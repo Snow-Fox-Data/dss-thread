@@ -1,0 +1,13 @@
+{
+    "id": "astor-data",
+    "version": "0.0.1",
+    "meta": {
+        "label": "Astor Data",
+        "description": "",
+        "author": "Excelion Partners",
+        "icon": "icon-puzzle-piece",
+        "tags": [],
+        "url": "",
+        "licenseInfo": "Apache Software License"
+    }
+}
