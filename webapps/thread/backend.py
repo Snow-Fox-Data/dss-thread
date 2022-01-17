@@ -218,6 +218,7 @@ def get_ds_lineage(all_projects):
             outs = get_stream(recipe, 'outputs', p)            
 
             for i in ins:
+                print(i)
                 ds = get_ds_by_name(i, all_projects, p)
                 if not 'lineage_downstream' in ds:
                     ds['lineage_downstream'] = outs
@@ -227,6 +228,7 @@ def get_ds_lineage(all_projects):
                             ds['lineage_downstream'].append(o)
 
             for o in outs:
+                print(o)
                 ds = get_ds_by_name(o, all_projects, p)
                 if not 'lineage_upstream' in ds:
                     ds['lineage_upstream'] = ins
