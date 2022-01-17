@@ -1,8 +1,8 @@
 {
-    "id": "astor-data",
+    "id": "dss-thread",
     "version": "0.0.1",
     "meta": {
-        "label": "Astor Data",
+        "label": "Thread",
         "description": "",
         "author": "Excelion Partners",
         "icon": "icon-puzzle-piece",
