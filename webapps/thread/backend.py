@@ -69,7 +69,7 @@ def scan_server():
     root_folder = client.get_root_project_folder()
     dss_folders = root_folder.list_child_folders()
     
-    folder_list = ['astor']
+    folder_list = ['astor', 'dataiku']
     db_list = []
     pipeline_list = []
     project_list = []
