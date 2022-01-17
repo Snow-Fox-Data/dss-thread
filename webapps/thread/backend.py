@@ -218,24 +218,28 @@ def get_ds_lineage(all_projects):
             outs = get_stream(recipe, 'outputs', p)            
 
             for i in ins:
-                print(i)
-                ds = get_ds_by_name(i, all_projects, p)
-                if not 'lineage_downstream' in ds:
-                    ds['lineage_downstream'] = outs
-                else:
-                    for o in outs:
-                        if not o in ds['lineage_downstream']:
-                            ds['lineage_downstream'].append(o)
+                try:
+                    ds = get_ds_by_name(i, all_projects, p)
+                    if not 'lineage_downstream' in ds:
+                        ds['lineage_downstream'] = outs
+                    else:
+                        for o in outs:
+                            if not o in ds['lineage_downstream']:
+                                ds['lineage_downstream'].append(o)
+                except:
+                    print(f'input lineage error: ' + i)
 
             for o in outs:
-                print(o)
-                ds = get_ds_by_name(o, all_projects, p)
-                if not 'lineage_upstream' in ds:
-                    ds['lineage_upstream'] = ins
-                else:
-                    for i in ins:
-                        if not i in ds['lineage_upstream']:
-                            ds['lineage_upstream'].append(i)
+                try:
+                    ds = get_ds_by_name(o, all_projects, p)
+                    if not 'lineage_upstream' in ds:
+                        ds['lineage_upstream'] = ins
+                    else:
+                        for i in ins:
+                            if not i in ds['lineage_upstream']:
+                                ds['lineage_upstream'].append(i)
+                except:
+                    print(f'output lineage error: ' + o)
 
     # get the full dataset lineage
     for p in all_projects:
