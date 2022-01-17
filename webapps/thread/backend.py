@@ -140,32 +140,36 @@ def get_stream(recipe, inputs_outputs, p_name):
     return refs
 
 def traverse_lineage(ds_name, all_projects, upstream=True):
-    ds = get_ds_by_name(ds_name, all_projects)
+    try:
+        ds = get_ds_by_name(ds_name, all_projects)
 
-    dir = 'lineage_upstream'
-    if upstream == False:
-        dir = 'lineage_downstream'
+        dir = 'lineage_upstream'
+        if upstream == False:
+            dir = 'lineage_downstream'
 
-    dir_full = dir + '_full'
+        dir_full = dir + '_full'
 
-    if (dir + '_complete') in ds:
-        return ds[dir_full]
+        if (dir + '_complete') in ds:
+            return ds[dir_full]
 
-    next_levels = []
-    #print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
-            
-    if dir in ds:
-        for l in ds[dir]:
-            nxt = traverse_lineage(l, all_projects, upstream)
-            # next_levels[dir] = nxt
+        next_levels = []
+        #print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
+                
+        if dir in ds:
+            for l in ds[dir]:
+                nxt = traverse_lineage(l, all_projects, upstream)
+                # next_levels[dir] = nxt
 
-            next_levels.append({'name':l, dir_full: nxt})
+                next_levels.append({'name':l, dir_full: nxt})
 
-        ds[dir + '_complete'] = 1
-        ds[dir_full] = next_levels
-        #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
+            ds[dir + '_complete'] = 1
+            ds[dir_full] = next_levels
+            #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
 
-    return next_levels
+        return next_levels
+        
+    except:
+        return []
 
 def dataset_project_shares(project):
     exposed = project.get_settings().settings['exposedObjects']['objects']
