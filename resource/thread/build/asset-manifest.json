@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "../../resource/astor/build/static/css/main.3fcd11d6.chunk.css",
-    "main.js": "../../resource/astor/build/static/js/main.359fcdce.chunk.js",
-    "main.js.map": "../../resource/astor/build/static/js/main.359fcdce.chunk.js.map",
-    "runtime-main.js": "../../resource/astor/build/static/js/runtime-main.784c9eb1.js",
-    "runtime-main.js.map": "../../resource/astor/build/static/js/runtime-main.784c9eb1.js.map",
-    "static/css/2.68a81a89.chunk.css": "../../resource/astor/build/static/css/2.68a81a89.chunk.css",
-    "static/js/2.05b66802.chunk.js": "../../resource/astor/build/static/js/2.05b66802.chunk.js",
-    "static/js/2.05b66802.chunk.js.map": "../../resource/astor/build/static/js/2.05b66802.chunk.js.map",
-    "index.html": "../../resource/astor/build/index.html",
-    "precache-manifest.7051948086c6a6a17a5410989efd19d7.js": "../../resource/astor/build/precache-manifest.7051948086c6a6a17a5410989efd19d7.js",
-    "service-worker.js": "../../resource/astor/build/service-worker.js",
-    "static/css/2.68a81a89.chunk.css.map": "../../resource/astor/build/static/css/2.68a81a89.chunk.css.map",
-    "static/css/main.3fcd11d6.chunk.css.map": "../../resource/astor/build/static/css/main.3fcd11d6.chunk.css.map",
-    "static/js/2.05b66802.chunk.js.LICENSE.txt": "../../resource/astor/build/static/js/2.05b66802.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "../../resource/astor/build/static/media/logo.5d5d9eef.svg"
+    "main.css": "../../resource/thread/build/static/css/main.4ef52917.chunk.css",
+    "main.js": "../../resource/thread/build/static/js/main.8a647b5b.chunk.js",
+    "main.js.map": "../../resource/thread/build/static/js/main.8a647b5b.chunk.js.map",
+    "runtime-main.js": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js",
+    "runtime-main.js.map": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js.map",
+    "static/css/2.68a81a89.chunk.css": "../../resource/thread/build/static/css/2.68a81a89.chunk.css",
+    "static/js/2.9a1eebb4.chunk.js": "../../resource/thread/build/static/js/2.9a1eebb4.chunk.js",
+    "static/js/2.9a1eebb4.chunk.js.map": "../../resource/thread/build/static/js/2.9a1eebb4.chunk.js.map",
+    "index.html": "../../resource/thread/build/index.html",
+    "precache-manifest.3d09e6d0a92f36a4afc8f184a730640b.js": "../../resource/thread/build/precache-manifest.3d09e6d0a92f36a4afc8f184a730640b.js",
+    "service-worker.js": "../../resource/thread/build/service-worker.js",
+    "static/css/2.68a81a89.chunk.css.map": "../../resource/thread/build/static/css/2.68a81a89.chunk.css.map",
+    "static/css/main.4ef52917.chunk.css.map": "../../resource/thread/build/static/css/main.4ef52917.chunk.css.map",
+    "static/js/2.9a1eebb4.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.9a1eebb4.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "../../resource/thread/build/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.784c9eb1.js",
+    "static/js/runtime-main.8e4d5060.js",
     "static/css/2.68a81a89.chunk.css",
-    "static/js/2.05b66802.chunk.js",
-    "static/css/main.3fcd11d6.chunk.css",
-    "static/js/main.359fcdce.chunk.js"
+    "static/js/2.9a1eebb4.chunk.js",
+    "static/css/main.4ef52917.chunk.css",
+    "static/js/main.8a647b5b.chunk.js"
   ]
 }
