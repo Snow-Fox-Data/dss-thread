@@ -69,7 +69,7 @@ def scan_server():
     root_folder = client.get_root_project_folder()
     dss_folders = root_folder.list_child_folders()
     
-    folder_list = ['astor']
+    folder_list = []
     db_list = []
     pipeline_list = []
     project_list = []
@@ -77,9 +77,10 @@ def scan_server():
     scan_obj = {}
 
     for folder in dss_folders:
-        if not folder.get_name() in folder_list:
-    #         print(f'ignoring folder {folder.get_name()}')
-            continue
+        if len(folder_list) > 0:
+            if not folder.get_name() in folder_list:
+        #         print(f'ignoring folder {folder.get_name()}')
+                continue
 
         dss_projects = folder.list_project_keys()
     #     print(folder)
@@ -100,20 +101,8 @@ def scan_server():
             scan_obj[proj]['recipes'] = recipes
 
     get_ds_lineage(scan_obj)    
-    # for p in scan_obj: # p is project id
-    #     for ds in scan_obj[p]['datasets']:
-    #         # ds is a dataset dictionary
-    #         ds['lineage_down'] = ds_lineage(p + '.' + ds.name, 'downstream', scan_obj)
-    #         ds['lineage_up'] = ds_lineage(p + '.' + ds.name, 'upstream', scan_obj)
 
     return scan_obj
-
-# def flatten(A):
-#     rt = []
-#     for i in A:
-#         if isinstance(i,list): rt.extend(flatten(i))
-#         else: rt.append(i)
-#     return rt
 
 def get_ds_by_name(name, all_projects, p_name=None):
     # print(name)
