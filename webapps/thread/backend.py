@@ -167,7 +167,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
             #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
 
         return next_levels
-        
+
     except:
         return []
 
@@ -186,27 +186,30 @@ def get_full_col_name(ds, col):
 
 def get_col_lineage(ds, col_name, all_projects):
     up_matches = []
-
-    if 'lineage_upstream_full' in ds:
-        for up in ds['lineage_upstream_full']:
-            up_ds = get_ds_by_name(up['name'], all_projects)
-            full_col_name = get_full_col_name(up_ds, col_name)
-      
-            for col in up_ds['schema']['columns']:
-                # print(col, col_name)
-                if col['name'].upper() == col_name.upper():
-                    up_matches.append(full_col_name);
-
     down_matches = []
 
-    if 'lineage_downstream_full' in ds:
-        for down in ds['lineage_downstream_full']:
-            down_ds = get_ds_by_name(down['name'], all_projects)
-            full_col_name = get_full_col_name(down_ds, col_name)
-            
-            for col in down_ds['schema']['columns']:
-                if col['name'].upper() == col_name.upper():
-                    down_matches.append(full_col_name)
+    try:
+        if 'lineage_upstream_full' in ds:
+            for up in ds['lineage_upstream_full']:
+                up_ds = get_ds_by_name(up['name'], all_projects)
+                full_col_name = get_full_col_name(up_ds, col_name)
+        
+                for col in up_ds['schema']['columns']:
+                    # print(col, col_name)
+                    if col['name'].upper() == col_name.upper():
+                        up_matches.append(full_col_name);
+
+
+        if 'lineage_downstream_full' in ds:
+            for down in ds['lineage_downstream_full']:
+                down_ds = get_ds_by_name(down['name'], all_projects)
+                full_col_name = get_full_col_name(down_ds, col_name)
+                
+                for col in down_ds['schema']['columns']:
+                    if col['name'].upper() == col_name.upper():
+                        down_matches.append(full_col_name)
+    except:
+        print('col lineage error')
 
     return up_matches, down_matches
 
