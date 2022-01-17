@@ -1,10 +1,7 @@
 import dataiku
 import pandas as pd
 from flask import request
-import firebase_admin
 import numpy as np
-
-from firebase_admin import db
 
 intitialized = False
 
@@ -13,7 +10,6 @@ def initialize():
     global global_ref
     
     get_user()
-    init_firebase()
 
     return json.dumps({'result': 'success'})
 
@@ -276,17 +272,3 @@ def get_user():
     auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
     # print ("User doing the query is %s" % auth_info["authIdentifier"])
     return auth_info["authIdentifier"]
-
-def init_firebase():
-    global intitialized
-    
-    if not intitialized:
-        config_folder = dataiku.Folder("NO1cHeSG")
-        db_url = 'https://astor-data-dev-default-rtdb.firebaseio.com/'
-
-        pth = config_folder.get_info()['path'] + '/astor-data-dev-firebase-adminsdk-kmmqm-129d55c6af.json'
-
-        cred_obj = firebase_admin.credentials.Certificate(pth)
-        default_app = firebase_admin.initialize_app(cred_obj, { 'databaseURL':db_url})
-        
-        intitialized = True
