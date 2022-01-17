@@ -83,7 +83,7 @@ def scan_server():
                 continue
 
         dss_projects = folder.list_project_keys()
-    #     print(folder)
+        print(folder)
         for proj in dss_projects:
             scan_obj[proj] = {}
             
