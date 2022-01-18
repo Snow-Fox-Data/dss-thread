@@ -11,7 +11,38 @@ def initialize():
     
     get_user()
 
+    client = dataiku.api_client()
+
+    # get a handle to the current project
+    proj = client.get_default_project()
+
+    init_proj_dataset()
+
     return json.dumps({'result': 'success'})
+
+def init_proj_dataset():
+    client = dataiku.api_client()
+    
+    proj = client.get_default_project()
+
+    ds = proj.get_dataset('--Thread-Projects--')
+    if not ds.exists():
+        project_variables = dataiku.get_custom_variables()
+        csv_dataset_name = '--Thread-Projects--'
+
+        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + csv_dataset_name}
+        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+
+        csv_dataset = proj.create_dataset(csv_dataset_name, type='Filesystem', params=params,
+                                            formatType='csv', formatParams=format_params)
+
+# Set dataset to managed
+ds_def = csv_dataset.get_definition()
+ds_def['managed'] = True
+csv_dataset.set_definition(ds_def)
+
+# Set schema
+csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
 @app.route('/getuser')
 def getuser():
@@ -213,7 +244,11 @@ def get_col_lineage(ds, col_name, all_projects):
 
     return up_matches, down_matches
 
-def get_ds_lineage(all_projects):
+def get_dataset_lineage(full_ds_name):
+    p_name, ds_name = extract_name_project(full_ds_name)
+
+
+def get_all_lineage(all_projects):
 
     # get the 1st level of upstream / downstream
     for p in all_projects:

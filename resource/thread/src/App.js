@@ -118,7 +118,7 @@ class App extends Component {
         const ref = React.createRef();
 
         if (!isLoaded) {
-            return <div>Loading...</div>;
+            return <div>Scanning DSS...</div>;
         } else {
             if (selectedDataset == null) {
                 return (
