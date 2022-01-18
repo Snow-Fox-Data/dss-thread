@@ -7,14 +7,9 @@ intitialized = False
 
 @app.route('/initialize')
 def initialize():
-    global global_ref
+    # global global_ref
     
     get_user()
-
-    client = dataiku.api_client()
-
-    # get a handle to the current project
-    proj = client.get_default_project()
 
     init_proj_dataset()
 
@@ -22,7 +17,6 @@ def initialize():
 
 def init_proj_dataset():
     client = dataiku.api_client()
-    
     proj = client.get_default_project()
 
     ds_name = '--Thread-Projects--'
