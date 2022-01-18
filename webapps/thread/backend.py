@@ -5,15 +5,15 @@ import numpy as np
 
 intitialized = False
 
-@app.route('/initialize')
-def initialize():
-    # global global_ref
+# @app.route('/initialize')
+# def initialize():
+#     # global global_ref
     
-    get_user()
+#     get_user()
 
-    init_proj_dataset()
+#     init_proj_dataset()
 
-    return json.dumps({'result': 'success'})
+#     return json.dumps({'result': 'success'})
 
 def init_proj_dataset():
     client = dataiku.api_client()
@@ -51,6 +51,8 @@ def getuser():
 
 @app.route('/get-projects')
 def get_projects():
+    init_proj_dataset()
+    
     res = scan_server()
 
     return json.dumps(res)
