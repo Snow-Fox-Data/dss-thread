@@ -120,9 +120,10 @@ def scan_server(proj_ds):
 
     #     dss_projects = folder.list_project_keys()
     #     print(folder)
-    proj_df = proj_ds.get_dataframe()
+    ds2 = dataiku.Dataset(proj_ds.name)
+    proj_df = ds2.get_dataframe()
     proj_df['name'] = dss_projects
-    proj_ds.write_with_schema(proj_df)
+    ds2.write_with_schema(proj_df)
 
     for proj in dss_projects:
         scan_obj[proj] = {}
