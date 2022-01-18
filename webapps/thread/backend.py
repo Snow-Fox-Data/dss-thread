@@ -30,10 +30,10 @@ def init_proj_dataset():
     if not ds.exists():
         project_variables = dataiku.get_custom_variables()
 
-        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + csv_dataset_name}
+        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_name}
         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(csv_dataset_name, type='Filesystem', params=params,
+        csv_dataset = proj.create_dataset(ds_name, type='Filesystem', params=params,
                                             formatType='csv', formatParams=format_params)
 
         # Set dataset to managed
