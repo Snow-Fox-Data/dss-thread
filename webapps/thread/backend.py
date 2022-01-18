@@ -39,6 +39,11 @@ def init_proj_dataset():
         # Set schema
         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
+        ds2 = dataiku.Dataset(ds_name)
+        df = pd.DataFrame(columns=['name'])
+        
+        ds2.write_with_schema(df)
+
         print(f'created {ds_name} dataset')
     else:
         print(f'{ds_name} already exists')
