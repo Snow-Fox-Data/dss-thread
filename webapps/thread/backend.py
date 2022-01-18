@@ -36,17 +36,18 @@ def init_proj_dataset():
         csv_dataset = proj.create_dataset(csv_dataset_name, type='Filesystem', params=params,
                                             formatType='csv', formatParams=format_params)
 
+        # Set dataset to managed
+        ds_def = csv_dataset.get_definition()
+        ds_def['managed'] = True
+        csv_dataset.set_definition(ds_def)
+
+        # Set schema
+        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+
         print(f'created {ds_name} dataset')
     else:
         print(f'{ds_name} already exists')
 
-# Set dataset to managed
-ds_def = csv_dataset.get_definition()
-ds_def['managed'] = True
-csv_dataset.set_definition(ds_def)
-
-# Set schema
-csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
 @app.route('/getuser')
 def getuser():
