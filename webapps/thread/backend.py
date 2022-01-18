@@ -100,7 +100,7 @@ def scan_server():
             scan_obj[proj]['datasets'] = datasets
             scan_obj[proj]['recipes'] = recipes
 
-    get_ds_lineage(scan_obj)    
+    # get_ds_lineage(scan_obj)    
 
     return scan_obj
 
