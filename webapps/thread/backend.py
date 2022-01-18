@@ -42,6 +42,8 @@ def init_proj_dataset():
     else:
         print(f'{ds_name} already exists')
 
+    return ds
+
 
 @app.route('/getuser')
 def getuser():
@@ -51,9 +53,9 @@ def getuser():
 
 @app.route('/get-projects')
 def get_projects():
-    init_proj_dataset()
-    
-    res = scan_server()
+    proj_ds = init_proj_dataset()
+
+    res = scan_server(proj_ds)
 
     return json.dumps(res)
 
@@ -95,42 +97,48 @@ def update_column_description(column_array, description):
 
         ds.set_schema(ds_schema)
 
-def scan_server():
+def scan_server(proj_ds):
 
     client = dataiku.api_client()
-    root_folder = client.get_root_project_folder()
-    dss_folders = root_folder.list_child_folders()
+    # root_folder = client.get_root_project_folder()
+    # dss_folders = root_folder.list_child_folders()
     
     folder_list = []
-    db_list = []
-    pipeline_list = []
+    # db_list = []
+    # pipeline_list = []
     project_list = []
 
     scan_obj = {}
 
-    for folder in dss_folders:
-        if len(folder_list) > 0:
-            if not folder.get_name() in folder_list:
-        #         print(f'ignoring folder {folder.get_name()}')
-                continue
+    dss_projects = client.list_project_keys()
 
-        dss_projects = folder.list_project_keys()
-        print(folder)
-        for proj in dss_projects:
-            scan_obj[proj] = {}
-            
-            project_list.append(proj)
+    # for folder in dss_folders:
+    #     if len(folder_list) > 0:
+    #         if not folder.get_name() in folder_list:
+    #     #         print(f'ignoring folder {folder.get_name()}')
+    #             continue
 
-            # print(proj)
-            project = client.get_project(proj)
-            # meta = project.get_metadata()
-            # settings = project.get_settings().get_raw()
+    #     dss_projects = folder.list_project_keys()
+    #     print(folder)
+    proj_df = proj_ds.get_dataframe()
+    proj_df['name'] = dss_projects
+    proj_ds.write_with_schema(proj_df)
 
-            datasets = project.list_datasets()
-            recipes = project.list_recipes()
+    for proj in dss_projects:
+        scan_obj[proj] = {}
+        
+        project_list.append(proj)
 
-            scan_obj[proj]['datasets'] = datasets
-            scan_obj[proj]['recipes'] = recipes
+        # print(proj)
+        project = client.get_project(proj)
+        # meta = project.get_metadata()
+        # settings = project.get_settings().get_raw()
+
+        datasets = project.list_datasets()
+        recipes = project.list_recipes()
+
+        scan_obj[proj]['datasets'] = datasets
+        scan_obj[proj]['recipes'] = recipes
 
     # get_ds_lineage(scan_obj)    
 
