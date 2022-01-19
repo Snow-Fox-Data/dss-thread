@@ -108,7 +108,7 @@ def get_projects():
 
         for p in projs:
             res[p] = {}
-            res[p]['datasets'] = ds_df.query(f'project=="{p}"')['name'].tolist()
+            res[p]['datasets'] = ds_df.query(f'project=="{p}"')
 
     return json.dumps(res)
 
