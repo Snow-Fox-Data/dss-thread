@@ -107,7 +107,7 @@ def get_projects():
         projs = ds_df['project'].unique()
 
         for p in projs:
-            res[p] = ds_df.query(f'project=="{p}"')['name']
+            res[p] = ds_df.query(f'project=="{p}"')['name'].tolist()
 
     return json.dumps(res)
 
