@@ -22,7 +22,9 @@ def init_dataset_dataset():
     ds_name = '--Thread-Datasets--'
     ds_loc = 'thread_datasets.csv'
     ds = proj.get_dataset(ds_name)
-    if not ds.exists():
+
+    exists = ds.exists()
+    if not exists:
         project_variables = dataiku.get_custom_variables()
 
         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
@@ -48,7 +50,7 @@ def init_dataset_dataset():
     else:
         print(f'{ds_name} already exists')
 
-    return ds
+    return ds, exists
 
 # def init_proj_dataset():
 #     client = dataiku.api_client()
@@ -95,9 +97,17 @@ def getuser():
 @app.route('/get-projects')
 def get_projects():
     # proj_ds = init_proj_dataset()
-    ds_ds = init_dataset_dataset()
+    ds_ds, exists = init_dataset_dataset()
 
-    res = scan_server(ds_ds)
+    res = {}
+    if not exists:
+        res = scan_server(ds_ds)
+    else:
+        ds_df = ds_ds.get_dataframe()
+        projs = ds_df['project'].unique()
+
+        for p in projs:
+            res[p] = ds_df.query('project="' + p + '"')['name']
 
     return json.dumps(res)
 
