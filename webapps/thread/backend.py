@@ -50,40 +50,40 @@ def init_dataset_dataset():
 
     return ds
 
-def init_proj_dataset():
-    client = dataiku.api_client()
-    proj = client.get_default_project()
+# def init_proj_dataset():
+#     client = dataiku.api_client()
+#     proj = client.get_default_project()
 
-    ds_name = '--Thread-Projects--'
-    ds_loc = 'thread_projects.csv'
-    ds = proj.get_dataset(ds_name)
-    if not ds.exists():
-        project_variables = dataiku.get_custom_variables()
+#     ds_name = '--Thread-Projects--'
+#     ds_loc = 'thread_projects.csv'
+#     ds = proj.get_dataset(ds_name)
+#     if not ds.exists():
+#         project_variables = dataiku.get_custom_variables()
 
-        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
-        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+#         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+#         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(ds_name, type='Filesystem', params=params,
-                                            formatType='csv', formatParams=format_params)
+#         csv_dataset = proj.create_dataset(ds_name, type='Filesystem', params=params,
+#                                             formatType='csv', formatParams=format_params)
 
-        # Set dataset to managed
-        ds_def = csv_dataset.get_definition()
-        ds_def['managed'] = True
-        csv_dataset.set_definition(ds_def)
+#         # Set dataset to managed
+#         ds_def = csv_dataset.get_definition()
+#         ds_def['managed'] = True
+#         csv_dataset.set_definition(ds_def)
 
-        # Set schema
-        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+#         # Set schema
+#         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
-        ds2 = dataiku.Dataset(ds_name)
-        df = pd.DataFrame(columns=['name'])
+#         ds2 = dataiku.Dataset(ds_name)
+#         df = pd.DataFrame(columns=['name'])
         
-        ds2.write_with_schema(df)
+#         ds2.write_with_schema(df)
 
-        print(f'created {ds_name} dataset')
-    else:
-        print(f'{ds_name} already exists')
+#         print(f'created {ds_name} dataset')
+#     else:
+#         print(f'{ds_name} already exists')
 
-    return ds
+#     return ds
 
 
 @app.route('/getuser')
@@ -94,10 +94,10 @@ def getuser():
 
 @app.route('/get-projects')
 def get_projects():
-    proj_ds = init_proj_dataset()
+    # proj_ds = init_proj_dataset()
     ds_ds = init_dataset_dataset()
 
-    res = scan_server(proj_ds, ds_ds)
+    res = scan_server(ds_ds)
 
     return json.dumps(res)
 
@@ -139,7 +139,7 @@ def update_column_description(column_array, description):
 
         ds.set_schema(ds_schema)
 
-def scan_server(proj_ds, ds_ds):
+def scan_server(ds_ds):
 
     client = dataiku.api_client()
     # root_folder = client.get_root_project_folder()
@@ -162,14 +162,11 @@ def scan_server(proj_ds, ds_ds):
 
     #     dss_projects = folder.list_project_keys()
     #     print(folder)
-    ds2 = dataiku.Dataset(proj_ds.name)
-    proj_df = ds2.get_dataframe()
-    proj_df['name'] = dss_projects
-    ds2.write_with_schema(proj_df)
-
+    
+    ds_list = []
     for proj in dss_projects:
         scan_obj[proj] = {}
-        
+
         project_list.append(proj)
 
         # print(proj)
@@ -183,7 +180,13 @@ def scan_server(proj_ds, ds_ds):
         scan_obj[proj]['datasets'] = datasets
         scan_obj[proj]['recipes'] = recipes
 
-    # get_ds_lineage(scan_obj)    
+        for ds in datasets:
+            obj = { 'project': proj, 'name': ds.name}
+            ds_list.append(obj)
+
+    # get_ds_lineage(scan_obj)
+    dataset_dataset = dataiku.Dataset(ds_ds.name)
+    dataset_dataset.write_with_schema(pd.DataFrame.from_dict(ds_list))
 
     return scan_obj
 
