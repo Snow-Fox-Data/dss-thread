@@ -103,7 +103,7 @@ def get_projects():
     if not exists:
         res = scan_server(ds_ds)
     else:
-        ds_df = ds_ds.get_dataframe()
+        ds_df = dataiku.Dataset(ds_ds.name).get_dataframe()
         projs = ds_df['project'].unique()
 
         for p in projs:
