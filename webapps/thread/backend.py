@@ -448,8 +448,8 @@ def get_ds_lineage(all_projects):
             if 'lineage_downstream' in ds:
                 traverse_lineage(ds['full_name'], all_projects, upstream=False)
                
-            for i in range(len(ds['schema']['columns'])):
-                col = ds['schema']['columns'][i]
-                up, down = get_col_lineage(ds, col['name'], all_projects)
-                col['lineage_upstream'] = up
-                col['lineage_downstream'] = down
+            # for i in range(len(ds['schema']['columns'])):
+            #     col = ds['schema']['columns'][i]
+            #     up, down = get_col_lineage(ds, col['name'], all_projects)
+            #     col['lineage_upstream'] = up
+            #     col['lineage_downstream'] = down
