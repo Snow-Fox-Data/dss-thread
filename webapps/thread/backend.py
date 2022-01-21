@@ -210,7 +210,9 @@ def scan_server(ds_ds):
         scan_obj[proj]['datasets'] = datasets
         scan_obj[proj]['recipes'] = recipes
 
+    print('start get lineage...')
     get_ds_lineage(scan_obj)
+    print('end get lineage')
     for p in scan_obj:
         datasets = p['datasets']
         for ds in datasets:
