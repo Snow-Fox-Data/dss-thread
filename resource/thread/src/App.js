@@ -52,14 +52,19 @@ class App extends Component {
 
     }
 
-    findDataset = (tree, key) => {
+    findDataset = (key) => {
         var proj = key.split('.')[0];
         var ds_name = key.split('.')[1];
 
-        var p_ref = tree[proj];
-        console.log(p_ref);
+        // var p_ref = tree[proj];
+        console.log(ds_name);
 
-        return p_ref.datasets.find(({ name }) => name === ds_name);
+        // return p_ref.datasets.find(({ name }) => name === ds_name);
+
+        // this.setState({
+        //     selectedDataset: this.findDataset(full_tree, selected[0].id),
+        //     full_ds_name: selected[0].id
+        // })
     }
 
     refreshData = () => {
@@ -129,10 +134,7 @@ class App extends Component {
                                 placeholder='Search for Dataset'
                                 onChange={(selected) => {
                                     if (selected.length > 0) {
-                                        this.setState({
-                                            selectedDataset: this.findDataset(full_tree, selected[0].id),
-                                            full_ds_name: selected[0].id
-                                        });
+                                        this.findDataset(selected[0].id)
                                         ref.current.clear()
                                     };
                                 }}
@@ -151,10 +153,7 @@ class App extends Component {
                                 placeholder='Search for Dataset'
                                 onChange={(selected) => {
                                     if (selected.length > 0) {
-                                        this.setState({
-                                            selectedDataset: this.findDataset(full_tree, selected[0].id),
-                                            full_ds_name: selected[0].id
-                                        })
+                                        this.findDataset()
                                         ref.current.clear()
                                     };
                                 }}
