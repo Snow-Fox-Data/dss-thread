@@ -127,7 +127,7 @@ def dataset_details():
 
     return json.dumps({
         'success': True,
-        'dataset': [x for x in ds_list if x['name']==dataset_name],
+        'dataset': [x for x in ds_list if x['name']==dataset_name][0],
         'dataset_name': get_full_dataset_name(dataset_name, project)
     })
 
