@@ -68,7 +68,10 @@ class App extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    alert(result)
+                    this.setState({
+                        selectedDataset: result.dataset,
+                        full_ds_name: result.dataset_name
+                    })
                 });
 
         // return p_ref.datasets.find(({ name }) => name === ds_name);
