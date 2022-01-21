@@ -112,11 +112,22 @@ def get_projects():
 
     return json.dumps(res)
 
+@app.route('/dataset-details', methods=['POST'])
+def dataset_details():
+    data = json.loads(request.data)
+    dataset_name = data['dataset_name']
+
+    print(dataset_name)
+
+    return json.dumps({
+        'success': True
+    })
+
 @app.route('/update-col-desc', methods=['POST'])
 def update_col_desc():
     # frm = request.form
 
-    print('POST!')
+    # print('POST!')
     print(request.data)
     data = json.loads(request.data)
     # print(data['col'])

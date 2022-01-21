@@ -42,15 +42,15 @@ class App extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick = () => {
-        console.log('The link was clicked.');
+    // handleClick = () => {
+    //     console.log('The link was clicked.');
 
-        window.$.getJSON(window.getWebAppBackendUrl('initialize'), function (data) {
-            const output = window.$('<pre />').text('Backend reply: ' + JSON.stringify(data));
-            window.$('body').append(output)
-        });
+    //     window.$.getJSON(window.getWebAppBackendUrl('initialize'), function (data) {
+    //         const output = window.$('<pre />').text('Backend reply: ' + JSON.stringify(data));
+    //         window.$('body').append(output)
+    //     });
 
-    }
+    // }
 
     findDataset = (key) => {
         var proj = key.split('.')[0];
@@ -59,6 +59,17 @@ class App extends Component {
         // var p_ref = tree[proj];
         console.log(ds_name);
 
+        fetch(window.getWebAppBackendUrl('dataset-details'), {
+            method: 'POST', body: JSON.stringify({
+                'dataset-name': ds_name
+            })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    alert(result)
+                });
+                
         // return p_ref.datasets.find(({ name }) => name === ds_name);
 
         // this.setState({
