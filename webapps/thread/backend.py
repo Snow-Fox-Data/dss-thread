@@ -210,11 +210,13 @@ def scan_server(ds_ds):
         scan_obj[proj]['datasets'] = datasets
         scan_obj[proj]['recipes'] = recipes
 
-        for ds in datasets:
-            obj = { 'project': proj, 'name': ds.name}
-            ds_list.append(obj)
-
     get_ds_lineage(scan_obj)
+    for p in scan_obj:
+        datasets = p['datasets']
+        for ds in datasets:
+                obj = { 'project': proj, 'name': ds.name}
+                ds_list.append(obj)
+
     dataset_dataset = dataiku.Dataset(ds_ds.name)
     dataset_dataset.write_with_schema(pd.DataFrame.from_dict(ds_list))
 
