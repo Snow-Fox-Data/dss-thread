@@ -275,6 +275,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
                 
         if dir in ds:
             for l in ds[dir]:
+                print(l, all_projects, upstream)
                 nxt = traverse_lineage(l, all_projects, upstream)
                 # next_levels[dir] = nxt
 
