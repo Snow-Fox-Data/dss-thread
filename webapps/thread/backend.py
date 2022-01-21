@@ -120,12 +120,14 @@ def dataset_details():
 
     # print(dataset_name)
     client = dataiku.api_client()
-    # project = client.get_project(project)
-    ds = dataiku.Dataset(dataset_name, project)
+    ds_proj = client.get_project(project)
+    ds_list = ds_proj.list_datasets()
+    
+    # ds = dataiku.Dataset(dataset_name, project)
 
     return json.dumps({
         'success': True,
-        'dataset': ds
+        'dataset': [x for x in ds_list if x['name']==dataset_name]
     })
 
 @app.route('/update-col-desc', methods=['POST'])
