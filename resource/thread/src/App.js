@@ -168,7 +168,7 @@ class App extends Component {
                                 placeholder='Search for Dataset'
                                 onChange={(selected) => {
                                     if (selected.length > 0) {
-                                        this.findDataset()
+                                        this.findDataset(selected[0].id)
                                         ref.current.clear()
                                     };
                                 }}
