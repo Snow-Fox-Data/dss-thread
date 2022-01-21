@@ -271,7 +271,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
                 
         if dir in ds:
             for l in ds[dir]:
-                # print(l, all_projects, upstream)
+                print(l, all_projects, upstream)
                 nxt = traverse_lineage(l, all_projects, upstream)
                 # next_levels[dir] = nxt
 
@@ -285,6 +285,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
 
     except:
         return []
+
 
 def dataset_project_shares(project):
     exposed = project.get_settings().settings['exposedObjects']['objects']
@@ -418,8 +419,8 @@ def get_ds_lineage(all_projects):
                             for o in outs:
                                 if not o in ds['lineage_downstream']:
                                     ds['lineage_downstream'].append(o)
-                    except:
-                        print(f'input lineage error: ' + i)
+                    except Exception as e: 
+                        print(f'input lineage error: {e}')
 
                 for o in outs:
                     try:
@@ -430,26 +431,65 @@ def get_ds_lineage(all_projects):
                             for i in ins:
                                 if not i in ds['lineage_upstream']:
                                     ds['lineage_upstream'].append(i)
-                    except:
-                        print(f'output lineage error: ' + o)
-            except:
-                print('lineage error')
+                    except Exception as e: 
+                        print(f'output lineage error: {e}')
 
-    # get the full dataset lineage
-    for p in all_projects:
-        project = all_projects[p]
-        for d in range(len(project['datasets'])):
-            ds = project['datasets'][d]
-            ds['full_name'] = get_full_dataset_name(ds['name'], p)
+            except Exception as e: 
+                print(e)
+                
+# def get_ds_lineage(all_projects):
 
-            if 'lineage_upstream' in ds:
-                traverse_lineage(ds['full_name'], all_projects, upstream=True)
+#     # get the 1st level of upstream / downstream
+#     for p in all_projects:
+#         project = all_projects[p]
 
-            if 'lineage_downstream' in ds:
-                traverse_lineage(ds['full_name'], all_projects, upstream=False)
+#         for r in range(len(project['recipes'])):
+#             try:
+#                 recipe = project['recipes'][r]
+#                 ins = get_stream(recipe, 'inputs', p)            
+#                 outs = get_stream(recipe, 'outputs', p)            
+
+#                 for i in ins:
+#                     try:
+#                         ds = get_ds_by_name(i, all_projects, p)
+#                         if not 'lineage_downstream' in ds:
+#                             ds['lineage_downstream'] = outs
+#                         else:
+#                             for o in outs:
+#                                 if not o in ds['lineage_downstream']:
+#                                     ds['lineage_downstream'].append(o)
+#                     except:
+#                         print(f'input lineage error: ' + i)
+
+#                 for o in outs:
+#                     try:
+#                         ds = get_ds_by_name(o, all_projects, p)
+#                         if not 'lineage_upstream' in ds:
+#                             ds['lineage_upstream'] = ins
+#                         else:
+#                             for i in ins:
+#                                 if not i in ds['lineage_upstream']:
+#                                     ds['lineage_upstream'].append(i)
+#                     except:
+#                         print(f'output lineage error: ' + o)
+#             except:
+#                 print('lineage error')
+
+#     # get the full dataset lineage
+#     for p in all_projects:
+#         project = all_projects[p]
+#         for d in range(len(project['datasets'])):
+#             ds = project['datasets'][d]
+#             ds['full_name'] = get_full_dataset_name(ds['name'], p)
+
+#             if 'lineage_upstream' in ds:
+#                 traverse_lineage(ds['full_name'], all_projects, upstream=True)
+
+#             if 'lineage_downstream' in ds:
+#                 traverse_lineage(ds['full_name'], all_projects, upstream=False)
                
-            # for i in range(len(ds['schema']['columns'])):
-            #     col = ds['schema']['columns'][i]
-            #     up, down = get_col_lineage(ds, col['name'], all_projects)
-            #     col['lineage_upstream'] = up
-            #     col['lineage_downstream'] = down
+#             for i in range(len(ds['schema']['columns'])):
+#                 col = ds['schema']['columns'][i]
+#                 up, down = get_col_lineage(ds, col['name'], all_projects)
+#                 col['lineage_upstream'] = up
+#                 col['lineage_downstream'] = down
