@@ -199,7 +199,7 @@ def scan_server(ds_ds):
     print('start get lineage...')
     get_ds_lineage(scan_obj)
     print('end get lineage')
-    
+
     for p in scan_obj:
         datasets = scan_obj[p]['datasets']
         for ds in datasets:
@@ -271,7 +271,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
                 
         if dir in ds:
             for l in ds[dir]:
-                print(l, all_projects, upstream)
+                # print(l, all_projects, upstream)
                 nxt = traverse_lineage(l, all_projects, upstream)
                 # next_levels[dir] = nxt
 
