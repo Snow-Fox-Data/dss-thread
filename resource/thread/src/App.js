@@ -61,7 +61,8 @@ class App extends Component {
 
         fetch(window.getWebAppBackendUrl('dataset-details'), {
             method: 'POST', body: JSON.stringify({
-                'dataset-name': ds_name
+                'dataset-name': ds_name,
+                'project': proj
             })
         })
             .then(res => res.json())
@@ -69,7 +70,7 @@ class App extends Component {
                 (result) => {
                     alert(result)
                 });
-                
+
         // return p_ref.datasets.find(({ name }) => name === ds_name);
 
         // this.setState({

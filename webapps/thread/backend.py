@@ -116,11 +116,16 @@ def get_projects():
 def dataset_details():
     data = json.loads(request.data)
     dataset_name = data['dataset-name']
+    project = data['project']
 
-    print(dataset_name)
+    # print(dataset_name)
+    client = dataiku.api_client()
+    # project = client.get_project(project)
+    ds = dataiku.Dataset(dataset_name, project)
 
     return json.dumps({
-        'success': True
+        'success': True,
+        'dataset': ds
     })
 
 @app.route('/update-col-desc', methods=['POST'])
