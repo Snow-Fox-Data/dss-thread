@@ -175,25 +175,11 @@ def scan_server(ds_ds):
     # root_folder = client.get_root_project_folder()
     # dss_folders = root_folder.list_child_folders()
     
-    folder_list = []
-    # db_list = []
-    # pipeline_list = []
     project_list = []
-
+    ds_list = []
     scan_obj = {}
 
     dss_projects = client.list_project_keys()
-
-    # for folder in dss_folders:
-    #     if len(folder_list) > 0:
-    #         if not folder.get_name() in folder_list:
-    #     #         print(f'ignoring folder {folder.get_name()}')
-    #             continue
-
-    #     dss_projects = folder.list_project_keys()
-    #     print(folder)
-    
-    ds_list = []
     for proj in dss_projects:
         scan_obj[proj] = {}
 
@@ -213,10 +199,18 @@ def scan_server(ds_ds):
     print('start get lineage...')
     get_ds_lineage(scan_obj)
     print('end get lineage')
+    
     for p in scan_obj:
-        datasets = p['datasets']
+        datasets = scan_obj[p]['datasets']
         for ds in datasets:
+                # , 'lineage_downstream':ds['lineage_downstream'],
+    #                  'lineage_upstream':ds['lineage_upstream']
                 obj = { 'project': proj, 'name': ds.name}
+                if 'lineage_downstream' in ds:
+                    obj['lineage_downstream'] = ds['lineage_downstream']
+                if 'lineage_upstream' in ds:
+                    obj['lineage_upstream'] = ds['lineage_upstream']
+                    
                 ds_list.append(obj)
 
     dataset_dataset = dataiku.Dataset(ds_ds.name)
