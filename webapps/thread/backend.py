@@ -129,7 +129,7 @@ def dataset_details():
 
     ds_name = '--Thread-Datasets--'
     # ds = proj.get_dataset(ds_name)
-    ds = dataiku.Dataset(ds_name).get_dataframe()
+    ds = dataiku.Dataset(ds_name)
     res = ds.get_dataframe().query(f'name=="{dataset_name}"')
 
     return json.dumps({
