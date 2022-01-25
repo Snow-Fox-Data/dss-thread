@@ -119,15 +119,21 @@ def dataset_details():
     project = data['project']
 
     # print(dataset_name)
-    client = dataiku.api_client()
-    ds_proj = client.get_project(project)
-    ds_list = ds_proj.list_datasets()
+    # client = dataiku.api_client()
+    # ds_proj = client.get_project(project)
+    # ds_list = ds_proj.list_datasets()
     
     # ds = dataiku.Dataset(dataset_name, project)
+    client = dataiku.api_client()
+    proj = client.get_default_project()
+
+    ds_name = '--Thread-Datasets--'
+    ds = proj.get_dataset(ds_name)
+    res = ds.get_dataframe().query(f'name=="{dataset_name}"')
 
     return json.dumps({
         'success': True,
-        'dataset': [x for x in ds_list if x['name']==dataset_name][0],
+        'dataset': res, #[x for x in ds_list if x['name']==dataset_name][0],
         'dataset_name': get_full_dataset_name(dataset_name, project)
     })
 
