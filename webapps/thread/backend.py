@@ -260,6 +260,9 @@ def get_stream(recipe, inputs_outputs, p_name):
     except:
         print('error getting stream')
         
+    if refs is None:
+        return []
+        
     return refs
 
 def traverse_lineage(ds_name, all_projects, upstream=True):
