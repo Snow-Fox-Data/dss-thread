@@ -134,7 +134,7 @@ def dataset_details():
 
     return json.dumps({
         'success': True,
-        'dataset': res.to_json(), #[x for x in ds_list if x['name']==dataset_name][0],
+        'dataset': res.to_dict(), #[x for x in ds_list if x['name']==dataset_name][0],
         'dataset_name': get_full_dataset_name(dataset_name, project)
     })
 
