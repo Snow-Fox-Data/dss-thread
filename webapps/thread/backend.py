@@ -211,7 +211,7 @@ def scan_server(ds_ds):
         for ds in datasets:
                 # , 'lineage_downstream':ds['lineage_downstream'],
     #                  'lineage_upstream':ds['lineage_upstream']
-                obj = { 'project': proj, 'name': ds.name}
+                obj = { 'project': p, 'name': ds.name}
                 if 'lineage_downstream' in ds:
                     obj['lineage_downstream'] = ds['lineage_downstream']
                 if 'lineage_upstream' in ds:
