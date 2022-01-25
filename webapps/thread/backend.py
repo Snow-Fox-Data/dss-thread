@@ -118,7 +118,7 @@ def dataset_details():
     dataset_name = data['dataset-name']
     project = data['project']
 
-    print(dataset_name)
+    print(project, dataset_name)
     client = dataiku.api_client()
     ds_proj = client.get_project(project)
     ds_list = ds_proj.list_datasets()
