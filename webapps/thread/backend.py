@@ -128,7 +128,8 @@ def dataset_details():
     proj = client.get_default_project()
 
     ds_name = '--Thread-Datasets--'
-    ds = proj.get_dataset(ds_name)
+    # ds = proj.get_dataset(ds_name)
+    ds = dataiku.Dataset(ds_name).get_dataframe()
     res = ds.get_dataframe().query(f'name=="{dataset_name}"')
 
     return json.dumps({
@@ -262,7 +263,7 @@ def get_stream(recipe, inputs_outputs, p_name):
         
     if refs is None:
         return []
-        
+
     return refs
 
 def traverse_lineage(ds_name, all_projects, upstream=True):
