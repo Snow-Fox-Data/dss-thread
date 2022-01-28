@@ -164,7 +164,7 @@ class Dataset extends Component {
             .then(
                 (result) => {
                     col.lineage_downstream = result.downs;
-                    col.lineage_uptream = result.ups;
+                    col.lineage_upstream = result.ups;
 
                     this.update('col_elements', col);
                     this.setState({ modalDialog: true, selectedCol: col });
