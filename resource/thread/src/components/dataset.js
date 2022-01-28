@@ -159,7 +159,7 @@ class Dataset extends Component {
 
         fetch(window.getWebAppBackendUrl('column-lineage'), {
             method: 'POST', body: JSON.stringify({
-                'column': this.createColName(this.state.selectedCol.name)
+                'column': this.createColName(col)
             })
         })
             .then(res => res.json())
