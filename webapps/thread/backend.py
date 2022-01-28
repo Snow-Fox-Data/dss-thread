@@ -288,7 +288,7 @@ def get_col_lineage(project_name, ds_name, col_name):
         ds_ref = dataiku.Dataset(d, p)
         schema = ds_ref.read_schema()
         for s in schema:
-            if s.upper() == col_name.upper():
+            if s['name'].upper() == col_name.upper():
                 downs.append(up + '.' + col_name)
 
     return ups, downs
