@@ -261,7 +261,7 @@ def get_col_lineage(project_name, ds_name, col_name):
     # client = dataiku.api_client()
    
     ds_df = dataiku.Dataset(THREAD_DS_NAME).get_dataframe()
-    ds_details = ds_df.query(f'name=="{ds_name}" & project=="{project_name}"').iloc[0]
+    ds_details = ds_df.query(f'name=="{ds_name}" & project=="{project_name}"').to_dict['records'][0]
 
     for up in ds_details['lineage_upstream']:
         p, d = extract_name_project(up)
