@@ -154,8 +154,6 @@ class Dataset extends Component {
     }
 
     openColumn(col) {
-        this.update('col_elements', col);
-        this.setState({ modalDialog: true, selectedCol: col });
 
         fetch(window.getWebAppBackendUrl('column-lineage'), {
             method: 'POST', body: JSON.stringify({
@@ -165,7 +163,10 @@ class Dataset extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    eventBus.dispatch("dataRefresh", {});
+                    
+                    this.update('col_elements', col);
+                    this.setState({ modalDialog: true, selectedCol: col });
+                    //eventBus.dispatch("dataRefresh", {});
                 });
     };
 
