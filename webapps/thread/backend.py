@@ -62,7 +62,7 @@ def get_projects():
 
         for p in projs:
             res[p] = {}
-            res[p]['datasets'] = ds_df.query(f'project=="{p}"').replace({np.nan:''}).to_dict(orient='records')
+            res[p]['datasets'] = ds_df.query(f'project=="{p}"').to_dict(orient='records')
 
     return json.dumps(res)
 
@@ -79,7 +79,7 @@ def dataset_details():
     dku_ds = [x for x in ds_list if x['name']==dataset_name][0]
     
     ds = dataiku.Dataset(THREAD_DS_NAME)
-    res = ds.get_dataframe().query(f'name=="{dataset_name}"').replace({np.nan:''}).to_dict('records')[0]
+    res = ds.get_dataframe().query(f'name=="{dataset_name}"').to_dict('records')[0]
 
     dku_ds['lineage_downstream'] = res['lineage_downstream']
     dku_ds['lineage_upstream'] = res['lineage_upstream']
@@ -280,6 +280,7 @@ def get_col_lineage(project_name, ds_name, col_name):
             if s.upper() == col_name.upper():
                 ups.append(up + '.' + col_name)
 
+    print(ds_details['lineage_downstream'])
     for down in json.loads(ds_details['lineage_downstream']):
         p, d = extract_name_project(down)
         
