@@ -112,6 +112,10 @@ class App extends Component {
                 this.refreshData()
             );
 
+            eventBus.on("datasetSelected", (ds) =>
+                this.findDataset(ds)
+            );
+
             this.refreshData()
         }
 
