@@ -1,27 +1,18 @@
+from crypt import methods
 import dataiku
 import pandas as pd
 from flask import request
 import numpy as np
 
 intitialized = False
-
-# @app.route('/initialize')
-# def initialize():
-#     # global global_ref
-    
-#     get_user()
-
-#     init_proj_dataset()
-
-#     return json.dumps({'result': 'success'})
+THREAD_DS_NAME = '--Thread-Datasets--'
 
 def init_dataset_dataset():
     client = dataiku.api_client()
     proj = client.get_default_project()
 
-    ds_name = '--Thread-Datasets--'
     ds_loc = 'thread_datasets.csv'
-    ds = proj.get_dataset(ds_name)
+    ds = proj.get_dataset(THREAD_DS_NAME)
 
     exists = ds.exists()
     if not exists:
@@ -51,41 +42,6 @@ def init_dataset_dataset():
         print(f'{ds_name} already exists')
 
     return ds, exists
-
-# def init_proj_dataset():
-#     client = dataiku.api_client()
-#     proj = client.get_default_project()
-
-#     ds_name = '--Thread-Projects--'
-#     ds_loc = 'thread_projects.csv'
-#     ds = proj.get_dataset(ds_name)
-#     if not ds.exists():
-#         project_variables = dataiku.get_custom_variables()
-
-#         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
-#         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
-
-#         csv_dataset = proj.create_dataset(ds_name, type='Filesystem', params=params,
-#                                             formatType='csv', formatParams=format_params)
-
-#         # Set dataset to managed
-#         ds_def = csv_dataset.get_definition()
-#         ds_def['managed'] = True
-#         csv_dataset.set_definition(ds_def)
-
-#         # Set schema
-#         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
-
-#         ds2 = dataiku.Dataset(ds_name)
-#         df = pd.DataFrame(columns=['name'])
-        
-#         ds2.write_with_schema(df)
-
-#         print(f'created {ds_name} dataset')
-#     else:
-#         print(f'{ds_name} already exists')
-
-#     return ds
 
 
 @app.route('/getuser')
@@ -124,8 +80,7 @@ def dataset_details():
     ds_list = ds_proj.list_datasets()
     dku_ds = [x for x in ds_list if x['name']==dataset_name][0]
     
-    ds_name = '--Thread-Datasets--'
-    ds = dataiku.Dataset(ds_name)
+    ds = dataiku.Dataset(THREAD_DS_NAME)
     res = ds.get_dataframe().query(f'name=="{dataset_name}"').replace({np.nan:''}).to_dict('records')[0]
 
     dku_ds['lineage_downstream'] = res['lineage_downstream']
@@ -157,6 +112,10 @@ def update_col_desc():
     return json.dumps({
         'success': True
     })
+
+@app.route('/column-lineage', methods=['POST'])
+def column_lineage():
+    get_col_lineage()
 
 def update_column_description(column_array, description):
     if type(column_array)==str:
@@ -265,38 +224,6 @@ def get_stream(recipe, inputs_outputs, p_name):
 
     return refs
 
-def traverse_lineage(ds_name, all_projects, upstream=True):
-    try:
-        ds = get_ds_by_name(ds_name, all_projects)
-
-        dir = 'lineage_upstream'
-        if upstream == False:
-            dir = 'lineage_downstream'
-
-        dir_full = dir + '_full'
-
-        if (dir + '_complete') in ds:
-            return ds[dir_full]
-
-        next_levels = []
-        #print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
-                
-        if dir in ds:
-            for l in ds[dir]:
-                print(l, all_projects, upstream)
-                nxt = traverse_lineage(l, all_projects, upstream)
-                # next_levels[dir] = nxt
-
-                next_levels.append({'name':l, dir_full: nxt})
-
-            ds[dir + '_complete'] = 1
-            ds[dir_full] = next_levels
-            #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
-
-        return next_levels
-
-    except:
-        return []
 
 
 def dataset_project_shares(project):
@@ -312,37 +239,128 @@ def get_full_col_name(ds, col):
 
     return ds_name + '.' + col
 
-def get_col_lineage(ds, col_name, all_projects):
-    up_matches = []
-    down_matches = []
+def get_col_lineage(project_name, ds_name, col_name):
+    ds_df = dataiku.Dataset(THREAD_DS_NAME).get_dataframe()
+    ds_details = ds_df.query(f'name=="{ds_name}" & project="{project_name}"').iloc[0]
 
-    try:
-        if 'lineage_upstream_full' in ds:
-            for up in ds['lineage_upstream_full']:
-                up_ds = get_ds_by_name(up['name'], all_projects)
-                full_col_name = get_full_col_name(up_ds, col_name)
-        
-                for col in up_ds['schema']['columns']:
-                    # print(col, col_name)
-                    if col['name'].upper() == col_name.upper():
-                        up_matches.append(full_col_name);
+    for up in ds_details['lineage_upstream']:
+        p,d = extract_name_project(up)
+        up_ds = ds_df.query(f'name=="{d}" & project="{p}"').iloc[0]
 
 
-        if 'lineage_downstream_full' in ds:
-            for down in ds['lineage_downstream_full']:
-                down_ds = get_ds_by_name(down['name'], all_projects)
-                full_col_name = get_full_col_name(down_ds, col_name)
+def get_user():
+    headers = dict(request.headers)
+    # Get the auth info of the user performing the request
+    auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
+    # print ("User doing the query is %s" % auth_info["authIdentifier"])
+    return auth_info["authIdentifier"]
+
+def get_ds_lineage(all_projects):
+
+    # get the 1st level of upstream / downstream
+    for p in all_projects:
+        project = all_projects[p]
+
+        for r in range(len(project['recipes'])):
+            try:
+                recipe = project['recipes'][r]
+                ins = get_stream(recipe, 'inputs', p)            
+                outs = get_stream(recipe, 'outputs', p)            
+
+                for i in ins:
+                    try:
+                        ds = get_ds_by_name(i, all_projects, p)
+                        if not 'lineage_downstream' in ds:
+                            ds['lineage_downstream'] = outs
+                        else:
+                            for o in outs:
+                                if not o in ds['lineage_downstream']:
+                                    ds['lineage_downstream'].append(o)
+                    except Exception as e: 
+                        print(f'input lineage error: {e}')
+
+                for o in outs:
+                    try:
+                        ds = get_ds_by_name(o, all_projects, p)
+                        if not 'lineage_upstream' in ds:
+                            ds['lineage_upstream'] = ins
+                        else:
+                            for i in ins:
+                                if not i in ds['lineage_upstream']:
+                                    ds['lineage_upstream'].append(i)
+                    except Exception as e: 
+                        print(f'output lineage error: {e}')
+
+            except Exception as e: 
+                print(e)
+             
+
+# def traverse_lineage(ds_name, all_projects, upstream=True):
+#     try:
+#         ds = get_ds_by_name(ds_name, all_projects)
+
+#         dir = 'lineage_upstream'
+#         if upstream == False:
+#             dir = 'lineage_downstream'
+
+#         dir_full = dir + '_full'
+
+#         if (dir + '_complete') in ds:
+#             return ds[dir_full]
+
+#         next_levels = []
+#         #print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
                 
-                for col in down_ds['schema']['columns']:
-                    if col['name'].upper() == col_name.upper():
-                        down_matches.append(full_col_name)
-    except:
-        print('col lineage error')
+#         if dir in ds:
+#             for l in ds[dir]:
+#                 print(l, all_projects, upstream)
+#                 nxt = traverse_lineage(l, all_projects, upstream)
+#                 # next_levels[dir] = nxt
 
-    return up_matches, down_matches
+#                 next_levels.append({'name':l, dir_full: nxt})
 
-def get_dataset_lineage(full_ds_name):
-    p_name, ds_name = extract_name_project(full_ds_name)
+#             ds[dir + '_complete'] = 1
+#             ds[dir_full] = next_levels
+#             #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
+
+#         return next_levels
+
+#     except:
+#         return []
+
+# def get_col_lineage(ds, col_name, all_projects):
+#     up_matches = []
+#     down_matches = []
+
+    
+
+#     try:
+#         if 'lineage_upstream_full' in ds:
+#             for up in ds['lineage_upstream_full']:
+#                 up_ds = get_ds_by_name(up['name'], all_projects)
+#                 full_col_name = get_full_col_name(up_ds, col_name)
+        
+#                 for col in up_ds['schema']['columns']:
+#                     # print(col, col_name)
+#                     if col['name'].upper() == col_name.upper():
+#                         up_matches.append(full_col_name);
+
+
+#         if 'lineage_downstream_full' in ds:
+#             for down in ds['lineage_downstream_full']:
+#                 down_ds = get_ds_by_name(down['name'], all_projects)
+#                 full_col_name = get_full_col_name(down_ds, col_name)
+                
+#                 for col in down_ds['schema']['columns']:
+#                     if col['name'].upper() == col_name.upper():
+#                         down_matches.append(full_col_name)
+#     except:
+#         print('col lineage error')
+
+#     return up_matches, down_matches
+
+# def get_dataset_lineage(full_ds_name):
+#     p_name, ds_name = extract_name_project(full_ds_name)
 
 
 # def get_all_lineage(all_projects):
@@ -404,53 +422,7 @@ def get_dataset_lineage(full_ds_name):
 #                 col['lineage_upstream'] = up
 #                 col['lineage_downstream'] = down
                 
-
-def get_user():
-    headers = dict(request.headers)
-    # Get the auth info of the user performing the request
-    auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
-    # print ("User doing the query is %s" % auth_info["authIdentifier"])
-    return auth_info["authIdentifier"]
-
-def get_ds_lineage(all_projects):
-
-    # get the 1st level of upstream / downstream
-    for p in all_projects:
-        project = all_projects[p]
-
-        for r in range(len(project['recipes'])):
-            try:
-                recipe = project['recipes'][r]
-                ins = get_stream(recipe, 'inputs', p)            
-                outs = get_stream(recipe, 'outputs', p)            
-
-                for i in ins:
-                    try:
-                        ds = get_ds_by_name(i, all_projects, p)
-                        if not 'lineage_downstream' in ds:
-                            ds['lineage_downstream'] = outs
-                        else:
-                            for o in outs:
-                                if not o in ds['lineage_downstream']:
-                                    ds['lineage_downstream'].append(o)
-                    except Exception as e: 
-                        print(f'input lineage error: {e}')
-
-                for o in outs:
-                    try:
-                        ds = get_ds_by_name(o, all_projects, p)
-                        if not 'lineage_upstream' in ds:
-                            ds['lineage_upstream'] = ins
-                        else:
-                            for i in ins:
-                                if not i in ds['lineage_upstream']:
-                                    ds['lineage_upstream'].append(i)
-                    except Exception as e: 
-                        print(f'output lineage error: {e}')
-
-            except Exception as e: 
-                print(e)
-                
+   
 # def get_ds_lineage(all_projects):
 
 #     # get the 1st level of upstream / downstream
@@ -507,3 +479,48 @@ def get_ds_lineage(all_projects):
 #                 up, down = get_col_lineage(ds, col['name'], all_projects)
 #                 col['lineage_upstream'] = up
 #                 col['lineage_downstream'] = down
+
+# def init_proj_dataset():
+#     client = dataiku.api_client()
+#     proj = client.get_default_project()
+
+#     ds_name = '--Thread-Projects--'
+#     ds_loc = 'thread_projects.csv'
+#     ds = proj.get_dataset(ds_name)
+#     if not ds.exists():
+#         project_variables = dataiku.get_custom_variables()
+
+#         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+#         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+
+#         csv_dataset = proj.create_dataset(ds_name, type='Filesystem', params=params,
+#                                             formatType='csv', formatParams=format_params)
+
+#         # Set dataset to managed
+#         ds_def = csv_dataset.get_definition()
+#         ds_def['managed'] = True
+#         csv_dataset.set_definition(ds_def)
+
+#         # Set schema
+#         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+
+#         ds2 = dataiku.Dataset(ds_name)
+#         df = pd.DataFrame(columns=['name'])
+        
+#         ds2.write_with_schema(df)
+
+#         print(f'created {ds_name} dataset')
+#     else:
+#         print(f'{ds_name} already exists')
+
+#     return ds
+
+# @app.route('/initialize')
+# def initialize():
+#     # global global_ref
+    
+#     get_user()
+
+#     init_proj_dataset()
+
+#     return json.dumps({'result': 'success'})
