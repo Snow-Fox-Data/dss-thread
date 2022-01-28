@@ -69,7 +69,7 @@ class Dataset extends Component {
             if (base_elem.lineage_downstream_full != null)
                 this.traverse(down_res, base_elem, 'lineage_downstream_full');
             else
-                down_res = base_elem.lineage_downstream;
+                down_res = eval(base_elem.lineage_downstream);
         }
 
         var up_res = [];
@@ -77,7 +77,7 @@ class Dataset extends Component {
             if (base_elem.lineage_upstream_full != null)
                 this.traverse(up_res, base_elem, 'lineage_upstream_full');
             else
-                up_res = base_elem.lineage_upstream;
+                up_res = eval(base_elem.lineage_upstream);
         }
 
         for (var x = 0; x < down_res.length; x++) {
