@@ -185,13 +185,17 @@ def scan_server(ds_ds):
                 obj = { 'project': p, 'name': ds.name}
                 if 'lineage_downstream' in ds:
                     obj['lineage_downstream'] = ds['lineage_downstream']
+                else:
+                    obj['lineage_downstream'] =[]
                 if 'lineage_upstream' in ds:
                     obj['lineage_upstream'] = ds['lineage_upstream']
+                else:
+                    obj['lineage_upstream'] =[]
                     
                 ds_list.append(obj)
 
     dataset_dataset = dataiku.Dataset(ds_ds.name)
-    df = pd.DataFrame.from_dict(ds_list).replace({np.nan:''})
+    df = pd.DataFrame.from_dict(ds_list)
     dataset_dataset.write_with_schema(df)
 
     return scan_obj
