@@ -1,6 +1,7 @@
 from crypt import methods
 
 from itsdangerous import json
+from pyparsing import col
 import dataiku
 import pandas as pd
 from flask import request
@@ -121,9 +122,11 @@ def column_lineage():
     # project = data['project']
     column = data['column']
 
-    print(column)
+    p, d, c = extract_name_project(column)
 
-    ups, downs = get_col_lineage(project_name='', ds_name='dataset_name', col_name=column)
+    # print(column)
+
+    ups, downs = get_col_lineage(p, d, c)
 
     return json.dumps({
         'ups': ups,
@@ -210,8 +213,13 @@ def get_ds_by_name(name, all_projects, p_name=None):
             return ds
 
 def extract_name_project(full_ds_name):
-    p_name = full_ds_name.split('.')[0]
-    d_name = full_ds_name.split('.')[1]
+    splits = full_ds_name.split('.')
+    p_name = splits[0]
+    d_name = splits[1]
+
+    if len(splits) > 2:
+        c_name = splits[2]
+        return p_name, d_name, c_name
 
     return p_name, d_name
 
