@@ -21,7 +21,7 @@ def init_dataset_dataset():
         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(ds_name, type='Filesystem', params=params,
+        csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
                                             formatType='csv', formatParams=format_params)
 
         # Set dataset to managed
@@ -32,14 +32,14 @@ def init_dataset_dataset():
         # Set schema
         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
-        ds2 = dataiku.Dataset(ds_name)
+        ds2 = dataiku.Dataset(THREAD_DS_NAME)
         df = pd.DataFrame(columns=['project','name'])
         
         ds2.write_with_schema(df)
 
-        print(f'created {ds_name} dataset')
+        print(f'created {THREAD_DS_NAME} dataset')
     else:
-        print(f'{ds_name} already exists')
+        print(f'{THREAD_DS_NAME} already exists')
 
     return ds, exists
 
