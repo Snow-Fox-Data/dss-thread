@@ -191,7 +191,8 @@ def scan_server(ds_ds):
                 ds_list.append(obj)
 
     dataset_dataset = dataiku.Dataset(ds_ds.name)
-    dataset_dataset.write_with_schema(pd.DataFrame.from_dict(ds_list))
+    df = pd.DataFrame.from_dict(ds_list).replace({np.nan:''})
+    dataset_dataset.write_with_schema(df)
 
     return scan_obj
 
@@ -264,6 +265,7 @@ def get_col_lineage(project_name, ds_name, col_name):
     ds_details = ds_df.query(f'name=="{ds_name}" & project=="{project_name}"').to_dict('records')[0]
 
     print(ds_details)
+
     for up in json.loads(ds_details['lineage_upstream']):
         p, d = extract_name_project(up)
         # up_ds = ds_df.query(f'name=="{d}" & project="{p}"').iloc[0]
@@ -274,7 +276,7 @@ def get_col_lineage(project_name, ds_name, col_name):
             if s.upper() == col_name.upper():
                 ups.append(up + '.' + col_name)
 
-    for down in json.loads(ds_details['lineage_down']):
+    for down in json.loads(ds_details['lineage_downstream']):
         p, d = extract_name_project(down)
         
         ds_ref = dataiku.Dataset(d, p)
