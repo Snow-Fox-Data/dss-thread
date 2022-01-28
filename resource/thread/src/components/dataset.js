@@ -156,6 +156,17 @@ class Dataset extends Component {
     openColumn(col) {
         this.update('col_elements', col);
         this.setState({ modalDialog: true, selectedCol: col });
+
+        fetch(window.getWebAppBackendUrl('column-lineage'), {
+            method: 'POST', body: JSON.stringify({
+                'column': this.createColName(this.state.selectedCol.name)
+            })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    eventBus.dispatch("dataRefresh", {});
+                });
     };
 
     closeColumn = () => {

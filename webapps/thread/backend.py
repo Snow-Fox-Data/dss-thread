@@ -1,4 +1,6 @@
 from crypt import methods
+
+from itsdangerous import json
 import dataiku
 import pandas as pd
 from flask import request
@@ -42,7 +44,6 @@ def init_dataset_dataset():
         print(f'{THREAD_DS_NAME} already exists')
 
     return ds, exists
-
 
 @app.route('/getuser')
 def getuser():
@@ -115,7 +116,19 @@ def update_col_desc():
 
 @app.route('/column-lineage', methods=['POST'])
 def column_lineage():
-    get_col_lineage()
+    data = json.loads(request.data)
+    # dataset_name = data['dataset']
+    # project = data['project']
+    column = data['column']
+
+    print(column)
+
+    ups, downs = get_col_lineage(project_name='', ds_name='dataset_name', col_name=column)
+
+    return json.dumps({
+        'ups': ups,
+        'downs': downs
+    })
 
 def update_column_description(column_array, description):
     if type(column_array)==str:
@@ -224,8 +237,6 @@ def get_stream(recipe, inputs_outputs, p_name):
 
     return refs
 
-
-
 def dataset_project_shares(project):
     exposed = project.get_settings().settings['exposedObjects']['objects']
     for e in exposed:
@@ -240,13 +251,34 @@ def get_full_col_name(ds, col):
     return ds_name + '.' + col
 
 def get_col_lineage(project_name, ds_name, col_name):
+    ups = []
+    downs = []
+
+    # client = dataiku.api_client()
+   
     ds_df = dataiku.Dataset(THREAD_DS_NAME).get_dataframe()
     ds_details = ds_df.query(f'name=="{ds_name}" & project="{project_name}"').iloc[0]
 
     for up in ds_details['lineage_upstream']:
-        p,d = extract_name_project(up)
-        up_ds = ds_df.query(f'name=="{d}" & project="{p}"').iloc[0]
+        p, d = extract_name_project(up)
+        # up_ds = ds_df.query(f'name=="{d}" & project="{p}"').iloc[0]
+        
+        ds_ref = dataiku.Dataset(d, p)
+        schema = ds_ref.read_schema()
+        for s in schema:
+            if s.upper() == col_name.upper():
+                ups.append(up + '.' + col_name)
 
+    for down in ds_details['lineage_down']:
+        p, d = extract_name_project(down)
+        
+        ds_ref = dataiku.Dataset(d, p)
+        schema = ds_ref.read_schema()
+        for s in schema:
+            if s.upper() == col_name.upper():
+                downs.append(up + '.' + col_name)
+
+    return ups, downs
 
 def get_user():
     headers = dict(request.headers)
