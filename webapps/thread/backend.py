@@ -2,6 +2,7 @@ import dataiku
 import pandas as pd
 from flask import request
 import numpy as np
+import ast
 
 intitialized = False
 THREAD_DS_NAME = '--Thread-Datasets--'
@@ -270,7 +271,7 @@ def get_col_lineage(project_name, ds_name, col_name):
 
     print(ds_details)
 
-    for up in json.loads(ds_details['lineage_upstream']):
+    for up in ast.literal_eval(ds_details['lineage_upstream']):
         p, d = extract_name_project(up)
         # up_ds = ds_df.query(f'name=="{d}" & project="{p}"').iloc[0]
         
@@ -280,8 +281,8 @@ def get_col_lineage(project_name, ds_name, col_name):
             if s.upper() == col_name.upper():
                 ups.append(up + '.' + col_name)
 
-    print(ds_details['lineage_downstream'])
-    for down in json.loads(ds_details['lineage_downstream']):
+    # print(ds_details['lineage_downstream'])
+    for down in ast.literal_eval(ds_details['lineage_downstream']):
         p, d = extract_name_project(down)
         
         ds_ref = dataiku.Dataset(d, p)
