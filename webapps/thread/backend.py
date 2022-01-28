@@ -289,7 +289,7 @@ def get_col_lineage(project_name, ds_name, col_name):
         schema = ds_ref.read_schema()
         for s in schema:
             if s['name'].upper() == col_name.upper():
-                downs.append(up + '.' + col_name)
+                downs.append(down + '.' + col_name)
 
     return ups, downs
 
