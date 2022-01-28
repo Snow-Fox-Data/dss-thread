@@ -25,7 +25,7 @@ export default memo(({ data, isConnectable }) => {
         <div style={{ fontWeight: 'bold' }}>{data.project}</div>
         <div>
           {/* <a href={createDsLink2(data.project, data.dataset)} target="_blank">{data.dataset}</a> */}
-          <a onclick={selectDataset}>{data.dataset}</a>
+          <a href='#' onclick={selectDataset}>{data.dataset}</a>
         </div>
         <div>
           {data.column}
