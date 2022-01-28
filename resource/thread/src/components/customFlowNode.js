@@ -9,7 +9,8 @@ export default memo(({ data, isConnectable }) => {
     return '/projects/' + proj + '/datasets/' + ds + '/explore/';
   }
 
-  function selectDataset() {
+  function selectDataset(e) {
+    e.preventDefault();
     eventBus.dispatch("datasetSelected", data.project + '.' + data.dataset);
   }
 
@@ -25,7 +26,7 @@ export default memo(({ data, isConnectable }) => {
         <div style={{ fontWeight: 'bold' }}>{data.project}</div>
         <div>
           {/* <a href={createDsLink2(data.project, data.dataset)} target="_blank">{data.dataset}</a> */}
-          <a href='#' onclick={selectDataset}>{data.dataset}</a>
+          <a href='javascript:void(0)' onClick={selectDataset}>{data.dataset}</a>
         </div>
         <div>
           {data.column}
