@@ -126,7 +126,7 @@ def dataset_details():
     
     ds_name = '--Thread-Datasets--'
     ds = dataiku.Dataset(ds_name)
-    res = ds.get_dataframe().query(f'name=="{dataset_name}"').to_dict('records')[0]
+    res = ds.get_dataframe().query(f'name=="{dataset_name}"').replace({np.nan:''}).to_dict('records')[0]
 
     dku_ds['lineage_downstream'] = res['lineage_downstream']
     dku_ds['lineage_upstream'] = res['lineage_upstream']
