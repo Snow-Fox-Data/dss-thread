@@ -154,7 +154,7 @@ class Dataset extends Component {
     }
 
     openColumn(col) {
-
+        // loading the column lineage
         fetch(window.getWebAppBackendUrl('column-lineage'), {
             method: 'POST', body: JSON.stringify({
                 'column': this.createColName(col.name)
@@ -163,7 +163,9 @@ class Dataset extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    
+                    col.lineage_downstream = result.downs;
+                    col.lineage_uptream = result.ups;
+
                     this.update('col_elements', col);
                     this.setState({ modalDialog: true, selectedCol: col });
                     //eventBus.dispatch("dataRefresh", {});
