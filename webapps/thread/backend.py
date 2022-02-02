@@ -254,7 +254,7 @@ def get_stream(recipe, inputs_outputs, p_name):
                 d_name = name
 
             try:
-                exist = dataiku.Dataset(d_name, p_name)
+                exist = dataiku.Dataset(d_name, p_name).get_location_info()
                 refs.append(get_full_dataset_name(d_name, p_name))
             except: 
                 print(f'{p_name}.{d_name} doesnt exist')
