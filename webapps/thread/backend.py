@@ -394,6 +394,9 @@ def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
 
             if dir in ds:
                 for l in ds[dir]:
+                    if l == ds_name:
+                        continue
+                    
                     try:
                         recur_ct = recur_ct + 1
                         if recur_ct > 300:
