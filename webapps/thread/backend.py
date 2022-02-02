@@ -159,21 +159,21 @@ def scan_server(ds_ds):
 
     dss_projects = client.list_project_keys()
     for proj in dss_projects:
-        if 'astor' in proj.lower():
-            scan_obj[proj] = {}
+        # if 'astor' in proj.lower():
+        scan_obj[proj] = {}
 
-            project_list.append(proj)
+        project_list.append(proj)
 
-            # print(proj)
-            project = client.get_project(proj)
-            # meta = project.get_metadata()
-            # settings = project.get_settings().get_raw()
+        # print(proj)
+        project = client.get_project(proj)
+        # meta = project.get_metadata()
+        # settings = project.get_settings().get_raw()
 
-            datasets = project.list_datasets()
-            recipes = project.list_recipes()
+        datasets = project.list_datasets()
+        recipes = project.list_recipes()
 
-            scan_obj[proj]['datasets'] = datasets
-            scan_obj[proj]['recipes'] = recipes
+        scan_obj[proj]['datasets'] = datasets
+        scan_obj[proj]['recipes'] = recipes
 
     print('start get lineage...')
     get_ds_lineage(scan_obj)
@@ -270,7 +270,7 @@ def get_col_lineage(project_name, ds_name, col_name):
     ds_df = dataiku.Dataset(THREAD_DS_NAME).get_dataframe()
     ds_details = ds_df.query(f'name=="{ds_name}" & project=="{project_name}"').to_dict('records')[0]
 
-    print(ds_details)
+    # print(ds_details)
 
     for up in ast.literal_eval(ds_details['lineage_upstream']):
         p, d = extract_name_project(up)
@@ -373,7 +373,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
                 
         if dir in ds:
             for l in ds[dir]:
-                print(l, all_projects, upstream)
+                # print(l, all_projects, upstream)
                 nxt = traverse_lineage(l, all_projects, upstream)
                 # next_levels[dir] = nxt
 
