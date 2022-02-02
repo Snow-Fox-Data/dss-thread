@@ -245,6 +245,7 @@ def get_stream(recipe, inputs_outputs, p_name):
     refs = []
     try:
         for i in range(len(recipe[inputs_outputs]['main']['items'])):
+            print(recipe[inputs_outputs]['main']['items'][i])
             name = recipe[inputs_outputs]['main']['items'][i]['ref']
             if '.' in name:
                 p_name, d_name = extract_name_project(name)
