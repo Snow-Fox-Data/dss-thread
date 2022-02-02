@@ -385,9 +385,12 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
         next_levels = []
         if dir in ds:
             for l in ds[dir]:
-                nxt = traverse_lineage(l, all_projects, upstream)
-                next_levels.append({'name':l, dir_full: nxt})
-
+                try:
+                    nxt = traverse_lineage(l, all_projects, upstream)
+                    next_levels.append({'name':l, dir_full: nxt})
+                except:
+                    print(f'recursive error {l}')
+        
         return next_levels
 
         # next_levels = []
