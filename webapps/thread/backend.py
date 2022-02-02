@@ -369,7 +369,7 @@ def get_ds_lineage(all_projects):
                
              
 
-def traverse_lineage(ds_name, all_projects, upstream=True):
+def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
     try:
         ds = get_ds_by_name(ds_name, all_projects)
 
@@ -386,10 +386,15 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
         if dir in ds:
             for l in ds[dir]:
                 try:
-                    nxt = traverse_lineage(l, all_projects, upstream)
+                    recur_ct = recur_ct + 1
+                    if recur_ct > 300:
+                        print(f'recursive error {l}, {recur_ct}')
+                        break
+
+                    nxt = traverse_lineage(l, all_projects, upstream, recur_ct)
                     next_levels.append({'name':l, dir_full: nxt})
-                except:
-                    print(f'recursive error {l}')
+                except Exception as e:
+                    capture_exception(e)
         
         return next_levels
 
