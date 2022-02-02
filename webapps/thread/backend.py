@@ -171,21 +171,21 @@ def scan_server(ds_ds):
 
     dss_projects = client.list_project_keys()
     for proj in dss_projects:
-        # if 'astor' in proj.lower():
-        scan_obj[proj] = {}
+        if 'VMCHURNPREDICTION' in proj.upper():
+            scan_obj[proj] = {}
 
-        project_list.append(proj)
+            project_list.append(proj)
 
-        # print(proj)
-        project = client.get_project(proj)
-        # meta = project.get_metadata()
-        # settings = project.get_settings().get_raw()
+            # print(proj)
+            project = client.get_project(proj)
+            # meta = project.get_metadata()
+            # settings = project.get_settings().get_raw()
 
-        datasets = project.list_datasets()
-        recipes = project.list_recipes()
+            datasets = project.list_datasets()
+            recipes = project.list_recipes()
 
-        scan_obj[proj]['datasets'] = datasets
-        scan_obj[proj]['recipes'] = recipes
+            scan_obj[proj]['datasets'] = datasets
+            scan_obj[proj]['recipes'] = recipes
 
     print('start get lineage...')
     get_ds_lineage(scan_obj)
@@ -394,15 +394,11 @@ def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
 
             if dir in ds:
                 for l in ds[dir]:
-                    if l == ds_name:
-                        continue
-                    
                     try:
                         recur_ct = recur_ct + 1
                         if recur_ct > 300:
                             print(f'recursive error {dir} - {ds_name}, {l}, {ds[dir]}')
                             return []
-
 
                         nxt = traverse_lineage(l, all_projects, upstream, recur_ct)
                         next_levels.append({'name':l, dir_full: nxt})
