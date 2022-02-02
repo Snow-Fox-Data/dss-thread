@@ -388,7 +388,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
             for l in ds[dir]:
                 # print(l, all_projects, upstream)
                 nxt = traverse_lineage(l, all_projects, upstream)
-                next_levels[dir] = nxt
+                # next_levels[dir] = nxt
                 # nxt = []
 
                 next_levels.append({'name':l, dir_full: nxt})
