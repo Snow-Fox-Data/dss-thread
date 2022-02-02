@@ -27,7 +27,6 @@ def init_dataset_dataset():
     ds = proj.get_dataset(THREAD_DS_NAME)
 
     exists = ds.exists()
-    exists = False
     if not exists:
         project_variables = dataiku.get_custom_variables()
 
@@ -247,8 +246,6 @@ def get_stream(recipe, inputs_outputs, p_name):
     try:
         for i in range(len(recipe[inputs_outputs]['main']['items'])):
             name = recipe[inputs_outputs]['main']['items'][i]['ref']
-            if 'model_scikit' in name:
-                print(recipe[inputs_outputs]['main']['items'][i])
             if '.' in name:
                 p_name, d_name = extract_name_project(name)
             else:
@@ -358,17 +355,17 @@ def get_ds_lineage(all_projects):
                 capture_exception(e)
 
     # get the full dataset lineage
-    # for p in all_projects:
-    #     project = all_projects[p]
-    #     for d in range(len(project['datasets'])):
-    #         ds = project['datasets'][d]
-    #         ds['full_name'] = get_full_dataset_name(ds['name'], p)
+    for p in all_projects:
+        project = all_projects[p]
+        for d in range(len(project['datasets'])):
+            ds = project['datasets'][d]
+            ds['full_name'] = get_full_dataset_name(ds['name'], p)
 
-    #         if 'lineage_upstream' in ds:
-    #             traverse_lineage(ds['full_name'], all_projects, upstream=True)
+            if 'lineage_upstream' in ds:
+                traverse_lineage(ds['full_name'], all_projects, upstream=True)
 
-    #         if 'lineage_downstream' in ds:
-    #             traverse_lineage(ds['full_name'], all_projects, upstream=False)
+            if 'lineage_downstream' in ds:
+                traverse_lineage(ds['full_name'], all_projects, upstream=False)
                
              
 
