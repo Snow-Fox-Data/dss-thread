@@ -335,7 +335,7 @@ def get_ds_lineage(all_projects):
                                 if not o in ds['lineage_downstream']:
                                     ds['lineage_downstream'].append(o)
                     except Exception as e: 
-                        capture_exception(e))
+                        capture_exception(e)
 
                 for o in outs:
                     try:
