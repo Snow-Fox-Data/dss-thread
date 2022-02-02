@@ -3,6 +3,18 @@ import pandas as pd
 from flask import request
 import numpy as np
 import ast
+import sentry_sdk
+from sentry_sdk import capture_exception
+from sentry_sdk import capture_message
+
+sentry_sdk.init(
+    "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0
+)
 
 intitialized = False
 THREAD_DS_NAME = '--Thread-Datasets--'
@@ -241,7 +253,7 @@ def get_stream(recipe, inputs_outputs, p_name):
 
             refs.append(get_full_dataset_name(d_name, p_name))
     except:
-        print('error getting stream')
+        capture_message('error getting stream')
         
     if refs is None:
         return []
@@ -323,7 +335,7 @@ def get_ds_lineage(all_projects):
                                 if not o in ds['lineage_downstream']:
                                     ds['lineage_downstream'].append(o)
                     except Exception as e: 
-                        print(f'input lineage error: {e}')
+                        capture_exception(e))
 
                 for o in outs:
                     try:
@@ -335,10 +347,10 @@ def get_ds_lineage(all_projects):
                                 if not i in ds['lineage_upstream']:
                                     ds['lineage_upstream'].append(i)
                     except Exception as e: 
-                        print(f'output lineage error: {e}')
+                        capture_exception(e)
 
             except Exception as e: 
-                print(e)
+                capture_exception(e)
 
     # get the full dataset lineage
     for p in all_projects:
@@ -387,7 +399,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
         return next_levels
 
     except Exception as e: 
-        print(f'traverse error: {e}')
+        capture_exception(e)
         return []
 
 # def get_col_lineage(ds, col_name, all_projects):
