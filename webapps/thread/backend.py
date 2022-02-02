@@ -371,17 +371,17 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
         next_levels = []
         print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
                 
-        if dir in ds:
-            for l in ds[dir]:
-                # print(l, all_projects, upstream)
-                nxt = traverse_lineage(l, all_projects, upstream)
-                # next_levels[dir] = nxt
+        # if dir in ds:
+        #     for l in ds[dir]:
+        #         # print(l, all_projects, upstream)
+        #         nxt = traverse_lineage(l, all_projects, upstream)
+        #         # next_levels[dir] = nxt
 
-                next_levels.append({'name':l, dir_full: nxt})
+        #         next_levels.append({'name':l, dir_full: nxt})
 
-            ds[dir + '_complete'] = 1
-            ds[dir_full] = next_levels
-            #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
+        #     ds[dir + '_complete'] = 1
+        #     ds[dir_full] = next_levels
+        #     #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
 
         return next_levels
 
