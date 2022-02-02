@@ -252,8 +252,8 @@ def get_stream(recipe, inputs_outputs, p_name):
                 d_name = name
 
             refs.append(get_full_dataset_name(d_name, p_name))
-    except:
-        capture_message('error getting stream')
+    except Exception as e:
+        capture_exception(e)
         
     if refs is None:
         return []
@@ -382,7 +382,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
             return ds[dir_full]
 
         next_levels = []
-        print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
+        # print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
                 
         if dir in ds:
             for l in ds[dir]:
