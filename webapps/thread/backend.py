@@ -159,20 +159,21 @@ def scan_server(ds_ds):
 
     dss_projects = client.list_project_keys()
     for proj in dss_projects:
-        scan_obj[proj] = {}
+        if 'astor' in proj.lower():
+            scan_obj[proj] = {}
 
-        project_list.append(proj)
+            project_list.append(proj)
 
-        # print(proj)
-        project = client.get_project(proj)
-        # meta = project.get_metadata()
-        # settings = project.get_settings().get_raw()
+            # print(proj)
+            project = client.get_project(proj)
+            # meta = project.get_metadata()
+            # settings = project.get_settings().get_raw()
 
-        datasets = project.list_datasets()
-        recipes = project.list_recipes()
+            datasets = project.list_datasets()
+            recipes = project.list_recipes()
 
-        scan_obj[proj]['datasets'] = datasets
-        scan_obj[proj]['recipes'] = recipes
+            scan_obj[proj]['datasets'] = datasets
+            scan_obj[proj]['recipes'] = recipes
 
     print('start get lineage...')
     get_ds_lineage(scan_obj)
