@@ -328,12 +328,13 @@ def get_ds_lineage(all_projects):
                 for i in ins:
                     try:
                         ds = get_ds_by_name(i, all_projects, p)
-                        if not 'lineage_downstream' in ds:
-                            ds['lineage_downstream'] = outs
-                        else:
-                            for o in outs:
-                                if not o in ds['lineage_downstream']:
-                                    ds['lineage_downstream'].append(o)
+                        if ds is not None:
+                            if not 'lineage_downstream' in ds:
+                                ds['lineage_downstream'] = outs
+                            else:
+                                for o in outs:
+                                    if not o in ds['lineage_downstream']:
+                                        ds['lineage_downstream'].append(o)
                     except Exception as e: 
                         capture_exception(e)
 
