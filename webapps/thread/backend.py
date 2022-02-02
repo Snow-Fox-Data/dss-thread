@@ -27,6 +27,7 @@ def init_dataset_dataset():
     ds = proj.get_dataset(THREAD_DS_NAME)
 
     exists = ds.exists()
+    exists = False
     if not exists:
         project_variables = dataiku.get_custom_variables()
 
