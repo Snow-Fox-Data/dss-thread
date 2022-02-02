@@ -246,7 +246,7 @@ def get_stream(recipe, inputs_outputs, p_name):
     try:
         for i in range(len(recipe[inputs_outputs]['main']['items'])):
             name = recipe[inputs_outputs]['main']['items'][i]['ref']
-            if name == 'model_scikit':
+            if 'model_scikit' in name:
                 print(recipe[inputs_outputs]['main']['items'][i])
             if '.' in name:
                 p_name, d_name = extract_name_project(name)
