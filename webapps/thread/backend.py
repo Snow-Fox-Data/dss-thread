@@ -340,17 +340,17 @@ def get_ds_lineage(all_projects):
                 print(e)
 
     # get the full dataset lineage
-    # for p in all_projects:
-    #     project = all_projects[p]
-    #     for d in range(len(project['datasets'])):
-    #         ds = project['datasets'][d]
-    #         ds['full_name'] = get_full_dataset_name(ds['name'], p)
+    for p in all_projects:
+        project = all_projects[p]
+        for d in range(len(project['datasets'])):
+            ds = project['datasets'][d]
+            ds['full_name'] = get_full_dataset_name(ds['name'], p)
 
-    #         if 'lineage_upstream' in ds:
-    #             traverse_lineage(ds['full_name'], all_projects, upstream=True)
+            if 'lineage_upstream' in ds:
+                traverse_lineage(ds['full_name'], all_projects, upstream=True)
 
-    #         if 'lineage_downstream' in ds:
-    #             traverse_lineage(ds['full_name'], all_projects, upstream=False)
+            if 'lineage_downstream' in ds:
+                traverse_lineage(ds['full_name'], all_projects, upstream=False)
                
              
 
@@ -384,7 +384,8 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
 
         return next_levels
 
-    except:
+    except Exception as e: 
+        print(f'traverse error: {e}')
         return []
 
 # def get_col_lineage(ds, col_name, all_projects):
