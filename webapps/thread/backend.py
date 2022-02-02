@@ -381,49 +381,32 @@ def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
     try:
         ds = get_ds_by_name(ds_name, all_projects)
 
-        dir = 'lineage_upstream'
-        if upstream == False:
-            dir = 'lineage_downstream'
-
-        dir_full = dir + '_full'
-
-        if (dir + '_complete') in ds:
-            return ds[dir_full]
-
         next_levels = []
-        if dir in ds:
-            for l in ds[dir]:
-                try:
-                    recur_ct = recur_ct + 1
-                    if recur_ct > 300:
-                        print(f'recursive error {ds_name}, {l}, {recur_ct}')
-                        break
+        if not ds is None:
+            dir = 'lineage_upstream'
+            if upstream == False:
+                dir = 'lineage_downstream'
 
-                    nxt = traverse_lineage(l, all_projects, upstream, recur_ct)
-                    next_levels.append({'name':l, dir_full: nxt})
-                except Exception as e:
-                    capture_exception(e)
-        
+            dir_full = dir + '_full'
+
+            if (dir + '_complete') in ds:
+                return ds[dir_full]
+
+            if dir in ds:
+                for l in ds[dir]:
+                    try:
+                        recur_ct = recur_ct + 1
+                        if recur_ct > 300:
+                            print(f'recursive error {ds_name}, {l}, {recur_ct}')
+                            break
+
+                        nxt = traverse_lineage(l, all_projects, upstream, recur_ct)
+                        next_levels.append({'name':l, dir_full: nxt})
+                    except Exception as e:
+                        capture_exception(e)
+            
         return next_levels
-
-        # next_levels = []
-        # # print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
-                
-        # if dir in ds:
-        #     for l in ds[dir]:
-        #         print(l, upstream)
-        #         # print(l, all_projects, upstream)
-        #         nxt = traverse_lineage(l, all_projects, upstream)
-        #         # next_levels[dir] = nxt
-        #         # nxt = []
-
-        #         # next_levels.append({'name':l, dir_full: nxt})
-
-        #     ds[dir + '_complete'] = 1
-        #     # ds[dir_full] = next_levels
-        #     #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
-
-        # return next_levels
+            
 
     except Exception as e: 
         print(f'error traversing {ds_name}')
