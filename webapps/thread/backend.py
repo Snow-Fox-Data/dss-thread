@@ -338,40 +338,59 @@ def get_ds_lineage(all_projects):
 
             except Exception as e: 
                 print(e)
+
+    # get the full dataset lineage
+    for p in all_projects:
+        project = all_projects[p]
+        for d in range(len(project['datasets'])):
+            ds = project['datasets'][d]
+            ds['full_name'] = get_full_dataset_name(ds['name'], p)
+
+            if 'lineage_upstream' in ds:
+                traverse_lineage(ds['full_name'], all_projects, upstream=True)
+
+            if 'lineage_downstream' in ds:
+                traverse_lineage(ds['full_name'], all_projects, upstream=False)
+               
+            for i in range(len(ds['schema']['columns'])):
+                col = ds['schema']['columns'][i]
+                up, down = get_col_lineage(ds, col['name'], all_projects)
+                col['lineage_upstream'] = up
+                col['lineage_downstream'] = down
              
 
-# def traverse_lineage(ds_name, all_projects, upstream=True):
-#     try:
-#         ds = get_ds_by_name(ds_name, all_projects)
+def traverse_lineage(ds_name, all_projects, upstream=True):
+    try:
+        ds = get_ds_by_name(ds_name, all_projects)
 
-#         dir = 'lineage_upstream'
-#         if upstream == False:
-#             dir = 'lineage_downstream'
+        dir = 'lineage_upstream'
+        if upstream == False:
+            dir = 'lineage_downstream'
 
-#         dir_full = dir + '_full'
+        dir_full = dir + '_full'
 
-#         if (dir + '_complete') in ds:
-#             return ds[dir_full]
+        if (dir + '_complete') in ds:
+            return ds[dir_full]
 
-#         next_levels = []
-#         #print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
+        next_levels = []
+        #print('traversing ' + dir + ' in ' + ds['projectKey'] + '.' + ds['name'])
                 
-#         if dir in ds:
-#             for l in ds[dir]:
-#                 print(l, all_projects, upstream)
-#                 nxt = traverse_lineage(l, all_projects, upstream)
-#                 # next_levels[dir] = nxt
+        if dir in ds:
+            for l in ds[dir]:
+                print(l, all_projects, upstream)
+                nxt = traverse_lineage(l, all_projects, upstream)
+                # next_levels[dir] = nxt
 
-#                 next_levels.append({'name':l, dir_full: nxt})
+                next_levels.append({'name':l, dir_full: nxt})
 
-#             ds[dir + '_complete'] = 1
-#             ds[dir_full] = next_levels
-#             #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
+            ds[dir + '_complete'] = 1
+            ds[dir_full] = next_levels
+            #print('setting lineage for ' + ds['projectKey'] + '.' + ds['name'])
 
-#         return next_levels
+        return next_levels
 
-#     except:
-#         return []
+    except:
+        return []
 
 # def get_col_lineage(ds, col_name, all_projects):
 #     up_matches = []
