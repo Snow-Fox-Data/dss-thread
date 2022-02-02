@@ -251,7 +251,13 @@ def get_stream(recipe, inputs_outputs, p_name):
             else:
                 d_name = name
 
-            refs.append(get_full_dataset_name(d_name, p_name))
+            try:
+                exist = dataiku.Dataset(d_name, p_name)
+                refs.append(get_full_dataset_name(d_name, p_name))
+            except: 
+                print(f'{p_name}.{d_name} doesnt exist')
+                # doesn't exist, this is probably a folder or other item we don't currently support
+
     except Exception as e:
         capture_exception(e)
         
