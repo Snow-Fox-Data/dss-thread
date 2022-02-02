@@ -227,6 +227,8 @@ def get_ds_by_name(name, all_projects, p_name=None):
         if ds['name'] == d_name:
             return ds
 
+    return None
+
 def extract_name_project(full_ds_name):
     splits = full_ds_name.split('.')
     p_name = splits[0]
