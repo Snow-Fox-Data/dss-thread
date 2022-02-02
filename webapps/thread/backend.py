@@ -397,7 +397,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
                     try:
                         recur_ct = recur_ct + 1
                         if recur_ct > 300:
-                            print(f'recursive error {ds_name}, {l}, {recur_ct}')
+                            print(f'recursive error {ds_name}, {l}, {ds[dir]}')
                             return []
 
 
