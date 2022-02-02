@@ -410,7 +410,7 @@ def traverse_lineage(ds_name, all_projects, upstream=True):
         # return next_levels
 
     except Exception as e: 
-        print(f'error traversing {e}')
+        print(f'error traversing {ds_name}')
         return []
 
 # def get_col_lineage(ds, col_name, all_projects):
