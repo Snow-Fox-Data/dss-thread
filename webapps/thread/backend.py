@@ -353,6 +353,7 @@ def get_ds_lineage(all_projects):
                         ds = get_ds_by_name(o, all_projects, p)
                         if recipe['name'] == 'split_churn_prepared':
                             print(ds)
+                            print('-------')
                         if ds is not None:
                             if not 'lineage_upstream' in ds:
                                 ds['lineage_upstream'] = ins
