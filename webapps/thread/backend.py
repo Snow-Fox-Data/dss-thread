@@ -193,7 +193,7 @@ def scan_server(ds_ds):
     get_ds_lineage2(scan_obj)
     print('end get lineage')
 
-    print(json.dumps(scan_obj))
+    # print(json.dumps(scan_obj))
 
     for p in scan_obj:
         datasets = scan_obj[p]['datasets']
