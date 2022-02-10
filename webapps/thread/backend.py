@@ -332,7 +332,7 @@ def get_ds_lineage(all_projects):
                 outs = get_stream(recipe, 'outputs', p)            
 
                 for i in ins:
-                    if i == 'auc_results':
+                    if i == 'VMCHURNPREDICTION.auc_results':
                         print(recipe)
                     try:
                         ds = get_ds_by_name(i, all_projects, p)
@@ -347,8 +347,7 @@ def get_ds_lineage(all_projects):
                         capture_exception(e)
 
                 for o in outs:
-                    print(o)
-                    if o == 'auc_results':
+                    if o == 'VMCHURNPREDICTIONauc_results':
                         print(recipe)
                     try:
                         ds = get_ds_by_name(o, all_projects, p)
