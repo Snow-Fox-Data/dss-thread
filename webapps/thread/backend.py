@@ -194,8 +194,6 @@ def scan_server(ds_ds):
     for p in scan_obj:
         datasets = scan_obj[p]['datasets']
         for ds in datasets:
-                # , 'lineage_downstream':ds['lineage_downstream'],
-    #                  'lineage_upstream':ds['lineage_upstream']
                 obj = { 'project': p, 'name': ds.name}
                 if 'lineage_downstream' in ds:
                     obj['lineage_downstream'] = ds['lineage_downstream']
@@ -370,10 +368,12 @@ def get_ds_lineage(all_projects):
             ds['full_name'] = get_full_dataset_name(ds['name'], p)
 
             if 'lineage_upstream' in ds:
-                traverse_lineage(ds['full_name'], all_projects, upstream=True)
+                result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
 
             if 'lineage_downstream' in ds:
-                traverse_lineage(ds['full_name'], all_projects, upstream=False)
+                result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
+
+            print(result_up)
                
              
 
