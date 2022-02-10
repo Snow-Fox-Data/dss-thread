@@ -347,6 +347,7 @@ def get_ds_lineage(all_projects):
                         capture_exception(e)
 
                 for o in outs:
+                    print(o)
                     if o == 'auc_results':
                         print(recipe)
                     try:
