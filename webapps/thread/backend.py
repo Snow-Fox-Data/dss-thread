@@ -183,13 +183,17 @@ def scan_server(ds_ds):
 
             datasets = project.list_datasets()
             recipes = project.list_recipes()
+            folders = project.list_managed_folders()
 
             scan_obj[proj]['datasets'] = datasets
             scan_obj[proj]['recipes'] = recipes
+            scan_obj[proj]['folders'] = folders
 
     print('start get lineage...')
-    get_ds_lineage(scan_obj)
+    get_ds_lineage2(scan_obj)
     print('end get lineage')
+
+    print(scan_obj.dumps())
 
     for p in scan_obj:
         datasets = scan_obj[p]['datasets']
@@ -244,19 +248,20 @@ def get_full_dataset_name(name, project):
 def get_stream(recipe, inputs_outputs, p_name):
     refs = []
     try:
-        for i in range(len(recipe[inputs_outputs]['main']['items'])):
-            name = recipe[inputs_outputs]['main']['items'][i]['ref']
-            if '.' in name:
-                p_name, d_name = extract_name_project(name)
-            else:
-                d_name = name
+        for j in recipe[inputs_outputs]:
+            for i in range(len(recipe[inputs_outputs][j]['items'])):
+                name = recipe[inputs_outputs][j]['items'][i]['ref']
+                if '.' in name:
+                    p_name, d_name = extract_name_project(name)
+                else:
+                    d_name = name
 
-            try:
-                exist = dataiku.Dataset(d_name, p_name).get_location_info()
-                refs.append(get_full_dataset_name(d_name, p_name))
-            except: 
-                print(f'{p_name}.{d_name} doesnt exist')
-                # doesn't exist, this is probably a folder or other item we don't currently support
+                try:
+                    exist = dataiku.Dataset(d_name, p_name).get_location_info()
+                    refs.append(get_full_dataset_name(d_name, p_name))
+                except: 
+                    print(f'{p_name}.{d_name} doesnt exist')
+                    # doesn't exist, this is probably a folder or other item we don't currently support
 
     except Exception as e:
         capture_exception(e)
@@ -318,6 +323,38 @@ def get_user():
     auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
     # print ("User doing the query is %s" % auth_info["authIdentifier"])
     return auth_info["authIdentifier"]
+
+def get_ds_lineage2(all_projects):
+    for p in all_projects:
+        project = all_projects[p]
+
+        for r in range(len(project['recipes'])):
+            recipe = project['recipes'][r]
+            ins = get_stream(recipe, 'inputs', p)            
+            outs = get_stream(recipe, 'outputs', p)  
+
+            for i in ins:
+                ds = get_ds_by_name(i, all_projects, p)
+                if ds is not None:
+                    if not 'lineage_downstream' in ds:
+                        ds['lineage_downstream'] = outs
+                    else:
+                        for o in outs:
+                            if not o in ds['lineage_downstream']:
+                                ds['lineage_downstream'].append(o)
+            
+            for o in outs:
+                # if o == 'VMCHURNPREDICTIONauc_results':
+                    # print(recipe)
+                ds = get_ds_by_name(o, all_projects, p)
+                if ds is not None:
+                    if not 'lineage_upstream' in ds:
+                        ds['lineage_upstream'] = ins
+                    else:
+                        for i in ins:
+                            if not i in ds['lineage_upstream']:
+                                ds['lineage_upstream'].append(i)
+
 
 def get_ds_lineage(all_projects):
 
