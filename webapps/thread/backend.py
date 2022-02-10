@@ -332,6 +332,8 @@ def get_ds_lineage(all_projects):
                 outs = get_stream(recipe, 'outputs', p)            
 
                 for i in ins:
+                    if i == 'auc_results':
+                        print(recipe)
                     try:
                         ds = get_ds_by_name(i, all_projects, p)
                         if ds is not None:
@@ -345,6 +347,8 @@ def get_ds_lineage(all_projects):
                         capture_exception(e)
 
                 for o in outs:
+                    if o == 'auc_results':
+                        print(recipe)
                     try:
                         ds = get_ds_by_name(o, all_projects, p)
                         if ds is not None:
