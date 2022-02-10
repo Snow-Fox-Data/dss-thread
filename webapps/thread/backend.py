@@ -336,7 +336,7 @@ def get_ds_lineage(all_projects):
                         # print(recipe)
                     try:
                         ds = get_ds_by_name(i, all_projects, p)
-                        if recipe['name'] != 'split_churn_prepared':
+                        if recipe['name'] == 'split_churn_prepared':
                             print(ds)
                             print('-------')
                         if ds is not None:
