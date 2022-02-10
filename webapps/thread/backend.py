@@ -334,6 +334,7 @@ def get_ds_lineage2(all_projects):
             outs = get_stream(recipe, 'outputs', p)  
 
             for i in ins:
+                # get the input dataset for this recipe
                 ds = get_ds_by_name(i, all_projects, p)
                 if ds is not None:
                     if not 'lineage_downstream' in ds:
@@ -342,6 +343,10 @@ def get_ds_lineage2(all_projects):
                         for o in outs:
                             if not o in ds['lineage_downstream']:
                                 ds['lineage_downstream'].append(o)
+                
+                if o == 'VMCHURNPREDICTION.auc_results':
+                    return
+                
             
             for o in outs:
                 # if o == 'VMCHURNPREDICTIONauc_results':
