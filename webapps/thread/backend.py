@@ -361,22 +361,20 @@ def get_ds_lineage(all_projects):
                 capture_exception(e)
 
     # get the full dataset lineage
-    for p in all_projects:
-        project = all_projects[p]
-        for d in range(len(project['datasets'])):
-            ds = project['datasets'][d]
-            ds['full_name'] = get_full_dataset_name(ds['name'], p)
+    # for p in all_projects:
+    #     project = all_projects[p]
+    #     for d in range(len(project['datasets'])):
+    #         ds = project['datasets'][d]
+    #         ds['full_name'] = get_full_dataset_name(ds['name'], p)
 
-            if 'lineage_upstream' in ds:
-                result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
+    #         if 'lineage_upstream' in ds:
+    #             result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
 
-            if 'lineage_downstream' in ds:
-                result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
+    #         if 'lineage_downstream' in ds:
+    #             result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
 
-            print(result_up)
+    #         print(result_up)
                
-             
-
 def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
     try:
         ds = get_ds_by_name(ds_name, all_projects)
@@ -411,6 +409,41 @@ def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
     except Exception as e: 
         print(f'error traversing {ds_name}')
         return []
+
+# def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
+#     try:
+#         ds = get_ds_by_name(ds_name, all_projects)
+
+#         next_levels = []
+#         if not ds is None:
+#             dir = 'lineage_upstream'
+#             if upstream == False:
+#                 dir = 'lineage_downstream'
+
+#             dir_full = dir + '_full'
+
+#             if (dir + '_complete') in ds:
+#                 return ds[dir_full]
+
+#             if dir in ds:
+#                 for l in ds[dir]:
+#                     try:
+#                         recur_ct = recur_ct + 1
+#                         if recur_ct > 300:
+#                             print(f'recursive error {dir} - {ds_name}, {l}, {ds[dir]}')
+#                             return []
+
+#                         nxt = traverse_lineage(l, all_projects, upstream, recur_ct)
+#                         next_levels.append({'name':l, dir_full: nxt})
+#                     except Exception as e:
+#                         capture_exception(e)
+            
+#         return next_levels
+            
+
+#     except Exception as e: 
+#         print(f'error traversing {ds_name}')
+#         return []
 
 # def get_col_lineage(ds, col_name, all_projects):
 #     up_matches = []
