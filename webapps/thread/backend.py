@@ -351,16 +351,17 @@ def get_ds_lineage(all_projects):
                         # print(recipe)
                     try:
                         ds = get_ds_by_name(o, all_projects, p)
-                        if recipe['name'] == 'split_churn_prepared':
+                        if recipe['name'] != 'split_churn_prepared':
                             print(ds)
                             print('-------')
-                        if ds is not None:
-                            if not 'lineage_upstream' in ds:
-                                ds['lineage_upstream'] = ins
-                            else:
-                                for i in ins:
-                                    if not i in ds['lineage_upstream']:
-                                        ds['lineage_upstream'].append(i)
+                        # if ds is not None:
+                        #     if not 'lineage_upstream' in ds:
+                        #         ds['lineage_upstream'] = ins
+                        #     else:
+                        #         for i in ins:
+                        #             if not i in ds['lineage_upstream']:
+                        #                 ds['lineage_upstream'].append(i)
+
                     except Exception as e: 
                         capture_exception(e)
 
