@@ -344,7 +344,7 @@ def get_ds_lineage2(all_projects):
                             if not o in ds['lineage_downstream']:
                                 ds['lineage_downstream'].append(o)
                 
-                if o == 'VMCHURNPREDICTION.auc_results':
+                if i == 'VMCHURNPREDICTION.auc_results':
                     return
                 
             
