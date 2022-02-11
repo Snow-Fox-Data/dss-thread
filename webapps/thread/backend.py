@@ -17,43 +17,44 @@ sentry_sdk.init(
 )
 
 intitialized = False
-THREAD_DS_NAME = '--Thread-Datasets--'
+# THREAD_DS_NAME = '--Thread-Datasets--'
+THREAD_PROJ_NAME = '--Thread-Projects--'
 
-def init_dataset_dataset():
-    client = dataiku.api_client()
-    proj = client.get_default_project()
+# def init_dataset_dataset():
+    # client = dataiku.api_client()
+    # proj = client.get_default_project()
 
-    ds_loc = 'thread_datasets.csv'
-    ds = proj.get_dataset(THREAD_DS_NAME)
+    # ds_loc = 'thread_datasets.csv'
+    # ds = proj.get_dataset(THREAD_DS_NAME)
 
-    exists = ds.exists()
-    if not exists:
-        project_variables = dataiku.get_custom_variables()
+    # exists = ds.exists()
+    # if not exists:
+    #     project_variables = dataiku.get_custom_variables()
 
-        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
-        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+    #     params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+    #     format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
-                                            formatType='csv', formatParams=format_params)
+    #     csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
+    #                                         formatType='csv', formatParams=format_params)
 
-        # Set dataset to managed
-        ds_def = csv_dataset.get_definition()
-        ds_def['managed'] = True
-        csv_dataset.set_definition(ds_def)
+    #     # Set dataset to managed
+    #     ds_def = csv_dataset.get_definition()
+    #     ds_def['managed'] = True
+    #     csv_dataset.set_definition(ds_def)
 
-        # Set schema
-        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+    #     # Set schema
+    #     csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
-        ds2 = dataiku.Dataset(THREAD_DS_NAME)
-        df = pd.DataFrame(columns=['project','name'])
+    #     ds2 = dataiku.Dataset(THREAD_DS_NAME)
+    #     df = pd.DataFrame(columns=['project','name'])
         
-        ds2.write_with_schema(df)
+    #     ds2.write_with_schema(df)
 
-        print(f'created {THREAD_DS_NAME} dataset')
-    else:
-        print(f'{THREAD_DS_NAME} already exists')
+    #     print(f'created {THREAD_DS_NAME} dataset')
+    # else:
+    #     print(f'{THREAD_DS_NAME} already exists')
 
-    return ds, exists
+    # return ds, exists
 
 @app.route('/getuser')
 def getuser():
@@ -63,12 +64,12 @@ def getuser():
 
 @app.route('/get-projects')
 def get_projects():
-    # proj_ds = init_proj_dataset()
-    ds_ds, exists = init_dataset_dataset()
+    proj_ds, exists = init_proj_dataset()
+    # ds_ds, exists = init_proj_dataset()
 
     res = {}
     if not exists:
-        res = scan_server(ds_ds)
+        res = scan_server(proj_ds)
     else:
         ds_df = dataiku.Dataset(ds_ds.name).get_dataframe()
         projs = ds_df['project'].unique()
@@ -159,7 +160,7 @@ def update_column_description(column_array, description):
 
         ds.set_schema(ds_schema)
 
-def scan_server(ds_ds):
+def scan_server(proj_ds):
 
     client = dataiku.api_client()
     # root_folder = client.get_root_project_folder()
@@ -195,52 +196,64 @@ def scan_server(ds_ds):
 
     # print(json.dumps(scan_obj))
 
-    for p in scan_obj:
-        datasets = scan_obj[p]['datasets']
-        for ds in datasets:
-                obj = { 'project': p, 'name': ds.name}
-                if 'lineage_downstream' in ds:
-                    obj['lineage_downstream'] = ds['lineage_downstream']
-                else:
-                    obj['lineage_downstream'] =[]
-                if 'lineage_upstream' in ds:
-                    obj['lineage_upstream'] = ds['lineage_upstream']
-                else:
-                    obj['lineage_upstream'] =[]
+    # for p in scan_obj:
+    #     datasets = scan_obj[p]['datasets']
+    #     for ds in datasets:
+    #             obj = { 'project': p, 'name': ds.name}
+    #             if 'lineage_downstream' in ds:
+    #                 obj['lineage_downstream'] = ds['lineage_downstream']
+    #             else:
+    #                 obj['lineage_downstream'] =[]
+    #             if 'lineage_upstream' in ds:
+    #                 obj['lineage_upstream'] = ds['lineage_upstream']
+    #             else:
+    #                 obj['lineage_upstream'] =[]
                     
-                ds_list.append(obj)
+    #             ds_list.append(obj)
 
-    dataset_dataset = dataiku.Dataset(ds_ds.name)
-    df = pd.DataFrame.from_dict(ds_list)
-    dataset_dataset.write_with_schema(df)
+    # dataset_dataset = dataiku.Dataset(ds_ds.name)
+    # df = pd.DataFrame.from_dict(ds_list)
+    # dataset_dataset.write_with_schema(df)
 
-    return scan_obj
+    df = pd.DataFrame.from_dict(scan_obj, orient='index')
+    proj_dataset = dataiku.Dataset(proj_ds.name)
+    proj_dataset.write_with_schema(df.reset_index(inplace=True))
 
-def get_ds_by_name(name, all_projects, p_name=None):
-    # print(name)
-    if '.' in name:
-        p_name, d_name = extract_name_project(name)
-    else:
-        d_name = name
+    return df
 
-    # print(p_name, d_name)
-    for i in range(len(all_projects[p_name]['datasets'])):
-        ds = all_projects[p_name]['datasets'][i]
-        if ds['name'] == d_name:
-            return ds
+def init_proj_dataset():
+    client = dataiku.api_client()
+    proj = client.get_default_project()
 
-    return None
+    ds_loc = 'thread_projects.csv'
+    ds = proj.get_dataset(THREAD_PROJ_NAME)
 
-def extract_name_project(full_ds_name):
-    splits = full_ds_name.split('.')
-    p_name = splits[0]
-    d_name = splits[1]
+    exists = ds.exists()
+    if exists:
+        ds.delete(drop_data=True)
+        
+    project_variables = dataiku.get_custom_variables()
 
-    if len(splits) > 2:
-        c_name = splits[2]
-        return p_name, d_name, c_name
+    params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+    format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-    return p_name, d_name
+    csv_dataset = proj.create_dataset(THREAD_PROJ_NAME, type='Filesystem', params=params,
+                                        formatType='csv', formatParams=format_params)
+
+    # Set dataset to managed
+    ds_def = csv_dataset.get_definition()
+    ds_def['managed'] = True
+    csv_dataset.set_definition(ds_def)
+
+    # Set schema
+    csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+
+    ds2 = dataiku.Dataset(THREAD_PROJ_NAME)
+    df = pd.DataFrame(columns=['project','name'])
+
+    ds2.write_with_schema(df)
+
+    return ds, exists
 
 def get_full_dataset_name(name, project):
     return project + '.' + name
@@ -271,58 +284,19 @@ def get_stream(recipe, inputs_outputs, p_name):
 
     return refs
 
-def dataset_project_shares(project):
-    exposed = project.get_settings().settings['exposedObjects']['objects']
-    for e in exposed:
-        if e['type'] == "DATASET":
-            rules = e['rules']
-            for r in rules:
-                proj = r['targetProject']
+def get_ds_by_name(name, all_projects, p_name=None):
+    # print(name)
+    if '.' in name:
+        p_name, d_name = extract_name_project(name)
+    else:
+        d_name = name
 
-def get_full_col_name(ds, col):
-    ds_name = get_full_dataset_name(ds['name'], ds['projectKey'])
+    for i in range(len(all_projects[p_name]['datasets'])):
+        ds = all_projects[p_name]['datasets'][i]
+        if ds['name'] == d_name:
+            return ds
 
-    return ds_name + '.' + col
-
-def get_col_lineage(project_name, ds_name, col_name):
-    ups = []
-    downs = []
-
-    # client = dataiku.api_client()
-   
-    ds_df = dataiku.Dataset(THREAD_DS_NAME).get_dataframe()
-    ds_details = ds_df.query(f'name=="{ds_name}" & project=="{project_name}"').to_dict('records')[0]
-
-    # print(ds_details)
-
-    for up in ast.literal_eval(ds_details['lineage_upstream']):
-        p, d = extract_name_project(up)
-        # up_ds = ds_df.query(f'name=="{d}" & project="{p}"').iloc[0]
-        
-        ds_ref = dataiku.Dataset(d, p)
-        schema = ds_ref.read_schema()
-        for s in schema:
-            if s.upper() == col_name.upper():
-                ups.append(up + '.' + col_name)
-
-    # print(ds_details['lineage_downstream'])
-    for down in ast.literal_eval(ds_details['lineage_downstream']):
-        p, d = extract_name_project(down)
-        
-        ds_ref = dataiku.Dataset(d, p)
-        schema = ds_ref.read_schema()
-        for s in schema:
-            if s['name'].upper() == col_name.upper():
-                downs.append(down + '.' + col_name)
-
-    return ups, downs
-
-def get_user():
-    headers = dict(request.headers)
-    # Get the auth info of the user performing the request
-    auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
-    # print ("User doing the query is %s" % auth_info["authIdentifier"])
-    return auth_info["authIdentifier"]
+    return None
 
 def get_ds_lineage2(all_projects):
     for p in all_projects:
@@ -344,13 +318,7 @@ def get_ds_lineage2(all_projects):
                             if not o in ds['lineage_downstream']:
                                 ds['lineage_downstream'].append(o)
                 
-                if i == 'VMCHURNPREDICTION.auc_results':
-                    return
-                
-            
             for o in outs:
-                # if o == 'VMCHURNPREDICTIONauc_results':
-                    # print(recipe)
                 ds = get_ds_by_name(o, all_projects, p)
                 if ds is not None:
                     if not 'lineage_upstream' in ds:
