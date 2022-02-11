@@ -194,7 +194,7 @@ def scan_server(proj_ds):
     get_ds_lineage2(scan_obj)
     print('end get lineage')
 
-    print(json.dumps(scan_obj))
+    # print(json.dumps(scan_obj))
 
     # for p in scan_obj:
     #     datasets = scan_obj[p]['datasets']
@@ -216,6 +216,9 @@ def scan_server(proj_ds):
     # dataset_dataset.write_with_schema(df)
 
     df = pd.DataFrame.from_dict(scan_obj, orient='index')
+
+    print(f'len: {len(df)}')
+
     proj_dataset = dataiku.Dataset(proj_ds.name)
     proj_dataset.write_with_schema(df.reset_index(inplace=True))
 
