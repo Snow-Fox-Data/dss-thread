@@ -255,6 +255,17 @@ def init_proj_dataset():
 
     return ds, False
 
+def extract_name_project(full_ds_name):
+    splits = full_ds_name.split('.')
+    p_name = splits[0]
+    d_name = splits[1]
+
+    if len(splits) > 2:
+        c_name = splits[2]
+        return p_name, d_name, c_name
+
+    return p_name, d_name
+
 def get_full_dataset_name(name, project):
     return project + '.' + name
 
