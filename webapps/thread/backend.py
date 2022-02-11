@@ -81,29 +81,29 @@ def get_projects():
 
     return json.dumps(res)
 
-@app.route('/dataset-details', methods=['POST'])
-def dataset_details():
-    data = json.loads(request.data)
-    dataset_name = data['dataset-name']
-    project = data['project']
+# @app.route('/dataset-details', methods=['POST'])
+# def dataset_details():
+#     data = json.loads(request.data)
+#     dataset_name = data['dataset-name']
+#     project = data['project']
 
-    print(project, dataset_name)
-    client = dataiku.api_client()
-    ds_proj = client.get_project(project)
-    ds_list = ds_proj.list_datasets()
-    dku_ds = [x for x in ds_list if x['name']==dataset_name][0]
+#     print(project, dataset_name)
+#     client = dataiku.api_client()
+#     ds_proj = client.get_project(project)
+#     ds_list = ds_proj.list_datasets()
+#     dku_ds = [x for x in ds_list if x['name']==dataset_name][0]
     
-    ds = dataiku.Dataset(THREAD_DS_NAME)
-    res = ds.get_dataframe().query(f'name=="{dataset_name}"').to_dict('records')[0]
+#     ds = dataiku.Dataset(THREAD_DS_NAME)
+#     res = ds.get_dataframe().query(f'name=="{dataset_name}"').to_dict('records')[0]
 
-    dku_ds['lineage_downstream'] = res['lineage_downstream']
-    dku_ds['lineage_upstream'] = res['lineage_upstream']
+#     dku_ds['lineage_downstream'] = res['lineage_downstream']
+#     dku_ds['lineage_upstream'] = res['lineage_upstream']
 
-    return json.dumps({
-        'success': True,
-        'dataset': dku_ds, #
-        'dataset_name': get_full_dataset_name(dataset_name, project)
-    })
+#     return json.dumps({
+#         'success': True,
+#         'dataset': dku_ds, #
+#         'dataset_name': get_full_dataset_name(dataset_name, project)
+#     })
 
 @app.route('/update-col-desc', methods=['POST'])
 def update_col_desc():

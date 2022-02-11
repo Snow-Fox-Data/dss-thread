@@ -59,20 +59,27 @@ class App extends Component {
         // var p_ref = tree[proj];
         console.log(ds_name);
 
-        fetch(window.getWebAppBackendUrl('dataset-details'), {
-            method: 'POST', body: JSON.stringify({
-                'dataset-name': ds_name,
-                'project': proj
-            })
+        var ds = this.full_tree[proj]['datasets'].find(element => element.name == ds_name);
+
+        this.setState({
+            selectedDataset: ds,
+            full_ds_name: ds_name
         })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        selectedDataset: result.dataset,
-                        full_ds_name: result.dataset_name
-                    })
-                });
+
+        // fetch(window.getWebAppBackendUrl('dataset-details'), {
+        //     method: 'POST', body: JSON.stringify({
+        //         'dataset-name': ds_name,
+        //         'project': proj
+        //     })
+        // })
+        //     .then(res => res.json())
+        //     .then(
+        //         (result) => {
+        //             this.setState({
+        // selectedDataset: result.dataset,
+                //         full_ds_name: result.dataset_name
+                //     })
+                // });
 
         // return p_ref.datasets.find(({ name }) => name === ds_name);
 
