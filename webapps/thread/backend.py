@@ -216,11 +216,10 @@ def scan_server(proj_ds):
     # dataset_dataset.write_with_schema(df)
 
     df = pd.DataFrame.from_dict(scan_obj, orient='index')
-
-    print(f'len: {len(df)}')
-
+    df.reset_index(inplace=True)
+    
     proj_dataset = dataiku.Dataset(proj_ds.name)
-    proj_dataset.write_with_schema(df.reset_index(inplace=True))
+    proj_dataset.write_with_schema(df)
 
     return df
 
