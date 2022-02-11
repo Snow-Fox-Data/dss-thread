@@ -253,7 +253,7 @@ def init_proj_dataset():
 
     ds2.write_with_schema(df)
 
-    return ds, exists
+    return ds, False
 
 def get_full_dataset_name(name, project):
     return project + '.' + name
