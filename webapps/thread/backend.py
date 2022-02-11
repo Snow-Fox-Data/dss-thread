@@ -73,14 +73,11 @@ def get_projects():
     else:
         res_df = dataiku.Dataset(proj_ds.name).get_dataframe()
     
-    # res_df = res_df.query(f'index=="{p}"')['datasets'] # .to_dict(orient='records')
+    projs = res_df['index'].unique()
 
-    # for p in projs:
-    #     res[p] = {}
-    #     res[p]['datasets'] = proj_df.query(f'index=="{p}"').to_dict(orient='records')
-
-    res[p] = {}
-    res[p]['datasets'] = res_df.query(f'index=="{p}"').to_dict(orient='records')
+    for p in projs:
+        res[p] = {}
+        res[p]['datasets'] = res_df.query(f'index=="{p}"').to_dict(orient='records')
 
     return json.dumps(res)
 
