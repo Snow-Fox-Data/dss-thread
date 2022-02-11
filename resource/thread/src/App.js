@@ -59,7 +59,7 @@ class App extends Component {
         // var p_ref = tree[proj];
         console.log(ds_name);
 
-        var ds = this.full_tree[proj]['datasets'].find(element => element.name == ds_name);
+        var ds = this.state.full_tree[proj]['datasets'].find(element => element.name == ds_name);
 
         this.setState({
             selectedDataset: ds,
