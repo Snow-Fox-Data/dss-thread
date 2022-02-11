@@ -77,7 +77,7 @@ def get_projects():
 
     for p in projs:
         res[p] = {}
-        res[p]['datasets'] = res_df.query(f'index=="{p}"').to_dict(orient='records')
+        res[p]['datasets'] = res_df.query(f'index=="{p}"').iloc[0]['datasets'].to_dict(orient='records')
 
     return json.dumps(res)
 
