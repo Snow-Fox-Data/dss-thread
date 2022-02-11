@@ -71,12 +71,12 @@ def get_projects():
     if not exists:
         res = scan_server(proj_ds)
     else:
-        ds_df = dataiku.Dataset(ds_ds.name).get_dataframe()
-        projs = ds_df['project'].unique()
+        proj_df = dataiku.Dataset(proj_ds.name).get_dataframe()
+        projs = proj_df['index'].unique()
 
         for p in projs:
             res[p] = {}
-            res[p]['datasets'] = ds_df.query(f'project=="{p}"').to_dict(orient='records')
+            res[p]['datasets'] = proj_df.query(f'index=="{p}"').to_dict(orient='records')
 
     return json.dumps(res)
 
