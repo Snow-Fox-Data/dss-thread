@@ -328,6 +328,7 @@ class Dataset extends Component {
                     <Row><h4><b>Type:</b> {this.props.deets.type}</h4></Row>
                     <Row><h4><b>Last Modified:</b> {this.props.deets.versionTag.lastModifiedBy.login} @ {this.props.deets.versionTag.lastModifiedOn}</h4></Row>
                     <Row><h4><b>Short Desc:</b> {this.props.deets.shortDesc}</h4></Row>
+                    <Row>{this.prop.deets}</Row>
                     <Row>
                         <Toast show={this.state.showA} delay={3000} autohide animation={false}>
                             <Toast.Header>
