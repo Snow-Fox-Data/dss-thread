@@ -340,69 +340,21 @@ def get_ds_lineage(all_projects):
                             d['lineage_upstream'].append(i)
 
 
-def get_ds_lineage_old(all_projects):
-
-    # get the 1st level of upstream / downstream
-    for p in all_projects:
-        project = all_projects[p]
-
-        for r in range(len(project['recipes'])):
-            try:
-                recipe = project['recipes'][r]
-                ins = get_stream(recipe, 'inputs', p)            
-                outs = get_stream(recipe, 'outputs', p)            
-
-                for i in ins:
-                    # if i == 'VMCHURNPREDICTION.auc_results':
-                        # print(recipe)
-                    try:
-                        ds = get_ds_by_name(i, all_projects, p)
-                        if recipe['name'] == 'split_churn_prepared':
-                            print(ds)
-                            print('-------')
-                        if ds is not None:
-                            if not 'lineage_downstream' in ds:
-                                ds['lineage_downstream'] = outs
-                            else:
-                                for o in outs:
-                                    if not o in ds['lineage_downstream']:
-                                        ds['lineage_downstream'].append(o)
-                    except Exception as e: 
-                        capture_exception(e)
-
-                for o in outs:
-                    # if o == 'VMCHURNPREDICTIONauc_results':
-                        # print(recipe)
-                    try:
-                        ds = get_ds_by_name(o, all_projects, p)
-                        if ds is not None:
-                            if not 'lineage_upstream' in ds:
-                                ds['lineage_upstream'] = ins
-                            else:
-                                for i in ins:
-                                    if not i in ds['lineage_upstream']:
-                                        ds['lineage_upstream'].append(i)
-
-                    except Exception as e: 
-                        capture_exception(e)
-
-            except Exception as e: 
-                capture_exception(e)
 
     # get the full dataset lineage
-    # for p in all_projects:
-    #     project = all_projects[p]
-    #     for d in range(len(project['datasets'])):
-    #         ds = project['datasets'][d]
-    #         ds['full_name'] = get_full_dataset_name(ds['name'], p)
+    for p in all_projects:
+        project = all_projects[p]
+        for d in range(len(project['datasets'])):
+            ds = project['datasets'][d]
+            ds['full_name'] = get_full_dataset_name(ds['name'], p)
 
-    #         if 'lineage_upstream' in ds:
-    #             result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
+            if 'lineage_upstream' in ds:
+                result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
 
-    #         if 'lineage_downstream' in ds:
-    #             result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
+            if 'lineage_downstream' in ds:
+                result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
 
-    #         print(result_up)
+            # print(result_up)
                
 def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
     try:
