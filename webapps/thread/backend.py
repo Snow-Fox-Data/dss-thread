@@ -192,7 +192,7 @@ def scan_server(proj_ds):
             scan_obj[proj]['folders'] = folders
 
     print('start get lineage...')
-    get_ds_lineage2(scan_obj)
+    get_ds_lineage(scan_obj)
     print('end get lineage')
 
     # print(json.dumps(scan_obj))
@@ -312,38 +312,35 @@ def get_ds_by_name(name, all_projects, p_name=None):
 
     return None
 
-def get_ds_lineage2(all_projects):
+def get_ds_lineage(all_projects):
     for p in all_projects:
         project = all_projects[p]
+        
+        for r in project['recipes']:
+            ins = get_stream(r, 'inputs', p)            
+            outs = get_stream(r, 'outputs', p)  
+            
+            r['ins'] = ins
+            r['outs'] = outs
 
-        for r in range(len(project['recipes'])):
-            recipe = project['recipes'][r]
-            ins = get_stream(recipe, 'inputs', p)            
-            outs = get_stream(recipe, 'outputs', p)  
-
-            for i in ins:
-                # get the input dataset for this recipe
-                ds = get_ds_by_name(i, all_projects, p)
-                if ds is not None:
-                    if not 'lineage_downstream' in ds:
-                        ds['lineage_downstream'] = outs
-                    else:
-                        for o in outs:
-                            if not o in ds['lineage_downstream']:
-                                ds['lineage_downstream'].append(o)
-                
-            for o in outs:
-                ds = get_ds_by_name(o, all_projects, p)
-                if ds is not None:
-                    if not 'lineage_upstream' in ds:
-                        ds['lineage_upstream'] = ins
-                    else:
-                        for i in ins:
-                            if not i in ds['lineage_upstream']:
-                                ds['lineage_upstream'].append(i)
+        for d in project['datasets']:
+            d['lineage_downstream'] = []
+            d['lineage_upstream'] = []
+            
+            for r in project['recipes']:
+#                 print(d['name'], r['ins'])
+                full_nm = get_full_dataset_name(d['name'], d['projectKey'])
+                if full_nm in r['ins']:
+                    for o in r['outs']:
+                        if not o in d['lineage_downstream']:
+                            d['lineage_downstream'].append(o)
+                if full_nm in r['outs']:
+                    for i in r['ins']:
+                        if not i in d['lineage_upstream']:
+                            d['lineage_upstream'].append(i)
 
 
-def get_ds_lineage(all_projects):
+def get_ds_lineage_old(all_projects):
 
     # get the 1st level of upstream / downstream
     for p in all_projects:
