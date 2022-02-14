@@ -352,7 +352,7 @@ def get_ds_lineage(all_projects):
 
             if 'lineage_downstream' in ds:
                 result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
-                ds['lineage_upstream_full'] = result_down
+                ds['lineage_downstream_full'] = result_down
 
             # print(result_up)
                
