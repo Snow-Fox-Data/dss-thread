@@ -339,8 +339,6 @@ def get_ds_lineage(all_projects):
                         if not i in d['lineage_upstream']:
                             d['lineage_upstream'].append(i)
 
-
-
     # get the full dataset lineage
     for p in all_projects:
         project = all_projects[p]
@@ -350,9 +348,11 @@ def get_ds_lineage(all_projects):
 
             if 'lineage_upstream' in ds:
                 result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
+                ds['lineage_upstream_full'] = result_up
 
             if 'lineage_downstream' in ds:
                 result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
+                ds['lineage_upstream_full'] = result_down
 
             # print(result_up)
                
