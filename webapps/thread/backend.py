@@ -355,7 +355,7 @@ def get_ds_lineage(all_projects):
                 for result in result_up:
                     r = result['lineage_upstream_full']
                     while len(r) > 0:
-                        r = r['lineage_upstream_full']
+                        r = r[0]['lineage_upstream_full']
 
                 ds['lineage_upstream'].append(r['name'])
                     
@@ -369,7 +369,7 @@ def get_ds_lineage(all_projects):
                 for result in result_down:
                     r = result['lineage_downstream_full']
                     while len(r) > 0:
-                        r = r['lineage_downstream_full']
+                        r = r[0]['lineage_downstream_full']
 
                 ds['lineage_downstream'].append(r['name'])
 
