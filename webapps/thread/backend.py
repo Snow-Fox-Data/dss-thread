@@ -348,11 +348,30 @@ def get_ds_lineage(all_projects):
 
             if 'lineage_upstream' in ds:
                 result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
-                ds['lineage_upstream_full'] = result_up
+                # ds['lineage_upstream_full'] = result_up
+
+                ds['lineage_upstream'] = []
+
+                for result in result_up:
+                    r = result['lineage_upstream_full']
+                    while len(r) > 0:
+                        r = r['lineage_upstream_full']
+
+                ds['lineage_upstream'].append(r['name'])
+                    
 
             if 'lineage_downstream' in ds:
                 result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
-                ds['lineage_downstream_full'] = result_down
+                # ds['lineage_downstream_full'] = result_down
+
+                ds['lineage_downstream'] = []
+
+                for result in result_down:
+                    r = result['lineage_downstream_full']
+                    while len(r) > 0:
+                        r = r['lineage_downstream_full']
+
+                ds['lineage_downstream'].append(r['name'])
 
             # print(result_up)
                
