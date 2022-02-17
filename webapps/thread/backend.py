@@ -340,39 +340,39 @@ def get_ds_lineage(all_projects):
                             d['lineage_upstream'].append(i)
 
     # get the full dataset lineage
-    for p in all_projects:
-        project = all_projects[p]
-        for d in range(len(project['datasets'])):
-            ds = project['datasets'][d]
-            ds['full_name'] = get_full_dataset_name(ds['name'], p)
+    # for p in all_projects:
+    #     project = all_projects[p]
+    #     for d in range(len(project['datasets'])):
+    #         ds = project['datasets'][d]
+    #         ds['full_name'] = get_full_dataset_name(ds['name'], p)
 
-            if 'lineage_upstream' in ds:
-                result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
-                # ds['lineage_upstream_full'] = result_up
+    #         if 'lineage_upstream' in ds:
+    #             result_up = traverse_lineage(ds['full_name'], all_projects, upstream=True)
+    #             # ds['lineage_upstream_full'] = result_up
 
-                ds['lineage_upstream'] = []
+    #             ds['lineage_upstream'] = []
 
-                for result in result_up:
-                    r = result
-                    while len(r['lineage_upstream_full']) > 0:
-                        r = r[0]
+    #             for result in result_up:
+    #                 r = result
+    #                 while len(r['lineage_upstream_full']) > 0:
+    #                     r = r[0]
                 
-                    ds['lineage_upstream'].append(r[0]['name'])
+    #                 ds['lineage_upstream'].append(r[0]['name'])
                     
-            if 'lineage_downstream' in ds:
-                result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
-                # ds['lineage_downstream_full'] = result_down
+    #         if 'lineage_downstream' in ds:
+    #             result_down = traverse_lineage(ds['full_name'], all_projects, upstream=False)
+    #             # ds['lineage_downstream_full'] = result_down
 
-                ds['lineage_downstream'] = []
+    #             ds['lineage_downstream'] = []
 
-                for result in result_down:
-                    r = result
-                    while len(r['lineage_downstream_full']) > 0:
-                        r = r[0]
+    #             for result in result_down:
+    #                 r = result
+    #                 while len(r['lineage_downstream_full']) > 0:
+    #                     r = r[0]
                 
-                    ds['lineage_downstream'].append(r[0]['name'])
+    #                 ds['lineage_downstream'].append(r[0]['name'])
 
-            # print(result_up)
+    #         # print(result_up)
                
 def traverse_lineage(ds_name, all_projects, upstream=True, recur_ct = 0):
     try:
