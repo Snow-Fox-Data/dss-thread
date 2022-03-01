@@ -265,7 +265,7 @@ class dss_utils:
         ds = dataiku.Dataset(d_name, p_name)
 
         ds_ds = self.get_datasets_ds()
-        rec = ds_ds.query(f'key=="{key}"')
+        rec = ds_ds.get_dataframe().query(f'key=="{key}"')
 
         lin_up = rec['lineage_upstream']
         lin_down = rec['lineage_downstream']
