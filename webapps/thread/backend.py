@@ -32,13 +32,19 @@ def scan():
     dss = dss_utils()
 
     proj_ds, f = dss.init_proj_dataset()
-    dss.scan_server(proj_ds)
+    index_ds = dss.init_index_dataset()
+
+    result = dss.scan_server(proj_ds)
 
     return json.dumps({"result": "scan complete"})
 
 @app.route('/search', methods=['GET'])
 def search():
     args = request.args
+    dss = dss_utils()
+
+    proj_ds = dss.get_proj_ds()
+    df = proj_ds.get_dataframe()
 
     return json.dumps(
         {
@@ -52,27 +58,27 @@ def load_item():
     # load full info (including lineage) for project, dataset, column or definition
     return json.dumps([]) 
     
-@app.route('/get-projects')
-def get_projects():
+# @app.route('/get-projects')
+# def get_projects():
 
-    util = dss_utils()
+    # util = dss_utils()
 
-    proj_ds, exists = util.init_proj_dataset()
-    # ds_ds, exists = util.init_definition_dataset()
+    # proj_ds, exists = util.init_proj_dataset()
+    # # ds_ds, exists = util.init_definition_dataset()
 
-    res = {}
-    if not exists:
-        res_df = util.scan_server(proj_ds)
-    else:
-        res_df = dataiku.Dataset(proj_ds.name).get_dataframe()
+    # res = {}
+    # if not exists:
+    #     res_df = util.scan_server(proj_ds)
+    # else:
+    #     res_df = dataiku.Dataset(proj_ds.name).get_dataframe()
     
-    projs = res_df['index'].unique()
+    # projs = res_df['index'].unique()
 
-    for p in projs:
-        res[p] = {}
-        res[p]['datasets'] = res_df.query(f'index=="{p}"').iloc[0]['datasets']#.to_dict(orient='records')
+    # for p in projs:
+    #     res[p] = {}
+    #     res[p]['datasets'] = res_df.query(f'index=="{p}"').iloc[0]['datasets']#.to_dict(orient='records')
 
-    return json.dumps(res)
+    # return json.dumps(res)
 
 @app.route('/update-col-desc', methods=['POST'])
 def update_col_desc():
@@ -137,6 +143,7 @@ def column_lineage():
 
 THREAD_DS_NAME = '--Thread-Descriptions--'
 THREAD_PROJ_NAME = '--Thread-Projects--'
+THREAD_INDEX_NAME = '--Thread-Index--'
 
 class dss_utils:
 
@@ -177,6 +184,39 @@ class dss_utils:
 
         return ds, False
     
+    def init_index_dataset(self):
+            proj = self.client.get_default_project()
+
+            ds_loc = 'thread_index.csv'
+            ds = proj.get_dataset(THREAD_INDEX_NAME)
+
+            exists = ds.exists()
+            if exists:
+                ds.delete(drop_data=True)
+                
+            project_variables = dataiku.get_custom_variables()
+
+            params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+            format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+
+            csv_dataset = proj.create_dataset(THREAD_INDEX_NAME, type='Filesystem', params=params,
+                                                formatType='csv', formatParams=format_params)
+
+            # Set dataset to managed
+            ds_def = csv_dataset.get_definition()
+            ds_def['managed'] = True
+            csv_dataset.set_definition(ds_def)
+
+            # Set schema
+            csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+
+            ds2 = dataiku.Dataset(THREAD_INDEX_NAME)
+            df = pd.DataFrame(columns=['name','type'])
+
+            ds2.write_with_schema(df)
+
+            return ds, False
+
     def init_definition_dataset(self):
         proj = self.client.get_default_project()
 
@@ -363,34 +403,52 @@ class dss_utils:
 
         #         # print(result_up)
 
+    def get_proj_ds(self):
+        proj_dataset = dataiku.Dataset(THREAD_PROJ_NAME)
+
+        return proj_dataset
+
     def scan_server(self, proj_ds):
 
         # root_folder = client.get_root_project_folder()
         # dss_folders = root_folder.list_child_folders()
         
         project_list = []
-        ds_list = []
+        index_list = []
         scan_obj = {}
 
         dss_projects = self.client.list_project_keys()
         for proj in dss_projects:
-            if 'VMCHURNPREDICTION' in proj.upper():
-                scan_obj[proj] = {}
+            # if 'VMCHURNPREDICTION' in proj.upper():
+            scan_obj[proj] = {}
 
-                project_list.append(proj)
+            project_list.append(proj)
 
-                # print(proj)
-                project = self.client.get_project(proj)
-                # meta = project.get_metadata()
-                # settings = project.get_settings().get_raw()
+            # print(proj)
+            project = self.client.get_project(proj)
+            # meta = project.get_metadata()
+            # settings = project.get_settings().get_raw()
 
-                datasets = project.list_datasets()
-                recipes = project.list_recipes()
-                folders = project.list_managed_folders()
+            datasets = project.list_datasets()
+            recipes = project.list_recipes()
+            folders = project.list_managed_folders()
 
-                scan_obj[proj]['datasets'] = datasets
-                scan_obj[proj]['recipes'] = recipes
-                scan_obj[proj]['folders'] = folders
+            scan_obj[proj]['datasets'] = datasets
+            scan_obj[proj]['recipes'] = recipes
+            scan_obj[proj]['folders'] = folders
+
+            index_list.append({
+                "name": project.get_summary()['name'],
+                "type": "project",
+                "key": proj
+            })
+
+            for dataset in datasets:
+                index_list.append({
+                    "name": dataset['name'],
+                    "type": "dataset",
+                    "key": self.get_full_dataset_name(dataset['name'], proj)
+                })
 
         print('start get lineage...')
         # self.get_ds_lineage(scan_obj)
@@ -423,4 +481,10 @@ class dss_utils:
         proj_dataset = dataiku.Dataset(proj_ds.name)
         proj_dataset.write_with_schema(df)
 
-        return df
+        df = pd.DataFrame.from_dict(index_list)
+        # df.reset_index(inplace=True)
+        
+        idx_ds = dataiku.Dataset(THREAD_INDEX_NAME)
+        idx_ds.write_with_schema(df)
+
+        return True
