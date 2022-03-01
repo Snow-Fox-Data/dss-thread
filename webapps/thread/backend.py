@@ -152,7 +152,7 @@ def column_lineage():
 
 
 THREAD_DS_NAME = '--Thread-Descriptions--'
-THREAD_PROJ_NAME = '--Thread-Projects--'
+THREAD_DATASETS_NAME = '--Thread-Datasets--'
 THREAD_INDEX_NAME = '--Thread-Index--'
 
 class dss_utils:
@@ -165,7 +165,7 @@ class dss_utils:
         proj = self.client.get_default_project()
 
         ds_loc = 'thread_datasets.csv'
-        ds = proj.get_dataset(THREAD_DS_NAME)
+        ds = proj.get_dataset(THREAD_DATASETS_NAME)
 
         exists = ds.exists()
         if exists:
@@ -176,7 +176,7 @@ class dss_utils:
         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
+        csv_dataset = proj.create_dataset(THREAD_DATASETS_NAME, type='Filesystem', params=params,
                                             formatType='csv', formatParams=format_params)
 
         # Set dataset to managed
@@ -187,7 +187,7 @@ class dss_utils:
         # Set schema
         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
-        ds2 = dataiku.Dataset(THREAD_DS_NAME)
+        ds2 = dataiku.Dataset(THREAD_DATASETS_NAME)
         df = pd.DataFrame(columns=['project','lineage-upstream', 'lineage-downstream'])
 
         ds2.write_with_schema(df)
@@ -264,9 +264,11 @@ class dss_utils:
         p_name, d_name = self.extract_name_project(key)
         ds = dataiku.Dataset(d_name, p_name)
 
-        proj_ds = self.get_proj_ds()
-        lin_up = self.traverse_lineage(key, proj_ds)
-        lin_down = self.traverse_lineage(key, proj_ds, False)
+        ds_ds = self.get_datasets_ds()
+        rec = ds_ds.query(f'key=="{key}"')
+
+        lin_up = rec['lineage_upstream']
+        lin_down = rec['lineage_downstream']
 
         return {
             "schema":ds.read_schema(),
@@ -430,8 +432,8 @@ class dss_utils:
 
         #         # print(result_up)
 
-    def get_proj_ds(self):
-        proj_dataset = dataiku.Dataset(THREAD_PROJ_NAME)
+    def get_datasets_ds(self):
+        proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
 
         return proj_dataset
 
