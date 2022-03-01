@@ -128,16 +128,10 @@ class App extends Component {
 
                     var p_list = [];
                     Object.keys(reponse.results).forEach(function (results) {
-                        console.log('results == ');
-                        console.log(results);
-                        // console.log('value == ');
-                        // console.log(value);
+                        // console.log('results == ');
+                        // console.log(results);
 
                         p_list[p_list.length] = reponse.results[results];
-
-                        // for (var x = 0; x < reponse.results[results].length; x++) {
-                        //     p_list[p_list.length] = reponse.results[results][x];
-                        // }
                     });
 
                     console.log('p_list :: ');
@@ -190,6 +184,26 @@ class App extends Component {
         const ref = React.createRef();
         const filterBy = () => false;
 
+        const renderMenuItemChildren = (option, props) =>  {
+            console.log('option == ');
+            console.log(option);
+            console.log('props == ');
+            console.log(props);
+
+            return <Fragment>
+                {/* <img
+                    alt={option.login}
+                    src={option.avatar_url}
+                    style={{
+                    height: '24px',
+                    marginRight: '10px',
+                    width: '24px',
+                    }}
+                /> */}
+                <span>{option.search_term}</span>
+            </Fragment>
+        }
+
         return (
             <Container style={{ paddingTop: '20px' }}>
                 <Row>
@@ -202,20 +216,21 @@ class App extends Component {
                         onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
-                        renderMenuItemChildren={(option, props) => (                                   
-                            <Fragment>
-                                {/* <img
-                                    alt={option.login}
-                                    src={option.avatar_url}
-                                    style={{
-                                    height: '24px',
-                                    marginRight: '10px',
-                                    width: '24px',
-                                    }}
-                                /> */}
-                                <span>{option.search_term}</span>
-                            </Fragment>
-                        )}
+                        renderMenuItemChildren={renderMenuItemChildren}
+                        // renderMenuItemChildren={(option, props) => (                                   
+                        //     <Fragment>
+                        //         {/* <img
+                        //             alt={option.login}
+                        //             src={option.avatar_url}
+                        //             style={{
+                        //             height: '24px',
+                        //             marginRight: '10px',
+                        //             width: '24px',
+                        //             }}
+                        //         /> */}
+                        //         <span>{option.search_term}</span>
+                        //     </Fragment>
+                        // )}
                     />
                     {/* <Typeahead
                         ref={ref}
