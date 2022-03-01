@@ -112,7 +112,7 @@ class App extends Component {
     // }
 
     search = (term) => {
-        fetch(window.getWebAppBackendUrl('search'), term)
+        fetch(window.getWebAppBackendUrl('search'), {'term': term})
             .then(res => res.json())
             .then(
                 (result) => {
