@@ -481,8 +481,8 @@ class dss_utils:
         proj_dataset = dataiku.Dataset(proj_ds.name)
         proj_dataset.write_with_schema(df)
 
-        df = pd.DataFrame.from_dict(index_list, orient='index')
-        df.reset_index(inplace=True)
+        df = pd.DataFrame.from_dict(index_list)
+        # df.reset_index(inplace=True)
         
         idx_ds = dataiku.Dataset(THREAD_INDEX_NAME)
         idx_ds.write_with_schema(df)
