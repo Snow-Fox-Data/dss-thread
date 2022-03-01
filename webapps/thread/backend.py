@@ -43,15 +43,18 @@ def search():
     args = request.args
     dss = dss_utils()
 
-    proj_ds = dss.get_proj_ds()
-    df = proj_ds.get_dataframe()
+    idx_ds = dss.get_index_ds()
+    df = idx_ds.get_dataframe()
 
-    return json.dumps(
-        {
-            "results": [{"type": "project",
-            "name": args.get('term')}]
-        }
-    )
+    result = df[df['name'].str.contains(args.get('term'))]
+
+    return result.to_json()
+    # return json.dumps(
+    #     {
+    #         "results": [{"type": "project",
+    #         "name": args.get('term')}]
+    #     }
+    # )
 
 @app.route('/load-item', methods=['POST'])
 def load_item():
@@ -405,6 +408,11 @@ class dss_utils:
 
     def get_proj_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_PROJ_NAME)
+
+        return proj_dataset
+
+    def get_index_ds(self):
+        proj_dataset = dataiku.Dataset(THREAD_INDEX_NAME)
 
         return proj_dataset
 
