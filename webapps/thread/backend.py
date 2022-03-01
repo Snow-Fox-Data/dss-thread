@@ -43,15 +43,18 @@ def search():
     args = request.args
     dss = dss_utils()
 
-    proj_ds = dss.get_proj_ds()
-    df = proj_ds.get_dataframe()
+    idx_ds = dss.get_index_ds()
+    df = idx_ds.get_dataframe()
 
-    return json.dumps(
-        {
-            "results": [{"type": "project",
-            "name": args.get('term')}]
-        }
-    )
+    result = df[df['name'].str.contains(args.get('term'))]
+
+    return result.to_json(orient="records")
+    # return json.dumps(
+    #     {
+    #         "results": [{"type": "project",
+    #         "name": args.get('term')}]
+    #     }
+    # )
 
 @app.route('/load-item', methods=['POST'])
 def load_item():
@@ -408,6 +411,11 @@ class dss_utils:
 
         return proj_dataset
 
+    def get_index_ds(self):
+        proj_dataset = dataiku.Dataset(THREAD_INDEX_NAME)
+
+        return proj_dataset
+
     def scan_server(self, proj_ds):
 
         # root_folder = client.get_root_project_folder()
@@ -449,6 +457,13 @@ class dss_utils:
                     "type": "dataset",
                     "key": self.get_full_dataset_name(dataset['name'], proj)
                 })
+
+                for column in dataset['schema']['columns']:
+                   index_list.append({
+                     "name": column['name'],
+                     "type": "column",
+                    "key": self.get_full_dataset_name(dataset['name'], proj) + '.' + column['name']
+                     }) 
 
         print('start get lineage...')
         # self.get_ds_lineage(scan_obj)
