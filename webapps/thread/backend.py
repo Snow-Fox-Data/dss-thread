@@ -185,11 +185,7 @@ class dss_utils:
         csv_dataset.set_definition(ds_def)
 
         # Set schema
-        csv_dataset.set_schema({'columns': [{ 'name':'name',
-         "type":"string"}, {'name':'lineage-upstream', 'type':'string'},
-        {'name': 'lineage-downstream', 'type':'string'}
-        ]
-        })
+        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
         ds2 = dataiku.Dataset(THREAD_DS_NAME)
         df = pd.DataFrame(columns=['project','lineage-upstream', 'lineage-downstream'])
