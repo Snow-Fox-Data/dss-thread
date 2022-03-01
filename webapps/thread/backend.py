@@ -7,7 +7,6 @@ import numpy as np
 import ast
 import sentry_sdk
 
-
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
 
@@ -36,9 +35,8 @@ def search():
 @app.route('/load-item', methods=['POST'])
 def load_item():
     # load full info (including lineage) for project, dataset, column or definition
-
+    return json.dumps([]]) 
     
-
 @app.route('/get-projects')
 def get_projects():
 
