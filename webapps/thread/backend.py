@@ -270,7 +270,7 @@ class dss_utils:
         lin_up = rec['lineage_upstream']
         lin_down = rec['lineage_downstream']
 
-        return {
+        res = {
             "schema":ds.read_schema(),
             "name": ds.full_name,
             "key": key,
@@ -280,6 +280,9 @@ class dss_utils:
             "lineage-upstream": lin_up,
             "lineage-downstream": lin_down
         }
+
+        print(res)
+        return res
 
     def get_stream(self, recipe, inputs_outputs, p_name):
         refs = []
