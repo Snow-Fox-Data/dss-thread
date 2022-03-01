@@ -22,6 +22,13 @@ sentry_sdk.init(
 
 #     return json.dumps({"user": usr})
 
+@app.route('/scan', methods=['GET'])
+def scan():
+    dss = dss_utils()
+
+    proj_ds, f = dss.init_proj_dataset()
+    dss.scan_server(proj_ds)
+
 @app.route('/search', methods=['GET'])
 def search():
     args = request.args
