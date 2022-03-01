@@ -133,11 +133,11 @@ class App extends Component {
                         // console.log('value == ');
                         // console.log(value);
 
-                        // p_list[p_list.length] = result[value];
+                        p_list[p_list.length] = reponse.results[results];
 
-                        for (var x = 0; x < reponse.results[results].length; x++) {
-                            p_list[p_list.length] = reponse.results[results][x];
-                        }
+                        // for (var x = 0; x < reponse.results[results].length; x++) {
+                        //     p_list[p_list.length] = reponse.results[results][x];
+                        // }
                     });
 
                     console.log('p_list :: ');
