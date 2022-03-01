@@ -127,18 +127,13 @@ class App extends Component {
                     console.log(result);
 
                     var p_list = [];
-                    Object.keys(result).forEach(function (proj_name) {
-                        console.log('proj_name :: ');
-                        console.log(proj_name);
+                    Object.keys(result).forEach(function (key, value) {
+                        console.log('key :: ');
+                        console.log(key);
 
-                        for (var x = 0; x < result[proj_name].length; x++) {
-                            p_list[p_list.length] = result[proj_name];
+                        for (var x = 0; x < result[key].length; x++) {
+                            p_list[p_list.length] = value;
                         }
-
-                        // for (var x = 0; x < result[proj_name].datasets.length; x++) {
-                        //     var ds = result[proj_name].datasets[x];
-                        //     p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
-                        // }
                     });
 
                     console.log('p_list :: ');
