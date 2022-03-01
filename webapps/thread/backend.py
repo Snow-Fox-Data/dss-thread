@@ -7,7 +7,6 @@ import numpy as np
 import ast
 import sentry_sdk
 
-# from util.dss import dss_utils
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -34,14 +33,23 @@ def search():
         }
     )
 
+@app.route('/load-item', methods=['POST'])
+def load_item():
+    # load full info (including lineage) for project, dataset, column or definition
+
+    
+
 @app.route('/get-projects')
 def get_projects():
-    proj_ds, exists = dss_utils.init_proj_dataset()
-    ds_ds, exists = dss_utils.init_description_dataset()
+
+    util = dss_utils()
+
+    proj_ds, exists = util.init_proj_dataset()
+    ds_ds, exists = util.init_description_dataset()
 
     res = {}
     if not exists:
-        res_df = dss_utils.scan_server(proj_ds)
+        res_df = util.scan_server(proj_ds)
     else:
         res_df = dataiku.Dataset(proj_ds.name).get_dataframe()
     
@@ -114,3 +122,294 @@ def update_column_description(column_array, description):
 
 
 
+THREAD_DS_NAME = '--Thread-Descriptions--'
+THREAD_PROJ_NAME = '--Thread-Projects--'
+
+class dss_utils:
+
+    def __int__(self):
+        self.client = dataiku.api_client()
+        # self.init_description_dataset()
+
+    def init_proj_dataset(self):
+        proj = self.client.get_default_project()
+
+        ds_loc = 'thread_projects.csv'
+        ds = proj.get_dataset(THREAD_PROJ_NAME)
+
+        exists = ds.exists()
+        if exists:
+            ds.delete(drop_data=True)
+            
+        project_variables = dataiku.get_custom_variables()
+
+        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+
+        csv_dataset = proj.create_dataset(THREAD_PROJ_NAME, type='Filesystem', params=params,
+                                            formatType='csv', formatParams=format_params)
+
+        # Set dataset to managed
+        ds_def = csv_dataset.get_definition()
+        ds_def['managed'] = True
+        csv_dataset.set_definition(ds_def)
+
+        # Set schema
+        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+
+        ds2 = dataiku.Dataset(THREAD_PROJ_NAME)
+        df = pd.DataFrame(columns=['project','name'])
+
+        ds2.write_with_schema(df)
+
+        return ds, False
+    
+    def init_description_dataset(self):
+        proj = self.client.get_default_project()
+
+        ds_loc = 'thread_datasets.csv'
+        ds = proj.get_dataset(THREAD_DS_NAME)
+
+        exists = ds.exists()
+        if not exists:
+            project_variables = dataiku.get_custom_variables()
+
+            params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+            format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+
+            csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
+                                                formatType='csv', formatParams=format_params)
+
+            # Set dataset to managed
+            ds_def = csv_dataset.get_definition()
+            ds_def['managed'] = True
+            csv_dataset.set_definition(ds_def)
+
+            # Set schema
+            csv_dataset.set_schema({'columns': [{'name': 'name', 'description':'string'}]})
+
+            ds2 = dataiku.Dataset(THREAD_DS_NAME)
+            df = pd.DataFrame(columns=['name','description'])
+            
+            ds2.write_with_schema(df)
+
+            print(f'created {THREAD_DS_NAME} dataset')
+        else:
+            print(f'{THREAD_DS_NAME} already exists')
+
+        return ds, exists
+
+    def get_stream(self, recipe, inputs_outputs, p_name):
+        refs = []
+        try:
+            for j in recipe[inputs_outputs]:
+                for i in range(len(recipe[inputs_outputs][j]['items'])):
+                    name = recipe[inputs_outputs][j]['items'][i]['ref']
+                    if '.' in name:
+                        p_name, d_name = self.extract_name_project(name)
+                    else:
+                        d_name = name
+
+                    try:
+                        exist = dataiku.Dataset(d_name, p_name).get_location_info()
+                        refs.append(self.get_full_dataset_name(d_name, p_name))
+                    except: 
+                        print(f'{p_name}.{d_name} doesnt exist')
+                        # doesn't exist, this is probably a folder or other item we don't currently support
+
+        except Exception as e:
+            capture_exception(e)
+            
+        if refs is None:
+            return []
+
+        return refs
+
+    def get_ds_by_name(self, name, all_projects, p_name=None):
+        # print(name)
+        if '.' in name:
+            p_name, d_name = self.extract_name_project(name)
+        else:
+            d_name = name
+
+        for i in range(len(all_projects[p_name]['datasets'])):
+            ds = all_projects[p_name]['datasets'][i]
+            if ds['name'] == d_name:
+                return ds
+
+        return None
+
+
+                
+    def traverse_lineage(self, ds_name, all_projects, upstream=True, recur_ct = 0):
+        try:
+            ds = self.get_ds_by_name(ds_name, all_projects)
+
+            next_levels = []
+            if not ds is None:
+                dir = 'lineage_upstream'
+                if upstream == False:
+                    dir = 'lineage_downstream'
+
+                dir_full = dir + '_full'
+
+                if (dir + '_complete') in ds:
+                    return ds[dir_full]
+
+                if dir in ds:
+                    for l in ds[dir]:
+                        try:
+                            recur_ct = recur_ct + 1
+                            if recur_ct > 300:
+                                print(f'recursive error {dir} - {ds_name}, {l}, {ds[dir]}')
+                                return []
+
+                            nxt = self.traverse_lineage(l, all_projects, upstream, recur_ct)
+                            next_levels.append({'name':l, dir_full: nxt})
+                        except Exception as e:
+                            capture_exception(e)
+                
+            return next_levels
+                
+
+        except Exception as e: 
+            print(f'error traversing {ds_name}')
+            return []
+
+    def extract_name_project(full_ds_name):
+        splits = full_ds_name.split('.')
+        p_name = splits[0]
+        d_name = splits[1]
+
+        if len(splits) > 2:
+            c_name = splits[2]
+            return p_name, d_name, c_name
+
+        return p_name, d_name
+
+    def get_full_dataset_name(name, project):
+        return project + '.' + name
+
+    def get_ds_lineage(self, all_projects):
+        for p in all_projects:
+            project = all_projects[p]
+            
+            for r in project['recipes']:
+                ins = self.get_stream(r, 'inputs', p)            
+                outs = self.get_stream(r, 'outputs', p)  
+                
+                r['ins'] = ins
+                r['outs'] = outs
+
+            for d in project['datasets']:
+                d['lineage_downstream'] = []
+                d['lineage_upstream'] = []
+                
+                for r in project['recipes']:
+    #                 print(d['name'], r['ins'])
+                    full_nm = self.get_full_dataset_name(d['name'], d['projectKey'])
+                    if full_nm in r['ins']:
+                        for o in r['outs']:
+                            if not o in d['lineage_downstream']:
+                                d['lineage_downstream'].append(o)
+                    if full_nm in r['outs']:
+                        for i in r['ins']:
+                            if not i in d['lineage_upstream']:
+                                d['lineage_upstream'].append(i)
+
+        # get the full dataset lineage
+        for p in all_projects:
+            project = all_projects[p]
+            for d in range(len(project['datasets'])):
+                ds = project['datasets'][d]
+                ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
+
+                if 'lineage_upstream' in ds:
+                    result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
+                    # ds['lineage_upstream_full'] = result_up
+
+                    ds['lineage_upstream'] = []
+
+                    for result in result_up:
+                        r = result
+                        while len(r['lineage_upstream_full']) > 0:
+                            r = r[0]
+                    
+                        ds['lineage_upstream'].append(r[0]['name'])
+                        
+                if 'lineage_downstream' in ds:
+                    result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
+                    # ds['lineage_downstream_full'] = result_down
+
+                    ds['lineage_downstream'] = []
+
+                    for result in result_down:
+                        r = result
+                        while len(r['lineage_downstream_full']) > 0:
+                            r = r[0]
+                    
+                        ds['lineage_downstream'].append(r[0]['name'])
+
+        #         # print(result_up)
+
+    def scan_server(self, proj_ds):
+
+        # root_folder = client.get_root_project_folder()
+        # dss_folders = root_folder.list_child_folders()
+        
+        project_list = []
+        ds_list = []
+        scan_obj = {}
+
+        dss_projects = self.client.list_project_keys()
+        for proj in dss_projects:
+            if 'VMCHURNPREDICTION' in proj.upper():
+                scan_obj[proj] = {}
+
+                project_list.append(proj)
+
+                # print(proj)
+                project = self.client.get_project(proj)
+                # meta = project.get_metadata()
+                # settings = project.get_settings().get_raw()
+
+                datasets = project.list_datasets()
+                recipes = project.list_recipes()
+                folders = project.list_managed_folders()
+
+                scan_obj[proj]['datasets'] = datasets
+                scan_obj[proj]['recipes'] = recipes
+                scan_obj[proj]['folders'] = folders
+
+        print('start get lineage...')
+        self.get_ds_lineage(scan_obj)
+        print('end get lineage')
+
+        # print(json.dumps(scan_obj))
+
+        # for p in scan_obj:
+        #     datasets = scan_obj[p]['datasets']
+        #     for ds in datasets:
+        #             obj = { 'project': p, 'name': ds.name}
+        #             if 'lineage_downstream' in ds:
+        #                 obj['lineage_downstream'] = ds['lineage_downstream']
+        #             else:
+        #                 obj['lineage_downstream'] =[]
+        #             if 'lineage_upstream' in ds:
+        #                 obj['lineage_upstream'] = ds['lineage_upstream']
+        #             else:
+        #                 obj['lineage_upstream'] =[]
+                        
+        #             ds_list.append(obj)
+
+        # dataset_dataset = dataiku.Dataset(ds_ds.name)
+        # df = pd.DataFrame.from_dict(ds_list)
+        # dataset_dataset.write_with_schema(df)
+
+        df = pd.DataFrame.from_dict(scan_obj, orient='index')
+        df.reset_index(inplace=True)
+        
+        proj_dataset = dataiku.Dataset(proj_ds.name)
+        proj_dataset.write_with_schema(df)
+
+        return df
