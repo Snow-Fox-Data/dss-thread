@@ -34,6 +34,8 @@ def scan():
     proj_ds, f = dss.init_proj_dataset()
     dss.scan_server(proj_ds)
 
+    return json.dumps({"result": "scan complete"})
+
 @app.route('/search', methods=['GET'])
 def search():
     args = request.args
