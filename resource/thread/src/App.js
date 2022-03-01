@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Typeahead } from 'react-bootstrap-typeahead';
+import { AsyncTypeahead, Typeahead } from 'react-bootstrap-typeahead';
 import eventBus from "./eventBus";
 import {
     BrowserRouter as Router,
@@ -31,10 +31,12 @@ class App extends Component {
             rendered: false,
             dataiku: undefined,
             isLoaded: false,
+            isLoading: false,
             project_list: [],
             full_ds_name: '',
             full_tree: {},
-            selectedDataset: null
+            selectedDataset: null,
+            searchResults: []
         };
 
         this.project_list = []
@@ -111,26 +113,36 @@ class App extends Component {
     //             });
     // }
 
-    search = (term) => {
-        fetch(window.getWebAppBackendUrl('search'), {'term': term})
+    search = (query) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
             .then(res => res.json())
             .then(
-                (result) => {
-                    console.log('result :: ');
-                    console.log(result);
-                    // var p_list = []
-                    // Object.keys(result).forEach(function (proj_name) {
-                    //     for (var x = 0; x < result[proj_name].datasets.length; x++) {
-                    //         var ds = result[proj_name].datasets[x];
-                    //         p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
-                    //     }
-                    // });
+                (reponse) => {
+                    console.log('reponse == ');
+                    console.log(reponse);
 
-                    // this.setState({
-                    //     isLoaded: true,
-                    //     project_list: p_list,
-                    //     full_tree: result
-                    // });
+                    var p_list = [];
+                    Object.keys(reponse.results).forEach(function (results) {
+                        // console.log('results == ');
+                        // console.log(results);
+
+                        p_list[p_list.length] = reponse.results[results];
+                    });
+
+                    console.log('p_list :: ');
+                    console.log(p_list);
+
+                    this.setState({
+                        searchResults: p_list                        
+                        // isLoaded: true,
+                        // project_list: p_list,
+                        // full_tree: result
+                    });
                 });
     }
 
@@ -147,11 +159,20 @@ class App extends Component {
             //     this.findDataset(ds)
             // );
 
-            this.search('thread');
+            // this.search('thread');
             // this.refreshData();
-        }
+        });
+    }
 
-        );
+    renderMenuItemChildren(option, props) {
+        console.log('option == ');
+        console.log(option);
+        console.log('props == ');
+        console.log(props);
+
+        return <Fragment>            
+            <span>{option.search_term}</span>
+        </Fragment>
     }
 
     render() {
@@ -170,54 +191,107 @@ class App extends Component {
         //     </main>
         // </Router>
         // )
-        const { isLoaded, project_list, full_tree, showDetail, selectedDataset, full_ds_name } = this.state;
+        const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults } = this.state;
         const ref = React.createRef();
+        const filterBy = () => true;
 
-        if (!isLoaded) {
-            return <div>Scanning DSS...</div>;
-        } else {
-            if (selectedDataset == null) {
-                return (
-                    <Container style={{ paddingTop: '20px' }}>
-                        <Row>
-                            <Typeahead
-                                ref={ref}
-                                placeholder='Search for Dataset'
-                                onChange={(selected) => {
-                                    if (selected.length > 0) {
-                                        this.findDataset(selected[0].id)
-                                        ref.current.clear()
-                                    };
-                                }}
-                                options={project_list}
-                            />
-                        </Row>
-                    </Container>
-                );
-            }
-            else {
-                return (
-                    <Container style={{ paddingTop: '20px' }}>
-                        <Row>
-                            <Typeahead
-                                ref={ref}
-                                placeholder='Search for Dataset'
-                                onChange={(selected) => {
-                                    if (selected.length > 0) {
-                                        this.findDataset(selected[0].id)
-                                        ref.current.clear()
-                                    };
-                                }}
-                                options={project_list}
-                            />
-                        </Row>
-                        <Row>
-                            <Dataset deets={selectedDataset} full_ds_name={full_ds_name}></Dataset>
-                        </Row>
-                    </Container>
-                );
-            }
-        }
+        return (
+            <Container style={{ paddingTop: '20px' }}>
+                <Row>
+                    <AsyncTypeahead
+                        filterBy={filterBy}
+                        id="async-search"
+                        isLoading={isLoading}
+                        labelKey="search_term"
+                        minLength={3}
+                        onSearch={this.search}
+                        options={searchResults}
+                        placeholder='Search for Dataset'
+                        // renderMenuItemChildren={this.renderMenuItemChildren}
+                        renderMenuItemChildren={(option, props) => (                                   
+                            <Fragment>      
+                                <span>{option.search_term}</span>
+                            </Fragment>
+                        )}
+                    />                    
+                </Row>
+            </Container>
+        );
+
+        // <Typeahead
+        //                 ref={ref}
+        //                 placeholder='Search for Dataset'
+        //                 onChange={(selected) => {
+        //                     console.log('Typeahead :: selected');
+        //                     console.log(selected);
+        //                     // if (selected.length > 0) {
+        //                     //     this.findDataset(selected[0].id)
+        //                     //     ref.current.clear()
+        //                     // };
+        //                 }}
+        //                 options={searchResults}
+        //             />
+
+        //  renderMenuItemChildren={(option, props) => (                                   
+        //                     <Fragment>
+        //                         {/* <img
+        //                             alt={option.login}
+        //                             src={option.avatar_url}
+        //                             style={{
+        //                             height: '24px',
+        //                             marginRight: '10px',
+        //                             width: '24px',
+        //                             }}
+        //                         /> */}
+        //                         <span>{option.search_term}</span>
+        //                     </Fragment>
+        //                 )}
+
+        // if (!isLoaded) {
+        //     return <div>Scanning DSS...</div>;
+        // } else {
+        //     if (selectedDataset == null) {
+        //         return (
+        //             <Container style={{ paddingTop: '20px' }}>
+        //                 <Row>
+        //                     <Typeahead
+        //                         ref={ref}
+        //                         placeholder='Search for Dataset'
+        //                         onChange={(selected) => {
+        //                             if (selected.length > 0) {
+        //                                 this.findDataset(selected[0].id)
+        //                                 ref.current.clear()
+        //                             };
+        //                         }}
+        //                         options={project_list}
+        //                     />
+        //                 </Row>
+        //             </Container>
+        //         );
+        //     }
+        //     else {
+        //         return (
+        //             <Container style={{ paddingTop: '20px' }}>
+        //                 <Row>
+        //                     <Typeahead
+        //                         ref={ref}
+        //                         placeholder='Search for Dataset'
+        //                         onChange={(selected) => {
+        //                             if (selected.length > 0) {
+        //                                 this.findDataset(selected[0].id)
+        //                                 ref.current.clear()
+        //                             };
+        //                         }}
+        //                         options={project_list}
+        //                     />
+        //                 </Row>
+        //                 <Row>
+        //                     <Dataset deets={selectedDataset} full_ds_name={full_ds_name}></Dataset>
+        //                 </Row>
+        //             </Container>
+        //         );
+        //     }
+        // }
     }
 }
 
