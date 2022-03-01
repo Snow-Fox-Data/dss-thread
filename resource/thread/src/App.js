@@ -111,8 +111,14 @@ class App extends Component {
     //             });
     // }
 
-    search = (term) => {
-        fetch(window.getWebAppBackendUrl('search'), {'term': term})
+    search = (_term) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ term: _term })
+        };
+
+        fetch(window.getWebAppBackendUrl('search'), requestOptions)
             .then(res => res.json())
             .then(
                 (result) => {
