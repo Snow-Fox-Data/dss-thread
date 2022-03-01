@@ -126,13 +126,43 @@ class App extends Component {
                     console.log('reponse == ');
                     console.log(reponse);
 
-                    var p_list = [];
-                    Object.keys(reponse.results).forEach(function (results) {
-                        // console.log('results == ');
-                        // console.log(results);
+                    // var p_list = [];
+                    // Object.keys(reponse.results).forEach(function (results) {
+                    //     p_list[p_list.length] = reponse.results[results];
+                    // });
 
-                        p_list[p_list.length] = reponse.results[results];
-                    });
+                    var p_list = [
+                        {
+                            "type": "project",
+                            "name": "whatever",
+                            "short-description": "....",
+                            "lineage-upstream": [],
+                            "lineage-downstream": [],
+                            "datasets": [],
+                        }, {
+                            "type": "dataset",
+                            "name": "whatever",
+                            "short-description": "....",
+                            "lineage-upstream": [],
+                            "lineage-downstream": [],
+                            "columns": [],
+                        }, {
+                            "type": "column",
+                            "name": "whatever",
+                            "short-description": "....",
+                            "lineage-upstream": [],
+                            "lineage-downstream": [],
+                            "definition": "my-definition",
+                        }, {
+                            "type": "definition",
+                            "name": "whatever",
+                            "columns": ["project.dataset5.col1", "project2.dataset2.col3"],
+                            "tags": ["tag1", "tag2"],
+                            "description": "This is the thing that does the stuff",
+                            "sources": [],
+                            "destinations": ["some powerbi report"]
+                        }
+                    ]
 
                     console.log('p_list :: ');
                     console.log(p_list);
@@ -162,17 +192,6 @@ class App extends Component {
             // this.search('thread');
             // this.refreshData();
         });
-    }
-
-    renderMenuItemChildren(option, props) {
-        console.log('option == ');
-        console.log(option);
-        console.log('props == ');
-        console.log(props);
-
-        return <Fragment>            
-            <span>{option.search_term}</span>
-        </Fragment>
     }
 
     render() {
@@ -209,8 +228,8 @@ class App extends Component {
                         placeholder='Search for Dataset'
                         renderMenuItemChildren={(option, props) => (                                   
                             <Fragment>      
-                                <span>{option.name}</span>
-                                <span>{option.type}</span>
+                                <span>Type: {option.type}; </span>
+                                <span>Name: {option.name}; </span>                                
                             </Fragment>
                         )}
                     />                    
