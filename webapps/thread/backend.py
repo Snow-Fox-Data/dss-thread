@@ -43,7 +43,7 @@ def get_projects():
     util = dss_utils()
 
     proj_ds, exists = util.init_proj_dataset()
-    ds_ds, exists = util.init_description_dataset()
+    # ds_ds, exists = util.init_definition_dataset()
 
     res = {}
     if not exists:
@@ -162,40 +162,38 @@ class dss_utils:
 
         return ds, False
     
-    def init_description_dataset(self):
+    def init_definition_dataset(self):
         proj = self.client.get_default_project()
 
-        ds_loc = 'thread_datasets.csv'
+        ds_loc = 'thread_definition.csv'
         ds = proj.get_dataset(THREAD_DS_NAME)
 
         exists = ds.exists()
-        if not exists:
-            project_variables = dataiku.get_custom_variables()
-
-            params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
-            format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
-
-            csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
-                                                formatType='csv', formatParams=format_params)
-
-            # Set dataset to managed
-            ds_def = csv_dataset.get_definition()
-            ds_def['managed'] = True
-            csv_dataset.set_definition(ds_def)
-
-            # Set schema
-            csv_dataset.set_schema({'columns': [{'name': 'name', 'description':'string'}]})
-
-            ds2 = dataiku.Dataset(THREAD_DS_NAME)
-            df = pd.DataFrame(columns=['name','description'])
+        if exists:
+            ds.delete(drop_data=True)
             
-            ds2.write_with_schema(df)
+        project_variables = dataiku.get_custom_variables()
 
-            print(f'created {THREAD_DS_NAME} dataset')
-        else:
-            print(f'{THREAD_DS_NAME} already exists')
+        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        return ds, exists
+        csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
+                                            formatType='csv', formatParams=format_params)
+
+        # Set dataset to managed
+        ds_def = csv_dataset.get_definition()
+        ds_def['managed'] = True
+        csv_dataset.set_definition(ds_def)
+
+        # Set schema
+        csv_dataset.set_schema({'columns': [{'name': 'name', 'definition':'string'}]})
+
+        ds2 = dataiku.Dataset(THREAD_DS_NAME)
+        df = pd.DataFrame(columns=['name','definition'])
+
+        ds2.write_with_schema(df)
+
+        return ds, False
 
     def get_stream(self, recipe, inputs_outputs, p_name):
         refs = []
