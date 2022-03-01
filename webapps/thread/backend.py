@@ -272,7 +272,7 @@ class dss_utils:
             print(f'error traversing {ds_name}')
             return []
 
-    def extract_name_project(full_ds_name):
+    def extract_name_project(self, full_ds_name):
         splits = full_ds_name.split('.')
         p_name = splits[0]
         d_name = splits[1]
@@ -283,7 +283,7 @@ class dss_utils:
 
         return p_name, d_name
 
-    def get_full_dataset_name(name, project):
+    def get_full_dataset_name(self, name, project):
         return project + '.' + name
 
     def get_ds_lineage(self, all_projects):
