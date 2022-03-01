@@ -49,17 +49,21 @@ def search():
     result = df[df['name'].str.contains(args.get('term'))]
 
     return result.to_json(orient="records")
-    # return json.dumps(
-    #     {
-    #         "results": [{"type": "project",
-    #         "name": args.get('term')}]
-    #     }
-    # )
 
-@app.route('/load-item', methods=['POST'])
+@app.route('/load-item', methods=['GET'])
 def load_item():
+    # passing "key" as querystring param
     # load full info (including lineage) for project, dataset, column or definition
-    return json.dumps([]) 
+    args = request.args
+    key = args.get('key')
+    dss = dss_utils()
+
+    idx_ds = dss.get_index_ds()
+    df = idx_ds.get_dataframe()
+
+    res = df.query(f'key=="{key}"').iloc[0]
+
+    return json.dumps(res) 
     
 # @app.route('/get-projects')
 # def get_projects():
