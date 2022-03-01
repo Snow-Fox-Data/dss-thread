@@ -164,8 +164,8 @@ class dss_utils:
     def init_proj_dataset(self):
         proj = self.client.get_default_project()
 
-        ds_loc = 'thread_projects.csv'
-        ds = proj.get_dataset(THREAD_PROJ_NAME)
+        ds_loc = 'thread_datasets.csv'
+        ds = proj.get_dataset(THREAD_DS_NAME)
 
         exists = ds.exists()
         if exists:
@@ -176,7 +176,7 @@ class dss_utils:
         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(THREAD_PROJ_NAME, type='Filesystem', params=params,
+        csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
                                             formatType='csv', formatParams=format_params)
 
         # Set dataset to managed
@@ -185,9 +185,13 @@ class dss_utils:
         csv_dataset.set_definition(ds_def)
 
         # Set schema
-        csv_dataset.set_schema({'columns': [{ 'name', 'lineage-upstream', 'lineage-downstream'}]})
+        csv_dataset.set_schema({'columns': [{ 'name':'name',
+         "type":"string"}, {'name':'lineage-upstream', 'type':'string'},
+        {'name': 'lineage-downstream', 'type':'string'}
+        ]
+        })
 
-        ds2 = dataiku.Dataset(THREAD_PROJ_NAME)
+        ds2 = dataiku.Dataset(THREAD_DS_NAME)
         df = pd.DataFrame(columns=['project','lineage-upstream', 'lineage-downstream'])
 
         ds2.write_with_schema(df)
