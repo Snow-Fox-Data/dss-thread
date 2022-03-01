@@ -98,22 +98,22 @@ def column_lineage():
         'downs': downs
     })
 
-def update_column_description(column_array, description):
-    if type(column_array)==str:
-        column_array = [column_array]
+# def update_column_description(column_array, description):
+#     if type(column_array)==str:
+#         column_array = [column_array]
         
-    client = dataiku.api_client()
-    for i in column_array:
-        lst = i.split('.')
-        project, dataset, column = lst[0], lst[1], lst[2]
-        p = client.get_project(project)
-        ds = p.get_dataset(dataset)
-        ds_schema = ds.get_schema()
-        for z in ds_schema['columns']: 
-            if z['name']==column:
-                z['comment']=description
+#     client = dataiku.api_client()
+#     for i in column_array:
+#         lst = i.split('.')
+#         project, dataset, column = lst[0], lst[1], lst[2]
+#         p = client.get_project(project)
+#         ds = p.get_dataset(dataset)
+#         ds_schema = ds.get_schema()
+#         for z in ds_schema['columns']: 
+#             if z['name']==column:
+#                 z['comment']=description
 
-        ds.set_schema(ds_schema)
+#         ds.set_schema(ds_schema)
 
 
 
@@ -125,7 +125,7 @@ THREAD_PROJ_NAME = '--Thread-Projects--'
 
 class dss_utils:
 
-    def __int__(self):
+    def __init__(self):
         self.client = dataiku.api_client()
         # self.init_description_dataset()
 
