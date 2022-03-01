@@ -202,50 +202,21 @@ class App extends Component {
                         filterBy={filterBy}
                         id="async-search"
                         isLoading={isLoading}
-                        labelKey="search_term"
+                        labelKey="name"
                         minLength={3}
                         onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
-                        // renderMenuItemChildren={this.renderMenuItemChildren}
                         renderMenuItemChildren={(option, props) => (                                   
                             <Fragment>      
-                                <span>{option.search_term}</span>
+                                <span>{option.name}</span>
+                                <span>{option.type}</span>
                             </Fragment>
                         )}
                     />                    
                 </Row>
             </Container>
         );
-
-        // <Typeahead
-        //                 ref={ref}
-        //                 placeholder='Search for Dataset'
-        //                 onChange={(selected) => {
-        //                     console.log('Typeahead :: selected');
-        //                     console.log(selected);
-        //                     // if (selected.length > 0) {
-        //                     //     this.findDataset(selected[0].id)
-        //                     //     ref.current.clear()
-        //                     // };
-        //                 }}
-        //                 options={searchResults}
-        //             />
-
-        //  renderMenuItemChildren={(option, props) => (                                   
-        //                     <Fragment>
-        //                         {/* <img
-        //                             alt={option.login}
-        //                             src={option.avatar_url}
-        //                             style={{
-        //                             height: '24px',
-        //                             marginRight: '10px',
-        //                             width: '24px',
-        //                             }}
-        //                         /> */}
-        //                         <span>{option.search_term}</span>
-        //                     </Fragment>
-        //                 )}
 
         // if (!isLoaded) {
         //     return <div>Scanning DSS...</div>;
