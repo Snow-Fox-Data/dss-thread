@@ -46,8 +46,6 @@ def search():
     proj_ds = dss.get_proj_ds()
     df = proj_ds.get_dataframe()
 
-    ds = 
-
     return json.dumps(
         {
             "results": [{"type": "project",
