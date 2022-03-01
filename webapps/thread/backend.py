@@ -42,7 +42,8 @@ def search():
 
     return json.dumps(
         {
-            "results": [{"search_term": args.get('term')}]
+            "results": [{"type": "project",
+            "name": args.get('term')}]
         }
     )
 
