@@ -262,7 +262,8 @@ class dss_utils:
 
     def load_dataset(self, key):
         p_name, d_name = self.extract_name_project(key)
-        ds = dataiku.Dataset(d_name, p_name)
+        project = self.client.get_project(p_name)
+        ds = project.get_dataset(d_name)
 
         return {
             "schema":ds.read_schema(),
@@ -309,8 +310,6 @@ class dss_utils:
                 return ds
 
         return None
-
-
                 
     def traverse_lineage(self, ds_name, all_projects, upstream=True, recur_ct = 0):
         try:
