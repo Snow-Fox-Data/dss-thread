@@ -122,22 +122,22 @@ class App extends Component {
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
             .then(res => res.json())
             .then(
-                (result) => {
-                    console.log('result == ');
-                    console.log(result);
+                (reponse) => {
+                    console.log('reponse == ');
+                    console.log(reponse);
 
                     var p_list = [];
-                    Object.keys(result.results).forEach(function (key, value) {
-                        console.log('key == ');
-                        console.log(key);
-                        console.log('value == ');
-                        console.log(value);
+                    Object.keys(reponse.results).forEach(function (results) {
+                        console.log('results == ');
+                        console.log(results);
+                        // console.log('value == ');
+                        // console.log(value);
 
                         // p_list[p_list.length] = result[value];
 
-                        // for (var x = 0; x < result[value].length; x++) {
-                        //     p_list[p_list.length] = result[value];
-                        // }
+                        for (var x = 0; x < reponse.results[results].length; x++) {
+                            p_list[p_list.length] = reponse.results[results][x];
+                        }
                     });
 
                     console.log('p_list :: ');
