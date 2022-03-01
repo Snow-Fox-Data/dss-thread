@@ -462,7 +462,7 @@ class dss_utils:
                    index_list.append({
                      "name": column['name'],
                      "type": "column",
-                    "key": self.get_full_dataset_name(dataset['name'], proj) + '.' + column.name
+                    "key": self.get_full_dataset_name(dataset['name'], proj) + '.' + column['name']
                      }) 
 
         print('start get lineage...')
