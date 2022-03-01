@@ -266,6 +266,7 @@ class dss_utils:
 
         proj_ds = self.get_proj_ds()
         lin_up = self.traverse_lineage(key, proj_ds)
+        lin_down = self.traverse_lineage(key, proj_ds, False)
 
         return {
             "schema":ds.read_schema(),
@@ -274,7 +275,8 @@ class dss_utils:
             "id": p_name,
             "project": p_name,
             "meta": ds.read_metadata(),
-            "lineage-upstream": lin_up
+            "lineage-upstream": lin_up,
+            "lineage-downstream": lin_down
         }
 
     def get_stream(self, recipe, inputs_outputs, p_name):
