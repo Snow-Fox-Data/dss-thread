@@ -400,7 +400,7 @@ class dss_utils:
             project = all_projects[p]
             for d in range(len(project['datasets'])):
                 ds = project['datasets'][d]
-                # ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
+                ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
 
                 if 'lineage_upstream' in ds:
                     result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
