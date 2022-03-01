@@ -164,6 +164,26 @@ class App extends Component {
         });
     }
 
+    renderMenuItemChildren(option, props) {
+        console.log('option == ');
+        console.log(option);
+        console.log('props == ');
+        console.log(props);
+
+        return <Fragment>
+            {/* <img
+                alt={option.login}
+                src={option.avatar_url}
+                style={{
+                height: '24px',
+                marginRight: '10px',
+                width: '24px',
+                }}
+            /> */}
+            <span>{option.search_term}</span>
+        </Fragment>
+    }
+
     render() {
         //        <Router>
         //     <main>
@@ -184,26 +204,6 @@ class App extends Component {
         const ref = React.createRef();
         const filterBy = () => false;
 
-        const renderMenuItemChildren = (option, props) =>  {
-            console.log('option == ');
-            console.log(option);
-            console.log('props == ');
-            console.log(props);
-
-            return <Fragment>
-                {/* <img
-                    alt={option.login}
-                    src={option.avatar_url}
-                    style={{
-                    height: '24px',
-                    marginRight: '10px',
-                    width: '24px',
-                    }}
-                /> */}
-                <span>{option.search_term}</span>
-            </Fragment>
-        }
-
         return (
             <Container style={{ paddingTop: '20px' }}>
                 <Row>
@@ -216,7 +216,7 @@ class App extends Component {
                         onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
-                        renderMenuItemChildren={renderMenuItemChildren}
+                        renderMenuItemChildren={this.renderMenuItemChildren}
                         // renderMenuItemChildren={(option, props) => (                                   
                         //     <Fragment>
                         //         {/* <img
