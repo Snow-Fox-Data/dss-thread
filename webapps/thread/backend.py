@@ -48,7 +48,7 @@ def search():
 
     result = df[df['name'].str.contains(args.get('term'))]
 
-    return result.to_json()
+    return result.to_json(orient="records")
     # return json.dumps(
     #     {
     #         "results": [{"type": "project",
