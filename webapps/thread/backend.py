@@ -268,8 +268,10 @@ class dss_utils:
 
         return {
             "schema":ds.read_schema(),
-            "name": ds.name,
-            "id": ds.id
+            "name": ds.full_name,
+            "key": key,
+            "id": p_name,
+            "project": p_name
         }
 
     def get_stream(self, recipe, inputs_outputs, p_name):
