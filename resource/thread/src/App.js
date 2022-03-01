@@ -193,7 +193,7 @@ class App extends Component {
         // )
         const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults } = this.state;
         const ref = React.createRef();
-        const filterBy = () => false;
+        const filterBy = () => true;
 
         return (
             <Container style={{ paddingTop: '20px' }}>
@@ -202,12 +202,17 @@ class App extends Component {
                         filterBy={filterBy}
                         id="async-search"
                         isLoading={isLoading}
-                        labelKey="search"
+                        labelKey="search_term"
                         minLength={3}
                         onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
-                        renderMenuItemChildren={this.renderMenuItemChildren}                       
+                        // renderMenuItemChildren={this.renderMenuItemChildren}
+                        renderMenuItemChildren={(option, props) => (                                   
+                            <Fragment>      
+                                <span>{option.search_term}</span>
+                            </Fragment>
+                        )}
                     />                    
                 </Row>
             </Container>
@@ -227,20 +232,20 @@ class App extends Component {
         //                 options={searchResults}
         //             />
 
-         // renderMenuItemChildren={(option, props) => (                                   
-                        //     <Fragment>
-                        //         {/* <img
-                        //             alt={option.login}
-                        //             src={option.avatar_url}
-                        //             style={{
-                        //             height: '24px',
-                        //             marginRight: '10px',
-                        //             width: '24px',
-                        //             }}
-                        //         /> */}
-                        //         <span>{option.search_term}</span>
-                        //     </Fragment>
-                        // )}
+        //  renderMenuItemChildren={(option, props) => (                                   
+        //                     <Fragment>
+        //                         {/* <img
+        //                             alt={option.login}
+        //                             src={option.avatar_url}
+        //                             style={{
+        //                             height: '24px',
+        //                             marginRight: '10px',
+        //                             width: '24px',
+        //                             }}
+        //                         /> */}
+        //                         <span>{option.search_term}</span>
+        //                     </Fragment>
+        //                 )}
 
         // if (!isLoaded) {
         //     return <div>Scanning DSS...</div>;
