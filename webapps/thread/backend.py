@@ -271,7 +271,8 @@ class dss_utils:
             "name": ds.full_name,
             "key": key,
             "id": p_name,
-            "project": p_name
+            "project": p_name,
+            "meta": ds.read_metadata()
         }
 
     def get_stream(self, recipe, inputs_outputs, p_name):
