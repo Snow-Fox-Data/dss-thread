@@ -115,10 +115,10 @@ class App extends Component {
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ term: _term })
+            // body: JSON.stringify({ term: _term })
         };
 
-        fetch(window.getWebAppBackendUrl('search'), requestOptions)
+        fetch(window.getWebAppBackendUrl('search') + '?term=' + _term, requestOptions)
             .then(res => res.json())
             .then(
                 (result) => {
