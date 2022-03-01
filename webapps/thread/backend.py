@@ -24,7 +24,7 @@ sentry_sdk.init(
 #     return json.dumps({"user": usr})
 
 @app.route('/init', methods=['GET'])
-def scan():
+def init():
     return json.dumps({"result": "initialized"})
 
 @app.route('/scan', methods=['GET'])
