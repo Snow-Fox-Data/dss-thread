@@ -378,7 +378,7 @@ class dss_utils:
                 scan_obj[proj]['folders'] = folders
 
         print('start get lineage...')
-        self.get_ds_lineage(scan_obj)
+        # self.get_ds_lineage(scan_obj)
         print('end get lineage')
 
         # print(json.dumps(scan_obj))
