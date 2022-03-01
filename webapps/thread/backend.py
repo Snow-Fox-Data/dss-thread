@@ -49,17 +49,24 @@ def search():
     result = df[df['name'].str.contains(args.get('term'))]
 
     return result.to_json(orient="records")
-    # return json.dumps(
-    #     {
-    #         "results": [{"type": "project",
-    #         "name": args.get('term')}]
-    #     }
-    # )
 
-@app.route('/load-item', methods=['POST'])
+@app.route('/load-item', methods=['GET'])
 def load_item():
+    # passing "key" as querystring param
     # load full info (including lineage) for project, dataset, column or definition
-    return json.dumps([]) 
+    args = request.args
+    key = args.get('key')
+    dss = dss_utils()
+
+    idx_ds = dss.get_index_ds()
+    df = idx_ds.get_dataframe()
+
+    res = df.query(f'key=="{key}"').iloc[0]
+    if res['type'] == 'dataset':
+        ds = dss.load_dataset(key)
+        return json.dumps(ds)
+
+    return json.dumps(res) 
     
 # @app.route('/get-projects')
 # def get_projects():
@@ -178,10 +185,10 @@ class dss_utils:
         csv_dataset.set_definition(ds_def)
 
         # Set schema
-        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+        csv_dataset.set_schema({'columns': [{'name': 'name', 'lineage-upstream', 'lineage-downstream'}]})
 
         ds2 = dataiku.Dataset(THREAD_PROJ_NAME)
-        df = pd.DataFrame(columns=['project','name'])
+        df = pd.DataFrame(columns=['project','lineage-upstream', 'lineage-downstream'])
 
         ds2.write_with_schema(df)
 
@@ -253,6 +260,25 @@ class dss_utils:
 
         return ds, False
 
+    def load_dataset(self, key):
+        p_name, d_name = self.extract_name_project(key)
+        ds = dataiku.Dataset(d_name, p_name)
+
+        proj_ds = self.get_proj_ds()
+        lin_up = self.traverse_lineage(key, proj_ds)
+        lin_down = self.traverse_lineage(key, proj_ds, False)
+
+        return {
+            "schema":ds.read_schema(),
+            "name": ds.full_name,
+            "key": key,
+            "id": p_name,
+            "project": p_name,
+            "meta": ds.read_metadata(),
+            "lineage-upstream": lin_up,
+            "lineage-downstream": lin_down
+        }
+
     def get_stream(self, recipe, inputs_outputs, p_name):
         refs = []
         try:
@@ -292,8 +318,6 @@ class dss_utils:
                 return ds
 
         return None
-
-
                 
     def traverse_lineage(self, ds_name, all_projects, upstream=True, recur_ct = 0):
         try:
@@ -430,12 +454,12 @@ class dss_utils:
             # if 'VMCHURNPREDICTION' in proj.upper():
             scan_obj[proj] = {}
 
-            project_list.append(proj)
+            # project_list.append(proj)
 
-            # print(proj)
+            # # print(proj)
             project = self.client.get_project(proj)
-            # meta = project.get_metadata()
-            # settings = project.get_settings().get_raw()
+            # # meta = project.get_metadata()
+            # # settings = project.get_settings().get_raw()
 
             datasets = project.list_datasets()
             recipes = project.list_recipes()
@@ -465,35 +489,36 @@ class dss_utils:
                     "key": self.get_full_dataset_name(dataset['name'], proj) + '.' + column['name']
                      }) 
 
-        print('start get lineage...')
-        # self.get_ds_lineage(scan_obj)
-        print('end get lineage')
+        # print('start get lineage...')
+        self.get_ds_lineage(scan_obj)
+        # print('end get lineage')
 
         # print(json.dumps(scan_obj))
 
-        # for p in scan_obj:
-        #     datasets = scan_obj[p]['datasets']
-        #     for ds in datasets:
-        #             obj = { 'project': p, 'name': ds.name}
-        #             if 'lineage_downstream' in ds:
-        #                 obj['lineage_downstream'] = ds['lineage_downstream']
-        #             else:
-        #                 obj['lineage_downstream'] =[]
-        #             if 'lineage_upstream' in ds:
-        #                 obj['lineage_upstream'] = ds['lineage_upstream']
-        #             else:
-        #                 obj['lineage_upstream'] =[]
+        ds_list = []
+        for p in scan_obj:
+            datasets = scan_obj[p]['datasets']
+            for ds in datasets:
+                    obj = { 'project': p, 'name': ds.name, 'key': self.get_full_dataset_name(ds.name, p)}
+                    if 'lineage_downstream' in ds:
+                        obj['lineage_downstream'] = ds['lineage_downstream']
+                    else:
+                        obj['lineage_downstream'] =[]
+                    if 'lineage_upstream' in ds:
+                        obj['lineage_upstream'] = ds['lineage_upstream']
+                    else:
+                        obj['lineage_upstream'] =[]
                         
-        #             ds_list.append(obj)
+                    ds_list.append(obj)
 
         # dataset_dataset = dataiku.Dataset(ds_ds.name)
         # df = pd.DataFrame.from_dict(ds_list)
         # dataset_dataset.write_with_schema(df)
 
-        df = pd.DataFrame.from_dict(scan_obj, orient='index')
-        df.reset_index(inplace=True)
+        df = pd.DataFrame.from_dict(ds_list, orient='records')
+        # df.reset_index(inplace=True)
         
-        proj_dataset = dataiku.Dataset(proj_ds.name)
+        proj_dataset = dataiku.Dataset(THREAD_DS_NAME)
         proj_dataset.write_with_schema(df)
 
         df = pd.DataFrame.from_dict(index_list)
