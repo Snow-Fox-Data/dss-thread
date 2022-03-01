@@ -202,6 +202,24 @@ class App extends Component {
         console.log('props == ');
         console.log(props);
 
+        switch(option.type) {
+            case "project":
+                console.log('RENDER PROJECT');
+                break;
+            case "dataset":
+                console.log('RENDER DATASET');
+                break;
+            case "column":
+                console.log('RENDER COLUMN');
+                break;
+            case "definition":
+                console.log('RENDER DEFINITION');
+                break;
+            default: 
+                console.log('RENDER DEFINITION');
+                break;
+        }
+
         return <Fragment>      
             <span>Type: {option.type}; </span>
             <span>Name: {option.name}; </span>                                
