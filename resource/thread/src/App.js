@@ -2,16 +2,18 @@ import React, { Fragment } from "react";
 import { Component } from 'react';
 import { useEffect } from 'react';
 
-import logo from './logo.svg';
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AsyncTypeahead, Typeahead } from 'react-bootstrap-typeahead';
-import eventBus from "./eventBus";
+
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import {
+    Button,
+    Col,
+    Container,
+    Form,
+    Row
+} from 'react-bootstrap';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -19,11 +21,12 @@ import {
     Routes,
     Link
 } from "react-router-dom";
-import Dataset from './components/dataset.js';
-import menuItemProject from "./components/menuItemProject";
 
-import MenuItemProject from "./components/menuItemProject";
-// import { IconName } from "react-icons/fa";
+import logo from './logo.svg';
+import eventBus from "./eventBus";
+
+import Dataset from './components/dataset.js';
+import Common from "./common/common";
 
 class App extends Component {
 
@@ -204,27 +207,40 @@ class App extends Component {
         console.log('props == ');
         console.log(props);
 
-        switch(option.type) {
-            case "project":
-                console.log('RENDER PROJECT');
-                return MenuItemProject;
-                break;
-            case "dataset":
-                console.log('RENDER DATASET');
-                break;
-            case "column":
-                console.log('RENDER COLUMN');
-                break;
-            case "definition":
-                console.log('RENDER DEFINITION');
-                break;
-            default: 
-                console.log('RENDER DEFAULT');
-                return <Fragment>      
-                    <span>Type: {option.type}; </span>
-                    <span>Name: {option.name}; </span>                                
-                </Fragment>;
-        }   
+        // switch(option.type) {
+        //     case "project":
+        //         console.log('RENDER PROJECT');
+        //         return <Fragment>      
+        //             <span>Type: {option.type}; </span>
+        //             <span>Name: {option.name}; </span>                                
+        //         </Fragment>;
+
+        //         // return MenuItemProject;
+        //         // break;
+        //     case "dataset":
+        //         console.log('RENDER DATASET');
+        //         break;
+        //     case "column":
+        //         console.log('RENDER COLUMN');
+        //         break;
+        //     case "definition":
+        //         console.log('RENDER DEFINITION');
+        //         break;
+        //     default: 
+        //         console.log('RENDER DEFAULT');
+        //         return <Fragment>      
+        //             <span>Type: {option.type}; </span>
+        //             <span>Name: {option.name}; </span>                                
+        //         </Fragment>;
+        // }   
+
+        // FaColumns, FaDatabase, FaList, FaProjectDiagram
+
+        return <Fragment>
+            {Common.getIconForObjectType(option.type)}
+            <span>Type: {option.type}; </span>
+            <span>Name: {option.name}; </span>                                
+        </Fragment>;
     }
 
     render() {
