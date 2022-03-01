@@ -1,5 +1,6 @@
 from ctypes import util
 from dis import disassemble
+import json
 import dataiku
 import pandas as pd
 from flask import request
@@ -21,6 +22,10 @@ sentry_sdk.init(
 #     usr = get_user()
 
 #     return json.dumps({"user": usr})
+
+@app.route('/init', methods=['GET'])
+def scan():
+    return json.dumps({"result": "initialized"})
 
 @app.route('/scan', methods=['GET'])
 def scan():
