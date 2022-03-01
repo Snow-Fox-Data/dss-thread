@@ -137,6 +137,9 @@ class App extends Component {
                         // }
                     });
 
+                    console.log('p_list :: ');
+                    console.log(p_list);
+
                     this.setState({
                         searchResults: p_list                        
                         // isLoaded: true,
@@ -182,7 +185,7 @@ class App extends Component {
         // )
         const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults } = this.state;
         const ref = React.createRef();
-        const filterBy = () => true;
+        const filterBy = () => false;
 
         return (
             <Container style={{ paddingTop: '20px' }}>
