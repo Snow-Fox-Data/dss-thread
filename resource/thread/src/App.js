@@ -111,20 +111,44 @@ class App extends Component {
                 });
     }
 
+    search = (term) => {
+        fetch(window.getWebAppBackendUrl('search'), term)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log('results :: ');
+                    console.log(results);
+                    // var p_list = []
+                    // Object.keys(result).forEach(function (proj_name) {
+                    //     for (var x = 0; x < result[proj_name].datasets.length; x++) {
+                    //         var ds = result[proj_name].datasets[x];
+                    //         p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
+                    //     }
+                    // });
+
+                    // this.setState({
+                    //     isLoaded: true,
+                    //     project_list: p_list,
+                    //     full_tree: result
+                    // });
+                });
+    }
+
     componentDidMount() {
         window.$(document).ready(() => {
             this.setState({ dataiku: window.dataiku });
             this.setState({ rendered: true });
 
-            eventBus.on("dataRefresh", (data) =>
-                this.refreshData()
-            );
+            // eventBus.on("dataRefresh", (data) =>
+            //     this.refreshData()
+            // );
 
             eventBus.on("datasetSelected", (ds) =>
                 this.findDataset(ds)
             );
 
-            this.refreshData()
+            this.search('thread');
+            // this.refreshData();
         }
 
         );
