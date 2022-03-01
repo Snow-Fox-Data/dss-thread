@@ -34,7 +34,8 @@ class App extends Component {
             project_list: [],
             full_ds_name: '',
             full_tree: {},
-            selectedDataset: null
+            selectedDataset: null,
+            searchResults: []
         };
 
         this.project_list = []
@@ -176,54 +177,74 @@ class App extends Component {
         //     </main>
         // </Router>
         // )
-        const { isLoaded, project_list, full_tree, showDetail, selectedDataset, full_ds_name } = this.state;
+        const { isLoaded, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults } = this.state;
         const ref = React.createRef();
 
-        if (!isLoaded) {
-            return <div>Scanning DSS...</div>;
-        } else {
-            if (selectedDataset == null) {
-                return (
-                    <Container style={{ paddingTop: '20px' }}>
-                        <Row>
-                            <Typeahead
-                                ref={ref}
-                                placeholder='Search for Dataset'
-                                onChange={(selected) => {
-                                    if (selected.length > 0) {
-                                        this.findDataset(selected[0].id)
-                                        ref.current.clear()
-                                    };
-                                }}
-                                options={project_list}
-                            />
-                        </Row>
-                    </Container>
-                );
-            }
-            else {
-                return (
-                    <Container style={{ paddingTop: '20px' }}>
-                        <Row>
-                            <Typeahead
-                                ref={ref}
-                                placeholder='Search for Dataset'
-                                onChange={(selected) => {
-                                    if (selected.length > 0) {
-                                        this.findDataset(selected[0].id)
-                                        ref.current.clear()
-                                    };
-                                }}
-                                options={project_list}
-                            />
-                        </Row>
-                        <Row>
-                            <Dataset deets={selectedDataset} full_ds_name={full_ds_name}></Dataset>
-                        </Row>
-                    </Container>
-                );
-            }
-        }
+        return (
+            <Container style={{ paddingTop: '20px' }}>
+                <Row>
+                    <Typeahead
+                        ref={ref}
+                        placeholder='Search for Dataset'
+                        onChange={(selected) => {
+                            console.log('Typeahead :: selected');
+                            console.log(selected);
+                            // if (selected.length > 0) {
+                            //     this.findDataset(selected[0].id)
+                            //     ref.current.clear()
+                            // };
+                        }}
+                        options={searchResults}
+                    />
+                </Row>
+            </Container>
+        );
+
+        // if (!isLoaded) {
+        //     return <div>Scanning DSS...</div>;
+        // } else {
+        //     if (selectedDataset == null) {
+        //         return (
+        //             <Container style={{ paddingTop: '20px' }}>
+        //                 <Row>
+        //                     <Typeahead
+        //                         ref={ref}
+        //                         placeholder='Search for Dataset'
+        //                         onChange={(selected) => {
+        //                             if (selected.length > 0) {
+        //                                 this.findDataset(selected[0].id)
+        //                                 ref.current.clear()
+        //                             };
+        //                         }}
+        //                         options={project_list}
+        //                     />
+        //                 </Row>
+        //             </Container>
+        //         );
+        //     }
+        //     else {
+        //         return (
+        //             <Container style={{ paddingTop: '20px' }}>
+        //                 <Row>
+        //                     <Typeahead
+        //                         ref={ref}
+        //                         placeholder='Search for Dataset'
+        //                         onChange={(selected) => {
+        //                             if (selected.length > 0) {
+        //                                 this.findDataset(selected[0].id)
+        //                                 ref.current.clear()
+        //                             };
+        //                         }}
+        //                         options={project_list}
+        //                     />
+        //                 </Row>
+        //                 <Row>
+        //                     <Dataset deets={selectedDataset} full_ds_name={full_ds_name}></Dataset>
+        //                 </Row>
+        //             </Container>
+        //         );
+        //     }
+        // }
     }
 }
 
