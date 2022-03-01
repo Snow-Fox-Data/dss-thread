@@ -185,11 +185,7 @@ class dss_utils:
         csv_dataset.set_definition(ds_def)
 
         # Set schema
-        csv_dataset.set_schema({'columns': [{ 'name':'name',
-         "type":"string"}, {'name':'lineage-upstream', 'type':'string'},
-        {'name': 'lineage-downstream', 'type':'string'}
-        ]
-        })
+        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
         ds2 = dataiku.Dataset(THREAD_DS_NAME)
         df = pd.DataFrame(columns=['project','lineage-upstream', 'lineage-downstream'])
@@ -404,33 +400,33 @@ class dss_utils:
             project = all_projects[p]
             for d in range(len(project['datasets'])):
                 ds = project['datasets'][d]
-                ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
+                # ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
 
                 if 'lineage_upstream' in ds:
                     result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
-                    # ds['lineage_upstream_full'] = result_up
+                    ds['lineage_upstream_full'] = result_up
 
-                    ds['lineage_upstream'] = []
+                    # ds['lineage_upstream'] = []
 
-                    for result in result_up:
-                        r = result
-                        while len(r['lineage_upstream_full']) > 0:
-                            r = r[0]
+                    # for result in result_up:
+                    #     r = result
+                    #     while len(r['lineage_upstream_full']) > 0:
+                    #         r = r[0]
                     
-                        ds['lineage_upstream'].append(r[0]['name'])
+                    #     ds['lineage_upstream'].append(r[0]['name'])
                         
                 if 'lineage_downstream' in ds:
                     result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
-                    # ds['lineage_downstream_full'] = result_down
+                    ds['lineage_downstream_full'] = result_down
 
-                    ds['lineage_downstream'] = []
+                    # ds['lineage_downstream'] = []
 
-                    for result in result_down:
-                        r = result
-                        while len(r['lineage_downstream_full']) > 0:
-                            r = r[0]
+                    # for result in result_down:
+                    #     r = result
+                    #     while len(r['lineage_downstream_full']) > 0:
+                    #         r = r[0]
                     
-                        ds['lineage_downstream'].append(r[0]['name'])
+                    #     ds['lineage_downstream'].append(r[0]['name'])
 
         #         # print(result_up)
 
@@ -505,11 +501,11 @@ class dss_utils:
             for ds in datasets:
                     obj = { 'project': p, 'name': ds.name, 'key': self.get_full_dataset_name(ds.name, p)}
                     if 'lineage_downstream' in ds:
-                        obj['lineage_downstream'] = ds['lineage_downstream']
+                        obj['lineage_downstream'] = ds['lineage_downstream_full']
                     else:
                         obj['lineage_downstream'] =[]
                     if 'lineage_upstream' in ds:
-                        obj['lineage_upstream'] = ds['lineage_upstream']
+                        obj['lineage_upstream'] = ds['lineage_upstream_full']
                     else:
                         obj['lineage_upstream'] =[]
                         
