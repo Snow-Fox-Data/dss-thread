@@ -267,8 +267,8 @@ class dss_utils:
         ds_ds = self.get_datasets_ds()
         rec = ds_ds.get_dataframe().query(f'key=="{key}"')
 
-        lin_up = rec['lineage_upstream']
-        lin_down = rec['lineage_downstream']
+        lin_up = rec.iloc[0]['lineage_upstream']
+        lin_down = rec.iloc[0]['lineage_downstream']
 
         res = {
             "schema":ds.read_schema(),
