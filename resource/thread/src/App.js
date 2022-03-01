@@ -90,34 +90,34 @@ class App extends Component {
         // })
     }
 
-    refreshData = () => {
-        fetch(window.getWebAppBackendUrl('get-projects'))
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    var p_list = []
-                    Object.keys(result).forEach(function (proj_name) {
-                        for (var x = 0; x < result[proj_name].datasets.length; x++) {
-                            var ds = result[proj_name].datasets[x];
-                            p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
-                        }
-                    });
+    // refreshData = () => {
+    //     fetch(window.getWebAppBackendUrl('get-projects'))
+    //         .then(res => res.json())
+    //         .then(
+    //             (result) => {
+    //                 var p_list = []
+    //                 Object.keys(result).forEach(function (proj_name) {
+    //                     for (var x = 0; x < result[proj_name].datasets.length; x++) {
+    //                         var ds = result[proj_name].datasets[x];
+    //                         p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
+    //                     }
+    //                 });
 
-                    this.setState({
-                        isLoaded: true,
-                        project_list: p_list,
-                        full_tree: result
-                    });
-                });
-    }
+    //                 this.setState({
+    //                     isLoaded: true,
+    //                     project_list: p_list,
+    //                     full_tree: result
+    //                 });
+    //             });
+    // }
 
     search = (term) => {
         fetch(window.getWebAppBackendUrl('search'), term)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log('results :: ');
-                    console.log(results);
+                    console.log('result :: ');
+                    console.log(result);
                     // var p_list = []
                     // Object.keys(result).forEach(function (proj_name) {
                     //     for (var x = 0; x < result[proj_name].datasets.length; x++) {
@@ -143,9 +143,9 @@ class App extends Component {
             //     this.refreshData()
             // );
 
-            eventBus.on("datasetSelected", (ds) =>
-                this.findDataset(ds)
-            );
+            // eventBus.on("datasetSelected", (ds) =>
+            //     this.findDataset(ds)
+            // );
 
             this.search('thread');
             // this.refreshData();
