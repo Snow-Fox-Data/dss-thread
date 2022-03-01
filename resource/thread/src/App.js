@@ -180,12 +180,13 @@ class App extends Component {
         // )
         const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, search, searchResults } = this.state;
         const ref = React.createRef();
+        const filterBy = () => true;
 
         return (
             <Container style={{ paddingTop: '20px' }}>
                 <Row>
                     <AsyncTypeahead
-                        // filterBy={filterBy}
+                        filterBy={filterBy}
                         id="async-search"
                         isLoading={isLoading}
                         labelKey="search"
