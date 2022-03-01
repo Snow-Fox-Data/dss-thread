@@ -127,16 +127,16 @@ class App extends Component {
                     console.log(result);
 
                     var p_list = [];
-                    Object.keys(result).forEach(function (key, value) {
+                    Object.keys(result.results).forEach(function (key, value) {
                         console.log('key == ');
                         console.log(key);
                         console.log('value == ');
                         console.log(value);
 
-                        p_list[p_list.length] = value;
+                        // p_list[p_list.length] = result[value];
 
-                        // for (var x = 0; x < result[key].length; x++) {
-                        //     p_list[p_list.length] = value;
+                        // for (var x = 0; x < result[value].length; x++) {
+                        //     p_list[p_list.length] = result[value];
                         // }
                     });
 
