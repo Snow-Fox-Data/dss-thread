@@ -20,7 +20,9 @@ import {
     Link
 } from "react-router-dom";
 import Dataset from './components/dataset.js';
+import menuItemProject from "./components/menuItemProject";
 
+import MenuItemProject from "./components/menuItemProject";
 // import { IconName } from "react-icons/fa";
 
 class App extends Component {
@@ -205,6 +207,7 @@ class App extends Component {
         switch(option.type) {
             case "project":
                 console.log('RENDER PROJECT');
+                return MenuItemProject;
                 break;
             case "dataset":
                 console.log('RENDER DATASET');
@@ -216,14 +219,12 @@ class App extends Component {
                 console.log('RENDER DEFINITION');
                 break;
             default: 
-                console.log('RENDER DEFINITION');
-                break;
-        }
-
-        return <Fragment>      
-            <span>Type: {option.type}; </span>
-            <span>Name: {option.name}; </span>                                
-        </Fragment>;
+                console.log('RENDER DEFAULT');
+                return <Fragment>      
+                    <span>Type: {option.type}; </span>
+                    <span>Name: {option.name}; </span>                                
+                </Fragment>;
+        }   
     }
 
     render() {
