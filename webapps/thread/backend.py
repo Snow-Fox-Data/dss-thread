@@ -458,7 +458,7 @@ class dss_utils:
                     "key": self.get_full_dataset_name(dataset['name'], proj)
                 })
 
-                for column in dataset['columns']:
+                for column in dataset['schema']['columns']:
                    index_list.append({
                      "name": column['name'],
                      "type": "column",
