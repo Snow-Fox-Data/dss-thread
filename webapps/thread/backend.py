@@ -1,3 +1,5 @@
+from ctypes import util
+from dis import disassemble
 import dataiku
 import pandas as pd
 from flask import request
@@ -5,7 +7,7 @@ import numpy as np
 import ast
 import sentry_sdk
 
-from util.dss import dss_utils
+# from util.dss import dss_utils
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -21,6 +23,16 @@ sentry_sdk.init(
 #     usr = get_user()
 
 #     return json.dumps({"user": usr})
+
+@app.route('/search', methods=['GET'])
+def search():
+    args = request.args
+
+    return json.dumps(
+        {
+            "results": [{"search_term": args.get('term')}]
+        }
+    )
 
 @app.route('/get-projects')
 def get_projects():
