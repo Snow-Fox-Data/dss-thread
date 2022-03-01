@@ -515,7 +515,7 @@ class dss_utils:
         # df = pd.DataFrame.from_dict(ds_list)
         # dataset_dataset.write_with_schema(df)
 
-        df = pd.DataFrame.from_dict(ds_list, orient='columns')
+        df = pd.DataFrame.from_dict(ds_list)
         # df.reset_index(inplace=True)
         
         proj_dataset = dataiku.Dataset(THREAD_DS_NAME)
