@@ -35,7 +35,7 @@ def search():
 @app.route('/load-item', methods=['POST'])
 def load_item():
     # load full info (including lineage) for project, dataset, column or definition
-    return json.dumps([]]) 
+    return json.dumps([]) 
     
 @app.route('/get-projects')
 def get_projects():
