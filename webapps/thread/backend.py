@@ -458,6 +458,13 @@ class dss_utils:
                     "key": self.get_full_dataset_name(dataset['name'], proj)
                 })
 
+                for column in dataset['columns']:
+                   index_list.append({
+                     "name": column['name'],
+                     "type": "column",
+                    "key": self.get_full_dataset_name(dataset['name'], proj) + '.' + column.name
+                     }) 
+
         print('start get lineage...')
         # self.get_ds_lineage(scan_obj)
         print('end get lineage')
