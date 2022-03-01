@@ -113,34 +113,34 @@ class App extends Component {
     //             });
     // }
 
-    // search = (_term) => {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         // body: JSON.stringify({ term: _term })
-    //     };
+    search = (query) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
 
-    //     fetch(window.getWebAppBackendUrl('search') + '?term=' + _term, requestOptions)
-    //         .then(res => res.json())
-    //         .then(
-    //             (result) => {
-    //                 console.log('result :: ');
-    //                 console.log(result);
-    //                 // var p_list = []
-    //                 // Object.keys(result).forEach(function (proj_name) {
-    //                 //     for (var x = 0; x < result[proj_name].datasets.length; x++) {
-    //                 //         var ds = result[proj_name].datasets[x];
-    //                 //         p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
-    //                 //     }
-    //                 // });
+        fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log('result :: ');
+                    console.log(result);
+                    // var p_list = []
+                    // Object.keys(result).forEach(function (proj_name) {
+                    //     for (var x = 0; x < result[proj_name].datasets.length; x++) {
+                    //         var ds = result[proj_name].datasets[x];
+                    //         p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
+                    //     }
+                    // });
 
-    //                 // this.setState({
-    //                 //     isLoaded: true,
-    //                 //     project_list: p_list,
-    //                 //     full_tree: result
-    //                 // });
-    //             });
-    // }
+                    this.setState({
+                        searchResults: result                        
+                        // isLoaded: true,
+                        // project_list: p_list,
+                        // full_tree: result
+                    });
+                });
+    }
 
     componentDidMount() {
         window.$(document).ready(() => {
@@ -180,34 +180,34 @@ class App extends Component {
         const ref = React.createRef();
         const filterBy = () => true;
 
-        const search = (_term) => {
-            const requestOptions = {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                // body: JSON.stringify({ term: _term })
-            };
+        // const search = (_term) => {
+        //     const requestOptions = {
+        //         method: 'GET',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         // body: JSON.stringify({ term: _term })
+        //     };
     
-            fetch(window.getWebAppBackendUrl('search') + '?term=' + _term, requestOptions)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        console.log('result :: ');
-                        console.log(result);
-                        // var p_list = []
-                        // Object.keys(result).forEach(function (proj_name) {
-                        //     for (var x = 0; x < result[proj_name].datasets.length; x++) {
-                        //         var ds = result[proj_name].datasets[x];
-                        //         p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
-                        //     }
-                        // });
+        //     fetch(window.getWebAppBackendUrl('search') + '?term=' + _term, requestOptions)
+        //         .then(res => res.json())
+        //         .then(
+        //             (result) => {
+        //                 console.log('result :: ');
+        //                 console.log(result);
+        //                 // var p_list = []
+        //                 // Object.keys(result).forEach(function (proj_name) {
+        //                 //     for (var x = 0; x < result[proj_name].datasets.length; x++) {
+        //                 //         var ds = result[proj_name].datasets[x];
+        //                 //         p_list[p_list.length] = { id: proj_name + '.' + ds.name, label: ds.name + ' (' + proj_name + ')' };
+        //                 //     }
+        //                 // });
     
-                        // this.setState({
-                        //     isLoaded: true,
-                        //     project_list: p_list,
-                        //     full_tree: result
-                        // });
-                    });
-        }
+        //                 // this.setState({
+        //                 //     isLoaded: true,
+        //                 //     project_list: p_list,
+        //                 //     full_tree: result
+        //                 // });
+        //             });
+        // }
 
         return (
             <Container style={{ paddingTop: '20px' }}>
@@ -218,7 +218,7 @@ class App extends Component {
                         isLoading={isLoading}
                         labelKey="search"
                         minLength={3}
-                        onSearch={search}
+                        onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
                         renderMenuItemChildren={(option, props) => (                                   
