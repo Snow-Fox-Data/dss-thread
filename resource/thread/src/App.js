@@ -170,16 +170,7 @@ class App extends Component {
         console.log('props == ');
         console.log(props);
 
-        return <Fragment>
-            {/* <img
-                alt={option.login}
-                src={option.avatar_url}
-                style={{
-                height: '24px',
-                marginRight: '10px',
-                width: '24px',
-                }}
-            /> */}
+        return <Fragment>            
             <span>{option.search_term}</span>
         </Fragment>
     }
@@ -216,8 +207,27 @@ class App extends Component {
                         onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
-                        renderMenuItemChildren={this.renderMenuItemChildren}
-                        // renderMenuItemChildren={(option, props) => (                                   
+                        renderMenuItemChildren={this.renderMenuItemChildren}                       
+                    />                    
+                </Row>
+            </Container>
+        );
+
+        // <Typeahead
+        //                 ref={ref}
+        //                 placeholder='Search for Dataset'
+        //                 onChange={(selected) => {
+        //                     console.log('Typeahead :: selected');
+        //                     console.log(selected);
+        //                     // if (selected.length > 0) {
+        //                     //     this.findDataset(selected[0].id)
+        //                     //     ref.current.clear()
+        //                     // };
+        //                 }}
+        //                 options={searchResults}
+        //             />
+
+         // renderMenuItemChildren={(option, props) => (                                   
                         //     <Fragment>
                         //         {/* <img
                         //             alt={option.login}
@@ -231,23 +241,6 @@ class App extends Component {
                         //         <span>{option.search_term}</span>
                         //     </Fragment>
                         // )}
-                    />
-                    {/* <Typeahead
-                        ref={ref}
-                        placeholder='Search for Dataset'
-                        onChange={(selected) => {
-                            console.log('Typeahead :: selected');
-                            console.log(selected);
-                            // if (selected.length > 0) {
-                            //     this.findDataset(selected[0].id)
-                            //     ref.current.clear()
-                            // };
-                        }}
-                        options={searchResults}
-                    /> */}
-                </Row>
-            </Container>
-        );
 
         // if (!isLoaded) {
         //     return <div>Scanning DSS...</div>;
