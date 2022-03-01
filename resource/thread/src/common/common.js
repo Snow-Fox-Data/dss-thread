@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
 function getIconForObjectType(type) {
+    // console.log();
     switch(type) {
         case "project":
             return <FaProjectDiagram />;

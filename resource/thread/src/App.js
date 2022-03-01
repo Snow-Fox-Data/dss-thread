@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Spacer } from "react";
 import { Component } from 'react';
 import { useEffect } from 'react';
 
@@ -238,7 +238,9 @@ class App extends Component {
 
         return <Fragment>
             {Common.getIconForObjectType(option.type)}
+            <Spacer y={2} />
             <span>Type: {option.type}; </span>
+            <Spacer y={2} />
             <span>Name: {option.name}; </span>                                
         </Fragment>;
     }
