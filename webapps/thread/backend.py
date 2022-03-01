@@ -262,9 +262,10 @@ class dss_utils:
 
     def load_dataset(self, key):
         p_name, d_name = self.extract_name_project(key)
-        # project = self.client.get_project(p_name)
-        # ds = project.get_dataset(d_name)
         ds = dataiku.Dataset(d_name, p_name)
+
+        proj_ds = self.get_proj_ds()
+        lin_up = self.traverse_lineage(key, proj_ds)
 
         return {
             "schema":ds.read_schema(),
@@ -272,7 +273,8 @@ class dss_utils:
             "key": key,
             "id": p_name,
             "project": p_name,
-            "meta": ds.read_metadata()
+            "meta": ds.read_metadata(),
+            "lineage-upstream": lin_up
         }
 
     def get_stream(self, recipe, inputs_outputs, p_name):
