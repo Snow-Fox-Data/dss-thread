@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Typeahead } from 'react-bootstrap-typeahead';
+import { AsyncTypeahead, Typeahead } from 'react-bootstrap-typeahead';
 import eventBus from "./eventBus";
 import {
     BrowserRouter as Router,
@@ -31,6 +31,7 @@ class App extends Component {
             rendered: false,
             dataiku: undefined,
             isLoaded: false,
+            isLoading: false,
             project_list: [],
             full_ds_name: '',
             full_tree: {},
@@ -154,7 +155,7 @@ class App extends Component {
             //     this.findDataset(ds)
             // );
 
-            this.search('thread');
+            // this.search('thread');
             // this.refreshData();
         }
 
@@ -177,13 +178,37 @@ class App extends Component {
         //     </main>
         // </Router>
         // )
-        const { isLoaded, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults } = this.state;
+        const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, search, searchResults } = this.state;
         const ref = React.createRef();
 
         return (
             <Container style={{ paddingTop: '20px' }}>
                 <Row>
-                    <Typeahead
+                    <AsyncTypeahead
+                        // filterBy={filterBy}
+                        id="async-search"
+                        isLoading={isLoading}
+                        labelKey="search"
+                        minLength={3}
+                        onSearch={search}
+                        options={searchResults}
+                        placeholder='Search for Dataset'
+                        renderMenuItemChildren={(option, props) => (                                   
+                            <Fragment>
+                                {/* <img
+                                    alt={option.login}
+                                    src={option.avatar_url}
+                                    style={{
+                                    height: '24px',
+                                    marginRight: '10px',
+                                    width: '24px',
+                                    }}
+                                /> */}
+                                <span>{option.search_term}</span>
+                            </Fragment>
+                        )}
+                    />
+                    {/* <Typeahead
                         ref={ref}
                         placeholder='Search for Dataset'
                         onChange={(selected) => {
@@ -195,7 +220,7 @@ class App extends Component {
                             // };
                         }}
                         options={searchResults}
-                    />
+                    /> */}
                 </Row>
             </Container>
         );
