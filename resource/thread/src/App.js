@@ -21,6 +21,8 @@ import {
 } from "react-router-dom";
 import Dataset from './components/dataset.js';
 
+// import { IconName } from "react-icons/fa";
+
 class App extends Component {
 
     // JUST ADDING A COMMENT TO TEST WORKFLOW.
@@ -194,6 +196,36 @@ class App extends Component {
         });
     }
 
+    renderMenuItemChildren(option, props) {
+        console.log('option == ');
+        console.log(option);
+        console.log('props == ');
+        console.log(props);
+
+        switch(option.type) {
+            case "project":
+                console.log('RENDER PROJECT');
+                break;
+            case "dataset":
+                console.log('RENDER DATASET');
+                break;
+            case "column":
+                console.log('RENDER COLUMN');
+                break;
+            case "definition":
+                console.log('RENDER DEFINITION');
+                break;
+            default: 
+                console.log('RENDER DEFINITION');
+                break;
+        }
+
+        return <Fragment>      
+            <span>Type: {option.type}; </span>
+            <span>Name: {option.name}; </span>                                
+        </Fragment>;
+    }
+
     render() {
         //        <Router>
         //     <main>
@@ -226,16 +258,18 @@ class App extends Component {
                         onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
-                        renderMenuItemChildren={(option, props) => (                                   
-                            <Fragment>      
-                                <span>Type: {option.type}; </span>
-                                <span>Name: {option.name}; </span>                                
-                            </Fragment>
-                        )}
+                        renderMenuItemChildren={this.renderMenuItemChildren}
                     />                    
                 </Row>
             </Container>
         );
+
+        // renderMenuItemChildren={(option, props) => (                                   
+        //     <Fragment>      
+        //         <span>Type: {option.type}; </span>
+        //         <span>Name: {option.name}; </span>                                
+        //     </Fragment>
+        // )}
 
         // if (!isLoaded) {
         //     return <div>Scanning DSS...</div>;
