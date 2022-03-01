@@ -62,6 +62,9 @@ def load_item():
     df = idx_ds.get_dataframe()
 
     res = df.query(f'key=="{key}"').iloc[0]
+    if res['type'] == 'dataset':
+        ds = dss.load_dataset(key)
+        return json.dumps(ds)
 
     return json.dumps(res) 
     
@@ -256,6 +259,16 @@ class dss_utils:
         ds2.write_with_schema(df)
 
         return ds, False
+
+    def load_dataset(self, key):
+        p_name, d_name = self.extract_name_project(key)
+        ds = dataiku.Dataset(d_name, p_name)
+
+        return {
+            "schema":ds.read_schema(),
+            "name": ds.name,
+            "id": ds.id
+        }
 
     def get_stream(self, recipe, inputs_outputs, p_name):
         refs = []
