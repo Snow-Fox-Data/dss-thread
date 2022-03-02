@@ -87,7 +87,7 @@ def update_desc():
     data = request.values
     desc_id = int(data['id'])
 
-#    print(desc_id, exists)
+    print(desc_id, exists)
     if desc_id == -1:
         print('new desc')
         # new description
