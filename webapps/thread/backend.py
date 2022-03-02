@@ -291,18 +291,14 @@ class dss_utils:
         nxt = []
 
         for obj in ds_lineage_obj:
-            # print('obj:')
-            # print(obj)
             ds = self.load_dataset(obj['name'])
             for column in ds['schema']:
-                print(column['name'], col, ds['name'])
                     
                 if column['name'].lower() == col.lower():
                     # direct column name match!
-                    print('match:')
-                    # lin = self.get_col_lineage(col, ds[dir], upstream)
+                    lin = self.get_col_lineage(col, ds[dir], upstream)
 
-                    # nxt.append({'name':obj['name'] + '.' + col, dir:lin})
+                    nxt.append({'name':obj['name'] + '.' + col, dir:lin})
         
         return nxt
                     
