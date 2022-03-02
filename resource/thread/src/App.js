@@ -78,10 +78,33 @@ class App extends Component {
     //     // })
     // }
 
-    loadItem = (key) => {
-        console.log('loadItem :: key == ');
-        console.log(key);
+    loadItem = (item) => {
+        console.log('loadItem :: item == ');
+        console.log(item);
 
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item.key, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                console.log('response == ');
+                console.log(response);
+
+                // var p_list = [];
+                // Object.keys(reponse).forEach(function (results) {
+                //     p_list[p_list.length] = reponse[results];
+                // });
+
+                // this.setState({
+                //     searchResults: p_list                        
+                //     // isLoaded: true,
+                //     // project_list: p_list,
+                //     // full_tree: result
+                // });
+            });
     }
 
     search = (query) => {
@@ -92,10 +115,10 @@ class App extends Component {
 
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
             .then(res => res.json())
-            .then((reponse) => {
+            .then((response) => {
                 var p_list = [];
-                Object.keys(reponse).forEach(function (results) {
-                    p_list[p_list.length] = reponse[results];
+                Object.keys(response).forEach(function (results) {
+                    p_list[p_list.length] = response[results];
                 });
 
                 // var p_list = [
