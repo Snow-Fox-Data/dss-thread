@@ -40,21 +40,27 @@ class App extends Component {
         console.log('loadItem :: item == ');
         console.log(item);
 
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        };
-
-        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item[0].key, requestOptions)
-            .then(res => res.json())
-            .then((response) => {
-                console.log('response == ');
-                console.log(response);
-                
-                this.setState({
-                    selectedItem: response      
+        if(item.length > 0) {
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            };
+    
+            fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item[0].key, requestOptions)
+                .then(res => res.json())
+                .then((response) => {
+                    console.log('response == ');
+                    console.log(response);
+                    
+                    this.setState({
+                        selectedItem: response      
+                    });
                 });
-            });
+        } else {
+            // this.setState({
+            //     selectedItem: null      
+            // });
+        }
     }
 
     search = (query) => {
