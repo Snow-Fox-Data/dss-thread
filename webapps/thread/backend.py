@@ -508,11 +508,11 @@ class dss_utils:
             for ds in datasets:
                     obj = { 'project': p, 'name': ds.name, 'key': self.get_full_dataset_name(ds.name, p)}
                     if 'lineage_downstream' in ds:
-                        obj['lineage_downstream'] = ds['lineage_downstream_full']
+                        obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full'])
                     else:
                         obj['lineage_downstream'] =[]
                     if 'lineage_upstream' in ds:
-                        obj['lineage_upstream'] = ds['lineage_upstream_full']
+                        obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
                     else:
                         obj['lineage_upstream'] =[]
                         
