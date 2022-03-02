@@ -64,7 +64,7 @@ def load_item():
     res = df.query(f'key=="{key}"').iloc[0]
     if res['type'] == 'dataset':
         ds = dss.load_dataset(key)
-        
+
         return json.dumps(ds)
     else:
         if res['type'] == 'project':
@@ -247,6 +247,13 @@ class dss_utils:
 
     def load_project(self, key):
         p = self.client.get_project(key)
+
+        ds = dataiku.Dataset(THREAD_DATASETS_NAME)
+        datasets = ds.get_dataframe().query(f'project=="{key}"')
+
+        p['datasets'] = []
+        for d in datasets:
+            p['datasets'].append(d)
 
         return p.get_summary()
    
