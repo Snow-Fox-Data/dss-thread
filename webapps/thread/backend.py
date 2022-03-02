@@ -288,6 +288,7 @@ class dss_utils:
         if upstream:
             dir = 'lineage-upstream'
 
+        print(ds_lineage)
         nxt = []
         for obj in ds_lineage:
             ds = self.load_dataset(obj['name'])
