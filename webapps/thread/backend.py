@@ -87,8 +87,6 @@ def update_desc():
     
     data = request.values
     desc_id = int(data['id'])
-
-    print(type(data['applied_to']))
     applied_to = json.loads(data['applied_to'])
 
     # print(desc_id, exists)
@@ -107,9 +105,6 @@ def update_desc():
         else:
             df = pd.DataFrame.from_dict([desc])
     else:
-        recs = df.loc[df['id']==desc_id]
-        print(len(recs))
-
         df.loc[df['id']==desc_id, 'name'] = data['name']
         df.loc[df['id']==desc_id, 'description'] = data['description']
         df.loc[df['id']==desc_id, 'applied_to'] = applied_to
@@ -202,9 +197,6 @@ class dss_utils:
             "lineage-downstream": lin_down
         }
 
-        if col_lineage:
-            print(res)
-
         return res
 
     def update_column_description(self, column_array, description):
@@ -212,7 +204,6 @@ class dss_utils:
             column_array = [column_array]
             
         for i in column_array:
-            print(i)
             lst = i.split('.')
             project, dataset, column = lst[0], lst[1], lst[2]
             p = self.client.get_project(project)
