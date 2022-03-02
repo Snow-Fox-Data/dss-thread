@@ -63,7 +63,7 @@ def load_item():
 
     res = df.query(f'key=="{key}"').iloc[0]
     if res['type'] == 'dataset':
-        ds = dss.load_dataset(key)
+        ds = dss.load_dataset(key, True)
 
         return json.dumps(ds)
     else:
@@ -254,7 +254,7 @@ class dss_utils:
 
         return p
    
-    def load_dataset(self, key):
+    def load_dataset(self, key, col_lineage=False):
         p_name, d_name = self.extract_name_project(key)
         ds = dataiku.Dataset(d_name, p_name)
 
@@ -297,9 +297,9 @@ class dss_utils:
                 if column['name'].lower() == col.lower():
                     # direct column name match!
                     print(col, ds['name'], ds[dir])
-                    # lin = self.get_col_lineage(col, ds[dir], upstream)
+                    lin = self.get_col_lineage(col, ds[dir], upstream)
 
-                    nxt.append({'name':obj['name'] + '.' + col})#, dir:lin
+                    nxt.append({'name':obj['name'] + '.' + col, dir:lin})#
         
         return nxt
                     
