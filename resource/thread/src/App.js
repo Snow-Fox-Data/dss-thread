@@ -35,7 +35,8 @@ class App extends Component {
             full_ds_name: '',
             full_tree: {},
             selectedDataset: null,
-            searchResults: []
+            selectedItem: null,
+            searchResults: [],
         };
 
         this.project_list = []
@@ -226,6 +227,8 @@ class App extends Component {
                         renderMenuItemChildren={this.renderMenuItemChildren}
                     />                    
                 </Row>
+
+                
             </Container>
         );
     }

@@ -49,7 +49,6 @@ class Dataset extends Component {
         return res;
     }
 
-
     update = (st, base_elem) => {
 
         var elements = [{
@@ -375,6 +374,5 @@ class Dataset extends Component {
         );
     }
 }
-
 
 export default Dataset;
