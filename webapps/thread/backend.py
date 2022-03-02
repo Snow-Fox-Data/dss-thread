@@ -291,11 +291,13 @@ class dss_utils:
         nxt = []
 
         for obj in ds_lineage_obj:
+            print('obj:')
             print(obj)
             ds = self.load_dataset(obj['name'])
             for col in ds['schema']:
                 if col['name'] == col:
                     # direct column name match!
+                    print('match:')
                     print(col['name'], col, ds['name'])
                     # lin = self.get_col_lineage(col, ds[dir], upstream)
 
