@@ -73,7 +73,21 @@ def load_item():
             return json.dumps(p)
 
     return json.dumps(res) 
-    
+
+@app.route('/update-desc', methods=['POST'])
+def update_desc():
+    data = json.loads(request.data)
+    desc_id = data['id']
+
+    if desc_id == -1:
+        # new description
+        desc = {
+            "id": random.randint(100000,100000000),
+            "name": data['name'],
+            "description": data['description']
+        }
+
+
 
 @app.route('/update-col-desc', methods=['POST'])
 def update_col_desc():
@@ -96,23 +110,6 @@ def update_col_desc():
         'success': True
     })
 
-@app.route('/column-lineage', methods=['POST'])
-def column_lineage():
-    data = json.loads(request.data)
-    # dataset_name = data['dataset']
-    # project = data['project']
-    column = data['column']
-
-    p, d, c = extract_name_project(column)
-
-    # print(column)
-
-    ups, downs = get_col_lineage(p, d, c)
-
-    return json.dumps({
-        'ups': ups,
-        'downs': downs
-    })
 
 # def update_column_description(column_array, description):
 #     if type(column_array)==str:
@@ -149,9 +146,9 @@ class dss_utils:
         ds_loc = 'thread_datasets.csv'
         ds = proj.get_dataset(THREAD_DATASETS_NAME)
 
-        exists = ds.exists()
-        if exists:
-            ds.delete(drop_data=True)
+        # exists = ds.exists()
+        # if exists:
+        #     ds.delete(drop_data=True)
             
         project_variables = dataiku.get_custom_variables()
 
@@ -167,12 +164,13 @@ class dss_utils:
         csv_dataset.set_definition(ds_def)
 
         # Set schema
-        csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+        # csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
         ds2 = dataiku.Dataset(THREAD_DATASETS_NAME)
-        df = pd.DataFrame(columns=['key','lineage_downstream', 'lineage_upstream', 'name', 'project'])
+        df = pd.DataFrame()#columns=['key','lineage_downstream', 'lineage_upstream', 'name', 'project'])
 
-        ds2.write_with_schema(df)
+        # ds2.write_with_schema(df)
+        ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
         return ds, False
     
@@ -182,9 +180,9 @@ class dss_utils:
             ds_loc = 'thread_index.csv'
             ds = proj.get_dataset(THREAD_INDEX_NAME)
 
-            exists = ds.exists()
-            if exists:
-                ds.delete(drop_data=True)
+            # exists = ds.exists()
+            # if exists:
+            #     ds.delete(drop_data=True)
                 
             project_variables = dataiku.get_custom_variables()
 
@@ -200,12 +198,13 @@ class dss_utils:
             csv_dataset.set_definition(ds_def)
 
             # Set schema
-            csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+            # csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
             ds2 = dataiku.Dataset(THREAD_INDEX_NAME)
-            df = pd.DataFrame(columns=['name','type'])
+            df = pd.DataFrame()#(columns=['name','type'])
 
-            ds2.write_with_schema(df)
+            # ds2.write_with_schema(df)
+            ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
             return ds, False
 
@@ -215,9 +214,9 @@ class dss_utils:
         ds_loc = 'thread_definition.csv'
         ds = proj.get_dataset(THREAD_DS_NAME)
 
-        exists = ds.exists()
-        if exists:
-            ds.delete(drop_data=True)
+        # exists = ds.exists()
+        # if exists:
+        #     ds.delete(drop_data=True)
             
         project_variables = dataiku.get_custom_variables()
 
@@ -236,9 +235,10 @@ class dss_utils:
         csv_dataset.set_schema({'columns': [{'name': 'name', 'definition':'string'}]})
 
         ds2 = dataiku.Dataset(THREAD_DS_NAME)
-        df = pd.DataFrame(columns=['name','definition'])
+        df = pd.DataFrame()#columns=['name','definition'])
 
-        ds2.write_with_schema(df)
+        ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+        # ds2.write_with_schema(df)
 
         return ds, False
 
@@ -307,7 +307,6 @@ class dss_utils:
         
         return nxt
                     
-
     def get_stream(self, recipe, inputs_outputs, p_name):
         refs = []
         try:
@@ -529,12 +528,14 @@ class dss_utils:
         # df.reset_index(inplace=True)
         
         proj_dataset = dataiku.Dataset(THREAD_DS_NAME)
-        proj_dataset.write_with_schema(df)
+        # proj_dataset.write_with_schema(df)
+        proj_dataset.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
         df = pd.DataFrame.from_dict(index_list)
         # df.reset_index(inplace=True)
         
         idx_ds = dataiku.Dataset(THREAD_INDEX_NAME)
-        idx_ds.write_with_schema(df)
+        # idx_ds.write_with_schema(df)
+        idx_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
         return True
