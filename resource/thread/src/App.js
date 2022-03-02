@@ -87,7 +87,7 @@ class App extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item.key, requestOptions)
+        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item[0].key, requestOptions)
             .then(res => res.json())
             .then((response) => {
                 console.log('response == ');
@@ -222,7 +222,7 @@ class App extends Component {
                         onChange={this.loadItem}
                         onSearch={this.search}
                         options={searchResults}
-                        placeholder='Search for Dataset'
+                        placeholder='Search for Datase'                        
                         renderMenuItemChildren={this.renderMenuItemChildren}
                     />                    
                 </Row>
