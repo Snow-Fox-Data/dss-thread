@@ -20,6 +20,7 @@ import {
 } from "react-router-dom";
 
 import Common from "./common/common";
+import DataikuItem from "./components/dataikuItem";
 
 class App extends Component {
 
@@ -207,7 +208,7 @@ class App extends Component {
         //     </main>
         // </Router>
         
-        const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults } = this.state;
+        const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults, selec } = this.state;
         const ref = React.createRef();
         const filterBy = () => true;
 
@@ -228,7 +229,7 @@ class App extends Component {
                     />                    
                 </Row>
 
-                
+                <DataikuItem item="{selectedItem}"/>
             </Container>
         );
     }
