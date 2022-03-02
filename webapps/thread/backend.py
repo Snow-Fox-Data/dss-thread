@@ -290,9 +290,8 @@ class dss_utils:
 
         # print(ds_lineage)
         nxt = []
-        for index in range(len(ds_lineage)):
-            obj = ds_lineage[index]
 
+        for obj in ds_lineage:
             print(obj)
             ds = self.load_dataset(obj['name'])
             for col in ds['schema']:
