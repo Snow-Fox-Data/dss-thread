@@ -220,7 +220,7 @@ class dss_utils:
             ds_schema = ds.get_schema()
             for z in ds_schema['columns']: 
                 if z['name']==column:
-                    z['comment']=description['description']
+                    z['comment']=description
 
             ds.set_schema(ds_schema)
 
