@@ -7,6 +7,7 @@ from flask import request
 import numpy as np
 import ast
 import sentry_sdk
+import random
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -86,7 +87,7 @@ def update_desc():
     data = request.values
     desc_id = data['id']
 
-    print(desc_id, exists)
+#    print(desc_id, exists)
     if desc_id == -1 or desc_id == '-1':
         print('new desc')
         # new description
