@@ -265,8 +265,8 @@ class dss_utils:
         lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
         schema = ds.read_schema()
-        # for col in schema:
-            # col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
+        for col in schema:
+            col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
             # col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
 
         res = {
@@ -280,7 +280,7 @@ class dss_utils:
             "lineage-downstream": lin_down
         }
 
-        print(res)
+        # print(res)
         return res
 
     def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
@@ -291,7 +291,7 @@ class dss_utils:
         nxt = []
 
         for obj in ds_lineage_obj:
-            # print(obj)
+            print(obj)
             ds = self.load_dataset(obj['name'])
             for col in ds['schema']:
                 if col['name'] == col:
