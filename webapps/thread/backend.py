@@ -31,8 +31,9 @@ def init():
 def scan():
     dss = dss_utils()
 
-    ds_ds = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
-    index_ds = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
+    dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
+    dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
+    dss.init_thread_ds(THREAD_DESCRPTIONS_NAME, 'thread_descriptions.csv')
 
     result = dss.scan_server()
 
@@ -76,6 +77,9 @@ def load_item():
 
 @app.route('/update-desc', methods=['POST'])
 def update_desc():
+    desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
+    df = desc_ds.get_dataframe()
+    
     data = json.loads(request.data)
     desc_id = data['id']
 
@@ -87,6 +91,11 @@ def update_desc():
             "description": data['description']
         }
 
+        df = df.append(desc, ignore_index=True)
+
+        desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+
+    return json.dumps({"success": True})
 
 
 @app.route('/update-col-desc', methods=['POST'])
