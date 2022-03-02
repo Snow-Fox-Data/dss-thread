@@ -6,9 +6,6 @@ class DataikuItem extends Component {
     constructor(props) {
         super(props);
 
-        console.log('props == ');
-        console.log(props);
-
         this.state = {
             
         };
@@ -34,6 +31,9 @@ class DataikuItem extends Component {
     //     4: {name: 'merchant_state', type: 'string'}
 
     render() {
+        console.log('render() :: this.props == ');
+        console.log(this.props);
+
         let item;
         if (this.props.item != null) {
             item = <Row>
