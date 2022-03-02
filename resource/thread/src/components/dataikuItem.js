@@ -34,17 +34,20 @@ class DataikuItem extends Component {
     //     4: {name: 'merchant_state', type: 'string'}
 
     render() {
+        let item;
+        if (this.props.item != null) {
+            item = <Row>
+                <p>DISPLAY RESULTS OF LOAD ITEM HERE...</p>
+            </Row>
+        } else {
+            item = <Row>
+                <p>No Item to display...</p>
+            </Row>
+        }        
+
         return (
             <div style={{ paddingTop: '20px' }}>
-                 if (this.props.item != null) {
-                     <Row>
-                        <p>DISPLAY RESULTS OF LOAD ITEM HERE...</p>
-                    </Row>
-                 } else {
-                    <Row>
-                        <p>No Item to display...</p>
-                    </Row>
-                 }                
+                {item}
             </div>
         );
     }
