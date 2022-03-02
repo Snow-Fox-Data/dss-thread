@@ -83,7 +83,7 @@ def update_desc():
     if exists:
         df = desc_ds.get_dataframe()
     
-    data = json.loads(request.data)
+    data = request.values
     desc_id = data['id']
 
     if desc_id == -1:
@@ -98,7 +98,7 @@ def update_desc():
             df = df.append(desc, ignore_index=True)
         else:
             df = pd.DataFrame.from_dict([desc])
-                
+
         desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
         
             
