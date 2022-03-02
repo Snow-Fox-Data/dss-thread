@@ -267,9 +267,10 @@ class dss_utils:
         schema = ds.read_schema()
         for col in schema:
             up_lin = self.get_col_lineage(col['name'], lin_up, True)
-            print(up_lin)
+            # print(up_lin)
             col['lineage_upstream'] = json.dumps(up_lin)
             # col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
+
 
         res = {
             "schema": schema,
@@ -282,7 +283,7 @@ class dss_utils:
             "lineage-downstream": lin_down
         }
 
-        # print(res)
+        print(res)
         return res
 
     def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
