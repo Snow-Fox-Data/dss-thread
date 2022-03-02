@@ -103,7 +103,7 @@ def update_desc():
         else:
             df = pd.DataFrame.from_dict([desc])
     else:
-        recs = df.loc[df['id']=={desc_id}]
+        recs = df.loc[df['id']==desc_id]
         print(len(recs))
 
         df.loc[df['id']=={desc_id}, 'name'] = data['name']
