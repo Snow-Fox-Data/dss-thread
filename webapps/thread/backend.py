@@ -87,6 +87,8 @@ def update_desc():
     
     data = request.values
     desc_id = int(data['id'])
+
+    print(data['applied_to'])
     applied_to = json.loads(data['applied_to'])
 
     # print(desc_id, exists)
@@ -97,7 +99,7 @@ def update_desc():
             "id": random.randint(100000,100000000),
             "name": data['name'],
             "description": data['description'],
-            "applied_to": data['applied_to']
+            "applied_to": applied_to
         }
 
         if exists:
