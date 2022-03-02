@@ -33,7 +33,7 @@ def scan():
 
     # proj_ds, f = dss.init_proj_dataset()
     # index_ds = dss.init_index_dataset()
-    ds_ds = dss.init_thread_ds(THREAD_DS_NAME, 'thread_datasets.csv')
+    ds_ds = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
     index_ds = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
 
     result = dss.scan_server()
@@ -132,7 +132,7 @@ def update_col_desc():
 
 
 
-THREAD_DS_NAME = '--Thread-Descriptions--'
+THREAD_DESCRPTIONS_NAME = '--Thread-Descriptions--'
 THREAD_DATASETS_NAME = '--Thread-Datasets--'
 THREAD_INDEX_NAME = '--Thread-Index--'
 
@@ -541,14 +541,14 @@ class dss_utils:
             datasets = scan_obj[p]['datasets']
             for ds in datasets:
                     obj = { "project": p, "name": ds.name, "key": self.get_full_dataset_name(ds.name, p)}
-                    # if 'lineage_downstream' in ds:
-                    #     obj['lineage_downstream'] = ''json.dumps(ds['lineage_downstream_full'])
-                    # else:
-                    #     obj['lineage_downstream'] = []
-                    # if 'lineage_upstream' in ds:
-                    #     obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
-                    # else:
-                    #     obj['lineage_upstream'] = []
+                    if 'lineage_downstream' in ds:
+                        obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full'])
+                    else:
+                        obj['lineage_downstream'] = []
+                    if 'lineage_upstream' in ds:
+                        obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
+                    else:
+                        obj['lineage_upstream'] = []
                         
                     ds_list.append(obj)
 
@@ -557,11 +557,11 @@ class dss_utils:
         # dataset_dataset.write_with_schema(df)
 
         df = pd.DataFrame.from_dict(ds_list)
-        # df = df.astype({"lineage_upstream": str})
-        # df = df.astype({"lineage_downstream": str})
+        df = df.astype({"lineage_upstream": str})
+        df = df.astype({"lineage_downstream": str})
         # df.reset_index(inplace=True)
         
-        proj_dataset = dataiku.Dataset(THREAD_DS_NAME)
+        proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
         # proj_dataset.write_with_schema(df)
         proj_dataset.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
