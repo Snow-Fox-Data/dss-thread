@@ -78,6 +78,7 @@ def load_item():
 
 @app.route('/update-desc', methods=['POST'])
 def update_desc():
+    dss = dss_utils()
     desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
     exists = len(desc_ds.read_schema(raise_if_empty=False)) > 0
 
@@ -111,49 +112,11 @@ def update_desc():
         df.loc[df['id']==desc_id, 'applied_to'] = data['applied_to']
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+
+    if len(data['applied_to']) > 0:
+        dss.update_column_description(data['applied_to'], data['description'])
      
     return json.dumps({"success": True})
-
-
-@app.route('/update-col-desc', methods=['POST'])
-def update_col_desc():
-    # frm = request.form
-
-    # print('POST!')
-    # print(request.data)
-    data = json.loads(request.data)
-    # print(data['col'])
-
-    cols = data['cols']
-    desc = data['desc']
-
-    # print(col, desc)
-
-    # update the orig
-    update_column_description(cols, description=desc)
-
-    return json.dumps({
-        'success': True
-    })
-
-
-# def update_column_description(column_array, description):
-#     if type(column_array)==str:
-#         column_array = [column_array]
-        
-#     client = dataiku.api_client()
-#     for i in column_array:
-#         lst = i.split('.')
-#         project, dataset, column = lst[0], lst[1], lst[2]
-#         p = client.get_project(project)
-#         ds = p.get_dataset(dataset)
-#         ds_schema = ds.get_schema()
-#         for z in ds_schema['columns']: 
-#             if z['name']==column:
-#                 z['comment']=description
-
-#         ds.set_schema(ds_schema)
-
 
 
 THREAD_DESCRPTIONS_NAME = '--Thread-Descriptions--'
@@ -240,6 +203,22 @@ class dss_utils:
             print(res)
 
         return res
+
+    def update_column_description(self, column_array, description):
+        if type(column_array)==str:
+            column_array = [column_array]
+            
+        for i in column_array:
+            lst = i.split('.')
+            project, dataset, column = lst[0], lst[1], lst[2]
+            p = self.client.get_project(project)
+            ds = p.get_dataset(dataset)
+            ds_schema = ds.get_schema()
+            for z in ds_schema['columns']: 
+                if z['name']==column:
+                    z['comment']=description['description']
+
+            ds.set_schema(ds_schema)
 
     def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
         dir = 'lineage-downstream'
