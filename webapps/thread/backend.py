@@ -288,11 +288,12 @@ class dss_utils:
         if upstream:
             dir = 'lineage-upstream'
 
-        print(ds_lineage)
+        # print(ds_lineage)
+        ds_lineage_obj = json.loads(ds_lineage)
         nxt = []
 
-        for obj in ds_lineage:
-            print(obj)
+        for obj in ds_lineage_obj:
+            # print(obj)
             ds = self.load_dataset(obj['name'])
             for col in ds['schema']:
                 if col['name'] == col:
