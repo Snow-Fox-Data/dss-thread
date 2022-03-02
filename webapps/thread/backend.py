@@ -64,31 +64,16 @@ def load_item():
     res = df.query(f'key=="{key}"').iloc[0]
     if res['type'] == 'dataset':
         ds = dss.load_dataset(key)
+        
         return json.dumps(ds)
+    else:
+        if res['type'] == 'project':
+            p = dss.load_project(key)
+
+            return json.dumps(p)
 
     return json.dumps(res) 
     
-# @app.route('/get-projects')
-# def get_projects():
-
-    # util = dss_utils()
-
-    # proj_ds, exists = util.init_proj_dataset()
-    # # ds_ds, exists = util.init_definition_dataset()
-
-    # res = {}
-    # if not exists:
-    #     res_df = util.scan_server(proj_ds)
-    # else:
-    #     res_df = dataiku.Dataset(proj_ds.name).get_dataframe()
-    
-    # projs = res_df['index'].unique()
-
-    # for p in projs:
-    #     res[p] = {}
-    #     res[p]['datasets'] = res_df.query(f'index=="{p}"').iloc[0]['datasets']#.to_dict(orient='records')
-
-    # return json.dumps(res)
 
 @app.route('/update-col-desc', methods=['POST'])
 def update_col_desc():
@@ -260,6 +245,11 @@ class dss_utils:
 
         return ds, False
 
+    def load_project(self, key):
+        p = self.client.get_project(key)
+
+        return p.get_summary()
+   
     def load_dataset(self, key):
         p_name, d_name = self.extract_name_project(key)
         ds = dataiku.Dataset(d_name, p_name)
