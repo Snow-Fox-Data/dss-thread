@@ -94,18 +94,21 @@ def update_desc():
         desc = {
             "id": random.randint(100000,100000000),
             "name": data['name'],
-            "description": data['description']
+            "description": data['description'],
+            "applied_to": []
         }
 
         if exists:
             df = df.append(desc, ignore_index=True)
         else:
             df = pd.DataFrame.from_dict([desc])
+    else:
+        df.loc[df['id']=={desc_id}, 'name'] = data['name']
+        df.loc[df['id']=={desc_id}, 'description'] = data['description']
 
-        desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+    desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+
         
-            
-
     return json.dumps({"success": True})
 
 
