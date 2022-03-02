@@ -87,6 +87,7 @@ def update_desc():
     
     data = request.values
     desc_id = int(data['id'])
+    applied_to = json.loads(data['applied_to'])
 
     # print(desc_id, exists)
     if desc_id == -1:
@@ -109,12 +110,12 @@ def update_desc():
 
         df.loc[df['id']==desc_id, 'name'] = data['name']
         df.loc[df['id']==desc_id, 'description'] = data['description']
-        df.loc[df['id']==desc_id, 'applied_to'] = data['applied_to']
+        df.loc[df['id']==desc_id, 'applied_to'] = applied_to
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
     if len(data['applied_to']) > 0:
-        dss.update_column_description(data['applied_to'], data['description'])
+        dss.update_column_description(applied_to, data['description'])
      
     return json.dumps({"success": True})
 
