@@ -541,14 +541,14 @@ class dss_utils:
             datasets = scan_obj[p]['datasets']
             for ds in datasets:
                     obj = { 'project': p, 'name': ds.name, 'key': self.get_full_dataset_name(ds.name, p)}
-                    if 'lineage_downstream' in ds:
-                        obj['lineage_downstream'] = ''#json.dumps(ds['lineage_downstream_full'])
-                    else:
-                        obj['lineage_downstream'] = []
-                    if 'lineage_upstream' in ds:
-                        obj['lineage_upstream'] = ''#json.dumps(ds['lineage_upstream_full'])
-                    else:
-                        obj['lineage_upstream'] = []
+                    # if 'lineage_downstream' in ds:
+                    #     obj['lineage_downstream'] = ''json.dumps(ds['lineage_downstream_full'])
+                    # else:
+                    #     obj['lineage_downstream'] = []
+                    # if 'lineage_upstream' in ds:
+                    #     obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
+                    # else:
+                    #     obj['lineage_upstream'] = []
                         
                     ds_list.append(obj)
 
@@ -557,8 +557,8 @@ class dss_utils:
         # dataset_dataset.write_with_schema(df)
 
         df = pd.DataFrame.from_dict(ds_list)
-        df = df.astype({"lineage_upstream": str})
-        df = df.astype({"lineage_downstream": str})
+        # df = df.astype({"lineage_upstream": str})
+        # df = df.astype({"lineage_downstream": str})
         # df.reset_index(inplace=True)
         
         proj_dataset = dataiku.Dataset(THREAD_DS_NAME)
