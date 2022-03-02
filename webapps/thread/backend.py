@@ -34,7 +34,7 @@ def scan():
     # proj_ds, f = dss.init_proj_dataset()
     # index_ds = dss.init_index_dataset()
     ds_ds = dss.init_thread_ds(THREAD_DS_NAME, 'thread_datasets.csv')
-    index_ds = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_datasets.csv')
+    index_ds = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
 
     result = dss.scan_server(ds_ds)
 
