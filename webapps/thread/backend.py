@@ -31,10 +31,12 @@ def init():
 def scan():
     dss = dss_utils()
 
-    proj_ds, f = dss.init_proj_dataset()
-    index_ds = dss.init_index_dataset()
+    # proj_ds, f = dss.init_proj_dataset()
+    # index_ds = dss.init_index_dataset()
+    ds_ds = dss.init_thread_ds(THREAD_DS_NAME, 'thread_datasets.csv')
+    index_ds = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_datasets.csv')
 
-    result = dss.scan_server(proj_ds)
+    result = dss.scan_server(ds_ds)
 
     return json.dumps({"result": "scan complete"})
 
@@ -140,6 +142,36 @@ class dss_utils:
         self.client = dataiku.api_client()
         # self.init_description_dataset()
 
+    def init_thread_ds(self, name, location):
+        proj = self.client.get_default_project()
+
+        ds_loc = location
+        ds = proj.get_dataset(name)
+
+        exists = ds.exists()
+        if exists:
+            ds.delete(drop_data=True)
+            
+        project_variables = dataiku.get_custom_variables()
+
+        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+
+        csv_dataset = proj.create_dataset(THREAD_DATASETS_NAME, type='Filesystem', params=params,
+                                            formatType='csv', formatParams=format_params)
+
+        # Set dataset to managed
+        ds_def = csv_dataset.get_definition()
+        ds_def['managed'] = True
+        csv_dataset.set_definition(ds_def)
+
+        ds2 = dataiku.Dataset(name)
+        df = pd.DataFrame()
+
+        ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+
+        return ds
+
     def init_proj_dataset(self):
         proj = self.client.get_default_project()
 
@@ -232,7 +264,7 @@ class dss_utils:
         csv_dataset.set_definition(ds_def)
 
         # Set schema
-        csv_dataset.set_schema({'columns': [{'name': 'name', 'definition':'string'}]})
+        # csv_dataset.set_schema({'columns': [{'name': 'name', 'definition':'string'}]})
 
         ds2 = dataiku.Dataset(THREAD_DS_NAME)
         df = pd.DataFrame()#columns=['name','definition'])
