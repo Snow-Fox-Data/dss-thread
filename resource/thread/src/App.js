@@ -78,6 +78,12 @@ class App extends Component {
     //     // })
     // }
 
+    loadItem = (key) => {
+        console.log('loadItem :: key == ' + key);
+
+
+    }
+
     search = (query) => {
         const requestOptions = {
             method: 'GET',
@@ -86,53 +92,52 @@ class App extends Component {
 
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
             .then(res => res.json())
-            .then(
-                (reponse) => {
-                    var p_list = [];
-                    Object.keys(reponse).forEach(function (results) {
-                        p_list[p_list.length] = reponse[results];
-                    });
-
-                    // var p_list = [
-                    //     {
-                    //         "type": "project",
-                    //         "name": "whatever",
-                    //         "short-description": "....",
-                    //         "lineage-upstream": [],
-                    //         "lineage-downstream": [],
-                    //         "datasets": [],
-                    //     }, {
-                    //         "type": "dataset",
-                    //         "name": "whatever",
-                    //         "short-description": "....",
-                    //         "lineage-upstream": [],
-                    //         "lineage-downstream": [],
-                    //         "columns": [],
-                    //     }, {
-                    //         "type": "column",
-                    //         "name": "whatever",
-                    //         "short-description": "....",
-                    //         "lineage-upstream": [],
-                    //         "lineage-downstream": [],
-                    //         "definition": "my-definition",
-                    //     }, {
-                    //         "type": "definition",
-                    //         "name": "whatever",
-                    //         "columns": ["project.dataset5.col1", "project2.dataset2.col3"],
-                    //         "tags": ["tag1", "tag2"],
-                    //         "description": "This is the thing that does the stuff",
-                    //         "sources": [],
-                    //         "destinations": ["some powerbi report"]
-                    //     }
-                    // ];
-
-                    this.setState({
-                        searchResults: p_list                        
-                        // isLoaded: true,
-                        // project_list: p_list,
-                        // full_tree: result
-                    });
+            .then((reponse) => {
+                var p_list = [];
+                Object.keys(reponse).forEach(function (results) {
+                    p_list[p_list.length] = reponse[results];
                 });
+
+                // var p_list = [
+                //     {
+                //         "type": "project",
+                //         "name": "whatever",
+                //         "short-description": "....",
+                //         "lineage-upstream": [],
+                //         "lineage-downstream": [],
+                //         "datasets": [],
+                //     }, {
+                //         "type": "dataset",
+                //         "name": "whatever",
+                //         "short-description": "....",
+                //         "lineage-upstream": [],
+                //         "lineage-downstream": [],
+                //         "columns": [],
+                //     }, {
+                //         "type": "column",
+                //         "name": "whatever",
+                //         "short-description": "....",
+                //         "lineage-upstream": [],
+                //         "lineage-downstream": [],
+                //         "definition": "my-definition",
+                //     }, {
+                //         "type": "definition",
+                //         "name": "whatever",
+                //         "columns": ["project.dataset5.col1", "project2.dataset2.col3"],
+                //         "tags": ["tag1", "tag2"],
+                //         "description": "This is the thing that does the stuff",
+                //         "sources": [],
+                //         "destinations": ["some powerbi report"]
+                //     }
+                // ];
+
+                this.setState({
+                    searchResults: p_list                        
+                    // isLoaded: true,
+                    // project_list: p_list,
+                    // full_tree: result
+                });
+            });
     }
 
     componentDidMount() {
@@ -191,6 +196,7 @@ class App extends Component {
                         isLoading={isLoading}
                         labelKey="name"
                         minLength={3}
+                        onChange={this.loadItem}
                         onSearch={this.search}
                         options={searchResults}
                         placeholder='Search for Dataset'
