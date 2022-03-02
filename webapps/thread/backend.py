@@ -106,8 +106,8 @@ def update_desc():
         recs = df.loc[df['id']==desc_id]
         print(len(recs))
 
-        df.loc[df['id']=={desc_id}, 'name'] = data['name']
-        df.loc[df['id']=={desc_id}, 'description'] = data['description']
+        df.loc[df['id']==desc_id, 'name'] = data['name']
+        df.loc[df['id']==desc_id, 'description'] = data['description']
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
      
