@@ -188,7 +188,7 @@ class dss_utils:
         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
         ds2 = dataiku.Dataset(THREAD_DATASETS_NAME)
-        df = pd.DataFrame(columns=['key','lineage_upstream', 'lineage_downstream', 'name', 'project'])
+        df = pd.DataFrame(columns=['key','lineage_downstream', 'lineage_upstream', 'name', 'project'])
 
         ds2.write_with_schema(df)
 
@@ -267,8 +267,8 @@ class dss_utils:
         ds_ds = self.get_datasets_ds()
         rec = ds_ds.get_dataframe().query(f'key=="{key}"')
 
-        lin_up = rec['lineage_upstream']
-        lin_down = rec['lineage_downstream']
+        lin_up = rec.iloc[0]['lineage_upstream']
+        lin_down = rec.iloc[0]['lineage_downstream']
 
         res = {
             "schema":ds.read_schema(),
@@ -348,7 +348,10 @@ class dss_utils:
                                 return []
 
                             nxt = self.traverse_lineage(l, all_projects, upstream, recur_ct)
-                            next_levels.append({'name':l, dir_full: nxt})
+                            next_levels.append({'name':l, dir: nxt})
+
+                            ds[dir + '_complete'] = True
+                            ds[dir_full] = nxt
                         except Exception as e:
                             capture_exception(e)
                 
