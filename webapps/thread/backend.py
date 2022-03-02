@@ -36,7 +36,7 @@ def scan():
     ds_ds = dss.init_thread_ds(THREAD_DS_NAME, 'thread_datasets.csv')
     index_ds = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
 
-    result = dss.scan_server(ds_ds)
+    result = dss.scan_server()
 
     return json.dumps({"result": "scan complete"})
 
@@ -168,9 +168,9 @@ class dss_utils:
         ds2 = dataiku.Dataset(name)
         df = pd.DataFrame()
 
-        ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+        ds2.write_dataframe(df) #, infer_schema=True, dropAndCreate=True)
 
-        return ds
+        return ds2
 
     # def init_proj_dataset(self):
     #     proj = self.client.get_default_project()
@@ -483,7 +483,7 @@ class dss_utils:
 
         return proj_dataset
 
-    def scan_server(self, proj_ds):
+    def scan_server(self):
 
         # root_folder = client.get_root_project_folder()
         # dss_folders = root_folder.list_child_folders()
@@ -540,7 +540,7 @@ class dss_utils:
         for p in scan_obj:
             datasets = scan_obj[p]['datasets']
             for ds in datasets:
-                    obj = { 'project': p, 'name': ds.name, 'key': self.get_full_dataset_name(ds.name, p)}
+                    obj = { "project": p, "name": ds.name, "key": self.get_full_dataset_name(ds.name, p)}
                     # if 'lineage_downstream' in ds:
                     #     obj['lineage_downstream'] = ''json.dumps(ds['lineage_downstream_full'])
                     # else:
