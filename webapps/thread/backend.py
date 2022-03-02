@@ -297,7 +297,7 @@ class dss_utils:
         nxt = []
 
         for obj in ds_lineage_obj:
-            ds = self.load_dataset(obj['name'])
+            ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
                     
                 if column['name'].lower() == col.lower():
