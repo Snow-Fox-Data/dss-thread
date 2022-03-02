@@ -85,10 +85,10 @@ def update_desc():
         df = desc_ds.get_dataframe()
     
     data = request.values
-    desc_id = data['id']
+    desc_id = int(data['id'])
 
 #    print(desc_id, exists)
-    if desc_id == -1 or desc_id == '-1':
+    if desc_id == -1:
         print('new desc')
         # new description
         desc = {
