@@ -261,8 +261,8 @@ class dss_utils:
         ds_ds = self.get_datasets_ds()
         rec = ds_ds.get_dataframe().query(f'key=="{key}"')
 
-        lin_up = rec.iloc[0]['lineage_upstream']
-        lin_down = rec.iloc[0]['lineage_downstream']
+        lin_up = json.loads(rec.iloc[0]['lineage_upstream'])
+        lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
         schema = ds.read_schema()
         for col in schema:
@@ -283,13 +283,11 @@ class dss_utils:
         print(res)
         return res
 
-    def get_col_lineage(self, col, ds_lineage, upstream=False):
+    def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
         dir = 'lineage-downstream'
         if upstream:
             dir = 'lineage-upstream'
 
-        # print(ds_lineage)
-        ds_lineage_obj = json.loads(ds_lineage)
         nxt = []
 
         for obj in ds_lineage_obj:
@@ -298,6 +296,7 @@ class dss_utils:
             for col in ds['schema']:
                 if col['name'] == col:
                     # direct column name match!
+                    print(col['name'], col, ds['name'])
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '.' + col, dir:lin})
