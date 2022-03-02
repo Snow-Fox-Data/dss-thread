@@ -288,9 +288,11 @@ class dss_utils:
         if upstream:
             dir = 'lineage-upstream'
 
-        print(ds_lineage)
+        # print(ds_lineage)
         nxt = []
-        for obj in ds_lineage:
+        for index in range(len(ds_lineage)):
+            obj = ds_lineage[index]
+
             ds = self.load_dataset(obj['name'])
             for col in ds['schema']:
                 if col['name'] == col:
