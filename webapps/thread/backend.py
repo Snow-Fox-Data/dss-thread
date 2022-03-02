@@ -284,7 +284,9 @@ class dss_utils:
             "lineage-downstream": lin_down
         }
 
-        # print(res)
+        if col_lineage:
+            print(res)
+
         return res
 
     def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
