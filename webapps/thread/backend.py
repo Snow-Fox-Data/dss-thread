@@ -283,7 +283,7 @@ class dss_utils:
         print(res)
         return res
 
-    def get_col_lineage(self, col, ds_lineage_obj, upstream=False, recur_ct=0):
+    def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
         dir = 'lineage-downstream'
         if upstream:
             dir = 'lineage-upstream'
@@ -297,14 +297,9 @@ class dss_utils:
                 if col['name'] == col:
                     # direct column name match!
                     print(col['name'], col, ds['name'])
-                    recur_ct = recur_ct + 1
+                    # lin = self.get_col_lineage(col, ds[dir], upstream)
 
-                    if recur_ct > 100:
-                        return
-
-                    lin = self.get_col_lineage(col, ds[dir], upstream, recur_ct)
-
-                    nxt.append({'name':obj['name'] + '.' + col, dir:lin})
+                    # nxt.append({'name':obj['name'] + '.' + col, dir:lin})
         
         return nxt
                     
