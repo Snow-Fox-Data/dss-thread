@@ -252,8 +252,8 @@ class dss_utils:
         datasets = ds.get_dataframe().query(f'project=="{key}"')
 
         p['datasets'] = []
-        for d in datasets:
-            p['datasets'].append(d)
+        for idx, row in datasets.iterrows():
+            p['datasets'].append(row['key'])
 
         return p
    
