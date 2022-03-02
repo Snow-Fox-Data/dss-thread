@@ -86,7 +86,9 @@ def update_desc():
     data = request.values
     desc_id = data['id']
 
+    print(desc_id, exists)
     if desc_id == -1:
+        print('new desc')
         # new description
         desc = {
             "id": random.randint(100000,100000000),
