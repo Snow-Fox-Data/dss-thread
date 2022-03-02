@@ -246,16 +246,16 @@ class dss_utils:
         return ds, False
 
     def load_project(self, key):
-        p = self.client.get_project(key)
+        p = self.client.get_project(key).get_summary()
 
         ds = dataiku.Dataset(THREAD_DATASETS_NAME)
         datasets = ds.get_dataframe().query(f'project=="{key}"')
 
         p['datasets'] = []
-        for d in datasets:
-            p['datasets'].append(d)
+        for idx, row in datasets.iterrows():
+            p['datasets'].append(row['key'])
 
-        return p.get_summary()
+        return p
    
     def load_dataset(self, key):
         p_name, d_name = self.extract_name_project(key)
