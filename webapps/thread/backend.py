@@ -133,9 +133,6 @@ def column_lineage():
 
 
 
-
-
-
 THREAD_DS_NAME = '--Thread-Descriptions--'
 THREAD_DATASETS_NAME = '--Thread-Datasets--'
 THREAD_INDEX_NAME = '--Thread-Index--'
@@ -267,8 +264,13 @@ class dss_utils:
         lin_up = rec.iloc[0]['lineage_upstream']
         lin_down = rec.iloc[0]['lineage_downstream']
 
+        schema = ds.read_schema()
+        for col in schema:
+            col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
+            col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
+
         res = {
-            "schema":ds.read_schema(),
+            "schema": schema,
             "name": ds.full_name,
             "key": key,
             "id": p_name,
@@ -280,6 +282,24 @@ class dss_utils:
 
         print(res)
         return res
+
+    def get_col_lineage(self, col, ds_lineage, upstream=False):
+        dir = 'lineage-downstream'
+        if upstream:
+            dir = 'lineage-upstream'
+
+        nxt = []
+        for obj in ds_lineage:
+            ds = self.load_dataset(obj['name'])
+            for col in ds['schema']:
+                if col['name'] == col:
+                    # direct column name match!
+                    lin = self.get_col_lineage(col, ds[dir], upstream)
+
+                    nxt.append({'name':obj['name'] + '.' + col, dir:lin})
+        
+        return nxt
+                    
 
     def get_stream(self, recipe, inputs_outputs, p_name):
         refs = []
@@ -410,30 +430,10 @@ class dss_utils:
                 if 'lineage_upstream' in ds:
                     result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
                     ds['lineage_upstream_full'] = result_up
-
-                    # ds['lineage_upstream'] = []
-
-                    # for result in result_up:
-                    #     r = result
-                    #     while len(r['lineage_upstream_full']) > 0:
-                    #         r = r[0]
-                    
-                    #     ds['lineage_upstream'].append(r[0]['name'])
-                        
+        
                 if 'lineage_downstream' in ds:
                     result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
                     ds['lineage_downstream_full'] = result_down
-
-                    # ds['lineage_downstream'] = []
-
-                    # for result in result_down:
-                    #     r = result
-                    #     while len(r['lineage_downstream_full']) > 0:
-                    #         r = r[0]
-                    
-                    #     ds['lineage_downstream'].append(r[0]['name'])
-
-        #         # print(result_up)
 
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
@@ -463,9 +463,7 @@ class dss_utils:
 
             # # print(proj)
             project = self.client.get_project(proj)
-            # # meta = project.get_metadata()
-            # # settings = project.get_settings().get_raw()
-
+            
             datasets = project.list_datasets()
             recipes = project.list_recipes()
             folders = project.list_managed_folders()
