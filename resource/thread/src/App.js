@@ -79,8 +79,8 @@ class App extends Component {
     // }
 
     loadItem = (key) => {
-        console.log('loadItem :: key == ' + key);
-
+        console.log('loadItem :: key == ');
+        console.log(key);
 
     }
 
