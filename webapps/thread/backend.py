@@ -297,7 +297,7 @@ class dss_utils:
             for column in ds['schema']:
                 print(column['name'], col, ds['name'])
                     
-                if column['name'] == col:
+                if column['name'].lower() == col.lower():
                     # direct column name match!
                     print('match:')
                     # lin = self.get_col_lineage(col, ds[dir], upstream)
