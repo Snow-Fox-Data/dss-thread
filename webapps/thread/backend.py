@@ -296,7 +296,7 @@ class dss_utils:
                     
                 if column['name'].lower() == col.lower():
                     # direct column name match!
-                    print(col, ds['dir'])
+                    print(col, ds[dir])
                     # lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '.' + col, dir:lin})
