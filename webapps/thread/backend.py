@@ -268,7 +268,7 @@ class dss_utils:
         for col in schema:
             up_lin = self.get_col_lineage(col['name'], lin_up, True)
             print(up_lin)
-            col['lineage_upstream'] = up_lin
+            col['lineage_upstream'] = json.dumps(up_lin)
             # col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
 
         res = {
