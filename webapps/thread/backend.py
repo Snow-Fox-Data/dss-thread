@@ -87,7 +87,7 @@ def update_desc():
     data = request.values
     desc_id = int(data['id'])
 
-    print(desc_id, exists)
+    # print(desc_id, exists)
     if desc_id == -1:
         print('new desc')
         # new description
@@ -103,12 +103,14 @@ def update_desc():
         else:
             df = pd.DataFrame.from_dict([desc])
     else:
+        recs = df.loc[df['id']=={desc_id}]
+        print(len(recs))
+
         df.loc[df['id']=={desc_id}, 'name'] = data['name']
         df.loc[df['id']=={desc_id}, 'description'] = data['description']
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
-
-        
+     
     return json.dumps({"success": True})
 
 
