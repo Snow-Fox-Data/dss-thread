@@ -188,7 +188,7 @@ class dss_utils:
         csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
         ds2 = dataiku.Dataset(THREAD_DATASETS_NAME)
-        df = pd.DataFrame(columns=['key','lineage_upstream', 'lineage_downstream', 'name', 'project'])
+        df = pd.DataFrame(columns=['key','lineage_downstream', 'lineage_upstream', 'name', 'project'])
 
         ds2.write_with_schema(df)
 
