@@ -78,7 +78,10 @@ def load_item():
 @app.route('/update-desc', methods=['POST'])
 def update_desc():
     desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
-    df = desc_ds.get_dataframe()
+    exists = len(desc_ds.read_schema(raise_if_empty=False)) > 0
+
+    if exists:
+        df = desc_ds.get_dataframe()
     
     data = json.loads(request.data)
     desc_id = data['id']
@@ -91,9 +94,14 @@ def update_desc():
             "description": data['description']
         }
 
-        df = df.append(desc, ignore_index=True)
-
+        if exists:
+            df = df.append(desc, ignore_index=True)
+        else:
+            df = pd.DataFrame.from_dict([desc])
+                
         desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+        
+            
 
     return json.dumps({"success": True})
 
