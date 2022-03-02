@@ -89,8 +89,8 @@ class App extends Component {
             .then(
                 (reponse) => {
                     var p_list = [];
-                    Object.keys(reponse.results).forEach(function (results) {
-                        p_list[p_list.length] = reponse.results[results];
+                    Object.keys(reponse).forEach(function (results) {
+                        p_list[p_list.length] = reponse[results];
                     });
 
                     // var p_list = [
