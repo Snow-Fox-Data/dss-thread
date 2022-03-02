@@ -95,7 +95,7 @@ def update_desc():
             "id": random.randint(100000,100000000),
             "name": data['name'],
             "description": data['description'],
-            "applied_to": []
+            "applied_to": data['applied_to']
         }
 
         if exists:
@@ -108,6 +108,7 @@ def update_desc():
 
         df.loc[df['id']==desc_id, 'name'] = data['name']
         df.loc[df['id']==desc_id, 'description'] = data['description']
+        df.loc[df['id']==desc_id, 'applied_to'] = data['applied_to']
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
      
