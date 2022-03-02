@@ -35,11 +35,17 @@ class DataikuItem extends Component {
 
     render() {
         return (
-            <>
-                <Row>
-                    <p>DISPLAY RESULTS OF LOAD ITEM HERE...</p>
-                </Row>
-            </>
+            <div style={{ paddingTop: '20px' }}>
+                 if (this.props.item != null) {
+                     <Row>
+                        <p>DISPLAY RESULTS OF LOAD ITEM HERE...</p>
+                    </Row>
+                 } else {
+                    <Row>
+                        <p>No Item to display...</p>
+                    </Row>
+                 }                
+            </div>
         );
     }
 }

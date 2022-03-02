@@ -208,7 +208,7 @@ class App extends Component {
         //     </main>
         // </Router>
         
-        const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults, selec } = this.state;
+        const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults, selectedItem } = this.state;
         const ref = React.createRef();
         const filterBy = () => true;
 
@@ -229,7 +229,7 @@ class App extends Component {
                     />                    
                 </Row>
 
-                <DataikuItem item="{selectedItem}"/>
+                <DataikuItem item={selectedItem} />
             </Container>
         );
     }
