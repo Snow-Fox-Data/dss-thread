@@ -266,7 +266,9 @@ class dss_utils:
 
         schema = ds.read_schema()
         for col in schema:
-            col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
+            up_lin = self.get_col_lineage(col['name'], lin_up, True)
+            print(up_lin)
+            col['lineage_upstream'] = up_lin
             # col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
 
         res = {
@@ -296,7 +298,7 @@ class dss_utils:
                     
                 if column['name'].lower() == col.lower():
                     # direct column name match!
-                    print(col, ds['name'], ds[dir])
+                    # print(col, ds['name'], ds[dir])
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '.' + col, dir:lin})#
