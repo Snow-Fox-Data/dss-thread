@@ -294,10 +294,10 @@ class dss_utils:
             # print('obj:')
             # print(obj)
             ds = self.load_dataset(obj['name'])
-            for col in ds['schema']:
-                print(col['name'], col, ds['name'])
+            for column in ds['schema']:
+                print(column['name'], col, ds['name'])
                     
-                if col['name'] == col:
+                if column['name'] == col:
                     # direct column name match!
                     print('match:')
                     # lin = self.get_col_lineage(col, ds[dir], upstream)
