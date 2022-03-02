@@ -172,107 +172,107 @@ class dss_utils:
 
         return ds
 
-    def init_proj_dataset(self):
-        proj = self.client.get_default_project()
+    # def init_proj_dataset(self):
+    #     proj = self.client.get_default_project()
 
-        ds_loc = 'thread_datasets.csv'
-        ds = proj.get_dataset(THREAD_DATASETS_NAME)
+    #     ds_loc = 'thread_datasets.csv'
+    #     ds = proj.get_dataset(THREAD_DATASETS_NAME)
 
-        exists = ds.exists()
-        if exists:
-            ds.delete(drop_data=True)
+    #     exists = ds.exists()
+    #     if exists:
+    #         ds.delete(drop_data=True)
             
-        project_variables = dataiku.get_custom_variables()
+    #     project_variables = dataiku.get_custom_variables()
 
-        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
-        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+    #     params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+    #     format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(THREAD_DATASETS_NAME, type='Filesystem', params=params,
-                                            formatType='csv', formatParams=format_params)
+    #     csv_dataset = proj.create_dataset(THREAD_DATASETS_NAME, type='Filesystem', params=params,
+    #                                         formatType='csv', formatParams=format_params)
 
-        # Set dataset to managed
-        ds_def = csv_dataset.get_definition()
-        ds_def['managed'] = True
-        csv_dataset.set_definition(ds_def)
+    #     # Set dataset to managed
+    #     ds_def = csv_dataset.get_definition()
+    #     ds_def['managed'] = True
+    #     csv_dataset.set_definition(ds_def)
 
-        # Set schema
-        # csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+    #     # Set schema
+    #     # csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
-        ds2 = dataiku.Dataset(THREAD_DATASETS_NAME)
-        df = pd.DataFrame()#columns=['key','lineage_downstream', 'lineage_upstream', 'name', 'project'])
+    #     ds2 = dataiku.Dataset(THREAD_DATASETS_NAME)
+    #     df = pd.DataFrame()#columns=['key','lineage_downstream', 'lineage_upstream', 'name', 'project'])
 
-        # ds2.write_with_schema(df)
-        ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+    #     # ds2.write_with_schema(df)
+    #     ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
-        return ds, False
+    #     return ds, False
     
-    def init_index_dataset(self):
-            proj = self.client.get_default_project()
+    # def init_index_dataset(self):
+    #         proj = self.client.get_default_project()
 
-            ds_loc = 'thread_index.csv'
-            ds = proj.get_dataset(THREAD_INDEX_NAME)
+    #         ds_loc = 'thread_index.csv'
+    #         ds = proj.get_dataset(THREAD_INDEX_NAME)
 
-            exists = ds.exists()
-            if exists:
-                ds.delete(drop_data=True)
+    #         exists = ds.exists()
+    #         if exists:
+    #             ds.delete(drop_data=True)
                 
-            project_variables = dataiku.get_custom_variables()
+    #         project_variables = dataiku.get_custom_variables()
 
-            params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
-            format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+    #         params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+    #         format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-            csv_dataset = proj.create_dataset(THREAD_INDEX_NAME, type='Filesystem', params=params,
-                                                formatType='csv', formatParams=format_params)
+    #         csv_dataset = proj.create_dataset(THREAD_INDEX_NAME, type='Filesystem', params=params,
+    #                                             formatType='csv', formatParams=format_params)
 
-            # Set dataset to managed
-            ds_def = csv_dataset.get_definition()
-            ds_def['managed'] = True
-            csv_dataset.set_definition(ds_def)
+    #         # Set dataset to managed
+    #         ds_def = csv_dataset.get_definition()
+    #         ds_def['managed'] = True
+    #         csv_dataset.set_definition(ds_def)
 
-            # Set schema
-            # csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
+    #         # Set schema
+    #         # csv_dataset.set_schema({'columns': [{'name': 'name', 'type':'string'}]})
 
-            ds2 = dataiku.Dataset(THREAD_INDEX_NAME)
-            df = pd.DataFrame()#(columns=['name','type'])
+    #         ds2 = dataiku.Dataset(THREAD_INDEX_NAME)
+    #         df = pd.DataFrame()#(columns=['name','type'])
 
-            # ds2.write_with_schema(df)
-            ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+    #         # ds2.write_with_schema(df)
+    #         ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
-            return ds, False
+    #         return ds, False
 
-    def init_definition_dataset(self):
-        proj = self.client.get_default_project()
+    # def init_definition_dataset(self):
+    #     proj = self.client.get_default_project()
 
-        ds_loc = 'thread_definition.csv'
-        ds = proj.get_dataset(THREAD_DS_NAME)
+    #     ds_loc = 'thread_definition.csv'
+    #     ds = proj.get_dataset(THREAD_DS_NAME)
 
-        exists = ds.exists()
-        if exists:
-            ds.delete(drop_data=True)
+    #     exists = ds.exists()
+    #     if exists:
+    #         ds.delete(drop_data=True)
             
-        project_variables = dataiku.get_custom_variables()
+    #     project_variables = dataiku.get_custom_variables()
 
-        params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
-        format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
+    #     params = {'connection': 'filesystem_folders', 'path': project_variables['projectKey']  + '/' + ds_loc}
+    #     format_params = {'separator': '\t', 'style': 'unix', 'compress': ''}
 
-        csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
-                                            formatType='csv', formatParams=format_params)
+    #     csv_dataset = proj.create_dataset(THREAD_DS_NAME, type='Filesystem', params=params,
+    #                                         formatType='csv', formatParams=format_params)
 
-        # Set dataset to managed
-        ds_def = csv_dataset.get_definition()
-        ds_def['managed'] = True
-        csv_dataset.set_definition(ds_def)
+    #     # Set dataset to managed
+    #     ds_def = csv_dataset.get_definition()
+    #     ds_def['managed'] = True
+    #     csv_dataset.set_definition(ds_def)
 
-        # Set schema
-        # csv_dataset.set_schema({'columns': [{'name': 'name', 'definition':'string'}]})
+    #     # Set schema
+    #     # csv_dataset.set_schema({'columns': [{'name': 'name', 'definition':'string'}]})
 
-        ds2 = dataiku.Dataset(THREAD_DS_NAME)
-        df = pd.DataFrame()#columns=['name','definition'])
+    #     ds2 = dataiku.Dataset(THREAD_DS_NAME)
+    #     df = pd.DataFrame()#columns=['name','definition'])
 
-        ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
-        # ds2.write_with_schema(df)
+    #     ds2.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+    #     # ds2.write_with_schema(df)
 
-        return ds, False
+    #     return ds, False
 
     def load_project(self, key):
         p = self.client.get_project(key).get_summary()
@@ -544,11 +544,11 @@ class dss_utils:
                     if 'lineage_downstream' in ds:
                         obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full'])
                     else:
-                        obj['lineage_downstream'] =[]
+                        obj['lineage_downstream'] = []
                     if 'lineage_upstream' in ds:
                         obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
                     else:
-                        obj['lineage_upstream'] =[]
+                        obj['lineage_upstream'] = []
                         
                     ds_list.append(obj)
 
@@ -557,6 +557,8 @@ class dss_utils:
         # dataset_dataset.write_with_schema(df)
 
         df = pd.DataFrame.from_dict(ds_list)
+        df = df.astype({"lineage_upstream": str})
+        df = df.astype({"lineage_downstream": str})
         # df.reset_index(inplace=True)
         
         proj_dataset = dataiku.Dataset(THREAD_DS_NAME)
