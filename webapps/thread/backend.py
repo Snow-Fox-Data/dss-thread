@@ -146,9 +146,9 @@ class dss_utils:
         ds_loc = 'thread_datasets.csv'
         ds = proj.get_dataset(THREAD_DATASETS_NAME)
 
-        # exists = ds.exists()
-        # if exists:
-        #     ds.delete(drop_data=True)
+        exists = ds.exists()
+        if exists:
+            ds.delete(drop_data=True)
             
         project_variables = dataiku.get_custom_variables()
 
@@ -180,9 +180,9 @@ class dss_utils:
             ds_loc = 'thread_index.csv'
             ds = proj.get_dataset(THREAD_INDEX_NAME)
 
-            # exists = ds.exists()
-            # if exists:
-            #     ds.delete(drop_data=True)
+            exists = ds.exists()
+            if exists:
+                ds.delete(drop_data=True)
                 
             project_variables = dataiku.get_custom_variables()
 
@@ -214,9 +214,9 @@ class dss_utils:
         ds_loc = 'thread_definition.csv'
         ds = proj.get_dataset(THREAD_DS_NAME)
 
-        # exists = ds.exists()
-        # if exists:
-        #     ds.delete(drop_data=True)
+        exists = ds.exists()
+        if exists:
+            ds.delete(drop_data=True)
             
         project_variables = dataiku.get_custom_variables()
 
