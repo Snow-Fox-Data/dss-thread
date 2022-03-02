@@ -20,6 +20,7 @@ import {
 } from "react-router-dom";
 
 import Common from "./common/common";
+import DataikuItem from "./components/dataikuItem";
 
 class App extends Component {
 
@@ -27,56 +28,13 @@ class App extends Component {
         super(props)
 
         this.state = {
-            rendered: false,
             dataiku: undefined,
-            isLoaded: false,
+            dataikuItem: null,
             isLoading: false,
-            project_list: [],
-            full_ds_name: '',
-            full_tree: {},
-            selectedDataset: null,
-            searchResults: []
-        };
-
-        this.project_list = []
+            selectedItem: null,
+            searchResults: [],
+        }
     }
-
-    // findDataset = (key) => {
-    //     var proj = key.split('.')[0];
-    //     var ds_name = key.split('.')[1];
-
-    //     // var p_ref = tree[proj];
-    //     console.log(ds_name);
-
-    //     var ds = this.state.full_tree[proj]['datasets'].find(element => element.name == ds_name);
-
-    //     this.setState({
-    //         selectedDataset: ds,
-    //         full_ds_name: ds_name
-    //     })
-
-    //     // fetch(window.getWebAppBackendUrl('dataset-details'), {
-    //     //     method: 'POST', body: JSON.stringify({
-    //     //         'dataset-name': ds_name,
-    //     //         'project': proj
-    //     //     })
-    //     // })
-    //     //     .then(res => res.json())
-    //     //     .then(
-    //     //         (result) => {
-    //     //             this.setState({
-    //     // selectedDataset: result.dataset,
-    //             //         full_ds_name: result.dataset_name
-    //             //     })
-    //             // });
-
-    //     // return p_ref.datasets.find(({ name }) => name === ds_name);
-
-    //     // this.setState({
-    //     //     selectedDataset: this.findDataset(full_tree, selected[0].id),
-    //     //     full_ds_name: selected[0].id
-    //     // })
-    // }
 
     loadItem = (item) => {
         console.log('loadItem :: item == ');
@@ -87,23 +45,15 @@ class App extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item.key, requestOptions)
+        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item[0].key, requestOptions)
             .then(res => res.json())
             .then((response) => {
                 console.log('response == ');
                 console.log(response);
-
-                // var p_list = [];
-                // Object.keys(reponse).forEach(function (results) {
-                //     p_list[p_list.length] = reponse[results];
-                // });
-
-                // this.setState({
-                //     searchResults: p_list                        
-                //     // isLoaded: true,
-                //     // project_list: p_list,
-                //     // full_tree: result
-                // });
+                
+                this.setState({
+                    selectedItem: response      
+                });
             });
     }
 
@@ -121,44 +71,8 @@ class App extends Component {
                     p_list[p_list.length] = response[results];
                 });
 
-                // var p_list = [
-                //     {
-                //         "type": "project",
-                //         "name": "whatever",
-                //         "short-description": "....",
-                //         "lineage-upstream": [],
-                //         "lineage-downstream": [],
-                //         "datasets": [],
-                //     }, {
-                //         "type": "dataset",
-                //         "name": "whatever",
-                //         "short-description": "....",
-                //         "lineage-upstream": [],
-                //         "lineage-downstream": [],
-                //         "columns": [],
-                //     }, {
-                //         "type": "column",
-                //         "name": "whatever",
-                //         "short-description": "....",
-                //         "lineage-upstream": [],
-                //         "lineage-downstream": [],
-                //         "definition": "my-definition",
-                //     }, {
-                //         "type": "definition",
-                //         "name": "whatever",
-                //         "columns": ["project.dataset5.col1", "project2.dataset2.col3"],
-                //         "tags": ["tag1", "tag2"],
-                //         "description": "This is the thing that does the stuff",
-                //         "sources": [],
-                //         "destinations": ["some powerbi report"]
-                //     }
-                // ];
-
                 this.setState({
                     searchResults: p_list                        
-                    // isLoaded: true,
-                    // project_list: p_list,
-                    // full_tree: result
                 });
             });
     }
@@ -206,9 +120,11 @@ class App extends Component {
         //     </main>
         // </Router>
         
-        const { isLoaded, isLoading, project_list, full_tree, showDetail, selectedDataset, full_ds_name, searchResults } = this.state;
-        const ref = React.createRef();
+        const { isLoading, searchResults, selectedItem } = this.state;
+        // const ref = React.createRef();
         const filterBy = () => true;
+
+        this.dataikuItem = <DataikuItem item={selectedItem} />;
 
         return (
             <Container style={{ paddingTop: '20px' }}>
@@ -222,10 +138,12 @@ class App extends Component {
                         onChange={this.loadItem}
                         onSearch={this.search}
                         options={searchResults}
-                        placeholder='Search for Dataset'
+                        placeholder='Search for Datase'                        
                         renderMenuItemChildren={this.renderMenuItemChildren}
                     />                    
                 </Row>
+
+                {this.dataikuItem}
             </Container>
         );
     }
