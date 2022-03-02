@@ -14,7 +14,18 @@ class DataikuItem extends Component {
     // id: "ADVANCED_CREDITCARDFRAUDAMOSNJUGUN"
     // key: "ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.trans_by_groupID"
     // lineage-downstream: "[]"
-    // lineage-upstream: "[{'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_joined_joined', 'lineage_upstream': [{'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.merchant_info', 'lineage_upstream': []}, {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.cardholder_info', 'lineage_upstream': []}, {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2018_prepared_stacked', 'lineage_upstream': [{'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2018_prepared', 'lineage_upstream': [{'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2018', 'lineage_upstream': []}]}, {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2017', 'lineage_upstream': []}]}]}]"
+    // lineage-upstream: "[{
+    //     'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_joined_joined', 'lineage_upstream': [
+    //         {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.merchant_info', 'lineage_upstream': []}, 
+    //         {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.cardholder_info', 'lineage_upstream': []}, 
+    //         {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2018_prepared_stacked', 'lineage_upstream': [
+    //             {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2018_prepared', 'lineage_upstream': [
+    //                 {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2018', 'lineage_upstream': []}
+    //             ]}, 
+    //             {'name': 'ADVANCED_CREDITCARDFRAUDAMOSNJUGUN.transactions_2017', 'lineage_upstream': []}
+    //         ]}
+    //     ]}
+    // ]"
     // meta:
     //     checklists:
     //         checklists: []
@@ -37,7 +48,8 @@ class DataikuItem extends Component {
         let item;
         if (this.props.item != null) {
             item = <Row>
-                <p>DISPLAY RESULTS OF LOAD ITEM HERE...</p>
+                <p><b>Name: </b>{this.props.item.name}</p>
+                <p><b>Project: </b>{this.props.item.project}</p>                  
             </Row>
         } else {
             item = <Row>
