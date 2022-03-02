@@ -348,7 +348,10 @@ class dss_utils:
                                 return []
 
                             nxt = self.traverse_lineage(l, all_projects, upstream, recur_ct)
-                            next_levels.append({'name':l, dir_full: nxt})
+                            next_levels.append({'name':l, dir: nxt})
+
+                            ds[dir + '_complete'] = True
+                            ds[dir_full] = nxt
                         except Exception as e:
                             capture_exception(e)
                 
