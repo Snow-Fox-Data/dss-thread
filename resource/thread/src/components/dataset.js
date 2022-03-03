@@ -51,9 +51,15 @@ class Dataset extends Component {
 
     update = (st, base_elem) => {
 
+        console.log('dataset :: update() :: ');
+        console.log("st == ");
+        console.log(st);
+        console.log("base_elem == ");
+        console.log(base_elem);
+
         var elements = [{
             id: '-1',
-            // type: 'customFlowNode',
+            type: 'customFlowNode',
             data: { label: base_elem.name },
             position: { x: 250, y: 140 },
             style: { width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },

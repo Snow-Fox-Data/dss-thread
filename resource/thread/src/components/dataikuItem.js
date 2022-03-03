@@ -175,9 +175,6 @@ class DataikuItem extends Component {
     }
 
     render() {
-        console.log('render() :: this.props == ');
-        console.log(this.props);
-
         let item;
         let itemDetails = this.renderItemDetailsByType();
         if (this.props.item != null) {
