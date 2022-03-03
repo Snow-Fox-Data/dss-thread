@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { useTable } from 'react-table';
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 
@@ -107,7 +106,7 @@ class DataikuItem extends Component {
             tags[tags.length] = <span>{element}</span>;
         });
 
-        let schemaTable = this.buildSchemaTable();
+        // let schemaTable = this.buildSchemaTable();
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
@@ -115,7 +114,7 @@ class DataikuItem extends Component {
             
             <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
-                {schemaTable}
+                {/* {schemaTable} */}
             </div>    
 
             <div class="tags">{tags}</div>  
