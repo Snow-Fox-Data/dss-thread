@@ -37,7 +37,9 @@ class DataikuItem extends Component {
 
         let tags;
         this.props.item.meta.tags.forEach(element => {
-            tags[tags.length] = <span>{element}</span>;
+            console.log('element == ');
+            console.log(element);
+            // tags[tags.length] = <span>{element}</span>;
         });
         
         return <Col>
