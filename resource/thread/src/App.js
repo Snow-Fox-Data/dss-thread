@@ -106,7 +106,7 @@ class App extends Component {
 
     renderMenuItemChildren(option, props) {
         return <Fragment>
-            {Common.getIconForObjectType(option.type)}
+            {Common.getIconForDataikuItemType(option.type)}
             <span style={{ marginLeft: '.5rem', marginRight: '.5rem' }}>Type: {option.type}; </span>
             <span>Name: {option.name}; </span>                                
         </Fragment>;

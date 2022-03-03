@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import Common from "../common/common";
 
 class DataikuItem extends Component {
 
@@ -20,8 +21,13 @@ class DataikuItem extends Component {
         let item;
         if (this.props.item != null) {
             item = <Row>
-                <p><b>Name: </b>{this.props.item.name}</p>
-                <p><b>Project: </b>{this.props.item.project}</p>                  
+                <Col xs={1}>
+                    {Common.getIconForDataikuItemType(this.props.type)}
+                </Col>
+                <Col>
+                    <p><b>Name: </b>{this.props.item.name}</p>
+                    <p><b>Project: </b>{this.props.item.project}</p>
+                </Col>                              
             </Row>
         } else {
             item = <Row>

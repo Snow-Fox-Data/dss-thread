@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
-function getIconForObjectType(type) {
+function getIconForDataikuItemType(type) {
     // console.log();
     switch(type) {
         case "project":
@@ -18,7 +18,7 @@ function getIconForObjectType(type) {
 }
 
 const Common = {
-    getIconForObjectType
+    getIconForDataikuItemType
 };
 
 export default Common;
