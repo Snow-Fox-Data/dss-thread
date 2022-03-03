@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 import Dataset from "./dataset";
+import Table from 'react-bootstrap/Table';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 
 class DataikuItem extends Component {
 
@@ -9,7 +12,7 @@ class DataikuItem extends Component {
         super(props);
 
         this.state = {
-            
+
         };
     }
 
@@ -24,7 +27,7 @@ class DataikuItem extends Component {
 
     buildTagsString(arrayTags) {
         let tags = [<span><b>Tags: </b></span>];
-    
+
         arrayTags.forEach(element => {
             tags[tags.length] = <span>{element}</span>;
         });
@@ -37,7 +40,7 @@ class DataikuItem extends Component {
     //         () => this.props.item.schema,
     //         []
     //       )
-        
+
     //       const columns = React.useMemo(
     //         () => [
     //             {  
@@ -50,7 +53,7 @@ class DataikuItem extends Component {
     //         ],
     //         []
     //       )
-        
+
     //       const {
     //         getTableProps,
     //         getTableBodyProps,
@@ -58,7 +61,7 @@ class DataikuItem extends Component {
     //         rows,
     //         prepareRow,
     //       } = useTable({ columns, data })
-        
+
     //       return (
     //         <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
     //           <thead>
@@ -108,7 +111,7 @@ class DataikuItem extends Component {
     // }
 
     renderItemDetailsByType() {
-        switch(this.props.type) {
+        switch (this.props.type) {
             case 'dataset':
                 return this.renderDataset();
             case 'project':
@@ -125,19 +128,19 @@ class DataikuItem extends Component {
 
         // let schemaTable = this.buildSchemaTable();
         let lineage = this.buildLineage();
-        
+
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
             <p class="project"><b>Project: </b>{this.props.item.project}</p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
-            
+
             {/* <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
                 {schemaTable}
             </div>     */}
 
-            <div class="tags">{tags}</div>  
-            <div class="lineage">{lineage}</div>  
+            <div class="tags">{tags}</div>
+            <div class="lineage">{lineage}</div>
 
         </Col>;
     }
@@ -150,15 +153,21 @@ class DataikuItem extends Component {
         //     Header: 'Type',  
         //     accessor: 'type'  
         // }] 
+        // onClick={() => this.openColumn(col)}
 
         let tags = this.buildTagsString(this.props.item.tags);
-        
+        let dataSetRows = this.props.item.datasets.map((col) =>
+            <tr>
+                <td>{col}</td>
+            </tr>
+        );
+
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
-            
+
             {/* <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
                 <ReactTable  
@@ -169,8 +178,21 @@ class DataikuItem extends Component {
                 />  
             </div>     */}
 
-            <div class="tags">{tags}</div>  
-            <div>{this.props.item.datasets}</div>
+            <div class="tags">{tags}</div>
+            <div>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {dataSetRows}
+                    </tbody>
+                </Table>
+            </div>
         </Col>;
     }
 
@@ -185,13 +207,13 @@ class DataikuItem extends Component {
                 <Col xs={1}>
                     {Common.getIconForDataikuItemType(this.props.type, "100%")}
                 </Col>
-                {itemDetails}                                          
+                {itemDetails}
             </Row>
         } else {
             item = <Row>
                 <p>No Item to display...</p>
             </Row>
-        }        
+        }
 
         return (
             <div class="dataiku-item" style={{ paddingTop: '20px' }}>
