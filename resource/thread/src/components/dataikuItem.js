@@ -12,17 +12,14 @@ class DataikuItem extends Component {
         };
     }
 
-    renderItemDetailsByType() {
-        switch(this.props.type) {
-            case 'dataset':
-                return this.renderDataset();
-            case 'project':
-                return this.renderProject();
-            case 'dataset':
-                return <Col>
-                    <p>No rendering has been setup for this item.</p>
-                </Col>;
-        }
+    buildTagsString(arrayTags) {
+        let tags = [<span><b>Tags: </b></span>];
+    
+        arrayTags.forEach(element => {
+            tags[tags.length] = <span>{element}</span>;
+        });
+
+        return tags;
     }
 
     // buildSchemaTable() { 
@@ -100,18 +97,28 @@ class DataikuItem extends Component {
     //       )
     // }
 
-    renderDataset() {
-        let tags = [<span><b>Tags: </b></span>];
+    renderItemDetailsByType() {
+        switch(this.props.type) {
+            case 'dataset':
+                return this.renderDataset();
+            case 'project':
+                return this.renderProject();
+            case 'dataset':
+                return <Col>
+                    <p>No rendering has been setup for this item.</p>
+                </Col>;
+        }
+    }
 
-        this.props.item.meta.tags.forEach(element => {
-            tags[tags.length] = <span>{element}</span>;
-        });
+    renderDataset() {
+        let tags = this.buildTagsString(this.props.item.meta.tags);
 
         // let schemaTable = this.buildSchemaTable();
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
             <p class="project"><b>Project: </b>{this.props.item.project}</p>
+            <p class="name"><b>Type: </b>{this.props.type}</p>
             
             {/* <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
@@ -131,14 +138,13 @@ class DataikuItem extends Component {
         //     accessor: 'type'  
         // }] 
 
-        // let tags;
-        // this.props.meta.tags.forEach(element => {
-        //     tags[tags.length] = <span>{element}</span>;
-        // });
+        let tags = this.buildTagsString(this.props.item.meta.tags);
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
-            <p class="project"><b>Project: </b>{this.props.item.project}</p>
+            <p class="name"><b>Type: </b>{this.props.type}</p>
+
+            {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
             
             {/* <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
@@ -150,7 +156,7 @@ class DataikuItem extends Component {
                 />  
             </div>     */}
 
-            {/* <div class="tags">{tags}</div>   */}
+            <div class="tags">{tags}</div>  
         </Col>;
     }
 
@@ -161,7 +167,6 @@ class DataikuItem extends Component {
         let item;
         let itemDetails = this.renderItemDetailsByType();
         if (this.props.item != null) {
-            // MOVE RENDER ITEMS HERE AND PUT ROW AS MAIN TAG FOR BUILDING IT.
             item = <Row>
                 <Col xs={1}>
                     {Common.getIconForDataikuItemType(this.props.type, "100%")}
