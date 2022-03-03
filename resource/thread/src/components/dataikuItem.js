@@ -17,7 +17,7 @@ class DataikuItem extends Component {
             case 'dataset':
                 return this.renderDataset();
             case 'project':
-                return this.renderDataset();
+                return this.renderProject();
             case 'dataset':
                 return <Col>
                     <p>No rendering has been setup for this item.</p>
@@ -102,6 +102,7 @@ class DataikuItem extends Component {
 
     renderDataset() {
         let tags = [<span><b>Tags: </b></span>];
+
         this.props.item.meta.tags.forEach(element => {
             tags[tags.length] = <span>{element}</span>;
         });
