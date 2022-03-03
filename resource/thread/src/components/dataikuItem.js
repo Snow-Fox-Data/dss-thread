@@ -35,12 +35,12 @@ class DataikuItem extends Component {
             accessor: 'type'  
         }] 
 
-        let tags;
-        this.props.item.meta.tags.forEach(element => {
-            console.log('element == ');
-            console.log(element);
-            // tags[tags.length] = <span>{element}</span>;
-        });
+        // let tags;
+        // this.props.item.meta.tags.forEach(element => {
+        //     console.log('element == ');
+        //     console.log(element);
+        //     // tags[tags.length] = <span>{element}</span>;
+        // });
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
@@ -56,7 +56,7 @@ class DataikuItem extends Component {
                 />  
             </div>    
 
-            <div class="tags">{tags}</div>  
+            {/* <div class="tags">{tags}</div>   */}
         </Col>;
     }
 
