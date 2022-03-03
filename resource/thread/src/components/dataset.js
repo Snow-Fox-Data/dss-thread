@@ -222,12 +222,19 @@ class Dataset extends Component {
     saveCol() {
         // alert(this.state.selectedCol.comment)
 
-        for (var x = 0; x < this.props.deets.schema.columns.length; x++) {
-            if (this.props.deets.schema.columns[x].name == this.state.selectedCol.name) {
-                this.props.deets.schema.columns[x].comment = this.state.selectedCol.comment;
+        for (var x = 0; x < this.props.deets.schema.length; x++) {
+            if (this.props.deets.schema[x].name == this.state.selectedCol.name) {
+                this.props.deets.schema[x].comment = this.state.selectedCol.comment;
                 break;
             }
         }
+
+        // for (var x = 0; x < this.props.deets.schema.columns.length; x++) {
+        //     if (this.props.deets.schema.columns[x].name == this.state.selectedCol.name) {
+        //         this.props.deets.schema.columns[x].comment = this.state.selectedCol.comment;
+        //         break;
+        //     }
+        // }
 
         this.modalClosed();
 
@@ -271,13 +278,21 @@ class Dataset extends Component {
         }
         // }, 500);
 
-        var listItems = this.props.deets.schema.columns.map((col) =>
+        var listItems = this.props.deets.schema.map((col) =>
             <tr onClick={() => this.openColumn(col)}>
                 <td>{col.name}</td>
                 <td>{col.type}</td>
                 <td>{col.comment}</td>
             </tr>
         );
+
+        // var listItems = this.props.deets.schema.columns.map((col) =>
+        //     <tr onClick={() => this.openColumn(col)}>
+        //         <td>{col.name}</td>
+        //         <td>{col.type}</td>
+        //         <td>{col.comment}</td>
+        //     </tr>
+        // );
 
         return (
             <>
@@ -323,10 +338,10 @@ class Dataset extends Component {
                 </Modal>
 
                 <Container style={{ paddingTop: '20px' }}>
-                    <Row><h2><a href={this.createDsLink(this.props.deets)} target="_blank">{this.props.deets.name} ({this.props.deets.projectKey})</a></h2></Row>
-                    <Row><h4><b>Type:</b> {this.props.deets.type}</h4></Row>
-                    <Row><h4><b>Last Modified:</b> {this.props.deets.versionTag.lastModifiedBy.login} @ {this.props.deets.versionTag.lastModifiedOn}</h4></Row>
-                    <Row><h4><b>Short Desc:</b> {this.props.deets.shortDesc}</h4></Row>
+                    {/* <Row><h2><a href={this.createDsLink(this.props.deets)} target="_blank">{this.props.deets.name} ({this.props.deets.projectKey})</a></h2></Row> */}                    
+                    {/* <Row><h4><b>Type:</b> {this.props.deets.type}</h4></Row> */}
+                    {/* <Row><h4><b>Last Modified:</b> {this.props.deets.versionTag.lastModifiedBy.login} @ {this.props.deets.versionTag.lastModifiedOn}</h4></Row> */}
+                    {/* <Row><h4><b>Short Desc:</b> {this.props.deets.shortDesc}</h4></Row> */}
                     <Row>
                         <Toast show={this.state.showA} delay={3000} autohide animation={false}>
                             <Toast.Header>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
+import Dataset from "./dataset";
 
 class DataikuItem extends Component {
 
@@ -10,6 +11,15 @@ class DataikuItem extends Component {
         this.state = {
             
         };
+    }
+
+    buildLineage() {
+        // UPSTREAM TO THE LEFT
+        // DOWNSTREAM TO THE RIGHT
+
+        return <Row>
+            <Dataset deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.type}></Dataset>
+        </Row>
     }
 
     buildTagsString(arrayTags) {
@@ -114,6 +124,7 @@ class DataikuItem extends Component {
         let tags = this.buildTagsString(this.props.item.meta.tags);
 
         // let schemaTable = this.buildSchemaTable();
+        let lineage = this.buildLineage();
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
@@ -126,6 +137,8 @@ class DataikuItem extends Component {
             </div>     */}
 
             <div class="tags">{tags}</div>  
+            <div class="lineage">{lineage}</div>  
+
         </Col>;
     }
 
