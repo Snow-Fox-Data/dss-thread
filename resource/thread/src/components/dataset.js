@@ -60,7 +60,7 @@ class Dataset extends Component {
         var elements = [{
             id: '-1',
             type: 'customFlowNode',
-            data: { label: base_elem.key },
+            data: { label: base_elem.name },
             position: { x: 250, y: 140 },
             style: { width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
             sourcePosition: 'right',
@@ -98,6 +98,11 @@ class Dataset extends Component {
                 dataset = splits[1];
             if (splits.length > 2)
                 col = splits[2];
+
+            console.log("project == ");
+            console.log(project);
+            console.log("dataset == ");
+            console.log(dataset);
 
             elements[elements.length] = {
                 id: 'down_' + x,
