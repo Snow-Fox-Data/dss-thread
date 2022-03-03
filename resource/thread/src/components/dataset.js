@@ -57,10 +57,12 @@ class Dataset extends Component {
         console.log("base_elem == ");
         console.log(base_elem);
 
+        var base_splits = base_elem.name.split('.');
+
         var elements = [{
             id: '-1',
             type: 'customFlowNode',
-            data: { project: base_elem.project, dataset: base_elem.name, },
+            data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: 250, y: 140 },
             style: { width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
             sourcePosition: 'right',
