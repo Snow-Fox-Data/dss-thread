@@ -138,7 +138,7 @@ class DataikuItem extends Component {
         //     accessor: 'type'  
         // }] 
 
-        let tags = this.buildTagsString(this.props.item.meta.tags);
+        let tags = this.buildTagsString(this.props.item.tags);
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
