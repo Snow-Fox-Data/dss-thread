@@ -97,7 +97,9 @@ def update_desc():
             "id": random.randint(100000,100000000),
             "name": data['name'],
             "description": data['description'],
-            "applied_to": applied_to
+            "applied_to": applied_to,
+            "sources": [],
+            "destinations":[]
         }
 
         if exists:
