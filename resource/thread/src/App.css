@@ -40,3 +40,15 @@
 .modal-dialog{
   left:0px;
 }
+
+.dataiku-item { 
+  padding-top: 2.0em;
+}
+
+.dataiku-item p {
+  font-size: 1.5em;
+}
+
+.dataiku-item .tags span {
+  margin-right: 1.0em;
+}
