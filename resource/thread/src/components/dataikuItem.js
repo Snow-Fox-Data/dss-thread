@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactTable from "react-table";  
+// import ReactTable from "react-table";  
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 
@@ -35,18 +35,18 @@ class DataikuItem extends Component {
             accessor: 'type'  
         }] 
 
-        // let tags;
-        // this.props.item.meta.tags.forEach(element => {
-        //     console.log('element == ');
-        //     console.log(element);
-        //     // tags[tags.length] = <span>{element}</span>;
-        // });
+        let tags;
+        this.props.item.meta.tags.forEach(element => {
+            console.log('element == ');
+            console.log(element);
+            tags[tags.length] = <span>{element}</span>;
+        });
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
             <p class="project"><b>Project: </b>{this.props.item.project}</p>
             
-            <div class="schema-content">  
+            {/* <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
                 <ReactTable  
                     data={this.props.item.schema}  
@@ -54,9 +54,9 @@ class DataikuItem extends Component {
                     defaultPageSize = {2}  
                     pageSizeOptions = {[2,4, 6]}  
                 />  
-            </div>    
+            </div>     */}
 
-            {/* <div class="tags">{tags}</div>   */}
+            <div class="tags">{tags}</div>  
         </Col>;
     }
 
