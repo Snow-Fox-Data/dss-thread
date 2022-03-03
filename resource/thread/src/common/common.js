@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
-function getIconForDataikuItemType(type) {
+function getIconForDataikuItemType(type, size = "2x") {
+    // Sizes work 1x - 10x
     // console.log();
     switch(type) {
         case "project":
-            return <FaProjectDiagram />;
+            return <FaProjectDiagram size={size} />;
         case "dataset":
-            return <FaDatabase />;
+            return <FaDatabase size={size} />;
         case "column":
-            return <FaColumns />;
+            return <FaColumns size={size} />;
         case "definition":
-            return <FaList />;
+            return <FaList size={size} />;
         default: 
-            return <FaQuestionCircle />;
+            return <FaQuestionCircle size={size} />;
     }   
 }
 

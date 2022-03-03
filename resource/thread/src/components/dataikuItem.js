@@ -22,7 +22,7 @@ class DataikuItem extends Component {
         if (this.props.item != null) {
             item = <Row>
                 <Col xs={1}>
-                    {Common.getIconForDataikuItemType(this.props.type)}
+                    {Common.getIconForDataikuItemType(this.props.type, "5x")}
                 </Col>
                 <Col>
                     <p><b>Name: </b>{this.props.item.name}</p>
