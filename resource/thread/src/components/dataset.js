@@ -70,19 +70,19 @@ class Dataset extends Component {
 
         // find all the end-nodes
         var down_res = [];
-        if (base_elem.lineage_downstream != null && base_elem.lineage_downstream != '') {
-            if (base_elem.lineage_downstream_full != null)
-                this.traverse(down_res, base_elem, 'lineage_downstream_full');
+        if (base_elem['lineage-downstream'] != null && base_elem['lineage-downstream'] != '') {
+            if (base_elem['lineage-downstream'] != null)
+                this.traverse(down_res, base_elem, 'lineage-downstream');
             else
-                down_res = eval(base_elem.lineage_downstream);
+                down_res = eval(base_elem['lineage-downstream']);
         }
 
         var up_res = [];
-        if (base_elem.lineage_upstream != null && base_elem.lineage_upstream != '') {
-            if (base_elem.lineage_upstream_full != null)
-                this.traverse(up_res, base_elem, 'lineage_upstream_full');
+        if (base_elem['lineage-upstream'] != null && base_elem['lineage-upstream'] != '') {
+            if (base_elem['lineage-upstream'] != null)
+                this.traverse(up_res, base_elem, 'lineage-upstream');
             else
-                up_res = eval(base_elem.lineage_upstream);
+                up_res = eval(base_elem['lineage-upstream']);
         }
 
         for (var x = 0; x < down_res.length; x++) {
