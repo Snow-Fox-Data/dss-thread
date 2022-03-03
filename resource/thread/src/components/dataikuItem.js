@@ -170,6 +170,7 @@ class DataikuItem extends Component {
             </div>     */}
 
             <div class="tags">{tags}</div>  
+            <div>{this.props.item.datasets}</div>
         </Col>;
     }
 
