@@ -181,12 +181,15 @@ class dss_utils:
         lin_up = json.loads(rec.iloc[0]['lineage_upstream'])
         lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
-        schema = ds.read_schema()
+        try:
+            schema = ds.read_schema()
 
-        if col_lineage:
-            for col in schema:
-                col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
-                col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
+            if col_lineage:
+                for col in schema:
+                    col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
+                    col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
+        except:
+            print(f'no schema for {key}')
 
         res = {
             "schema": schema,
