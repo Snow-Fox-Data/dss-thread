@@ -36,7 +36,7 @@ class DataikuItem extends Component {
         }] 
 
         let tags;
-        this.props.meta.tags.forEach(element => {
+        this.props.item.meta.tags.forEach(element => {
             tags[tags.length] = <span>{element}</span>;
         });
         
@@ -47,7 +47,7 @@ class DataikuItem extends Component {
             <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
                 <ReactTable  
-                    data={this.props.schema}  
+                    data={this.props.item.schema}  
                     columns={columns}  
                     defaultPageSize = {2}  
                     pageSizeOptions = {[2,4, 6]}  
@@ -97,6 +97,7 @@ class DataikuItem extends Component {
         let item;
         let itemDetails = this.renderItemDetailsByType();
         if (this.props.item != null) {
+            // MOVE RENDER ITEMS HERE AND PUT ROW AS MAIN TAG FOR BUILDING IT.
             item = <Row>
                 <Col xs={1}>
                     {Common.getIconForDataikuItemType(this.props.type, "100%")}
