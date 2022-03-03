@@ -60,7 +60,7 @@ class Dataset extends Component {
         var elements = [{
             id: '-1',
             type: 'customFlowNode',
-            data: { label: base_elem.name },
+            data: { project: base_elem.project, dataset: base_elem.name, },
             position: { x: 250, y: 140 },
             style: { width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
             sourcePosition: 'right',
