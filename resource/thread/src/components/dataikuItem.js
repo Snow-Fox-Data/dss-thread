@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ReactTable } from "react-table";  
+import { useTable } from 'react-table';
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 
@@ -26,19 +26,88 @@ class DataikuItem extends Component {
         }
     }
 
-    renderDataset() {
-        const columns = [{  
-            Header: 'Name',  
-            accessor: 'name'  
-        },{  
-            Header: 'Type',  
-            accessor: 'type'  
-        }] 
+    buildSchemaTable() { 
+        const data = React.useMemo(
+            () => this.props.item.schema,
+            []
+          )
+        
+          const columns = React.useMemo(
+            () => [
+                {  
+                    Header: 'Name',  
+                    accessor: 'name'  
+                },{  
+                    Header: 'Type',  
+                    accessor: 'type'  
+                }
+            ],
+            []
+          )
+        
+          const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow,
+          } = useTable({ columns, data })
+        
+          return (
+            <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+              <thead>
+                {headerGroups.map(headerGroup => (
+                  <tr {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map(column => (
+                      <th
+                        {...column.getHeaderProps()}
+                        style={{
+                          borderBottom: 'solid 3px red',
+                          background: 'aliceblue',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        {column.render('Header')}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody {...getTableBodyProps()}>
+                {rows.map(row => {
+                  prepareRow(row)
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map(cell => {
+                        return (
+                          <td
+                            {...cell.getCellProps()}
+                            style={{
+                              padding: '10px',
+                              border: 'solid 1px gray',
+                              background: 'papayawhip',
+                            }}
+                          >
+                            {cell.render('Cell')}
+                          </td>
+                        )
+                      })}
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          )
+    }
 
+    renderDataset() {
         let tags = [<span><b>Tags: </b></span>];
         this.props.item.meta.tags.forEach(element => {
             tags[tags.length] = <span>{element}</span>;
         });
+
+        let schemaTable = this.buildSchemaTable();
         
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
@@ -46,12 +115,7 @@ class DataikuItem extends Component {
             
             <div class="schema-content">  
                 <p class="schema"><b>Project: </b></p>
-                <ReactTable  
-                    data={this.props.item.schema}  
-                    columns={columns}  
-                    defaultPageSize = {2}  
-                    pageSizeOptions = {[2,4, 6]}  
-                />  
+                {schemaTable}
             </div>    
 
             <div class="tags">{tags}</div>  
