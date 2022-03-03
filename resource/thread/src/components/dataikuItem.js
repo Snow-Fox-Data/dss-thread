@@ -180,12 +180,11 @@ class DataikuItem extends Component {
 
             <div class="tags">{tags}</div>
             <div>
+                <h4>Datasets</h4>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
