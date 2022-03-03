@@ -50,13 +50,6 @@ class Dataset extends Component {
     }
 
     update = (st, base_elem) => {
-
-        console.log('dataset :: update() :: ');
-        console.log("st == ");
-        console.log(st);
-        console.log("base_elem == ");
-        console.log(base_elem);
-
         var base_splits = base_elem.name.split('.');
 
         var elements = [{
@@ -100,11 +93,6 @@ class Dataset extends Component {
                 dataset = splits[1];
             if (splits.length > 2)
                 col = splits[2];
-
-            console.log("project == ");
-            console.log(project);
-            console.log("dataset == ");
-            console.log(dataset);
 
             elements[elements.length] = {
                 id: 'down_' + x,
@@ -373,7 +361,7 @@ class Dataset extends Component {
                         <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
                             <Tab eventKey="lineage" title="Lineage">
                                 <Row>
-                                    <div style={{ height: 300 }}>
+                                    <div style={{ backgroundColor: '#EEE', height: 500 }}>
                                         {this.state.elements && <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes}>
                                             <Controls showInteractive="false" />
                                         </ReactFlow>}
