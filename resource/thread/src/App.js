@@ -32,6 +32,7 @@ class App extends Component {
             dataikuItem: null,
             isLoading: false,
             selectedItem: null,
+            selectedItemType: null,
             searchResults: [],
         }
     }
@@ -53,14 +54,16 @@ class App extends Component {
                     console.log(response);
                     
                     this.setState({
-                        selectedItem: response      
+                        selectedItem: response,
+                        selectedItemType: item[0].type    
                     });
                 });
-        } else {
-            this.setState({
-                selectedItem: null      
-            });
-        }
+        } 
+        // else {
+        //     this.setState({
+        //         selectedItem: null      
+        //     });
+        // }
     }
 
     search = (query) => {
@@ -78,7 +81,7 @@ class App extends Component {
                 });
 
                 this.setState({
-                    searchResults: p_list                        
+                    searchResults: p_list                                        
                 });
             });
     }
@@ -126,11 +129,11 @@ class App extends Component {
         //     </main>
         // </Router>
         
-        const { isLoading, searchResults, selectedItem } = this.state;
+        const { isLoading, searchResults, selectedItem, selectedItemType } = this.state;
         // const ref = React.createRef();
         const filterBy = () => true;
 
-        this.dataikuItem = <DataikuItem item={selectedItem} />;
+        this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
 
         return (
             <Container style={{ paddingTop: '20px' }}>

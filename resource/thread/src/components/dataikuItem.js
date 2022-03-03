@@ -11,6 +11,8 @@ class DataikuItem extends Component {
         };
     }
 
+    // render()  {}
+
     render() {
         console.log('render() :: this.props == ');
         console.log(this.props);
