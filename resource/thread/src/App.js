@@ -57,9 +57,9 @@ class App extends Component {
                     });
                 });
         } else {
-            // this.setState({
-            //     selectedItem: null      
-            // });
+            this.setState({
+                selectedItem: null      
+            });
         }
     }
 
