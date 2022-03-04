@@ -154,22 +154,23 @@ class Dataset extends Component {
     }
 
     openColumn(col) {
-        // loading the column lineage
-        fetch(window.getWebAppBackendUrl('column-lineage'), {
-            method: 'POST', body: JSON.stringify({
-                'column': this.createColName(col.name)
-            })
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    col.lineage_downstream = result.downs;
-                    col.lineage_upstream = result.ups;
+        eventBus.dispatch("columnSelected", col);
+        // // loading the column lineage
+        // fetch(window.getWebAppBackendUrl('column-lineage'), {
+        //     method: 'POST', body: JSON.stringify({
+        //         'column': this.createColName(col.name)
+        //     })
+        // })
+        //     .then(res => res.json())
+        //     .then(
+        //         (result) => {
+        //             col.lineage_downstream = result.downs;
+        //             col.lineage_upstream = result.ups;
 
-                    this.update('col_elements', col);
-                    this.setState({ modalDialog: true, selectedCol: col });
-                    //eventBus.dispatch("dataRefresh", {});
-                });
+        //             this.update('col_elements', col);
+        //             this.setState({ modalDialog: true, selectedCol: col });
+        //             //eventBus.dispatch("dataRefresh", {});
+        //         });
     };
 
     closeColumn = () => {
@@ -339,7 +340,7 @@ class Dataset extends Component {
                 </Modal>
 
                 <Container style={{ paddingTop: '20px' }}>
-                    {/* <Row><h2><a href={this.createDsLink(this.props.deets)} target="_blank">{this.props.deets.name} ({this.props.deets.projectKey})</a></h2></Row> */}                    
+                    {/* <Row><h2><a href={this.createDsLink(this.props.deets)} target="_blank">{this.props.deets.name} ({this.props.deets.projectKey})</a></h2></Row> */}
                     {/* <Row><h4><b>Type:</b> {this.props.deets.type}</h4></Row> */}
                     {/* <Row><h4><b>Last Modified:</b> {this.props.deets.versionTag.lastModifiedBy.login} @ {this.props.deets.versionTag.lastModifiedOn}</h4></Row> */}
                     {/* <Row><h4><b>Short Desc:</b> {this.props.deets.shortDesc}</h4></Row> */}
