@@ -186,9 +186,7 @@ class DataikuItem extends Component {
             <div class="tags">{tags}</div>
 
             <Tabs defaultActiveKey="lineage" className="mb-3">
-                <Tab eventKey="columns" title="Columns" def></Tab>
-                <div style={{ paddingTop: '10px' }}>
-                    <h3>Datasets</h3>
+                <Tab eventKey="columns" title="Datasets" def>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -199,7 +197,7 @@ class DataikuItem extends Component {
                             {dataSetRows}
                         </tbody>
                     </Table>
-                </div>
+                </Tab>
             </Tabs>
         </Col>;
     }
