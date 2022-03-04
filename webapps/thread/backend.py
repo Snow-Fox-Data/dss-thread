@@ -8,6 +8,8 @@ import numpy as np
 import ast
 import sentry_sdk
 import random
+from sentry_sdk import capture_exception
+from sentry_sdk import capture_message
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -200,7 +202,8 @@ class dss_utils:
                         col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
                         col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
                 
-        except:
+        except Exception as e:
+            capture_exception(e)
             print(f'no schema for {key}')
 
         res = {
