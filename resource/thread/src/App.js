@@ -132,10 +132,10 @@ class App extends Component {
     renderMenuItemChildren(option, props) {
         return <Fragment>
             {Common.getIconForDataikuItemType(option.type)}
-            <span style={{ marginLeft: '.5rem', marginRight: '.5rem' }}>Type: {option.type}; </span>
-            <span>Name: {option.name}; </span>
-            {option.type == 'dataset' || option.type=='column' &&
-                <span>Project: {option.name.split('.')[0]}; </span>
+            <span style={{ fontWeight: 'bold' }}>Name: {option.name}</span><span style='padding:3px'>|</span>
+            <span>Type: {option.type}</span><span style='padding:3px'>|</span>
+            {option.type == 'dataset' || option.type == 'column' &&
+                <span>Project: {option.key.split('.')[0]}; </span>
             }
         </Fragment>;
     }
