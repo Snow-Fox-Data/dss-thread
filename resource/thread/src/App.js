@@ -36,10 +36,12 @@ class App extends Component {
             selectedItem: null,
             selectedItemType: null,
             searchResults: [],
+            loading: true
         }
     }
 
     loadItem = (item) => {
+        this.setState({ loading: true });
         console.log('loadItem :: item == ');
         console.log(item);
 
@@ -59,6 +61,7 @@ class App extends Component {
                         selectedItem: response,
                         selectedItemType: item[0].type
                     });
+                    this.setState({ loading: false });
                 });
         }
         // else {
@@ -74,6 +77,7 @@ class App extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
+        this.setState({ loading: true });
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
             .then(res => res.json())
             .then((response) => {
@@ -85,6 +89,7 @@ class App extends Component {
                 this.setState({
                     searchResults: p_list
                 });
+                this.setState({ loading: false });
             });
     }
 
@@ -92,6 +97,7 @@ class App extends Component {
         window.$(document).ready(() => {
             this.setState({ dataiku: window.dataiku });
             this.setState({ rendered: true });
+            this.setState({ loading: false });
 
             // eventBus.on("dataRefresh", (data) =>
             //     this.refreshData()
@@ -158,9 +164,13 @@ class App extends Component {
                 </Row>
 
                 <Row>
-                    <Spinner animation="border" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
+                    <div style={{ padding: '10px' }}>
+                        {this.state.loading ?
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                            : null}
+                    </div>
                 </Row>
 
                 {this.dataikuItem}
