@@ -147,10 +147,10 @@ class DataikuItem extends Component {
         </p>
             <p class="name"><b>Type: </b>{this.props.item.type}</p>
             <p class="name"><b>Project: </b>
-                <span style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }} onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
+                <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
             </p>
             <p class="name"><b>Dataset: </b>
-                <span style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }} onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span></p>
+                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span></p>
             {/* <p class="project"><b>Project: </b>
                 <span style={{ textDecoration: 'underline', color: 'blue' }} onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}
@@ -171,7 +171,7 @@ class DataikuItem extends Component {
                     </a></span>
             </p>
             <p class="project"><b>Project: </b>
-                <span style={{ textDecoration: 'underline', color: 'blue' }} onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <div class="schema-content">  
