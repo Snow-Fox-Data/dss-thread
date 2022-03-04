@@ -125,7 +125,11 @@ class DataikuItem extends Component {
     }
 
     openDataset(ds) {
-        eventBus.dispatch("datasetSelected", { 'dataset': ds });
+        eventBus.dispatch("datasetSelected", ds);
+    }
+
+    openProject(proj) {
+        eventBus.dispatch("projectSelected", proj);
     }
 
     renderDataset() {
@@ -168,7 +172,7 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <p class="name"><b>Name: </b>{this.props.item.name}</p>
+            <p class="name"><b>Name: </b><span onClick={() => this.openDataset(this.props.item.id)}>{this.props.item.name}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
@@ -185,8 +189,8 @@ class DataikuItem extends Component {
 
             <div class="tags">{tags}</div>
             <div style={{ paddingTop: '10px' }}>
-                <Tabs defaultActiveKey="lineage" className="mb-3">
-                    <Tab eventKey="columns" title="Datasets" def>
+                <Tabs defaultActiveKey="datasets" className="mb-3">
+                    <Tab eventKey="datasets" title="Datasets" def>
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
