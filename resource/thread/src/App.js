@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import eventBus from "./eventBus";
 
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {
@@ -95,9 +96,10 @@ class App extends Component {
             //     this.refreshData()
             // );
 
-            // eventBus.on("datasetSelected", (ds) =>
-            //     this.findDataset(ds)
-            // );
+            eventBus.on("datasetSelected", (ds) =>
+                // this.findDataset(ds)
+                alert(ds)
+            );
 
             // this.search('thread');
             // this.refreshData();

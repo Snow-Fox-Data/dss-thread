@@ -5,6 +5,7 @@ import Dataset from "./dataset";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import eventBus from "../eventBus";
 
 class DataikuItem extends Component {
 
@@ -123,6 +124,10 @@ class DataikuItem extends Component {
         }
     }
 
+    openDataset(ds) {
+        eventBus.dispatch("datasetSelected", { 'dataset': ds });
+    }
+
     renderDataset() {
         let tags = this.buildTagsString(this.props.item.meta.tags);
 
@@ -158,7 +163,7 @@ class DataikuItem extends Component {
         let tags = this.buildTagsString(this.props.item.tags);
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
-                <td>{col}</td>
+                <td onClick={() => this.openDataset(col)}>{col}</td>
             </tr>
         );
 
@@ -179,8 +184,8 @@ class DataikuItem extends Component {
             </div>     */}
 
             <div class="tags">{tags}</div>
-            <div>
-                <h4>Datasets</h4>
+            <div style="padding-top:10px;">
+                <h3>Datasets</h3>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
