@@ -184,7 +184,7 @@ class DataikuItem extends Component {
             </div>     */}
 
             <div class="tags">{tags}</div>
-            <div style="padding-top:10px;">
+            <div style={{ paddingTop: '10px' }}>
                 <h3>Datasets</h3>
                 <Table striped bordered hover>
                     <thead>
