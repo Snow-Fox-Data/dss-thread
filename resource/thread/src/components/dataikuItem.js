@@ -122,6 +122,8 @@ class DataikuItem extends Component {
                 return this.renderDataset();
             case 'project':
                 return this.renderProject();
+            case 'column':
+                return this.renderColumn();
             case 'dataset':
                 return <Col>
                     <p>No rendering has been setup for this item.</p>
@@ -135,6 +137,13 @@ class DataikuItem extends Component {
 
     openProject(proj) {
         eventBus.dispatch("projectSelected", proj);
+    }
+
+    renderColumn() {
+        return <Col> <p class="name"><b>Name: </b>
+            {this.props.item.name}
+        </p>
+        </Col>
     }
 
     renderDataset() {

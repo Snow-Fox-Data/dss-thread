@@ -117,6 +117,13 @@ class App extends Component {
                 }])
             );
 
+            eventBus.on("columnSelected", (proj) =>
+            this.loadItem([{
+                key: proj,
+                type: 'column'
+            }])
+        );
+
             // this.search('thread');
             // this.refreshData();
         });
