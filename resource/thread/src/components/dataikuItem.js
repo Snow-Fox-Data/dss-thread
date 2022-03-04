@@ -160,6 +160,10 @@ class DataikuItem extends Component {
         </Col>;
     }
 
+    createProjectLink(projkey) {
+        return '/projects/' + projkey + '/flow/';
+    }
+
     renderProject() {
         // const columns = [{  
         //     Header: 'Name',  
@@ -178,8 +182,9 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <p class="name"><b>Name: </b><span>{this.props.item.name}</span><span style={{paddingRight:'4px'}}>
-                <ArrowUpRightSquare onClick={() => this.openExternalProject(this.props.item.projectKey)} size={20} /></span></p>
+            <p class="name"><b>Name: </b><span>{this.props.item.name}</span><span style={{ paddingLeft: '4px' }}>
+                <a href={this.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
+                </a></span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
