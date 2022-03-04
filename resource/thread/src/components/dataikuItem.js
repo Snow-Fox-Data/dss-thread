@@ -101,7 +101,7 @@ class DataikuItem extends Component {
         // let schemaTable = this.buildSchemaTable();
         let lineage = this.buildLineage();
 
-        var listItems = this.props.deets.schema.map((col) =>
+        var listItems = this.props.item.schema.map((col) =>
             <tr onClick={() => this.openColumn(col.key)}>
                 <td>{col.name}</td>
                 <td>{col.type}</td>
