@@ -37,81 +37,6 @@ class DataikuItem extends Component {
         return tags;
     }
 
-    // buildSchemaTable() { 
-    //     const data = React.useMemo(
-    //         () => this.props.item.schema,
-    //         []
-    //       )
-
-    //       const columns = React.useMemo(
-    //         () => [
-    //             {  
-    //                 Header: 'Name',  
-    //                 accessor: 'name'  
-    //             },{  
-    //                 Header: 'Type',  
-    //                 accessor: 'type'  
-    //             }
-    //         ],
-    //         []
-    //       )
-
-    //       const {
-    //         getTableProps,
-    //         getTableBodyProps,
-    //         headerGroups,
-    //         rows,
-    //         prepareRow,
-    //       } = useTable({ columns, data })
-
-    //       return (
-    //         <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
-    //           <thead>
-    //             {headerGroups.map(headerGroup => (
-    //               <tr {...headerGroup.getHeaderGroupProps()}>
-    //                 {headerGroup.headers.map(column => (
-    //                   <th
-    //                     {...column.getHeaderProps()}
-    //                     style={{
-    //                       borderBottom: 'solid 3px red',
-    //                       background: 'aliceblue',
-    //                       color: 'black',
-    //                       fontWeight: 'bold',
-    //                     }}
-    //                   >
-    //                     {column.render('Header')}
-    //                   </th>
-    //                 ))}
-    //               </tr>
-    //             ))}
-    //           </thead>
-    //           <tbody {...getTableBodyProps()}>
-    //             {rows.map(row => {
-    //               prepareRow(row)
-    //               return (
-    //                 <tr {...row.getRowProps()}>
-    //                   {row.cells.map(cell => {
-    //                     return (
-    //                       <td
-    //                         {...cell.getCellProps()}
-    //                         style={{
-    //                           padding: '10px',
-    //                           border: 'solid 1px gray',
-    //                           background: 'papayawhip',
-    //                         }}
-    //                       >
-    //                         {cell.render('Cell')}
-    //                       </td>
-    //                     )
-    //                   })}
-    //                 </tr>
-    //               )
-    //             })}
-    //           </tbody>
-    //         </table>
-    //       )
-    // }
-
     openExternalProject(key) {
         alert(key)
     }
@@ -140,6 +65,8 @@ class DataikuItem extends Component {
     }
 
     renderColumn() {
+        let lineage = this.buildLineage();
+        
         return <Col>
             <p class="name"><b>Project: </b>
                 <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
@@ -158,6 +85,7 @@ class DataikuItem extends Component {
                     </Tab>
                     <Tab eventKey="lineage" title="Lineage" def>
                         lineage here 
+                        <div class="lineage">{lineage}</div>
                     </Tab>
                 </Tabs>
             </div>
