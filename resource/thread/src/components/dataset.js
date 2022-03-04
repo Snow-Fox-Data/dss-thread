@@ -272,33 +272,25 @@ class Dataset extends Component {
     }
 
     render() {
-
-        // setTimeout(() => {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }
-        // }, 500);
 
-        var listItems = this.props.deets.schema.map((col) =>
-            <tr onClick={() => this.openColumn(col.key)}>
-                <td>{col.name}</td>
-                <td>{col.type}</td>
-                <td>{col.comment}</td>
-            </tr>
-        );
-
-        // var listItems = this.props.deets.schema.columns.map((col) =>
-        //     <tr onClick={() => this.openColumn(col)}>
-        //         <td>{col.name}</td>
-        //         <td>{col.type}</td>
-        //         <td>{col.comment}</td>
-        //     </tr>
-        // );
+        if(this.props.deets.hasOwnProperty('schema')) {
+            var listItems = this.props.deets.schema.map((col) =>
+                <tr onClick={() => this.openColumn(col.key)}>
+                    <td>{col.name}</td>
+                    <td>{col.type}</td>
+                    <td>{col.comment}</td>
+                </tr>
+            );
+        } else {
+            var listItems = <p>No Columns to Display.</p>;
+        }
 
         return (
             <>
-
                 <Modal size="lg" show={this.state.modalDialog} onHide={this.closeColumn} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>{this.state.selectedCol.name}</Modal.Title>
