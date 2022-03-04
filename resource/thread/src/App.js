@@ -133,7 +133,7 @@ class App extends Component {
         return <Fragment>
             {Common.getIconForDataikuItemType(option.type)}
             <span style={{ fontWeight: 'bold' }}>Name: {option.name}</span><span style='padding:3px'>|</span>
-            <span>Type: {option.type}</span><span style='padding:3px'>|</span>
+            <span>Type: {option.type}</span><span style={{ padding: '3px' }}>|</span>
             {option.type == 'dataset' || option.type == 'column' &&
                 <span>Project: {option.key.split('.')[0]}; </span>
             }
