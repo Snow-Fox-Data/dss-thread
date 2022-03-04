@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import eventBus from "../eventBus";
-import {ArrowUpRightSquare} from 'react-bootstrap-icons'
+import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 
 class DataikuItem extends Component {
 
@@ -112,6 +112,10 @@ class DataikuItem extends Component {
     //       )
     // }
 
+    openExternalProject(key) {
+        alert(key)
+    }
+
     renderItemDetailsByType() {
         switch (this.props.type) {
             case 'dataset':
@@ -174,8 +178,8 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <p class="name"><b>Name: </b>{this.props.item.name}</p>
-            <ArrowUpRightSquare />
+            <p class="name"><b>Name: </b><span>{this.props.item.name}</span><span>
+                <ArrowUpRightSquare onClick={() => this.openExternalProject(this.props.item.key)} size={32} /></span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
