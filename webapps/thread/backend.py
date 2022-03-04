@@ -197,7 +197,7 @@ class dss_utils:
         try:
             if col_lineage != 'none':
                 for col in schema:
-                    col['key'] = key + '.' + col
+                    col['key'] = key + '.' + col['name']
                     if col_lineage == 'all' or col['name'] == col_lineage:
                         col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
                         col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
