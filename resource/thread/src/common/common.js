@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
-function getIconForDataikuItemType(type, size = "14px") {
+function getIconForDataikuItemType(type, size = "12px") {
     // console.log();
     switch(type) {
         case "project":
