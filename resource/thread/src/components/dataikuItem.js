@@ -141,13 +141,15 @@ class DataikuItem extends Component {
 
     renderColumn() {
         return <Col>
-            <p class="name"><b>{this.props.item.type}: </b>
+            <p class="name"><b>Project: </b>
                 <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
-                <span style={{ padding: '2px' }}>.</span>
-                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span>
-                <span style={{ padding: '2px' }}>.</span>
-                {this.props.item.name}
             </p>
+            <p class="name"><b>Dataset: </b>
+                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span>
+            </p>
+            <p class="name"><b>Column Name: </b>{this.props.item.name}
+            </p>
+            <p class="name"><b>Type: </b>{this.props.item.type}</p>
         </Col>
     }
 
