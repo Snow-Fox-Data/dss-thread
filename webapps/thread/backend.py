@@ -179,7 +179,7 @@ class dss_utils:
         return p
    
     def load_dataset(self, key, col_lineage='none'):
-        p_name, d_name = self.extract_name_project(key)
+        p_name, d_name, c_name = self.extract_name_project(key)
         ds = dataiku.Dataset(d_name, p_name)
 
         ds_ds = self.get_datasets_ds()
