@@ -42,24 +42,24 @@ class App extends Component {
         console.log('loadItem :: item == ');
         console.log(item);
 
-        if(item.length > 0) {
+        if (item.length > 0) {
             const requestOptions = {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             };
-    
+
             fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item[0].key, requestOptions)
                 .then(res => res.json())
                 .then((response) => {
                     console.log('response == ');
                     console.log(response);
-                    
+
                     this.setState({
                         selectedItem: response,
-                        selectedItemType: item[0].type    
+                        selectedItemType: item[0].type
                     });
                 });
-        } 
+        }
         // else {
         //     this.setState({
         //         selectedItem: null      
@@ -82,7 +82,7 @@ class App extends Component {
                 });
 
                 this.setState({
-                    searchResults: p_list                                        
+                    searchResults: p_list
                 });
             });
     }
@@ -97,67 +97,69 @@ class App extends Component {
             // );
 
             eventBus.on("datasetSelected", (ds) =>
-                // this.findDataset(ds)
-                alert(ds)
+                this.loadItem([{
+                    key: ds,
+                    type: 'dataset'
+                }])
             );
 
-            // this.search('thread');
-            // this.refreshData();
-        });
-    }
+        // this.search('thread');
+        // this.refreshData();
+    });
+}
 
-    renderMenuItemChildren(option, props) {
-        return <Fragment>
-            {Common.getIconForDataikuItemType(option.type)}
-            <span style={{ marginLeft: '.5rem', marginRight: '.5rem' }}>Type: {option.type}; </span>
-            <span>Name: {option.name}; </span>                                
-        </Fragment>;
-    }
+renderMenuItemChildren(option, props) {
+    return <Fragment>
+        {Common.getIconForDataikuItemType(option.type)}
+        <span style={{ marginLeft: '.5rem', marginRight: '.5rem' }}>Type: {option.type}; </span>
+        <span>Name: {option.name}; </span>
+    </Fragment>;
+}
 
-    render() {
-        // <Router>
-        //     <main>
-        //       <nav>
-        //         <ul>
-        //           <li><Link to="/">Home</Link></li>
-        //           <li><a href="/about">About</a></li>
-        //           <li><a href="/contact">Contact</a></li>
-        //         </ul>
-        //       </nav>
+render() {
+    // <Router>
+    //     <main>
+    //       <nav>
+    //         <ul>
+    //           <li><Link to="/">Home</Link></li>
+    //           <li><a href="/about">About</a></li>
+    //           <li><a href="/contact">Contact</a></li>
+    //         </ul>
+    //       </nav>
 
-        //         <Routes>
-        //             <Route path="/" exact component={Home} />
-        //         </Routes>
-        //     </main>
-        // </Router>
-        
-        const { isLoading, searchResults, selectedItem, selectedItemType } = this.state;
-        // const ref = React.createRef();
-        const filterBy = () => true;
+    //         <Routes>
+    //             <Route path="/" exact component={Home} />
+    //         </Routes>
+    //     </main>
+    // </Router>
 
-        this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
+    const { isLoading, searchResults, selectedItem, selectedItemType } = this.state;
+    // const ref = React.createRef();
+    const filterBy = () => true;
 
-        return (
-            <Container style={{ paddingTop: '20px' }}>
-                <Row>
-                    <AsyncTypeahead
-                        filterBy={filterBy}
-                        id="async-search"
-                        isLoading={isLoading}
-                        labelKey="name"
-                        minLength={3}
-                        onChange={this.loadItem}
-                        onSearch={this.search}
-                        options={searchResults}
-                        placeholder='Search for Datase'                        
-                        renderMenuItemChildren={this.renderMenuItemChildren}
-                    />                    
-                </Row>
+    this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
 
-                {this.dataikuItem}
-            </Container>
-        );
-    }
+    return (
+        <Container style={{ paddingTop: '20px' }}>
+            <Row>
+                <AsyncTypeahead
+                    filterBy={filterBy}
+                    id="async-search"
+                    isLoading={isLoading}
+                    labelKey="name"
+                    minLength={3}
+                    onChange={this.loadItem}
+                    onSearch={this.search}
+                    options={searchResults}
+                    placeholder='Search for Datase'
+                    renderMenuItemChildren={this.renderMenuItemChildren}
+                />
+            </Row>
+
+            {this.dataikuItem}
+        </Container>
+    );
+}
 }
 
 export default App;
