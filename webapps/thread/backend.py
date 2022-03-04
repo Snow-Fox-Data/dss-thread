@@ -204,7 +204,7 @@ class dss_utils:
                 
         except Exception as e:
             capture_exception(e)
-            print(f'no schema for {key}')
+            print(f'no schema for {key} {e}')
 
         res = {
             "schema": schema,
