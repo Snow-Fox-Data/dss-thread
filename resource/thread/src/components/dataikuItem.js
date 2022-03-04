@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import eventBus from "../eventBus";
+import {ArrowUpRightSquare} from 'react-bootstrap-icons'
 
 class DataikuItem extends Component {
 
@@ -141,7 +142,7 @@ class DataikuItem extends Component {
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
             <p class="project"><b>Project: </b>
-                <span onClick={() => this.openDataset(this.props.item.id)}>{this.props.item.project}</span></p>
+                <span onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <div class="schema-content">  
@@ -174,6 +175,7 @@ class DataikuItem extends Component {
 
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
+            <ArrowUpRightSquare />
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
