@@ -140,7 +140,8 @@ class DataikuItem extends Component {
 
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}</p>
-            <p class="project"><b>Project: </b>{this.props.item.project}</p>
+            <p class="project"><b>Project: </b>
+                <span onClick={() => this.openDataset(this.props.item.id)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <div class="schema-content">  
@@ -172,7 +173,7 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <p class="name"><b>Name: </b><span onClick={() => this.openDataset(this.props.item.id)}>{this.props.item.name}</span></p>
+            <p class="name"><b>Name: </b>{this.props.item.name}</p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
