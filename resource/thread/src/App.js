@@ -98,7 +98,7 @@ class App extends Component {
 
             eventBus.on("datasetSelected", (ds) =>
                 this.loadItem([{
-                    key: ds,
+                    key: ds['dataset'],
                     type: 'dataset'
                 }])
             );
