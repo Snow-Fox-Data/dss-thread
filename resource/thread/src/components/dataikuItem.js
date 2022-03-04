@@ -146,7 +146,7 @@ class DataikuItem extends Component {
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}
                 <span style={{ paddingLeft: '4px' }}>
-                    <a href={this.createDatasetLink(this.props.item.key, this.props.item.project)} target="_blank"><ArrowUpRightSquare size={20} />
+                    <a href={this.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={20} />
                     </a></span>
             </p>
             <p class="project"><b>Project: </b>
