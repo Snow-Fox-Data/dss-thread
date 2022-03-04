@@ -195,7 +195,7 @@ class dss_utils:
             "schema": schema,
             "name": ds.full_name,
             "key": key,
-            "id": p_name,
+            "id": d_name,
             "project": p_name,
             "meta": ds.read_metadata(),
             "lineage-upstream": lin_up,
