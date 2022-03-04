@@ -77,7 +77,7 @@ def load_item():
             if res['type'] == 'column':
                 p_name, d_name, c_name = dss.extract_name_project(key)
                 print(f'loading col: {key}')
-                p = dss.load_dataset(key, c_name)
+                p = dss.load_dataset(p_name + '.' + d_name, c_name)
 
                 return p['schema'][0]
 
