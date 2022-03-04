@@ -140,21 +140,14 @@ class DataikuItem extends Component {
     }
 
     renderColumn() {
-        return <Col> <p class="name"><b>Name: </b>{this.props.item.name}
-            {/* <span style={{ paddingLeft: '4px' }}>
-                <a href={this.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={20} />
-                </a></span> */}
-        </p>
-            <p class="name"><b>Type: </b>{this.props.item.type}</p>
-            <p class="name"><b>Project: </b>
+        return <Col>
+            <p class="name"><b>{this.props.item.type}: </b>
                 <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
+                <span style={{ padding: '2px' }}>.</span>
+                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span>
+                <span style={{ padding: '2px' }}>.</span>
+                {this.props.item.name}
             </p>
-            <p class="name"><b>Dataset: </b>
-                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span></p>
-            {/* <p class="project"><b>Project: </b>
-                <span style={{ textDecoration: 'underline', color: 'blue' }} onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
-            <p class="name"><b>Type: </b>{this.props.type}
-            </p> */}
         </Col>
     }
 
