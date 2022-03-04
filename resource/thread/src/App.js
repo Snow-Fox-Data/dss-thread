@@ -118,11 +118,11 @@ class App extends Component {
             );
 
             eventBus.on("columnSelected", (proj) =>
-            this.loadItem([{
-                key: proj,
-                type: 'column'
-            }])
-        );
+                this.loadItem([{
+                    key: proj,
+                    type: 'column'
+                }])
+            );
 
             // this.search('thread');
             // this.refreshData();
@@ -134,6 +134,9 @@ class App extends Component {
             {Common.getIconForDataikuItemType(option.type)}
             <span style={{ marginLeft: '.5rem', marginRight: '.5rem' }}>Type: {option.type}; </span>
             <span>Name: {option.name}; </span>
+            {option.type == 'dataset' || option.type=='column' &&
+                <span>Project: {option.name.split('.')[0]}; </span>
+            }
         </Fragment>;
     }
 
