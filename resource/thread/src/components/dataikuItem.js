@@ -150,6 +150,17 @@ class DataikuItem extends Component {
             <p class="name"><b>Column Name: </b>{this.props.item.name}
             </p>
             <p class="name"><b>Type: </b>{this.props.item.type}</p>
+
+            <div style={{ paddingTop: '10px' }}>
+                <Tabs defaultActiveKey="definition" className="mb-3">
+                    <Tab eventKey="definition" title="Definition" def>
+                        {this.props.item.comment}
+                    </Tab>
+                    <Tab eventKey="lineage" title="Lineage" def>
+                        lineage here 
+                    </Tab>
+                </Tabs>
+            </div>
         </Col>
     }
 
@@ -169,7 +180,6 @@ class DataikuItem extends Component {
                 <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
-
             <div class="tags">{tags}</div>
             <div class="lineage">{lineage}</div>
 
@@ -185,15 +195,6 @@ class DataikuItem extends Component {
     }
 
     renderProject() {
-        // const columns = [{  
-        //     Header: 'Name',  
-        //     accessor: 'name'  
-        // },{  
-        //     Header: 'Type',  
-        //     accessor: 'type'  
-        // }] 
-        // onClick={() => this.openColumn(col)}
-
         let tags = this.buildTagsString(this.props.item.tags);
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
