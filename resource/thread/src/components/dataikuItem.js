@@ -144,9 +144,13 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
 
         return <Col>
-            <p class="name"><b>Name: </b>{this.props.item.name}</p>
+            <p class="name"><b>Name: </b>{this.props.item.name}
+                <span style={{ paddingLeft: '4px' }}>
+                    <a href={this.createDatasetLink(this.props.item.key, this.props.item.project)} target="_blank"><ArrowUpRightSquare size={20} />
+                    </a></span>
+            </p>
             <p class="project"><b>Project: </b>
-                <span onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                <span style={{ textDecoration: 'underline', color: 'blue' }} onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             {/* <div class="schema-content">  
@@ -162,6 +166,10 @@ class DataikuItem extends Component {
 
     createProjectLink(projkey) {
         return '/projects/' + projkey + '/flow/';
+    }
+
+    createDatasetLink(projkey, ds) {
+        return '/projects/' + projkey + '/datasets/' + ds + '/explore/';
     }
 
     renderProject() {
