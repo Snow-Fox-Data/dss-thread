@@ -146,6 +146,8 @@ class DataikuItem extends Component {
                 </a></span> */}
         </p>
         <p class="name"><b>Type: </b>{this.props.item.type}</p>
+        <p class="name"><b>Project: </b>{this.props.item.project}</p>
+        <p class="name"><b>Dataset: </b>{this.props.item.dataset}</p>
             {/* <p class="project"><b>Project: </b>
                 <span style={{ textDecoration: 'underline', color: 'blue' }} onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}

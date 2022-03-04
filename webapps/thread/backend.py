@@ -79,6 +79,8 @@ def load_item():
                 print(f'loading col: {key}')
                 p = dss.load_dataset(p_name + '.' + d_name, c_name)
                 col = next(item for item in p['schema'] if item["name"] == c_name)
+                col['project'] = p_name
+                col['dataset'] = d_name
 
                 return col
 
