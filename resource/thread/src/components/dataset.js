@@ -281,7 +281,7 @@ class Dataset extends Component {
         // }, 500);
 
         var listItems = this.props.deets.schema.map((col) =>
-            <tr onClick={() => this.openColumn(col)}>
+            <tr onClick={() => this.openColumn(col.key)}>
                 <td>{col.name}</td>
                 <td>{col.type}</td>
                 <td>{col.comment}</td>
