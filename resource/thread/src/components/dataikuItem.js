@@ -140,9 +140,16 @@ class DataikuItem extends Component {
     }
 
     renderColumn() {
-        return <Col> <p class="name"><b>Name: </b>
-            {this.props.item.name}
+        return <Col> <p class="name"><b>Name: </b>{this.props.item.name}
+            {/* <span style={{ paddingLeft: '4px' }}>
+                <a href={this.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={20} />
+                </a></span> */}
         </p>
+        <p class="name"><b>Type: </b>{this.props.item.type}</p>
+            {/* <p class="project"><b>Project: </b>
+                <span style={{ textDecoration: 'underline', color: 'blue' }} onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+            <p class="name"><b>Type: </b>{this.props.type}
+            </p> */}
         </Col>
     }
 
