@@ -184,19 +184,23 @@ class DataikuItem extends Component {
             </div>     */}
 
             <div class="tags">{tags}</div>
-            <div style={{ paddingTop: '10px' }}>
-                <h3>Datasets</h3>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dataSetRows}
-                    </tbody>
-                </Table>
-            </div>
+
+            <Tabs defaultActiveKey="lineage" className="mb-3">
+                <Tab eventKey="columns" title="Columns" def></Tab>
+                <div style={{ paddingTop: '10px' }}>
+                    <h3>Datasets</h3>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataSetRows}
+                        </tbody>
+                    </Table>
+                </div>
+            </Tabs>
         </Col>;
     }
 
