@@ -76,7 +76,7 @@ def load_item():
         else:
             if res['type'] == 'column':
                 p_name, d_name, c_name = dss.extract_name_project(key)
-                print(f'loading col: {key}')
+                print(f'loading col: {key}, {c_name}')
                 p = dss.load_dataset(p_name + '.' + d_name, c_name)
                 col = next(item for item in p['schema'] if item["name"] == c_name)
                 col['project'] = p_name
