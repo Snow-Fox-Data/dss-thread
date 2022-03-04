@@ -169,10 +169,6 @@ class DataikuItem extends Component {
                 <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
-            {/* <div class="schema-content">  
-                <p class="schema"><b>Project: </b></p>
-                {schemaTable}
-            </div>     */}
 
             <div class="tags">{tags}</div>
             <div class="lineage">{lineage}</div>
