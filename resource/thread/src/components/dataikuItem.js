@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
-import Dataset from "./dataset";
+// import Dataset from "./dataset";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
+import Lineage from "./lineage";
 
 class DataikuItem extends Component {
 
@@ -19,11 +20,9 @@ class DataikuItem extends Component {
     }
 
     buildLineage() {
-        // UPSTREAM TO THE LEFT
-        // DOWNSTREAM TO THE RIGHT
-
         return <Row>
-            <Dataset deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.type}></Dataset>
+            <Lineage deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.type}></Lineage>
+            {/* <Dataset deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.type}></Dataset> */}
         </Row>
     }
 
@@ -55,6 +54,10 @@ class DataikuItem extends Component {
                 </Col>;
         }
     }
+
+    openColumn(col) {
+        eventBus.dispatch("columnSelected", col);
+    };
 
     openDataset(ds) {
         eventBus.dispatch("datasetSelected", ds);
@@ -98,6 +101,14 @@ class DataikuItem extends Component {
         // let schemaTable = this.buildSchemaTable();
         let lineage = this.buildLineage();
 
+        var listItems = this.props.deets.schema.map((col) =>
+            <tr onClick={() => this.openColumn(col.key)}>
+                <td>{col.name}</td>
+                <td>{col.type}</td>
+                <td>{col.comment}</td>
+            </tr>
+        );
+
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}
                 <span style={{ paddingLeft: '4px' }}>
@@ -109,8 +120,28 @@ class DataikuItem extends Component {
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
             <div class="tags">{tags}</div>
-            <div class="lineage">{lineage}</div>
 
+            <Row style={{ paddingTop: '20px' }}>
+                <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
+                    <Tab eventKey="lineage" title="Lineage">
+                        <div class="lineage">{lineage}</div>
+                    </Tab>
+                    <Tab eventKey="columns" title="Columns" def>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listItems}
+                            </tbody>
+                        </Table>
+                    </Tab>
+                </Tabs>
+            </Row>
         </Col>;
     }
 

@@ -1,6 +1,18 @@
 import React, { Component } from "react";
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
+function createDsLink(ds) {
+    return this.createDsLink2(ds.projectKey, ds.name)
+}
+
+function createDsLink2(proj, ds) {
+    return '/projects/' + proj + '/datasets/' + ds + '/explore/';
+}
+
+function createDsLinkFull(proj, ds) {
+    return '<a href="' + this.createDsLink2(proj, ds) + '" target="_blank">' + proj + '.' + ds + '</a>';
+}
+
 function getIconForDataikuItemType(type, size = "11px") {
     // console.log();
     switch(type) {
@@ -18,6 +30,9 @@ function getIconForDataikuItemType(type, size = "11px") {
 }
 
 const Common = {
+    createDsLink,
+    createDsLink2,
+    createDsLinkFull,
     getIconForDataikuItemType
 };
 
