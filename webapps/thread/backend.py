@@ -255,7 +255,7 @@ class dss_utils:
                 for i in range(len(recipe[inputs_outputs][j]['items'])):
                     name = recipe[inputs_outputs][j]['items'][i]['ref']
                     if '.' in name:
-                        p_name, d_name = self.extract_name_project(name)
+                        p_name, d_name, c_name = self.extract_name_project(name)
                     else:
                         d_name = name
 
@@ -277,7 +277,7 @@ class dss_utils:
     def get_ds_by_name(self, name, all_projects, p_name=None):
         # print(name)
         if '.' in name:
-            p_name, d_name = self.extract_name_project(name)
+            p_name, d_name, c_name = self.extract_name_project(name)
         else:
             d_name = name
 
@@ -335,7 +335,7 @@ class dss_utils:
             c_name = splits[2]
             return p_name, d_name, c_name
 
-        return p_name, d_name
+        return p_name, d_name, ''
 
     def get_full_dataset_name(self, name, project):
         return project + '.' + name
