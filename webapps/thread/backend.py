@@ -75,8 +75,9 @@ def load_item():
             return json.dumps(p)
         else:
             if res['type'] == 'column':
-                ds = args.get('dataset')
-                p = dss.load_dataset(ds, key)
+                p_name, d_name, c_name = dss.extract_name_project(key)
+
+                p = dss.load_dataset(d_name, c_name)
 
                 return p['schema'][0]
 
