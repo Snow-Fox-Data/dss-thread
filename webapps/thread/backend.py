@@ -65,7 +65,7 @@ def load_item():
 
     res = df.query(f'key=="{key}"').iloc[0]
     if res['type'] == 'dataset':
-        ds = dss.load_dataset(key, True)
+        ds = dss.load_dataset(key, 'none')
 
         return json.dumps(ds)
     else:
@@ -73,6 +73,12 @@ def load_item():
             p = dss.load_project(key)
 
             return json.dumps(p)
+        else:
+            if res['type'] == 'column':
+                ds = args.get('dataset')
+                p = dss.load_dataset(ds, key)
+
+                return p['schema'][0]
 
     return json.dumps(res) 
 
@@ -171,7 +177,7 @@ class dss_utils:
 
         return p
    
-    def load_dataset(self, key, col_lineage=False):
+    def load_dataset(self, key, col_lineage='none'):
         p_name, d_name = self.extract_name_project(key)
         ds = dataiku.Dataset(d_name, p_name)
 
@@ -182,12 +188,14 @@ class dss_utils:
         lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
         try:
-            schema = ds.read_schema()
+            if col_lineage != 'none':
+                schema = ds.read_schema()
 
-            if col_lineage:
                 for col in schema:
-                    col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
-                    col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
+                    if col_lineage == 'all' or col['name'] == col_lineage:
+                        col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
+                        col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
+                
         except:
             print(f'no schema for {key}')
 

@@ -172,7 +172,7 @@ class App extends Component {
                         onChange={this.loadItem}
                         onSearch={this.search}
                         options={searchResults}
-                        placeholder='Search for Datase'
+                        placeholder='Search'
                         renderMenuItemChildren={this.renderMenuItemChildren}
                     />
                 </Row>
