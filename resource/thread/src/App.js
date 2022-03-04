@@ -138,7 +138,7 @@ class App extends Component {
             {option.type == 'dataset' || option.type == 'column' &&
                 <span>
                     <span style={{ padding: '3px' }}>|</span>
-                    <span>Project: {option.key.split('.')[0]}; </span>
+                    <span>Project: {option.key.split('.')[0]}</span>
                 </span>
             }
         </Fragment>;
@@ -174,7 +174,7 @@ class App extends Component {
                         filterBy={filterBy}
                         id="async-search"
                         isLoading={isLoading}
-                        labelKey="name"
+                        labelKey="key"
                         minLength={3}
                         onChange={this.loadItem}
                         onSearch={this.search}
