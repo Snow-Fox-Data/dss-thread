@@ -9,7 +9,8 @@ import eventBus from "./eventBus";
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {
     Container,
-    Row
+    Row,
+    Spinner
 } from 'react-bootstrap';
 
 import {
@@ -103,63 +104,69 @@ class App extends Component {
                 }])
             );
 
-        // this.search('thread');
-        // this.refreshData();
-    });
-}
+            // this.search('thread');
+            // this.refreshData();
+        });
+    }
 
-renderMenuItemChildren(option, props) {
-    return <Fragment>
-        {Common.getIconForDataikuItemType(option.type)}
-        <span style={{ marginLeft: '.5rem', marginRight: '.5rem' }}>Type: {option.type}; </span>
-        <span>Name: {option.name}; </span>
-    </Fragment>;
-}
+    renderMenuItemChildren(option, props) {
+        return <Fragment>
+            {Common.getIconForDataikuItemType(option.type)}
+            <span style={{ marginLeft: '.5rem', marginRight: '.5rem' }}>Type: {option.type}; </span>
+            <span>Name: {option.name}; </span>
+        </Fragment>;
+    }
 
-render() {
-    // <Router>
-    //     <main>
-    //       <nav>
-    //         <ul>
-    //           <li><Link to="/">Home</Link></li>
-    //           <li><a href="/about">About</a></li>
-    //           <li><a href="/contact">Contact</a></li>
-    //         </ul>
-    //       </nav>
+    render() {
+        // <Router>
+        //     <main>
+        //       <nav>
+        //         <ul>
+        //           <li><Link to="/">Home</Link></li>
+        //           <li><a href="/about">About</a></li>
+        //           <li><a href="/contact">Contact</a></li>
+        //         </ul>
+        //       </nav>
 
-    //         <Routes>
-    //             <Route path="/" exact component={Home} />
-    //         </Routes>
-    //     </main>
-    // </Router>
+        //         <Routes>
+        //             <Route path="/" exact component={Home} />
+        //         </Routes>
+        //     </main>
+        // </Router>
 
-    const { isLoading, searchResults, selectedItem, selectedItemType } = this.state;
-    // const ref = React.createRef();
-    const filterBy = () => true;
+        const { isLoading, searchResults, selectedItem, selectedItemType } = this.state;
+        // const ref = React.createRef();
+        const filterBy = () => true;
 
-    this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
+        this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
 
-    return (
-        <Container style={{ paddingTop: '20px' }}>
-            <Row>
-                <AsyncTypeahead
-                    filterBy={filterBy}
-                    id="async-search"
-                    isLoading={isLoading}
-                    labelKey="name"
-                    minLength={3}
-                    onChange={this.loadItem}
-                    onSearch={this.search}
-                    options={searchResults}
-                    placeholder='Search for Datase'
-                    renderMenuItemChildren={this.renderMenuItemChildren}
-                />
-            </Row>
+        return (
+            <Container style={{ paddingTop: '20px' }}>
+                <Row>
+                    <AsyncTypeahead
+                        filterBy={filterBy}
+                        id="async-search"
+                        isLoading={isLoading}
+                        labelKey="name"
+                        minLength={3}
+                        onChange={this.loadItem}
+                        onSearch={this.search}
+                        options={searchResults}
+                        placeholder='Search for Datase'
+                        renderMenuItemChildren={this.renderMenuItemChildren}
+                    />
+                </Row>
 
-            {this.dataikuItem}
-        </Container>
-    );
-}
+                <Row>
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </Row>
+
+                {this.dataikuItem}
+            </Container>
+        );
+    }
 }
 
 export default App;
