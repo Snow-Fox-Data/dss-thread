@@ -61,19 +61,36 @@ class Lineage extends Component {
 
         // find all the end-nodes
         var down_res = [];
-        if (base_elem['lineage-downstream'] != null && base_elem['lineage-downstream'] != '') {
-            if (base_elem['lineage-downstream'] != null)
-                this.traverse(down_res, base_elem, 'lineage-downstream');
-            else
-                down_res = eval(base_elem['lineage-downstream']);
-        }
-
         var up_res = [];
-        if (base_elem['lineage-upstream'] != null && base_elem['lineage-upstream'] != '') {
-            if (base_elem['lineage-upstream'] != null)
-                this.traverse(up_res, base_elem, 'lineage-upstream');
-            else
-                up_res = eval(base_elem['lineage-upstream']);
+
+        if(this.props.type == 'column') {
+            if (base_elem['lineage_downstream'] != null && base_elem['lineage_downstream'] != '') {
+                if (base_elem['lineage_downstream'] != null)
+                    this.traverse(down_res, base_elem, 'lineage_downstream');
+                else
+                    down_res = eval(base_elem['lineage_downstream']);
+            }
+            
+            if (base_elem['lineage_upstream'] != null && base_elem['lineage_upstream'] != '') {
+                if (base_elem['lineage_upstream'] != null)
+                    this.traverse(up_res, base_elem, 'lineage_upstream');
+                else
+                    up_res = eval(base_elem['lineage_upstream']);
+            }
+        } else {
+            if (base_elem['lineage-downstream'] != null && base_elem['lineage-downstream'] != '') {
+                if (base_elem['lineage-downstream'] != null)
+                    this.traverse(down_res, base_elem, 'lineage-downstream');
+                else
+                    down_res = eval(base_elem['lineage-downstream']);
+            }
+            
+            if (base_elem['lineage-upstream'] != null && base_elem['lineage-upstream'] != '') {
+                if (base_elem['lineage-upstream'] != null)
+                    this.traverse(up_res, base_elem, 'lineage-upstream');
+                else
+                    up_res = eval(base_elem['lineage-upstream']);
+            }
         }
 
         for (var x = 0; x < down_res.length; x++) {
@@ -153,7 +170,7 @@ class Lineage extends Component {
         rv.fitView();
     }
 
-    render() {
+    render() {        
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);

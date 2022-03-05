@@ -97,8 +97,6 @@ class DataikuItem extends Component {
 
     renderDataset() {
         let tags = this.buildTagsString(this.props.item.meta.tags);
-
-        // let schemaTable = this.buildSchemaTable();
         let lineage = this.buildLineage();
 
         var listItems = this.props.item.schema.map((col) =>
@@ -166,18 +164,6 @@ class DataikuItem extends Component {
                 <a href={this.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
                 </a></span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
-
-            {/* <p class="project"><b>Project: </b>{this.props.item.project}</p> */}
-
-            {/* <div class="schema-content">  
-                <p class="schema"><b>Project: </b></p>
-                <ReactTable  
-                    data={this.props.schema}  
-                    columns={columns}  
-                    defaultPageSize = {2}  
-                    pageSizeOptions = {[2,4, 6]}  
-                />  
-            </div>     */}
 
             <div class="tags">{tags}</div>
             <div style={{ paddingTop: '10px' }}>
