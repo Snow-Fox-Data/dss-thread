@@ -86,8 +86,7 @@ class DataikuItem extends Component {
                     <Tab eventKey="definition" title="Definition" def>
                         {this.props.item.comment}
                     </Tab>
-                    <Tab eventKey="lineage" title="Lineage" def>
-                        lineage here 
+                    <Tab eventKey="lineage" title="Lineage" def>                        
                         <div class="lineage">{lineage}</div>
                     </Tab>
                 </Tabs>
