@@ -291,65 +291,7 @@ class Dataset extends Component {
 
         return (
             <>
-                <Modal size="lg" show={this.state.modalDialog} onHide={this.closeColumn} animation={false}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>{this.state.selectedCol.name}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Container>
-                            {/* <Row>
-                                <b>Downstream:</b><div>{this.formatLineage(this.state.selectedCol.lineage_downstream)}</div>
-                            </Row>
-                            <Row>
-                                <b>Upstream:</b><div>{this.formatLineage(this.state.selectedCol.lineage_upstream)}</div>
-                            </Row> */}
-                            <Row>
-                                <div style={{ height: 300 }}>
-                                    <ReactFlow onLoad={this.onLoad} elements={this.state.col_elements} nodeTypes={this.nodeTypes}>
-                                        <Controls showInteractive="false" />
-                                    </ReactFlow>
-                                </div>
-                            </Row>
-                            <Row>
-                                <Form style={{ paddingTop: '15px' }}>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Description</Form.Label>
-                                        <Form.Control type="text" defaultValue={this.state.selectedCol.comment}
-                                            onChange={e => this.state.selectedCol.comment = e.target.value}
-                                        />
-                                        <Form.Text className="text-muted">
-                                            Will be saved to the DSS Column name
-                                        </Form.Text>
-                                    </Form.Group>
-                                </Form>
-                            </Row>
-                        </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={() => this.saveColLineage()}>Save all Lineage</Button>
-                        <Button variant="primary" onClick={() => this.saveCol()}>Save</Button>
-                    </Modal.Footer>
-                </Modal>
-
                 <Container style={{ paddingTop: '20px' }}>
-                    {/* <Row><h2><a href={this.createDsLink(this.props.deets)} target="_blank">{this.props.deets.name} ({this.props.deets.projectKey})</a></h2></Row> */}
-                    {/* <Row><h4><b>Type:</b> {this.props.deets.type}</h4></Row> */}
-                    {/* <Row><h4><b>Last Modified:</b> {this.props.deets.versionTag.lastModifiedBy.login} @ {this.props.deets.versionTag.lastModifiedOn}</h4></Row> */}
-                    {/* <Row><h4><b>Short Desc:</b> {this.props.deets.shortDesc}</h4></Row> */}
-                    <Row>
-                        <Toast show={this.state.showA} delay={3000} autohide animation={false}>
-                            <Toast.Header>
-                                <img
-                                    src="holder.js/20x20?text=%20"
-                                    className="rounded me-2"
-                                    alt=""
-                                />
-                                <strong className="me-auto">Bootstrap</strong>
-                                <small>11 mins ago</small>
-                            </Toast.Header>
-                            <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-                        </Toast>
-                    </Row>
                     <Row style={{ paddingTop: '20px' }}>
                         <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
                             <Tab eventKey="lineage" title="Lineage">

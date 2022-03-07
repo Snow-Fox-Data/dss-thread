@@ -5,6 +5,7 @@ import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Button from 'react-bootstrap/Button'
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
@@ -69,7 +70,7 @@ class DataikuItem extends Component {
 
     renderColumn() {
         let lineage = this.buildLineage();
-        
+
         return <Col>
             <p class="name"><b>Project: </b>
                 <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
@@ -84,9 +85,10 @@ class DataikuItem extends Component {
             <div style={{ paddingTop: '10px' }}>
                 <Tabs defaultActiveKey="definition" className="mb-3">
                     <Tab eventKey="definition" title="Definition" def>
+                        <Button variant="primary">Add</Button>{' '}
                         {this.props.item.comment}
                     </Tab>
-                    <Tab eventKey="lineage" title="Lineage" def>                        
+                    <Tab eventKey="lineage" title="Lineage" def>
                         <div class="lineage">{lineage}</div>
                     </Tab>
                 </Tabs>
@@ -109,7 +111,7 @@ class DataikuItem extends Component {
         return <Col>
             <p class="name"><b>Name: </b>{this.props.item.name}
                 <span style={{ paddingLeft: '4px' }}>
-                    <a href={this.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={20} />
+                    <a href={Common.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={20} />
                     </a></span>
             </p>
             <p class="project"><b>Project: </b>
@@ -142,14 +144,6 @@ class DataikuItem extends Component {
         </Col>;
     }
 
-    createProjectLink(projkey) {
-        return '/projects/' + projkey + '/flow/';
-    }
-
-    createDatasetLink(projkey, ds) {
-        return '/projects/' + projkey + '/datasets/' + ds + '/explore/';
-    }
-
     renderProject() {
         let tags = this.buildTagsString(this.props.item.tags);
         let dataSetRows = this.props.item.datasets.map((col) =>
@@ -160,7 +154,7 @@ class DataikuItem extends Component {
 
         return <Col>
             <p class="name"><b>Name: </b><span>{this.props.item.name}</span><span style={{ paddingLeft: '4px' }}>
-                <a href={this.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
+                <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
                 </a></span></p>
             <p class="name"><b>Type: </b>{this.props.type}</p>
 
