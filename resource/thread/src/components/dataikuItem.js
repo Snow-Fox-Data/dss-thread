@@ -118,7 +118,7 @@ class DataikuItem extends Component {
                 <Tabs defaultActiveKey="definition" className="mb-3">
                     <Tab eventKey="definition" title="Definition" def>
                         <Button variant="primary"
-                            onClick={this.newDef}
+                            onClick={() => this.newDef()}
                         >Add</Button>{' '}
                         {this.props.item.comment}
                     </Tab>
