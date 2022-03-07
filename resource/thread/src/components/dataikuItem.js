@@ -56,6 +56,10 @@ class DataikuItem extends Component {
         }
     }
 
+    newDef() {
+        alert('new')
+    }
+
     openColumn(col) {
         eventBus.dispatch("columnSelected", col);
     };
@@ -85,7 +89,9 @@ class DataikuItem extends Component {
             <div style={{ paddingTop: '10px' }}>
                 <Tabs defaultActiveKey="definition" className="mb-3">
                     <Tab eventKey="definition" title="Definition" def>
-                        <Button variant="primary">Add</Button>{' '}
+                        <Button variant="primary"
+                        onClick={this.newDef}
+                        >Add</Button>{' '}
                         {this.props.item.comment}
                     </Tab>
                     <Tab eventKey="lineage" title="Lineage" def>
