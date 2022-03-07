@@ -160,7 +160,8 @@ class Lineage extends Component {
             var edge = { id: '-1-up_' + x, source: 'up_' + x, target: '-1', arrowHeadType: 'arrow' };
             if (up_res[x].count > 0) {
                 edge.animated = true;
-                edge.label = '[' + up_res[x].count + ']';
+                edge.label = '[999]';
+                // edge.label = '[' + up_res[x].count + ']';
             }
 
             elements[elements.length] = edge;
