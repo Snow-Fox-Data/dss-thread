@@ -93,6 +93,11 @@ class Lineage extends Component {
             }
         }
 
+        console.log('down_res == ');
+        console.log(down_res);
+        console.log('up_res == ');
+        console.log(up_res);
+
         for (var x = 0; x < down_res.length; x++) {
             var lbl = down_res[x];
             if (lbl.name != null)
