@@ -5,7 +5,7 @@ import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import Button from 'react-bootstrap/Button'
+import { Modal, Button, Form, Toast } from "react-bootstrap";
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
@@ -16,7 +16,7 @@ class DataikuItem extends Component {
         super(props);
 
         this.state = {
-
+            newDefModal: false
         };
     }
 
@@ -57,7 +57,7 @@ class DataikuItem extends Component {
     }
 
     newDef() {
-        alert('new')
+        this.setState({ newDefModal: true });
     }
 
     openColumn(col) {
@@ -76,6 +76,34 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
 
         return <Col>
+            {/* onHide={this.closeColumn}  */}
+            <Modal size="lg" show={this.state.newDefModal} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title>test</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                        <Row>
+                            <Form style={{ paddingTop: '15px' }}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Description</Form.Label>
+                                    {/* <Form.Control type="text" defaultValue={this.state.selectedCol.comment}
+                                        onChange={e => this.state.selectedCol.comment = e.target.value}
+                                    />
+                                    <Form.Text className="text-muted">
+                                        Will be saved to the DSS Column name
+                                    </Form.Text> */}
+                                </Form.Group>
+                            </Form>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    {/* <Button variant="secondary" onClick={() => this.saveColLineage()}>Save all Lineage</Button>
+                    <Button variant="primary" onClick={() => this.saveCol()}>Save</Button> */}
+                </Modal.Footer>
+            </Modal>
+
             <p class="name"><b>Project: </b>
                 <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
             </p>
@@ -90,7 +118,7 @@ class DataikuItem extends Component {
                 <Tabs defaultActiveKey="definition" className="mb-3">
                     <Tab eventKey="definition" title="Definition" def>
                         <Button variant="primary"
-                        onClick={this.newDef}
+                            onClick={this.newDef}
                         >Add</Button>{' '}
                         {this.props.item.comment}
                     </Tab>
