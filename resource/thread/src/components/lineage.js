@@ -158,7 +158,6 @@ class Lineage extends Component {
             }
 
             var edge = { id: '-1-up_' + x, source: 'up_' + x, target: '-1', arrowHeadType: 'arrow' };
-            edge.label = '[999]';
             if (up_res[x].count > 0) {
                 edge.animated = true;
                 edge.label = '[' + up_res[x].count + ']';
