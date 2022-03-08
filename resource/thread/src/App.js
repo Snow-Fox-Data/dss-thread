@@ -10,7 +10,8 @@ import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {
     Container,
     Row,
-    Spinner
+    Spinner,
+    Button
 } from 'react-bootstrap';
 
 import {
@@ -129,6 +130,15 @@ class App extends Component {
         });
     }
 
+    rescan() {
+        this.setState({ loading: true });
+        fetch(window.getWebAppBackendUrl('scan'))
+            .then(res => res.json())
+            .then((response) => {
+                this.setState({ loading: false });
+            });
+    }
+
     renderMenuItemChildren(option, props) {
         return <Fragment>
             {Common.getIconForDataikuItemType(option.type)}
@@ -169,6 +179,11 @@ class App extends Component {
 
         return (
             <Container style={{ paddingTop: '20px' }}>
+                <Row>
+                    <Button variant="primary"
+                        onClick={() => this.rescan()}
+                    >Rescan</Button>{' '}
+                </Row>
                 <Row>
                     <AsyncTypeahead
                         filterBy={filterBy}
