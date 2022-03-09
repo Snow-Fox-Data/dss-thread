@@ -88,7 +88,7 @@ def load_item():
 
     return json.dumps(res) 
 
-@app.route('/update-desc', methods=['POST'])
+@app.route('/update-desc', methods=['GET','POST'])
 def update_desc():
     dss = dss_utils()
     desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
