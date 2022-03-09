@@ -26,19 +26,32 @@ class DataikuItem extends Component {
 
     saveCol() {
         // this.setState({ newDefModal: false });
-        let formData = new FormData()
-        formData.append("name", this.state.selectedDef.name);
-        formData.append("description", this.state.selectedDef.value);
-        formData.append("applied_to", [this.props.item.key]);
-        formData.append("id", -1);
+        // let formData = new FormData()
+        // formData.append("name", this.state.selectedDef.name);
+        // formData.append("description", this.state.selectedDef.value);
+        // formData.append("applied_to", [this.props.item.key]);
+        // formData.append("id", -1);
 
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data'
+        //     },
+        //     body: formData
+        // };
         const requestOptions = {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: formData
-        };
+            body: JSON.stringify({
+                "name": this.state.selectedDef.name,
+                "description": this.state.selectedDef.value,
+                "applied_to": [this.props.item.key],
+                "id": -1
+            })
+        }
 
         fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
             .then(res => res.json())
