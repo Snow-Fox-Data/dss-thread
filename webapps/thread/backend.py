@@ -100,7 +100,7 @@ def update_desc():
     data = request.json
     desc_id = int(data['id'])
     # print(desc_id)
-    applied_to = json.loads(data['applied_to'])
+    applied_to = data['applied_to']
 
     # print(desc_id, exists)
     if desc_id == -1:
