@@ -88,45 +88,45 @@ def load_item():
 
     return json.dumps(res) 
 
-@app.route('/update-desc', methods=['GET','POST'])
+@app.route('/update-desc', methods=['POST'])
 def update_desc():
-    dss = dss_utils()
-    desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
-    exists = len(desc_ds.read_schema(raise_if_empty=False)) > 0
+    # dss = dss_utils()
+    # desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
+    # exists = len(desc_ds.read_schema(raise_if_empty=False)) > 0
 
-    if exists:
-        df = desc_ds.get_dataframe()
+    # if exists:
+    #     df = desc_ds.get_dataframe()
     
-    data = request.values
-    desc_id = int(data['id'])
-    applied_to = json.loads(data['applied_to'])
+    # data = request.values
+    # desc_id = int(data['id'])
+    # applied_to = json.loads(data['applied_to'])
 
-    # print(desc_id, exists)
-    if desc_id == -1:
-        print('new desc')
-        # new description
-        desc = {
-            "id": random.randint(100000,100000000),
-            "name": data['name'],
-            "description": data['description'],
-            "applied_to": applied_to,
-            "sources": [],
-            "destinations":[]
-        }
+    # # print(desc_id, exists)
+    # if desc_id == -1:
+    #     print('new desc')
+    #     # new description
+    #     desc = {
+    #         "id": random.randint(100000,100000000),
+    #         "name": data['name'],
+    #         "description": data['description'],
+    #         "applied_to": applied_to,
+    #         "sources": [],
+    #         "destinations":[]
+    #     }
 
-        if exists:
-            df = df.append(desc, ignore_index=True)
-        else:
-            df = pd.DataFrame.from_dict([desc])
-    else:
-        df.loc[df['id']==desc_id, 'name'] = data['name']
-        df.loc[df['id']==desc_id, 'description'] = data['description']
-        df.loc[df['id']==desc_id, 'applied_to'] = applied_to
+    #     if exists:
+    #         df = df.append(desc, ignore_index=True)
+    #     else:
+    #         df = pd.DataFrame.from_dict([desc])
+    # else:
+    #     df.loc[df['id']==desc_id, 'name'] = data['name']
+    #     df.loc[df['id']==desc_id, 'description'] = data['description']
+    #     df.loc[df['id']==desc_id, 'applied_to'] = applied_to
 
-    desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+    # desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
-    if len(data['applied_to']) > 0:
-        dss.update_column_description(applied_to, data['description'])
+    # if len(data['applied_to']) > 0:
+    #     dss.update_column_description(applied_to, data['description'])
      
     return json.dumps({"success": True})
 
