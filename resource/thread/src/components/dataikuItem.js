@@ -16,7 +16,10 @@ class DataikuItem extends Component {
         super(props);
 
         this.state = {
-            newDefModal: false
+            newDefModal: false,
+            selectedDef: {
+                name: "New Definition"
+            }
         };
     }
 
@@ -79,7 +82,7 @@ class DataikuItem extends Component {
             {/* onHide={this.closeColumn}  */}
             <Modal size="lg" show={this.state.newDefModal} animation={false}>
                 <Modal.Header closeButton>
-                    <Modal.Title>test</Modal.Title>
+                    <Modal.Title>{this.state.selectedDef.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
@@ -87,12 +90,12 @@ class DataikuItem extends Component {
                             <Form style={{ paddingTop: '15px' }}>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Description</Form.Label>
-                                    {/* <Form.Control type="text" defaultValue={this.state.selectedCol.comment}
-                                        onChange={e => this.state.selectedCol.comment = e.target.value}
+                                    <Form.Control type="text" defaultValue={this.state.selectedDef.name}
+                                    // onChange={e => this.state.selectedCol.comment = e.target.value}
                                     />
                                     <Form.Text className="text-muted">
                                         Will be saved to the DSS Column name
-                                    </Form.Text> */}
+                                    </Form.Text>
                                 </Form.Group>
                             </Form>
                         </Row>
