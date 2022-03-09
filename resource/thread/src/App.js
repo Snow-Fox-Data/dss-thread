@@ -10,6 +10,7 @@ import { FaRedo } from 'react-icons/fa';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {
     Container,
+    Col,
     Row,
     Spinner,
     Button
@@ -180,12 +181,15 @@ class App extends Component {
 
         return (
             <Container style={{ paddingTop: '20px' }}>
-                <Row style={{paddingBottom:'10px'}}>
-                    <Button variant="primary" size="sm"
-                        onClick={() => this.rescan()}
-                    >
-                        <FaRedo />
-                    </Button>
+                <Row style={{ paddingBottom: '10px' }}>
+                    <Col><h1>Thread</h1></Col>
+                    <Col style={{ textAlign: 'right' }}>
+                        <Button variant="primary" style={{ width: '22px', height: '22px' }}
+                            onClick={() => this.rescan()}
+                        >
+                            <FaRedo />
+                        </Button>
+                    </Col>
                 </Row>
                 <Row>
                     <AsyncTypeahead
