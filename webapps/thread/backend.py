@@ -90,15 +90,16 @@ def load_item():
 
 @app.route('/update-desc', methods=['POST'])
 def update_desc():
-    # dss = dss_utils()
-    # desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
-    # exists = len(desc_ds.read_schema(raise_if_empty=False)) > 0
+    dss = dss_utils()
+    desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
+    exists = len(desc_ds.read_schema(raise_if_empty=False)) > 0
 
-    # if exists:
-    #     df = desc_ds.get_dataframe()
+    if exists:
+        df = desc_ds.get_dataframe()
     
-    # data = request.values
-    # desc_id = int(data['id'])
+    data = request.values
+    desc_id = int(data['id'])
+    print(desc_id)
     # applied_to = json.loads(data['applied_to'])
 
     # # print(desc_id, exists)
