@@ -86,7 +86,7 @@ def load_item():
                 col = next(item for item in p['schema'] if item["name"] == c_name)
                 col['project'] = p_name
                 col['dataset'] = d_name
-                col['definition'] = {}
+                col['definition'] = { "id": -1}
 
                 if len(result) > 0:
                     col['definition'] = result.to_dict('records')[0]

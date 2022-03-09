@@ -170,12 +170,28 @@ class DataikuItem extends Component {
             <div style={{ paddingTop: '10px' }}>
                 <Tabs defaultActiveKey="definition" className="mb-3">
                     <Tab eventKey="definition" title="Definition" def>
-                        <Button variant="primary"
-                            onClick={() => this.newDef()}
-                        >Add</Button>{' '}
-                        <div style={{ padding: '10px' }}>
-                            {this.props.item.comment}
-                        </div>
+                        {
+                            this.props.item.definition.id == -1 &&
+                            <div>
+                                <Button variant="primary"
+                                    onClick={() => this.newDef()}
+                                >Add</Button>{' '}
+                                <div style={{ padding: '10px' }}>
+                                    {this.props.item.comment}
+                                </div>
+                            </div>
+                        }
+                        {
+                            this.props.item.definition.id > 0 &&
+                            <div>
+                                <Button variant="primary"
+                                    onClick={() => this.newDef()}
+                                >Edit</Button>{' '}
+                                <div style={{ padding: '10px' }}>
+                                    {this.props.item.comment}
+                                </div>
+                            </div>
+                        }
                     </Tab>
                     <Tab eventKey="lineage" title="Lineage" def>
                         <div class="lineage">{lineage}</div>
