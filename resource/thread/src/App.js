@@ -6,7 +6,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
 
-import { FaArrowCircleRight } from 'react-icons/fa';
+import { FaRedo } from 'react-icons/fa';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {
     Container,
@@ -181,10 +181,10 @@ class App extends Component {
         return (
             <Container style={{ paddingTop: '20px' }}>
                 <Row style={{paddingBottom:'10px'}}>
-                    <Button variant="primary"
+                    <Button variant="primary" size="sm"
                         onClick={() => this.rescan()}
                     >
-                        <FaArrowCircleRight />
+                        <FaRedo />
                     </Button>
                 </Row>
                 <Row>
