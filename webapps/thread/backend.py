@@ -97,9 +97,9 @@ def update_desc():
     if exists:
         df = desc_ds.get_dataframe()
     
-    # data = request.values
-    # desc_id = int(data['id'])
-    print(request.json)
+    data = request.json
+    desc_id = int(data['id'])
+    print(desc_id)
     # applied_to = json.loads(data['applied_to'])
 
     # # print(desc_id, exists)
