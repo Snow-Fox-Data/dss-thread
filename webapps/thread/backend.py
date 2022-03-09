@@ -98,8 +98,8 @@ def update_desc():
         df = desc_ds.get_dataframe()
     
     data = request.values
-    desc_id = int(data['id'])
-    print(desc_id)
+    # desc_id = int(data['id'])
+    print(data)
     # applied_to = json.loads(data['applied_to'])
 
     # # print(desc_id, exists)
