@@ -25,17 +25,16 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
-        // this.setState({ newDefModal: false });
-        let formData = new FormData();
-        formData.append('name', this.state.selectedDef.name);
-        formData.append('description', this.state.selectedDef.value);
-        formData.append('applied_to', [this.props.key]);
-        formData.append('id', -1);
-
+        this.setState({ newDefModal: false });
         fetch(window.getWebAppBackendUrl('update-desc'), {
-            method: 'POST', body: formData, headers: {
-                "Content-Type": "form-data"
-            },
+            method: 'POST', body: JSON.stringify({
+                'name': this.state.selectedDef.name,
+                'description': this.state.selectedDef.value,
+                'applied_to': this.props.key
+            }),
+            headers: {
+                "Content-Type": 'application/json'
+            }
         })
             .then(res => res.json())
             .then(
