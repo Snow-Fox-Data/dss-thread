@@ -82,7 +82,7 @@ class DataikuItem extends Component {
         this.setState({
             selectedDef: {
                 name: 'New Definition',
-                value: this.props.item.content
+                value: this.props.item.comment
             }
         })
         this.setState({ newDefModal: true });
