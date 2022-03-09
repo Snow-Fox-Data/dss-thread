@@ -213,8 +213,8 @@ class dss_utils:
             "id": d_name,
             "project": p_name,
             "meta": ds.read_metadata(),
-            "lineage-upstream": lin_up,
-            "lineage-downstream": lin_down
+            "lineage_upstream": lin_up,
+            "lineage_downstream": lin_down
         }
 
         return res
@@ -236,9 +236,9 @@ class dss_utils:
             ds.set_schema(ds_schema)
 
     def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
-        dir = 'lineage-downstream'
+        dir = 'lineage_downstream'
         if upstream:
-            dir = 'lineage-upstream'
+            dir = 'lineage_upstream'
 
         nxt = []
 
