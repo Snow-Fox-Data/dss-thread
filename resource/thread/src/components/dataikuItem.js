@@ -30,9 +30,12 @@ class DataikuItem extends Component {
         formData.append('name', this.state.selectedDef.name);
         formData.append('description', this.state.selectedDef.value);
         formData.append('applied_to', [this.props.key]);
+        formData.append('id', -1);
 
         fetch(window.getWebAppBackendUrl('update-desc'), {
-            method: 'POST', body: formData
+            method: 'POST', body: formData, headers: {
+                "Content-Type": "form-data"
+            },
         })
             .then(res => res.json())
             .then(
