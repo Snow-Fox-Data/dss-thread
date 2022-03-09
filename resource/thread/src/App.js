@@ -184,11 +184,7 @@ class App extends Component {
                 <Row style={{ paddingBottom: '10px' }}>
                     <Col><h1>Thread</h1></Col>
                     <Col style={{ textAlign: 'right' }}>
-                        <Button variant="primary" style={{ width: '22px', height: '22px' }}
-                            onClick={() => this.rescan()}
-                        >
-                            <FaRedo />
-                        </Button>
+                        <FaRedo onClick={() => this.rescan()} style={{ width: '22px', height: '22px' }} />
                     </Col>
                 </Row>
                 <Row>
