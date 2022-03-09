@@ -229,7 +229,7 @@ class DataikuItem extends Component {
         }
 
         return (
-            <div class="dataiku-item" style={{ paddingTop: '20px' }}>
+            <div class="dataiku-item">
                 {item}
             </div>
         );

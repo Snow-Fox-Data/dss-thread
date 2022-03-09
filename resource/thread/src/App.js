@@ -184,7 +184,7 @@ class App extends Component {
                 <Row style={{ paddingBottom: '10px' }}>
                     <Col><h1>Thread</h1></Col>
                     <Col style={{ textAlign: 'right' }}>
-                        <FaRedo onClick={() => this.rescan()} style={{ width: '22px', height: '22px' }} />
+                        <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                     </Col>
                 </Row>
                 <Row>
@@ -211,8 +211,9 @@ class App extends Component {
                             : null}
                     </div>
                 </Row>
-
-                {this.dataikuItem}
+                <Row>
+                    {this.dataikuItem}
+                </Row>
             </Container>
         );
     }
