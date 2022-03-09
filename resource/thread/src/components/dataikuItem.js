@@ -25,21 +25,20 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
-        this.setState({ newDefModal: false });
-        // fetch(window.getWebAppBackendUrl('update-col-desc'), {
-        //     method: 'POST', body: JSON.stringify({
-        //         'cols': [this.createColName(this.state.selectedCol.name)],
-        //         'desc': this.state.selectedCol.comment,
-        //         'upstream': false,
-        //         'downstream': false
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(
-        //         (result) => {
-        //             this.setState({ newDefModal: false });
-        //             // eventBus.dispatch("dataRefresh", {});
-        //         });
+        // this.setState({ newDefModal: false });
+        fetch(window.getWebAppBackendUrl('update-desc'), {
+            method: 'POST', body: JSON.stringify({
+                'name': this.state.selectedDef.name,
+                'description': this.state.selectedDef.value,
+                'applied_to': this.props.key
+            })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({ newDefModal: false });
+                    // eventBus.dispatch("dataRefresh", {});
+                });
     }
 
     buildLineage() {
