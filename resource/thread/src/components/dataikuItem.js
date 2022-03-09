@@ -29,8 +29,8 @@ class DataikuItem extends Component {
         let formData = new FormData()
         formData.append("name", this.state.selectedDef.name);
         formData.append("description", this.state.selectedDef.value);
-        formData.append("applied_to", this.props.key);
-        formData.append("id", '-1');
+        formData.append("applied_to", [this.props.item.key]);
+        formData.append("id", -1);
 
         const requestOptions = {
             method: 'POST',
