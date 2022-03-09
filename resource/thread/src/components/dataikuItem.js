@@ -18,9 +18,28 @@ class DataikuItem extends Component {
         this.state = {
             newDefModal: false,
             selectedDef: {
-                name: "New Definition"
+                name: "New Definition",
+                value:""
             }
         };
+    }
+
+    saveCol() {
+        this.setState({ newDefModal: false });
+        // fetch(window.getWebAppBackendUrl('update-col-desc'), {
+        //     method: 'POST', body: JSON.stringify({
+        //         'cols': [this.createColName(this.state.selectedCol.name)],
+        //         'desc': this.state.selectedCol.comment,
+        //         'upstream': false,
+        //         'downstream': false
+        //     })
+        // })
+        //     .then(res => res.json())
+        //     .then(
+        //         (result) => {
+        //             this.setState({ newDefModal: false });
+        //             // eventBus.dispatch("dataRefresh", {});
+        //         });
     }
 
     buildLineage() {
@@ -89,21 +108,26 @@ class DataikuItem extends Component {
                         <Row>
                             <Form style={{ paddingTop: '15px' }}>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Description</Form.Label>
+                                    <Form.Label>Description Name</Form.Label>
                                     <Form.Control type="text" defaultValue={this.state.selectedDef.name}
-                                    // onChange={e => this.state.selectedCol.comment = e.target.value}
+                                        onChange={e => this.state.selectedDef.name = e.target.value}
                                     />
-                                    <Form.Text className="text-muted">
+                                    {/* <Form.Text className="text-muted">
                                         Will be saved to the DSS Column name
-                                    </Form.Text>
+                                    </Form.Text> */}
+                                    <Form.Label>Description Value</Form.Label>
+                                    <Form.Control type="text" defaultValue={this.state.selectedDef.value}
+                                        onChange={e => this.state.selectedDef.value = e.target.value}
+                                    />
                                 </Form.Group>
                             </Form>
                         </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    {/* <Button variant="secondary" onClick={() => this.saveColLineage()}>Save all Lineage</Button>
-                    <Button variant="primary" onClick={() => this.saveCol()}>Save</Button> */}
+                {/* onClick={() => this.saveColLineage()} */}
+                    <Button variant="secondary" >Save all Lineage</Button>
+                    <Button variant="primary" onClick={() => this.saveCol()}>Save</Button>
                 </Modal.Footer>
             </Modal>
 
