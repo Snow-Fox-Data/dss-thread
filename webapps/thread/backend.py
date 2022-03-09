@@ -89,7 +89,7 @@ def load_item():
                 col['definition'] = {}
 
                 if len(result) > 0:
-                    col['definition'] = json.dumps(result.iloc[0])
+                    col['definition'] = result.iloc[0].to_json()
 
                 return col
 
