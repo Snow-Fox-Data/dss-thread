@@ -77,12 +77,19 @@ def load_item():
             return json.dumps(p)
         else:
             if res['type'] == 'column':
+                df = dataiku.Dataset(THREAD_DESCRPTIONS_NAME).get_dataframe()
+                result = df[df['applies_to'].str.contains(args.get('key'), case=False)]
+
                 p_name, d_name, c_name = dss.extract_name_project(key)
                 print(f'loading col: {key}, {c_name}')
                 p = dss.load_dataset(p_name + '.' + d_name, c_name)
                 col = next(item for item in p['schema'] if item["name"] == c_name)
                 col['project'] = p_name
                 col['dataset'] = d_name
+                col['definition'] = {}
+
+                if len(result) > 0:
+                    col['definition'] = json.dumps(result.iloc[0])
 
                 return col
 
