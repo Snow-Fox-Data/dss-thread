@@ -19,7 +19,7 @@ class DataikuItem extends Component {
             newDefModal: false,
             selectedDef: {
                 name: "New Definition",
-                value:""
+                value: ""
             }
         };
     }
@@ -79,6 +79,12 @@ class DataikuItem extends Component {
     }
 
     newDef() {
+        this.setState({
+            selectedDef: {
+                name: 'New Definition',
+                value: this.props.item.content
+            }
+        })
         this.setState({ newDefModal: true });
     }
 
@@ -125,7 +131,7 @@ class DataikuItem extends Component {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                {/* onClick={() => this.saveColLineage()} */}
+                    {/* onClick={() => this.saveColLineage()} */}
                     <Button variant="secondary" >Save all Lineage</Button>
                     <Button variant="primary" onClick={() => this.saveCol()}>Save</Button>
                 </Modal.Footer>
@@ -147,7 +153,9 @@ class DataikuItem extends Component {
                         <Button variant="primary"
                             onClick={() => this.newDef()}
                         >Add</Button>{' '}
-                        {this.props.item.comment}
+                        <div style={{ padding: '10px' }}>
+                            {this.props.item.comment}
+                        </div>
                     </Tab>
                     <Tab eventKey="lineage" title="Lineage" def>
                         <div class="lineage">{lineage}</div>
