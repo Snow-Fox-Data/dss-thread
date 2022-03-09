@@ -32,13 +32,12 @@ class DataikuItem extends Component {
         formData.append("applied_to", this.props.key);
         formData.append("id", '-1');
 
-        fetch(window.getWebAppBackendUrl('update-desc'), {
-            method: 'POST',
-            //  body: formData,
-            headers: {
-                "Content-Type": 'multipart/form-data'
-            }
-        })
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
             .then(res => res.json())
             .then(
                 (result) => {
