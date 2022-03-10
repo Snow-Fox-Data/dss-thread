@@ -96,6 +96,9 @@ class App extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
+        console.log("this.state.filters == ");
+        console.log(this.state.filters);
+
         this.setState({ loading: true });
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
             .then(res => res.json())
@@ -221,26 +224,22 @@ class App extends Component {
 
                 <Row className="filter" style={{ marginTop: "0.5em" }}>
                     <Col xs={1}>
-                        <p>Filter By: </p>
+                        <h4>Filter By: </h4>
                     </Col>
                     {Object.entries(filters).map(([key, value]) => {
                         return (
                             <Col xs={1}>
-                                <div key={key}>
-                                    <div className="toppings-list-item">
-                                        <div className="left-section">
-                                        <input
-                                            type="checkbox"
-                                            id={`filter-${key}`}
-                                            name={key}
-                                            value={key}
-                                            checked={value}
-                                            onChange={() => this.handleOnChange(key)}
-                                            style={{ marginRight:  "1.0em" }}
-                                        />
-                                        <label htmlFor={`filter-${key}`}>{key}</label>
-                                        </div>
-                                    </div>
+                                <div className="filter-types" key={key}>
+                                    <input
+                                        type="checkbox"
+                                        id={`filter-${key}`}
+                                        name={key}
+                                        value={key}
+                                        checked={value}
+                                        onChange={() => this.handleOnChange(key)}
+                                        style={{ marginRight:  "1.0em" }}
+                                    />
+                                    <label htmlFor={`filter-${key}`}>{key}</label>
                                 </div>
                             </Col>                                
                         );
