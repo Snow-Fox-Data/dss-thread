@@ -103,7 +103,8 @@ class App extends Component {
         Object.entries(this.state.filters).map(([key, value]) => {
             console.log("key == " + key);
             console.log("value == " + value);
-            if(value) {
+            console.log(value);
+            if(value == true) {
                 return key + ',';
             }            
         });
