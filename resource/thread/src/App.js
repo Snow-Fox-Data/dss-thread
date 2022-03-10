@@ -59,19 +59,19 @@ class App extends Component {
             }            
         });
 
-        let strTypes = "&types=";
-        types.map((item, i, arr) => {
-            console.log("i == " + i);
-            console.log("item == ");
-            console.log(item);
-            console.log("arr == ");
-            console.log(arr);
-        });
-
         console.log("types == ");
         console.log(types);
-        
-        // types = (types[types.length - 1] === ',') ? types.substring(0, types.length - 1) : types;
+
+        let strTypes = "&types=";
+        strTypes += types.map((type, i, arr) => {
+            console.log("i == " + i);
+            console.log("type == ");
+            console.log(type);
+            console.log("arr == ");
+            console.log(arr);
+            return type;
+        });
+
         console.log("strTypes == " + strTypes);
         return strTypes;
     }
