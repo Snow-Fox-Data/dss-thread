@@ -109,6 +109,7 @@ class App extends Component {
             if(value == true) {
                 return key;
             }            
+            return null;
         });
 
         console.log("types == " + types);
