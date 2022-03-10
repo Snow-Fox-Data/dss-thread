@@ -53,20 +53,24 @@ class App extends Component {
         console.log(this.state.filters);
 
         let types = [];
-        Object.entries(this.state.filters).map(([key, value]) => {
-            console.log("key == " + key);
-            console.log("value == " + value);
-            console.log(value);
-            console.log("(value == true) == ");
-            console.log((value == true));
+        Object.entries(this.state.filters).map(([key, value]) => {            
             if(value == true) {
                 types[types.length] = key;
             }            
         });
 
+        let strTypes = "&types=";
+        types.map((item, i, arr) => {
+            console.log("i == " + i);
+            console.log("item == ");
+            console.log(item);
+            console.log("arr == ");
+            console.log(arr);
+        });
+
         console.log("types == ");
         console.log(types);
-        let strTypes = "&types=";
+        
         // types = (types[types.length - 1] === ',') ? types.substring(0, types.length - 1) : types;
         console.log("strTypes == " + strTypes);
         return strTypes;
