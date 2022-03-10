@@ -104,6 +104,8 @@ class App extends Component {
             console.log("key == " + key);
             console.log("value == " + value);
             console.log(value);
+            console.log("(value == true) == ");
+            console.log((value == true));
             if(value == true) {
                 return key + ',';
             }            
