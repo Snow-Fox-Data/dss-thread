@@ -99,8 +99,8 @@ class App extends Component {
         console.log("this.state.filters == ");
         console.log(this.state.filters);
 
-        let types = "&types=";
-        types += Object.entries(this.state.filters).map(([key, value]) => {
+        let types = [];
+        types[types.length] = Object.entries(this.state.filters).map(([key, value]) => {
             console.log("key == " + key);
             console.log("value == " + value);
             console.log(value);
@@ -109,12 +109,12 @@ class App extends Component {
             if(value == true) {
                 return key;
             }            
-            return null;
         });
 
         console.log("types == " + types);
+        let strTypes = "&types=";
         // types = (types[types.length - 1] === ',') ? types.substring(0, types.length - 1) : types;
-        // console.log("types == " + types);
+        console.log("strTypes == " + strTypes);
 
         this.setState({ loading: true });
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
