@@ -62,18 +62,22 @@ class App extends Component {
         console.log("types == ");
         console.log(types);
 
-        let strTypes = "&types=";
-        strTypes += types.map((type, i, arr) => {
-            console.log("i == " + i);
-            console.log("type == ");
-            console.log(type);
-            console.log("arr == ");
-            console.log(arr);
-            return type;
-        });
-
-        console.log("strTypes == " + strTypes);
-        return strTypes;
+        if(types.length > 0) {
+            let strTypes = "&types=";
+            strTypes += types.map((type, i, arr) => {
+                console.log("i == " + i);
+                console.log("type == ");
+                console.log(type);
+                console.log("arr == ");
+                console.log(arr);
+                return type;
+            });
+    
+            console.log("strTypes == " + strTypes);
+            return strTypes;
+        } else {
+            return null;
+        }        
     }
 
     handleOnChange = (type) => {
@@ -111,16 +115,17 @@ class App extends Component {
         }
     }
 
-    search = (query) => {
+    search = (term) => {
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
 
         let types = this.formatQueryTypes();
+        console.log('search() :: types = ' + types);
 
         this.setState({ loading: true });
-        fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
+        fetch(window.getWebAppBackendUrl('search') + '?term=' + term, requestOptions)
             .then(res => res.json())
             .then((response) => {
                 var p_list = [];
