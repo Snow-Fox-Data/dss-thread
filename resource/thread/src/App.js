@@ -48,15 +48,32 @@ class App extends Component {
         }
     }
 
+    formatQueryTypes = () => {
+        console.log("formatQueryTypes() :: this.state.filters == ");
+        console.log(this.state.filters);
+
+        let types = [];
+        Object.entries(this.state.filters).map(([key, value]) => {
+            console.log("key == " + key);
+            console.log("value == " + value);
+            console.log(value);
+            console.log("(value == true) == ");
+            console.log((value == true));
+            if(value == true) {
+                types[types.length] = key;
+            }            
+        });
+
+        console.log("types == ");
+        console.log(types);
+        let strTypes = "&types=";
+        // types = (types[types.length - 1] === ',') ? types.substring(0, types.length - 1) : types;
+        console.log("strTypes == " + strTypes);
+        return strTypes;
+    }
+
     handleOnChange = (type) => {
-        console.log("type == ");
-        console.log(type);
-
         let tempFilters = this.state.filters;
-
-        console.log("tempFilters == ");
-        console.log(tempFilters);
-
         tempFilters[type] = !tempFilters[type];
 
         this.setState({ 
@@ -96,26 +113,7 @@ class App extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        console.log("this.state.filters == ");
-        console.log(this.state.filters);
-
-        let types = [];
-        Object.entries(this.state.filters).map(([key, value]) => {
-            console.log("key == " + key);
-            console.log("value == " + value);
-            console.log(value);
-            console.log("(value == true) == ");
-            console.log((value == true));
-            if(value == true) {
-                types[types.length] = key;
-            }            
-        });
-
-        console.log("types == ");
-        console.log(types);
-        let strTypes = "&types=";
-        // types = (types[types.length - 1] === ',') ? types.substring(0, types.length - 1) : types;
-        console.log("strTypes == " + strTypes);
+        let types = this.formatQueryTypes();
 
         this.setState({ loading: true });
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
