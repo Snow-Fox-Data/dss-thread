@@ -213,7 +213,7 @@ class App extends Component {
                     />
                 </Row>
 
-                <Row>
+                {/* <Row>
                     <p>Filter By: </p>
 
                     <div className="filter">
@@ -237,7 +237,7 @@ class App extends Component {
                             );
                         })}
                     </div>
-                </Row>
+                </Row> */}
 
                 <Row>
                     <div style={{ padding: '10px' }}>
