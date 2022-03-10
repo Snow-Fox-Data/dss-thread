@@ -48,7 +48,7 @@ class App extends Component {
         }
     }
 
-    checkboxChange = (type) => {
+    handleOnChange = (type) => {
         console.log("type == ");
         console.log(type);
     }
@@ -229,6 +229,7 @@ class App extends Component {
                                             value={key}
                                             checked={value}
                                             onChange={() => this.handleOnChange(key)}
+                                            style={{ marginRight:  "1.0em" }}
                                         />
                                         <label htmlFor={`filter-${key}`}>{key}</label>
                                         </div>
