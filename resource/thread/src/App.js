@@ -183,7 +183,7 @@ class App extends Component {
         //     </main>
         // </Router>
 
-        const { isLoading, searchResults, selectedItem, selectedItemType } = this.state;
+        const { filters, isLoading, searchResults, selectedItem, selectedItemType } = this.state;
         // const ref = React.createRef();
         const filterBy = () => true;
 
@@ -213,11 +213,11 @@ class App extends Component {
                     />
                 </Row>
 
-                {/* <Row>
+                <Row>
                     <p>Filter By: </p>
 
                     <div className="filter">
-                        {this.filters.map((checked, key) => {
+                        {Object.entries(filters).map(([key, value]) => {
                             return (
                                 <div key={key}>
                                     <div className="toppings-list-item">
@@ -227,7 +227,7 @@ class App extends Component {
                                             id={`filter-${key}`}
                                             name={key}
                                             value={key}
-                                            checked={checked}
+                                            checked={value}
                                             onChange={() => this.handleOnChange(key)}
                                         />
                                         <label htmlFor={`filter-${key}`}>{key}</label>
@@ -237,7 +237,7 @@ class App extends Component {
                             );
                         })}
                     </div>
-                </Row> */}
+                </Row>
 
                 <Row>
                     <div style={{ padding: '10px' }}>

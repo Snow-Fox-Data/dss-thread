@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "../../resource/thread/build/static/css/main.89c46eb4.chunk.css",
-    "main.js": "../../resource/thread/build/static/js/main.6a9d9140.chunk.js",
-    "main.js.map": "../../resource/thread/build/static/js/main.6a9d9140.chunk.js.map",
+    "main.js": "../../resource/thread/build/static/js/main.da4b1bf2.chunk.js",
+    "main.js.map": "../../resource/thread/build/static/js/main.da4b1bf2.chunk.js.map",
     "runtime-main.js": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js",
     "runtime-main.js.map": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js.map",
     "static/css/2.68a81a89.chunk.css": "../../resource/thread/build/static/css/2.68a81a89.chunk.css",
-    "static/js/2.a33bbd4d.chunk.js": "../../resource/thread/build/static/js/2.a33bbd4d.chunk.js",
-    "static/js/2.a33bbd4d.chunk.js.map": "../../resource/thread/build/static/js/2.a33bbd4d.chunk.js.map",
+    "static/js/2.79c53325.chunk.js": "../../resource/thread/build/static/js/2.79c53325.chunk.js",
+    "static/js/2.79c53325.chunk.js.map": "../../resource/thread/build/static/js/2.79c53325.chunk.js.map",
     "index.html": "../../resource/thread/build/index.html",
-    "precache-manifest.5e6e882d9e53799197ad4785951b0f7f.js": "../../resource/thread/build/precache-manifest.5e6e882d9e53799197ad4785951b0f7f.js",
+    "precache-manifest.fce3f68812e416479962250f7aa7be67.js": "../../resource/thread/build/precache-manifest.fce3f68812e416479962250f7aa7be67.js",
     "service-worker.js": "../../resource/thread/build/service-worker.js",
     "static/css/2.68a81a89.chunk.css.map": "../../resource/thread/build/static/css/2.68a81a89.chunk.css.map",
     "static/css/main.89c46eb4.chunk.css.map": "../../resource/thread/build/static/css/main.89c46eb4.chunk.css.map",
-    "static/js/2.a33bbd4d.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.a33bbd4d.chunk.js.LICENSE.txt"
+    "static/js/2.79c53325.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.79c53325.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8e4d5060.js",
     "static/css/2.68a81a89.chunk.css",
-    "static/js/2.a33bbd4d.chunk.js",
+    "static/js/2.79c53325.chunk.js",
     "static/css/main.89c46eb4.chunk.css",
-    "static/js/main.6a9d9140.chunk.js"
+    "static/js/main.da4b1bf2.chunk.js"
   ]
 }
