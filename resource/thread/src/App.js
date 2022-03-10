@@ -99,6 +99,17 @@ class App extends Component {
         console.log("this.state.filters == ");
         console.log(this.state.filters);
 
+        let types = "&types=";
+        Object.entries(this.state.filters).map(([key, value]) => {
+            if(value) {
+                return key + ',';
+            }            
+        });
+
+        console.log("types types == " + types);
+        types = types.substring(0, types.length - 1);
+        console.log("types types == " + types);
+
         this.setState({ loading: true });
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
             .then(res => res.json())
