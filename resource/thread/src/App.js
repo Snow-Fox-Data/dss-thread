@@ -110,8 +110,8 @@ class App extends Component {
         });
 
         console.log("types == " + types);
-        types = types.substring(0, types.length - 1);
-        console.log("types == " + types);
+        // types = (types[types.length - 1] === ',') ? types.substring(0, types.length - 1) : types;
+        // console.log("types == " + types);
 
         this.setState({ loading: true });
         fetch(window.getWebAppBackendUrl('search') + '?term=' + query, requestOptions)
