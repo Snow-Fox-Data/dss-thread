@@ -107,7 +107,7 @@ class App extends Component {
             console.log("(value == true) == ");
             console.log((value == true));
             if(value == true) {
-                return key + ',';
+                return key;
             }            
         });
 
