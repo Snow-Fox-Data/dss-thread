@@ -100,7 +100,7 @@ class App extends Component {
         console.log(this.state.filters);
 
         let types = "&types=";
-        Object.entries(this.state.filters).map(([key, value]) => {
+        types += Object.entries(this.state.filters).map(([key, value]) => {
             console.log("key == " + key);
             console.log("value == " + value);
             console.log(value);
