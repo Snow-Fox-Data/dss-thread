@@ -100,14 +100,14 @@ class App extends Component {
         console.log(this.state.filters);
 
         let types = [];
-        types[types.length] = Object.entries(this.state.filters).map(([key, value]) => {
+        Object.entries(this.state.filters).map(([key, value]) => {
             console.log("key == " + key);
             console.log("value == " + value);
             console.log(value);
             console.log("(value == true) == ");
             console.log((value == true));
             if(value == true) {
-                return key;
+                types[types.length] = key;
             }            
         });
 
