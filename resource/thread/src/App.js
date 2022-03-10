@@ -111,7 +111,8 @@ class App extends Component {
             }            
         });
 
-        console.log("types == " + types);
+        console.log("types == ");
+        console.log(types);
         let strTypes = "&types=";
         // types = (types[types.length - 1] === ',') ? types.substring(0, types.length - 1) : types;
         console.log("strTypes == " + strTypes);
