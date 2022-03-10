@@ -53,7 +53,7 @@ class App extends Component {
         console.log(type);
 
         let tempFilters = this.filters;
-        tempFilters.type = !tempFilters.type;
+        tempFilters[type] = !tempFilters[type];
 
         this.setState({ 
             filters: tempFilters
@@ -215,35 +215,32 @@ class App extends Component {
                     />
                 </Row>
 
-                <Row>
+                <Row className="filter">
                     <Col xs={2}>
                         <p>Filter By: </p>
                     </Col>
-                    
-                    <div className="filter">
-                        {Object.entries(filters).map(([key, value]) => {
-                            return (
-                                <Col xs={2}>
-                                    <div key={key}>
-                                        <div className="toppings-list-item">
-                                            <div className="left-section">
-                                            <input
-                                                type="checkbox"
-                                                id={`filter-${key}`}
-                                                name={key}
-                                                value={key}
-                                                checked={value}
-                                                onChange={() => this.handleOnChange(key)}
-                                                style={{ marginRight:  "1.0em" }}
-                                            />
-                                            <label htmlFor={`filter-${key}`}>{key}</label>
-                                            </div>
+                    {Object.entries(filters).map(([key, value]) => {
+                        return (
+                            <Col xs={2}>
+                                <div key={key}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                        <input
+                                            type="checkbox"
+                                            id={`filter-${key}`}
+                                            name={key}
+                                            value={key}
+                                            checked={value}
+                                            onChange={() => this.handleOnChange(key)}
+                                            style={{ marginRight:  "1.0em" }}
+                                        />
+                                        <label htmlFor={`filter-${key}`}>{key}</label>
                                         </div>
                                     </div>
-                                </Col>                                
-                            );
-                        })}
-                    </div>
+                                </div>
+                            </Col>                                
+                        );
+                    })}
                 </Row>
 
                 <Row>
