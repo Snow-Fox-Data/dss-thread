@@ -52,7 +52,7 @@ class App extends Component {
         console.log("type == ");
         console.log(type);
 
-        let tempFilters = this.filters;
+        let tempFilters = this.state.filters;
 
         console.log("tempFilters == ");
         console.log(tempFilters);
