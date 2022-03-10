@@ -35,12 +35,22 @@ class App extends Component {
         this.state = {
             dataiku: undefined,
             dataikuItem: null,
+            filters: {
+                columns: true,
+                datasets: true,
+                projects: true,                
+            },
             isLoading: false,
             selectedItem: null,
             selectedItemType: null,
             searchResults: [],
             loading: true
         }
+    }
+
+    checkboxChange = (type) => {
+        console.log("type == ");
+        console.log(type);
     }
 
     loadItem = (item) => {
@@ -187,6 +197,7 @@ class App extends Component {
                         <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                     </Col>
                 </Row>
+
                 <Row>
                     <AsyncTypeahead
                         filterBy={filterBy}
@@ -200,6 +211,32 @@ class App extends Component {
                         placeholder='Search'
                         renderMenuItemChildren={this.renderMenuItemChildren}
                     />
+                </Row>
+
+                <Row>
+                    <p>Filter By: </p>
+
+                    <div className="filter">
+                        {this.filters.map((checked, key) => {
+                            return (
+                                <div key={key}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                        <input
+                                            type="checkbox"
+                                            id={`filter-${key}`}
+                                            name={key}
+                                            value={key}
+                                            checked={checked}
+                                            onChange={() => this.handleOnChange(key)}
+                                        />
+                                        <label htmlFor={`filter-${key}`}>{key}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </Row>
 
                 <Row>
