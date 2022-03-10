@@ -53,6 +53,10 @@ class App extends Component {
         console.log(type);
 
         let tempFilters = this.filters;
+
+        console.log("tempFilters == ");
+        console.log(tempFilters);
+
         tempFilters[type] = !tempFilters[type];
 
         this.setState({ 
@@ -215,13 +219,13 @@ class App extends Component {
                     />
                 </Row>
 
-                <Row className="filter">
-                    <Col xs={2}>
+                <Row className="filter" style={{ marginTop: "0.5em" }}>
+                    <Col xs={1}>
                         <p>Filter By: </p>
                     </Col>
                     {Object.entries(filters).map(([key, value]) => {
                         return (
-                            <Col xs={2}>
+                            <Col xs={1}>
                                 <div key={key}>
                                     <div className="toppings-list-item">
                                         <div className="left-section">
