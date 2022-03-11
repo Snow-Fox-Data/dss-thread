@@ -49,9 +49,6 @@ class App extends Component {
     }
 
     formatQueryTypes = () => {
-        console.log("formatQueryTypes() :: this.state.filters == ");
-        console.log(this.state.filters);
-
         let types = [];
         Object.entries(this.state.filters).map(([key, value]) => {            
             if(value == true) {
@@ -59,17 +56,9 @@ class App extends Component {
             }            
         });
 
-        console.log("types == ");
-        console.log(types);
-
         if(types.length > 0) {
             let strTypes = "&types=";
             strTypes += types.map((type, i, arr) => {
-                console.log("i == " + i);
-                console.log("type == ");
-                console.log(type);
-                console.log("arr == ");
-                console.log(arr);
                 return type;
             });
     
@@ -121,11 +110,18 @@ class App extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
+        let url = window.getWebAppBackendUrl('search') + '?term=' + term;
+
         let types = this.formatQueryTypes();
         console.log('search() :: types = ' + types);
 
+        if(types != null) {
+            url += types;
+        }
+        console.log('url = ' + url);
+
         this.setState({ loading: true });
-        fetch(window.getWebAppBackendUrl('search') + '?term=' + term, requestOptions)
+        fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
                 var p_list = [];
