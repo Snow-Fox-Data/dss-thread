@@ -261,7 +261,7 @@ class App extends Component {
                     </InputGroup> */}
 
                     <div>
-                        <div className="input-group">
+                        <div className="input-group" style={{ width: "100%" }}>
                             <AsyncTypeahead
                                 filterBy={filterBy}
                                 id="async-search"
@@ -273,7 +273,7 @@ class App extends Component {
                                 options={searchResults}
                                 placeholder='Search'
                                 renderMenuItemChildren={this.renderMenuItemChildren}
-                                style={{ width: "100%" }}
+                                style={{ width: "auto" }}
                             />
                             <div className="input-group-btn">
                                 <FaFilter onClick={() => this.toggleFilter()} style={{ 
