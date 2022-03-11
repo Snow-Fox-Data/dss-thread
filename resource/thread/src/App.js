@@ -248,19 +248,38 @@ class App extends Component {
                             renderMenuItemChildren={this.renderMenuItemChildren}
                         />
                         <InputGroup.Prepend>
-                            <InputGroup.Button>
-                                <FaFilter onClick={() => this.toggleFilter()} style={{ 
-                                    backgroundColor: "#66a3ff", 
-                                    cursor: 'pointer', 
-                                    height: '34px', 
-                                    padding: "8px", 
-                                    width: '34px' 
-                                }} />
-                            </InputGroup.Button>
+                            <FaFilter onClick={() => this.toggleFilter()} style={{ 
+                                backgroundColor: "#66a3ff", 
+                                cursor: 'pointer', 
+                                height: '34px', 
+                                padding: "8px", 
+                                width: '34px' 
+                            }} />
                         </InputGroup.Prepend>
                     </InputGroup>
-                    {/* <Col></Col>
-                    <Col xs={1}></Col> */}
+                    {/* <Col>
+                        <AsyncTypeahead
+                            filterBy={filterBy}
+                            id="async-search"
+                            isLoading={loading}
+                            labelKey="key"
+                            minLength={3}
+                            onChange={this.loadItem}
+                            onSearch={this.search}
+                            options={searchResults}
+                            placeholder='Search'
+                            renderMenuItemChildren={this.renderMenuItemChildren}
+                        />
+                    </Col>
+                    <Col xs={1}>
+                        <FaFilter onClick={() => this.toggleFilter()} style={{ 
+                            backgroundColor: "#66a3ff", 
+                            cursor: 'pointer', 
+                            height: '34px', 
+                            padding: "8px", 
+                            width: '34px' 
+                        }} />
+                    </Col> */}
                 </Row>
 
                 { openFilter ?
