@@ -260,7 +260,34 @@ class App extends Component {
                         </InputGroup.Prepend>
                     </InputGroup> */}
 
-                    <Col>
+                    <div className='col-md-6'>
+                        <div className="input-group">
+                            <AsyncTypeahead
+                                filterBy={filterBy}
+                                id="async-search"
+                                isLoading={loading}
+                                labelKey="key"
+                                minLength={3}
+                                onChange={this.loadItem}
+                                onSearch={this.search}
+                                options={searchResults}
+                                placeholder='Search'
+                                renderMenuItemChildren={this.renderMenuItemChildren}
+                            />
+                            <div className="input-group-btn">
+                                <FaFilter onClick={() => this.toggleFilter()} style={{ 
+                                    backgroundColor: "#66a3ff", 
+                                    color:  "#FFFFFF",
+                                    cursor: 'pointer', 
+                                    height: '34px', 
+                                    padding: "8px", 
+                                    width: '34px' 
+                                }} />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* <Col>
                         <AsyncTypeahead
                             filterBy={filterBy}
                             id="async-search"
@@ -283,7 +310,7 @@ class App extends Component {
                             padding: "8px", 
                             width: '34px' 
                         }} />
-                    </Col>
+                    </Col> */}
                 </Row>
 
                 { openFilter ?
