@@ -234,7 +234,7 @@ class App extends Component {
                 </Row>
 
                 <Row>
-                    <InputGroup className="mb-3">
+                    {/* <InputGroup className="mb-3">
                         <AsyncTypeahead
                             filterBy={filterBy}
                             id="async-search"
@@ -258,8 +258,9 @@ class App extends Component {
                                 width: '34px' 
                             }} />
                         </InputGroup.Prepend>
-                    </InputGroup>
-                    {/* <Col>
+                    </InputGroup> */}
+
+                    <Col>
                         <AsyncTypeahead
                             filterBy={filterBy}
                             id="async-search"
@@ -276,12 +277,13 @@ class App extends Component {
                     <Col xs={1}>
                         <FaFilter onClick={() => this.toggleFilter()} style={{ 
                             backgroundColor: "#66a3ff", 
+                            color:  "#FFFFFF",
                             cursor: 'pointer', 
                             height: '34px', 
                             padding: "8px", 
                             width: '34px' 
                         }} />
-                    </Col> */}
+                    </Col>
                 </Row>
 
                 { openFilter ?
