@@ -200,7 +200,8 @@ class App extends Component {
 
     toggleFilter() {
         console.log('toggleFilter() :: ');
-        this.state.openFilter = !this.state.openFilter;
+        // this.state.openFilter = !this.state.openFilter;
+        this.setState({ openFilter: !this.state.openFilter });
         console.log('this.state.openFilter == ');
         console.log(this.state.openFilter);
     }
@@ -255,9 +256,9 @@ class App extends Component {
                         <FaFilter onClick={() => this.toggleFilter()} style={{ 
                             backgroundColor: "#66a3ff", 
                             cursor: 'pointer', 
-                            height: '20px', 
+                            height: '34px', 
                             padding: "8px", 
-                            width: '20px' 
+                            width: '34px' 
                         }} />
                     </Col>                    
                 </Row>
