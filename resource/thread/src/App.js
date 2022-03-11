@@ -273,7 +273,7 @@ class App extends Component {
                                 options={searchResults}
                                 placeholder='Search'
                                 renderMenuItemChildren={this.renderMenuItemChildren}
-                                style={{ width: "auto" }}
+                                style={{ width: "95%" }}
                             />
                             <div className="input-group-btn">
                                 <FaFilter onClick={() => this.toggleFilter()} style={{ 
