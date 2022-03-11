@@ -13,11 +13,12 @@ import {
 } from 'react-icons/fa';
 
 import {
+    Button,
     Container,
     Col,
+    InputGroup,
     Row,
     Spinner,
-    Button
 } from 'react-bootstrap';
 
 import {
@@ -32,7 +33,6 @@ import Common from "./common/common";
 import DataikuItem from "./components/dataikuItem";
 
 class App extends Component {
-
     constructor(props) {
         super(props)
 
@@ -199,11 +199,7 @@ class App extends Component {
     }
 
     toggleFilter() {
-        console.log('toggleFilter() :: ');
-        // this.state.openFilter = !this.state.openFilter;
         this.setState({ openFilter: !this.state.openFilter });
-        console.log('this.state.openFilter == ');
-        console.log(this.state.openFilter);
     }
 
     render() {
@@ -238,7 +234,7 @@ class App extends Component {
                 </Row>
 
                 <Row>
-                    <Col>
+                    <InputGroup className="mb-3">
                         <AsyncTypeahead
                             filterBy={filterBy}
                             id="async-search"
@@ -251,16 +247,20 @@ class App extends Component {
                             placeholder='Search'
                             renderMenuItemChildren={this.renderMenuItemChildren}
                         />
-                    </Col>
-                    <Col xs={1}>
-                        <FaFilter onClick={() => this.toggleFilter()} style={{ 
-                            backgroundColor: "#66a3ff", 
-                            cursor: 'pointer', 
-                            height: '34px', 
-                            padding: "8px", 
-                            width: '34px' 
-                        }} />
-                    </Col>                    
+                        <InputGroup.Append>
+                            <InputGroup.Button>
+                                <FaFilter onClick={() => this.toggleFilter()} style={{ 
+                                    backgroundColor: "#66a3ff", 
+                                    cursor: 'pointer', 
+                                    height: '34px', 
+                                    padding: "8px", 
+                                    width: '34px' 
+                                }} />
+                            </InputGroup.Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                    {/* <Col></Col>
+                    <Col xs={1}></Col> */}
                 </Row>
 
                 { openFilter ?
