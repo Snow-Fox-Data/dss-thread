@@ -16,10 +16,10 @@ import {
     Button,
     Container,
     Col,
-    InputGroup,
     Row,
     Spinner,
 } from 'react-bootstrap';
+import InputGroup from "react-bootstrap/InputGroup";
 
 import {
     BrowserRouter as Router,
@@ -247,9 +247,11 @@ class App extends Component {
                             placeholder='Search'
                             renderMenuItemChildren={this.renderMenuItemChildren}
                         />
+
                         <InputGroup.Prepend>
                             <FaFilter onClick={() => this.toggleFilter()} style={{ 
                                 backgroundColor: "#66a3ff", 
+                                color:  "#FFFFFF",
                                 cursor: 'pointer', 
                                 height: '34px', 
                                 padding: "8px", 
