@@ -6,8 +6,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
 
-import { FaRedo } from 'react-icons/fa';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { 
+    FaFilter, 
+    FaRedo 
+} from 'react-icons/fa';
+
 import {
     Container,
     Col,
@@ -40,11 +44,10 @@ class App extends Component {
                 datasets: true,
                 projects: true,                
             },
-            isLoading: false,
+            loading: true,
             selectedItem: null,
             selectedItemType: null,
-            searchResults: [],
-            loading: true
+            searchResults: [],            
         }
     }
 
@@ -113,8 +116,6 @@ class App extends Component {
         let url = window.getWebAppBackendUrl('search') + '?term=' + term;
 
         let types = this.formatQueryTypes();
-        console.log('search() :: types = ' + types);
-
         if(types != null) {
             url += types;
         }
@@ -196,6 +197,10 @@ class App extends Component {
         </Fragment>;
     }
 
+    toggleFilter() {
+        this.state.openFilter = !this.state.openFilter;
+    }
+
     render() {
         // <Router>
         //     <main>
@@ -213,8 +218,7 @@ class App extends Component {
         //     </main>
         // </Router>
 
-        const { filters, isLoading, searchResults, selectedItem, selectedItemType } = this.state;
-        // const ref = React.createRef();
+        const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
         const filterBy = () => true;
 
         this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
@@ -229,44 +233,51 @@ class App extends Component {
                 </Row>
 
                 <Row>
-                    <AsyncTypeahead
-                        filterBy={filterBy}
-                        id="async-search"
-                        isLoading={isLoading}
-                        labelKey="key"
-                        minLength={3}
-                        onChange={this.loadItem}
-                        onSearch={this.search}
-                        options={searchResults}
-                        placeholder='Search'
-                        renderMenuItemChildren={this.renderMenuItemChildren}
-                    />
-                </Row>
-
-                <Row className="filter" style={{ marginTop: "0.5em" }}>
-                    <Col xs={1}>
-                        <h4>Filter By: </h4>
+                    <Col>
+                        <AsyncTypeahead
+                            filterBy={filterBy}
+                            id="async-search"
+                            isLoading={loading}
+                            labelKey="key"
+                            minLength={3}
+                            onChange={this.loadItem}
+                            onSearch={this.search}
+                            options={searchResults}
+                            placeholder='Search'
+                            renderMenuItemChildren={this.renderMenuItemChildren}
+                        />
                     </Col>
-                    {Object.entries(filters).map(([key, value]) => {
-                        return (
-                            <Col xs={1}>
-                                <div className="filter-types" key={key}>
-                                    <input
-                                        type="checkbox"
-                                        id={`filter-${key}`}
-                                        name={key}
-                                        value={key}
-                                        checked={value}
-                                        onChange={() => this.handleOnChange(key)}
-                                        style={{ marginRight:  "1.0em" }}
-                                    />
-                                    <label htmlFor={`filter-${key}`}>{key}</label>
-                                </div>
-                            </Col>                                
-                        );
-                    })}
+                    <Col xs={1}>
+                        <FaFilter onClick={() => this.toggleFilter()} style={{ backgroundColor: "#0066ff", width: '20px', height: '20px', cursor: 'pointer' }} />
+                    </Col>                    
                 </Row>
 
+                { openFilter ?
+                    <Row className="filter" style={{ marginTop: "0.5em" }}>
+                        <Col xs={1}>
+                            <h4>Filter By: </h4>
+                        </Col>
+                        {Object.entries(filters).map(([key, value]) => {
+                            return (
+                                <Col xs={1}>
+                                    <div className="filter-types" key={key}>
+                                        <input
+                                            type="checkbox"
+                                            id={`filter-${key}`}
+                                            name={key}
+                                            value={key}
+                                            checked={value}
+                                            onChange={() => this.handleOnChange(key)}
+                                            style={{ marginRight:  "1.0em" }}
+                                        />
+                                        <label htmlFor={`filter-${key}`}>{key}</label>
+                                    </div>
+                                </Col>                                
+                            );
+                        })}
+                    </Row>
+                : null }
+                
                 <Row>
                     <div style={{ padding: '10px' }}>
                         {this.state.loading ?

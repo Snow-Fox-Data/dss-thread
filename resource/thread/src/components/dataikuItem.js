@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
-// import Dataset from "./dataset";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
@@ -11,7 +10,6 @@ import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 
 class DataikuItem extends Component {
-
     constructor(props) {
         super(props);
 
