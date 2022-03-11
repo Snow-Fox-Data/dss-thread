@@ -234,38 +234,12 @@ class App extends Component {
                 </Row>
 
                 <Row>
-                    {/* <InputGroup className="mb-3">
-                        <AsyncTypeahead
-                            filterBy={filterBy}
-                            id="async-search"
-                            isLoading={loading}
-                            labelKey="key"
-                            minLength={3}
-                            onChange={this.loadItem}
-                            onSearch={this.search}
-                            options={searchResults}
-                            placeholder='Search'
-                            renderMenuItemChildren={this.renderMenuItemChildren}
-                        />
-
-                        <InputGroup.Prepend>
-                            <FaFilter onClick={() => this.toggleFilter()} style={{ 
-                                backgroundColor: "#66a3ff", 
-                                color:  "#FFFFFF",
-                                cursor: 'pointer', 
-                                height: '34px', 
-                                padding: "8px", 
-                                width: '34px' 
-                            }} />
-                        </InputGroup.Prepend>
-                    </InputGroup> */}
-
-                    <div>
+                    <Col>
                         <div className="input-group" style={{ width: "100%" }}>
                             <AsyncTypeahead
                                 filterBy={filterBy}
                                 id="async-search"
-                                isLoading={loading}
+                                // isLoading={loading}
                                 labelKey="key"
                                 minLength={3}
                                 onChange={this.loadItem}
@@ -286,32 +260,7 @@ class App extends Component {
                                 }} />
                             </div>
                         </div>
-                    </div>
-
-                    {/* <Col>
-                        <AsyncTypeahead
-                            filterBy={filterBy}
-                            id="async-search"
-                            isLoading={loading}
-                            labelKey="key"
-                            minLength={3}
-                            onChange={this.loadItem}
-                            onSearch={this.search}
-                            options={searchResults}
-                            placeholder='Search'
-                            renderMenuItemChildren={this.renderMenuItemChildren}
-                        />
                     </Col>
-                    <Col xs={1}>
-                        <FaFilter onClick={() => this.toggleFilter()} style={{ 
-                            backgroundColor: "#66a3ff", 
-                            color:  "#FFFFFF",
-                            cursor: 'pointer', 
-                            height: '34px', 
-                            padding: "8px", 
-                            width: '34px' 
-                        }} />
-                    </Col> */}
                 </Row>
 
                 { openFilter ?
