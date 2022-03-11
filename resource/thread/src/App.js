@@ -247,7 +247,7 @@ class App extends Component {
                             placeholder='Search'
                             renderMenuItemChildren={this.renderMenuItemChildren}
                         />
-                        <InputGroup.Append>
+                        <InputGroup.Prepend>
                             <InputGroup.Button>
                                 <FaFilter onClick={() => this.toggleFilter()} style={{ 
                                     backgroundColor: "#66a3ff", 
@@ -257,7 +257,7 @@ class App extends Component {
                                     width: '34px' 
                                 }} />
                             </InputGroup.Button>
-                        </InputGroup.Append>
+                        </InputGroup.Prepend>
                     </InputGroup>
                     {/* <Col></Col>
                     <Col xs={1}></Col> */}
