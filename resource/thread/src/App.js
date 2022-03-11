@@ -45,6 +45,7 @@ class App extends Component {
                 projects: true,                
             },
             loading: true,
+            openFilter: false,
             selectedItem: null,
             selectedItemType: null,
             searchResults: [],            
@@ -198,7 +199,10 @@ class App extends Component {
     }
 
     toggleFilter() {
+        console.log('toggleFilter() :: ');
         this.state.openFilter = !this.state.openFilter;
+        console.log('this.state.openFilter == ');
+        console.log(this.state.openFilter);
     }
 
     render() {
@@ -248,7 +252,13 @@ class App extends Component {
                         />
                     </Col>
                     <Col xs={1}>
-                        <FaFilter onClick={() => this.toggleFilter()} style={{ backgroundColor: "#0066ff", width: '20px', height: '20px', cursor: 'pointer' }} />
+                        <FaFilter onClick={() => this.toggleFilter()} style={{ 
+                            backgroundColor: "#66a3ff", 
+                            cursor: 'pointer', 
+                            height: '20px', 
+                            padding: "8px", 
+                            width: '20px' 
+                        }} />
                     </Col>                    
                 </Row>
 
