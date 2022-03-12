@@ -30,3 +30,7 @@
 .filter-types input[type=checkbox] {
   margin-top: 0;
 }
+
+.filter-types label {
+  margin-bottom: 0;
+}
