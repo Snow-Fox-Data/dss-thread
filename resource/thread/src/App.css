@@ -29,8 +29,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 0.25em;
-  padding-top: 0.25em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
 }
 
 .filter-types input[type=checkbox] {
