@@ -23,20 +23,6 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
-        // this.setState({ newDefModal: false });
-        // let formData = new FormData()
-        // formData.append("name", this.state.selectedDef.name);
-        // formData.append("description", this.state.selectedDef.value);
-        // formData.append("applied_to", [this.props.item.key]);
-        // formData.append("id", -1);
-
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data'
-        //     },
-        //     body: formData
-        // };
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -56,14 +42,12 @@ class DataikuItem extends Component {
             .then(
                 (result) => {
                     this.setState({ newDefModal: false });
-                    // eventBus.dispatch("dataRefresh", {});
                 });
     }
 
     buildLineage() {
         return <Row>
             <Lineage deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.type}></Lineage>
-            {/* <Dataset deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.type}></Dataset> */}
         </Row>
     }
 
@@ -122,7 +106,6 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
 
         return <Col>
-            {/* onHide={this.closeColumn}  */}
             <Modal size="lg" show={this.state.newDefModal} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>{this.state.selectedDef.name}</Modal.Title>
@@ -136,9 +119,6 @@ class DataikuItem extends Component {
                                     <Form.Control type="text" defaultValue={this.state.selectedDef.name}
                                         onChange={e => this.state.selectedDef.name = e.target.value}
                                     />
-                                    {/* <Form.Text className="text-muted">
-                                        Will be saved to the DSS Column name
-                                    </Form.Text> */}
                                     <Form.Label>Description Value</Form.Label>
                                     <Form.Control type="text" defaultValue={this.state.selectedDef.value}
                                         onChange={e => this.state.selectedDef.value = e.target.value}
