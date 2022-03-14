@@ -107,11 +107,15 @@ class DataikuItem extends Component {
         eventBus.dispatch("projectSelected", proj);
     }
 
+    handleModalClose() {
+        this.setState({ newDefModal: false });
+    }
+
     renderColumn() {
         let lineage = this.buildLineage();
 
         return <Col>
-            <Modal size="lg" show={this.state.newDefModal} animation={false}>
+            <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={this.handleModalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{this.state.selectedDef.name}</Modal.Title>
                 </Modal.Header>
