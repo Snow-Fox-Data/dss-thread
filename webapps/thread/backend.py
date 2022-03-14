@@ -77,8 +77,11 @@ def load_item():
             return json.dumps(p)
         else:
             if res['type'] == 'column':
-                df = dataiku.Dataset(THREAD_DESCRPTIONS_NAME).get_dataframe()
-                result = df[df['applied_to'].str.contains(args.get('key'), case=False)]
+                try:
+                    df = dataiku.Dataset(THREAD_DESCRPTIONS_NAME).get_dataframe()
+                    result = df[df['applied_to'].str.contains(args.get('key'), case=False)]
+                except:
+                    result = ''
 
                 p_name, d_name, c_name = dss.extract_name_project(key)
                 print(f'loading col: {key}, {c_name}')
