@@ -201,6 +201,7 @@ class dss_utils:
         lin_up = json.loads(rec.iloc[0]['lineage_upstream'])
         lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
+        schema = {}
         try:
             schema = ds.read_schema()
             for col in schema:
