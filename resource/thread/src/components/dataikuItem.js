@@ -23,6 +23,11 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
+
+        let val = '';
+        if (this.state.selectedDef.value != null)
+            val = this.state.selectedDef.value;
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -31,7 +36,7 @@ class DataikuItem extends Component {
             },
             body: JSON.stringify({
                 "name": this.state.selectedDef.name,
-                "description": this.state.selectedDef.value,
+                "description": val,
                 "applied_to": [this.props.item.key],
                 "id": -1
             })
