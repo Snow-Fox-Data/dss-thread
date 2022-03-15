@@ -53,41 +53,16 @@ class App extends Component {
     }
 
     filterDataikuItems = (response) => {
-        console.log('response :: length == ' + response.length);
-        console.log(response);
-
         let types = this.formatQueryTypes();
-        console.log('types == ');
-        console.log(types);
 
         var p_list = [];
         Object.keys(response).forEach(function (results) {    
-            // console.log('results == ' + results);
-            // console.log(results);
-
             var dataikuItem = response[results];
-            // console.log('dataikuItem == ');
-            // console.log(dataikuItem);
-            var logger = {
-                dataikuItem: dataikuItem,
-                "types.indexOf(dataikuItem.type)": types.indexOf(dataikuItem.type),
-                "types.indexOf(dataikuItem.type) >= 0": types.indexOf(dataikuItem.type) >= 0
-            }
-            console.log('logger == ');
-            console.log(logger);
-
             if(types.indexOf(dataikuItem.type.toString()) >= 0) {
                 p_list[p_list.length] = dataikuItem;
 
             }            
         });
-
-        console.log('p_list :: length == ' + p_list.length);
-        console.log(p_list);
-        
-        // var res = a.filter(function (el) {
-        //     return types.indexOf(el.id) >= 0; 
-        //   });
 
         return p_list;
     }
@@ -100,18 +75,7 @@ class App extends Component {
             }            
         });
 
-        return types;
-
-        // if(types.length > 0) {
-        //     let strTypes = "&types=";
-        //     strTypes += types.map((type, i, arr) => {
-        //         return type;
-        //     });
-    
-        //     return strTypes;
-        // } else {
-        //     return null;
-        // }        
+        return types; 
     }
 
     handleOnChange = (type) => {
@@ -156,27 +120,11 @@ class App extends Component {
         };
 
         let url = window.getWebAppBackendUrl('search') + '?term=' + term;
-
-        // let types = this.formatQueryTypes();
-        // if(types != null) {
-        //     url += types;
-        // }
-        // console.log('url = ' + url);
-
         this.setState({ loading: true });
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
                 var p_list = this.filterDataikuItems(response);
-                // Object.keys(response).forEach(function (results) {
-                //     console.log('response == ');
-                //     console.log(response);
-
-                //     console.log('results == ');
-                //     console.log(results);
-
-                //     p_list[p_list.length] = response[results];
-                // });
 
                 this.setState({
                     searchResults: p_list,
@@ -286,8 +234,6 @@ class App extends Component {
                             <AsyncTypeahead
                                 filterBy={filterBy}
                                 id="async-search"
-                                // isLoading={this.state.loading}
-                                // disabled={this.state.loading}
                                 delay={300}
                                 labelKey="key"
                                 minLength={3}
