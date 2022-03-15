@@ -12,6 +12,10 @@
   padding-top: 2.0em;
 }
 
+.dataiku-item b {
+  margin-right: 0.5em;
+}
+
 .dataiku-item p {
   font-size: 1.5em;
 }

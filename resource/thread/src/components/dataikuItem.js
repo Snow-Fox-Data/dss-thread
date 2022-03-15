@@ -85,7 +85,7 @@ class DataikuItem extends Component {
     }
 
     buildTagsString(arrayTags) {
-        let tags = [<span><b>Tags: </b></span>];
+        let tags = [<b>Tags: </b>];
 
         arrayTags.forEach(element => {
             tags[tags.length] = <span>{element}</span>;

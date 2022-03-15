@@ -1,11 +1,23 @@
-import React, { Component } from "react";
-import ReactFlow, { Controls } from 'react-flow-renderer';
+import React, { Component, Controls, useCallback } from 'react';
+import ReactFlow, { addEdge, useNodesState, useEdgesState } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
+import dagre from 'dagre';
 
 class Lineage extends Component {
 
     constructor(props) {
         super(props);
+
+        const containerHeight = 500;
+        const containerWidth = 1030;
+
+        const nodeWidth = 200;
+        const nodeHeight = 75;
+
+        const dagreGraph = new dagre.graphlib.Graph();
+        dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+        // const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(initialNodes, initialEdges);
 
         this.state = {
             elements: [],
@@ -16,6 +28,38 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
     }
+
+    // getLayoutedElements = (nodes, edges, direction = 'TB') => {
+    //     const isHorizontal = direction === 'LR';
+    //     dagreGraph.setGraph({ rankdir: direction });
+      
+    //     nodes.forEach((node) => {
+    //       dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+    //     });
+      
+    //     edges.forEach((edge) => {
+    //       dagreGraph.setEdge(edge.source, edge.target);
+    //     });
+      
+    //     dagre.layout(dagreGraph);
+      
+    //     nodes.forEach((node) => {
+    //       const nodeWithPosition = dagreGraph.node(node.id);
+    //       node.targetPosition = isHorizontal ? 'left' : 'top';
+    //       node.sourcePosition = isHorizontal ? 'right' : 'bottom';
+      
+    //       // We are shifting the dagre node position (anchor=center center) to the top left
+    //       // so it matches the React Flow node anchor point (top left).
+    //       node.position = {
+    //         x: nodeWithPosition.x - nodeWidth / 2,
+    //         y: nodeWithPosition.y - nodeHeight / 2,
+    //       };
+      
+    //       return node;
+    //     });
+      
+    //     return { nodes, edges };
+    // };
 
     traverse = (lst, node, prop, ct = 0) => {
         var res = [];
@@ -35,15 +79,36 @@ class Lineage extends Component {
         return res;
     }
 
+    // example = () => {
+    //     const nodes = [{
+    //         id: '1',
+    //         type: 'input',
+    //         data: { label: 'input' },
+    //         position,
+    //       }];
+
+    //     const edges = [{ 
+    //         id: 'e12', 
+    //         source: '1', 
+    //         target: '2', 
+    //         type: edgeType, 
+    //         animated: true 
+    //     }];
+    // }
+
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
+
+        let basePositionX = (this.containerWidth / 2);
+        let basePositionY = (this.containerHeight / 2);
 
         var baseElementId = 'base';
         var elements = [{
             id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
-            position: { x: 250, y: 140 },
+            position: { x: basePositionX, y: basePositionY },
+            // position: { x: 250, y: 140 },
             style: { backgroundColor: '#FFF', width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
             sourcePosition: 'right',
             targetPosition: 'left',
@@ -95,7 +160,7 @@ class Lineage extends Component {
                 targetPosition: 'left',
                 sourcePosition: 'right',
 
-                position: { x: 500, y: (200 / (up_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
                 draggable: false
             }
@@ -136,7 +201,7 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', width: '200px' },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             }
 
@@ -164,9 +229,49 @@ class Lineage extends Component {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }
+
+        // const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
+        // const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+      
+        // const onConnect = useCallback(
+        //   (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
+        //   []
+        // );
+
+        // const onLayout = useCallback(
+        //   (direction) => {
+        //     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+        //       nodes,
+        //       edges,
+        //       direction
+        //     );
+      
+        //     setNodes([...layoutedNodes]);
+        //     setEdges([...layoutedEdges]);
+        //   },
+        //   [nodes, edges]
+        // );
+
+        // return (
+        //     <div className="layoutflow">
+        //       <ReactFlow
+        //         nodes={nodes}
+        //         edges={edges}
+        //         onNodesChange={onNodesChange}
+        //         onEdgesChange={onEdgesChange}
+        //         onConnect={onConnect}
+        //         connectionLineType="smoothstep"
+        //         fitView
+        //       />
+        //       <div className="controls">
+        //         <button onClick={() => onLayout('TB')}>vertical layout</button>
+        //         <button onClick={() => onLayout('LR')}>horizontal layout</button>
+        //       </div>
+        //     </div>
+        // );
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: "500", width: "1030" }}>
+            <div style={{ backgroundColor: '#EEE', height: this.containerHeight, width: this.containerWidth }}>
                 {this.state.elements && 
                 <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
                     <Controls showInteractive="false" />
