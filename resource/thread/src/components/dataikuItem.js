@@ -8,6 +8,7 @@ import { Modal, Button, Form, Toast } from "react-bootstrap";
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
+import Meaning from "./meaning"
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -161,7 +162,7 @@ class DataikuItem extends Component {
                                     onClick={() => this.newDef()}
                                 >Add</Button>{' '}
                                 <div style={{ padding: '10px' }}>
-                                    {this.props.item.comment}
+                                    <Meaning props={this.state.selectedDef}></Meaning>
                                 </div>
                             </div>
                         }
@@ -172,7 +173,7 @@ class DataikuItem extends Component {
                                     onClick={() => this.newDef()}
                                 >Edit</Button>{' '}
                                 <div style={{ padding: '10px' }}>
-                                    {this.props.item.comment}
+                                    <Meaning props={this.state.selectedDef}></Meaning>
                                 </div>
                             </div>
                         }
