@@ -47,12 +47,14 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    this.props.item.definition = result.value;
+
                     this.setState({
                         newDefModal: false,
                         selectedDef: result.value
                     });
 
-                    this.forceUpdate();
+                    // this.forceUpdate();
                 });
     }
 
