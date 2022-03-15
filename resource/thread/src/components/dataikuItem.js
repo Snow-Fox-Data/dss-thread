@@ -123,10 +123,10 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
-        if (this.props.definition.id > -1) {
-            this.selectedDef.name = this.props.definition.name;
-            this.selectedDef.id = this.props.definition.id;
-            this.selectedDef.description = this.props.definition.description;
+        if (this.props.item.definition.id > -1) {
+            this.selectedDef.name = this.props.item.definition.name;
+            this.selectedDef.id = this.props.item.definition.id;
+            this.selectedDef.description = this.item.props.definition.description;
         }
         else {
             this.selectedDef.name = "New Meaning";
