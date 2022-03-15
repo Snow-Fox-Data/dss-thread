@@ -51,6 +51,8 @@ class DataikuItem extends Component {
                         newDefModal: false,
                         selectedDef: result.value
                     });
+
+                    this.forceUpdate();
                 });
     }
 

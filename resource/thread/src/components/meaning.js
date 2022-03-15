@@ -7,8 +7,6 @@ class Meaning extends Component {
 
     constructor(props) {
         super(props);
-
-
     }
 
     render() {
