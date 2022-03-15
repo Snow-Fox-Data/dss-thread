@@ -126,7 +126,7 @@ class DataikuItem extends Component {
         if (this.props.item.definition.id > -1) {
             this.state.selectedDef.name = this.props.item.definition.name;
             this.state.selectedDef.id = this.props.item.definition.id;
-            this.state.selectedDef.description = this.item.props.definition.description;
+            this.state.selectedDef.description = this.props.item.definition.description;
         }
         else {
             this.state.selectedDef.name = "New Meaning";
