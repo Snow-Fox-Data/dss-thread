@@ -14,7 +14,7 @@ class Meaning extends Component {
     render() {
         return (
             <Container>
-                {this.props.name}
+                {this.props.meaning.name}
             </Container>
         )
     }
