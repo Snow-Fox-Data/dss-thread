@@ -40,9 +40,9 @@ class App extends Component {
             dataiku: undefined,
             dataikuItem: null,
             filters: {
-                columns: true,
-                datasets: true,
-                projects: true,                
+                column: true,
+                dataset: true,
+                project: true,                
             },
             loading: true,
             openFilter: true,
@@ -76,7 +76,7 @@ class App extends Component {
             console.log('logger == ');
             console.log(logger);
 
-            if(types.indexOf(dataikuItem.type) >= 0) {
+            if(types.indexOf(dataikuItem.type.toString()) >= 0) {
                 p_list[p_list.length] = dataikuItem;
 
             }            
@@ -330,7 +330,7 @@ class App extends Component {
                                             onChange={() => this.handleOnChange(key)}
                                             style={{ marginRight:  "1.0em" }}
                                         />
-                                        <label htmlFor={`filter-${key}`}>{key}</label>
+                                        <label htmlFor={`filter-${key}`}>{key}s</label>
                                     </div>
                                 </Col>                                
                             );
