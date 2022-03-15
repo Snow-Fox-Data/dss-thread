@@ -79,7 +79,7 @@ def load_item():
             if res['type'] == 'column':
                 try:
                     df = dataiku.Dataset(THREAD_DESCRPTIONS_NAME).get_dataframe()
-                    result = df[df['applied_to'].str.contains(args.get('key'), case=False)]
+                    result = df[df['applied_to'].str.contains(args.get('key'), case=False)].fillna('')
                 except:
                     result = ''
 
@@ -97,7 +97,7 @@ def load_item():
                 return col
 
     response_json = json.dumps(res) 
-    print(response_json)
+    # print(response_json)
 
     return response_json
 
