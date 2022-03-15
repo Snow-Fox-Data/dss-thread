@@ -177,9 +177,9 @@ class Lineage extends Component {
         }
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: "auto", width: "auto" }}>
+            <div style={{ backgroundColor: '#EEE', height: "100%", width: "100%" }}>
                 {this.state.elements && 
-                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: 500, width: 1000 }}>
+                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes}>
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
