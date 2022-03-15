@@ -68,14 +68,13 @@ class App extends Component {
             var dataikuItem = response[results];
             // console.log('dataikuItem == ');
             // console.log(dataikuItem);
-            console.log('dataikuItem.type == ');
-            console.log(dataikuItem.type);
-
-            console.log('(types.indexOf(dataikuItem.type) >= 0) == ');
-            console.log(types.indexOf(dataikuItem.type) >= 0);
-
-            console.log('types.indexOf(dataikuItem.type) == ');
-            console.log(types.indexOf(dataikuItem.type));
+            var logger = {
+                dataikuItem: dataikuItem,
+                "types.indexOf(dataikuItem.type)": types.indexOf(dataikuItem.type),
+                "types.indexOf(dataikuItem.type) >= 0": types.indexOf(dataikuItem.type) >= 0
+            }
+            console.log('logger == ');
+            console.log(logger);
 
             if(types.indexOf(dataikuItem.type) >= 0) {
                 p_list[p_list.length] = dataikuItem;
@@ -97,7 +96,7 @@ class App extends Component {
         let types = [];
         Object.entries(this.state.filters).map(([key, value]) => {            
             if(value == true) {
-                types[types.length] = key;
+                types[types.length] = key.toString();
             }            
         });
 
