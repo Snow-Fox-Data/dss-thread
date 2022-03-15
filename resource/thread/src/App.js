@@ -239,7 +239,7 @@ class App extends Component {
                             <AsyncTypeahead
                                 filterBy={filterBy}
                                 id="async-search"
-                                // isLoading={loading}
+                                isLoading={this.state.loading}
                                 delay={400}
                                 labelKey="key"
                                 minLength={3}
