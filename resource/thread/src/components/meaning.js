@@ -11,7 +11,7 @@ class Meaning extends Component {
 
     render() {
         return (
-            <Container style={{maxWidth:"200px", border:"solid 1px #333;", borderRadius:"2px"}}>
+            <div style={{maxWidth:"200px", border:"solid 1px #333", borderRadius:"2px"}}>
                 <Row>
                     <Col>
                         <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
@@ -33,7 +33,7 @@ class Meaning extends Component {
                     </Col>
                 </Row>
 
-            </Container>
+            </div>
         )
     }
 }
