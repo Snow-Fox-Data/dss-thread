@@ -96,7 +96,10 @@ def load_item():
 
                 return col
 
-    return json.dumps(res) 
+    response_json = json.dumps(res) 
+    print(response_json)
+
+    return response_json
 
 @app.route('/update-desc', methods=['POST'])
 def update_desc():
