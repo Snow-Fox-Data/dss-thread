@@ -10,6 +10,11 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '.' + data.dataset);
   }
 
+  console.log('data == ');
+  console.log(data);
+  console.log('isConnectable == ');
+  console.log(isConnectable);
+
   return (
     <>
       <Handle

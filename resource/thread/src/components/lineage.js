@@ -1,15 +1,6 @@
 import React, { Component } from "react";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Table from 'react-bootstrap/Table';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
-import { Modal, Button, Form, Toast } from "react-bootstrap";
-import eventBus from "../eventBus";
 import ReactFlow, { Controls } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
-
-// import EditColumnModal from "./editColumnModal";
 
 class Lineage extends Component {
 
@@ -21,7 +12,6 @@ class Lineage extends Component {
             last_ds: '',
         };
 
-        // this.toggleModal = this.toggleModal.bind(this);
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
@@ -62,36 +52,19 @@ class Lineage extends Component {
 
         // find all the end-nodes
         var down_res = [];
+        if (base_elem['lineage_downstream'] != null && base_elem['lineage_downstream'] != '') {
+            if (base_elem['lineage_downstream'] != null)
+                this.traverse(down_res, base_elem, 'lineage_downstream');
+            else
+                down_res = eval(base_elem['lineage_downstream']);
+        }
+        
         var up_res = [];
-
-        if(this.props.type == 'column') {
-            if (base_elem['lineage_downstream'] != null && base_elem['lineage_downstream'] != '') {
-                if (base_elem['lineage_downstream'] != null)
-                    this.traverse(down_res, base_elem, 'lineage_downstream');
-                else
-                    down_res = eval(base_elem['lineage_downstream']);
-            }
-            
-            if (base_elem['lineage_upstream'] != null && base_elem['lineage_upstream'] != '') {
-                if (base_elem['lineage_upstream'] != null)
-                    this.traverse(up_res, base_elem, 'lineage_upstream');
-                else
-                    up_res = eval(base_elem['lineage_upstream']);
-            }
-        } else {
-            if (base_elem['lineage_downstream'] != null && base_elem['lineage_downstream'] != '') {
-                if (base_elem['lineage_downstream'] != null)
-                    this.traverse(down_res, base_elem, 'lineage_downstream');
-                else
-                    down_res = eval(base_elem['lineage_downstream']);
-            }
-            
-            if (base_elem['lineage_upstream'] != null && base_elem['lineage_upstream'] != '') {
-                if (base_elem['lineage_upstream'] != null)
-                    this.traverse(up_res, base_elem, 'lineage_upstream');
-                else
-                    up_res = eval(base_elem['lineage_upstream']);
-            }
+        if (base_elem['lineage_upstream'] != null && base_elem['lineage_upstream'] != '') {
+            if (base_elem['lineage_upstream'] != null)
+                this.traverse(up_res, base_elem, 'lineage_upstream');
+            else
+                up_res = eval(base_elem['lineage_upstream']);
         }
 
         for (var x = 0; x < down_res.length; x++) {
