@@ -7,9 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
 
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { 
-    FaFilter, 
-    FaRedo 
+import {
+    FaFilter,
+    FaRedo
 } from 'react-icons/fa';
 
 import {
@@ -42,13 +42,13 @@ class App extends Component {
             filters: {
                 column: true,
                 dataset: true,
-                project: true,                
+                project: true,
             },
             loading: true,
             openFilter: true,
             selectedItem: null,
             selectedItemType: null,
-            searchResults: [],            
+            searchResults: [],
         }
     }
 
@@ -56,12 +56,12 @@ class App extends Component {
         let types = this.formatQueryTypes();
 
         var p_list = [];
-        Object.keys(response).forEach(function (results) {    
+        Object.keys(response).forEach(function (results) {
             var dataikuItem = response[results];
-            if(types.indexOf(dataikuItem.type.toString()) >= 0) {
+            if (types.indexOf(dataikuItem.type.toString()) >= 0) {
                 p_list[p_list.length] = dataikuItem;
 
-            }            
+            }
         });
 
         return p_list;
@@ -69,20 +69,20 @@ class App extends Component {
 
     formatQueryTypes = () => {
         let types = [];
-        Object.entries(this.state.filters).map(([key, value]) => {            
-            if(value == true) {
+        Object.entries(this.state.filters).map(([key, value]) => {
+            if (value == true) {
                 types[types.length] = key.toString();
-            }            
+            }
         });
 
-        return types; 
+        return types;
     }
 
     handleOnChange = (type) => {
         let tempFilters = this.state.filters;
         tempFilters[type] = !tempFilters[type];
 
-        this.setState({ 
+        this.setState({
             filters: tempFilters
         });
     }
@@ -162,6 +162,10 @@ class App extends Component {
                     key: proj,
                     type: 'column'
                 }])
+            );
+
+            eventBus.on("loading", (isLoading) =>
+                this.setState({ "loading": isLoading })
             );
 
             // this.search('thread');
@@ -245,20 +249,20 @@ class App extends Component {
                                 style={{ width: "97.5%" }}
                             />
                             <div className="input-group-btn">
-                                <FaFilter onClick={() => this.toggleFilter()} style={{ 
-                                    backgroundColor: "#66a3ff", 
-                                    color:  "#FFFFFF",
-                                    cursor: 'pointer', 
-                                    height: '34px', 
-                                    padding: "8px", 
-                                    width: '34px' 
+                                <FaFilter onClick={() => this.toggleFilter()} style={{
+                                    backgroundColor: "#66a3ff",
+                                    color: "#FFFFFF",
+                                    cursor: 'pointer',
+                                    height: '34px',
+                                    padding: "8px",
+                                    width: '34px'
                                 }} />
                             </div>
                         </div>
                     </Col>
                 </Row>
 
-                { openFilter ?
+                {openFilter ?
                     <Row className="filter" style={{ marginTop: "0.5em" }}>
                         <Col xs={1}>
                             <h4>Filter By: </h4>
@@ -274,16 +278,16 @@ class App extends Component {
                                             value={key}
                                             checked={value}
                                             onChange={() => this.handleOnChange(key)}
-                                            style={{ marginRight:  "1.0em" }}
+                                            style={{ marginRight: "1.0em" }}
                                         />
                                         <label htmlFor={`filter-${key}`}>{key}s</label>
                                     </div>
-                                </Col>                                
+                                </Col>
                             );
                         })}
                     </Row>
-                : null }
-                
+                    : null}
+
                 <Row>
                     <div style={{ padding: '10px' }}>
                         {this.state.loading ?

@@ -43,6 +43,8 @@ class DataikuItem extends Component {
             })
         }
 
+        eventBus.dispatch("loading", true);
+
         fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
             .then(res => res.json())
             .then(
@@ -54,7 +56,7 @@ class DataikuItem extends Component {
                         selectedDef: result.value
                     });
 
-                    // this.forceUpdate();
+                    eventBus.dispatch("loading", false);
                 });
     }
 
