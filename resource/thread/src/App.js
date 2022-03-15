@@ -52,6 +52,32 @@ class App extends Component {
         }
     }
 
+    filterDataikuItems = (response) => {
+        console.log('response == ');
+        console.log(response);
+    
+
+        let types = this.formatQueryTypes();
+
+        var p_list = [];
+        Object.keys(response).forEach(function (results) {    
+            console.log('results == ' + results);
+            console.log(results);
+
+            var dataikuItem = response[results];
+            console.log('dataikuItem == ');
+            console.log(dataikuItem);
+
+            p_list[p_list.length] = dataikuItem;
+        });
+        
+        // var res = a.filter(function (el) {
+        //     return types.indexOf(el.id) >= 0; 
+        //   });
+
+        return p_list;
+    }
+
     formatQueryTypes = () => {
         let types = [];
         Object.entries(this.state.filters).map(([key, value]) => {            
@@ -117,7 +143,7 @@ class App extends Component {
 
         let url = window.getWebAppBackendUrl('search') + '?term=' + term;
 
-        let types = this.formatQueryTypes();
+        // let types = this.formatQueryTypes();
         // if(types != null) {
         //     url += types;
         // }
@@ -127,16 +153,16 @@ class App extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                var p_list = [];
-                Object.keys(response).forEach(function (results) {
-                    console.log('response == ');
-                    console.log(response);
+                var p_list = this.filterDataikuItems(response);
+                // Object.keys(response).forEach(function (results) {
+                //     console.log('response == ');
+                //     console.log(response);
 
-                    console.log('results == ');
-                    console.log(results);
+                //     console.log('results == ');
+                //     console.log(results);
 
-                    p_list[p_list.length] = response[results];
-                });
+                //     p_list[p_list.length] = response[results];
+                // });
 
                 this.setState({
                     searchResults: p_list
