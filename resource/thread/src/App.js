@@ -53,11 +53,12 @@ class App extends Component {
     }
 
     filterDataikuItems = (response) => {
-        console.log('response == ');
+        console.log('response :: length == ' + response.length);
         console.log(response);
-    
 
         let types = this.formatQueryTypes();
+        console.log('types == ');
+        console.log(types);
 
         var p_list = [];
         Object.keys(response).forEach(function (results) {    
@@ -68,11 +69,17 @@ class App extends Component {
             // console.log('dataikuItem == ');
             // console.log(dataikuItem);
 
+            console.log('(types.indexOf(dataikuItem.type) >= 0) == ');
+            console.log(types.indexOf(dataikuItem.type) >= 0);
+
             if(types.indexOf(dataikuItem.type) >= 0) {
                 p_list[p_list.length] = dataikuItem;
 
             }            
         });
+
+        console.log('p_list :: length == ' + p_list.length);
+        console.log(p_list);
         
         // var res = a.filter(function (el) {
         //     return types.indexOf(el.id) >= 0; 
@@ -168,9 +175,9 @@ class App extends Component {
                 // });
 
                 this.setState({
-                    searchResults: p_list
+                    searchResults: p_list,
+                    loading: false
                 });
-                this.setState({ loading: false });
             });
     }
 
