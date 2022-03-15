@@ -184,8 +184,8 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     {/* onClick={() => this.saveColLineage()} */}
-                    <Button variant="secondary" >Save all Lineage</Button>
-                    <Button variant="primary" onClick={() => this.saveCol()}>Save</Button>
+                    <Button variant="secondary" onClick={() => this.saveCol(true, true)}>Save all Lineage</Button>
+                    <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
                 </Modal.Footer>
             </Modal>
 
