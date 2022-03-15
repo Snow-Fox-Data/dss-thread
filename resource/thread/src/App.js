@@ -240,7 +240,7 @@ class App extends Component {
                                 filterBy={filterBy}
                                 id="async-search"
                                 // isLoading={this.state.loading}
-                                disabled={this.state.loading}
+                                // disabled={this.state.loading}
                                 delay={300}
                                 labelKey="key"
                                 minLength={3}
