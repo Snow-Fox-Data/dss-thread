@@ -15,19 +15,23 @@ class Meaning extends Component {
         return (
             <Container>
                 <Row>
-                    <Col style={{fontWeight:"bold"}}>
-                        Name
-                    </Col>
                     <Col>
-                        {this.props.meaning.name}
+                        <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
+                            Name
+                        </span>
+                        <span>
+                            {this.props.meaning.name}
+                        </span>
                     </Col>
                 </Row>
                 <Row>
-                    <Col style={{fontWeight:"bold"}}>
-                        Description
-                    </Col>
                     <Col>
-                        {this.props.meaning.description}
+                        <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
+                            Description
+                        </span>
+                        <span>
+                            {this.props.meaning.description}
+                        </span>
                     </Col>
                 </Row>
 
