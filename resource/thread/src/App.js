@@ -61,14 +61,17 @@ class App extends Component {
 
         var p_list = [];
         Object.keys(response).forEach(function (results) {    
-            console.log('results == ' + results);
-            console.log(results);
+            // console.log('results == ' + results);
+            // console.log(results);
 
             var dataikuItem = response[results];
-            console.log('dataikuItem == ');
-            console.log(dataikuItem);
+            // console.log('dataikuItem == ');
+            // console.log(dataikuItem);
 
-            p_list[p_list.length] = dataikuItem;
+            if(types.indexOf(dataikuItem.type) >= 0) {
+                p_list[p_list.length] = dataikuItem;
+
+            }            
         });
         
         // var res = a.filter(function (el) {
