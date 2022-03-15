@@ -17,8 +17,8 @@ class DataikuItem extends Component {
         this.state = {
             newDefModal: false,
             selectedDef: {
-                name: "New Definition",
-                value: ""
+                name: "New Meaning",
+                description: ""
             }
         };
     }
@@ -26,8 +26,8 @@ class DataikuItem extends Component {
     saveCol() {
 
         let val = '';
-        if (this.state.selectedDef.value != null)
-            val = this.state.selectedDef.value;
+        if (this.state.selectedDef.description != null)
+            val = this.state.selectedDef.description;
 
         const requestOptions = {
             method: 'POST',
@@ -39,7 +39,7 @@ class DataikuItem extends Component {
                 "name": this.state.selectedDef.name,
                 "description": val,
                 "applied_to": [this.props.item.key],
-                "id": -1
+                "id": this.state.selectedDef.id
             })
         }
 
