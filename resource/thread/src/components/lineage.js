@@ -122,7 +122,7 @@ class Lineage extends Component {
                 targetPosition: 'left',
                 sourcePosition: 'right',
 
-                position: { x: 500, y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: 500, y: (200 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
                 draggable: false
             }
