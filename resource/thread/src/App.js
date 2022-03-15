@@ -68,6 +68,8 @@ class App extends Component {
             var dataikuItem = response[results];
             // console.log('dataikuItem == ');
             // console.log(dataikuItem);
+            console.log('dataikuItem.type == ');
+            console.log(dataikuItem.type);
 
             console.log('(types.indexOf(dataikuItem.type) >= 0) == ');
             console.log(types.indexOf(dataikuItem.type) >= 0);
