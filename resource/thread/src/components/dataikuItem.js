@@ -49,7 +49,7 @@ class DataikuItem extends Component {
                 (result) => {
                     this.setState({
                         newDefModal: false,
-                        selectedDef: this.state.selectedDef
+                        selectedDef: result.value
                     });
                 });
     }

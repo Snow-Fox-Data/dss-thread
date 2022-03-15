@@ -137,8 +137,17 @@ def update_desc():
         else:
             df = pd.DataFrame.from_dict([desc])
     else:
-        df.loc[df['id']==desc_id, 'name'] = data['name']
-        df.loc[df['id']==desc_id, 'description'] = data['description']
+        desc = {
+            "id": desc_id,
+            "name": data['name'],
+            "description": data['description'],
+            "applied_to": applied_to,
+            "sources": [],
+            "destinations":[]
+        }
+
+        df.loc[df['id']==desc_id, 'name'] = desc['name']
+        df.loc[df['id']==desc_id, 'description'] = desc['description']
         df.loc[df['id']==desc_id, 'applied_to'] = applied_to
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
@@ -146,7 +155,9 @@ def update_desc():
     if len(data['applied_to']) > 0:
         dss.update_column_description(applied_to, data['description'])
      
-    return json.dumps({"success": True})
+    return json.dumps({"success": True,
+        "value": desc
+    })
 
 
 THREAD_DESCRPTIONS_NAME = '--Thread-Descriptions--'
