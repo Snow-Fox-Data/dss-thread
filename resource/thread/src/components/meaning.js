@@ -11,7 +11,17 @@ class Meaning extends Component {
 
     render() {
         return (
-            <div style={{maxWidth:"200px", border:"solid 1px #333", borderRadius:"2px"}}>
+            <div style={{ maxWidth: "300px", border: "solid 1px #999", borderRadius: "2px", padding: "10px" }}>
+                <Row>
+                    <Col>
+                        <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
+                            ID
+                        </span>
+                        <span>
+                            {this.props.meaning.id}
+                        </span>
+                    </Col>
+                </Row>
                 <Row>
                     <Col>
                         <span style={{ fontWeight: "bold", paddingRight: "10px" }}>

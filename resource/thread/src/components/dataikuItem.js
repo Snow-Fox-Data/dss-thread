@@ -23,11 +23,27 @@ class DataikuItem extends Component {
         };
     }
 
-    saveCol() {
+    flattenArray(elem, key, orig = []) {
+
+        for (var r in elem[key]) {
+            orig.push(r.name);
+            if (r[key].length > 0) {
+                orig = this.flattenArray(r, key, orig);
+            }
+        }
+
+        return orig;
+    }
+
+    saveCol(applyUp, applyDown) {
 
         let val = '';
         if (this.state.selectedDef.description != null)
             val = this.state.selectedDef.description;
+
+        let applyTo = [this.props.item.key];
+        if (applyUp)
+            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
 
         const requestOptions = {
             method: 'POST',
@@ -38,7 +54,7 @@ class DataikuItem extends Component {
             body: JSON.stringify({
                 "name": this.state.selectedDef.name,
                 "description": val,
-                "applied_to": [this.props.item.key],
+                "applied_to": applyTo,
                 "id": this.state.selectedDef.id
             })
         }
