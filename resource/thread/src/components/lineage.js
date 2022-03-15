@@ -8,11 +8,11 @@ class Lineage extends Component {
     constructor(props) {
         super(props);
 
-        const containerHeight = 500;
-        const containerWidth = 1030;
+        this.containerHeight = 500;
+        this.containerWidth = 1030;
 
-        const nodeWidth = 200;
-        const nodeHeight = 75;
+        this.nodeWidth = 200;
+        this.nodeHeight = 75;
 
         const dagreGraph = new dagre.graphlib.Graph();
         dagreGraph.setDefaultEdgeLabel(() => ({}));
