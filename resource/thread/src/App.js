@@ -45,7 +45,7 @@ class App extends Component {
                 projects: true,                
             },
             loading: true,
-            openFilter: false,
+            openFilter: true,
             selectedItem: null,
             selectedItemType: null,
             searchResults: [],            
@@ -239,8 +239,9 @@ class App extends Component {
                             <AsyncTypeahead
                                 filterBy={filterBy}
                                 id="async-search"
-                                isLoading={this.state.loading}
-                                delay={400}
+                                // isLoading={this.state.loading}
+                                disabled={this.state.loading}
+                                delay={300}
                                 labelKey="key"
                                 minLength={3}
                                 onChange={this.loadItem}
