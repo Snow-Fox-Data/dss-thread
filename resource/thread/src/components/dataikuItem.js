@@ -124,14 +124,14 @@ class DataikuItem extends Component {
         const handleClose = () => this.setState({ newDefModal: false });
 
         if (this.props.item.definition.id > -1) {
-            this.selectedDef.name = this.props.item.definition.name;
-            this.selectedDef.id = this.props.item.definition.id;
-            this.selectedDef.description = this.item.props.definition.description;
+            this.state.selectedDef.name = this.props.item.definition.name;
+            this.state.selectedDef.id = this.props.item.definition.id;
+            this.state.selectedDef.description = this.item.props.definition.description;
         }
         else {
-            this.selectedDef.name = "New Meaning";
-            this.selectedDef.description = "";
-            this.selectedDef.id = -1;
+            this.state.selectedDef.name = "New Meaning";
+            this.state.selectedDef.description = "";
+            this.state.selectedDef.id = -1;
         }
 
         return <Col>
