@@ -30,7 +30,7 @@ class Meaning extends Component {
                             Description
                         </span>
                         <span>
-                            {this.props.meaning.description}
+                            {this.props.meaning.value}
                         </span>
                     </Col>
                 </Row>
