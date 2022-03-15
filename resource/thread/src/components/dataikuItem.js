@@ -150,7 +150,7 @@ class DataikuItem extends Component {
                                     />
                                     <Form.Label>Description Value</Form.Label>
                                     <Form.Control type="text" defaultValue={this.state.selectedDef.value}
-                                        onChange={e => this.state.selectedDef.value = e.target.value}
+                                        onChange={e => this.state.selectedDef.description = e.target.value}
                                     />
                                 </Form.Group>
                             </Form>
