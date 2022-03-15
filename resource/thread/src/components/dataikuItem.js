@@ -96,6 +96,16 @@ class DataikuItem extends Component {
         this.setState({ newDefModal: true });
     }
 
+    editDef() {
+        this.setState({
+            selectedDef: {
+                name: this.props.item.definition.name,
+                value: this.props.item.definition.description
+            }
+        })
+        this.setState({ newDefModal: true });
+    }
+
     openColumn(col) {
         eventBus.dispatch("columnSelected", col);
     };
