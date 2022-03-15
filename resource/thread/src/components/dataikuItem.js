@@ -181,7 +181,7 @@ class DataikuItem extends Component {
                             this.props.item.definition.id > 0 &&
                             <div>
                                 <Button variant="primary"
-                                    onClick={() => this.newDef()}
+                                    onClick={() => this.editDef()}
                                 >Edit</Button>{' '}
                                 <div style={{ padding: '10px' }}>
                                     <Meaning meaning={this.state.selectedDef}></Meaning>
