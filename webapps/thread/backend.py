@@ -116,7 +116,7 @@ def update_desc():
     
     data = request.json
     desc_id = int(data['id'])
-    # print(desc_id)
+    print(data['applied_to'])
     applied_to = data['applied_to']
 
     # print(desc_id, exists)
