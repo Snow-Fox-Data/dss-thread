@@ -11,7 +11,7 @@ class Meaning extends Component {
 
     render() {
         return (
-            <Container>
+            <Container style={{maxWidth:"200px", border:"solid 1px #333;", borderRadius:"2px"}}>
                 <Row>
                     <Col>
                         <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
