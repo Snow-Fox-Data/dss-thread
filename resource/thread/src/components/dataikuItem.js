@@ -47,7 +47,10 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState({ newDefModal: false });
+                    this.setState({
+                        newDefModal: false,
+                        selectedDef: this.state.selectedDef
+                    });
                 });
     }
 
