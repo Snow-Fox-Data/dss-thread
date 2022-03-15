@@ -123,6 +123,17 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
+        if (this.props.definition.id > -1) {
+            this.selectedDef.name = this.props.definition.name;
+            this.selectedDef.id = this.props.definition.id;
+            this.selectedDef.description = this.props.definition.description;
+        }
+        else {
+            this.selectedDef.name = "New Meaning";
+            this.selectedDef.description = "";
+            this.selectedDef.id = -1;
+        }
+
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
