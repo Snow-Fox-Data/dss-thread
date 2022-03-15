@@ -74,6 +74,9 @@ class App extends Component {
             console.log('(types.indexOf(dataikuItem.type) >= 0) == ');
             console.log(types.indexOf(dataikuItem.type) >= 0);
 
+            console.log('types.indexOf(dataikuItem.type) == ');
+            console.log(types.indexOf(dataikuItem.type));
+
             if(types.indexOf(dataikuItem.type) >= 0) {
                 p_list[p_list.length] = dataikuItem;
 
