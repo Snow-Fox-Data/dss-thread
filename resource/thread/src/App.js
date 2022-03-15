@@ -60,17 +60,18 @@ class App extends Component {
             }            
         });
 
-        if(types.length > 0) {
-            let strTypes = "&types=";
-            strTypes += types.map((type, i, arr) => {
-                return type;
-            });
+        return types;
+
+        // if(types.length > 0) {
+        //     let strTypes = "&types=";
+        //     strTypes += types.map((type, i, arr) => {
+        //         return type;
+        //     });
     
-            console.log("strTypes == " + strTypes);
-            return strTypes;
-        } else {
-            return null;
-        }        
+        //     return strTypes;
+        // } else {
+        //     return null;
+        // }        
     }
 
     handleOnChange = (type) => {
@@ -117,10 +118,10 @@ class App extends Component {
         let url = window.getWebAppBackendUrl('search') + '?term=' + term;
 
         let types = this.formatQueryTypes();
-        if(types != null) {
-            url += types;
-        }
-        console.log('url = ' + url);
+        // if(types != null) {
+        //     url += types;
+        // }
+        // console.log('url = ' + url);
 
         this.setState({ loading: true });
         fetch(url, requestOptions)
@@ -128,6 +129,12 @@ class App extends Component {
             .then((response) => {
                 var p_list = [];
                 Object.keys(response).forEach(function (results) {
+                    console.log('response == ');
+                    console.log(response);
+
+                    console.log('results == ');
+                    console.log(results);
+
                     p_list[p_list.length] = response[results];
                 });
 
