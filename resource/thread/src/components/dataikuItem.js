@@ -25,13 +25,15 @@ class DataikuItem extends Component {
 
     flattenArray(elem, key, orig = []) {
 
-        for (var r in elem[key]) {
+        for (var idx = 0; idx < elem[key].length; idx++) {
+            let r = elem[key][idx];
+
             orig.push(r.name);
             if (r[key].length > 0) {
                 orig = this.flattenArray(r, key, orig);
             }
         }
-
+        
         return orig;
     }
 
