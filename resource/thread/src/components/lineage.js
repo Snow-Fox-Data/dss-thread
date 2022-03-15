@@ -49,7 +49,7 @@ class Lineage extends Component {
         var base_splits = base_elem.name.split('.');
 
         var elements = [{
-            id: '-1',
+            id: 'base',
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: 250, y: 140 },
@@ -118,7 +118,7 @@ class Lineage extends Component {
                 draggable: false
             }
 
-            var edge = { id: '-1-down_' + x, source: '-1', target: 'down_' + x, arrowHeadType: 'arrow' };
+            var edge = { id: 'down_' + x, source: 'base', target: 'down_' + x, arrowHeadType: 'arrow' };
             if (down_res[x].count > 0) {
                 edge.label = '[' + down_res[x].count + ']';
                 edge.animated = true;
@@ -152,7 +152,7 @@ class Lineage extends Component {
                 draggable: false
             }
 
-            var edge = { id: '-1-up_' + x, source: 'up_' + x, target: '-1', arrowHeadType: 'arrow' };
+            var edge = { id: 'up_' + x, source: 'up_' + x, target: 'base', arrowHeadType: 'arrow' };
             if (up_res[x].count > 0) {
                 edge.animated = true;
                 edge.label = '[' + up_res[x].count + ']';
@@ -179,7 +179,7 @@ class Lineage extends Component {
         return (
             <div style={{ backgroundColor: '#EEE', height: "500", width: "1030" }}>
                 {this.state.elements && 
-                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }} fitView>
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
