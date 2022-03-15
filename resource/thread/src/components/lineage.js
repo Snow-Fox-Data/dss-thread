@@ -48,8 +48,9 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
+        var baseElementId = 'base';
         var elements = [{
-            id: 'base',
+            id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: 250, y: 140 },
@@ -107,8 +108,14 @@ class Lineage extends Component {
             if (splits.length > 2)
                 col = splits[2];
 
+            var elementId = 'down_' + x.toString();
+
+            var downYPosition = ((300 / (down_res.length + 1)) * (x + 1));
+            console.log("downYPosition == ");
+            console.log(downYPosition);
+
             elements[elements.length] = {
-                id: 'down_' + x,
+                id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
                 style: { backgroundColor: '#FFF', width: '200px' },
@@ -118,7 +125,8 @@ class Lineage extends Component {
                 draggable: false
             }
 
-            var edge = { id: 'edge_down_' + x.toString(), source: 'base', target: 'down_' + x.toString(), arrowHeadType: 'arrow' };
+            var edgeId = 'edge_down_' + x.toString();
+            var edge = { id: edgeId, source: baseElementId, target: elementId, arrowHeadType: 'arrow' };
             if (down_res[x].count > 0) {
                 edge.label = '[' + down_res[x].count + ']';
                 edge.animated = true;
@@ -141,8 +149,13 @@ class Lineage extends Component {
             if (splits.length > 2)
                 col = splits[2];
 
+            var downYPosition = (300 / (up_res.length + 1) * (x + 1));
+            console.log("downYPosition == ");
+            console.log(downYPosition);
+
+            var elementId = 'up_' + x.toString();
             elements[elements.length] = {
-                id: 'up_' + x.toString(),
+                id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
                 style: { backgroundColor: '#FFF', width: '200px' },
@@ -152,7 +165,8 @@ class Lineage extends Component {
                 draggable: false
             }
 
-            var edge = { id: 'edge_up_' + x.toString(), source: 'up_' + x.toString(), target: 'base', arrowHeadType: 'arrow' };
+            var edgeId = 'edge_up_' + x.toString();
+            var edge = { id: edgeId, source: elementId, target: baseElementId, arrowHeadType: 'arrow' };
             if (up_res[x].count > 0) {
                 edge.animated = true;
                 edge.label = '[' + up_res[x].count + ']';
