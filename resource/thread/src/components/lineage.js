@@ -110,7 +110,7 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
 
-            var downYPosition = ((300 / (down_res.length + 1)) * (x + 1));
+            var downYPosition = (300 / (up_res.length + 1) * (x + 1));
             console.log("downYPosition == ");
             console.log(downYPosition);
 
@@ -121,7 +121,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', width: '200px' },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
+
+                position: { x: 500, y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
                 draggable: false
             }
 
@@ -149,9 +151,9 @@ class Lineage extends Component {
             if (splits.length > 2)
                 col = splits[2];
 
-            var downYPosition = (300 / (up_res.length + 1) * (x + 1));
-            console.log("downYPosition == ");
-            console.log(downYPosition);
+            var upYPosition = (300 / (up_res.length + 1) * (x + 1));
+            console.log("upYPosition == ");
+            console.log(upYPosition);
 
             var elementId = 'up_' + x.toString();
             elements[elements.length] = {
