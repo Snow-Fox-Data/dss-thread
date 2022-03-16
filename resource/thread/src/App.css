@@ -44,3 +44,7 @@
 .filter-types label {
   margin-bottom: 0;
 }
+
+div.react-confirm-alert-overlay {
+  z-index: 9999;
+}

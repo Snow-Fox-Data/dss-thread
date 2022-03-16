@@ -41,6 +41,7 @@ class DataikuItem extends Component {
     }
 
  saveCol(applyUp, applyDown) {
+     
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to do this.',
@@ -96,8 +97,6 @@ class DataikuItem extends Component {
             ]
         });
     };
-
-
 
     buildLineage() {
         return <Row>
