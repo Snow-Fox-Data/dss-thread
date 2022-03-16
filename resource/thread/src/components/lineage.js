@@ -112,8 +112,8 @@ class Lineage extends Component {
             id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
-            // position: { x: basePositionX, y: basePositionY },
-            position: { x: 250, y: 140 },
+            position: { x: basePositionX, y: basePositionY },
+            // position: { x: 250, y: 140 },
             style: { backgroundColor: '#FFF', width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
             sourcePosition: 'right',
             targetPosition: 'left',
@@ -165,8 +165,8 @@ class Lineage extends Component {
                 targetPosition: 'left',
                 sourcePosition: 'right',
 
-                // position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
+                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
                 draggable: false
             }
 
@@ -206,8 +206,8 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', width: '200px' },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             }
 
@@ -277,19 +277,28 @@ class Lineage extends Component {
         // );
 
         // height: this.containerHeight.toString(), width: this.containerWidth.toString()
-        console.log("this.containerHeight.toString() == ");
-        console.log(this.containerHeight.toString());
-        console.log("this.containerWidth.toString() == ");
-        console.log(this.containerWidth.toString());
+        // console.log("this.containerHeight.toString() == ");
+        // console.log(this.containerHeight.toString());
+        // console.log("this.containerWidth.toString() == ");
+        // console.log(this.containerWidth.toString());
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+            <div style={{ backgroundColor: '#EEE', height: this.containerHeight, width: this.containerWidth }}>
                 {this.state.elements && 
                 <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
         );
+        
+        // return (
+        //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+        //         {this.state.elements && 
+        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+        //             <Controls showInteractive="false" />
+        //         </ReactFlow>}
+        //     </div>
+        // );
     }
 }
 
