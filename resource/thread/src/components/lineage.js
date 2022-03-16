@@ -32,39 +32,6 @@ class Lineage extends Component {
         this.state.dagreGraph.setDefaultEdgeLabel(() => ({}));
     }
 
-    // DIRECTION TYPES 'TB' OR 'LR'
-    // getLayoutedElements = (nodes, edges, direction = 'LR') => {
-    //     const isHorizontal = direction === 'LR';
-    //     dagreGraph.setGraph({ rankdir: direction });
-      
-    //     nodes.forEach((node) => {
-    //       dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
-    //     });
-      
-    //     edges.forEach((edge) => {
-    //       dagreGraph.setEdge(edge.source, edge.target);
-    //     });
-      
-    //     dagre.layout(dagreGraph);
-      
-    //     nodes.forEach((node) => {
-    //       const nodeWithPosition = dagreGraph.node(node.id);
-    //       node.targetPosition = isHorizontal ? 'left' : 'top';
-    //       node.sourcePosition = isHorizontal ? 'right' : 'bottom';
-      
-    //       // We are shifting the dagre node position (anchor=center center) to the top left
-    //       // so it matches the React Flow node anchor point (top left).
-    //       node.position = {
-    //         x: nodeWithPosition.x - nodeWidth / 2,
-    //         y: nodeWithPosition.y - nodeHeight / 2,
-    //       };
-      
-    //       return node;
-    //     });
-      
-    //     return { nodes, edges };
-    // };
-
     traverse = (lst, node, prop, ct = 0) => {
         var res = [];
         if (node[prop] != null && node[prop].length > 0) {
@@ -128,8 +95,8 @@ class Lineage extends Component {
         };
 
         var elements = [baseNode];
-        var nodes = [baseNode];
-        var edges = [];
+        var _nodes = [baseNode];
+        var _edges = [];
 
         // find all the end-nodes
         var down_res = [];
@@ -186,7 +153,7 @@ class Lineage extends Component {
             };
 
             elements[elements.length] = node;
-            nodes[nodes.length] = node;
+            _nodes[_nodes.length] = node;
 
             var edgeId = 'edge_down_' + x.toString();
             var edge = { id: edgeId, source: baseElementId, target: elementId, arrowHeadType: 'arrow' };
@@ -196,7 +163,7 @@ class Lineage extends Component {
             }
 
             elements[elements.length] = edge;
-            edges[edges.length] = edge;
+            _edges[_edges.length] = edge;
         }
 
         for (var x = 0; x < up_res.length; x++) {
@@ -232,7 +199,7 @@ class Lineage extends Component {
             };
 
             elements[elements.length] = node;
-            nodes[nodes.length] = node;
+            _nodes[_nodes.length] = node;
 
             var edgeId = 'edge_up_' + x.toString();
             var edge = { id: edgeId, source: elementId, target: baseElementId, arrowHeadType: 'arrow' };
@@ -242,32 +209,34 @@ class Lineage extends Component {
             }
 
             elements[elements.length] = edge;
-            edges[edges.length] = edge;
+            _edges[_edges.length] = edge;
         }        
 
         console.log('elements == ');
         console.log(elements);
 
-        console.log('nodes == ');
-        console.log(nodes);
+        console.log('_nodes == ');
+        console.log(_nodes);
 
-        console.log('edges == ');
-        console.log(edges);
+        console.log('_edges == ');
+        console.log(_edges);
+
+        const { dagreGraph } = this.state;
+
+        _nodes.forEach((node) => {
+            dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        });
+
+        _edges.forEach((edge) => {
+            dagreGraph.setEdge(edge.source, edge.target);
+        });
+
+        dagre.layout(dagreGraph);
 
         this.setState({
-            nodes: nodes,
-            edges: edges
+            nodes: _nodes,
+            edges: _edges
         });
-
-        nodes.forEach((node) => {
-            this.state.dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        });
-
-        edges.forEach((edge) => {
-            this.state.dagreGraph.setEdge(edge.source, edge.target);
-        });
-
-        dagre.layout(this.state.dagreGraph);
 
         // var new_state = {}
         // new_state[st] = elements;
@@ -280,84 +249,56 @@ class Lineage extends Component {
     }
 
     render() {      
-        // AUTO LAYOUT EXAMPLE
-        // const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
-        // const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
-      
-        // const onConnect = useCallback(
-        //   (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
-        //   []
-        // );
-        // const onLayout = useCallback(
-        //   (direction) => {
-        //     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-        //       nodes,
-        //       edges,
-        //       direction
-        //     );
-      
-        //     setNodes([...layoutedNodes]);
-        //     setEdges([...layoutedEdges]);
-        //   },
-        //   [nodes, edges]
-        // );
-      
-        // return (
-        //   <div className="layoutflow">
-        //     <ReactFlow
-        //       nodes={nodes}
-        //       edges={edges}
-        //       onNodesChange={onNodesChange}
-        //       onEdgesChange={onEdgesChange}
-        //       onConnect={onConnect}
-        //       connectionLineType="smoothstep"
-        //       fitView
-        //     />
-        //     <div className="controls">
-        //       <button onClick={() => onLayout('TB')}>vertical layout</button>
-        //       <button onClick={() => onLayout('LR')}>horizontal layout</button>
-        //     </div>
-        //   </div>
-        // );
-
         // SEPARATED NODES AND EDGES
-        if (this.props.deets.name != this.state.last_ds) {
-            this.state.last_ds = this.props.deets.name;
-            this.update('elements', this.props.deets);
-        }
-
-        console.log('Render() :: this.state == ');
-        console.log(this.state);
-        
-        return (
-            <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
-                {this.state.elements && 
-                <ReactFlow 
-                    onLoad={this.onLoad} 
-                    nodes={this.state.nodes}
-                    edges={this.state.edges} 
-                    nodeTypes={this.nodeTypes} 
-                    style={{ height: "100%", width: "100%" }}
-                >
-                    <Controls showInteractive="false" />
-                </ReactFlow>}
-            </div>
-        );
-
-        // SECOND RENDER
         // if (this.props.deets.name != this.state.last_ds) {
         //     this.state.last_ds = this.props.deets.name;
         //     this.update('elements', this.props.deets);
         // }
+
+        // console.log('Render() :: this.state == ');
+        // console.log(this.state);
+
+        // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
+        // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
+
+        // const onConnect = useCallback(
+        //     (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
+        //     []
+        // );
         
         // return (
         //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
         //         {this.state.elements && 
-        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+        //         <ReactFlow 
+        //             onLoad={this.onLoad} 
+        //             nodes={this.state.nodes}
+        //             edges={this.state.edges} 
+        //             nodeTypes={this.nodeTypes} 
+        //             onConnect={onConnect}
+        //             onEdgesChange={onEdgesChange}
+        //             onNodesChange={onNodesChange}                    
+        //             connectionLineType="smoothstep"
+        //             style={{ height: "100%", width: "100%" }}
+        //         >
         //             <Controls showInteractive="false" />
         //         </ReactFlow>}
         //     </div>
         // );
+
+        // SECOND RENDER
+        if (this.props.deets.name != this.state.last_ds) {
+            this.state.last_ds = this.props.deets.name;
+            this.update('elements', this.props.deets);
+        }
+        
+        return (
+            <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
+                {this.state.elements && 
+                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+                    <Controls showInteractive="false" />
+                </ReactFlow>}
+            </div>
+        );
         
         // OG
         // return (
