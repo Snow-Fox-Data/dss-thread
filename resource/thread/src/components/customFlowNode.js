@@ -15,6 +15,14 @@ export default memo(({ data, isConnectable }) => {
   // console.log('isConnectable == ');
   // console.log(isConnectable);
 
+  // <Handle
+  //   type="target"
+  //   position="left"
+  //   isValidConnection={(connection) => connection.source === 'some-id'}
+  //   onConnect={(params) => console.log('handle onConnect', params)}
+  //   style={{ background: '#fff' }}
+  // />
+
   return (
     <>
       <Handle
@@ -38,6 +46,7 @@ export default memo(({ data, isConnectable }) => {
         type="source"
         position="right"
         isConnectable={isConnectable}
+        style={{ background: '#FFF' }}
       />
       {/* <Handle
         type="source"

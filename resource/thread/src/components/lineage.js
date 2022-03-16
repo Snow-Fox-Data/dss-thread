@@ -15,24 +15,21 @@ class Lineage extends Component {
     constructor(props) {
         super(props);
 
-        // this.dagreGraph = new dagre.graphlib.Graph();
-        // dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-        // const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-        //     initialNodes,
-        //     initialEdges
-        // );
-
         this.state = {
             elements: [],
             last_ds: '',
             layoutedEdges: null,
             layoutedNodes: null,
+            dagreGraph: new dagre.graphlib.Graph(),
+            nodes: [],
+            edges: []
         };
 
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
+
+        this.state.dagreGraph.setDefaultEdgeLabel(() => ({}));
     }
 
     // DIRECTION TYPES 'TB' OR 'LR'
@@ -115,8 +112,10 @@ class Lineage extends Component {
         console.log("basePositionY == ");
         console.log(basePositionY);
 
+        // dagreGraph.setGraph({ rankdir: 'LR' });
+
         var baseElementId = 'base';
-        var elements = [{
+        var baseNode = {
             id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
@@ -126,7 +125,11 @@ class Lineage extends Component {
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
-        }];
+        };
+
+        var elements = [baseNode];
+        var nodes = [baseNode];
+        var edges = [];
 
         // find all the end-nodes
         var down_res = [];
@@ -167,7 +170,7 @@ class Lineage extends Component {
 
             // basePositionY + (nodeHeight * ((x + 1) - Math.ceil(down_res.length * 0.5))) // I believe this is the way to good, but untested.
 
-            elements[elements.length] = {
+            var node = {
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
@@ -180,7 +183,10 @@ class Lineage extends Component {
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
-            }
+            };
+
+            elements[elements.length] = node;
+            nodes[nodes.length] = node;
 
             var edgeId = 'edge_down_' + x.toString();
             var edge = { id: edgeId, source: baseElementId, target: elementId, arrowHeadType: 'arrow' };
@@ -189,7 +195,8 @@ class Lineage extends Component {
                 edge.animated = true;
             }
 
-            elements[elements.length] = edge
+            elements[elements.length] = edge;
+            edges[edges.length] = edge;
         }
 
         for (var x = 0; x < up_res.length; x++) {
@@ -211,7 +218,7 @@ class Lineage extends Component {
             // console.log(upYPosition);
 
             var elementId = 'up_' + x.toString();
-            elements[elements.length] = {
+            var node ={
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
@@ -222,7 +229,10 @@ class Lineage extends Component {
                 // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
-            }
+            };
+
+            elements[elements.length] = node;
+            nodes[nodes.length] = node;
 
             var edgeId = 'edge_up_' + x.toString();
             var edge = { id: edgeId, source: elementId, target: baseElementId, arrowHeadType: 'arrow' };
@@ -232,10 +242,27 @@ class Lineage extends Component {
             }
 
             elements[elements.length] = edge;
-        }
+            edges[edges.length] = edge;
+        }        
 
         console.log('elements == ');
         console.log(elements);
+
+        console.log('nodes == ');
+        console.log(nodes);
+
+        console.log('edges == ');
+        console.log(edges);
+
+        // nodes.forEach((node) => {
+        //     dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        // });
+
+        // edges.forEach((edge) => {
+        //     dagreGraph.setEdge(edge.source, edge.target);
+        // });
+
+        // dagre.layout(dagreGraph);
 
         var new_state = {}
         new_state[st] = elements;
