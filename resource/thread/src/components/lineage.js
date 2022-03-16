@@ -17,8 +17,6 @@ class Lineage extends Component {
         const dagreGraph = new dagre.graphlib.Graph();
         dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-        // const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(initialNodes, initialEdges);
-
         this.state = {
             elements: [],
             last_ds: '',
@@ -28,38 +26,6 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
     }
-
-    // getLayoutedElements = (nodes, edges, direction = 'TB') => {
-    //     const isHorizontal = direction === 'LR';
-    //     dagreGraph.setGraph({ rankdir: direction });
-      
-    //     nodes.forEach((node) => {
-    //       dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
-    //     });
-      
-    //     edges.forEach((edge) => {
-    //       dagreGraph.setEdge(edge.source, edge.target);
-    //     });
-      
-    //     dagre.layout(dagreGraph);
-      
-    //     nodes.forEach((node) => {
-    //       const nodeWithPosition = dagreGraph.node(node.id);
-    //       node.targetPosition = isHorizontal ? 'left' : 'top';
-    //       node.sourcePosition = isHorizontal ? 'right' : 'bottom';
-      
-    //       // We are shifting the dagre node position (anchor=center center) to the top left
-    //       // so it matches the React Flow node anchor point (top left).
-    //       node.position = {
-    //         x: nodeWithPosition.x - nodeWidth / 2,
-    //         y: nodeWithPosition.y - nodeHeight / 2,
-    //       };
-      
-    //       return node;
-    //     });
-      
-    //     return { nodes, edges };
-    // };
 
     traverse = (lst, node, prop, ct = 0) => {
         var res = [];
@@ -153,7 +119,7 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
 
-            var downYPosition = ((x + 1) - Math.ceil(down_res.length - 0.5));
+            var downYPosition = ((x + 1) - Math.ceil(down_res.length * 0.5));
             console.log("downYPosition == ");
             console.log(downYPosition);
 
@@ -166,7 +132,7 @@ class Lineage extends Component {
                 sourcePosition: 'right',
                 // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
                 // position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                position: { x: basePositionX + (this.nodeWidth + 50), y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                position: { x: basePositionX + (this.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (this.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
@@ -238,52 +204,6 @@ class Lineage extends Component {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }
-
-        // const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
-        // const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
-      
-        // const onConnect = useCallback(
-        //   (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
-        //   []
-        // );
-
-        // const onLayout = useCallback(
-        //   (direction) => {
-        //     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-        //       nodes,
-        //       edges,
-        //       direction
-        //     );
-      
-        //     setNodes([...layoutedNodes]);
-        //     setEdges([...layoutedEdges]);
-        //   },
-        //   [nodes, edges]
-        // );
-
-        // return (
-        //     <div className="layoutflow">
-        //       <ReactFlow
-        //         nodes={nodes}
-        //         edges={edges}
-        //         onNodesChange={onNodesChange}
-        //         onEdgesChange={onEdgesChange}
-        //         onConnect={onConnect}
-        //         connectionLineType="smoothstep"
-        //         fitView
-        //       />
-        //       <div className="controls">
-        //         <button onClick={() => onLayout('TB')}>vertical layout</button>
-        //         <button onClick={() => onLayout('LR')}>horizontal layout</button>
-        //       </div>
-        //     </div>
-        // );
-
-        // height: this.containerHeight.toString(), width: this.containerWidth.toString()
-        // console.log("this.containerHeight.toString() == ");
-        // console.log(this.containerHeight.toString());
-        // console.log("this.containerWidth.toString() == ");
-        // console.log(this.containerWidth.toString());
         
         return (
             <div style={{ backgroundColor: '#EEE', height: this.containerHeight, width: this.containerWidth }}>
