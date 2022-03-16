@@ -117,7 +117,7 @@ def update_desc():
     data = request.json
     desc_id = int(data['id'])
     # print(data['applied_to'])
-    applied_to = json.dumps(data['applied_to'])
+    applied_to_json = json.dumps(data['applied_to'])
 
     # print(desc_id, exists)
     if desc_id == -1:
@@ -127,7 +127,7 @@ def update_desc():
             "id": random.randint(100000,100000000),
             "name": data['name'],
             "description": data['description'],
-            "applied_to": applied_to,
+            "applied_to": applied_to_json,
             "sources": [],
             "destinations":[]
         }
@@ -141,19 +141,19 @@ def update_desc():
             "id": desc_id,
             "name": data['name'],
             "description": data['description'],
-            "applied_to": applied_to,
+            "applied_to": applied_to_json,
             "sources": [],
             "destinations":[]
         }
 
         df.loc[df['id']==desc_id, 'name'] = desc['name']
         df.loc[df['id']==desc_id, 'description'] = desc['description']
-        df.loc[df['id']==desc_id, 'applied_to'] = applied_to
+        df.loc[df['id']==desc_id, 'applied_to'] = applied_to_json
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
     if len(data['applied_to']) > 0:
-        dss.update_column_description(applied_to, data['description'])
+        dss.update_column_description(data['applied_to'], data['description'])
      
     return json.dumps({"success": True,
         "value": desc
