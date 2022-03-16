@@ -233,6 +233,10 @@ class Lineage extends Component {
 
             elements[elements.length] = edge;
         }
+
+        console.log('elements == ');
+        console.log(elements);
+
         var new_state = {}
         new_state[st] = elements;
 
