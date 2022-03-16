@@ -153,9 +153,9 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
 
-            // var downYPosition = (300 / (up_res.length + 1) * (x + 1));
-            // console.log("downYPosition == ");
-            // console.log(downYPosition);
+            var downYPosition = ((x + 1) - Math.ceil(down_res.length - 0.5));
+            console.log("downYPosition == ");
+            console.log(downYPosition);
 
             elements[elements.length] = {
                 id: elementId,
@@ -196,9 +196,9 @@ class Lineage extends Component {
             if (splits.length > 2)
                 col = splits[2];
 
-            var upYPosition = (250 / (x + 1) - (down_res.length / 2));
-            console.log("upYPosition == ");
-            console.log(upYPosition);
+            // var upYPosition = (250 / (x + 1) - (down_res.length / 2));
+            // console.log("upYPosition == ");
+            // console.log(upYPosition);
 
             var elementId = 'up_' + x.toString();
             elements[elements.length] = {
