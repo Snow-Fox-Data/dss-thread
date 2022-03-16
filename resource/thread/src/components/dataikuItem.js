@@ -9,7 +9,9 @@ import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 import Definition from "./definition"
-import { confirm } from 'react-bootstrap-confirmation';
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -38,54 +40,64 @@ class DataikuItem extends Component {
         return orig;
     }
 
-    async saveCol(applyUp, applyDown) {
+ saveCol(applyUp, applyDown) {
+        confirmAlert({
+            title: 'Confirm to submit',
+            message: 'Are you sure to do this.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        let val = '';
+                        if (this.state.selectedDef.description != null)
+                            val = this.state.selectedDef.description;
 
-        this.setState({
-            newDefModal: false
+                        let applyTo = [this.props.item.key];
+                        if (applyUp)
+                            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
+                        if (applyDown)
+                            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
+
+                        const requestOptions = {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                "name": this.state.selectedDef.name,
+                                "description": val,
+                                "applied_to": applyTo,
+                                "id": this.state.selectedDef.id
+                            })
+                        }
+
+                        eventBus.dispatch("loading", true);
+
+                        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
+                            .then(res => res.json())
+                            .then(
+                                (result) => {
+                                    this.props.item.definition = result.value;
+
+                                    this.setState({
+                                        newDefModal: false,
+                                        selectedDef: result.value
+                                    });
+
+                                    eventBus.dispatch("loading", false);
+                                });
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => alert('Click No')
+                }
+            ]
         });
+    };
 
-        const result = await confirm('Are you really sure?');
 
-        let val = '';
-        if (this.state.selectedDef.description != null)
-            val = this.state.selectedDef.description;
-
-        let applyTo = [this.props.item.key];
-        if (applyUp)
-            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
-        if (applyDown)
-            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "name": this.state.selectedDef.name,
-                "description": val,
-                "applied_to": applyTo,
-                "id": this.state.selectedDef.id
-            })
-        }
-
-        eventBus.dispatch("loading", true);
-
-        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.props.item.definition = result.value;
-
-                    this.setState({
-                        newDefModal: false,
-                        selectedDef: result.value
-                    });
-
-                    eventBus.dispatch("loading", false);
-                });
-    }
 
     buildLineage() {
         return <Row>
