@@ -254,6 +254,7 @@ class dss_utils:
             column_array = [column_array]
             
         for i in column_array:
+            print(f'setting description for {i}')
             lst = i.split('.')
             project, dataset, column = lst[0], lst[1], lst[2]
             p = self.client.get_project(project)
