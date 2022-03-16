@@ -8,7 +8,7 @@ import { Modal, Button, Form, Toast } from "react-bootstrap";
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
-import Meaning from "./meaning"
+import Definition from "./definition"
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class DataikuItem extends Component {
         this.state = {
             newDefModal: false,
             selectedDef: {
-                name: "New Meaning",
+                name: "New Definition",
                 description: ""
             }
         };
@@ -158,7 +158,7 @@ class DataikuItem extends Component {
             this.state.selectedDef.description = this.props.item.definition.description;
         }
         else {
-            this.state.selectedDef.name = "New Meaning";
+            this.state.selectedDef.name = "New Definition";
             this.state.selectedDef.description = "";
             this.state.selectedDef.id = -1;
         }
@@ -211,10 +211,7 @@ class DataikuItem extends Component {
                             <div>
                                 <Button variant="primary"
                                     onClick={() => this.newDef()}
-                                >Add Meaning</Button>{' '}
-                                {/* <div style={{ padding: '10px' }}>
-                                    <Meaning meaning={this.state.selectedDef}></Meaning>
-                                </div> */}
+                                >Add Definition</Button>{' '}
                             </div>
                         }
                         {
@@ -222,9 +219,9 @@ class DataikuItem extends Component {
                             <div>
                                 <Button variant="primary"
                                     onClick={() => this.editDef()}
-                                >Edit Meaning</Button>{' '}
+                                >Edit Definition</Button>{' '}
                                 <div style={{ padding: '10px' }}>
-                                    <Meaning meaning={this.state.selectedDef}></Meaning>
+                                    <Definition definition={this.state.selectedDef}></Definition>
                                 </div>
                             </div>
                         }

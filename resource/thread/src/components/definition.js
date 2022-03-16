@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 
 
-class Meaning extends Component {
+class Definition extends Component {
 
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ class Meaning extends Component {
                             ID
                         </span>
                         <span>
-                            {this.props.meaning.id}
+                            {this.props.definition.id}
                         </span>
                     </Col>
                 </Row>
@@ -28,7 +28,7 @@ class Meaning extends Component {
                             Name
                         </span>
                         <span>
-                            {this.props.meaning.name}
+                            {this.props.definition.name}
                         </span>
                     </Col>
                 </Row>
@@ -38,7 +38,7 @@ class Meaning extends Component {
                             Description
                         </span>
                         <span>
-                            {this.props.meaning.description}
+                            {this.props.definition.description}
                         </span>
                     </Col>
                 </Row>
@@ -48,4 +48,4 @@ class Meaning extends Component {
     }
 }
 
-export default Meaning;
+export default Definition;
