@@ -5,27 +5,71 @@ import dagre from 'dagre';
 
 class Lineage extends Component {
 
+    // CONSTANT VALUES
+    static containerHeight = 500;
+    static containerWidth = 1030;
+
+    static nodeWidth = 200;
+    static nodeHeight = 60;
+
+    static dagreGraph = new dagre.graphlib.Graph();
+    
     constructor(props) {
         super(props);
 
-        this.containerHeight = 500;
-        this.containerWidth = 1030;
+        this.dagreGraph.setDefaultEdgeLabel(() => ({}));
+        // const dagreGraph = new dagre.graphlib.Graph();
+        // dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-        this.nodeWidth = 200;
-        this.nodeHeight = 60;
-
-        const dagreGraph = new dagre.graphlib.Graph();
-        dagreGraph.setDefaultEdgeLabel(() => ({}));
+        // const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+        //     initialNodes,
+        //     initialEdges
+        // );
 
         this.state = {
             elements: [],
             last_ds: '',
+            layoutedEdges: null,
+            layoutedNodes: null,
         };
 
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
     }
+
+    // DIRECTION TYPES 'TB' OR 'LR'
+    // getLayoutedElements = (nodes, edges, direction = 'LR') => {
+    //     const isHorizontal = direction === 'LR';
+    //     dagreGraph.setGraph({ rankdir: direction });
+      
+    //     nodes.forEach((node) => {
+    //       dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+    //     });
+      
+    //     edges.forEach((edge) => {
+    //       dagreGraph.setEdge(edge.source, edge.target);
+    //     });
+      
+    //     dagre.layout(dagreGraph);
+      
+    //     nodes.forEach((node) => {
+    //       const nodeWithPosition = dagreGraph.node(node.id);
+    //       node.targetPosition = isHorizontal ? 'left' : 'top';
+    //       node.sourcePosition = isHorizontal ? 'right' : 'bottom';
+      
+    //       // We are shifting the dagre node position (anchor=center center) to the top left
+    //       // so it matches the React Flow node anchor point (top left).
+    //       node.position = {
+    //         x: nodeWithPosition.x - nodeWidth / 2,
+    //         y: nodeWithPosition.y - nodeHeight / 2,
+    //       };
+      
+    //       return node;
+    //     });
+      
+    //     return { nodes, edges };
+    // };
 
     traverse = (lst, node, prop, ct = 0) => {
         var res = [];
@@ -45,6 +89,7 @@ class Lineage extends Component {
         return res;
     }
 
+    // STRUCTURE FOR NODES AND EDGES FOR AUTO LAYOUT
     // example = () => {
     //     const nodes = [{
     //         id: '1',
@@ -123,6 +168,8 @@ class Lineage extends Component {
             console.log("downYPosition == ");
             console.log(downYPosition);
 
+            // basePositionY + (nodeHeight * ((x + 1) - Math.ceil(down_res.length * 0.5))) // I believe this is the way to good, but untested.
+
             elements[elements.length] = {
                 id: elementId,
                 type: 'customFlowNode',
@@ -199,7 +246,48 @@ class Lineage extends Component {
         rv.fitView();
     }
 
-    render() {        
+    render() {      
+        // AUTO LAYOUT EXAMPLE
+        // const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
+        // const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+      
+        // const onConnect = useCallback(
+        //   (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
+        //   []
+        // );
+        // const onLayout = useCallback(
+        //   (direction) => {
+        //     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+        //       nodes,
+        //       edges,
+        //       direction
+        //     );
+      
+        //     setNodes([...layoutedNodes]);
+        //     setEdges([...layoutedEdges]);
+        //   },
+        //   [nodes, edges]
+        // );
+      
+        // return (
+        //   <div className="layoutflow">
+        //     <ReactFlow
+        //       nodes={nodes}
+        //       edges={edges}
+        //       onNodesChange={onNodesChange}
+        //       onEdgesChange={onEdgesChange}
+        //       onConnect={onConnect}
+        //       connectionLineType="smoothstep"
+        //       fitView
+        //     />
+        //     <div className="controls">
+        //       <button onClick={() => onLayout('TB')}>vertical layout</button>
+        //       <button onClick={() => onLayout('LR')}>horizontal layout</button>
+        //     </div>
+        //   </div>
+        // );
+
+        // SECOND RENDER
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
@@ -214,6 +302,7 @@ class Lineage extends Component {
             </div>
         );
         
+        // OG
         // return (
         //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
         //         {this.state.elements && 
