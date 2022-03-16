@@ -40,24 +40,24 @@ class DataikuItem extends Component {
         return orig;
     }
 
- saveCol(applyUp, applyDown) {
-     
+    saveCol(applyUp, applyDown) {
+        let applyTo = [this.props.item.key];
+        if (applyUp)
+            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
+        if (applyDown)
+            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
+
         confirmAlert({
-            title: 'Confirm to submit',
-            message: 'Are you sure to do this.',
+            title: 'Confirm Save',
+            message: 'Are you sure to apply this definition to ' + applyTo,
             buttons: [
                 {
-                    label: 'Yes',
+                    label: 'Apply',
                     onClick: () => {
                         let val = '';
                         if (this.state.selectedDef.description != null)
                             val = this.state.selectedDef.description;
 
-                        let applyTo = [this.props.item.key];
-                        if (applyUp)
-                            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
-                        if (applyDown)
-                            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
 
                         const requestOptions = {
                             method: 'POST',
@@ -91,8 +91,8 @@ class DataikuItem extends Component {
                     }
                 },
                 {
-                    label: 'No',
-                    onClick: () => alert('Click No')
+                    label: 'Cancel',
+                    onClick: () => {}
                 }
             ]
         });
