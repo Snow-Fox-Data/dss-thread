@@ -39,6 +39,11 @@ class DataikuItem extends Component {
     }
 
     async saveCol(applyUp, applyDown) {
+
+        this.setState({
+            newDefModal: false
+        });
+
         const result = await confirm('Are you really sure?');
 
         let val = '';
