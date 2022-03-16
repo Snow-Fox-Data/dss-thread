@@ -33,7 +33,7 @@ class DataikuItem extends Component {
                 orig = this.flattenArray(r, key, orig);
             }
         }
-        
+
         return orig;
     }
 
@@ -45,6 +45,8 @@ class DataikuItem extends Component {
 
         let applyTo = [this.props.item.key];
         if (applyUp)
+            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
+        if (applyDown)
             applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
 
         const requestOptions = {
