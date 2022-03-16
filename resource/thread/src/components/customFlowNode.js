@@ -46,7 +46,7 @@ export default memo(({ data, isConnectable }) => {
         type="source"
         position="right"
         isConnectable={isConnectable}
-        style={{ background: '#FFF' }}
+        style={{ background: '#555' }}
       />
       {/* <Handle
         type="source"
