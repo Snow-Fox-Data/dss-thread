@@ -39,7 +39,7 @@ class DataikuItem extends Component {
     }
 
     async saveCol(applyUp, applyDown) {
-        const result = await alert('Are you really sure?');
+        const result = await confirm('Are you really sure?');
 
         let val = '';
         if (this.state.selectedDef.description != null)
