@@ -8,14 +8,14 @@ class Lineage extends Component {
     constructor(props) {
         super(props);
 
-        // this.containerHeight = 500;
-        // this.containerWidth = 1030;
+        this.containerHeight = 500;
+        this.containerWidth = 1030;
 
-        // this.nodeWidth = 200;
-        // this.nodeHeight = 75;
+        this.nodeWidth = 200;
+        this.nodeHeight = 75;
 
-        // const dagreGraph = new dagre.graphlib.Graph();
-        // dagreGraph.setDefaultEdgeLabel(() => ({}));
+        const dagreGraph = new dagre.graphlib.Graph();
+        dagreGraph.setDefaultEdgeLabel(() => ({}));
 
         // const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(initialNodes, initialEdges);
 
@@ -99,13 +99,13 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
-        // let basePositionX = (this.containerWidth / 2);
-        // let basePositionY = (this.containerHeight / 2);
+        let basePositionX = (this.containerWidth / 2);
+        let basePositionY = (this.containerHeight / 2);
 
-        // console.log("basePositionX == ");
-        // console.log(basePositionX);
-        // console.log("basePositionY == ");
-        // console.log(basePositionY);
+        console.log("basePositionX == ");
+        console.log(basePositionX);
+        console.log("basePositionY == ");
+        console.log(basePositionY);
 
         var baseElementId = 'base';
         var elements = [{
@@ -277,10 +277,10 @@ class Lineage extends Component {
         // );
 
         // height: this.containerHeight.toString(), width: this.containerWidth.toString()
-        // console.log("this.containerHeight.toString() == ");
-        // console.log(this.containerHeight.toString());
-        // console.log("this.containerWidth.toString() == ");
-        // console.log(this.containerWidth.toString());
+        console.log("this.containerHeight.toString() == ");
+        console.log(this.containerHeight.toString());
+        console.log("this.containerWidth.toString() == ");
+        console.log(this.containerWidth.toString());
         
         return (
             <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
