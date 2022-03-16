@@ -102,13 +102,18 @@ class Lineage extends Component {
         let basePositionX = (this.containerWidth / 2);
         let basePositionY = (this.containerHeight / 2);
 
+        console.log("basePositionX == ");
+        console.log(basePositionX);
+        console.log("basePositionY == ");
+        console.log(basePositionY);
+
         var baseElementId = 'base';
         var elements = [{
             id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
-            position: { x: basePositionX, y: basePositionY },
-            // position: { x: 250, y: 140 },
+            // position: { x: basePositionX, y: basePositionY },
+            position: { x: 250, y: 140 },
             style: { backgroundColor: '#FFF', width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
             sourcePosition: 'right',
             targetPosition: 'left',
@@ -160,8 +165,8 @@ class Lineage extends Component {
                 targetPosition: 'left',
                 sourcePosition: 'right',
 
-                position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                // position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
+                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
                 draggable: false
             }
 
@@ -201,7 +206,8 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', width: '200px' },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             }
 
@@ -277,7 +283,7 @@ class Lineage extends Component {
         console.log(this.containerWidth.toString());
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: "500", width: "1030" }}>
+            <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
                 {this.state.elements && 
                 <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
                     <Controls showInteractive="false" />
