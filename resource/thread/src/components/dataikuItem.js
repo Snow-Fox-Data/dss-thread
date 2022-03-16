@@ -211,10 +211,10 @@ class DataikuItem extends Component {
                             <div>
                                 <Button variant="primary"
                                     onClick={() => this.newDef()}
-                                >Add</Button>{' '}
-                                <div style={{ padding: '10px' }}>
+                                >Add Meaning</Button>{' '}
+                                {/* <div style={{ padding: '10px' }}>
                                     <Meaning meaning={this.state.selectedDef}></Meaning>
-                                </div>
+                                </div> */}
                             </div>
                         }
                         {
@@ -222,7 +222,7 @@ class DataikuItem extends Component {
                             <div>
                                 <Button variant="primary"
                                     onClick={() => this.editDef()}
-                                >Edit</Button>{' '}
+                                >Edit Meaning</Button>{' '}
                                 <div style={{ padding: '10px' }}>
                                     <Meaning meaning={this.state.selectedDef}></Meaning>
                                 </div>
