@@ -23,7 +23,7 @@ export default memo(({ data, isConnectable }) => {
         style={{ background: '#555' }}
         isConnectable={isConnectable}
       />
-      <div style={{ border: 'solid 1px #333', borderRadius: '3px', textAlign: 'center', padding: '10px' }}>
+      <div style={{ border: 'solid 1px #333', borderRadius: '3px', height: '100%', padding: '10px', textAlign: 'center', width: '100%' }}>
         <div style={{ fontWeight: 'bold' }}>{data.project}</div>
         <div>
           {/* <a href={Common.createDsLink2(data.project, data.dataset)} target="_blank">{data.dataset}</a> */}

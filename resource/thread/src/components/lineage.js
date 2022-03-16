@@ -12,7 +12,7 @@ class Lineage extends Component {
         this.containerWidth = 1030;
 
         this.nodeWidth = 200;
-        this.nodeHeight = 75;
+        this.nodeHeight = 60;
 
         const dagreGraph = new dagre.graphlib.Graph();
         dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -153,9 +153,9 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
 
-            var downYPosition = (300 / (up_res.length + 1) * (x + 1));
-            console.log("downYPosition == ");
-            console.log(downYPosition);
+            // var downYPosition = (300 / (up_res.length + 1) * (x + 1));
+            // console.log("downYPosition == ");
+            // console.log(downYPosition);
 
             elements[elements.length] = {
                 id: elementId,
@@ -195,9 +195,9 @@ class Lineage extends Component {
             if (splits.length > 2)
                 col = splits[2];
 
-            var upYPosition = (300 / (up_res.length + 1) * (x + 1));
-            console.log("upYPosition == ");
-            console.log(upYPosition);
+            // var upYPosition = (300 / (up_res.length + 1) * (x + 1));
+            // console.log("upYPosition == ");
+            // console.log(upYPosition);
 
             var elementId = 'up_' + x.toString();
             elements[elements.length] = {
