@@ -269,9 +269,15 @@ class Lineage extends Component {
         //       </div>
         //     </div>
         // );
+
+        // height: this.containerHeight.toString(), width: this.containerWidth.toString()
+        console.log("this.containerHeight.toString() == ");
+        console.log(this.containerHeight.toString());
+        console.log("this.containerWidth.toString() == ");
+        console.log(this.containerWidth.toString());
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: this.containerHeight.toString(), width: this.containerWidth.toString() }}>
+            <div style={{ backgroundColor: '#EEE', height: "500", width: "1030" }}>
                 {this.state.elements && 
                 <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
                     <Controls showInteractive="false" />
