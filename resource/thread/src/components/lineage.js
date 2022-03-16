@@ -1,11 +1,21 @@
-import React, { Component } from "react";
-import ReactFlow, { Controls } from 'react-flow-renderer';
+import React, { Component, useCallback } from 'react';
+import ReactFlow, { addEdge, Controls, useNodesState, useEdgesState } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
+import dagre from 'dagre';
 
 class Lineage extends Component {
 
     constructor(props) {
         super(props);
+
+        this.containerHeight = 500;
+        this.containerWidth = 1030;
+
+        this.nodeWidth = 200;
+        this.nodeHeight = 60;
+
+        const dagreGraph = new dagre.graphlib.Graph();
+        dagreGraph.setDefaultEdgeLabel(() => ({}));
 
         this.state = {
             elements: [],
@@ -35,16 +45,42 @@ class Lineage extends Component {
         return res;
     }
 
+    // example = () => {
+    //     const nodes = [{
+    //         id: '1',
+    //         type: 'input',
+    //         data: { label: 'input' },
+    //         position,
+    //       }];
+
+    //     const edges = [{ 
+    //         id: 'e12', 
+    //         source: '1', 
+    //         target: '2', 
+    //         type: edgeType, 
+    //         animated: true 
+    //     }];
+    // }
+
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
+
+        let basePositionX = (this.containerWidth / 2) - (this.nodeWidth / 2);
+        let basePositionY = (this.containerHeight / 2) - (this.nodeHeight / 2);
+
+        console.log("basePositionX == ");
+        console.log(basePositionX);
+        console.log("basePositionY == ");
+        console.log(basePositionY);
 
         var baseElementId = 'base';
         var elements = [{
             id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
-            position: { x: 250, y: 140 },
-            style: { backgroundColor: '#FFF', width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
+            position: { x: basePositionX, y: basePositionY },
+            // position: { x: 250, y: 140 },
+            style: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold', height: this.nodeHeight, width: this.nodeWidth },
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
@@ -83,7 +119,7 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
 
-            var downYPosition = (300 / (up_res.length + 1) * (x + 1));
+            var downYPosition = ((x + 1) - Math.ceil(down_res.length * 0.5));
             console.log("downYPosition == ");
             console.log(downYPosition);
 
@@ -91,12 +127,14 @@ class Lineage extends Component {
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', width: '200px' },
+                style: { backgroundColor: '#FFF', height: this.nodeHeight, width: this.nodeWidth },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-
-                position: { x: 500, y: (200 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
+                // position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX + (this.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX + (this.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
+                
                 draggable: false
             }
 
@@ -124,19 +162,21 @@ class Lineage extends Component {
             if (splits.length > 2)
                 col = splits[2];
 
-            var upYPosition = (300 / (up_res.length + 1) * (x + 1));
-            console.log("upYPosition == ");
-            console.log(upYPosition);
+            // var upYPosition = (250 / (x + 1) - (down_res.length / 2));
+            // console.log("upYPosition == ");
+            // console.log(upYPosition);
 
             var elementId = 'up_' + x.toString();
             elements[elements.length] = {
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', width: '200px' },
+                style: { backgroundColor: '#FFF', height: this.nodeHeight, width: this.nodeWidth },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             }
 
@@ -166,13 +206,22 @@ class Lineage extends Component {
         }
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: "500", width: "1030" }}>
+            <div style={{ backgroundColor: '#EEE', height: this.containerHeight, width: this.containerWidth }}>
                 {this.state.elements && 
                 <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
         );
+        
+        // return (
+        //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+        //         {this.state.elements && 
+        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+        //             <Controls showInteractive="false" />
+        //         </ReactFlow>}
+        //     </div>
+        // );
     }
 }
 
