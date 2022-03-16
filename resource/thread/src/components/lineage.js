@@ -164,9 +164,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: this.nodeHeight, width: this.nodeWidth },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
                 // position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                position: { x: basePositionX + (this.nodeWidth + 50), y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                position: { x: basePositionX + (this.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
             }
