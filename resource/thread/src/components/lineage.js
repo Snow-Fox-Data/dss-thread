@@ -99,8 +99,8 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
-        let basePositionX = (this.containerWidth / 2);
-        let basePositionY = (this.containerHeight / 2);
+        let basePositionX = (this.containerWidth / 2) - (this.nodeWidth / 2);
+        let basePositionY = (this.containerHeight / 2) - (this.nodeHeight / 2);
 
         console.log("basePositionX == ");
         console.log(basePositionX);
@@ -114,7 +114,7 @@ class Lineage extends Component {
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: basePositionX, y: basePositionY },
             // position: { x: 250, y: 140 },
-            style: { backgroundColor: '#FFF', width: '200px', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold' },
+            style: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold', height: this.nodeHeight, width: this.nodeWidth },
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
@@ -161,12 +161,13 @@ class Lineage extends Component {
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', width: '200px' },
+                style: { backgroundColor: '#FFF', height: this.nodeHeight, width: this.nodeWidth },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-
-                position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                // position: { x: basePositionX + (this.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX + (this.nodeWidth + 50), y: ((300 / (down_res.length + 1)) * (x + 1)) },
+                
                 draggable: false
             }
 
@@ -203,10 +204,11 @@ class Lineage extends Component {
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', width: '200px' },
+                style: { backgroundColor: '#FFF', height: this.nodeHeight, width: this.nodeWidth },
                 sourcePosition: 'right',
                 targetPosition: 'left',
                 // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 position: { x: basePositionX - (this.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             }
