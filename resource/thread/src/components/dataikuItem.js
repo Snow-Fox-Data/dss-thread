@@ -166,18 +166,19 @@ class DataikuItem extends Component {
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{this.state.selectedDef.name}</Modal.Title>
+                    <Modal.Title>Definition: {this.state.selectedDef.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Row>
-                            <Form style={{ paddingTop: '15px' }}>
+                            <Form style={{ paddingTop: '5px' }}>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Description Name</Form.Label>
+                                    <Form.Label>Definition Name</Form.Label>
                                     <Form.Control type="text" defaultValue={this.state.selectedDef.name}
                                         onChange={e => this.state.selectedDef.name = e.target.value}
                                     />
-                                    <Form.Label>Description Value</Form.Label>
+                                    <div style={{ height: "10px" }}></div>
+                                    <Form.Label>Definition Description</Form.Label>
                                     <Form.Control type="text" defaultValue={this.state.selectedDef.value}
                                         onChange={e => this.state.selectedDef.description = e.target.value}
                                     />
