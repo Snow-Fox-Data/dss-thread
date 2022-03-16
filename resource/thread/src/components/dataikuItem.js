@@ -9,6 +9,7 @@ import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 import Definition from "./definition"
+import { confirm } from 'react-bootstrap-confirmation';
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -37,7 +38,8 @@ class DataikuItem extends Component {
         return orig;
     }
 
-    saveCol(applyUp, applyDown) {
+    async saveCol(applyUp, applyDown) {
+        const result = await alert('Are you really sure?');
 
         let val = '';
         if (this.state.selectedDef.description != null)
@@ -182,6 +184,9 @@ class DataikuItem extends Component {
                                     <Form.Control type="text" defaultValue={this.state.selectedDef.value}
                                         onChange={e => this.state.selectedDef.description = e.target.value}
                                     />
+                                    <Form.Text className="text-muted">
+                                        Will appear in the Dataiku Dataset's column description.
+                                    </Form.Text>
                                 </Form.Group>
                             </Form>
                         </Row>
