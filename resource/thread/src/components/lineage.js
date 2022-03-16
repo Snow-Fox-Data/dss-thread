@@ -325,6 +325,9 @@ class Lineage extends Component {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }
+
+        console.log('Render() :: this.state == ');
+        console.log(this.state);
         
         return (
             <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
