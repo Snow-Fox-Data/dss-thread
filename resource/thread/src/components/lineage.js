@@ -69,8 +69,11 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
-        let basePositionX = (Lineage.containerWidth / 2) - (Lineage.nodeWidth / 2);
-        let basePositionY = (Lineage.containerHeight / 2) - (Lineage.nodeHeight / 2);
+        // let basePositionX = (Lineage.containerWidth / 2) - (Lineage.nodeWidth / 2);
+        // let basePositionY = (Lineage.containerHeight / 2) - (Lineage.nodeHeight / 2);
+
+        let basePositionX = 0;
+        let basePositionY = 0;
 
         console.log("basePositionX == ");
         console.log(basePositionX);
@@ -142,9 +145,10 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 targetPosition: 'left',
                 sourcePosition: 'right',
+                position: { x: basePositionX, y: basePositionY },
                 // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
@@ -190,9 +194,10 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 sourcePosition: 'right',
                 targetPosition: 'left',
+                position: { x: basePositionX, y: basePositionY },
                 // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
-                position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             };
 
@@ -233,7 +238,8 @@ class Lineage extends Component {
 
         this.setState({
             nodes: _nodes,
-            edges: _edges
+            edges: _edges,
+            elements: elements
         });
 
         // ELMENTS STATE UPDATE
@@ -248,61 +254,61 @@ class Lineage extends Component {
 
     render() {      
         // SEPARATED NODES AND EDGES
-        if (this.props.deets.name != this.state.last_ds) {
-            this.state.last_ds = this.props.deets.name;
-            this.update('elements', this.props.deets);
-        }
-
-        console.log('Render() :: this.state == ');
-        console.log(this.state);
-
-        // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
-        // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
-
-        // const onConnect = useCallback(
-        //     (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
-        //     []
-        // );
-        
-        return (
-            <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
-                {this.state.elements && 
-                <ReactFlow                     
-                    nodes={this.state.nodes}
-                    edges={this.state.edges} 
-                    nodeTypes={this.nodeTypes} 
-                    // onConnect={onConnect}
-                    onLoad={this.onLoad} 
-                    // onEdgesChange={onEdgesChange}
-                    // onNodesChange={onNodesChange}                    
-                    connectionLineType="smoothstep"
-                    style={{ height: "100%", width: "100%" }}
-                >
-                    <Controls showInteractive="false" />
-                </ReactFlow>}
-            </div>
-        );
-
-        // WORKING RENDER
         // if (this.props.deets.name != this.state.last_ds) {
         //     this.state.last_ds = this.props.deets.name;
         //     this.update('elements', this.props.deets);
         // }
+
+        // console.log('Render() :: this.state == ');
+        // console.log(this.state);
+
+        // // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
+        // // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
+
+        // // const onConnect = useCallback(
+        // //     (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
+        // //     []
+        // // );
         
         // return (
         //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
         //         {this.state.elements && 
-        //         <ReactFlow 
-        //             connectionLineType="smoothstep"                    
-        //             elements={this.state.elements} 
+        //         <ReactFlow                     
+        //             nodes={this.state.nodes}
+        //             edges={this.state.edges} 
         //             nodeTypes={this.nodeTypes} 
+        //             // onConnect={onConnect}
         //             onLoad={this.onLoad} 
+        //             // onEdgesChange={onEdgesChange}
+        //             // onNodesChange={onNodesChange}                    
+        //             connectionLineType="smoothstep"
         //             style={{ height: "100%", width: "100%" }}
         //         >
         //             <Controls showInteractive="false" />
         //         </ReactFlow>}
         //     </div>
         // );
+
+        // WORKING RENDER
+        if (this.props.deets.name != this.state.last_ds) {
+            this.state.last_ds = this.props.deets.name;
+            this.update('elements', this.props.deets);
+        }
+        
+        return (
+            <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
+                {this.state.elements && 
+                <ReactFlow 
+                    connectionLineType="smoothstep"                    
+                    elements={this.state.elements} 
+                    nodeTypes={this.nodeTypes} 
+                    onLoad={this.onLoad} 
+                    style={{ height: "100%", width: "100%" }}
+                >
+                    <Controls showInteractive="false" />
+                </ReactFlow>}
+            </div>
+        );
     }
 }
 
