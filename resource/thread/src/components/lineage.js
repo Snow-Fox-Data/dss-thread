@@ -11,8 +11,6 @@ class Lineage extends Component {
 
     static nodeWidth = 200;
     static nodeHeight = 60;
-
-    // static dagreGraph = new dagre.graphlib.Graph();
     
     constructor(props) {
         super(props);
@@ -20,7 +18,9 @@ class Lineage extends Component {
         this.state = {
             elements: [],
             last_ds: '',
-            // dagreGraph: new dagre.graphlib.Graph(),
+            layoutedEdges: null,
+            layoutedNodes: null,
+            dagreGraph: new dagre.graphlib.Graph(),
             nodes: [],
             edges: []
         };
@@ -29,7 +29,7 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
 
-        // Lineage.dagreGraph.setDefaultEdgeLabel(() => ({}));
+        this.state.dagreGraph.setDefaultEdgeLabel(() => ({}));
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -74,16 +74,12 @@ class Lineage extends Component {
         let basePositionX = (Lineage.containerWidth / 2) - (Lineage.nodeWidth / 2);
         let basePositionY = (Lineage.containerHeight / 2) - (Lineage.nodeHeight / 2);
 
-        // let basePositionX = 0;
-        // let basePositionY = 0;
-
         console.log("basePositionX == ");
         console.log(basePositionX);
         console.log("basePositionY == ");
         console.log(basePositionY);
 
-        // Lineage.dagreGraph.setGraph({ rankdir: 'LR' });
-        // this.state.dagreGraph.setGraph({ rankdir: 'LR' });
+        this.state.dagreGraph.setGraph({ rankdir: 'LR' });
 
         var baseElementId = 'base';
         var baseNode = {
@@ -148,10 +144,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                // position: { x: basePositionX, y: basePositionY },
-                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
+                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
@@ -197,10 +192,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                // position: { x: basePositionX, y: basePositionY },
-                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             };
 
@@ -227,46 +221,26 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        // const { dagreGraph } = this.state;
-        
-        // _nodes.forEach((node) => {
-        //     Lineage.dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        //     // dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        // });
+        const { dagreGraph } = this.state;
 
-        // _edges.forEach((edge) => {
-        //     Lineage.dagreGraph.setEdge(edge.source, edge.target);
-        //     // dagreGraph.setEdge(edge.source, edge.target);
-        // });
+        _nodes.forEach((node) => {
+            dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        });
 
-        // dagre.layout(Lineage.dagreGraph);
-        // // dagre.layout(dagreGraph);
+        _edges.forEach((edge) => {
+            dagreGraph.setEdge(edge.source, edge.target);
+        });
 
-        // _nodes.forEach((node) => {
-        //     const nodeWithPosition = Lineage.dagreGraph.node(node.id);
-        //     // const nodeWithPosition = dagreGraph.node(node.id);
-        //     node.targetPosition = 'left';
-        //     node.sourcePosition = 'right';
-        
-        //     // We are shifting the dagre node position (anchor=center center) to the top left
-        //     // so it matches the React Flow node anchor point (top left).
-        //     node.position = {
-        //       x: nodeWithPosition.x - Lineage.nodeWidth / 2,
-        //       y: nodeWithPosition.y - Lineage.nodeHeight / 2,
-        //     };
-        
-        //     return node;
-        // });
+        dagre.layout(dagreGraph);
 
-        // this.setState({
-        //     nodes: _nodes,
-        //     edges: _edges,
-        //     elements: elements
-        // });
+        this.setState({
+            nodes: _nodes,
+            edges: _edges
+        });
 
-        // ELMENTS STATE UPDATE
         var new_state = {}
         new_state[st] = elements;
+
         this.setState(new_state)
     }
 
@@ -275,34 +249,34 @@ class Lineage extends Component {
     }
 
     render() {      
-        console.log('Render() :: this.state == ');
-        console.log(this.state);
-
         // SEPARATED NODES AND EDGES
         // if (this.props.deets.name != this.state.last_ds) {
         //     this.state.last_ds = this.props.deets.name;
         //     this.update('elements', this.props.deets);
         // }
 
-        // // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
-        // // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
+        // console.log('Render() :: this.state == ');
+        // console.log(this.state);
 
-        // // const onConnect = useCallback(
-        // //     (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
-        // //     []
-        // // );
+        // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
+        // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
+
+        // const onConnect = useCallback(
+        //     (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
+        //     []
+        // );
         
         // return (
         //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
         //         {this.state.elements && 
-        //         <ReactFlow                     
+        //         <ReactFlow 
+        //             onLoad={this.onLoad} 
         //             nodes={this.state.nodes}
         //             edges={this.state.edges} 
         //             nodeTypes={this.nodeTypes} 
-        //             // onConnect={onConnect}
-        //             onLoad={this.onLoad} 
-        //             // onEdgesChange={onEdgesChange}
-        //             // onNodesChange={onNodesChange}                    
+        //             onConnect={onConnect}
+        //             onEdgesChange={onEdgesChange}
+        //             onNodesChange={onNodesChange}                    
         //             connectionLineType="smoothstep"
         //             style={{ height: "100%", width: "100%" }}
         //         >
@@ -311,7 +285,7 @@ class Lineage extends Component {
         //     </div>
         // );
 
-        // WORKING RENDER
+        // SECOND RENDER
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
@@ -320,16 +294,21 @@ class Lineage extends Component {
         return (
             <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
                 {this.state.elements && 
-                <ReactFlow              
-                    elements={this.state.elements} 
-                    nodeTypes={this.nodeTypes} 
-                    onLoad={this.onLoad} 
-                    style={{ height: "100%", width: "100%" }}
-                >
+                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
         );
+        
+        // OG
+        // return (
+        //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+        //         {this.state.elements && 
+        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+        //             <Controls showInteractive="false" />
+        //         </ReactFlow>}
+        //     </div>
+        // );
     }
 }
 
