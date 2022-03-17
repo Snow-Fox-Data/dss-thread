@@ -14,7 +14,11 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
+<<<<<<< HEAD
   "../../resource/thread/build/precache-manifest.7c55d7636010548938e7ed27e721374b.js"
+=======
+  "../../resource/thread/build/precache-manifest.494ce4190d93df580e3036d35c39e1ac.js"
+>>>>>>> parent of a263c436 (Added back the elements set state to get the lineage displaying again.)
 );
 
 self.addEventListener('message', (event) => {
