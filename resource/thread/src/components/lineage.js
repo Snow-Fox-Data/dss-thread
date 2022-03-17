@@ -258,16 +258,16 @@ class Lineage extends Component {
         //     return node;
         // });
 
-        this.setState({
-            nodes: _nodes,
-            edges: _edges,
-            elements: elements
-        });
+        // this.setState({
+        //     nodes: _nodes,
+        //     edges: _edges,
+        //     elements: elements
+        // });
 
         // ELMENTS STATE UPDATE
-        // var new_state = {}
-        // new_state[st] = elements;
-        // this.setState(new_state)
+        var new_state = {}
+        new_state[st] = elements;
+        this.setState(new_state)
     }
 
     onLoad(rv) {
@@ -320,8 +320,7 @@ class Lineage extends Component {
         return (
             <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
                 {this.state.elements && 
-                <ReactFlow 
-                    connectionLineType="smoothstep"                    
+                <ReactFlow              
                     elements={this.state.elements} 
                     nodeTypes={this.nodeTypes} 
                     onLoad={this.onLoad} 
