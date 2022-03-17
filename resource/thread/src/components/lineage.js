@@ -253,14 +253,14 @@ class Lineage extends Component {
     }
 
     render() {      
+        console.log('Render() :: this.state == ');
+        console.log(this.state);
+
         // SEPARATED NODES AND EDGES
         // if (this.props.deets.name != this.state.last_ds) {
         //     this.state.last_ds = this.props.deets.name;
         //     this.update('elements', this.props.deets);
         // }
-
-        // console.log('Render() :: this.state == ');
-        // console.log(this.state);
 
         // // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
         // // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
