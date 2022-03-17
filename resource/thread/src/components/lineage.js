@@ -301,6 +301,11 @@ class Lineage extends Component {
         // );
         
         // OG
+        if (this.props.deets.name != this.state.last_ds) {
+            this.state.last_ds = this.props.deets.name;
+            this.update('elements', this.props.deets);
+        }
+
         return (
             <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
                 {this.state.elements && 
