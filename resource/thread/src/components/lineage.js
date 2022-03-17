@@ -285,8 +285,8 @@ class Lineage extends Component {
             this.update('elements', this.props.deets);
         }
 
-        const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
-        const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
+        // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
+        // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
 
         // const onConnect = useCallback(
         //     (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
@@ -302,8 +302,8 @@ class Lineage extends Component {
                     nodeTypes={this.nodeTypes} 
                     // onConnect={onConnect}
                     onLoad={this.onLoad} 
-                    onEdgesChange={onEdgesChange}
-                    onNodesChange={onNodesChange}                    
+                    // onEdgesChange={onEdgesChange}
+                    // onNodesChange={onNodesChange}                    
                     connectionLineType="smoothstep"
                     style={{ height: "100%", width: "100%" }}
                 >
