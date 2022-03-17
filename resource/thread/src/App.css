@@ -48,3 +48,7 @@
 div.react-confirm-alert-overlay {
   z-index: 9999;
 }
+
+.tab-content > div {
+  opacity: inherit;
+}
