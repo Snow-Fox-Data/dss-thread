@@ -18,8 +18,6 @@ class Lineage extends Component {
         this.state = {
             elements: [],
             last_ds: '',
-            layoutedEdges: null,
-            layoutedNodes: null,
             dagreGraph: new dagre.graphlib.Graph(),
             nodes: [],
             edges: []
@@ -240,6 +238,8 @@ class Lineage extends Component {
 
         var new_state = {}
         new_state[st] = elements;
+        new_state['nodes'] = elements;
+        new_state['edges'] = elements;
 
         this.setState(new_state)
     }
