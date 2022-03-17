@@ -19,8 +19,6 @@ class Lineage extends Component {
         this.state = {
             elements: [],
             last_ds: '',
-            layoutedEdges: null,
-            layoutedNodes: null,
             // dagreGraph: new dagre.graphlib.Graph(),
             nodes: [],
             edges: []
