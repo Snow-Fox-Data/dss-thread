@@ -10,10 +10,10 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '.' + data.dataset);
   }
 
-  // console.log('data == ');
-  // console.log(data);
-  // console.log('isConnectable == ');
-  // console.log(isConnectable);
+  console.log('data == ');
+  console.log(data);
+  console.log('isConnectable == ');
+  console.log(isConnectable);
 
   // <Handle
   //   type="target"
@@ -48,13 +48,6 @@ export default memo(({ data, isConnectable }) => {
         isConnectable={isConnectable}
         style={{ background: '#555' }}
       />
-      {/* <Handle
-        type="source"
-        position="right"
-        id="b"
-        style={{ bottom: 10, top: 'auto', background: '#555' }}
-        isConnectable={isConnectable}
-      /> */}
     </>
   );
 });

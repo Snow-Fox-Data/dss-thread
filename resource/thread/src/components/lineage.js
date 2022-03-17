@@ -255,8 +255,8 @@ class Lineage extends Component {
         //     this.update('elements', this.props.deets);
         // }
 
-        // console.log('Render() :: this.state == ');
-        // console.log(this.state);
+        console.log('Render() :: this.state == ');
+        console.log(this.state);
 
         // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
         // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
@@ -266,45 +266,41 @@ class Lineage extends Component {
         //     []
         // );
         
-        // return (
-        //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
-        //         {this.state.elements && 
-        //         <ReactFlow 
-        //             onLoad={this.onLoad} 
-        //             nodes={this.state.nodes}
-        //             edges={this.state.edges} 
-        //             nodeTypes={this.nodeTypes} 
-        //             onConnect={onConnect}
-        //             onEdgesChange={onEdgesChange}
-        //             onNodesChange={onNodesChange}                    
-        //             connectionLineType="smoothstep"
-        //             style={{ height: "100%", width: "100%" }}
-        //         >
-        //             <Controls showInteractive="false" />
-        //         </ReactFlow>}
-        //     </div>
-        // );
-
-        // SECOND RENDER
-        if (this.props.deets.name != this.state.last_ds) {
-            this.state.last_ds = this.props.deets.name;
-            this.update('elements', this.props.deets);
-        }
-        
         return (
             <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
                 {this.state.elements && 
-                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+                <ReactFlow                     
+                    nodes={this.state.nodes}
+                    edges={this.state.edges} 
+                    nodeTypes={this.nodeTypes} 
+                    // onConnect={onConnect}
+                    onLoad={this.onLoad} 
+                    // onEdgesChange={onEdgesChange}
+                    // onNodesChange={onNodesChange}                    
+                    connectionLineType="smoothstep"
+                    style={{ height: "100%", width: "100%" }}
+                >
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
         );
+
+        // WORKING RENDER
+        // if (this.props.deets.name != this.state.last_ds) {
+        //     this.state.last_ds = this.props.deets.name;
+        //     this.update('elements', this.props.deets);
+        // }
         
-        // OG
         // return (
-        //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+        //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
         //         {this.state.elements && 
-        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+        //         <ReactFlow 
+        //             connectionLineType="smoothstep"                    
+        //             elements={this.state.elements} 
+        //             nodeTypes={this.nodeTypes} 
+        //             onLoad={this.onLoad} 
+        //             style={{ height: "100%", width: "100%" }}
+        //         >
         //             <Controls showInteractive="false" />
         //         </ReactFlow>}
         //     </div>
