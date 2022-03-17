@@ -144,9 +144,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
+                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
@@ -192,9 +192,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
-                position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             };
 
@@ -286,29 +286,29 @@ class Lineage extends Component {
         // );
 
         // SECOND RENDER
-        if (this.props.deets.name != this.state.last_ds) {
-            this.state.last_ds = this.props.deets.name;
-            this.update('elements', this.props.deets);
-        }
+        // if (this.props.deets.name != this.state.last_ds) {
+        //     this.state.last_ds = this.props.deets.name;
+        //     this.update('elements', this.props.deets);
+        // }
         
-        return (
-            <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
-                {this.state.elements && 
-                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
-                    <Controls showInteractive="false" />
-                </ReactFlow>}
-            </div>
-        );
-        
-        // OG
         // return (
-        //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+        //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
         //         {this.state.elements && 
         //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
         //             <Controls showInteractive="false" />
         //         </ReactFlow>}
         //     </div>
         // );
+        
+        // OG
+        return (
+            <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+                {this.state.elements && 
+                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+                    <Controls showInteractive="false" />
+                </ReactFlow>}
+            </div>
+        );
     }
 }
 
