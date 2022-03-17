@@ -236,12 +236,10 @@ class Lineage extends Component {
             edges: _edges
         });
 
-        var new_state = {}
-        new_state[st] = elements;
-        new_state['nodes'] = elements;
-        new_state['edges'] = elements;
-
-        this.setState(new_state)
+        // ELMENTS STATE UPDATE
+        // var new_state = {}
+        // new_state[st] = elements;
+        // this.setState(new_state)
     }
 
     onLoad(rv) {
@@ -250,10 +248,10 @@ class Lineage extends Component {
 
     render() {      
         // SEPARATED NODES AND EDGES
-        // if (this.props.deets.name != this.state.last_ds) {
-        //     this.state.last_ds = this.props.deets.name;
-        //     this.update('elements', this.props.deets);
-        // }
+        if (this.props.deets.name != this.state.last_ds) {
+            this.state.last_ds = this.props.deets.name;
+            this.update('elements', this.props.deets);
+        }
 
         console.log('Render() :: this.state == ');
         console.log(this.state);
