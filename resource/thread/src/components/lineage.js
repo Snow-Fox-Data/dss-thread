@@ -20,7 +20,7 @@ class Lineage extends Component {
             last_ds: '',
             layoutedEdges: null,
             layoutedNodes: null,
-            dagreGraph: new dagre.graphlib.Graph(),
+            // dagreGraph: new dagre.graphlib.Graph(),
             nodes: [],
             edges: []
         };
@@ -29,7 +29,7 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
 
-        this.state.dagreGraph.setDefaultEdgeLabel(() => ({}));
+        // this.state.dagreGraph.setDefaultEdgeLabel(() => ({}));
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -79,7 +79,7 @@ class Lineage extends Component {
         console.log("basePositionY == ");
         console.log(basePositionY);
 
-        this.state.dagreGraph.setGraph({ rankdir: 'LR' });
+        // this.state.dagreGraph.setGraph({ rankdir: 'LR' });
 
         var baseElementId = 'base';
         var baseNode = {
@@ -221,22 +221,22 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        const { dagreGraph } = this.state;
+        // const { dagreGraph } = this.state;
 
-        _nodes.forEach((node) => {
-            dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        });
+        // _nodes.forEach((node) => {
+        //     dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        // });
 
-        _edges.forEach((edge) => {
-            dagreGraph.setEdge(edge.source, edge.target);
-        });
+        // _edges.forEach((edge) => {
+        //     dagreGraph.setEdge(edge.source, edge.target);
+        // });
 
-        dagre.layout(dagreGraph);
+        // dagre.layout(dagreGraph);
 
-        this.setState({
-            nodes: _nodes,
-            edges: _edges
-        });
+        // this.setState({
+        //     nodes: _nodes,
+        //     edges: _edges
+        // });
 
         var new_state = {}
         new_state[st] = elements;
