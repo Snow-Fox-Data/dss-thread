@@ -48,6 +48,13 @@ export default memo(({ data, isConnectable }) => {
         isConnectable={isConnectable}
         style={{ background: '#555' }}
       />
+      {/* <Handle
+        type="source"
+        position="right"
+        id="b"
+        style={{ bottom: 10, top: 'auto', background: '#555' }}
+        isConnectable={isConnectable}
+      /> */}
     </>
   );
 });
