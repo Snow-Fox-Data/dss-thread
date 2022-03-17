@@ -1,5 +1,6 @@
 import React, { Component, useCallback } from 'react';
-import ReactFlow, { addEdge, Controls, useNodesState, useEdgesState } from 'react-flow-renderer';
+import ReactFlow, { Controls } from 'react-flow-renderer';
+// import ReactFlow, { addEdge, Controls, useNodesState, useEdgesState } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import dagre from 'dagre';
 
@@ -249,14 +250,14 @@ class Lineage extends Component {
     }
 
     render() {      
+        console.log('Render() :: this.state == ');
+        console.log(this.state);
+
         // SEPARATED NODES AND EDGES
         // if (this.props.deets.name != this.state.last_ds) {
         //     this.state.last_ds = this.props.deets.name;
         //     this.update('elements', this.props.deets);
-        // }
-
-        // console.log('Render() :: this.state == ');
-        // console.log(this.state);
+        // }        
 
         // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
         // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
@@ -286,34 +287,34 @@ class Lineage extends Component {
         // );
 
         // SECOND RENDER
-        // if (this.props.deets.name != this.state.last_ds) {
-        //     this.state.last_ds = this.props.deets.name;
-        //     this.update('elements', this.props.deets);
-        // }
-        
-        // return (
-        //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
-        //         {this.state.elements && 
-        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
-        //             <Controls showInteractive="false" />
-        //         </ReactFlow>}
-        //     </div>
-        // );
-        
-        // OG
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }
-
+        
         return (
-            <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+            <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
                 {this.state.elements && 
                 <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
         );
+        
+        // OG
+        // if (this.props.deets.name != this.state.last_ds) {
+        //     this.state.last_ds = this.props.deets.name;
+        //     this.update('elements', this.props.deets);
+        // }
+
+        // return (
+        //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+        //         {this.state.elements && 
+        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+        //             <Controls showInteractive="false" />
+        //         </ReactFlow>}
+        //     </div>
+        // );
     }
 }
 
