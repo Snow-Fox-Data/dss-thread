@@ -16,7 +16,7 @@
         "react-bootstrap-typeahead": "5.2.1",
         "react-confirm-alert": "^2.8.0",
         "react-dom": "^16.13.1",
-        "react-flow-renderer": "^9.7.1",
+        "react-flow-renderer": "^10.0.3",
         "react-icons": "^4.3.1",
         "react-router-dom": "^6.0.2",
         "react-scripts": "3.4.1"
