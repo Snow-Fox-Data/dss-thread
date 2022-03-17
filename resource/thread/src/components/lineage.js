@@ -229,35 +229,34 @@ class Lineage extends Component {
 
         // const { dagreGraph } = this.state;
         
+        // _nodes.forEach((node) => {
+        //     Lineage.dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        //     // dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        // });
 
-        _nodes.forEach((node) => {
-            Lineage.dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-            // dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        });
+        // _edges.forEach((edge) => {
+        //     Lineage.dagreGraph.setEdge(edge.source, edge.target);
+        //     // dagreGraph.setEdge(edge.source, edge.target);
+        // });
 
-        _edges.forEach((edge) => {
-            Lineage.dagreGraph.setEdge(edge.source, edge.target);
-            // dagreGraph.setEdge(edge.source, edge.target);
-        });
+        // dagre.layout(Lineage.dagreGraph);
+        // // dagre.layout(dagreGraph);
 
-        dagre.layout(Lineage.dagreGraph);
-        // dagre.layout(dagreGraph);
-
-        _nodes.forEach((node) => {
-            const nodeWithPosition = Lineage.dagreGraph.node(node.id);
-            // const nodeWithPosition = dagreGraph.node(node.id);
-            node.targetPosition = 'left';
-            node.sourcePosition = 'right';
+        // _nodes.forEach((node) => {
+        //     const nodeWithPosition = Lineage.dagreGraph.node(node.id);
+        //     // const nodeWithPosition = dagreGraph.node(node.id);
+        //     node.targetPosition = 'left';
+        //     node.sourcePosition = 'right';
         
-            // We are shifting the dagre node position (anchor=center center) to the top left
-            // so it matches the React Flow node anchor point (top left).
-            node.position = {
-              x: nodeWithPosition.x - Lineage.nodeWidth / 2,
-              y: nodeWithPosition.y - Lineage.nodeHeight / 2,
-            };
+        //     // We are shifting the dagre node position (anchor=center center) to the top left
+        //     // so it matches the React Flow node anchor point (top left).
+        //     node.position = {
+        //       x: nodeWithPosition.x - Lineage.nodeWidth / 2,
+        //       y: nodeWithPosition.y - Lineage.nodeHeight / 2,
+        //     };
         
-            return node;
-          });
+        //     return node;
+        // });
 
         this.setState({
             nodes: _nodes,
