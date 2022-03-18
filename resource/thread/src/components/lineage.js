@@ -1,11 +1,12 @@
-import React, { Component, useCallback } from 'react';
+import React, { Component, useCallback, useState, useEffect } from 'react';
 // import ReactFlow, { Controls } from 'react-flow-renderer';
 import ReactFlow, { addEdge, Controls, useNodesState, useEdgesState } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import dagre from 'dagre';
+import { createGraphLayout } from '../common/layout.js';
 
-const dagreGraph = new dagre.graphlib.Graph();
-dagreGraph.setDefaultEdgeLabel(() => ({}));
+// const dagreGraph = new dagre.graphlib.Graph();
+// dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 class Lineage extends Component {
 
@@ -223,17 +224,17 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        dagreGraph.setGraph({ rankdir: 'LR' });
+        // dagreGraph.setGraph({ rankdir: 'LR' });
 
-        _nodes.forEach((node) => {
-            dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        });
+        // _nodes.forEach((node) => {
+        //     dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        // });
 
-        _edges.forEach((edge) => {
-            dagreGraph.setEdge(edge.source, edge.target);
-        });
+        // _edges.forEach((edge) => {
+        //     dagreGraph.setEdge(edge.source, edge.target);
+        // });
 
-        dagre.layout(dagreGraph);
+        // dagre.layout(dagreGraph);
 
         this.setState({
             edges: _edges,
@@ -258,6 +259,14 @@ class Lineage extends Component {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
+
+            const [elements, setElements] = useState();
+
+            useEffect(() => {
+                createGraphLayout(elements)
+                .then((els) => setElements(els))
+                .catch((err) => console.error(err));
+            }, []);
         }        
 
         // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
@@ -276,8 +285,8 @@ class Lineage extends Component {
                 {this.state.elements && 
                 <ReactFlow 
                     onLoad={this.onLoad} 
-                    nodes={this.state.nodes}
-                    edges={this.state.edges}
+                    // nodes={this.state.nodes}
+                    // edges={this.state.edges}
                     elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
                     // onConnect={onConnect}
