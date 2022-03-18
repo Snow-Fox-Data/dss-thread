@@ -237,10 +237,10 @@ class Lineage extends Component {
         //     edges: _edges
         // });
 
-        // var new_state = {}
-        // new_state[st] = elements;
+        var new_state = {}
+        new_state[st] = elements;
 
-        // this.setState(new_state)
+        this.setState(new_state)
     }
 
     onLoad(rv) {
