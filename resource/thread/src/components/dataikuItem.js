@@ -241,13 +241,13 @@ class DataikuItem extends Component {
                                     // filterBy={filterBy}
                                     id="def-search"
                                     delay={300}
-                                    // labelKey="name"
+                                    labelKey={option => `${option.name}` `${option.description}` }
                                     minLength={3}
                                     onChange={this.selectDef}
                                     onSearch={this.defSearch}
                                     options={defSearchResults}
                                     placeholder='Search'
-                                    // renderMenuItemChildren={this.renderDefSearchMenuItem}
+                                    renderMenuItemChildren={this.renderDefSearchMenuItem}
                                     style={{ width: "97.5%" }}
                                 />
 
