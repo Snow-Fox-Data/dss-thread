@@ -260,13 +260,13 @@ class Lineage extends Component {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
 
-            const [elements, setElements] = useState();
+            // const [elements, setElements] = useState();
 
-            useEffect(() => {
-                createGraphLayout(elements)
-                .then((els) => setElements(els))
-                .catch((err) => console.error(err));
-            }, []);
+            // useEffect(() => {
+            //     createGraphLayout(elements)
+            //         .then((els) => setElements(els))
+            //         .catch((err) => console.error(err));
+            // }, []);
         }        
 
         // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
