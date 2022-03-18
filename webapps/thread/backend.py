@@ -42,6 +42,16 @@ def scan():
 
     return json.dumps({"result": "scan complete"})
 
+@app.route('/def-search', methods=['GET'])
+def defintition_list():
+    df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+    result = df[df['name'].str.contains(args.get('term'), case=False)]
+    result2 = df[df['description'].str.contains(args.get('term'), case=False)]
+
+    merged_df = pd.concat([result, result2], ignore_index=True)
+
+    return merged_df.to_json(orient='records')
+
 @app.route('/search', methods=['GET'])
 def search():
     args = request.args

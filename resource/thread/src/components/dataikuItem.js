@@ -9,6 +9,7 @@ import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 import Definition from "./definition"
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -91,7 +92,7 @@ class DataikuItem extends Component {
                 },
                 {
                     label: 'Cancel',
-                    onClick: () => {}
+                    onClick: () => { }
                 }
             ]
         });
@@ -165,6 +166,22 @@ class DataikuItem extends Component {
         eventBus.dispatch("projectSelected", proj);
     }
 
+    defSearch = (term) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
+        this.setState({ loading: true });
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                
+            });
+
+    }
+
     renderColumn() {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
@@ -187,6 +204,21 @@ class DataikuItem extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
+                        <Row>
+                            <AsyncTypeahead
+                                // filterBy={filterBy}
+                                id="def-search"
+                                delay={300}
+                                labelKey="key"
+                                minLength={3}
+                                onChange={this.loadItem}
+                                onSearch={this.defSearch}
+                                // options={searchResults}
+                                placeholder='Search'
+                                // renderMenuItemChildren={this.renderMenuItemChildren}
+                                style={{ width: "97.5%" }}
+                            />
+                        </Row>
                         <Row>
                             <Form style={{ paddingTop: '5px' }}>
                                 <Form.Group className="mb-3">
