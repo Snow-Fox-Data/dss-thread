@@ -4,7 +4,7 @@ import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import { Modal, Button, Form, Toast } from "react-bootstrap";
+import { Modal, Button, Form, Toast, ButtonGroup } from "react-bootstrap";
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
@@ -185,7 +185,7 @@ class DataikuItem extends Component {
 
     renderDefSearchMenuItem(option, props) {
         return <Fragment>
-            <div style={{ fontWeight: 'bold', paddingLeft: '4px' }}>Definition: {option.name}</div>
+            <div style={{ fontWeight: 'bold' }}>{option.name}</div>
             <div>{option.description}</div>
         </Fragment>;
     }
@@ -219,6 +219,12 @@ class DataikuItem extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
+                        <row>
+                            <ButtonGroup>
+                                <Button variant="secondary">New Definition</Button>
+                                <Button variant="secondary">Existing Definition</Button>
+                            </ButtonGroup>
+                        </row>
                         <Row>
                             <AsyncTypeahead
                                 // filterBy={filterBy}
