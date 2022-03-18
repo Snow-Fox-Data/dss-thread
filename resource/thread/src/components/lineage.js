@@ -237,11 +237,11 @@ class Lineage extends Component {
         // dagre.layout(dagreGraph);
 
         // const [elements, setElements] = useState();
-        const [setElements] = useState();
+        // const [setElements] = useState();
 
-        createGraphLayout(elements)
-            .then((els) => setElements(els))
-            .catch((err) => console.error(err));
+        // createGraphLayout(elements)
+        //     .then((els) => setElements(els))
+        //     .catch((err) => console.error(err));
 
             // useEffect(() => {
             //     createGraphLayout(elements)
