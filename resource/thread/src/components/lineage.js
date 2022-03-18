@@ -130,9 +130,9 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
 
-            var downYPosition = ((x + 1) - Math.ceil(down_res.length * 0.5));
-            console.log("downYPosition == ");
-            console.log(downYPosition);
+            // var downYPosition = ((x + 1) - Math.ceil(down_res.length * 0.5));
+            // console.log("downYPosition == ");
+            // console.log(downYPosition);
 
             // basePositionY + (nodeHeight * ((x + 1) - Math.ceil(down_res.length * 0.5))) // I believe this is the way to good, but untested.
 
@@ -143,9 +143,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
+                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
@@ -191,8 +191,8 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             };
