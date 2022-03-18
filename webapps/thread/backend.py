@@ -222,7 +222,7 @@ class dss_utils:
         lin_up = json.loads(rec.iloc[0]['lineage_upstream'])
         lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
-        schema = {}
+        schema = []
         try:
             schema = ds.read_schema()
             for col in schema:
@@ -233,7 +233,7 @@ class dss_utils:
                         col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
                 
         except Exception as e:
-            capture_exception(e)
+            # capture_exception(e)
             print(f'no schema for {key} {e}')
 
         res = {
