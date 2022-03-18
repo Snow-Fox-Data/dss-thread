@@ -233,21 +233,23 @@ class DataikuItem extends Component {
                                 <Button onClick={() => this.toggleNew(false)} variant={this.state.newDefSelected ? "secondary" : "primary"}>Existing Definition</Button>
                             </ButtonGroup>
                         </row>
-                        <Row>
-                            <AsyncTypeahead
-                                // filterBy={filterBy}
-                                id="def-search"
-                                delay={300}
-                                labelKey="name"
-                                minLength={3}
-                                onChange={this.selectDef}
-                                onSearch={this.defSearch}
-                                options={defSearchResults}
-                                placeholder='Search'
-                                renderMenuItemChildren={this.renderDefSearchMenuItem}
-                                style={{ width: "97.5%" }}
-                            />
-                        </Row>
+                        {!this.state.newDefSelected &&
+                            <Row>
+                                <AsyncTypeahead
+                                    // filterBy={filterBy}
+                                    id="def-search"
+                                    delay={300}
+                                    labelKey="name"
+                                    minLength={3}
+                                    onChange={this.selectDef}
+                                    onSearch={this.defSearch}
+                                    options={defSearchResults}
+                                    placeholder='Search'
+                                    renderMenuItemChildren={this.renderDefSearchMenuItem}
+                                    style={{ width: "97.5%" }}
+                                />
+                            </Row>
+                        }
                         <Row>
                             <Form style={{ paddingTop: '5px' }}>
                                 <Form.Group className="mb-3">
