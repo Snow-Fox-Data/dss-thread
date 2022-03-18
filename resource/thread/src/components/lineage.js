@@ -278,8 +278,9 @@ class Lineage extends Component {
                 {this.state.elements && 
                 <ReactFlow 
                     onLoad={this.onLoad} 
-                    nodes={this.state.nodes}
-                    edges={this.state.edges} 
+                    // nodes={this.state.nodes}
+                    // edges={this.state.edges} 
+                    elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
                     // onConnect={onConnect}
                     // onEdgesChange={onEdgesChange}
