@@ -247,7 +247,7 @@ class DataikuItem extends Component {
                                     onSearch={this.defSearch}
                                     options={defSearchResults}
                                     placeholder='Search'
-                                    renderMenuItemChildren={this.renderDefSearchMenuItem}
+                                    // renderMenuItemChildren={this.renderDefSearchMenuItem}
                                     style={{ width: "97.5%" }}
                                 />
 
