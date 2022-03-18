@@ -36,7 +36,7 @@ def scan():
 
     dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
     dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
-    dss.init_thread_ds(THREAD_DESCRPTIONS_NAME, 'thread_descriptions.csv')
+    dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_descriptions.csv')
 
     result = dss.scan_server()
 
@@ -78,7 +78,7 @@ def load_item():
         else:
             if res['type'] == 'column':
                 try:
-                    df = dataiku.Dataset(THREAD_DESCRPTIONS_NAME).get_dataframe()
+                    df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                     result = df[df['applied_to'].str.contains(args.get('key'), case=False)].fillna('')
                 except:
                     result = ''
@@ -106,7 +106,7 @@ def update_desc():
     dss = dss_utils()
 
     try:
-        desc_ds = dataiku.Dataset(THREAD_DESCRPTIONS_NAME)
+        desc_ds = dataiku.Dataset(THREAD_DEFINITIONS_NAME)
         exists = len(desc_ds.read_schema(raise_if_empty=False)) > 0
 
         if exists:
@@ -160,7 +160,7 @@ def update_desc():
     })
 
 
-THREAD_DESCRPTIONS_NAME = '--Thread-Descriptions--'
+THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
 THREAD_DATASETS_NAME = '--Thread-Datasets--'
 THREAD_INDEX_NAME = '--Thread-Index--'
 

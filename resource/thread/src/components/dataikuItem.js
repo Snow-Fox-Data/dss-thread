@@ -136,7 +136,7 @@ class DataikuItem extends Component {
     newDef() {
         this.setState({
             selectedDef: {
-                name: 'New Definition',
+                name: this.props.item.name,
                 value: this.props.item.comment
             }
         })
