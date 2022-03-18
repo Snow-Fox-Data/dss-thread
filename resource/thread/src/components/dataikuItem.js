@@ -234,9 +234,10 @@ class DataikuItem extends Component {
                             </ButtonGroup>
                         </row>
                         {!this.state.newDefSelected &&
-                            <Row>
+                            <Row style={{paddingTop:"6px"}}>
                                 <AsyncTypeahead
                                     // filterBy={filterBy}
+                                    selected={[this.state.selectedDef]}
                                     id="def-search"
                                     delay={300}
                                     labelKey="name"
