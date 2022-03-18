@@ -204,7 +204,7 @@ class DataikuItem extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <Row>
+                        {/* <Row>
                             <AsyncTypeahead
                                 // filterBy={filterBy}
                                 id="def-search"
@@ -218,7 +218,7 @@ class DataikuItem extends Component {
                                 // renderMenuItemChildren={this.renderMenuItemChildren}
                                 style={{ width: "97.5%" }}
                             />
-                        </Row>
+                        </Row> */}
                         <Row>
                             <Form style={{ paddingTop: '5px' }}>
                                 <Form.Group className="mb-3">
