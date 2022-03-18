@@ -205,7 +205,9 @@ class DataikuItem extends Component {
         }
         else {
             this.setState({
-                selectDef: {
+                selectedDef: {
+                    name: this.props.item.definition.name,
+                    description: this.props.item.definition.description,
                     id: this.props.item.definition.id
                 }
             })
