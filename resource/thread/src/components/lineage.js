@@ -262,11 +262,9 @@ class Lineage extends Component {
 
             const [elements, setElements] = useState();
 
-            useEffect(() => {
-                createGraphLayout(elements)
-                    .then((els) => setElements(els))
-                    .catch((err) => console.error(err));
-            });
+            createGraphLayout(elements)
+                .then((els) => setElements(els))
+                .catch((err) => console.error(err));
 
             // useEffect(() => {
             //     createGraphLayout(elements)
