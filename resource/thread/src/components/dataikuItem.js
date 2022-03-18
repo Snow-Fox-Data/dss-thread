@@ -193,7 +193,7 @@ class DataikuItem extends Component {
     }
 
     selectDef = (item) => {
-        alert('select')
+        // alert('select')
     }
 
     toggleNew = (isNew) => {
@@ -234,7 +234,7 @@ class DataikuItem extends Component {
                             </ButtonGroup>
                         </row>
                         {!this.state.newDefSelected &&
-                            <Row style={{paddingTop:"6px"}}>
+                            <Row style={{ paddingTop: "6px" }}>
                                 <AsyncTypeahead
                                     // filterBy={filterBy}
                                     selected={[this.state.selectedDef]}
@@ -251,24 +251,26 @@ class DataikuItem extends Component {
                                 />
                             </Row>
                         }
-                        <Row>
-                            <Form style={{ paddingTop: '5px' }}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Definition Name</Form.Label>
-                                    <Form.Control type="text" defaultValue={this.state.selectedDef.name}
-                                        onChange={e => this.state.selectedDef.name = e.target.value}
-                                    />
-                                    <div style={{ height: "10px" }}></div>
-                                    <Form.Label>Definition Description</Form.Label>
-                                    <Form.Control type="text" defaultValue={this.state.selectedDef.description}
-                                        onChange={e => this.state.selectedDef.description = e.target.value}
-                                    />
-                                    <Form.Text className="text-muted">
-                                        Will appear in the Dataiku Dataset's column description.
-                                    </Form.Text>
-                                </Form.Group>
-                            </Form>
-                        </Row>
+                        {this.state.newDefSelected &&
+                            <Row>
+                                <Form style={{ paddingTop: '5px' }}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Definition Name</Form.Label>
+                                        <Form.Control type="text" defaultValue={this.state.selectedDef.name}
+                                            onChange={e => this.state.selectedDef.name = e.target.value}
+                                        />
+                                        <div style={{ height: "10px" }}></div>
+                                        <Form.Label>Definition Description</Form.Label>
+                                        <Form.Control type="text" defaultValue={this.state.selectedDef.description}
+                                            onChange={e => this.state.selectedDef.description = e.target.value}
+                                        />
+                                        <Form.Text className="text-muted">
+                                            Will appear in the Dataiku Dataset's column description.
+                                        </Form.Text>
+                                    </Form.Group>
+                                </Form>
+                            </Row>
+                        }
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
