@@ -204,21 +204,21 @@ class DataikuItem extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        {/* <Row>
+                        <Row>
                             <AsyncTypeahead
                                 // filterBy={filterBy}
                                 id="def-search"
                                 delay={300}
                                 labelKey="key"
                                 minLength={3}
-                                onChange={this.loadItem}
+                                // onChange={this.loadItem}
                                 onSearch={this.defSearch}
                                 // options={searchResults}
                                 placeholder='Search'
                                 // renderMenuItemChildren={this.renderMenuItemChildren}
                                 style={{ width: "97.5%" }}
                             />
-                        </Row> */}
+                        </Row>
                         <Row>
                             <Form style={{ paddingTop: '5px' }}>
                                 <Form.Group className="mb-3">
