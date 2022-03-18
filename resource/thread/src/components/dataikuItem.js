@@ -137,7 +137,7 @@ class DataikuItem extends Component {
         this.setState({
             selectedDef: {
                 name: this.props.item.name,
-                value: this.props.item.comment
+                description: this.props.item.comment
             }
         })
         this.setState({ newDefModal: true });
@@ -147,7 +147,7 @@ class DataikuItem extends Component {
         this.setState({
             selectedDef: {
                 name: this.props.item.definition.name,
-                value: this.props.item.definition.description,
+                description: this.props.item.definition.description,
                 id: this.props.item.definition.id
             }
         })
@@ -197,7 +197,7 @@ class DataikuItem extends Component {
                                     />
                                     <div style={{ height: "10px" }}></div>
                                     <Form.Label>Definition Description</Form.Label>
-                                    <Form.Control type="text" defaultValue={this.state.selectedDef.value}
+                                    <Form.Control type="text" defaultValue={this.state.selectedDef.description}
                                         onChange={e => this.state.selectedDef.description = e.target.value}
                                     />
                                     <Form.Text className="text-muted">
