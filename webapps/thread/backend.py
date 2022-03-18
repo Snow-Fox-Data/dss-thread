@@ -44,6 +44,8 @@ def scan():
 
 @app.route('/def-search', methods=['GET'])
 def defintition_list():
+    args = request.args
+    
     df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
     result = df[df['name'].str.contains(args.get('term'), case=False)]
     result2 = df[df['description'].str.contains(args.get('term'), case=False)]
