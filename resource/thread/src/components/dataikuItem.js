@@ -193,7 +193,9 @@ class DataikuItem extends Component {
     }
 
     selectDef = (item) => {
-        // alert('select')
+        this.setState({
+            selectDef: item
+        })
     }
 
     toggleNew = (isNew) => {
@@ -249,14 +251,14 @@ class DataikuItem extends Component {
                                     style={{ width: "97.5%" }}
                                 />
 
-                                <div style={{ paddingTop: "6px" }}>
+                                <div style={{ paddingTop: "10px" }}>
                                     <Definition definition={this.state.selectedDef}></Definition>
                                 </div>
                             </Row>
                         }
                         {this.state.newDefSelected &&
                             <Row>
-                                <Form style={{ paddingTop: '5px' }}>
+                                <Form style={{ paddingTop: '10px' }}>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Definition Name</Form.Label>
                                         <Form.Control type="text" defaultValue={this.state.selectedDef.name}
