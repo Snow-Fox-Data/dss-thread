@@ -22,7 +22,8 @@ class DataikuItem extends Component {
             newDefModal: false,
             selectedDef: {
                 name: "New Definition",
-                description: ""
+                description: "",
+                id:-1
             },
             defSearchResults: []
         };
@@ -221,8 +222,8 @@ class DataikuItem extends Component {
                     <Container>
                         <row>
                             <ButtonGroup>
-                                <Button variant="secondary">New Definition</Button>
-                                <Button variant="secondary">Existing Definition</Button>
+                                <Button variant={this.state.selectedDef.id == -1 ? "primary" : "secondary"}>New Definition</Button>
+                                <Button variant={this.state.selectedDef.id == -1 ? "secondary" : "primary"}>Existing Definition</Button>
                             </ButtonGroup>
                         </row>
                         <Row>
