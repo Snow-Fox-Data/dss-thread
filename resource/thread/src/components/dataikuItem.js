@@ -58,7 +58,6 @@ class DataikuItem extends Component {
                         if (this.state.selectedDef.description != null)
                             val = this.state.selectedDef.description;
 
-
                         const requestOptions = {
                             method: 'POST',
                             headers: {
@@ -134,12 +133,12 @@ class DataikuItem extends Component {
     }
 
     newDef() {
-        this.setState({
-            selectedDef: {
-                name: this.props.item.name,
-                description: this.props.item.comment
-            }
-        })
+        // this.setState({
+        //     selectedDef: {
+        //         name: this.props.item.name,
+        //         description: this.props.item.comment
+        //     }
+        // })
         this.setState({ newDefModal: true });
     }
 
@@ -176,8 +175,8 @@ class DataikuItem extends Component {
             this.state.selectedDef.description = this.props.item.definition.description;
         }
         else {
-            this.state.selectedDef.name = "New Definition";
-            this.state.selectedDef.description = "";
+            this.state.selectedDef.name = this.props.item.name;
+            this.state.selectedDef.description = this.props.item.comment;
             this.state.selectedDef.id = -1;
         }
 
