@@ -20,7 +20,6 @@ class Lineage extends Component {
         super(props);
 
         this.state = {
-            // dagreGraph: new dagre.graphlib.Graph(),
             elements: [],
             last_ds: '',
             nodes: [],
@@ -30,13 +29,6 @@ class Lineage extends Component {
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
-
-        // var _dagreGraph = new dagre.graphlib.Graph();
-        // _dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-        // this.setState({
-        //     dagreGraph: _dagreGraph
-        // });
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -231,7 +223,6 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        // var _dagreGraph = this.state.dagreGraph;
         dagreGraph.setGraph({ rankdir: 'LR' });
 
         _nodes.forEach((node) => {
@@ -247,7 +238,6 @@ class Lineage extends Component {
         this.setState({
             edges: _edges,
             elements: elements,
-            // dagreGraph: _dagreGraph,
             nodes: _nodes
         });
 
@@ -286,10 +276,8 @@ class Lineage extends Component {
                 {this.state.elements && 
                 <ReactFlow 
                     onLoad={this.onLoad} 
-                    // nodes={this.state.nodes}
-                    // edges={this.state.edges}
                     nodes={this.state.nodes}
-                    edges={this.state.edges}  
+                    edges={this.state.edges}
                     elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
                     // onConnect={onConnect}
