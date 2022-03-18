@@ -4,7 +4,7 @@
 
 ```
 cd ./resource/thread/
-npm run-script build
+git pull & npm run-script build
 ```
 
 ## To deploy to Excelion Dataiku:
