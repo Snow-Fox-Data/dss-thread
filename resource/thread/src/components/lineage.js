@@ -236,6 +236,19 @@ class Lineage extends Component {
 
         // dagre.layout(dagreGraph);
 
+        // const [elements, setElements] = useState();
+        const [setElements] = useState();
+
+        createGraphLayout(elements)
+            .then((els) => setElements(els))
+            .catch((err) => console.error(err));
+
+            // useEffect(() => {
+            //     createGraphLayout(elements)
+            //         .then((els) => setElements(els))
+            //         .catch((err) => console.error(err));
+            // }, []);
+
         this.setState({
             edges: _edges,
             elements: elements,
@@ -259,18 +272,6 @@ class Lineage extends Component {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
-
-            const [elements, setElements] = useState();
-
-            createGraphLayout(elements)
-                .then((els) => setElements(els))
-                .catch((err) => console.error(err));
-
-            // useEffect(() => {
-            //     createGraphLayout(elements)
-            //         .then((els) => setElements(els))
-            //         .catch((err) => console.error(err));
-            // }, []);
         }        
 
         // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
