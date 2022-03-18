@@ -237,7 +237,6 @@ class DataikuItem extends Component {
                             <Row style={{ paddingTop: "6px" }}>
                                 <AsyncTypeahead
                                     // filterBy={filterBy}
-                                    selected={[this.state.selectedDef]}
                                     id="def-search"
                                     delay={300}
                                     labelKey="name"
@@ -249,6 +248,10 @@ class DataikuItem extends Component {
                                     renderMenuItemChildren={this.renderDefSearchMenuItem}
                                     style={{ width: "97.5%" }}
                                 />
+
+                                <div style={{ paddingTop: "6px" }}>
+                                    <Definition definition={this.state.selectedDef}></Definition>
+                                </div>
                             </Row>
                         }
                         {this.state.newDefSelected &&
