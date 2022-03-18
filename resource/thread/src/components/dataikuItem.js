@@ -23,7 +23,8 @@ class DataikuItem extends Component {
             selectedDef: {
                 name: "New Definition",
                 description: ""
-            }
+            },
+            defSearchResults: []
         };
     }
 
@@ -177,7 +178,7 @@ class DataikuItem extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-
+                this.state.defSearchResults = response
             });
 
     }
@@ -194,6 +195,8 @@ class DataikuItem extends Component {
 
     renderColumn() {
         const filterBy = () => true;
+        const { defSearchResults } = this.state;
+
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
@@ -224,7 +227,7 @@ class DataikuItem extends Component {
                                 minLength={3}
                                 onChange={this.selectDef}
                                 onSearch={this.defSearch}
-                                // options={searchResults}
+                                options={defSearchResults}
                                 placeholder='Search'
                                 renderMenuItemChildren={this.renderDefSearchMenuItem}
                                 style={{ width: "97.5%" }}
