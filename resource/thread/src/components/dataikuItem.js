@@ -23,7 +23,7 @@ class DataikuItem extends Component {
             selectedDef: {
                 name: "New Definition",
                 description: "",
-                id:-1
+                id: -1
             },
             defSearchResults: []
         };
@@ -195,6 +195,23 @@ class DataikuItem extends Component {
         alert('select')
     }
 
+    toggleNew = (isNew) => {
+        if (isNew) {
+            this.setState({
+                selectDef: {
+                    id: -1
+                }
+            })
+        }
+        else {
+            this.setState({
+                selectDef: {
+                    id: this.props.definition.id
+                }
+            })
+        }
+    }
+
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
@@ -222,8 +239,8 @@ class DataikuItem extends Component {
                     <Container>
                         <row>
                             <ButtonGroup>
-                                <Button variant={this.state.selectedDef.id == -1 ? "primary" : "secondary"}>New Definition</Button>
-                                <Button variant={this.state.selectedDef.id == -1 ? "secondary" : "primary"}>Existing Definition</Button>
+                                <Button onClick={() => this.toggleNew(true)} variant={this.state.selectedDef.id == -1 ? "primary" : "secondary"}>New Definition</Button>
+                                <Button onClick={() => this.toggleNew(false)} variant={this.state.selectedDef.id == -1 ? "secondary" : "primary"}>Existing Definition</Button>
                             </ButtonGroup>
                         </row>
                         <Row>
