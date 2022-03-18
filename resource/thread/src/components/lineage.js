@@ -12,14 +12,13 @@ class Lineage extends Component {
 
     static nodeWidth = 200;
     static nodeHeight = 60;
-    
+ 
     constructor(props) {
         super(props);
 
         this.state = {
             elements: [],
             last_ds: '',
-            // dagreGraph: new dagre.graphlib.Graph(),
             nodes: [],
             edges: []
         };
@@ -28,7 +27,8 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
 
-        // this.state.dagreGraph.setDefaultEdgeLabel(() => ({}));
+        const dagreGraph = new dagre.graphlib.Graph();
+        dagreGraph.setDefaultEdgeLabel(() => ({}));
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -77,8 +77,6 @@ class Lineage extends Component {
         console.log(basePositionX);
         console.log("basePositionY == ");
         console.log(basePositionY);
-
-        // this.state.dagreGraph.setGraph({ rankdir: 'LR' });
 
         var baseElementId = 'base';
         var baseNode = {
@@ -220,22 +218,22 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        // const { dagreGraph } = this.state;
+        this.dagreGraph.setGraph({ rankdir: 'LR' });
 
-        // _nodes.forEach((node) => {
-        //     dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        // });
+        _nodes.forEach((node) => {
+            this.dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+        });
 
-        // _edges.forEach((edge) => {
-        //     dagreGraph.setEdge(edge.source, edge.target);
-        // });
+        _edges.forEach((edge) => {
+            this.dagreGraph.setEdge(edge.source, edge.target);
+        });
 
-        // dagre.layout(dagreGraph);
+        dagre.layout(this.dagreGraph);
 
-        // this.setState({
-        //     nodes: _nodes,
-        //     edges: _edges
-        // });
+        this.setState({
+            nodes: _nodes,
+            edges: _edges
+        });
 
         var new_state = {}
         new_state[st] = elements;
@@ -252,10 +250,10 @@ class Lineage extends Component {
         console.log(this.state);
 
         // SEPARATED NODES AND EDGES
-        // if (this.props.deets.name != this.state.last_ds) {
-        //     this.state.last_ds = this.props.deets.name;
-        //     this.update('elements', this.props.deets);
-        // }        
+        if (this.props.deets.name != this.state.last_ds) {
+            this.state.last_ds = this.props.deets.name;
+            this.update('elements', this.props.deets);
+        }        
 
         // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
         // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
@@ -265,48 +263,33 @@ class Lineage extends Component {
         //     []
         // );
         
-        // return (
-        //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
-        //         {this.state.elements && 
-        //         <ReactFlow 
-        //             onLoad={this.onLoad} 
-        //             nodes={this.state.nodes}
-        //             edges={this.state.edges} 
-        //             nodeTypes={this.nodeTypes} 
-        //             onConnect={onConnect}
-        //             onEdgesChange={onEdgesChange}
-        //             onNodesChange={onNodesChange}                    
-        //             connectionLineType="smoothstep"
-        //             style={{ height: "100%", width: "100%" }}
-        //         >
-        //             <Controls showInteractive="false" />
-        //         </ReactFlow>}
-        //     </div>
-        // );
-
-        // SECOND RENDER
-        if (this.props.deets.name != this.state.last_ds) {
-            this.state.last_ds = this.props.deets.name;
-            this.update('elements', this.props.deets);
-        }
-        
         return (
             <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
                 {this.state.elements && 
-                <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
+                <ReactFlow 
+                    onLoad={this.onLoad} 
+                    nodes={this.state.nodes}
+                    edges={this.state.edges} 
+                    nodeTypes={this.nodeTypes} 
+                    // onConnect={onConnect}
+                    // onEdgesChange={onEdgesChange}
+                    // onNodesChange={onNodesChange}
+                    connectionLineType="smoothstep"
+                    style={{ height: "100%", width: "100%" }}
+                >
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
         );
-        
-        // OG
+
+        // SECOND RENDER
         // if (this.props.deets.name != this.state.last_ds) {
         //     this.state.last_ds = this.props.deets.name;
         //     this.update('elements', this.props.deets);
         // }
-
+        
         // return (
-        //     <div style={{ backgroundColor: '#EEE', height: "500px", width: "1030px" }}>
+        //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
         //         {this.state.elements && 
         //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
         //             <Controls showInteractive="false" />
