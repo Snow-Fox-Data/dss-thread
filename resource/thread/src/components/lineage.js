@@ -17,6 +17,7 @@ class Lineage extends Component {
         super(props);
 
         this.state = {
+            dagreGraph: new dagre.graphlib.Graph(),
             elements: [],
             last_ds: '',
             nodes: [],
@@ -27,8 +28,12 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
 
-        const dagreGraph = new dagre.graphlib.Graph();
-        dagreGraph.setDefaultEdgeLabel(() => ({}));
+        var _dagreGraph = new dagre.graphlib.Graph();
+        _dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+        this.setState({
+            dagreGraph: _dagreGraph
+        });
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -218,27 +223,29 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        this.dagreGraph.setGraph({ rankdir: 'LR' });
+        var _dagreGraph = this.state.dagreGraph;
+        _dagreGraph.setGraph({ rankdir: 'LR' });
 
         _nodes.forEach((node) => {
-            this.dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+            _dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
         });
 
         _edges.forEach((edge) => {
-            this.dagreGraph.setEdge(edge.source, edge.target);
+            _dagreGraph.setEdge(edge.source, edge.target);
         });
 
-        dagre.layout(this.dagreGraph);
+        dagre.layout(_dagreGraph);
 
         this.setState({
-            nodes: _nodes,
-            edges: _edges
+            edges: _edges,
+            elements: elements,
+            dagreGraph: _dagreGraph,
+            nodes: _nodes
         });
 
-        var new_state = {}
-        new_state[st] = elements;
-
-        this.setState(new_state)
+        // var new_state = {}
+        // new_state[st] = elements;
+        // this.setState(new_state);
     }
 
     onLoad(rv) {
