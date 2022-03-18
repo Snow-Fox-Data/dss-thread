@@ -4,6 +4,9 @@ import ReactFlow, { Controls } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import dagre from 'dagre';
 
+const dagreGraph = new dagre.graphlib.Graph();
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+
 class Lineage extends Component {
 
     // CONSTANT VALUES
@@ -17,7 +20,7 @@ class Lineage extends Component {
         super(props);
 
         this.state = {
-            dagreGraph: new dagre.graphlib.Graph(),
+            // dagreGraph: new dagre.graphlib.Graph(),
             elements: [],
             last_ds: '',
             nodes: [],
@@ -28,12 +31,12 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
 
-        var _dagreGraph = new dagre.graphlib.Graph();
-        _dagreGraph.setDefaultEdgeLabel(() => ({}));
+        // var _dagreGraph = new dagre.graphlib.Graph();
+        // _dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-        this.setState({
-            dagreGraph: _dagreGraph
-        });
+        // this.setState({
+        //     dagreGraph: _dagreGraph
+        // });
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -223,23 +226,23 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        var _dagreGraph = this.state.dagreGraph;
-        _dagreGraph.setGraph({ rankdir: 'LR' });
+        // var _dagreGraph = this.state.dagreGraph;
+        dagreGraph.setGraph({ rankdir: 'LR' });
 
         _nodes.forEach((node) => {
-            _dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
+            dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
         });
 
         _edges.forEach((edge) => {
-            _dagreGraph.setEdge(edge.source, edge.target);
+            dagreGraph.setEdge(edge.source, edge.target);
         });
 
-        dagre.layout(_dagreGraph);
+        dagre.layout(dagreGraph);
 
         this.setState({
             edges: _edges,
             elements: elements,
-            dagreGraph: _dagreGraph,
+            // dagreGraph: _dagreGraph,
             nodes: _nodes
         });
 
