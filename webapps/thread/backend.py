@@ -85,7 +85,7 @@ def load_item():
 
                 p_name, d_name, c_name = dss.extract_name_project(key)
                 print(f'loading col: {key}, {c_name}')
-                p = dss.load_dataset(p_name + '.' + d_name, c_name)
+                p = dss.load_dataset(p_name + ' | ' + d_name, c_name)
                 col = next(item for item in p['schema'] if item["name"] == c_name)
                 col['project'] = p_name
                 col['dataset'] = d_name
@@ -226,7 +226,7 @@ class dss_utils:
         try:
             schema = ds.read_schema()
             for col in schema:
-                col['key'] = key + '.' + col['name']
+                col['key'] = key + ' | ' + col['name']
                 if col_lineage != 'none':
                     if col_lineage == 'all' or col['name'] == col_lineage:
                         col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
@@ -255,7 +255,7 @@ class dss_utils:
             
         for i in column_array:
             print(f'setting description for {i}')
-            lst = i.split('.')
+            lst = i.split(' | ')
             project, dataset, column = lst[0], lst[1], lst[2]
             p = self.client.get_project(project)
             ds = p.get_dataset(dataset)
@@ -282,7 +282,7 @@ class dss_utils:
                     # print(col, ds['name'], ds[dir])
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
-                    nxt.append({'name':obj['name'] + '.' + col, dir:lin})#
+                    nxt.append({'name':obj['name'] + ' | ' + col, dir:lin})#
         
         return nxt
                     
@@ -292,7 +292,7 @@ class dss_utils:
             for j in recipe[inputs_outputs]:
                 for i in range(len(recipe[inputs_outputs][j]['items'])):
                     name = recipe[inputs_outputs][j]['items'][i]['ref']
-                    if '.' in name:
+                    if ' | ' in name:
                         p_name, d_name, c_name = self.extract_name_project(name)
                     else:
                         d_name = name
@@ -314,7 +314,7 @@ class dss_utils:
 
     def get_ds_by_name(self, name, all_projects, p_name=None):
         # print(name)
-        if '.' in name:
+        if ' | ' in name:
             p_name, d_name, c_name = self.extract_name_project(name)
         else:
             d_name = name
@@ -365,7 +365,7 @@ class dss_utils:
             return []
 
     def extract_name_project(self, full_ds_name):
-        splits = full_ds_name.split('.')
+        splits = full_ds_name.split(' | ')
         p_name = splits[0]
         d_name = splits[1]
 
@@ -376,7 +376,7 @@ class dss_utils:
         return p_name, d_name, ''
 
     def get_full_dataset_name(self, name, project):
-        return project + '.' + name
+        return project + ' | ' + name
 
     def get_ds_lineage(self, all_projects):
         for p in all_projects:
@@ -474,7 +474,7 @@ class dss_utils:
                    index_list.append({
                      "name": column['name'],
                      "type": "column",
-                    "key": self.get_full_dataset_name(dataset['name'], proj) + '.' + column['name']
+                    "key": self.get_full_dataset_name(dataset['name'], proj) + ' | ' + column['name']
                      }) 
 
         # print('start get lineage...')
