@@ -241,7 +241,7 @@ class DataikuItem extends Component {
                                     // filterBy={filterBy}
                                     id="def-search"
                                     delay={300}
-                                    labelKey="name"
+                                    // labelKey="name"
                                     minLength={3}
                                     onChange={this.selectDef}
                                     onSearch={this.defSearch}
