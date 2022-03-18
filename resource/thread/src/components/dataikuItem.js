@@ -185,7 +185,8 @@ class DataikuItem extends Component {
 
     renderDefSearchMenuItem(option, props) {
         return <Fragment>
-            <span style={{ fontWeight: 'bold', paddingLeft: '4px' }}>Name: {option.name}</span>
+            <div style={{ fontWeight: 'bold', paddingLeft: '4px' }}>Definition: {option.name}</div>
+            <div>{option.description}</div>
         </Fragment>;
     }
 
