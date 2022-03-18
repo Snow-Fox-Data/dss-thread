@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
@@ -177,9 +177,15 @@ class DataikuItem extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                
+
             });
 
+    }
+
+    renderDefSearchMenuItem(option, props) {
+        return <Fragment>
+            <span style={{ fontWeight: 'bold', paddingLeft: '4px' }}>Name: {option.name}</span>
+        </Fragment>;
     }
 
     selectDef = (item) => {
@@ -220,7 +226,7 @@ class DataikuItem extends Component {
                                 onSearch={this.defSearch}
                                 // options={searchResults}
                                 placeholder='Search'
-                                // renderMenuItemChildren={this.renderMenuItemChildren}
+                                renderMenuItemChildren={this.renderDefSearchMenuItem}
                                 style={{ width: "97.5%" }}
                             />
                         </Row>
