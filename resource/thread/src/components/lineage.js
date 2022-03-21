@@ -50,8 +50,6 @@ class Lineage extends Component {
 
         let basePositionX = 0;
         let basePositionY = 0;
-        // let basePositionX = (Lineage.DEFAULT_CONTAINER_WIDTH / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
-        // let basePositionY = (Lineage.DEFAULT_CONTAINER_HEIGHT / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
 
         var baseElementId = 'base';
         var baseNode = {
@@ -108,9 +106,7 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                position: { x: basePositionX, y: basePositionY },
-                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
-                // position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 * (down_res.length + 1) * (x + 1)) }, // Better Calculations            
+                position: { x: basePositionX, y: basePositionY },                     
                 draggable: false
             };
 
@@ -150,9 +146,7 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: basePositionX, y: basePositionY },
-                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) }, // OG
-                // position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (up_res.length + 1) * (x + 1)) },            
+                position: { x: basePositionX, y: basePositionY },         
                 draggable: false
             };
 
@@ -169,15 +163,6 @@ class Lineage extends Component {
             elements[elements.length] = edge;
             _edges[_edges.length] = edge;
         }        
-
-        console.log('elements == ');
-        console.log(elements);
-
-        console.log('_nodes == ');
-        console.log(_nodes);
-
-        console.log('_edges == ');
-        console.log(_edges);
 
         this.setState({
             edges: _edges,
@@ -220,37 +205,6 @@ class Lineage extends Component {
                 </ReactFlow>}
             </div>
         );        
-        // return (
-        //     <div style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: Lineage.DEFAULT_CONTAINER_WIDTH }}>
-        //         {this.state.elements && 
-        //         <ReactFlow 
-        //             onLoad={this.onLoad} 
-        //             elements={this.state.elements}
-        //             nodeTypes={this.nodeTypes} 
-        //             // onConnect={onConnect}
-        //             // onEdgesChange={onEdgesChange}
-        //             // onNodesChange={onNodesChange}
-        //             style={{ height: "100%", width: "100%" }}
-        //         >
-        //             <Controls showInteractive="false" />
-        //         </ReactFlow>}
-        //     </div>
-        // );
-
-        // SECOND RENDER
-        // if (this.props.deets.name != this.state.last_ds) {
-        //     this.state.last_ds = this.props.deets.name;
-        //     this.update('elements', this.props.deets);
-        // }
-        
-        // return (
-        //     <div style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: Lineage.DEFAULT_CONTAINER_WIDTH }}>
-        //         {this.state.elements && 
-        //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
-        //             <Controls showInteractive="false" />
-        //         </ReactFlow>}
-        //     </div>
-        // );
     }
 }
 

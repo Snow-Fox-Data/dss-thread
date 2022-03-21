@@ -89,9 +89,6 @@ class App extends Component {
 
     loadItem = (item) => {
         this.setState({ loading: true });
-        console.log('loadItem :: item == ');
-        console.log(item);
-
         if (item.length > 0) {
             const requestOptions = {
                 method: 'GET',
@@ -139,10 +136,6 @@ class App extends Component {
             this.setState({ rendered: true });
             this.setState({ loading: false });
 
-            // eventBus.on("dataRefresh", (data) =>
-            //     this.refreshData()
-            // );
-
             eventBus.on("datasetSelected", (ds) =>
                 this.loadItem([{
                     key: ds,
@@ -167,9 +160,6 @@ class App extends Component {
             eventBus.on("loading", (isLoading) =>
                 this.setState({ "loading": isLoading })
             );
-
-            // this.search('thread');
-            // this.refreshData();
         });
     }
 

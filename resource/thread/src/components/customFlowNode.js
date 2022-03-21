@@ -10,19 +10,6 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '.' + data.dataset);
   }
 
-  // console.log('data == ');
-  // console.log(data);
-  // console.log('isConnectable == ');
-  // console.log(isConnectable);
-
-  // <Handle
-  //   type="target"
-  //   position="left"
-  //   isValidConnection={(connection) => connection.source === 'some-id'}
-  //   onConnect={(params) => console.log('handle onConnect', params)}
-  //   style={{ background: '#fff' }}
-  // />
-
   return (
     <>
       <Handle

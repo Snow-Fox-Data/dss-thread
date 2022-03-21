@@ -31,7 +31,6 @@ class DataikuItem extends Component {
     }
 
     flattenArray(elem, key, orig = []) {
-
         for (var idx = 0; idx < elem[key].length; idx++) {
             let r = elem[key][idx];
 
@@ -137,12 +136,6 @@ class DataikuItem extends Component {
     }
 
     newDef() {
-        // this.setState({
-        //     selectedDef: {
-        //         name: this.props.item.name,
-        //         description: this.props.item.comment
-        //     }
-        // })
         this.setState({ newDefModal: true });
     }
 
