@@ -13,7 +13,7 @@ export const createGraphLayout = async (elements) => {
     defaultLayoutOptions: {
       "elk.algorithm": "layered",
       "elk.direction": "RIGHT",
-      "elk.padding": "[top=200,left=100,bottom=25,right=25]",
+      "elk.padding": "[top=50,left=50,bottom=50,right=50]",
       // "elk.spacing.componentComponent": 30,
       "elk.spacing.nodeNode": 50,
       "elk.layered.spacing.nodeNodeBetweenLayers": 25,
