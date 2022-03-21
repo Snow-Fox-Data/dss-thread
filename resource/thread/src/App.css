@@ -54,6 +54,11 @@ div.react-confirm-alert-overlay {
 }
 
 
+html {
+  font-size: 18px;
+}
+
+
 /*!
  * Bootswatch v5.1.3
  * Homepage: https://bootswatch.com
