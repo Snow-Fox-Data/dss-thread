@@ -51,6 +51,7 @@ export const createGraphLayout = async (elements) => {
     children: nodes,
     edges: edges
   });
+  
   return elements.map((el) => {
     if (isNode(el)) {
       const node = newGraph?.children?.find((n) => n.id === el.id);

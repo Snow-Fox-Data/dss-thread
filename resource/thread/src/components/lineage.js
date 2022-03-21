@@ -146,8 +146,8 @@ class Lineage extends Component {
                 targetPosition: 'left',
                 sourcePosition: 'right',
                 // position: { x: basePositionX, y: basePositionY },
-                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
-                position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
+                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
+                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
@@ -239,9 +239,7 @@ class Lineage extends Component {
         // const [elements, setElements] = useState();
         // const [setElements] = useState();
 
-        // createGraphLayout(elements)
-        //     .then((els) => setElements(els))
-        //     .catch((err) => console.error(err));
+        
 
             // useEffect(() => {
             //     createGraphLayout(elements)
@@ -255,6 +253,10 @@ class Lineage extends Component {
             nodes: _nodes
         });
 
+        createGraphLayout(elements)
+            .then((els) => this.setState({elements: els}))
+            .catch((err) => console.error(err));
+
         // var new_state = {}
         // new_state[st] = elements;
         // this.setState(new_state);
@@ -263,6 +265,14 @@ class Lineage extends Component {
     onLoad(rv) {
         rv.fitView();
     }
+
+    // useEffect() {
+    //     () => {
+    //         createGraphLayout(elements)
+    //             .then((els) => setElements(els))
+    //             .catch((err) => console.error(err));
+    //     }        
+    // }
 
     render() {      
         console.log('Render() :: this.state == ');
