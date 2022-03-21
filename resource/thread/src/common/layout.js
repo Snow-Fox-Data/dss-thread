@@ -2,8 +2,8 @@ import Elk from "elkjs";
 import { isNode } from "react-flow-renderer";
 import Lineage from "../components/lineage";
 
-// const DEFAULT_WIDTH = 200;
-// const DEFAULT_HEIGHT = 60;
+// const DEFAULT_NODE_WIDTH = 200;
+// const DEFAULT_NODE_HEIGHT = 60;
 
 export const createGraphLayout = async (elements) => {
   const nodes = [];
@@ -35,8 +35,8 @@ export const createGraphLayout = async (elements) => {
     if (isNode(el)) {
       nodes.push({
         id: el.id,
-        width: el.__rf?.width ?? Lineage.DEFAULT_WIDTH,
-        height: el.__rf?.height ?? Lineage.DEFAULT_HEIGHT
+        width: el.__rf?.width ?? Lineage.DEFAULT_NODE_WIDTH,
+        height: el.__rf?.height ?? Lineage.DEFAULT_NODE_HEIGHT
       });
     } else {
       edges.push({
