@@ -52,6 +52,7 @@ def defintition_list():
 
     merged_df = pd.concat([result, result2], ignore_index=True)
 
+    merged_df['search_def'] = merged_df['name'] + ' | ' + merged_df['description']
     return merged_df.to_json(orient='records')
 
 @app.route('/search', methods=['GET'])
