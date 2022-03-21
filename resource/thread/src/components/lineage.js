@@ -48,10 +48,10 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
-        let basePositionX = 0;
-        let basePositionY = 0;
-        // let basePositionX = (Lineage.containerWidth / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
-        // let basePositionY = (Lineage.containerHeight / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
+        // let basePositionX = 0;
+        // let basePositionY = 0;
+        let basePositionX = (Lineage.containerWidth / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
+        let basePositionY = (Lineage.containerHeight / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
 
         var baseElementId = 'base';
         var baseNode = {
