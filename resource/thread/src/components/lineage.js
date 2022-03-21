@@ -56,7 +56,7 @@ class Lineage extends Component {
             id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
-            // position: { x: basePositionX, y: basePositionY },
+            position: { x: basePositionX, y: basePositionY },
             style: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
             sourcePosition: 'right',
             targetPosition: 'left',
