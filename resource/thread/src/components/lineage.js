@@ -9,9 +9,9 @@ class Lineage extends Component {
     static containerHeight = 500;
     static containerWidth = 1030;
 
-    static nodeWidth = 200;
-    static nodeHeight = 60;
- 
+    static DEFAULT_NODE_HEIGHT = 60;
+    static DEFAULT_NODE_WIDTH = 200;
+
     constructor(props) {
         super(props);
 
@@ -48,8 +48,8 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
-        let basePositionX = (Lineage.containerWidth / 2) - (Lineage.nodeWidth / 2);
-        let basePositionY = (Lineage.containerHeight / 2) - (Lineage.nodeHeight / 2);
+        let basePositionX = (Lineage.containerWidth / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
+        let basePositionY = (Lineage.containerHeight / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
 
         var baseElementId = 'base';
         var baseNode = {
@@ -57,7 +57,7 @@ class Lineage extends Component {
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: basePositionX, y: basePositionY },
-            style: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
+            style: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
@@ -103,14 +103,14 @@ class Lineage extends Component {
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
+                style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                position: { x: basePositionX, y: basePositionY },
+                // position: { x: basePositionX, y: basePositionY },
                 // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
-                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
+                position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
                 
                 draggable: false
             };
@@ -148,13 +148,13 @@ class Lineage extends Component {
                 id: elementId,
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
+                style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: basePositionX, y: basePositionY },
-                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX, y: basePositionY },
+                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             };
 
