@@ -140,13 +140,24 @@ class DataikuItem extends Component {
     }
 
     editDef() {
-        // this.setState({
-        //     selectedDef: {
-        //         name: this.props.item.definition.name,
-        //         description: this.props.item.definition.description,
-        //         id: this.props.item.definition.id
-        //     }
-        // })
+        if (this.props.item.definition.id == -1) {
+            this.setState({
+                selectedDef: {
+                    name: this.props.item.name,
+                    description: this.props.item.comment,
+                    id: -1
+                }
+            })
+        }
+        else {
+            this.setState({
+                selectedDef: {
+                    name: this.props.item.definition.name,
+                    description: this.props.item.definition.description,
+                    id: this.props.item.definition.id
+                }
+            })
+        }
         this.setState({ newDefModal: true });
     }
 
