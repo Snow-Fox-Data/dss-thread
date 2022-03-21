@@ -1,8 +1,8 @@
 import Elk from "elkjs";
 import { isNode } from "react-flow-renderer";
 
-const DEFAULT_WIDTH = 172;
-const DEFAULT_HEIGHT = 36;
+const DEFAULT_WIDTH = 200;
+const DEFAULT_HEIGHT = 60;
 
 export const createGraphLayout = async (elements) => {
   const nodes = [];
@@ -51,7 +51,7 @@ export const createGraphLayout = async (elements) => {
     children: nodes,
     edges: edges
   });
-  
+
   return elements.map((el) => {
     if (isNode(el)) {
       const node = newGraph?.children?.find((n) => n.id === el.id);
