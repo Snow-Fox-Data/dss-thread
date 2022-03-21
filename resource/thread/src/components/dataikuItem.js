@@ -195,6 +195,25 @@ class DataikuItem extends Component {
         this.setState({
             newDefSelected: isNew
         })
+
+        if (isNew) {
+            this.setState({
+                selectedDef: {
+                    name: this.props.item.name,
+                    description: this.props.item.comment,
+                    id: -1
+                }
+            })
+        }
+        else {
+            this.setState({
+                selectedDef: {
+                    name: this.props.item.definition.name,
+                    description: this.props.item.definition.description,
+                    id: this.props.item.definition.id
+                }
+            })
+        }
     }
 
     renderColumn() {
