@@ -17,7 +17,7 @@ export const createGraphLayout = async (elements) => {
       // "elk.edgeLabels.inline": true,
       "elk.edgeRouting": "SPLINES",      
       "elk.layered.spacing.nodeNodeBetweenLayers": 50,
-      "elk.padding": "[top=150,left=100,bottom=25,right=25]",
+      "elk.padding": "[top=50,left=150,bottom=25,right=25]",
       "elk.spacing.nodeNode": 25,      
     }
   });

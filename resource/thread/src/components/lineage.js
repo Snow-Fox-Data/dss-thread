@@ -6,7 +6,7 @@ import { createGraphLayout } from '../common/layout.js';
 class Lineage extends Component {
 
     // CONSTANT VALUES
-    static DEFAULT_CONTAINER_HEIGHT = 500;
+    static DEFAULT_CONTAINER_HEIGHT = 750;
     static DEFAULT_CONTAINER_WIDTH = 1030;
 
     static DEFAULT_NODE_HEIGHT = 60;
