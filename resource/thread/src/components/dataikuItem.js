@@ -140,13 +140,13 @@ class DataikuItem extends Component {
     }
 
     editDef() {
-        this.setState({
-            selectedDef: {
-                name: this.props.item.definition.name,
-                description: this.props.item.definition.description,
-                id: this.props.item.definition.id
-            }
-        })
+        // this.setState({
+        //     selectedDef: {
+        //         name: this.props.item.definition.name,
+        //         description: this.props.item.definition.description,
+        //         id: this.props.item.definition.id
+        //     }
+        // })
         this.setState({ newDefModal: true });
     }
 
@@ -223,16 +223,16 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
-        if (this.props.item.definition.id > -1) {
-            this.state.selectedDef.name = this.props.item.definition.name;
-            this.state.selectedDef.id = this.props.item.definition.id;
-            this.state.selectedDef.description = this.props.item.definition.description;
-        }
-        else {
-            this.state.selectedDef.name = this.props.item.name;
-            this.state.selectedDef.description = this.props.item.comment;
-            this.state.selectedDef.id = -1;
-        }
+        // if (this.props.item.definition.id > -1) {
+        //     this.state.selectedDef.name = this.props.item.definition.name;
+        //     this.state.selectedDef.id = this.props.item.definition.id;
+        //     this.state.selectedDef.description = this.props.item.definition.description;
+        // }
+        // else {
+        //     this.state.selectedDef.name = this.props.item.name;
+        //     this.state.selectedDef.description = this.props.item.comment;
+        //     this.state.selectedDef.id = -1;
+        // }
 
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
