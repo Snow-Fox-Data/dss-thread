@@ -26,6 +26,10 @@
   margin-right: 1.0em;
 }
 
+.dataiku-item table {
+  font-size: 1em;
+}
+
 .filter h5 {
   margin-top: 6px;
 }
