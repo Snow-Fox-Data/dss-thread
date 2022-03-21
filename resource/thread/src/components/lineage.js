@@ -1,12 +1,7 @@
-import React, { Component, useCallback, useState, useEffect } from 'react';
-// import ReactFlow, { Controls } from 'react-flow-renderer';
-import ReactFlow, { addEdge, Controls, useNodesState, useEdgesState } from 'react-flow-renderer';
+import React, { Component, useCallback, useState } from 'react';
+import ReactFlow, { Controls } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
-import dagre from 'dagre';
 import { createGraphLayout } from '../common/layout.js';
-
-// const dagreGraph = new dagre.graphlib.Graph();
-// dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 class Lineage extends Component {
 
@@ -50,45 +45,18 @@ class Lineage extends Component {
         return res;
     }
 
-    // STRUCTURE FOR NODES AND EDGES FOR AUTO LAYOUT
-    // example = () => {
-    //     const nodes = [{
-    //         id: '1',
-    //         type: 'input',
-    //         data: { label: 'input' },
-    //         position,
-    //       }];
-
-    //     const edges = [{ 
-    //         id: 'e12', 
-    //         source: '1', 
-    //         target: '2', 
-    //         type: edgeType, 
-    //         animated: true 
-    //     }];
-    // }
-
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
         let basePositionX = (Lineage.containerWidth / 2) - (Lineage.nodeWidth / 2);
         let basePositionY = (Lineage.containerHeight / 2) - (Lineage.nodeHeight / 2);
 
-        // let basePositionX = 0;
-        // let basePositionY = 0;
-
-        console.log("basePositionX == ");
-        console.log(basePositionX);
-        console.log("basePositionY == ");
-        console.log(basePositionY);
-
         var baseElementId = 'base';
         var baseNode = {
             id: baseElementId,
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
-            position: { x: basePositionX, y: basePositionY },
-            // position: { x: 250, y: 140 },
+            // position: { x: basePositionX, y: basePositionY },
             style: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold', height: Lineage.nodeHeight, width: Lineage.nodeWidth },
             sourcePosition: 'right',
             targetPosition: 'left',
@@ -131,13 +99,6 @@ class Lineage extends Component {
                 col = splits[2];
 
             var elementId = 'down_' + x.toString();
-
-            // var downYPosition = ((x + 1) - Math.ceil(down_res.length * 0.5));
-            // console.log("downYPosition == ");
-            // console.log(downYPosition);
-
-            // basePositionY + (nodeHeight * ((x + 1) - Math.ceil(down_res.length * 0.5))) // I believe this is the way to good, but untested.
-
             var node = {
                 id: elementId,
                 type: 'customFlowNode',
@@ -146,7 +107,7 @@ class Lineage extends Component {
                 targetPosition: 'left',
                 sourcePosition: 'right',
                 // position: { x: basePositionX, y: basePositionY },
-                position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
+                // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX + (Lineage.nodeWidth + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
@@ -182,10 +143,6 @@ class Lineage extends Component {
             if (splits.length > 2)
                 col = splits[2];
 
-            // var upYPosition = (250 / (x + 1) - (down_res.length / 2));
-            // console.log("upYPosition == ");
-            // console.log(upYPosition);
-
             var elementId = 'up_' + x.toString();
             var node ={
                 id: elementId,
@@ -196,7 +153,7 @@ class Lineage extends Component {
                 targetPosition: 'left',
                 // position: { x: basePositionX, y: basePositionY },
                 // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
-                position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX - (Lineage.nodeWidth + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             };
@@ -224,29 +181,6 @@ class Lineage extends Component {
         console.log('_edges == ');
         console.log(_edges);
 
-        // dagreGraph.setGraph({ rankdir: 'LR' });
-
-        // _nodes.forEach((node) => {
-        //     dagreGraph.setNode(node.id, { width: Lineage.nodeWidth, height: Lineage.nodeHeight });
-        // });
-
-        // _edges.forEach((edge) => {
-        //     dagreGraph.setEdge(edge.source, edge.target);
-        // });
-
-        // dagre.layout(dagreGraph);
-
-        // const [elements, setElements] = useState();
-        // const [setElements] = useState();
-
-        
-
-            // useEffect(() => {
-            //     createGraphLayout(elements)
-            //         .then((els) => setElements(els))
-            //         .catch((err) => console.error(err));
-            // }, []);
-
         this.setState({
             edges: _edges,
             elements: elements,
@@ -256,23 +190,11 @@ class Lineage extends Component {
         createGraphLayout(elements)
             .then((els) => this.setState({elements: els}))
             .catch((err) => console.error(err));
-
-        // var new_state = {}
-        // new_state[st] = elements;
-        // this.setState(new_state);
     }
 
     onLoad(rv) {
         rv.fitView();
     }
-
-    // useEffect() {
-    //     () => {
-    //         createGraphLayout(elements)
-    //             .then((els) => setElements(els))
-    //             .catch((err) => console.error(err));
-    //     }        
-    // }
 
     render() {      
         console.log('Render() :: this.state == ');
@@ -283,31 +205,17 @@ class Lineage extends Component {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }        
-
-        // const [nodes, setNodes, onNodesChange] = useNodesState(this.state.nodes);
-        // const [edges, setEdges, onEdgesChange] = useEdgesState(this.state.edges);
-
-        // const onConnect = useCallback(
-        //     (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
-        //     []
-        // );
-
-        // setNodes([nodes]);
-        // setEdges([edges]);
         
         return (
             <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
                 {this.state.elements && 
                 <ReactFlow 
                     onLoad={this.onLoad} 
-                    // nodes={this.state.nodes}
-                    // edges={this.state.edges}
                     elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
                     // onConnect={onConnect}
                     // onEdgesChange={onEdgesChange}
                     // onNodesChange={onNodesChange}
-                    // connectionLineType="smoothstep"
                     style={{ height: "100%", width: "100%" }}
                 >
                     <Controls showInteractive="false" />
