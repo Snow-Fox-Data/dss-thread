@@ -443,7 +443,7 @@ class DataikuItem extends Component {
             </Row>
         } else {
             item = <Row>
-                <p>No Item to display...</p>
+                {/* <p>No Item to display...</p> */}
             </Row>
         }
 

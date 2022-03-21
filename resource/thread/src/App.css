@@ -17,11 +17,12 @@
 }
 
 .dataiku-item p {
-  font-size: 1.5em;
+  font-size: 1.2em;
+  margin-bottom: .2em;
 }
 
 .dataiku-item .tags span {
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-right: 1.0em;
 }
 
