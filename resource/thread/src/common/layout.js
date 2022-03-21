@@ -1,8 +1,8 @@
 import Elk from "elkjs";
 import { isNode } from "react-flow-renderer";
 
-const DEFAULT_WIDTH = 200;
-const DEFAULT_HEIGHT = 60;
+const DEFAULT_WIDTH = 250;
+const DEFAULT_HEIGHT = 40;
 
 export const createGraphLayout = async (elements) => {
   const nodes = [];
