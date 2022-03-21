@@ -12,24 +12,13 @@ export const createGraphLayout = async (elements) => {
   const elk = new Elk({
     defaultLayoutOptions: {
       "elk.algorithm": "layered",
+      "elk.contentAlignment": "V_CENTER",
       "elk.direction": "RIGHT",
-      "elk.padding": "[top=50,left=50,bottom=50,right=50]",
-      // "elk.spacing.componentComponent": 30,
-      "elk.spacing.nodeNode": 25,
-      "elk.layered.spacing.nodeNodeBetweenLayers": 50,
-      // "elk.spacing.nodeNode": 50,
-      // "elk.layered.spacing.nodeNodeBetweenLayers": 25,
       // "elk.edgeLabels.inline": true,
-      "elk.edgeRouting": "SPLINES"
-      // "elk.algorithm": "layered",
-      // "elk.contentAlignment": "V_CENTER",
-      // "elk.direction": "RIGHT",
-      // "elk.spacing.nodeNode": "25",
-      // "elk.layered.spacing.nodeNodeBetweenLayers": "75"
-      // "elk.layered.spacing": "50",
-      // "elk.spacing": "50"
-      // "elk.spacing.individual": "250"
-      // "elk.alignment": "RIGHT"
+      "elk.edgeRouting": "SPLINES",      
+      "elk.layered.spacing.nodeNodeBetweenLayers": 50,
+      "elk.padding": "[top=150,left=100,bottom=25,right=25]",
+      "elk.spacing.nodeNode": 25,      
     }
   });
 
