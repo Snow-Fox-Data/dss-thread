@@ -48,8 +48,10 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
-        let basePositionX = (Lineage.containerWidth / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
-        let basePositionY = (Lineage.containerHeight / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
+        let basePositionX = 0;
+        let basePositionY = 0;
+        // let basePositionX = (Lineage.containerWidth / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
+        // let basePositionY = (Lineage.containerHeight / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
 
         var baseElementId = 'base';
         var baseNode = {
@@ -106,12 +108,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                // position: { x: basePositionX, y: basePositionY },
+                position: { x: basePositionX, y: basePositionY },
                 // position: { x: 500, y: ((300 / (down_res.length + 1)) * (x + 1)) }, // OG
-                position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (200 / (down_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (down_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (250 / (x + 1) - (down_res.length / 2)) },
-                
+                // position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 * (down_res.length + 1) * (x + 1)) }, // Better Calculations            
                 draggable: false
             };
 
@@ -151,10 +150,9 @@ class Lineage extends Component {
                 style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                // position: { x: basePositionX, y: basePositionY },
+                position: { x: basePositionX, y: basePositionY },
                 // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) }, // OG
-                position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (200 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 * (up_res.length + 1) * (x + 1)) },            
                 draggable: false
             };
 
