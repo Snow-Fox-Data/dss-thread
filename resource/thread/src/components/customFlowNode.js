@@ -10,6 +10,9 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '.' + data.dataset);
   }
 
+  console.log('customFlowNode :: data == ');
+  console.log(data);
+
   return (
     <>
       <Handle
