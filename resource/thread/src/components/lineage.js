@@ -152,8 +152,8 @@ class Lineage extends Component {
                 sourcePosition: 'right',
                 targetPosition: 'left',
                 // position: { x: basePositionX, y: basePositionY },
-                position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) },
-                // position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
+                // position: { x: 0, y: (300 / (up_res.length + 1) * (x + 1)) }, // OG
+                position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (200 / (up_res.length + 1) * (x + 1)) },
                 // position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 50), y: (300 / (up_res.length + 1) * (x + 1)) },
                 draggable: false
             };
