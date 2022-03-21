@@ -224,7 +224,7 @@ class App extends Component {
         this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
 
         return (
-            <Container style={{ paddingTop: '20px' }}>
+            <Container style={{paddingTop: '20px', paddingTop: '20px' }}>
                 <Row style={{ paddingBottom: '10px' }}>
                     <Col><h1>Thread</h1></Col>
                     <Col style={{ textAlign: 'right' }}>
