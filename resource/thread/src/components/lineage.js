@@ -6,8 +6,8 @@ import { createGraphLayout } from '../common/layout.js';
 class Lineage extends Component {
 
     // CONSTANT VALUES
-    static containerHeight = 500;
-    static containerWidth = 1030;
+    static DEFAULT_CONTAINER_HEIGHT = 500;
+    static DEFAULT_CONTAINER_WIDTH = 1030;
 
     static DEFAULT_NODE_HEIGHT = 60;
     static DEFAULT_NODE_WIDTH = 200;
@@ -48,10 +48,10 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.name.split('.');
 
-        // let basePositionX = 0;
-        // let basePositionY = 0;
-        let basePositionX = (Lineage.containerWidth / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
-        let basePositionY = (Lineage.containerHeight / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
+        let basePositionX = 0;
+        let basePositionY = 0;
+        // let basePositionX = (Lineage.DEFAULT_CONTAINER_WIDTH / 2) - (Lineage.DEFAULT_NODE_WIDTH / 2);
+        // let basePositionY = (Lineage.DEFAULT_CONTAINER_HEIGHT / 2) - (Lineage.DEFAULT_NODE_HEIGHT / 2);
 
         var baseElementId = 'base';
         var baseNode = {
@@ -205,7 +205,7 @@ class Lineage extends Component {
         }        
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
+            <div style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
                 {this.state.elements && 
                 <ReactFlow 
                     onLoad={this.onLoad} 
@@ -219,7 +219,23 @@ class Lineage extends Component {
                     <Controls showInteractive="false" />
                 </ReactFlow>}
             </div>
-        );
+        );        
+        // return (
+        //     <div style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: Lineage.DEFAULT_CONTAINER_WIDTH }}>
+        //         {this.state.elements && 
+        //         <ReactFlow 
+        //             onLoad={this.onLoad} 
+        //             elements={this.state.elements}
+        //             nodeTypes={this.nodeTypes} 
+        //             // onConnect={onConnect}
+        //             // onEdgesChange={onEdgesChange}
+        //             // onNodesChange={onNodesChange}
+        //             style={{ height: "100%", width: "100%" }}
+        //         >
+        //             <Controls showInteractive="false" />
+        //         </ReactFlow>}
+        //     </div>
+        // );
 
         // SECOND RENDER
         // if (this.props.deets.name != this.state.last_ds) {
@@ -228,7 +244,7 @@ class Lineage extends Component {
         // }
         
         // return (
-        //     <div style={{ backgroundColor: '#EEE', height: Lineage.containerHeight, width: Lineage.containerWidth }}>
+        //     <div style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: Lineage.DEFAULT_CONTAINER_WIDTH }}>
         //         {this.state.elements && 
         //         <ReactFlow onLoad={this.onLoad} elements={this.state.elements} nodeTypes={this.nodeTypes} style={{ height: "100%", width: "100%" }}>
         //             <Controls showInteractive="false" />
