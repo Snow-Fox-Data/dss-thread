@@ -295,7 +295,6 @@ class App extends Component {
             <Container style={{ paddingTop: '10px' }}>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <a class="navbar-brand" href="#">
-                        <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
                         Thread
                     </a>
                 </nav>
