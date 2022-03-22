@@ -28,6 +28,8 @@ class DataikuItem extends Component {
             newDefSelected: true,
             defSearchResults: []
         };
+
+        this.resetSelectedDef()
     }
 
     flattenArray(elem, key, orig = []) {
@@ -139,7 +141,7 @@ class DataikuItem extends Component {
         this.setState({ newDefModal: true });
     }
 
-    editDef() {
+    resetSelectedDef() {
         if (this.props.item.definition.id == -1) {
             this.setState({
                 selectedDef: {
@@ -158,6 +160,9 @@ class DataikuItem extends Component {
                 }
             })
         }
+    }
+
+    editDef() {
         this.setState({ newDefModal: true });
     }
 
