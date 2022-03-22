@@ -159,7 +159,10 @@ class App extends Component {
 
                 // clear the search bar
                 // this.searchRef.clear()
-                window.top.location.href = "https://dataiku.excelion.io/projects/THREADDEMO/webapps/ROvQ0Y8_thread/view#hello"
+
+                let base_url = window.top.location.href.split('#')[0]
+
+                window.top.location.href = base_url + "#hello"
             }
             );
 
