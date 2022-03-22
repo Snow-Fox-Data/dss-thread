@@ -84,9 +84,16 @@ div.react-confirm-alert-overlay {
 }
 
 .thread-node h6 {
+  margin: 0;
   text-align: center;
 }
 
+.thread-node p {
+  flex-wrap: wrap;
+}
+.thread-node .thread-handle {
+  background-color: #555;
+}
 
 /*!
  * Bootswatch v5.1.3

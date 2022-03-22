@@ -57,6 +57,7 @@ class Lineage extends Component {
         var baseElementId = 'base';
         var baseNode = {
             id: baseElementId,
+            className: 'BASE-THREAD',
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: basePositionX, y: basePositionY },
@@ -103,7 +104,7 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
             var node = {
-                id: elementId,
+                id: elementId,                
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
                 style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },

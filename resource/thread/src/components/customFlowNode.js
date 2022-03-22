@@ -42,9 +42,9 @@ export default memo(({ data, isConnectable }) => {
   return (
     <>
       <Handle
+        className='thread-handle'
         type="target"
         position="left"
-        style={{ background: '#555' }}
         isConnectable={isConnectable}
       />
 
@@ -64,7 +64,6 @@ export default memo(({ data, isConnectable }) => {
         type="source"
         position="right"
         isConnectable={isConnectable}
-        style={{ background: '#555' }}
       />
     </>
   );
