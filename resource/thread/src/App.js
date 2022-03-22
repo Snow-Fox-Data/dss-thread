@@ -148,6 +148,7 @@ class App extends Component {
 
                 // clear the search bar
                 // this.searchRef.clear()
+                this.navToObject(ds)
             }
             );
 
@@ -159,10 +160,7 @@ class App extends Component {
 
                 // clear the search bar
                 // this.searchRef.clear()
-
-                let base_url = window.top.location.href.split('#')[0]
-
-                window.top.location.href = base_url + "#hello"
+                this.navToObject(proj)
             }
             );
 
@@ -173,7 +171,8 @@ class App extends Component {
                 }])
 
                 // clear the search bar
-                this.searchRef.clear()
+                // this.searchRef.clear()
+                this.navToObject(col)
             }
             );
 
@@ -181,6 +180,13 @@ class App extends Component {
                 this.setState({ "loading": isLoading })
             );
         });
+    }
+
+    navToObject(obj) {
+
+        let base_url = window.top.location.href.split('#')[0]
+        window.top.location.href = base_url + "#o=" + obj
+
     }
 
     rescan() {
