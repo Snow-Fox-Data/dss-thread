@@ -69,7 +69,7 @@ class App extends Component {
 
     formatQueryTypes = () => {
         let types = [];
-        Object.entries(this.state.filters).map(([key, value]) => {
+        Object.entries(this.state.filters).sort().map(([key, value]) => {
             if (value == true) {
                 types[types.length] = key.toString();
             }
