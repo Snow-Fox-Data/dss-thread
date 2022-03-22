@@ -254,9 +254,9 @@ class App extends Component {
 
                 {openFilter ?
                     <Row className="filter" style={{ marginTop: "0.5em" }}>
-                        <Col xs={1}>
+                        {/* <Col xs={1}>
                             <h5>Filter By: </h5>
-                        </Col>
+                        </Col> */}
                         {Object.entries(filters).map(([key, value]) => {
                             return (
                                 <Col xs={1}>

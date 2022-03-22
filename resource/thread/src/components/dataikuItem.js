@@ -234,17 +234,6 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
-        // if (this.props.item.definition.id > -1) {
-        //     this.state.selectedDef.name = this.props.item.definition.name;
-        //     this.state.selectedDef.id = this.props.item.definition.id;
-        //     this.state.selectedDef.description = this.props.item.definition.description;
-        // }
-        // else {
-        //     this.state.selectedDef.name = this.props.item.name;
-        //     this.state.selectedDef.description = this.props.item.comment;
-        //     this.state.selectedDef.id = -1;
-        // }
-
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -308,16 +297,11 @@ class DataikuItem extends Component {
                 </Modal.Footer>
             </Modal>
 
-            <p class="name"><b>Project: </b>
-                <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
-            </p>
-            <p class="name"><b>Dataset: </b>
+            <h2>{this.props.item.name}</h2>
+            <p class="name">
+                <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span> /
                 <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span>
             </p>
-            <p class="name"><b>Column Name: </b>{this.props.item.name}
-            </p>
-            <p class="name"><b>Type: </b>{this.props.item.type}</p>
-
             <div style={{ paddingTop: '10px' }}>
                 <Tabs defaultActiveKey="definition" className="mb-3">
                     <Tab eventKey="definition" title="Definition" def>
