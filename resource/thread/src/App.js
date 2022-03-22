@@ -139,21 +139,21 @@ class App extends Component {
             eventBus.on("datasetSelected", (ds) =>
                 this.loadItem([{
                     key: ds,
-                    type: 'dataset'
+                    object_type: 'dataset'
                 }])
             );
 
             eventBus.on("projectSelected", (proj) =>
                 this.loadItem([{
                     key: proj,
-                    type: 'project'
+                    object_type: 'project'
                 }])
             );
 
             eventBus.on("columnSelected", (col) =>
                 this.loadItem([{
                     key: col,
-                    type: 'column'
+                    object_type: 'column'
                 }])
             );
 
@@ -175,13 +175,12 @@ class App extends Component {
     renderMenuItemChildren(option, props) {
         return <Fragment>
             {Common.getIconForDataikuItemType(option.object_type)}
-            <span style={{ fontWeight: 'bold', paddingLeft: '4px' }}>Name: {option.name}</span>
-            <span style={{ padding: '3px' }}>|</span>
-            <span>Type: {option.object_type}</span>
+            <span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.object_type}:</span><span>{option.name}</span>
             {option.object_type == 'dataset' || option.object_type == 'column' &&
                 <span>
-                    <span style={{ padding: '3px' }}>|</span>
-                    <span>Project: {option.key.split('.')[0]}</span>
+                    <span style={{ padding: '3px' }}>[</span>
+                    <span>Project: {option.key.split('|')[0]}</span>
+                    <span style={{ padding: '3px' }}>]</span>
                 </span>
             }
         </Fragment>;
@@ -214,7 +213,7 @@ class App extends Component {
         this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
 
         return (
-            <Container style={{paddingTop: '20px', paddingTop: '20px' }}>
+            <Container style={{ paddingTop: '20px', paddingTop: '20px' }}>
                 <Row style={{ paddingBottom: '10px' }}>
                     <Col><h1>Thread</h1></Col>
                     <Col style={{ textAlign: 'right' }}>
