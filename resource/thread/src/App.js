@@ -131,53 +131,59 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.navDeepLink();
 
         window.$(document).ready(() => {
-            
-            this.setState({ dataiku: window.dataiku });
-            this.setState({ rendered: true });
-            this.setState({ loading: false });
 
-            eventBus.on("datasetSelected", (ds) => {
-                this.loadItem([{
-                    key: ds,
-                    object_type: 'dataset'
-                }])
+            fetch(window.getWebAppBackendUrl('get-user'))
+                .then(res => res.json())
+                .then((response) => {
 
-                // clear the search bar
-                // this.searchRef.clear()
-                this.navToObject(ds)
-            }
-            );
+                    this.setState({ dataiku: window.dataiku });
+                    this.setState({ rendered: true });
+                    this.setState({ loading: false });
 
-            eventBus.on("projectSelected", (proj) => {
-                this.loadItem([{
-                    key: proj,
-                    object_type: 'project'
-                }])
+                    this.navDeepLink();
 
-                // clear the search bar
-                // this.searchRef.clear()
-                this.navToObject(proj)
-            }
-            );
+                    eventBus.on("datasetSelected", (ds) => {
+                        this.loadItem([{
+                            key: ds,
+                            object_type: 'dataset'
+                        }])
 
-            eventBus.on("columnSelected", (col) => {
-                this.loadItem([{
-                    key: col,
-                    object_type: 'column'
-                }])
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(ds)
+                    }
+                    );
 
-                // clear the search bar
-                // this.searchRef.clear()
-                this.navToObject(col)
-            }
-            );
+                    eventBus.on("projectSelected", (proj) => {
+                        this.loadItem([{
+                            key: proj,
+                            object_type: 'project'
+                        }])
 
-            eventBus.on("loading", (isLoading) =>
-                this.setState({ "loading": isLoading })
-            );
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(proj)
+                    }
+                    );
+
+                    eventBus.on("columnSelected", (col) => {
+                        this.loadItem([{
+                            key: col,
+                            object_type: 'column'
+                        }])
+
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(col)
+                    }
+                    );
+
+                    eventBus.on("loading", (isLoading) =>
+                        this.setState({ "loading": isLoading })
+                    );
+                });
         });
     }
 
@@ -185,7 +191,7 @@ class App extends Component {
         let parts = window.top.location.href.split('#o=')
 
         if (parts.length > 1) {
-            alert(parts[1]);
+            this.loadItem(parts[1])
         }
     }
 

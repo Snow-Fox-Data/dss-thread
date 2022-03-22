@@ -21,11 +21,21 @@ sentry_sdk.init(
     traces_sample_rate=1.0
 )
 
-# @app.route('/getuser')
-# def getuser():
-#     usr = get_user()
 
-#     return json.dumps({"user": usr})
+@app.route('/get-user')
+def get_user():
+    headers = dict(request.headers)
+    # Get the auth info of the user performing the request
+    auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
+    print ("User doing the query is %s" % auth_info["authIdentifier"])
+    # If the user's group is not TRUSTED_GROUP, raise an exception
+    # if TRUSTED_GROUP not in auth_info["groups"] :
+        # raise Exception("You do not belong here, go away")
+    # else:
+    data = {"status": "ok", "you_are": auth_info["authIdentifier"]}
+
+    return json.dumps(data)
+
 
 @app.route('/init', methods=['GET'])
 def init():
