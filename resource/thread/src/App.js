@@ -132,7 +132,6 @@ class App extends Component {
 
     componentDidMount() {
         window.$(document).ready(() => {
-            this.searchRef = React.createRef();
             this.setState({ dataiku: window.dataiku });
             this.setState({ rendered: true });
             this.setState({ loading: false });
@@ -231,6 +230,8 @@ class App extends Component {
     }
 
     render() {
+        this.searchRef = React.createRef();
+
         // <Router>
         //     <main>
         //       <nav>
