@@ -187,23 +187,37 @@ class App extends Component {
 
     renderMenuItemChildren(option, props) {
         return <Fragment>
-            {Common.getIconForDataikuItemType(option.object_type)}
+
+            <span style={{ paddingRight: '5px' }}>
+                {Common.getIconForDataikuItemType(option.object_type), '13px'}
+            </span>
             {option.object_type == 'column' &&
                 <span>
-                    <span>Column</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
-                    <span style={{ padding: '3px' }}> in Dataset</span>
-                    <span>{option.key.split('|')[0]} | {option.key.split('|')[1]}</span>
+                    <span style={{}}>Project:</span>
+                    <span style={{}}>{option.key.split('|')[0]}</span>
+
+                    <span style={{ padding: '0px 4px' }}>|</span>
+
+                    <span style={{}}>Dataset:</span>
+                    <span style={{ padding: '0px 4px' }}>{option.key.split('|')[1]}</span>
+
+                    <span>Column:</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
                 </span>
             }
             {option.object_type == 'dataset' &&
                 <span>
-                    <span>Dataset</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
-                    <span>in Project: {option.key.split('|')[0]}</span>
+                    <span style={{}}>Project:</span>
+                    <span style={{}}>{option.key.split('|')[0]}</span>
+
+                    <span style={{ padding: '0px 4px' }}>|</span>
+
+                    <span style={{}}>Dataset:</span>
+                    <span style={{ padding: '0px 4px', fontWeight: 'bold' }}>{option.name}</span>
                 </span>
             }
             {option.object_type == 'project' &&
                 <span>
-                    <span>Project</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
+                    <span>Project: </span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
                 </span>
             }
 
@@ -295,7 +309,7 @@ class App extends Component {
                                             value={key}
                                             checked={value}
                                             onChange={() => this.handleOnChange(key)}
-                                            style={{ marginRight: "1.0em" }}
+                                            style={{ marginRight: "5px" }}
                                         />
                                         <label htmlFor={`filter-${key}`}>{key}s</label>
                                     </div>
