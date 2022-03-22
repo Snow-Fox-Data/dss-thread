@@ -229,7 +229,7 @@ class App extends Component {
                                 filterBy={filterBy}
                                 id="async-search"
                                 delay={300}
-                                labelKey="key"
+                                labelKey={option => {option.key.replace('|', ' | ')}}
                                 minLength={3}
                                 onChange={this.loadItem}
                                 onSearch={this.search}
