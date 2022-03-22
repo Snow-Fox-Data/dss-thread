@@ -106,6 +106,9 @@ class App extends Component {
                         selectedItem: response,
                         selectedItemType: item[0].object_type
                     });
+
+                    // clear the search bar
+                    this.searchRef.clear()
                 });
         }
     }
@@ -212,6 +215,7 @@ class App extends Component {
         const filterBy = () => true;
 
         this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
+        this.searchRef = React.createRef();
 
         return (
             <Container style={{ paddingTop: '20px', paddingTop: '20px' }}>
@@ -230,8 +234,9 @@ class App extends Component {
                                 id="async-search"
                                 delay={300}
                                 labelKey={option => {
-                                    return option.key.replace('|', ' | ')}
+                                    return option.key.replaceAll('|', ' | ')}
                                 }
+                                ref={this.searchRef}
                                 minLength={3}
                                 onChange={this.loadItem}
                                 onSearch={this.search}
