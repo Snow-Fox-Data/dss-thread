@@ -258,13 +258,19 @@ class dss_utils:
                 if col_lineage != 'none':
                     if col_lineage == 'all' or col['name'] == col_lineage:
                         col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
-                        col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)
-                
+                        col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)         
         except Exception as e:
             # capture_exception(e)
             print(f'no schema for {key} {e}')
 
+        # tags
+        p = self.client.get_project(p_name)
+        d = p.get_dataset(d_name)
+        tags = d.get_metadata()['tags']         
+
         res = {
+            "object_type": 'dataset',
+            "tags": tags,
             "schema": schema,
             "name": ds.full_name,
             "key": key,
