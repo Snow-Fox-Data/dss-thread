@@ -297,7 +297,27 @@ class App extends Component {
                     <a class="navbar-brand" href="#">
                         Thread
                     </a>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mr-auto">
+                            {/* <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Features</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pricing</a>
+                            </li> */}
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{this.state.currentUser}</a>
+                            </li>
+                        </ul>
+                    </div>
+                   
                 </nav>
+                {/* <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> */}
                 {/* <Row>
                     <Col>
                         <div class="title-row"><h1>Thread</h1></div></Col>
