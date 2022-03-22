@@ -10,8 +10,8 @@ export default memo(({ data, isConnectable }) => {
   var column = "";
 
   function formatData(name)  {
-    console.log('customFlowNode :: data == ');
-    console.log(data);
+    console.log('customFlowNode :: formatData() :: name == ');
+    console.log(name);
   
     var base_splits = name.split(' | ');
   
@@ -24,6 +24,8 @@ export default memo(({ data, isConnectable }) => {
         break;
       case 2:
         console.log('CASE 2');
+      case 3:
+        console.log('CASE 3');
         break;
       default:
         console.log('DEFAULT');
