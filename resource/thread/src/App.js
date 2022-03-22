@@ -291,7 +291,7 @@ class App extends Component {
 
         return (
             <Container style={{ paddingTop: '20px', paddingTop: '20px' }}>
-                <Row style={{ paddingBottom: '10px' }}>
+                <Row class="title-row">
                     <Col><h1>Thread</h1></Col>
                     <Col style={{ textAlign: 'right' }}>
                         <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />

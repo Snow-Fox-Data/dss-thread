@@ -9,6 +9,15 @@
   left:0px;
 }
 
+.title-row {
+  padding-bottom: 10px;
+}
+
+.title-row h1 {
+  font-weight: bold;
+  font-size:3rem;
+}
+
 .dataiku-item .tags button {
   margin-right: 6px;
 }
