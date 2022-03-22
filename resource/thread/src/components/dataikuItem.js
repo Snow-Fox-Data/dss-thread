@@ -137,9 +137,14 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (((prevProps.item == null && this.props.item != null) || (prevProps.item.id !== this.props.item.id))
-            && this.props.item.type == 'column') {
-            this.resetSelectedDef();
+        if (prevProps.item == null && this.item.props != null) {
+            if (this.props.item.type == 'column')
+                this.resetSelectedDef();
+        }
+        else {
+            if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id !== this.props.item.id)
+                && this.props.item.type == 'column')
+                this.resetSelectedDef();
         }
     }
 
