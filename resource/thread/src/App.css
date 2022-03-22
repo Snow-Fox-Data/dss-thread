@@ -85,12 +85,14 @@ div.react-confirm-alert-overlay {
   /* width: auto */
 }
 
-.thread-node h6 {
+.thread-node h6,
+.thread-node-base h6 {
   margin: 0;
   /* text-align: center; */
 }
 
-.thread-node p {
+.thread-node p,
+.thread-node-base p {
   flex-wrap: wrap;
 }
 
