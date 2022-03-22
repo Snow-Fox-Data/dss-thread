@@ -12,11 +12,11 @@ export default memo(({ data, isConnectable }) => {
   console.log('customFlowNode :: data == ');
   console.log(data);
 
-  function formatData(project)  {
-    console.log('customFlowNode :: formatData() :: project == ');
-    console.log(project);
+  function formatData(_project)  {
+    console.log('customFlowNode :: formatData() :: _project == ');
+    console.log(_project);
   
-    var base_splits = project.split(' | ');
+    var base_splits = _project.split(' | ');
   
     console.log('base_splits :: length == ' + base_splits.length);
     console.log(base_splits);
@@ -24,17 +24,29 @@ export default memo(({ data, isConnectable }) => {
     switch(base_splits.length) {
       case 1:
         console.log('CASE 1');
+        project = base_splits[0];
         break;
       case 2:
         console.log('CASE 2');
+        project = base_splits[0];
+        dataset = base_splits[1];
         break;
       case 3:
         console.log('CASE 3');
+        project = base_splits[0];
+        dataset = base_splits[1];
+        column = base_splits[2];
         break;
       default:
         console.log('DEFAULT');
+        project = _project;
         break;
     }
+
+    console.log('customFlowNode :: formatData() :: wrap up ');
+    console.log('project == ' + project);
+    console.log('dataset == ' + dataset);
+    console.log('column == ' + column);
   }
 
   function selectDataset(e) {
