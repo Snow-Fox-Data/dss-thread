@@ -184,7 +184,7 @@ class App extends Component {
         let parts = window.top.location.href.split('#o=')
 
         if (parts.length > 1) {
-            alert(parts[1])
+            alert(parts[1]);
         }
     }
 
