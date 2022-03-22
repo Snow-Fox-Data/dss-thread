@@ -47,14 +47,16 @@ export default memo(({ data, isConnectable }) => {
         style={{ background: '#555' }}
         isConnectable={isConnectable}
       />
-      <div style={{ border: 'solid 1px #333', borderRadius: '3px', height: '100%', padding: '10px', textAlign: 'center', width: '100%' }}>
-        <div style={{ fontWeight: 'bold' }}>{project}</div>
+
+      <div className='thread-node'>
         <div>
-          {/* <a href={Common.createDsLink2(data.project, data.dataset)} target="_blank">{data.dataset}</a> */}
+          <h4>{project}</h4>
+        </div>
+        <div>
           <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a>
         </div>
         <div>
-          {column}
+          <p>{column}</p>
         </div>
       </div>
 
@@ -64,13 +66,6 @@ export default memo(({ data, isConnectable }) => {
         isConnectable={isConnectable}
         style={{ background: '#555' }}
       />
-      {/* <Handle
-        type="source"
-        position="right"
-        id="b"
-        style={{ bottom: 10, top: 'auto', background: '#555' }}
-        isConnectable={isConnectable}
-      /> */}
     </>
   );
 });

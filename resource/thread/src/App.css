@@ -1,33 +1,15 @@
+html {
+  font-size: 14px;
+}
+
 .app-link {
   text-decoration: 'underline';
-  /* color: blue; */
   color: #3399f3;
   cursor: pointer;
 }
 
-.modal-dialog{
-  left:0px;
-}
-
-.title-row {
-  padding-bottom: 6px;
-}
-
-.title-row h1 {
-  font-weight: bold;
-  font-size:3rem;
-}
-
-.dataiku-item .tags button {
-  margin-right: 6px;
-}
-
-.dataiku-item { 
-  /* padding-top: 2.0em; */
-}
-
-.dataiku-item b {
-  /* margin-right: 0.5em; */
+.cellLink {
+  cursor: pointer;
 }
 
 .dataiku-item .icon {
@@ -35,21 +17,21 @@
   max-height: 90px;
 }
 
-.cellLink {
-  cursor: pointer;
-}
-
 .dataiku-item p {
   font-size: 1.2em;
   margin-bottom: .2em;
+}
+
+.dataiku-item table {
+  font-size: 1em;
 }
 
 .dataiku-item .tags {
   padding-top:5px;
 }
 
-.dataiku-item table {
-  font-size: 1em;
+.dataiku-item .tags button {
+  margin-right: 6px;
 }
 
 .filter h5 {
@@ -72,6 +54,19 @@
   margin-bottom: 0;
 }
 
+.modal-dialog {
+  left:0px;
+}
+
+.title-row {
+  padding-bottom: 6px;
+}
+
+.title-row h1 {
+  font-weight: bold;
+  font-size:3rem;
+}
+
 div.react-confirm-alert-overlay {
   z-index: 9999;
 }
@@ -80,10 +75,16 @@ div.react-confirm-alert-overlay {
   opacity: inherit;
 }
 
-
-html {
-  font-size: 14px;
+.thread-node {
+  border: 'solid 1px #333';
+  border-radius: '3px';
+  height: '100%';
+  padding: '10px';
+  text-align: 'center';
+  width: '100%'
 }
+
+
 
 /*!
  * Bootswatch v5.1.3
