@@ -94,10 +94,10 @@ def load_item():
             if res['object_type'] == 'column':
                 try:
                     df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-                    result = df[df['applied_to'].str.contains(args.get('key'), case=False)].fillna('')
+                    def_df = df[df['applied_to'].str.contains(args.get('key'), case=False)].fillna('')                    
                 except Exception as e:
                     print(e)
-                    result = ''
+                    def_df = ''
 
                 p_name, d_name, c_name = dss.extract_name_project(key)
                 print(f'loading col: {key}, {c_name}')
@@ -107,8 +107,8 @@ def load_item():
                 col['dataset'] = d_name
                 col['definition'] = { "id": -1}
 
-                if len(result) > 0:
-                    col['definition'] = result.to_dict('records')[0]
+                if len(def_df) > 0:
+                    col['definition'] = def_df.to_dict('records')[0]
 
                 return col
 
