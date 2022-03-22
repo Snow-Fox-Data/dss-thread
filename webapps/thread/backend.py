@@ -95,7 +95,8 @@ def load_item():
                 try:
                     df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                     result = df[df['applied_to'].str.contains(args.get('key'), case=False)].fillna('')
-                except:
+                except Exception as e:
+                    print(e)
                     result = ''
 
                 p_name, d_name, c_name = dss.extract_name_project(key)
