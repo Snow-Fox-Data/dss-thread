@@ -391,14 +391,14 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <p class="name"><b>Name: </b><span>{this.props.item.name}</span><span style={{ paddingLeft: '4px' }}>
+            <h1>{this.props.item.name}</h1>
+            <p>Dataiku Project<span style={{ paddingLeft: '4px' }}>
                 <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
                 </a></span></p>
-            <p class="name"><b>Type: </b>{this.props.type}</p>
 
             <div class="tags">{tags}</div>
             <div style={{ paddingTop: '10px' }}>
-                <Tabs defaultActiveKey="datasets" className="mb-3">
+                <Tabs defaultActiveKey="datasets" className="mb-3" id='project-tabs'>
                     <Tab eventKey="datasets" title="Datasets" def>
                         <Table striped bordered hover>
                             <thead>
