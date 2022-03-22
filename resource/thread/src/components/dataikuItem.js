@@ -314,13 +314,17 @@ class DataikuItem extends Component {
                     <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
                 </Modal.Footer>
             </Modal>
-
-            <h1>{this.props.item.name}</h1>
-            <p class="name">
-                <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
-                <span style={{ padding: "0px 3px" }}>/</span>
-                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
-            </p>
+            <Row>
+                <Col xs={1}>
+                    {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                </Col>
+                <h1>{this.props.item.name}</h1>
+                <p class="name">
+                    <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
+                    <span style={{ padding: "0px 3px" }}>|</span>
+                    <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
+                </p>
+            </Row>
             <div style={{ paddingTop: '10px' }}>
                 <Tabs defaultActiveKey="definition" className="mb-3">
                     <Tab eventKey="definition" title="Definition" def>
@@ -432,9 +436,7 @@ class DataikuItem extends Component {
         let itemDetails = this.renderItemDetailsByType();
         if (this.props.item != null) {
             item = <Row className="align-items-start">
-                <Col xs={1}>
-                    {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
-                </Col>
+
                 {itemDetails}
             </Row>
         } else {
