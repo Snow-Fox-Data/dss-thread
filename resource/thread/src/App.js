@@ -177,7 +177,7 @@ class App extends Component {
             {Common.getIconForDataikuItemType(option.type)}
             <span style={{ fontWeight: 'bold', paddingLeft: '4px' }}>Name: {option.name}</span>
             <span style={{ padding: '3px' }}>|</span>
-            <span>Type: {option.type}</span>
+            <span>Type: {option.object_type}</span>
             {option.type == 'dataset' || option.type == 'column' &&
                 <span>
                     <span style={{ padding: '3px' }}>|</span>
