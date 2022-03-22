@@ -295,7 +295,7 @@ class App extends Component {
             <Container style={{ paddingTop: '10px' }}>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Thread</a>
+                        <a class="navbar-brand" style={{ fontWeight:"bold", fontSize:"27px" }}>Thread</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -309,8 +309,11 @@ class App extends Component {
                                 </li> */}
                             </ul>
                             <ul class="navbar-nav">
+                                <li>
+                                    <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
+                                </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">{this.state.currentUser}</a>
+                                    <a class="nav-link">{this.state.currentUser}</a>
                                 </li>
                             </ul>
                         </div>
