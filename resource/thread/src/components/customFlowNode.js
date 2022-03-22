@@ -9,6 +9,9 @@ export default memo(({ data, isConnectable }) => {
   var dataset = "";
   var column = "";
 
+  console.log('customFlowNode :: data == ');
+  console.log(data);
+
   function formatData(name)  {
     console.log('customFlowNode :: formatData() :: name == ');
     console.log(name);
@@ -38,7 +41,7 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '|' + data.dataset);
   }
 
-  formatData(data.project.name);
+  // formatData(data.project.name);
 
   return (
     <>
