@@ -131,9 +131,10 @@ class App extends Component {
     }
 
     componentDidMount() {
-        window.$(document).ready(() => {
-            this.navDeepLink();
+        this.navDeepLink();
 
+        window.$(document).ready(() => {
+            
             this.setState({ dataiku: window.dataiku });
             this.setState({ rendered: true });
             this.setState({ loading: false });
