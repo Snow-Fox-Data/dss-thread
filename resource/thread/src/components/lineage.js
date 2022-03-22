@@ -211,7 +211,7 @@ class Lineage extends Component {
                     elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
                     style={{ height: "100%", width: "100%" }}
-                    fitView
+                    fitView={true}
                 >
                     <Controls showInteractive="false" />
                 </ReactFlow>}
