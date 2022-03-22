@@ -15,9 +15,6 @@ class Lineage extends Component {
     constructor(props) {
         super(props);
 
-        console.log('Lineage :: props == ');
-        console.log(props);
-
         this.state = {
             elements: [],
             last_ds: '',
@@ -203,11 +200,7 @@ class Lineage extends Component {
         rv.fitView();
     }
 
-    render() {      
-        console.log('Render() :: this.state == ');
-        console.log(this.state);
-
-        // SEPARATED NODES AND EDGES
+    render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
