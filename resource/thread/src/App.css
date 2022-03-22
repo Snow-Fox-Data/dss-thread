@@ -16,6 +16,10 @@
   /* margin-right: 0.5em; */
 }
 
+.dataiku-item .icon {
+  max-width: 100px;
+}
+
 .cellLink {
   cursor: pointer;
 }

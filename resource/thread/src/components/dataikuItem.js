@@ -316,7 +316,9 @@ class DataikuItem extends Component {
             </Modal>
             <Row>
                 <Col xs="auto">
-                    {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                    <div class="icon">
+                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                    </div>
                 </Col>
                 <Col>
                     <h1>{this.props.item.name}</h1>
@@ -327,34 +329,36 @@ class DataikuItem extends Component {
                     </p>
                 </Col>
             </Row>
-            <div style={{ paddingTop: '10px' }}>
-                <Tabs defaultActiveKey="definition" className="mb-3">
-                    <Tab eventKey="definition" title="Definition" def>
-                        {
-                            this.props.item.definition.id == -1 &&
-                            <div>
-                                <Button variant="primary"
-                                    onClick={() => this.newDef()}
-                                >Add Definition</Button>{' '}
-                            </div>
-                        }
-                        {
-                            this.props.item.definition.id > 0 &&
-                            <div>
-                                <Button variant="primary"
-                                    onClick={() => this.editDef()}
-                                >Edit Definition</Button>{' '}
-                                <div style={{ padding: '10px' }}>
-                                    <Definition definition={this.state.selectedDef}></Definition>
+            <Row>
+                <div style={{ paddingTop: '10px' }}>
+                    <Tabs defaultActiveKey="definition" className="mb-3">
+                        <Tab eventKey="definition" title="Definition" def>
+                            {
+                                this.props.item.definition.id == -1 &&
+                                <div>
+                                    <Button variant="primary"
+                                        onClick={() => this.newDef()}
+                                    >Add Definition</Button>{' '}
                                 </div>
-                            </div>
-                        }
-                    </Tab>
-                    <Tab eventKey="lineage" title="Lineage" def>
-                        <div class="lineage">{lineage}</div>
-                    </Tab>
-                </Tabs>
-            </div>
+                            }
+                            {
+                                this.props.item.definition.id > 0 &&
+                                <div>
+                                    <Button variant="primary"
+                                        onClick={() => this.editDef()}
+                                    >Edit Definition</Button>{' '}
+                                    <div style={{ padding: '10px' }}>
+                                        <Definition definition={this.state.selectedDef}></Definition>
+                                    </div>
+                                </div>
+                            }
+                        </Tab>
+                        <Tab eventKey="lineage" title="Lineage" def>
+                            <div class="lineage">{lineage}</div>
+                        </Tab>
+                    </Tabs>
+                </div>
+            </Row>
         </Col>
     }
 
@@ -371,9 +375,18 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <h1>{this.props.item.id}</h1>
-            <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
-            <div class="tags">{tags}</div>
+            <Row>
+                <Col xs="auto">
+                    <div class="icon">
+                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                    </div>
+                </Col>
+                <Col>
+                    <h1>{this.props.item.id}</h1>
+                    <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                    <div class="tags">{tags}</div>
+                </Col>
+            </Row>
 
             <Row style={{ paddingTop: '20px' }}>
                 <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
@@ -408,29 +421,39 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <h1>{this.props.item.name}</h1>
-            <p>Dataiku Project<span style={{ paddingLeft: '4px' }}>
-                <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
-                </a></span></p>
-
-            <div class="tags">{tags}</div>
-            <div style={{ paddingTop: '10px' }}>
-                <Tabs defaultActiveKey="datasets" className="mb-3" id='project-tabs'>
-                    <Tab eventKey="datasets" title="Datasets" def>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {dataSetRows}
-                            </tbody>
-                        </Table>
-                    </Tab>
-                </Tabs>
-            </div>
-        </Col>;
+            <Row>
+                <Col xs="auto">
+                    <div class="icon">
+                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                    </div>
+                </Col>
+                <Col>
+                    <h1>{this.props.item.name}</h1>
+                    <p>Dataiku Project<span style={{ paddingLeft: '4px' }}>
+                        <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
+                        </a></span></p>
+                </Col>
+            </Row>
+            <Row>
+                <div class="tags">{tags}</div>
+                <div style={{ paddingTop: '10px' }}>
+                    <Tabs defaultActiveKey="datasets" className="mb-3" id='project-tabs'>
+                        <Tab eventKey="datasets" title="Datasets" def>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {dataSetRows}
+                                </tbody>
+                            </Table>
+                        </Tab>
+                    </Tabs>
+                </div>
+            </Row>
+        </Col >;
     }
 
     render() {
