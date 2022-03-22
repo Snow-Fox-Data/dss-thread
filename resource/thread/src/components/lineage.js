@@ -188,7 +188,7 @@ class Lineage extends Component {
 
     onLoad(rv) {
         // TODO THIS ISN'T WORKING, THIS SHOULD BE FITTING THE CONTENT TO VIEW.
-        setTimeout(() => rv.fitView(), 0);
+        setTimeout(() => rv.fitView(), 1000);
     }
 
     render() {      
