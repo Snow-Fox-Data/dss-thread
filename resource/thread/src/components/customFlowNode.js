@@ -48,7 +48,7 @@ export default memo(({ data, isConnectable }) => {
         isConnectable={isConnectable}
       />
 
-      <div className='thread-node'>
+      <div>
         <div>
           <h6>{project}</h6>
         </div>
