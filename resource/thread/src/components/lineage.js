@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState } from 'react';
-import ReactFlow, { Controls } from 'react-flow-renderer';
+import ReactFlow, { Controls, useNodesState } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 
@@ -192,6 +192,10 @@ class Lineage extends Component {
         console.log('onInit() :: ');
     }
 
+    onNodesChange(rv) {
+        console.log('onInit() :: ');
+    }
+
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
@@ -210,6 +214,7 @@ class Lineage extends Component {
                     onInit={this.onInit}
                     elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
+                    onNodesChange={this.onNodesChange}
                     style={{ height: "100%", width: "100%" }}
                     fitView={true}
                 >
