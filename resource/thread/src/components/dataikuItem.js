@@ -353,10 +353,10 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <h1>{this.props.item.name}</h1>
+            <h1>{this.props.item.id}</h1>
             <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <div class="tags">{tags}</div>
-            
+
             <Row style={{ paddingTop: '20px' }}>
                 <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="lineage" title="Lineage">
