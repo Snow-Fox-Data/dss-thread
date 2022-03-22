@@ -17,7 +17,7 @@ export default memo(({ data, isConnectable }) => {
   console.log('customFlowNode :: data == ');
   console.log(data);
 
-  var base_splits = data.project.name.split(' | ');
+  var base_splits = data.project.split(' | ');
 
   console.log('base_splits == ');
   console.log(base_splits);
