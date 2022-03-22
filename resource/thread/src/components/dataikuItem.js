@@ -137,14 +137,14 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.item == null && this.props.item != null) {
-            if (this.props.item.object_type == 'column')
+        if (this.props.object_type == 'column') {
+            if (prevProps.item == null && this.props.item != null) {
                 this.resetSelectedDef();
-        }
-        else {
-            if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id !== this.props.item.id)
-                && this.props.item.object_type == 'column')
-                this.resetSelectedDef();
+            }
+            else {
+                if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id !== this.props.item.id))
+                    this.resetSelectedDef();
+            }
         }
     }
 
@@ -416,7 +416,7 @@ class DataikuItem extends Component {
         let tags = this.buildTagsString(this.props.item.tags);
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
-                <td class="cellLink" onClick={() => this.openDataset(col)}>{col}</td>
+                <td class="cellLink" onClick={() => this.openDataset(col)}>{col.split('|')[0]}</td>
             </tr>
         );
 
