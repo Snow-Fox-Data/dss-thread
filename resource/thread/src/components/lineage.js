@@ -187,8 +187,20 @@ class Lineage extends Component {
     }
 
     onLoad(rv) {
-        // TODO THIS ISN'T WORKING, THIS SHOULD BE FITTING THE CONTENT TO VIEW.
+        console.log('onLoad() :: ');
         setTimeout(() => rv.fitView(), 1000);
+    }
+
+    onConnect(rv) {
+        console.log('onConnect() :: ');
+    }
+
+    onEdgesChange(rv) {
+        console.log('onEdgesChange() :: ');
+    }
+
+    onNodesChange(rv) {
+        rv.fitView();
     }
 
     render() {      
@@ -208,9 +220,9 @@ class Lineage extends Component {
                     onLoad={this.onLoad} 
                     elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
-                    // onConnect={onConnect}
-                    // onEdgesChange={onEdgesChange}
-                    // onNodesChange={onNodesChange}
+                    onConnect={this.onConnect}
+                    onEdgesChange={this.onEdgesChange}
+                    onNodesChange={this.onNodesChange}
                     style={{ height: "100%", width: "100%" }}
                 >
                     <Controls showInteractive="false" />
