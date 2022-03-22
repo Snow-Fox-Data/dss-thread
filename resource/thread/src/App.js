@@ -211,7 +211,7 @@ class App extends Component {
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
         const filterBy = () => true;
 
-        this.dataikuItem = <DataikuItem item={selectedItem} type={selectedItemType} />;
+        this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
 
         return (
             <Container style={{paddingTop: '20px', paddingTop: '20px' }}>
