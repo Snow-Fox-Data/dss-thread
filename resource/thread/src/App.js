@@ -296,7 +296,6 @@ class App extends Component {
                     <Col>
                         <div class="title-row"><h1>Thread</h1></div></Col>
                     <Col style={{ textAlign: 'right', paddingTop: '16px', 'paddingRight': '16px' }}>
-                        <div>{ this.state.currentUser }</div>
                         <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                     </Col>
                 </Row>
@@ -337,27 +336,28 @@ class App extends Component {
 
                 {openFilter ?
                     <Row className="filter" style={{ marginTop: "0.5em" }}>
-                        {/* <Col xs={1}>
-                            <h5>Filter By: </h5>
-                        </Col> */}
-                        {Object.entries(filters).map(([key, value]) => {
-                            return (
-                                <Col xs={1}>
-                                    <div className="filter-types" key={key}>
-                                        <input
-                                            type="checkbox"
-                                            id={`filter-${key}`}
-                                            name={key}
-                                            value={key}
-                                            checked={value}
-                                            onChange={() => this.handleOnChange(key)}
-                                            style={{ marginRight: "5px" }}
-                                        />
-                                        <label htmlFor={`filter-${key}`}>{key}s</label>
-                                    </div>
-                                </Col>
-                            );
-                        })}
+                        <Col>
+                            {Object.entries(filters).map(([key, value]) => {
+                                return (
+                                    <Col xs={1}>
+                                        <div className="filter-types" key={key}>
+                                            <input
+                                                type="checkbox"
+                                                id={`filter-${key}`}
+                                                name={key}
+                                                value={key}
+                                                checked={value}
+                                                onChange={() => this.handleOnChange(key)}
+                                                style={{ marginRight: "5px" }}
+                                            />
+                                            <label htmlFor={`filter-${key}`}>{key}s</label>
+                                        </div>
+                                    </Col>
+                                );
+                            })}
+                        </Col>
+                        <Col style={{ textAlign: 'right' }}>
+                            <div>{this.state.currentUser}</div></Col>
                     </Row>
                     : null}
 
