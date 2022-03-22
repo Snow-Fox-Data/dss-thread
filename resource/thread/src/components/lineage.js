@@ -57,11 +57,11 @@ class Lineage extends Component {
         var baseElementId = 'base';
         var baseNode = {
             id: baseElementId,
-            className: 'BASE-THREAD',
+            className: 'thread-node-base',
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: basePositionX, y: basePositionY },
-            style: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: '2px', fontWeight: 'bold', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
+            style: {  height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
@@ -104,10 +104,11 @@ class Lineage extends Component {
 
             var elementId = 'down_' + x.toString();
             var node = {
-                id: elementId,                
+                id: elementId,
+                className: 'thread-node',
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
+                style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
                 position: { x: basePositionX, y: basePositionY },                     
@@ -145,9 +146,10 @@ class Lineage extends Component {
             var elementId = 'up_' + x.toString();
             var node ={
                 id: elementId,
+                className: 'thread-node',
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: { backgroundColor: '#FFF', height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
+                style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
                 position: { x: basePositionX, y: basePositionY },         
