@@ -65,7 +65,7 @@ class Lineage extends Component {
             draggable: false
         };
 
-        console.log('base-node :: base_splits[1].lenght == ' + base_splits[1].length);
+        // console.log('base-node :: base_splits[1].lenght == ' + base_splits[1].length);
 
         var elements = [baseNode];
         var _nodes = [baseNode];
