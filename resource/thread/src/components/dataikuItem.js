@@ -433,7 +433,7 @@ class DataikuItem extends Component {
         if (this.props.item != null) {
             item = <Row className="align-items-start">
                 <Col xs={1}>
-                    {Common.getIconForDataikuItemType(this.props.type, "100%")}
+                    {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
                 </Col>
                 {itemDetails}
             </Row>
