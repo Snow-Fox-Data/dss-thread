@@ -98,9 +98,9 @@ div.react-confirm-alert-overlay {
   border: solid 2px red;
   border-radius: 3px;
   font-weight: bold;
-  height: 100%;
+  height: auto;
   padding: 10px;
-  width: 100%
+  width: auto
 }
 
 .thread-node .thread-handle {
