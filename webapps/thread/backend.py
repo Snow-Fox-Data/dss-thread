@@ -73,6 +73,8 @@ def load_item():
     # load full info (including lineage) for project, dataset, column or definition
     args = request.args
     key = args.get('key')
+    key = key.replace(' | ', '|')
+
     dss = dss_utils()
 
     idx_ds = dss.get_index_ds()
