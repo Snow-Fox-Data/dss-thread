@@ -136,6 +136,12 @@ class DataikuItem extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.type == 'column') {
+            this.resetSelectedDef();
+        }
+    }
+
     newDef() {
         this.setState({ newDefModal: true });
     }
@@ -368,7 +374,7 @@ class DataikuItem extends Component {
                                 <tr>
                                     <th>Name</th>
                                     <th>Type</th>
-                                    <th>Description</th>
+                                    <th>Definition</th>
                                 </tr>
                             </thead>
                             <tbody>
