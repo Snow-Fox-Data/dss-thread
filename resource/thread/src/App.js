@@ -309,7 +309,7 @@ class App extends Component {
                                 </li> */}
                             </ul>
                             <ul class="navbar-nav">
-                                <li>
+                                <li style={{padding:'12px'}}>
                                     <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                                 </li>
                                 <li class="nav-item">
