@@ -79,17 +79,17 @@ def load_item():
     df = idx_ds.get_dataframe()
 
     res = df.query(f'key=="{key}"').iloc[0]
-    if res['type'] == 'dataset':
+    if res['object_type'] == 'dataset':
         ds = dss.load_dataset(key, 'none')
 
         return json.dumps(ds)
     else:
-        if res['type'] == 'project':
+        if res['object_type'] == 'project':
             p = dss.load_project(key)
 
             return json.dumps(p)
         else:
-            if res['type'] == 'column':
+            if res['object_type'] == 'column':
                 try:
                     df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                     result = df[df['applied_to'].str.contains(args.get('key'), case=False)].fillna('')
@@ -472,21 +472,21 @@ class dss_utils:
 
             index_list.append({
                 "name": project.get_summary()['name'],
-                "type": "project",
+                "object_type": "project",
                 "key": proj
             })
 
             for dataset in datasets:
                 index_list.append({
                     "name": dataset['name'],
-                    "type": "dataset",
+                    "object_type": "dataset",
                     "key": self.get_full_dataset_name(dataset['name'], proj)
                 })
 
                 for column in dataset['schema']['columns']:
                    index_list.append({
                      "name": column['name'],
-                     "type": "column",
+                     "object_type": "column",
                     "key": self.get_full_dataset_name(dataset['name'], proj) + ' | ' + column['name']
                      }) 
 

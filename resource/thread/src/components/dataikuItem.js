@@ -122,7 +122,7 @@ class DataikuItem extends Component {
     }
 
     renderItemDetailsByType() {
-        switch (this.props.type) {
+        switch (this.props.object_type) {
             case 'dataset':
                 return this.renderDataset();
             case 'project':
