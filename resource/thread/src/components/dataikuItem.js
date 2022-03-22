@@ -202,7 +202,6 @@ class DataikuItem extends Component {
             .then((response) => {
                 this.state.defSearchResults = response
             });
-
     }
 
     renderDefSearchMenuItem(option, props) {
@@ -214,7 +213,7 @@ class DataikuItem extends Component {
 
     selectDef = (item) => {
         this.setState({
-            selectDef: item
+            selectedDef: item
         })
     }
 
@@ -266,7 +265,7 @@ class DataikuItem extends Component {
                             </ButtonGroup>
                         </row>
                         {!this.state.newDefSelected &&
-                            <Row style={{ paddingTop: "6px" }}>
+                            <Row style={{ paddingTop: "10px" }}>
                                 <AsyncTypeahead
                                     // filterBy={filterBy}
                                     id="def-search"

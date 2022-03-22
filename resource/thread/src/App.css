@@ -1,6 +1,7 @@
 .app-link {
   text-decoration: 'underline';
-  color: blue;
+  /* color: blue; */
+  color: #3399f3;
   cursor: pointer;
 }
 
