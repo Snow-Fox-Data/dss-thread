@@ -183,6 +183,10 @@ class Lineage extends Component {
             .catch((err) => console.error(err));
     }
 
+    onChange(rv) {
+        console.log('onChange() :: ');
+    }
+
     onLoad(rv) {
         console.log('onLoad() :: ');
         setTimeout(() => rv.fitView(), 1000);
@@ -219,6 +223,7 @@ class Lineage extends Component {
                         // nodes={this.state.nodes}
                         nodeTypes={this.nodeTypes} 
                         onNodesChange={this.onNodesChange}
+                        onChange={this.onChange}
                         style={{ height: "100%", width: "100%" }}
                         fitView={true}
                     >
@@ -230,5 +235,7 @@ class Lineage extends Component {
         );        
     }
 }
+
+// const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
 
 export default Lineage;
