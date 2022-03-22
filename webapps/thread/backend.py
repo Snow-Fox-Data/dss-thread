@@ -10,6 +10,7 @@ import sentry_sdk
 import random
 from sentry_sdk import capture_exception
 from sentry_sdk import capture_message
+import re
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -94,7 +95,8 @@ def load_item():
             if res['object_type'] == 'column':
                 try:
                     df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-                    def_df = df[df['applied_to'].str.contains(args.get('key'), case=False)].fillna('')                    
+                    search_key = re.escape(key)
+                    def_df = df[df['applied_to'].str.contains(search_key, case=False)].fillna('')                    
                 except Exception as e:
                     print(e)
                     def_df = ''
