@@ -18,25 +18,16 @@ class DataikuItem extends Component {
     constructor(props) {
         super(props);
 
-        if (this.props.item != null && this.props.item.definition != null && this.props.definition.name != null) {
-            this.state = {
-                newDefModal: false,
-                selectedDef: {
-                    name: this.props.item.definition.name,
-                    description: this.props.item.definition.description,
-                    id: this.props.item.definition.id
-                },
-                newDefSelected: false,
-                defSearchResults: []
-            };
-        }
-        else {
-            this.state = {
-                newDefModal: false,
-                newDefSelected: true,
-                defSearchResults: []
-            };
-        }
+        this.state = {
+            newDefModal: false,
+            selectedDef: {
+                name: "New Definition",
+                description: "",
+                id: -1
+            },
+            newDefSelected: true,
+            defSearchResults: []
+        };
 
     }
 
@@ -246,6 +237,8 @@ class DataikuItem extends Component {
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
+
+        // this.resetSelectedDef()
 
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
