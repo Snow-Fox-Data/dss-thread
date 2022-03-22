@@ -132,6 +132,10 @@ class App extends Component {
 
     componentDidMount() {
         window.$(document).ready(() => {
+            window.addEventListener('locationchange', function () {
+                console.log('location changed!');
+            })
+
             this.setState({ dataiku: window.dataiku });
             this.setState({ rendered: true });
             this.setState({ loading: false });
