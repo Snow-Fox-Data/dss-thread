@@ -79,9 +79,9 @@ div.react-confirm-alert-overlay {
   background-color: #FFF;
   border: solid 1px #333;
   border-radius: 3px;
-  height: 100%;
+  height: auto;
   padding: 10px;
-  width: 100%
+  width: auto
 }
 
 .thread-node h6 {
