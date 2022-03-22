@@ -150,7 +150,7 @@ class App extends Component {
                 .then(res => res.json())
                 .then((response) => {
 
-                    this.setState({ dataiku: window.dataiku, currentUser: response['you-are'] });
+                    this.setState({ dataiku: window.dataiku, currentUser: response['you_are'] });
                     this.setState({ rendered: true });
                     this.setState({ loading: false });
 
