@@ -18,7 +18,7 @@ export default memo(({ data, isConnectable }) => {
   
     var base_splits = name.split(' | ');
   
-    console.log('base_splits == ');
+    console.log('base_splits :: length == ' + base_splits.length);
     console.log(base_splits);
 
     switch(base_splits.length) {
@@ -41,7 +41,7 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '|' + data.dataset);
   }
 
-  // formatData(data.project.name);
+  formatData(data.project.name);
 
   return (
     <>
