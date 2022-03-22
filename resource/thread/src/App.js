@@ -106,9 +106,6 @@ class App extends Component {
                         selectedItem: response,
                         selectedItemType: item[0].object_type
                     });
-
-                    // clear the search bar
-                    this.searchRef.clear()
                 });
         }
     }
@@ -135,29 +132,42 @@ class App extends Component {
 
     componentDidMount() {
         window.$(document).ready(() => {
+            this.searchRef = React.createRef();
             this.setState({ dataiku: window.dataiku });
             this.setState({ rendered: true });
             this.setState({ loading: false });
 
-            eventBus.on("datasetSelected", (ds) =>
+            eventBus.on("datasetSelected", (ds) => {
                 this.loadItem([{
                     key: ds,
                     object_type: 'dataset'
                 }])
+
+                // clear the search bar
+                this.searchRef.clear()
+            }
             );
 
-            eventBus.on("projectSelected", (proj) =>
+            eventBus.on("projectSelected", (proj) => {
                 this.loadItem([{
                     key: proj,
                     object_type: 'project'
                 }])
+
+                // clear the search bar
+                this.searchRef.clear()
+            }
             );
 
-            eventBus.on("columnSelected", (col) =>
+            eventBus.on("columnSelected", (col) => {
                 this.loadItem([{
                     key: col,
                     object_type: 'column'
                 }])
+
+                // clear the search bar
+                this.searchRef.clear()
+            }
             );
 
             eventBus.on("loading", (isLoading) =>
@@ -215,7 +225,6 @@ class App extends Component {
         const filterBy = () => true;
 
         this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
-        this.searchRef = React.createRef();
 
         return (
             <Container style={{ paddingTop: '20px', paddingTop: '20px' }}>
@@ -234,7 +243,8 @@ class App extends Component {
                                 id="async-search"
                                 delay={300}
                                 labelKey={option => {
-                                    return option.key.replaceAll('|', ' | ')}
+                                    return option.key.replaceAll('|', ' | ')
+                                }
                                 }
                                 ref={this.searchRef}
                                 minLength={3}
