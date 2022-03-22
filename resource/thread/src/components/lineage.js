@@ -9,8 +9,8 @@ class Lineage extends Component {
     static DEFAULT_CONTAINER_HEIGHT = 500;
     static DEFAULT_CONTAINER_WIDTH = 1030;
 
-    static DEFAULT_NODE_HEIGHT = 60;
-    static DEFAULT_NODE_WIDTH = 200;
+    static DEFAULT_NODE_HEIGHT = 75;
+    static DEFAULT_NODE_WIDTH = 250;
 
     constructor(props) {
         super(props);
