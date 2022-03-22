@@ -136,11 +136,11 @@ class DataikuItem extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.type == 'column') {
-            this.resetSelectedDef();
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.type == 'column') {
+    //         this.resetSelectedDef();
+    //     }
+    // }
 
     newDef() {
         this.setState({ newDefModal: true });
