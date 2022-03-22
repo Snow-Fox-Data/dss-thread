@@ -9,6 +9,10 @@
   left:0px;
 }
 
+.dataiku-item .tag-button {
+  padding-right: 6px;
+}
+
 .dataiku-item { 
   /* padding-top: 2.0em; */
 }
@@ -31,9 +35,8 @@
   margin-bottom: .2em;
 }
 
-.dataiku-item .tags span {
-  font-size: 1.2em;
-  margin-right: 1.0em;
+.dataiku-item .tags {
+  padding-top:5px;
 }
 
 .dataiku-item table {

@@ -189,7 +189,7 @@ class App extends Component {
         return <Fragment>
 
             <span style={{ paddingRight: '5px' }}>
-                {Common.getIconForDataikuItemType(option.object_type), '13px'}
+                {Common.getIconForDataikuItemType(option.object_type, '13px')}
             </span>
             {option.object_type == 'column' &&
                 <span>
@@ -200,6 +200,8 @@ class App extends Component {
 
                     <span style={{}}>Dataset:</span>
                     <span style={{ padding: '0px 4px' }}>{option.key.split('|')[1]}</span>
+
+                    <span style={{ padding: '0px 4px' }}>|</span>
 
                     <span>Column:</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
                 </span>
