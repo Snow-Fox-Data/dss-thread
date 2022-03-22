@@ -58,7 +58,7 @@ class App extends Component {
         var p_list = [];
         Object.keys(response).forEach(function (results) {
             var dataikuItem = response[results];
-            if (types.indexOf(dataikuItem.type.toString()) >= 0) {
+            if (types.indexOf(dataikuItem.object_type.toString()) >= 0) {
                 p_list[p_list.length] = dataikuItem;
 
             }
@@ -104,7 +104,7 @@ class App extends Component {
                     this.setState({
                         loading: false,
                         selectedItem: response,
-                        selectedItemType: item[0].type
+                        selectedItemType: item[0].object_type
                     });
                 });
         }
