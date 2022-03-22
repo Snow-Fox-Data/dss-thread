@@ -111,7 +111,9 @@ class DataikuItem extends Component {
         let tags = [];
 
         arrayTags.forEach(element => {
-            tags[tags.length] = <span>{element}</span>;
+            tags[tags.length] = <Button variant="primary" size="sm">
+                {element}
+            </Button>
         });
 
         return tags;

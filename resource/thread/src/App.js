@@ -188,20 +188,24 @@ class App extends Component {
     renderMenuItemChildren(option, props) {
         return <Fragment>
             {Common.getIconForDataikuItemType(option.object_type)}
-            {option.object_type == 'dataset' || option.object_type == 'column' &&
-                <span>
-                    <span style={{ padding: '3px' }}>[</span>
-                    <span>Project: {option.key.split('|')[0]}</span>
-                    <span style={{ padding: '3px' }}>]</span>
-                </span>
-            }
             {option.object_type == 'column' &&
                 <span>
-                    <span style={{ padding: '3px' }}>|</span>
-                    <span>Dataset: {option.key.split('|')[1]}</span>
+                    <span>Column</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
+                    <span style={{ padding: '3px' }}> in Dataset</span>
+                    <span>{option.key.split('|')[0]} | {option.key.split('|')[1]}</span>
                 </span>
             }
-            <span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.object_type}:</span><span>{option.name}</span>
+            {option.object_type == 'dataset' &&
+                <span>
+                    <span>Dataset</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
+                    <span>in Project: {option.key.split('|')[0]}</span>
+                </span>
+            }
+            {option.object_type == 'project' &&
+                <span>
+                    <span>Project</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
+                </span>
+            }
 
         </Fragment >;
     }
