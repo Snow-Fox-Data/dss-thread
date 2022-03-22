@@ -80,6 +80,7 @@ div.react-confirm-alert-overlay {
   border: solid 1px #333;
   border-radius: 3px;
   /* height: auto; */
+  overflow-x: hidden;
   padding: 10px;
   /* width: auto */
 }
@@ -99,6 +100,7 @@ div.react-confirm-alert-overlay {
   border-radius: 3px;
   font-weight: bold;
   /* height: auto; */
+  overflow-x: hidden;
   padding: 10px;
   /* width: auto */
 }
