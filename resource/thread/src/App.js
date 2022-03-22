@@ -175,7 +175,6 @@ class App extends Component {
     renderMenuItemChildren(option, props) {
         return <Fragment>
             {Common.getIconForDataikuItemType(option.object_type)}
-            <span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.object_type}:</span><span>{option.name}</span>
             {option.object_type == 'dataset' || option.object_type == 'column' &&
                 <span>
                     <span style={{ padding: '3px' }}>[</span>
@@ -183,6 +182,8 @@ class App extends Component {
                     <span style={{ padding: '3px' }}>]</span>
                 </span>
             }
+            <span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.object_type}:</span><span>{option.name}</span>
+
         </Fragment>;
     }
 
