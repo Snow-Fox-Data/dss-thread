@@ -12,11 +12,11 @@ export default memo(({ data, isConnectable }) => {
   console.log('customFlowNode :: data == ');
   console.log(data);
 
-  function formatData(name)  {
-    console.log('customFlowNode :: formatData() :: name == ');
-    console.log(name);
+  function formatData(project)  {
+    console.log('customFlowNode :: formatData() :: project == ');
+    console.log(project);
   
-    var base_splits = name.split(' | ');
+    var base_splits = project.split(' | ');
   
     console.log('base_splits :: length == ' + base_splits.length);
     console.log(base_splits);
@@ -41,7 +41,7 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '|' + data.dataset);
   }
 
-  formatData(data.project.name);
+  formatData(data.project);
 
   return (
     <>
