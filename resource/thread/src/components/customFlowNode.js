@@ -11,7 +11,7 @@ export default memo(({ data, isConnectable }) => {
 
   function selectDataset(e) {
     e.preventDefault();
-    eventBus.dispatch("datasetSelected", data.project + '.' + data.dataset);
+    eventBus.dispatch("datasetSelected", data.project + '|' + data.dataset);
   }
 
   console.log('customFlowNode :: data == ');
