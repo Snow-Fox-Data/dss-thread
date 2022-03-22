@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState } from 'react';
-import ReactFlow, { Controls, useNodesState, ReactFlowProvider } from 'react-flow-renderer';
+import ReactFlow, { Controls, ReactFlowProvider } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 
@@ -177,6 +177,8 @@ class Lineage extends Component {
             elements: elements,
             nodes: _nodes
         });
+
+        // useNodesState(_nodes);
 
         createGraphLayout(elements)
             .then((els) => this.setState({elements: els}))
