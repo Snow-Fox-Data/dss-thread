@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState } from 'react';
-import ReactFlow, { Controls, useNodesState } from 'react-flow-renderer';
+import ReactFlow, { Controls, useNodesState, ReactFlowProvider } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 
@@ -209,19 +209,23 @@ class Lineage extends Component {
         return (
             <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
                 {this.state.elements && 
-                <ReactFlow 
-                    onLoad={this.onLoad} 
-                    onInit={this.onInit}
-                    elements={this.state.elements}
-                    // edges={this.state.edges}
-                    // nodes={this.state.nodes}
-                    nodeTypes={this.nodeTypes} 
-                    onNodesChange={this.onNodesChange}
-                    style={{ height: "100%", width: "100%" }}
-                    fitView={true}
-                >
-                    <Controls showInteractive="false" />
-                </ReactFlow>}
+                <ReactFlowProvider>
+                    <div className="reactflow-wrapper">
+                    <ReactFlow 
+                        onLoad={this.onLoad} 
+                        onInit={this.onInit}
+                        elements={this.state.elements}
+                        // edges={this.state.edges}
+                        // nodes={this.state.nodes}
+                        nodeTypes={this.nodeTypes} 
+                        onNodesChange={this.onNodesChange}
+                        style={{ height: "100%", width: "100%" }}
+                        fitView={true}
+                    >
+                        <Controls showInteractive="false" />
+                    </ReactFlow>
+                    </div>
+              </ReactFlowProvider>}
             </div>
         );        
     }
