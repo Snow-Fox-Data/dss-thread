@@ -9,11 +9,8 @@ class Lineage extends Component {
     static DEFAULT_CONTAINER_HEIGHT = 500;
     static DEFAULT_CONTAINER_WIDTH = 1030;
 
-    // static DEFAULT_NODE_HEIGHT = 60;
-    // static DEFAULT_NODE_WIDTH = 200;
-
-    static DEFAULT_NODE_HEIGHT = "auto";
-    static DEFAULT_NODE_WIDTH = "auto";
+    static DEFAULT_NODE_HEIGHT = 60;
+    static DEFAULT_NODE_WIDTH = 200;
 
     constructor(props) {
         super(props);
@@ -64,7 +61,7 @@ class Lineage extends Component {
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: basePositionX, y: basePositionY },
-            style: {  height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
+            style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
