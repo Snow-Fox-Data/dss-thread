@@ -65,7 +65,7 @@ class Lineage extends Component {
             draggable: false
         };
 
-        // console.log('base-node :: base_splits[1].lenght == ' + base_splits[1].length);
+        // console.log('base-node :: base_splits[1].length == ' + base_splits[1].length);
 
         var elements = [baseNode];
         var _nodes = [baseNode];
@@ -188,34 +188,28 @@ class Lineage extends Component {
         setTimeout(() => rv.fitView(), 1000);
     }
 
-    onConnect(rv) {
-        console.log('onConnect() :: ');
-    }
-
-    onEdgesChange(rv) {
-        console.log('onEdgesChange() :: ');
-    }
-
-    onNodesChange(rv) {
-        rv.fitView();
+    onInit(rv) {
+        console.log('onInit() :: ');
     }
 
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
-        }        
+        }
+
+        // TODO onNodesChange isn't trigger when changing the screen.
+        // none of the event listens seem to trigger when changing view.
+        // need to trigger the fitview when changing over.
         
         return (
-            <div style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
+            <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
                 {this.state.elements && 
                 <ReactFlow 
                     onLoad={this.onLoad} 
+                    onInit={this.onInit}
                     elements={this.state.elements}
                     nodeTypes={this.nodeTypes} 
-                    onConnect={this.onConnect}
-                    onEdgesChange={this.onEdgesChange}
-                    onNodesChange={this.onNodesChange}
                     style={{ height: "100%", width: "100%" }}
                 >
                     <Controls showInteractive="false" />
