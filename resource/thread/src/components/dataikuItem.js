@@ -18,7 +18,7 @@ class DataikuItem extends Component {
     constructor(props) {
         super(props);
 
-        if (this.props.item.definition != null && this.props.definition.name != null) {
+        if (this.props.item != null && this.props.item.definition != null && this.props.definition.name != null) {
             this.state = {
                 newDefModal: false,
                 selectedDef: {
