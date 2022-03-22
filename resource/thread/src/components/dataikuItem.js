@@ -432,10 +432,10 @@ class DataikuItem extends Component {
                     <p>Dataiku Project<span style={{ paddingLeft: '4px' }}>
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
                         </a></span></p>
+                    <div class="tags">{tags}</div>
                 </Col>
             </Row>
             <Row>
-                <div class="tags">{tags}</div>
                 <div style={{ paddingTop: '10px' }}>
                     <Tabs defaultActiveKey="datasets" className="mb-3" id='project-tabs'>
                         <Tab eventKey="datasets" title="Datasets" def>

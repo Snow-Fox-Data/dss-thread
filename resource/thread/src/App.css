@@ -17,7 +17,8 @@
 }
 
 .dataiku-item .icon {
-  max-width: 100px;
+  max-width: 90px;
+  max-height: 90px;
 }
 
 .cellLink {
