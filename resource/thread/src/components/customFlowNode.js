@@ -13,7 +13,7 @@ export default memo(({ data, isConnectable }) => {
     console.log('customFlowNode :: formatData() :: _data == ');
     console.log(_data);
   
-    var project_splits = _data.split(' | ');
+    var project_splits = _data.project.split(' | ');
   
     console.log('project_splits :: length == ' + project_splits.length);
     console.log(project_splits);
