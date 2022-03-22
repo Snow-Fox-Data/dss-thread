@@ -90,24 +90,35 @@ class App extends Component {
     loadItem = (item) => {
         this.setState({ loading: true });
         if (item.length > 0) {
-            const requestOptions = {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            };
-
-            fetch(window.getWebAppBackendUrl('load-item') + '?key=' + item[0].key, requestOptions)
-                .then(res => res.json())
-                .then((response) => {
-                    console.log('response == ');
-                    console.log(response);
-
-                    this.setState({
-                        loading: false,
-                        selectedItem: response,
-                        selectedItemType: item[0].object_type
-                    });
-                });
+            this.loadItemByKey(item[0].key)
         }
+    }
+
+    loadItemByKey = (itemKey) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        let obj_type = 'project';
+        let splitCt = (itemKey.split(",").length - 1);
+        if (splitCt == 1)
+            obj_type = 'dataset';
+        else if (splitCt == 2)
+            obj_type = 'column'
+
+        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + itemKey, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                console.log('response == ');
+                console.log(response);
+
+                this.setState({
+                    loading: false,
+                    selectedItem: response,
+                    selectedItemType: obj_type
+                });
+            });
     }
 
     search = (term) => {
@@ -191,7 +202,7 @@ class App extends Component {
         let parts = window.top.location.href.split('#o=')
 
         if (parts.length > 1) {
-            this.loadItem(parts[1])
+            this.loadItemByKey(parts[1])
         }
     }
 
