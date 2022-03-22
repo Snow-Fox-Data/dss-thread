@@ -315,15 +315,17 @@ class DataikuItem extends Component {
                 </Modal.Footer>
             </Modal>
             <Row>
-                <Col xs={1}>
+                <Col xs="auto">
                     {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
                 </Col>
-                <h1>{this.props.item.name}</h1>
-                <p class="name">
-                    <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
-                    <span style={{ padding: "0px 3px" }}>|</span>
-                    <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
-                </p>
+                <Col>
+                    <h1>{this.props.item.name}</h1>
+                    <p class="name">
+                        <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
+                        <span style={{ padding: "0px 3px" }}>|</span>
+                        <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
+                    </p>
+                </Col>
             </Row>
             <div style={{ paddingTop: '10px' }}>
                 <Tabs defaultActiveKey="definition" className="mb-3">
