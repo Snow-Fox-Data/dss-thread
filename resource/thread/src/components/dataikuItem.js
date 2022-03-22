@@ -25,11 +25,11 @@ class DataikuItem extends Component {
                 description: "",
                 id: -1
             },
+            rendered: false,
             newDefSelected: true,
             defSearchResults: []
         };
 
-        this.resetSelectedDef()
     }
 
     flattenArray(elem, key, orig = []) {
@@ -238,6 +238,9 @@ class DataikuItem extends Component {
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
+
+        this.resetSelectedDef()
+        this.setState({ rendered: true })
 
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
