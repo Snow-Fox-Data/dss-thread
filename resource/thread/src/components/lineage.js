@@ -61,12 +61,14 @@ class Lineage extends Component {
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: basePositionX, y: basePositionY },
-            style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
-            // style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
+            // style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
+            style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
         };
+
+        console.log('base-node :: base_splits[1].lenght == ' + base_splits[1].length);
 
         var elements = [baseNode];
         var _nodes = [baseNode];
@@ -109,8 +111,8 @@ class Lineage extends Component {
                 className: 'thread-node',
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
-                // style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
+                // style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
+                style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
                 position: { x: basePositionX, y: basePositionY },                     
@@ -151,8 +153,8 @@ class Lineage extends Component {
                 className: 'thread-node',
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
-                // style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
+                // style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
+                style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
                 position: { x: basePositionX, y: basePositionY },         
