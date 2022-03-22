@@ -297,9 +297,10 @@ class DataikuItem extends Component {
                 </Modal.Footer>
             </Modal>
 
-            <h2>{this.props.item.name}</h2>
+            <h1>{this.props.item.name}</h1>
             <p class="name">
-                <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span> /
+                <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
+                <span style={{ padding: "0px 3px" }}>/</span>
                 <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span>
             </p>
             <div style={{ paddingTop: '10px' }}>
