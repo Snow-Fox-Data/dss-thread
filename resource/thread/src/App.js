@@ -290,9 +290,10 @@ class App extends Component {
         this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
 
         return (
-            <Container style={{ paddingTop: '20px', paddingTop: '20px' }}>
-                <Row class="title-row">
-                    <Col><h1>Thread</h1></Col>
+            <Container style={{ paddingTop: '10px' }}>
+                <Row>
+                    <Col>
+                        <div class="title-row"><h1>Thread</h1></div></Col>
                     <Col style={{ textAlign: 'right' }}>
                         <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                     </Col>
