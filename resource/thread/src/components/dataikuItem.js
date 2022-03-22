@@ -21,7 +21,9 @@ class DataikuItem extends Component {
         this.state = {
             newDefModal: false,
             selectedDef: {
-                id: null
+                name: this.props.item.definition.name,
+                description: this.props.item.definition.description,
+                id: this.props.item.definition.id
             },
             newDefSelected: true,
             defSearchResults: []
@@ -235,9 +237,6 @@ class DataikuItem extends Component {
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
-
-        if (this.state.selectedDef.id == null)
-            this.resetSelectedDef()
 
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>

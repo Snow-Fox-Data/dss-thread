@@ -9,18 +9,34 @@ export default memo(({ data, isConnectable }) => {
   var dataset = "";
   var column = "";
 
+  function formatData(name)  {
+    console.log('customFlowNode :: data == ');
+    console.log(data);
+  
+    var base_splits = name.split(' | ');
+  
+    console.log('base_splits == ');
+    console.log(base_splits);
+
+    switch(base_splits.length) {
+      case 1:
+        console.log('CASE 1');
+        break;
+      case 2:
+        console.log('CASE 2');
+        break;
+      default:
+        console.log('DEFAULT');
+        break;
+    }
+  }
+
   function selectDataset(e) {
     e.preventDefault();
     eventBus.dispatch("datasetSelected", data.project + '|' + data.dataset);
   }
 
-  console.log('customFlowNode :: data == ');
-  console.log(data);
-
-  var base_splits = data.project.split(' | ');
-
-  console.log('base_splits == ');
-  console.log(base_splits);
+  formatData(data.project.name);
 
   return (
     <>
