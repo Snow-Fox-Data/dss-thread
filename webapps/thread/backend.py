@@ -64,7 +64,7 @@ def search():
     df = idx_ds.get_dataframe()
 
     result = df[df['name'].str.contains(args.get('term'), case=False)]
-    df['key'] = df['key'].str.replace('|', ' | ')
+    result['key'] = result['key'].str.replace('|', ' | ')
 
     return result.to_json(orient="records")
 
