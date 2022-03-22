@@ -132,9 +132,7 @@ class App extends Component {
 
     componentDidMount() {
         window.$(document).ready(() => {
-            window.addEventListener('locationchange', function () {
-                console.log('location changed!');
-            })
+            this.navDeepLink();
 
             this.setState({ dataiku: window.dataiku });
             this.setState({ rendered: true });
@@ -182,11 +180,17 @@ class App extends Component {
         });
     }
 
-    navToObject(obj) {
+    navDeepLink() {
+        let parts = window.top.location.href.split('#o=')
 
+        if (parts.length > 1) {
+            alert(parts[1])
+        }
+    }
+
+    navToObject(obj) {
         let base_url = window.top.location.href.split('#')[0]
         window.top.location.href = base_url + "#o=" + obj
-
     }
 
     rescan() {
