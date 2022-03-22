@@ -9,37 +9,36 @@ export default memo(({ data, isConnectable }) => {
   var dataset = "";
   var column = "";
 
-  console.log('customFlowNode :: data == ');
-  console.log(data);
-
-  function formatData(_project)  {
-    console.log('customFlowNode :: formatData() :: _project == ');
-    console.log(_project);
+  function formatData(_data)  {
+    console.log('customFlowNode :: formatData() :: _data == ');
+    console.log(_data);
   
-    var base_splits = _project.split(' | ');
+    var project_splits = _data.split(' | ');
   
-    console.log('base_splits :: length == ' + base_splits.length);
-    console.log(base_splits);
+    console.log('project_splits :: length == ' + project_splits.length);
+    console.log(project_splits);
 
-    switch(base_splits.length) {
+    switch(project_splits.length) {
       case 1:
         console.log('CASE 1');
-        project = base_splits[0];
+        project = _data.project;
+        dataset = _data.dataset;
         break;
       case 2:
         console.log('CASE 2');
-        project = base_splits[0];
-        dataset = base_splits[1];
+        project = project_splits[0];
+        dataset = project_splits[1];
         break;
       case 3:
         console.log('CASE 3');
-        project = base_splits[0];
-        dataset = base_splits[1];
-        column = base_splits[2];
+        project = project_splits[0];
+        dataset = project_splits[1];
+        column = project_splits[2];
         break;
       default:
         console.log('DEFAULT');
-        project = _project;
+        project = _data.project;
+        dataset = _data.dataset;
         break;
     }
 
@@ -54,7 +53,7 @@ export default memo(({ data, isConnectable }) => {
     eventBus.dispatch("datasetSelected", data.project + '|' + data.dataset);
   }
 
-  formatData(data.project);
+  formatData(data);
 
   return (
     <>
@@ -65,13 +64,13 @@ export default memo(({ data, isConnectable }) => {
         isConnectable={isConnectable}
       />
       <div style={{ border: 'solid 1px #333', borderRadius: '3px', height: '100%', padding: '10px', textAlign: 'center', width: '100%' }}>
-        <div style={{ fontWeight: 'bold' }}>{data.project}</div>
+        <div style={{ fontWeight: 'bold' }}>{project}</div>
         <div>
           {/* <a href={Common.createDsLink2(data.project, data.dataset)} target="_blank">{data.dataset}</a> */}
-          <a href='javascript:void(0)' onClick={selectDataset}>{data.dataset}</a>
+          <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a>
         </div>
         <div>
-          {data.column}
+          {column}
         </div>
       </div>
 
