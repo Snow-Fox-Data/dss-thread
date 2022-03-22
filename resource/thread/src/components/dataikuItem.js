@@ -18,16 +18,25 @@ class DataikuItem extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            newDefModal: false,
-            selectedDef: {
-                name: this.props.item.definition.name,
-                description: this.props.item.definition.description,
-                id: this.props.item.definition.id
-            },
-            newDefSelected: true,
-            defSearchResults: []
-        };
+        if (this.props.item.definition != null && this.props.definition.name != null) {
+            this.state = {
+                newDefModal: false,
+                selectedDef: {
+                    name: this.props.item.definition.name,
+                    description: this.props.item.definition.description,
+                    id: this.props.item.definition.id
+                },
+                newDefSelected: false,
+                defSearchResults: []
+            };
+        }
+        else {
+            this.state = {
+                newDefModal: false,
+                newDefSelected: true,
+                defSearchResults: []
+            };
+        }
 
     }
 
