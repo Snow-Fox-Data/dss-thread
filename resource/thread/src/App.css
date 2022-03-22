@@ -16,6 +16,10 @@
   /* margin-right: 0.5em; */
 }
 
+.cellLink {
+  cursor: pointer;
+}
+
 .dataiku-item p {
   font-size: 1.2em;
   margin-bottom: .2em;

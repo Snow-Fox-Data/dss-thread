@@ -107,7 +107,7 @@ class DataikuItem extends Component {
     }
 
     buildTagsString(arrayTags) {
-        let tags = [<b>Tags: </b>];
+        let tags = [];
 
         arrayTags.forEach(element => {
             tags[tags.length] = <span>{element}</span>;
@@ -386,7 +386,7 @@ class DataikuItem extends Component {
         let tags = this.buildTagsString(this.props.item.tags);
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
-                <td onClick={() => this.openDataset(col)}>{col}</td>
+                <td class="cellLink" onClick={() => this.openDataset(col)}>{col}</td>
             </tr>
         );
 
