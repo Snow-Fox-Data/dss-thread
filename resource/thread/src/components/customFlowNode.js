@@ -34,7 +34,7 @@ export default memo(({ data, isConnectable }) => {
 
   function selectDataset(e) {
     e.preventDefault();
-    eventBus.dispatch("datasetSelected", data.project + '|' + data.dataset);
+    eventBus.dispatch("datasetSelected", project + '|' + dataset);
   }
 
   formatData(data);

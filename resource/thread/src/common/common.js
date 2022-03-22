@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
-function createDsLinkThread(proj, ds) {
-    return '/projects/' + proj + '/datasets/' + ds + '/explore/';
-}
-
-function createDsLinkTag(proj, ds) {
-    return '<a href="' + this.createDsLinkThread(proj, ds) + '" target="_blank">' + proj + '.' + ds + '</a>';
-}
-
 function createProjectLink(projkey) {
     return '/projects/' + projkey + '/flow/';
 }
 
 function createDatasetLink(projkey, ds) {
     return '/projects/' + projkey + '/datasets/' + ds + '/explore/';
+}
+
+function createDatasetLinkTag(proj, ds) {
+    return '<a href="' + this.createDatasetLink(proj, ds) + '" target="_blank">' + proj + '.' + ds + '</a>';
 }
 
 function getIconForDataikuItemType(type, size = "11px") {
@@ -35,7 +31,7 @@ function getIconForDataikuItemType(type, size = "11px") {
 const Common = {
     createDatasetLink,
     createProjectLink,
-    createDsLinkTag,
+    createDatasetLinkTag,
     getIconForDataikuItemType
 };
 
