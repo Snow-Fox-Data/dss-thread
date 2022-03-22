@@ -44,6 +44,7 @@ class App extends Component {
                 dataset: true,
                 project: true,
             },
+            currentUser: '',
             loading: true,
             openFilter: true,
             selectedItem: null,
@@ -149,7 +150,7 @@ class App extends Component {
                 .then(res => res.json())
                 .then((response) => {
 
-                    this.setState({ dataiku: window.dataiku });
+                    this.setState({ dataiku: window.dataiku, currentUser: response['you-are'] });
                     this.setState({ rendered: true });
                     this.setState({ loading: false });
 
@@ -294,7 +295,8 @@ class App extends Component {
                 <Row>
                     <Col>
                         <div class="title-row"><h1>Thread</h1></div></Col>
-                    <Col style={{ textAlign: 'right', paddingTop:'16px', 'paddingRight': '16px' }}>
+                    <Col style={{ textAlign: 'right', paddingTop: '16px', 'paddingRight': '16px' }}>
+                        <div>{ this.state.currentUser }</div>
                         <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                     </Col>
                 </Row>
