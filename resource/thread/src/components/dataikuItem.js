@@ -353,17 +353,10 @@ class DataikuItem extends Component {
         );
 
         return <Col>
-            <p class="name"><b>Name: </b>{this.props.item.name}
-                <span style={{ paddingLeft: '4px' }}>
-                    <a href={Common.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={20} />
-                    </a></span>
-            </p>
-            <p class="project"><b>Project: </b>
-                <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
-            <p class="name"><b>Type: </b>{this.props.type}</p>
-
+            <h1>{this.props.item.name}</h1>
+            <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
             <div class="tags">{tags}</div>
-
+            
             <Row style={{ paddingTop: '20px' }}>
                 <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="lineage" title="Lineage">
