@@ -147,7 +147,7 @@ class App extends Component {
                 }])
 
                 // clear the search bar
-                this.searchRef.clear()
+                // this.searchRef.clear()
             }
             );
 
@@ -158,7 +158,8 @@ class App extends Component {
                 }])
 
                 // clear the search bar
-                this.searchRef.clear()
+                // this.searchRef.clear()
+                window.top.location.href = "https://dataiku.excelion.io/projects/THREADDEMO/webapps/ROvQ0Y8_thread/view/#hello"
             }
             );
 
