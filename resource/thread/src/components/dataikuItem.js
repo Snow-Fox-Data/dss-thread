@@ -278,7 +278,7 @@ class DataikuItem extends Component {
                                         />
                                         <div style={{ height: "10px" }}></div>
                                         <Form.Label>Definition Description</Form.Label>
-                                        <Form.Control type="text" defaultValue={this.state.selectedDef.description}
+                                        <Form.Control as="textarea" rows="3" defaultValue={this.state.selectedDef.description}
                                             onChange={e => this.state.selectedDef.description = e.target.value}
                                         />
                                         <Form.Text className="text-muted">
@@ -301,7 +301,7 @@ class DataikuItem extends Component {
             <p class="name">
                 <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
                 <span style={{ padding: "0px 3px" }}>/</span>
-                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '.' + this.props.item.dataset)}>{this.props.item.dataset}</span>
+                <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
             </p>
             <div style={{ paddingTop: '10px' }}>
                 <Tabs defaultActiveKey="definition" className="mb-3">
