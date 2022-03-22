@@ -193,7 +193,7 @@ class Lineage extends Component {
     }
 
     onNodesChange(rv) {
-        console.log('onInit() :: ');
+        console.log('onNodesChange() :: ');
     }
 
     render() {
