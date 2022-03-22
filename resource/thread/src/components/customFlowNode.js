@@ -50,7 +50,7 @@ export default memo(({ data, isConnectable }) => {
 
       <div className='thread-node'>
         <div>
-          <h4>{project}</h4>
+          <h6>{project}</h6>
         </div>
         <div>
           <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a>
