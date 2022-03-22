@@ -15,6 +15,9 @@ class Lineage extends Component {
     constructor(props) {
         super(props);
 
+        console.log('Lineage :: props == ');
+        console.log(props);
+
         this.state = {
             elements: [],
             last_ds: '',

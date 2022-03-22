@@ -5,6 +5,10 @@ import { Handle } from 'react-flow-renderer';
 import Common from '../common/common';
 
 export default memo(({ data, isConnectable }) => {
+  var project = "";
+  var dataset = "";
+  var column = "";
+
   function selectDataset(e) {
     e.preventDefault();
     eventBus.dispatch("datasetSelected", data.project + '.' + data.dataset);
@@ -12,6 +16,11 @@ export default memo(({ data, isConnectable }) => {
 
   console.log('customFlowNode :: data == ');
   console.log(data);
+
+  var base_splits = data.project.name.split(' | ');
+
+  console.log('base_splits == ');
+  console.log(base_splits);
 
   return (
     <>

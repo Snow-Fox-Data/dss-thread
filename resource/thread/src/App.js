@@ -150,9 +150,9 @@ class App extends Component {
                 }])
             );
 
-            eventBus.on("columnSelected", (proj) =>
+            eventBus.on("columnSelected", (col) =>
                 this.loadItem([{
-                    key: proj,
+                    key: col,
                     type: 'column'
                 }])
             );
