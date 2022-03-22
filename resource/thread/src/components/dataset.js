@@ -179,7 +179,6 @@ class Dataset extends Component {
 
     closeColumn = () => {
         this.modalClosed();
-        // this.setState({ showA: true })
     }
 
     createColName(col) {
@@ -187,10 +186,6 @@ class Dataset extends Component {
     }
 
     formatLineage(lin) {
-        // for (var x = 0; x < lin.length; x++) {
-        //     lin[x] = this.createDsLinkFull(lin[x].split('.')[0], lin[x].split('.')[1])
-        // }
-
         if (lin != null)
             return lin.join(", ");
 

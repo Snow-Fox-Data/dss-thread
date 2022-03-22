@@ -9,43 +9,27 @@ export default memo(({ data, isConnectable }) => {
   var dataset = "";
   var column = "";
 
-  function formatData(_data)  {
-    console.log('customFlowNode :: formatData() :: _data == ');
-    console.log(_data);
-  
+  function formatData(_data)  {  
     var project_splits = _data.project.split(' | ');
-  
-    console.log('project_splits :: length == ' + project_splits.length);
-    console.log(project_splits);
-
     switch(project_splits.length) {
       case 1:
-        console.log('CASE 1');
         project = _data.project;
         dataset = _data.dataset;
         break;
       case 2:
-        console.log('CASE 2');
         project = project_splits[0];
         dataset = project_splits[1];
         break;
       case 3:
-        console.log('CASE 3');
         project = project_splits[0];
         dataset = project_splits[1];
         column = project_splits[2];
         break;
       default:
-        console.log('DEFAULT');
         project = _data.project;
         dataset = _data.dataset;
         break;
     }
-
-    console.log('customFlowNode :: formatData() :: wrap up ');
-    console.log('project == ' + project);
-    console.log('dataset == ' + dataset);
-    console.log('column == ' + column);
   }
 
   function selectDataset(e) {
