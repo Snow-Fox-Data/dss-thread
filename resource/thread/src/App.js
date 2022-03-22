@@ -101,7 +101,7 @@ class App extends Component {
         };
 
         let obj_type = 'project';
-        let splitCt = (itemKey.split(",").length - 1);
+        let splitCt = (itemKey.split("|").length - 1);
         if (splitCt == 1)
             obj_type = 'dataset';
         else if (splitCt == 2)
