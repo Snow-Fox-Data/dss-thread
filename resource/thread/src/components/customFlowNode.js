@@ -27,6 +27,7 @@ export default memo(({ data, isConnectable }) => {
         break;
       case 2:
         console.log('CASE 2');
+        break;
       case 3:
         console.log('CASE 3');
         break;
