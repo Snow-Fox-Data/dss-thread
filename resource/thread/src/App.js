@@ -195,9 +195,15 @@ class App extends Component {
                     <span style={{ padding: '3px' }}>]</span>
                 </span>
             }
+            {option.object_type == 'column' &&
+                <span>
+                    <span style={{ padding: '3px' }}>|</span>
+                    <span>Dataset: {option.key.split('|')[1]}</span>
+                </span>
+            }
             <span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.object_type}:</span><span>{option.name}</span>
 
-        </Fragment>;
+        </Fragment >;
     }
 
     toggleFilter() {

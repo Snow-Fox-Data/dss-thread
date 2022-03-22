@@ -261,8 +261,8 @@ class DataikuItem extends Component {
                     <Container>
                         <row>
                             <ButtonGroup>
-                                <Button onClick={() => this.toggleNew(true)} variant={this.state.newDefSelected ? "primary" : "secondary"}>New Definition</Button>
-                                <Button onClick={() => this.toggleNew(false)} variant={this.state.newDefSelected ? "secondary" : "primary"}>Existing Definition</Button>
+                                <Button onClick={() => this.toggleNew(true)} variant={this.state.newDefSelected ? "primary" : "secondary"}>Apply New Definition</Button>
+                                <Button onClick={() => this.toggleNew(false)} variant={this.state.newDefSelected ? "secondary" : "primary"}>Apply Existing Definition</Button>
                             </ButtonGroup>
                         </row>
                         {!this.state.newDefSelected &&
