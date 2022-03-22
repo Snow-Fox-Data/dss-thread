@@ -293,15 +293,20 @@ class App extends Component {
         return (
 
             <Container style={{ paddingTop: '10px' }}>
-                
-                <Row>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="#">
+                        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
+                        Thread
+                    </a>
+                </nav>
+                {/* <Row>
                     <Col>
                         <div class="title-row"><h1>Thread</h1></div></Col>
                     <Col style={{ textAlign: 'right', paddingTop: '16px', 'paddingRight': '16px' }}>
                         <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                         <div>{this.state.currentUser}</div>
                     </Col>
-                </Row>
+                </Row> */}
 
                 <Row>
                     <Col>
