@@ -281,7 +281,7 @@ class DataikuItem extends Component {
                                                     </div>
                                                 }
                                                 <Form.Label>Definition Name</Form.Label>
-                                                <Form.Control type="text" defaultValue={this.state.selectedDef.name}
+                                                <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
                                                 <div style={{ padding: "10px 0px" }}>
@@ -289,7 +289,7 @@ class DataikuItem extends Component {
                                                     <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.applied_to}></Form.Control>
                                                 </div>
                                                 <Form.Label>Definition Description</Form.Label>
-                                                <Form.Control as="textarea" rows="3" defaultValue={this.state.selectedDef.description}
+                                                <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
                                                 />
                                                 <Form.Text className="text-muted">
