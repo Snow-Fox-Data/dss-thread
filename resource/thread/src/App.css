@@ -96,7 +96,8 @@ div.react-confirm-alert-overlay {
 
 .thread-node p,
 .thread-node-base p {
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
+  font-size: 1.0em;
 }
 
 .thread-node-base {
