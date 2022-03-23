@@ -238,6 +238,7 @@ class DataikuItem extends Component {
             this.setState({
                 selectedDef: {
                     name: this.props.item.definition.name,
+                    applied_to: this.props.item.definition.applied_to,
                     description: this.props.item.definition.description,
                     id: this.props.item.definition.id
                 }
@@ -297,7 +298,7 @@ class DataikuItem extends Component {
                                             onChange={e => this.state.selectedDef.name = e.target.value}
                                         />
                                         <div style={{ padding: "10px 0px" }}>
-                                            <Form.Label>Definition Description</Form.Label>
+                                            <Form.Label>Applied To</Form.Label>
                                             <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.applied_to}></Form.Control>
                                         </div>
                                         <Form.Label>Definition Description</Form.Label>
