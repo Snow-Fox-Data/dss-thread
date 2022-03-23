@@ -22,6 +22,9 @@ class DataikuItem extends Component {
                 description: "",
                 id: -1
             },
+            tempSelDef: {
+
+            },
             newDefSelected: true,
             defSearchResults: []
         };
@@ -49,8 +52,8 @@ class DataikuItem extends Component {
             applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
 
         let val = '';
-        if (this.state.tempDef.description != null)
-            val = this.state.tempDef.description;
+        if (this.state.tempSelDef.description != null)
+            val = this.state.tempSelDef.description;
 
         const requestOptions = {
             method: 'POST',
@@ -59,10 +62,10 @@ class DataikuItem extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "name": this.state.tempDef.name,
+                "name": this.state.tempSelDef.name,
                 "description": val,
                 "applied_to": applyTo,
-                "id": this.state.selectedDef.id
+                "id": this.state.tempSelDef.id
             })
         }
 
@@ -199,7 +202,7 @@ class DataikuItem extends Component {
 
     selectDef = (item) => {
         this.setState({
-            selectedDef: item[0],
+            tempSelDef: item[0],
             newDefSelected: true
         })
     }
@@ -278,7 +281,7 @@ class DataikuItem extends Component {
                                                 }
                                                 <Form.Label>Definition Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.selectedDef.name}
-                                                    onChange={e => this.state.tempDef.name = e.target.value}
+                                                    onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
@@ -286,7 +289,7 @@ class DataikuItem extends Component {
                                                 </div>
                                                 <Form.Label>Definition Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.selectedDef.description}
-                                                    onChange={e => this.state.tempDef.description = e.target.value}
+                                                    onChange={e => this.state.tempSelDef.description = e.target.value}
                                                 />
                                                 <Form.Text className="text-muted">
                                                     Will appear in the Dataiku Dataset's column description.
