@@ -218,6 +218,10 @@ class Lineage extends Component {
         console.log('onNodesChange() :: ');
     }
 
+    onElementsRemove() {
+        console.log('onElementsRemove() :: ');
+    }
+
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
@@ -240,6 +244,7 @@ class Lineage extends Component {
                         // edges={this.state.edges}
                         // nodes={this.state.nodes}
                         nodeTypes={this.nodeTypes} 
+                        onElementsRemove={this.onElementsRemove}
                         onNodesChange={this.onNodesChange}
                         onChange={this.onChange}
                         style={{ height: "100%", width: "100%" }}
