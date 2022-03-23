@@ -296,7 +296,10 @@ class DataikuItem extends Component {
                                         <Form.Control type="text" defaultValue={this.state.selectedDef.name}
                                             onChange={e => this.state.selectedDef.name = e.target.value}
                                         />
-                                        <div style={{ height: "10px" }}></div>
+                                        <div style={{ padding: "10px 0px" }}>
+                                            <Form.Label>Definition Description</Form.Label>
+                                            <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.applied_to}></Form.Control>
+                                        </div>
                                         <Form.Label>Definition Description</Form.Label>
                                         <Form.Control as="textarea" rows="3" defaultValue={this.state.selectedDef.description}
                                             onChange={e => this.state.selectedDef.description = e.target.value}
@@ -430,9 +433,9 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.name}<span style={{paddingLeft:"6px", paddingBottom:"2px"}}>
+                    <h1>{this.props.item.name}<span style={{ paddingLeft: "6px", paddingBottom: "2px" }}>
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
-                        </span>
+                    </span>
                     </h1>
                     <p>Project<span style={{ paddingLeft: '4px' }}>
                         in {this.props.item.folder} folder</span></p>
