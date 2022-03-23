@@ -128,7 +128,7 @@ class Lineage extends Component {
             console.log('down_res == ');
             console.log(down_res);
 
-            if (down_res[x].count >= 0) {
+            if (down_res[x].count > 0) {
                 edge.label = '[' + down_res[x].count + ']';
                 edge.animated = true;
             }
@@ -174,7 +174,7 @@ class Lineage extends Component {
             console.log('up_res == ');
             console.log(up_res);
 
-            if (up_res[x].count >= 0) {
+            if (up_res[x].count > 0) {
                 edge.animated = true;
                 edge.label = '[' + up_res[x].count + ']';
             }
