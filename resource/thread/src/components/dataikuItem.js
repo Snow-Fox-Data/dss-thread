@@ -264,61 +264,64 @@ class DataikuItem extends Component {
                 <Modal.Body>
                     <Container>
                         <Row>
-                            <ButtonGroup style={{ float: "right" }}>
-                                <Button onClick={() => this.toggleNew(true)} >New Definition</Button>
-                                <Button onClick={() => this.toggleNew(false)}>Apply Definition</Button>
-                            </ButtonGroup>
-                            {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
-                                
-                        </Row>
-                        {!this.state.newDefSelected &&
-                            <Row style={{ paddingTop: "10px" }}>
-                                <AsyncTypeahead
-                                    // filterBy={filterBy}
-                                    id="def-search"
-                                    delay={300}
-                                    labelKey="search_def"
-                                    minLength={3}
-                                    onChange={this.selectDef}
-                                    onSearch={this.defSearch}
-                                    options={defSearchResults}
-                                    placeholder='Search'
-                                    renderMenuItemChildren={this.renderDefSearchMenuItem}
-                                    style={{ width: "97.5%" }}
-                                />
+                            <Col>
+                                {!this.state.newDefSelected &&
+                                    <div>
+                                        <AsyncTypeahead
+                                            // filterBy={filterBy}
+                                            id="def-search"
+                                            delay={300}
+                                            labelKey="search_def"
+                                            minLength={3}
+                                            onChange={this.selectDef}
+                                            onSearch={this.defSearch}
+                                            options={defSearchResults}
+                                            placeholder='Search'
+                                            renderMenuItemChildren={this.renderDefSearchMenuItem}
+                                            style={{ width: "97.5%" }}
+                                        />
 
-                                <div style={{ paddingTop: "10px" }}>
-                                    <Definition definition={this.state.selectedDef}></Definition>
-                                </div>
-                            </Row>
-                        }
-                        {this.state.newDefSelected &&
-                            <Row>
-                                <Form style={{ paddingTop: '10px' }}>
-                                    <Form.Group className="mb-3">
-                                        <div style={{ padding: "10px 0px" }}>
-                                            <Form.Label>Definition ID</Form.Label>
-                                            <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
+                                        <div style={{ paddingTop: "10px" }}>
+                                            <Definition definition={this.state.selectedDef}></Definition>
                                         </div>
-                                        <Form.Label>Definition Name</Form.Label>
-                                        <Form.Control type="text" defaultValue={this.state.selectedDef.name}
-                                            onChange={e => this.state.selectedDef.name = e.target.value}
-                                        />
-                                        <div style={{ padding: "10px 0px" }}>
-                                            <Form.Label>Applied To</Form.Label>
-                                            <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.applied_to}></Form.Control>
-                                        </div>
-                                        <Form.Label>Definition Description</Form.Label>
-                                        <Form.Control as="textarea" rows="3" defaultValue={this.state.selectedDef.description}
-                                            onChange={e => this.state.selectedDef.description = e.target.value}
-                                        />
-                                        <Form.Text className="text-muted">
-                                            Will appear in the Dataiku Dataset's column description.
-                                        </Form.Text>
-                                    </Form.Group>
-                                </Form>
-                            </Row>
-                        }
+                                    </div>
+                                }
+                                {this.state.newDefSelected &&
+                                    <div>
+                                        <Form style={{ paddingTop: '10px' }}>
+                                            <Form.Group className="mb-3">
+                                                <div style={{ padding: "10px 0px" }}>
+                                                    <Form.Label>Definition ID</Form.Label>
+                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
+                                                </div>
+                                                <Form.Label>Definition Name</Form.Label>
+                                                <Form.Control type="text" defaultValue={this.state.selectedDef.name}
+                                                    onChange={e => this.state.selectedDef.name = e.target.value}
+                                                />
+                                                <div style={{ padding: "10px 0px" }}>
+                                                    <Form.Label>Applied To</Form.Label>
+                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.applied_to}></Form.Control>
+                                                </div>
+                                                <Form.Label>Definition Description</Form.Label>
+                                                <Form.Control as="textarea" rows="3" defaultValue={this.state.selectedDef.description}
+                                                    onChange={e => this.state.selectedDef.description = e.target.value}
+                                                />
+                                                <Form.Text className="text-muted">
+                                                    Will appear in the Dataiku Dataset's column description.
+                                                </Form.Text>
+                                            </Form.Group>
+                                        </Form>
+                                    </div>
+                                }
+                            </Col>
+                            <Col ms-auto>
+                                {/* <ButtonGroup style={{ float: "right" }}> */}
+                                <Button onClick={() => this.toggleNew(true)}>New Definition</Button>
+                                <Button onClick={() => this.toggleNew(false)}>Apply Definition</Button>
+                                {/* </ButtonGroup> */}
+                                {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
+                            </Col>
+                        </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
