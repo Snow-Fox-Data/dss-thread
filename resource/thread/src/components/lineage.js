@@ -124,6 +124,10 @@ class Lineage extends Component {
 
             var edgeId = 'edge_down_' + x.toString();
             var edge = { id: edgeId, source: baseElementId, target: elementId, arrowHeadType: 'arrow' };
+
+            console.log('down_res == ');
+            console.log(down_res);
+
             if (down_res[x].count > 0) {
                 edge.label = '[' + down_res[x].count + ']';
                 edge.animated = true;
@@ -166,6 +170,10 @@ class Lineage extends Component {
 
             var edgeId = 'edge_up_' + x.toString();
             var edge = { id: edgeId, source: elementId, target: baseElementId, arrowHeadType: 'arrow' };
+
+            console.log('up_res == ');
+            console.log(up_res);
+
             if (up_res[x].count > 0) {
                 edge.animated = true;
                 edge.label = '[' + up_res[x].count + ']';
