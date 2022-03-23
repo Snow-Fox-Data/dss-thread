@@ -358,9 +358,6 @@ class DataikuItem extends Component {
             <Row>
                 <div style={{ paddingTop: '10px' }}>
                     <Tabs defaultActiveKey="definition" className="mb-3">
-                        <Tab eventKey="lineage" title="Lineage" def>
-                            <div class="lineage">{lineage}</div>
-                        </Tab>
                         <Tab eventKey="definition" title="Definition" def>
                             {
                                 this.props.item.definition.id == -1 &&
@@ -381,7 +378,10 @@ class DataikuItem extends Component {
                                     </div>
                                 </div>
                             }
-                        </Tab>                        
+                        </Tab>
+                        <Tab eventKey="lineage" title="Lineage" def>
+                            <div class="lineage">{lineage}</div>
+                        </Tab>
                     </Tabs>
                 </div>
             </Row>
