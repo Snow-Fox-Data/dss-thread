@@ -259,16 +259,19 @@ class DataikuItem extends Component {
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Definition: {this.state.selectedDef.name}</Modal.Title>
+                    <Modal.Title>Apply Definition</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <row>
-                            <ButtonGroup>
-                                <Button onClick={() => this.toggleNew(true)} variant={this.state.newDefSelected ? "primary" : "secondary"}>Apply New Definition</Button>
-                                <Button onClick={() => this.toggleNew(false)} variant={this.state.newDefSelected ? "secondary" : "primary"}>Apply Existing Definition</Button>
+                        <Row>
+                            <ButtonGroup style={{ float: "right" }}>
+                                {this.state.newDefSelected &
+                                    // variant={this.state.newDefSelected ? "primary" : "secondary"}
+                                    <Button onClick={() => this.toggleNew(true)} >New Definition</Button>
+                                }
+                                <Button onClick={() => this.toggleNew(false)}>Apply Definition</Button>
                             </ButtonGroup>
-                        </row>
+                        </Row>
                         {!this.state.newDefSelected &&
                             <Row style={{ paddingTop: "10px" }}>
                                 <AsyncTypeahead
@@ -294,6 +297,10 @@ class DataikuItem extends Component {
                             <Row>
                                 <Form style={{ paddingTop: '10px' }}>
                                     <Form.Group className="mb-3">
+                                        <div style={{ padding: "10px 0px" }}>
+                                            <Form.Label>Definition ID</Form.Label>
+                                            <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
+                                        </div>
                                         <Form.Label>Definition Name</Form.Label>
                                         <Form.Control type="text" defaultValue={this.state.selectedDef.name}
                                             onChange={e => this.state.selectedDef.name = e.target.value}
