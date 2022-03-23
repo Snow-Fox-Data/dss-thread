@@ -11,9 +11,6 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-
 class DataikuItem extends Component {
     constructor(props) {
         super(props);
@@ -51,54 +48,39 @@ class DataikuItem extends Component {
         if (applyDown)
             applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
 
-        confirmAlert({
-            title: 'Confirm Save',
-            message: 'Are you sure to apply this definition to ' + applyTo,
-            buttons: [
-                {
-                    label: 'Apply',
-                    onClick: () => {
-                        let val = '';
-                        if (this.state.selectedDef.description != null)
-                            val = this.state.selectedDef.description;
+        let val = '';
+        if (this.state.selectedDef.description != null)
+            val = this.state.selectedDef.description;
 
-                        const requestOptions = {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                "name": this.state.selectedDef.name,
-                                "description": val,
-                                "applied_to": applyTo,
-                                "id": this.state.selectedDef.id
-                            })
-                        }
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "name": this.state.selectedDef.name,
+                "description": val,
+                "applied_to": applyTo,
+                "id": this.state.selectedDef.id
+            })
+        }
 
-                        eventBus.dispatch("loading", true);
+        eventBus.dispatch("loading", true);
 
-                        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
-                            .then(res => res.json())
-                            .then(
-                                (result) => {
-                                    this.props.item.definition = result.value;
+        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.props.item.definition = result.value;
 
-                                    this.setState({
-                                        newDefModal: false,
-                                        selectedDef: result.value
-                                    });
+                    this.setState({
+                        newDefModal: false,
+                        selectedDef: result.value
+                    });
 
-                                    eventBus.dispatch("loading", false);
-                                });
-                    }
-                },
-                {
-                    label: 'Cancel',
-                    onClick: () => { }
-                }
-            ]
-        });
+                    eventBus.dispatch("loading", false);
+                });
     };
 
     buildLineage() {
@@ -290,10 +272,12 @@ class DataikuItem extends Component {
                                     <div>
                                         <Form style={{ paddingTop: '10px' }}>
                                             <Form.Group className="mb-3">
-                                                <div style={{ padding: "10px 0px" }}>
-                                                    <Form.Label>Definition ID</Form.Label>
-                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
-                                                </div>
+                                                {this.state.selectedDef.id > -1 &
+                                                    <div style={{ padding: "10px 0px" }}>
+                                                        <Form.Label>Definition ID</Form.Label>
+                                                        <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
+                                                    </div>
+                                                }
                                                 <Form.Label>Definition Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.selectedDef.name}
                                                     onChange={e => this.state.selectedDef.name = e.target.value}
@@ -320,16 +304,16 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     {/* onClick={() => this.saveColLineage()} */}
-                    <Col>
+                    <Col style={{ textAlign: "left" }}>
                         {/* <ButtonGroup style={{ float: "right" }}> */}
-                        <Button variant="dark" onClick={() => this.toggleNew(true)}>New Definition</Button>
-                        <Button variant="dark" onClick={() => this.toggleNew(false)}>Apply Definition</Button>
+                        <Button variant="dark" onClick={() => this.toggleNew(true)}>New</Button>
+                        <Button variant="dark" onClick={() => this.toggleNew(false)}>Search</Button>
                         {/* </ButtonGroup> */}
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Button variant="secondary" onClick={() => this.saveCol(true, true)}>Save all Lineage</Button>
-                        <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
+                        <Button variant="secondary" onClick={() => this.saveCol(true, true)}>Apply to Lineage</Button>
+                        <Button variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
                     </Col>
                 </Modal.Footer>
             </Modal>
