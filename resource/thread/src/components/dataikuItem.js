@@ -264,12 +264,13 @@ class DataikuItem extends Component {
 
     renderColumn() {
         const filterBy = () => true;
-        const { defSearchResults, lineage } = this.state;
+        const { defSearchResults } = this.state;
 
-        this.setState({
-            lineage: this.buildLineage()
-        });
-        
+        // this.setState({
+        //     lineage: this.buildLineage()
+        // });
+
+        let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
         // this.resetSelectedDef()
