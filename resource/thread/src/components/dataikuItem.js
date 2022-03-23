@@ -314,20 +314,23 @@ class DataikuItem extends Component {
                                     </div>
                                 }
                             </Col>
-                            <Col ms-auto>
-                                {/* <ButtonGroup style={{ float: "right" }}> */}
-                                <Button onClick={() => this.toggleNew(true)}>New Definition</Button>
-                                <Button onClick={() => this.toggleNew(false)}>Apply Definition</Button>
-                                {/* </ButtonGroup> */}
-                                {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
-                            </Col>
+
                         </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
                     {/* onClick={() => this.saveColLineage()} */}
-                    <Button variant="secondary" onClick={() => this.saveCol(true, true)}>Save all Lineage</Button>
-                    <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
+                    <Col>
+                        {/* <ButtonGroup style={{ float: "right" }}> */}
+                        <Button variant="dark" onClick={() => this.toggleNew(true)}>New Definition</Button>
+                        <Button variant="dark" onClick={() => this.toggleNew(false)}>Apply Definition</Button>
+                        {/* </ButtonGroup> */}
+                        {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
+                    </Col>
+                    <Col ms-auto>
+                        <Button variant="secondary" onClick={() => this.saveCol(true, true)}>Save all Lineage</Button>
+                        <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
+                    </Col>
                 </Modal.Footer>
             </Modal>
             <Row>
