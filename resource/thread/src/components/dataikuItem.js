@@ -379,7 +379,8 @@ class DataikuItem extends Component {
                                 </div>
                             }
                         </Tab>
-                        <Tab eventKey="lineage" title="Lineage" def>
+                        <Tab eventKey="lineage" title="Lineage" def
+                            forceRender>
                             <div class="lineage">{lineage}</div>
                         </Tab>
                     </Tabs>
