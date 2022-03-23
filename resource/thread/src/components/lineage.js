@@ -181,19 +181,25 @@ class Lineage extends Component {
             nodes: _nodes
         });
 
-        // useNodesState(_nodes);
-
         createGraphLayout(elements)
             .then((els) => this.setState({elements: els}))
             .catch((err) => console.error(err));
 
-        if(this.state.flowInstance != null) {
-            console.log("this.state.flowInstance == ");
-            console.log(this.state.flowInstance);
-            // this.state.flowInstance.fitView();
-        }
+        // if(this.state.flowInstance != null) {
+        //     console.log("this.state.flowInstance == ");
+        //     console.log(this.state.flowInstance);
+        //     // this.state.flowInstance.fitView();
+        // }
         // setTimeout(() => {
-            
+        //     var myBtn = document.getElementsByClassName("click-button");
+        //     myBtn.trigger('click');
+
+        //     // var alertNow = function() {
+        //     //     alert("hello world");
+        //     // };
+        //     // for (var i = 0; i < myBtn.length; i++) {
+        //     //     myBtn[i].addEventListener("click", alertNow, false);
+        //     // }
         // }, 1000);
         // react-flow__controls-fitview
     }
@@ -216,6 +222,11 @@ class Lineage extends Component {
         console.log(elements);
     }
 
+    onFitView(rv) {
+        console.log('onFitView() :: rv == ');
+        console.log(rv);
+    }
+
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
@@ -232,6 +243,7 @@ class Lineage extends Component {
                 <ReactFlowProvider>
                     <ReactFlow 
                         onLoad={this.onLoad} 
+                        onFitView={this.onFitView}
                         elements={this.state.elements}
                         onElementsRemove={this.onElementsRemove}
                         nodeTypes={this.nodeTypes} 
