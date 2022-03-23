@@ -184,35 +184,11 @@ class Lineage extends Component {
         createGraphLayout(elements)
             .then((els) => this.setState({elements: els}))
             .catch((err) => console.error(err));
-
-        // if(this.state.flowInstance != null) {
-        //     console.log("this.state.flowInstance == ");
-        //     console.log(this.state.flowInstance);
-        //     // this.state.flowInstance.fitView();
-        // }
-        // setTimeout(() => {
-        //     var myBtn = document.getElementsByClassName("click-button");
-        //     myBtn.trigger('click');
-
-        //     // var alertNow = function() {
-        //     //     alert("hello world");
-        //     // };
-        //     // for (var i = 0; i < myBtn.length; i++) {
-        //     //     myBtn[i].addEventListener("click", alertNow, false);
-        //     // }
-        // }, 1000);
-        // react-flow__controls-fitview
     }
 
     onLoad(rv) {
         console.log('onLoad() :: rv == ');
         console.log(rv);
-
-        // this.reactFlowInstance = rv;
-        
-        // this.setState({
-        //     flowInstance: rv
-        // });
 
         setTimeout(() => rv.fitView(), 1000);
     }
@@ -236,17 +212,9 @@ class Lineage extends Component {
         // TODO onNodesChange isn't trigger when changing the screen.
         // none of the event listens seem to trigger when changing view.
         // need to trigger the fitview when changing over.
-        // const elements = useStoreState((state) => state.elements);
-        // const setElements = useStoreActions((actions) => actions.setElements);
-
-        // const elements = useStoreState((state) => {
-        //     console.log("useStoreState() :: state ==  ");
-        //     console.log(state);
-        // });
-        // const setElements = useStoreActions((actions) => {
-        //     console.log("useStoreState() :: actions ==  ");
-        //     console.log(actions);
-        // });
+ 
+        console.log('render() :: state == ');
+        console.log(this.state);
         
         return (
             <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
