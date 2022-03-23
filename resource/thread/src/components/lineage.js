@@ -26,6 +26,8 @@ class Lineage extends Component {
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
+
+        this.reactFlowInstance = null;
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -199,6 +201,8 @@ class Lineage extends Component {
     onLoad(rv) {
         console.log('onLoad() :: rv == ');
         console.log(rv);
+
+        this.reactFlowInstance = rv;
         
         // this.setState({
         //     flowInstance: rv
