@@ -199,7 +199,8 @@ class DataikuItem extends Component {
 
     selectDef = (item) => {
         this.setState({
-            selectedDef: item
+            selectedDef: item,
+            newDefSelected: true
         })
     }
 
@@ -262,10 +263,6 @@ class DataikuItem extends Component {
                                             renderMenuItemChildren={this.renderDefSearchMenuItem}
                                             style={{ width: "97.5%" }}
                                         />
-
-                                        <div style={{ paddingTop: "10px" }}>
-                                            <Definition definition={this.state.selectedDef}></Definition>
-                                        </div>
                                     </div>
                                 }
                                 {this.state.newDefSelected &&
