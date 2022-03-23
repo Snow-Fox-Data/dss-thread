@@ -253,6 +253,13 @@ class DataikuItem extends Component {
         }
     }
 
+    refreshLineage() { 
+        let lineageData = this.props.item;
+        this.setState({
+            item: lineageData
+        });
+    }
+
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
@@ -380,7 +387,7 @@ class DataikuItem extends Component {
                             }
                         </Tab>
                         <Tab eventKey="lineage" title="Lineage" def
-                            forceRender>
+                            onSelect={this.refreshLineage}>
                             <div class="lineage">{lineage}</div>
                         </Tab>
                     </Tabs>
