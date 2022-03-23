@@ -19,7 +19,8 @@ class Lineage extends Component {
             elements: [],
             last_ds: '',
             nodes: [],
-            edges: []
+            edges: [],
+            flowInstance: null,
         };
 
         this.nodeTypes = {
@@ -184,9 +185,14 @@ class Lineage extends Component {
             .then((els) => this.setState({elements: els}))
             .catch((err) => console.error(err));
 
-        setTimeout(() => {
-            // document.
-        }, 1000);
+        if(this.state.flowInstance != null) {
+            console.log("this.state.flowInstance == ");
+            console.log(this.state.flowInstance);
+            // this.state.flowInstance.fitView();
+        }
+        // setTimeout(() => {
+            
+        // }, 1000);
         // react-flow__controls-fitview
     }
 
@@ -196,6 +202,10 @@ class Lineage extends Component {
 
     onLoad(rv) {
         console.log('onLoad() :: ');
+        this.setState({
+            flowInstance: rv
+        });
+
         setTimeout(() => rv.fitView(), 1000);
     }
 
