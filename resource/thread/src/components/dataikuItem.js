@@ -169,7 +169,8 @@ class DataikuItem extends Component {
                 selectedDef: {
                     name: this.props.item.definition.name,
                     description: this.props.item.definition.description,
-                    id: this.props.item.definition.id
+                    id: this.props.item.definition.id,
+                    applied_to: this.props.item.definition.applied_to,
                 }
             })
         }
