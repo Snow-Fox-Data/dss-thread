@@ -273,7 +273,7 @@ class DataikuItem extends Component {
                                             onChange={this.selectDef}
                                             onSearch={this.defSearch}
                                             options={defSearchResults}
-                                            placeholder='Search'
+                                            placeholder='Search for existing Definition'
                                             renderMenuItemChildren={this.renderDefSearchMenuItem}
                                             style={{ width: "97.5%" }}
                                         />
@@ -323,8 +323,8 @@ class DataikuItem extends Component {
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Button variant="secondary" onClick={() => this.saveCol(true, true)}>Apply to Lineage</Button>
-                        <Button variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
+                        <Button disabled={!this.state.newDefSelected} variant="secondary" onClick={() => this.saveCol(true, true)}>Apply to Lineage</Button>
+                        <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
                     </Col>
                 </Modal.Footer>
             </Modal>
