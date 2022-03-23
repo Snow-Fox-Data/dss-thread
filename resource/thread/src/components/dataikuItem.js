@@ -199,7 +199,7 @@ class DataikuItem extends Component {
 
     selectDef = (item) => {
         this.setState({
-            selectedDef: item,
+            selectedDef: item[0],
             newDefSelected: true
         })
     }
@@ -269,7 +269,7 @@ class DataikuItem extends Component {
                                     <div>
                                         <Form style={{ paddingTop: '10px' }}>
                                             <Form.Group className="mb-3">
-                                                {this.state.selectedDef.id > -1 &
+                                                {this.state.selectedDef.id > -1 &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Definition ID</Form.Label>
                                                         <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
