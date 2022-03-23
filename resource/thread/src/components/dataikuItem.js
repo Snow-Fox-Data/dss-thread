@@ -126,7 +126,7 @@ class DataikuItem extends Component {
                 this.resetSelectedDef();
             }
             else {
-                if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id !== this.props.item.id))
+                if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id))
                     this.resetSelectedDef();
             }
         }
@@ -290,7 +290,7 @@ class DataikuItem extends Component {
                                                         <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
                                                     </div>
                                                 }
-                                                {this.state.selectedDef.id > -1 &&
+                                                {this.state.selectedDef.id == -1 &&
                                                  <div style={{fontWeight:"bold"}}>New Defintion</div>
                                                 }
                                                 <Form.Label>Definition Name</Form.Label>
