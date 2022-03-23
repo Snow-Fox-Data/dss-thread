@@ -133,7 +133,14 @@ class DataikuItem extends Component {
     }
 
     newDef() {
-        this.setState({ newDefModal: true });
+        this.setState({
+            newDefModal: true,
+            tempSelDef: {
+                description: this.props.comment,
+                name: this.props.item.name,
+                id: -1
+            }
+        });
     }
 
     resetSelectedDef() {
