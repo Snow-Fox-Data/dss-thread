@@ -287,7 +287,7 @@ class DataikuItem extends Component {
                                                 {this.state.selectedDef.id > -1 &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Definition ID</Form.Label>
-                                                        <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
+                                                        <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
                                                     </div>
                                                 }
                                                 {this.state.selectedDef.id == -1 &&
@@ -299,7 +299,7 @@ class DataikuItem extends Component {
                                                 />
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
-                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.applied_to}></Form.Control>
+                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.applied_to}></Form.Control>
                                                 </div>
                                                 <Form.Label>Definition Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
@@ -327,7 +327,7 @@ class DataikuItem extends Component {
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Button disabled={!this.state.newDefSelected} variant="secondary" onClick={() => this.saveCol(true, true)}>Apply to Lineage</Button>
+                        <Button disabled="true" variant="secondary" onClick={() => this.saveCol(true, true)}>Apply to Lineage</Button>
                         <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
                     </Col>
                 </Modal.Footer>
