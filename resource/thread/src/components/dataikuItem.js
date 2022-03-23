@@ -164,6 +164,15 @@ class DataikuItem extends Component {
 
     editDef() {
         this.resetSelectedDef();
+
+        this.setState({
+            tempSelDef: {
+                name: this.props.item.definition.name,
+                description: this.props.item.definition.description,
+                id: this.props.item.definition.id,
+                applied_to: this.props.item.definition.applied_to
+            }
+        })
         this.setState({ newDefModal: true });
     }
 
