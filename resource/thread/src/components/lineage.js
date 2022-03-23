@@ -230,12 +230,12 @@ class Lineage extends Component {
                 <ReactFlowProvider>
                     <ReactFlow 
                         onLoad={this.onLoad} 
-                        onFitView={this.onFitView}
+                        // onFitView={this.onFitView}
                         elements={this.state.elements}
-                        onElementsRemove={this.onElementsRemove}
+                        // onElementsRemove={this.onElementsRemove}
                         nodeTypes={this.nodeTypes} 
                         style={{ height: "100%", width: "100%" }}
-                        fitView
+                        // fitView
                     >
                         <Controls showInteractive="false" />
                     </ReactFlow>
