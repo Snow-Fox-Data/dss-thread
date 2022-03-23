@@ -430,9 +430,9 @@ class DataikuItem extends Component {
                 </Col>
                 <Col>
                     <h1>{this.props.item.name}</h1>
-                    <p>Dataiku Project<span style={{ paddingLeft: '4px' }}>
+                    <p>Project<span style={{ paddingLeft: '4px' }}>
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={20} />
-                        </a></span></p>
+                        </a> in {this.props.item.folder} folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
             </Row>
