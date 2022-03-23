@@ -237,6 +237,9 @@ class dss_utils:
 
         # get the project's folder
         folder = proj.get_project_folder().name
+        if len(folder) == 0:
+            folder = 'root'
+            
         p['folder'] = folder
 
         p['datasets'] = []
