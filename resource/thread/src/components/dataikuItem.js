@@ -18,12 +18,9 @@ class DataikuItem extends Component {
         this.state = {
             newDefModal: false,
             selectedDef: {
-                name: "New Definition",
-                description: "",
                 id: -1
             },
             tempSelDef: {
-
             },
             newDefSelected: true,
             defSearchResults: []
@@ -124,7 +121,6 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
         if (this.props.object_type == 'column') {
             if (prevProps.item == null && this.props.item != null) {
                 this.resetSelectedDef();
@@ -293,6 +289,9 @@ class DataikuItem extends Component {
                                                         <Form.Label>Definition ID</Form.Label>
                                                         <Form.Control disabled="true" type="text" defaultValue={this.state.selectedDef.id}></Form.Control>
                                                     </div>
+                                                }
+                                                {this.state.selectedDef.id > -1 &&
+                                                 <div style={{fontWeight:"bold"}}>New Defintion</div>
                                                 }
                                                 <Form.Label>Definition Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
