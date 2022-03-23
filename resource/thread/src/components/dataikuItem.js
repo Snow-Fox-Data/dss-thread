@@ -16,6 +16,7 @@ class DataikuItem extends Component {
         super(props);
 
         this.state = {
+            lineage: null,
             newDefModal: false,
             selectedDef: {
                 id: -1
@@ -254,17 +255,18 @@ class DataikuItem extends Component {
     }
 
     refreshLineage() { 
-        let lineageData = this.props.item;
+        console.log('refreshLineage() :: ');
+        let lineageData = this.state.lineage;
         this.setState({
-            item: lineageData
+            lineage: lineageData
         });
     }
 
     renderColumn() {
         const filterBy = () => true;
-        const { defSearchResults } = this.state;
+        const { defSearchResults, lineage } = this.state;
 
-        let lineage = this.buildLineage();
+        lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
         // this.resetSelectedDef()
