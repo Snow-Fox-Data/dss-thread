@@ -176,6 +176,7 @@ class DataikuItem extends Component {
     }
 
     editDef() {
+        this.resetSelectedDef();
         this.setState({ newDefModal: true });
     }
 
@@ -429,7 +430,7 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.name}<span style={{paddingLeft:"4px"}}>
+                    <h1>{this.props.item.name}<span style={{paddingLeft:"6px", paddingBottom:"2px"}}>
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
                         </span>
                     </h1>
