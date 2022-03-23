@@ -16,6 +16,7 @@ class DataikuItem extends Component {
         super(props);
 
         this.state = {
+            lineage: null,
             newDefModal: false,
             selectedDef: {
                 id: -1
@@ -251,9 +252,21 @@ class DataikuItem extends Component {
         }
     }
 
+    refreshLineage() { 
+        console.log('refreshLineage() :: ');
+        let lineageData = this.state.lineage;
+        this.setState({
+            lineage: lineageData
+        });
+    }
+
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
+
+        // this.setState({
+        //     lineage: this.buildLineage()
+        // });
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
@@ -355,7 +368,7 @@ class DataikuItem extends Component {
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>
-                    <Tabs defaultActiveKey="lineage" className="mb-3">
+                    <Tabs defaultActiveKey="definition" className="mb-3" destroyInactiveTabPane>
                         <Tab eventKey="definition" title="Definition" def>
                             {
                                 this.props.item.definition.id == -1 &&
@@ -377,7 +390,8 @@ class DataikuItem extends Component {
                                 </div>
                             }
                         </Tab>
-                        <Tab eventKey="lineage" title="Lineage" def>
+                        <Tab eventKey="lineage" title="Lineage" def
+                            onSelect={this.refreshLineage}>
                             <div class="lineage">{lineage}</div>
                         </Tab>
                     </Tabs>
