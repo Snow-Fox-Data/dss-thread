@@ -276,15 +276,15 @@ class DataikuItem extends Component {
                                         <AsyncTypeahead
                                             // filterBy={filterBy}
                                             id="def-search"
-                                            delay={300}
-                                            labelKey="search_def"
+                                            labelKey="name"
+                                            filterBy={['name', 'description']}
+                                            caseSensitive="false"
                                             minLength={3}
                                             onChange={this.selectDef}
                                             onSearch={this.defSearch}
                                             options={defSearchResults}
                                             placeholder='Search for existing Definition'
                                             renderMenuItemChildren={this.renderDefSearchMenuItem}
-                                            style={{ width: "97.5%" }}
                                         />
                                     </div>
                                 }
@@ -299,9 +299,9 @@ class DataikuItem extends Component {
                                                     </div>
                                                 }
                                                 {this.state.selectedDef.id == -1 &&
-                                                    <div style={{ fontWeight: "bold" }}>New Defintion</div>
+                                                    <h3>New Defintion</h3>
                                                 }
-                                                <Form.Label>Definition Name</Form.Label>
+                                                <Form.Label>Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
@@ -309,7 +309,7 @@ class DataikuItem extends Component {
                                                     <Form.Label>Applied To</Form.Label>
                                                     <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.applied_to}></Form.Control>
                                                 </div>
-                                                <Form.Label>Definition Description</Form.Label>
+                                                <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
                                                 />
