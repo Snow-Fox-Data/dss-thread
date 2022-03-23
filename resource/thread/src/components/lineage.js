@@ -184,7 +184,10 @@ class Lineage extends Component {
             .then((els) => this.setState({elements: els}))
             .catch((err) => console.error(err));
 
-        // setTimeout(() => rv.fitView(), 1000);
+        setTimeout(() => {
+            // document.
+        }, 1000);
+        // react-flow__controls-fitview
     }
 
     onChange(rv) {
