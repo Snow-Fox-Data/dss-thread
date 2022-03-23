@@ -202,9 +202,9 @@ class Lineage extends Component {
 
     onLoad(rv) {
         console.log('onLoad() :: ');
-        this.setState({
-            flowInstance: rv
-        });
+        // this.setState({
+        //     flowInstance: rv
+        // });
 
         setTimeout(() => rv.fitView(), 1000);
     }
