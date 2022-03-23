@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState } from 'react';
-import ReactFlow, { Controls, ReactFlowProvider, ReactFlowProps } from 'react-flow-renderer';
+import ReactFlow, { Controls, ReactFlowProvider, onElementsRemove } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 
@@ -196,30 +196,20 @@ class Lineage extends Component {
         // react-flow__controls-fitview
     }
 
-    onChange() {
-        console.log('onChange() :: ');
-    }
-
     onLoad(rv) {
         console.log('onLoad() :: rv == ');
         console.log(rv);
-        // this.setState({
-        //     flowInstance: rv
-        // });
+        
+        this.setState({
+            flowInstance: rv
+        });
 
         setTimeout(() => rv.fitView(), 1000);
     }
 
-    onInit() {
-        console.log('onInit() :: ');
-    }
-
-    onNodesChange() {
-        console.log('onNodesChange() :: ');
-    }
-
-    onElementsRemove() {
-        console.log('onElementsRemove() :: ');
+    onElementsRemove(elements) {
+        console.log('onElementsRemove() :: elements == ');
+        console.log(elements);
     }
 
     render() {
@@ -236,29 +226,20 @@ class Lineage extends Component {
             <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
                 {this.state.elements && 
                 <ReactFlowProvider>
-                    <div className="reactflow-wrapper">
                     <ReactFlow 
                         onLoad={this.onLoad} 
-                        onInit={this.onInit}
                         elements={this.state.elements}
-                        // edges={this.state.edges}
-                        // nodes={this.state.nodes}
-                        nodeTypes={this.nodeTypes} 
                         onElementsRemove={this.onElementsRemove}
-                        onNodesChange={this.onNodesChange}
-                        onChange={this.onChange}
+                        nodeTypes={this.nodeTypes} 
                         style={{ height: "100%", width: "100%" }}
                         fitView
                     >
                         <Controls showInteractive="false" />
                     </ReactFlow>
-                    </div>
-              </ReactFlowProvider>}
+                </ReactFlowProvider>}
             </div>
         );        
     }
 }
-
-// const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
 
 export default Lineage;
