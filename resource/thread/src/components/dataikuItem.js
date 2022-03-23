@@ -265,12 +265,11 @@ class DataikuItem extends Component {
                     <Container>
                         <Row>
                             <ButtonGroup style={{ float: "right" }}>
-                                {this.state.newDefSelected &
-                                    // variant={this.state.newDefSelected ? "primary" : "secondary"}
-                                    <Button onClick={() => this.toggleNew(true)} >New Definition</Button>
-                                }
+                                <Button onClick={() => this.toggleNew(true)} >New Definition</Button>
                                 <Button onClick={() => this.toggleNew(false)}>Apply Definition</Button>
                             </ButtonGroup>
+                            {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
+                                
                         </Row>
                         {!this.state.newDefSelected &&
                             <Row style={{ paddingTop: "10px" }}>
