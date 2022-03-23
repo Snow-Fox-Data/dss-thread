@@ -239,14 +239,14 @@ class Lineage extends Component {
         // const elements = useStoreState((state) => state.elements);
         // const setElements = useStoreActions((actions) => actions.setElements);
 
-        const elements = useStoreState((state) => {
-            console.log("useStoreState() :: state ==  ");
-            console.log(state);
-        });
-        const setElements = useStoreActions((actions) => {
-            console.log("useStoreState() :: actions ==  ");
-            console.log(actions);
-        });
+        // const elements = useStoreState((state) => {
+        //     console.log("useStoreState() :: state ==  ");
+        //     console.log(state);
+        // });
+        // const setElements = useStoreActions((actions) => {
+        //     console.log("useStoreState() :: actions ==  ");
+        //     console.log(actions);
+        // });
         
         return (
             <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
