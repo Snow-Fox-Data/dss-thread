@@ -124,7 +124,7 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        let s = '';
+
         if (this.props.object_type == 'column') {
             if (prevProps.item == null && this.props.item != null) {
                 this.resetSelectedDef();
@@ -141,6 +141,11 @@ class DataikuItem extends Component {
     }
 
     resetSelectedDef() {
+        this.setState({
+            tempSelDef: {
+            }
+        })
+
         if (this.props.item.definition.id == -1) {
             this.setState({
                 selectedDef: {
