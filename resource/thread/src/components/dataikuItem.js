@@ -139,6 +139,7 @@ class DataikuItem extends Component {
     resetSelectedDef() {
         this.setState({
             tempSelDef: {
+                id: -1
             }
         })
 
@@ -291,7 +292,7 @@ class DataikuItem extends Component {
                                                     </div>
                                                 }
                                                 {this.state.selectedDef.id == -1 &&
-                                                 <div style={{fontWeight:"bold"}}>New Defintion</div>
+                                                    <div style={{ fontWeight: "bold" }}>New Defintion</div>
                                                 }
                                                 <Form.Label>Definition Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
