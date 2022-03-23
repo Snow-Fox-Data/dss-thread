@@ -229,10 +229,15 @@ class dss_utils:
         return ds2
 
     def load_project(self, key):
-        p = self.client.get_project(key).get_summary()
+        proj = self.client.get_project(key)
+        p = proj.get_summary()
 
         ds = dataiku.Dataset(THREAD_DATASETS_NAME)
         datasets = ds.get_dataframe().query(f'project=="{key}"')
+
+        # get the project's folder
+        folder = proj.get_project_folder().name
+        p['folder'] = folder
 
         p['datasets'] = []
         for idx, row in datasets.iterrows():
