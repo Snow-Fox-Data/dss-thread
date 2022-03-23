@@ -202,7 +202,7 @@ class Lineage extends Component {
         console.log('onLoad() :: rv == ');
         console.log(rv);
 
-        this.reactFlowInstance = rv;
+        // this.reactFlowInstance = rv;
         
         // this.setState({
         //     flowInstance: rv
