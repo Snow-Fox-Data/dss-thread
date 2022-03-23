@@ -2,9 +2,6 @@ import Elk from "elkjs";
 import { isNode } from "react-flow-renderer";
 import Lineage from "../components/lineage";
 
-// const DEFAULT_NODE_WIDTH = 200;
-// const DEFAULT_NODE_HEIGHT = 60;
-
 export const createGraphLayout = async (elements) => {
   const nodes = [];
   const edges = [];

@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState } from 'react';
-import ReactFlow, { Controls, ReactFlowProvider } from 'react-flow-renderer';
+import ReactFlow, { Controls, ReactFlowProvider, ReactFlowProps } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 
@@ -183,6 +183,8 @@ class Lineage extends Component {
         createGraphLayout(elements)
             .then((els) => this.setState({elements: els}))
             .catch((err) => console.error(err));
+
+        // setTimeout(() => rv.fitView(), 1000);
     }
 
     onChange(rv) {
