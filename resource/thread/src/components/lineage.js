@@ -196,12 +196,13 @@ class Lineage extends Component {
         // react-flow__controls-fitview
     }
 
-    onChange(rv) {
+    onChange() {
         console.log('onChange() :: ');
     }
 
     onLoad(rv) {
-        console.log('onLoad() :: ');
+        console.log('onLoad() :: rv == ');
+        console.log(rv);
         // this.setState({
         //     flowInstance: rv
         // });
@@ -209,11 +210,11 @@ class Lineage extends Component {
         setTimeout(() => rv.fitView(), 1000);
     }
 
-    onInit(rv) {
+    onInit() {
         console.log('onInit() :: ');
     }
 
-    onNodesChange(rv) {
+    onNodesChange() {
         console.log('onNodesChange() :: ');
     }
 
@@ -242,7 +243,7 @@ class Lineage extends Component {
                         onNodesChange={this.onNodesChange}
                         onChange={this.onChange}
                         style={{ height: "100%", width: "100%" }}
-                        fitView={true}
+                        fitView
                     >
                         <Controls showInteractive="false" />
                     </ReactFlow>
