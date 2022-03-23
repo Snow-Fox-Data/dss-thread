@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState } from 'react';
-import ReactFlow, { Controls, ReactFlowProvider, onElementsRemove } from 'react-flow-renderer';
+import ReactFlow, { Controls, ReactFlowProvider, useStoreState, useStoreActions } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 
@@ -236,6 +236,17 @@ class Lineage extends Component {
         // TODO onNodesChange isn't trigger when changing the screen.
         // none of the event listens seem to trigger when changing view.
         // need to trigger the fitview when changing over.
+        // const elements = useStoreState((state) => state.elements);
+        // const setElements = useStoreActions((actions) => actions.setElements);
+
+        const elements = useStoreState((state) => {
+            console.log("useStoreState() :: state ==  ");
+            console.log(state);
+        });
+        const setElements = useStoreActions((actions) => {
+            console.log("useStoreState() :: actions ==  ");
+            console.log(actions);
+        });
         
         return (
             <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
