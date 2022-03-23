@@ -49,8 +49,8 @@ class DataikuItem extends Component {
             applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
 
         let val = '';
-        if (this.state.selectedDef.description != null)
-            val = this.state.selectedDef.description;
+        if (this.state.tempDef.description != null)
+            val = this.state.tempDef.description;
 
         const requestOptions = {
             method: 'POST',
@@ -59,7 +59,7 @@ class DataikuItem extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "name": this.state.selectedDef.name,
+                "name": this.state.tempDef.name,
                 "description": val,
                 "applied_to": applyTo,
                 "id": this.state.selectedDef.id
@@ -214,6 +214,7 @@ class DataikuItem extends Component {
                 selectedDef: {
                     name: this.props.item.name,
                     description: this.props.item.comment,
+                    applied_to: [this.props.item.key],
                     id: -1
                 }
             })
@@ -277,7 +278,7 @@ class DataikuItem extends Component {
                                                 }
                                                 <Form.Label>Definition Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.selectedDef.name}
-                                                    onChange={e => this.state.selectedDef.name = e.target.value}
+                                                    onChange={e => this.state.tempDef.name = e.target.value}
                                                 />
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
@@ -285,7 +286,7 @@ class DataikuItem extends Component {
                                                 </div>
                                                 <Form.Label>Definition Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.selectedDef.description}
-                                                    onChange={e => this.state.selectedDef.description = e.target.value}
+                                                    onChange={e => this.state.tempDef.description = e.target.value}
                                                 />
                                                 <Form.Text className="text-muted">
                                                     Will appear in the Dataiku Dataset's column description.
