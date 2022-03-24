@@ -211,6 +211,18 @@ class Lineage extends Component {
         console.log(rv);
     }
 
+    componentDidMount() {
+        console.log('componentDidMount() :: ');
+        // this._unsubscribe = navigation.addListener('focus', () => {
+        //   //Your refresh code gets here
+        // });
+    }
+    
+      componentWillUnmount() {
+        console.log('componentWillUnmount() :: ');
+        // this._unsubscribe();
+    }
+
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
