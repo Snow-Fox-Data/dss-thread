@@ -149,6 +149,7 @@ def update_desc():
 
     # remove all old definitions for these new columns
     for a in data['applied_to']:
+        print(f'resetting {a}')
         df = dss.reset_col_definition(df, a)
 
     # print(desc_id, exists)
@@ -296,7 +297,7 @@ class dss_utils:
         return res
 
     def reset_col_definition(self, df, col_name):
-        df['applied_to'] = df['applied_to'].replace({f"['{col_name}'],": ''}).replace({f"['{col_name}']": ''})  
+        df['applied_to'] = df['applied_to'].replace({f'["{col_name}"\'],': ''}).replace({f'["{col_name}"]': ''})  
 
         return df
 
