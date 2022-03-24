@@ -22,6 +22,8 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
+            ref: null, // this is breaking
+            isVisible: null
             // ref: useRef(null), // this is breaking
             // isVisible: Common.useOnScreen(this.ref)
         };
@@ -220,6 +222,11 @@ class Lineage extends Component {
     componentDidMount() {
         console.log('componentDidMount() :: state == ');
         console.log(this.state);
+
+        this.setState({
+            ref: useRef(null),
+            isVisible: Common.useOnScreen(this.ref)
+        });
 
         // this._unsubscribe = navigation.addListener('focus', () => {
         //   //Your refresh code gets here
