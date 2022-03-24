@@ -322,7 +322,7 @@ class DataikuItem extends Component {
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
-                                                {this.state.tempSelDef.applied_to.length > 0 &&
+                                                {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Applied To</Form.Label>
                                                         <div>
