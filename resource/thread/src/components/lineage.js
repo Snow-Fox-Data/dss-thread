@@ -32,8 +32,8 @@ class Lineage extends Component {
 
         this.reactFlowInstance = null;
 
-        const ref = useRef();
-        const isVisible = Common.useOnScreen(ref);
+        // const ref = useRef(); // also breaking
+        // const isVisible = Common.useOnScreen(ref);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
