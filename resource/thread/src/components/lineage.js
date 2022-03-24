@@ -32,7 +32,7 @@ class Lineage extends Component {
 
         // THIS EXAMPLE WORKS, BUT USE STATE IN useOnScreen is failing
         const ref = React.createRef();
-        // const isVisible = Common.useOnScreen(ref);
+        const isVisible = Common.useOnScreen(ref);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
