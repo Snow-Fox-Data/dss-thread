@@ -68,7 +68,8 @@ const Common = {
     createProjectLink,
     createDatasetLinkTag,
     getIconForDataikuItemType,
-    useOnScreen
+    useOnScreen,
+    useIntersection
 };
 
 export default Common;
