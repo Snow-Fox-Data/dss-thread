@@ -144,13 +144,11 @@ def update_desc():
     
     data = request.json
     desc_id = int(data['id'])
-    # print(data['applied_to'])
+    col_key = int(data['column_key'])
     applied_to_json = json.dumps(data['applied_to'])
 
-    # remove all old definitions for these new columns
-    for a in data['applied_to']:
-        print(f'resetting {a}')
-        df = dss.reset_col_definition(df, a)
+    # remove old definition for this colimn
+    df = dss.reset_col_definition(df, col_key)
 
     # print(desc_id, exists)
     if desc_id == -1:

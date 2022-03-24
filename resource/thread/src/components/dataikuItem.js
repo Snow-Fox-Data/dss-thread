@@ -63,7 +63,8 @@ class DataikuItem extends Component {
                 "name": this.state.tempSelDef.name,
                 "description": val,
                 "applied_to": applyTo,
-                "id": this.state.tempSelDef.id
+                "id": this.state.tempSelDef.id,
+                "column_key": this.props.item.key
             })
         }
 
