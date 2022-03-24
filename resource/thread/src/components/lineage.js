@@ -222,7 +222,7 @@ class Lineage extends Component {
         console.log('componentDidMount() :: state == ');
         console.log(this.state);
 
-        this.isVisible = Common.useOnScreen(this.ref);
+        // this.isVisible = Common.useOnScreen(this.ref);
 
         // this.setState({
         //     ref: useRef(null),
