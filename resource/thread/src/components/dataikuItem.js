@@ -277,8 +277,6 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
 
-        // this.resetSelectedDef()
-
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -368,7 +366,8 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.name}</h1>
+                    <h1>{this.props.item.name}<
+                        a href={Common.createDatasetLink(this.props.item.key)} target="_blank"><ArrowUpRightSquare size={22} /></a></h1>
                     <p class="name">
                         <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
                         <span style={{ padding: "0px 3px" }}>|</span>
