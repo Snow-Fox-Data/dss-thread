@@ -11,25 +11,25 @@ class Definition extends Component {
 
     render() {
         return (<Card style={{ width: '18rem' }}>
+            <Card.Header>Definition</Card.Header>
             <Card.Body>
                 <Card.Title>{this.props.definition.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Definition</Card.Subtitle>
                 <Card.Text>
-                    <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
+                    <h5>
                         ID
-                    </span>
+                    </h5>
                     <span>
                         {this.props.definition.id}
                     </span>
-                    <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
+                    <h5>
                         Name
-                    </span>
+                    </h5>
                     <span>
                         {this.props.definition.name}
                     </span>
-                    <span style={{ fontWeight: "bold", paddingRight: "10px" }}>
+                    <h5>
                         Description
-                    </span>
+                    </h5>
                     <span>
                         {this.props.definition.description}
                     </span>
