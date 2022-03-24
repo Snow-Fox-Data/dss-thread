@@ -43,7 +43,9 @@ class DataikuItem extends Component {
     }
 
     saveCol(applyUp, applyDown) {
-        let applyTo = [this.props.item.key];
+        let applyTo = eval(this.state.tempSelDef.applied_to)
+        applyTo.push(this.props.item.key);
+        
         if (applyUp)
             applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
         if (applyDown)
