@@ -147,6 +147,10 @@ def update_desc():
     # print(data['applied_to'])
     applied_to_json = json.dumps(data['applied_to'])
 
+    # remove all old definitions for these new columns
+    for a in data['applied_to']:
+        df = dss.reset_col_definition(df, a)
+
     # print(desc_id, exists)
     if desc_id == -1:
         print('new desc')
@@ -239,7 +243,7 @@ class dss_utils:
         folder = proj.get_project_folder().name
         if len(folder) == 0:
             folder = 'root'
-            
+
         p['folder'] = folder
 
         p['datasets'] = []
@@ -290,6 +294,11 @@ class dss_utils:
         }
 
         return res
+
+    def reset_col_definition(self, df, col_name):
+        df['applied_to'] = df['applied_to'].replace({f"['{col_name}'],": ''}).replace({f"['{col_name}']": ''})  
+
+        return df
 
     def update_column_description(self, column_array, description):
         if type(column_array)==str:
