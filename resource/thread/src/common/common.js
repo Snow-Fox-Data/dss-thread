@@ -30,7 +30,7 @@ function getIconForDataikuItemType(type, size = "11px") {
 
 const useOnScreen = (ref) => {
 
-    const [isIntersecting, setIntersecting] = useState()
+    const [isIntersecting, setIntersecting] = React.createState()
   
     const observer = new IntersectionObserver(
       ([entry]) => setIntersecting(entry.isIntersecting)
