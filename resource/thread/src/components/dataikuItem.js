@@ -263,6 +263,7 @@ class DataikuItem extends Component {
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
+      
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
@@ -314,7 +315,8 @@ class DataikuItem extends Component {
                                                 />
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
-                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.applied_to}></Form.Control>
+                                                    {this.buildTagsString(this.state.tempSelDef.applied_to)}
+                                                    {/* <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.applied_to}></Form.Control> */}
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
