@@ -238,17 +238,17 @@ class DataikuItem extends Component {
 
         if (isNew) {
             this.setState({
-                selectedDef: {
+                tempSelDef: {
                     name: this.props.item.name,
                     description: this.props.item.comment,
-                    applied_to: [this.props.item.key],
+                    applied_to: [],
                     id: -1
                 }
             })
         }
         else {
             this.setState({
-                selectedDef: {
+                tempSelDef: {
                     name: this.props.item.definition.name,
                     applied_to: this.props.item.definition.applied_to,
                     description: this.props.item.definition.description,
