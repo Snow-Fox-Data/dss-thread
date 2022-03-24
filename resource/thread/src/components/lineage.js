@@ -223,10 +223,10 @@ class Lineage extends Component {
         console.log('componentDidMount() :: state == ');
         console.log(this.state);
 
-        this.setState({
-            ref: useRef(null),
-            isVisible: Common.useOnScreen(this.ref)
-        });
+        // this.setState({
+        //     ref: useRef(null),
+        //     isVisible: Common.useOnScreen(this.ref)
+        // });
 
         // this._unsubscribe = navigation.addListener('focus', () => {
         //   //Your refresh code gets here
