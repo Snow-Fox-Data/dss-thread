@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState } from 'react';
+import React, { Component, useCallback, useState, useEffect } from 'react';
 import ReactFlow, { Controls, ReactFlowProvider, useStoreState, useStoreActions } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
@@ -218,9 +218,13 @@ class Lineage extends Component {
         // });
     }
     
-      componentWillUnmount() {
+    componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
         // this._unsubscribe();
+    }
+
+    useEffect() {
+        console.log("useEffect() :: ");
     }
 
     render() {
