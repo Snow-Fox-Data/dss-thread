@@ -144,7 +144,7 @@ def update_desc():
     
     data = request.json
     desc_id = int(data['id'])
-    col_key = int(data['column_key'])
+    col_key = data['column_key']
     applied_to_json = json.dumps(data['applied_to'])
 
     # remove old definition for this colimn
