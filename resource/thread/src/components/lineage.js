@@ -223,10 +223,10 @@ class Lineage extends Component {
         console.log('componentDidMount() :: state == ');
         console.log(this.state);
 
-        const ref = React.createRef();
-        this.setState(Common.useOnScreen(this.state.isVisible, ref), () => {
-            console.log(this.state.count);
-        })
+        // const ref = React.createRef();
+        // this.setState(Common.useOnScreen(this.state.isVisible, ref), () => {
+        //     console.log(this.state.count);
+        // })
         
         // this.isVisible = Common.useOnScreen(this.ref);
 
