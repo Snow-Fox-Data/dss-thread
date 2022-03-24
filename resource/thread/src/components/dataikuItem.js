@@ -91,6 +91,9 @@ class DataikuItem extends Component {
     }
 
     buildTagsString(arrayTags) {
+        if (arrayTags == null)
+            return;
+            
         let tags = [];
 
         arrayTags.forEach(element => {
@@ -252,7 +255,7 @@ class DataikuItem extends Component {
         }
     }
 
-    refreshLineage() { 
+    refreshLineage() {
         console.log('refreshLineage() :: ');
         // let item = this.state.item;
         // this.setState({
@@ -263,7 +266,7 @@ class DataikuItem extends Component {
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
-      
+
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
