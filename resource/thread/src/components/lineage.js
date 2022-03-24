@@ -22,10 +22,6 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
-            // ref: null, // this is breaking
-            // isVisible: null
-            // ref: useRef(null), // this is breaking
-            // isVisible: Common.useOnScreen(this.ref)
         };
 
         this.nodeTypes = {
@@ -34,10 +30,8 @@ class Lineage extends Component {
 
         this.reactFlowInstance = null;
 
+        // THIS EXAMPLE WORKS, BUT USE STATE IN useOnScreen is failing
         const ref = React.createRef();
-        const isVisible = Common.useOnScreen(ref);
-
-        // const ref = useRef(); // also breaking
         // const isVisible = Common.useOnScreen(ref);
     }
 
