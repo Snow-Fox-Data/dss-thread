@@ -257,6 +257,9 @@ class DataikuItem extends Component {
 
     refreshLineage() {
         console.log('refreshLineage() :: ');
+        
+        this.forceUpdate();
+
         // let item = this.state.item;
         // this.setState({
         //     item: item
@@ -392,7 +395,7 @@ class DataikuItem extends Component {
                             }
                         </Tab>
                         <Tab eventKey="lineage" title="Lineage" def
-                            onSelect={this.refreshLineage}>
+                            onClick={this.refreshLineage}>
                             <div class="lineage">{lineage}</div>
                         </Tab>
                     </Tabs>
