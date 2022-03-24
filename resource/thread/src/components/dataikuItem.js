@@ -254,10 +254,10 @@ class DataikuItem extends Component {
 
     refreshLineage() { 
         console.log('refreshLineage() :: ');
-        let item = this.state.item;
-        this.setState({
-            item: item
-        });
+        // let item = this.state.item;
+        // this.setState({
+        //     item: item
+        // });
     }
 
     renderColumn() {
