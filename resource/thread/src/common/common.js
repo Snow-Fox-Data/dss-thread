@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
 function createProjectLink(projkey) {
@@ -28,29 +28,29 @@ function getIconForDataikuItemType(type, size = "11px") {
     }   
 }
 
-// function useOnScreen(ref) {
+function useOnScreen(ref) {
 
-//     const [isIntersecting, setIntersecting] = useState(false)
+    const [isIntersecting, setIntersecting] = useState(false)
   
-//     const observer = new IntersectionObserver(
-//       ([entry]) => setIntersecting(entry.isIntersecting)
-//     )
+    const observer = new IntersectionObserver(
+      ([entry]) => setIntersecting(entry.isIntersecting)
+    )
   
-//     useEffect(() => {
-//       observer.observe(ref.current)
-//       // Remove the observer as soon as the component is unmounted
-//       return () => { observer.disconnect() }
-//     }, [])
+    useEffect(() => {
+      observer.observe(ref.current)
+      // Remove the observer as soon as the component is unmounted
+      return () => { observer.disconnect() }
+    }, [])
   
-//     return isIntersecting
-//   }
+    return isIntersecting
+}
 
 const Common = {
     createDatasetLink,
     createProjectLink,
     createDatasetLinkTag,
     getIconForDataikuItemType,
-    // useOnScreen
+    useOnScreen
 };
 
 export default Common;

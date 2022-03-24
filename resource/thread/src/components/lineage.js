@@ -1,7 +1,8 @@
 import React, { Component, useCallback, useState, useEffect, useRef } from 'react';
 import ReactFlow, { Controls, ReactFlowProvider, useStoreState, useStoreActions } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
-import { createGraphLayout, useOnScreen } from '../common/layout.js';
+import { createGraphLayout } from '../common/layout.js';
+import Common from '../common/common.js';
 
 class Lineage extends Component {
 
@@ -21,8 +22,8 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
-            // ref: useRef(),
-            // isVisible: useOnScreen(ref)
+            ref: useRef(),
+            isVisible: Common.useOnScreen(this.ref)
         };
 
         this.nodeTypes = {
@@ -217,14 +218,18 @@ class Lineage extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount() :: ');
+        console.log('componentDidMount() :: state == ');
+        console.log(this.state);
+
         // this._unsubscribe = navigation.addListener('focus', () => {
         //   //Your refresh code gets here
         // });
     }
     
     componentWillUnmount() {
-        console.log('componentWillUnmount() :: ');
+        console.log('componentWillUnmount() :: state == ');
+        console.log(this.state);
+
         // this._unsubscribe();
     }
 
