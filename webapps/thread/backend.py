@@ -106,7 +106,7 @@ def load_item():
                 try:
                     df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                     search_key = re.escape(key)
-                    def_df = df[df['applied_to'].str.contains(search_key, case=False)].fillna('')                    
+                    def_df = df[df['applied_to'].str.contains(search_key, case=False, na=False)].fillna('')                    
                 except Exception as e:
                     print(e)
                     def_df = ''
