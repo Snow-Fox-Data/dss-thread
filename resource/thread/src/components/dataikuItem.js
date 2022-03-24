@@ -254,19 +254,15 @@ class DataikuItem extends Component {
 
     refreshLineage() { 
         console.log('refreshLineage() :: ');
-        let lineageData = this.state.lineage;
+        let item = this.state.item;
         this.setState({
-            lineage: lineageData
+            item: item
         });
     }
 
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
-
-        // this.setState({
-        //     lineage: this.buildLineage()
-        // });
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
