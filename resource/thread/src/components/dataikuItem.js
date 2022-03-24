@@ -45,7 +45,7 @@ class DataikuItem extends Component {
     saveCol(applyUp, applyDown) {
         let applyTo = eval(this.state.tempSelDef.applied_to)
         applyTo.push(this.props.item.key);
-        
+
         if (applyUp)
             applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
         if (applyDown)
@@ -93,14 +93,14 @@ class DataikuItem extends Component {
         </Row>
     }
 
-    buildTagsString(arrayTags) {
+    buildTagsString(arrayTags, variant="primary") {
         if (arrayTags == null)
             return;
 
         let tags = [];
 
         arrayTags.forEach(element => {
-            tags[tags.length] = <Button variant="primary" size="sm">
+            tags[tags.length] = <Button variant={variant} size="sm">
                 {element}
             </Button>
         });
@@ -260,7 +260,7 @@ class DataikuItem extends Component {
 
     refreshLineage() {
         console.log('refreshLineage() :: ');
-        
+
         // this.forceUpdate();
 
         // let item = this.state.item;
@@ -324,8 +324,9 @@ class DataikuItem extends Component {
                                                 />
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
-                                                    {this.buildTagsString(eval(this.state.tempSelDef.applied_to))}
-                                                    {/* <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.applied_to}></Form.Control> */}
+                                                    <div>
+                                                        {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+                                                    </div>
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
