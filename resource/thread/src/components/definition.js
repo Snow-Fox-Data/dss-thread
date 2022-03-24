@@ -17,21 +17,21 @@ class Definition extends Component {
                     <h5>
                         ID
                     </h5>
-                    <span>
+                    <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.id}
-                    </span>
+                    </div>
                     <h5>
                         Name
                     </h5>
-                    <span>
+                    <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.name}
-                    </span>
+                    </div>
                     <h5>
                         Description
                     </h5>
-                    <span>
+                    <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.description}
-                    </span>
+                    </div>
                 </Card.Text>
             </Card.Body>
         </Card>
