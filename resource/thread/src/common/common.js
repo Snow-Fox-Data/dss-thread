@@ -28,7 +28,7 @@ function getIconForDataikuItemType(type, size = "11px") {
     }   
 }
 
-function useOnScreen(ref) {
+const useOnScreen = (ref) => {
 
     const [isIntersecting, setIntersecting] = useState()
   
