@@ -258,7 +258,7 @@ class DataikuItem extends Component {
     refreshLineage() {
         console.log('refreshLineage() :: ');
         
-        this.forceUpdate();
+        // this.forceUpdate();
 
         // let item = this.state.item;
         // this.setState({
