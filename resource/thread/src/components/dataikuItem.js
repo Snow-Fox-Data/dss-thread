@@ -93,14 +93,14 @@ class DataikuItem extends Component {
         </Row>
     }
 
-    buildTagsString(arrayTags, variant="primary") {
+    buildTagsString(arrayTags, variant = "primary") {
         if (arrayTags == null)
             return;
 
         let tags = [];
 
         arrayTags.forEach(element => {
-            tags[tags.length] = <Button style={{marginRight:'6px'}} variant={variant} size="sm">
+            tags[tags.length] = <Button style={{ marginRight: '6px' }} variant={variant} size="sm">
                 {element}
             </Button>
         });
@@ -322,12 +322,14 @@ class DataikuItem extends Component {
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
-                                                <div style={{ padding: "10px 0px" }}>
-                                                    <Form.Label>Applied To</Form.Label>
-                                                    <div>
-                                                        {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+                                                {this.state.tempSelDef.applied_to.length > 0 &&
+                                                    <div style={{ padding: "10px 0px" }}>
+                                                        <Form.Label>Applied To</Form.Label>
+                                                        <div>
+                                                            {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                }
                                                 <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
