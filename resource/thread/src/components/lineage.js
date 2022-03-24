@@ -22,8 +22,8 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
-            ref: useRef(null), // this is breaking
-            isVisible: Common.useOnScreen(this.ref)
+            // ref: useRef(null), // this is breaking
+            // isVisible: Common.useOnScreen(this.ref)
         };
 
         this.nodeTypes = {
