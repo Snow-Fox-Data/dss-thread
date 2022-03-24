@@ -93,7 +93,7 @@ class DataikuItem extends Component {
     buildTagsString(arrayTags) {
         if (arrayTags == null)
             return;
-            
+
         let tags = [];
 
         arrayTags.forEach(element => {
@@ -321,7 +321,7 @@ class DataikuItem extends Component {
                                                 />
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
-                                                    {this.buildTagsString(this.state.tempSelDef.applied_to)}
+                                                    {this.buildTagsString(eval(this.state.tempSelDef.applied_to))}
                                                     {/* <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.applied_to}></Form.Control> */}
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
