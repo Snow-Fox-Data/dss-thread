@@ -22,8 +22,8 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
-            ref: useRef(),
-            isVisible: Common.useOnScreen(this.ref)
+            // ref: useRef(), // this is breaking
+            // isVisible: Common.useOnScreen(this.ref)
         };
 
         this.nodeTypes = {
@@ -32,8 +32,8 @@ class Lineage extends Component {
 
         this.reactFlowInstance = null;
 
-        // const ref = useRef();
-        // const isVisible = useOnScreen(ref);
+        const ref = useRef();
+        const isVisible = Common.useOnScreen(ref);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
