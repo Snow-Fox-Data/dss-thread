@@ -32,6 +32,7 @@ class Lineage extends Component {
 
         // THIS EXAMPLE WORKS, BUT USE STATE IN useOnScreen is failing
         const ref = React.createRef();
+        const isVisible = false;
         // const inViewport = Common.useIntersection(ref, '0px');
         // const isVisible = Common.useOnScreen(ref);
     }
@@ -220,6 +221,8 @@ class Lineage extends Component {
     componentDidMount() {
         console.log('componentDidMount() :: state == ');
         console.log(this.state);
+
+        this.isVisible = Common.useOnScreen(this.ref);
 
         // this.setState({
         //     ref: useRef(null),
