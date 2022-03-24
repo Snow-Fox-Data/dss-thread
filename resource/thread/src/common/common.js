@@ -28,11 +28,29 @@ function getIconForDataikuItemType(type, size = "11px") {
     }   
 }
 
+// function useOnScreen(ref) {
+
+//     const [isIntersecting, setIntersecting] = useState(false)
+  
+//     const observer = new IntersectionObserver(
+//       ([entry]) => setIntersecting(entry.isIntersecting)
+//     )
+  
+//     useEffect(() => {
+//       observer.observe(ref.current)
+//       // Remove the observer as soon as the component is unmounted
+//       return () => { observer.disconnect() }
+//     }, [])
+  
+//     return isIntersecting
+//   }
+
 const Common = {
     createDatasetLink,
     createProjectLink,
     createDatasetLinkTag,
-    getIconForDataikuItemType
+    getIconForDataikuItemType,
+    // useOnScreen
 };
 
 export default Common;

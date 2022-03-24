@@ -1,7 +1,7 @@
-import React, { Component, useCallback, useState, useEffect } from 'react';
+import React, { Component, useCallback, useState, useEffect, useRef } from 'react';
 import ReactFlow, { Controls, ReactFlowProvider, useStoreState, useStoreActions } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
-import { createGraphLayout } from '../common/layout.js';
+import { createGraphLayout, useOnScreen } from '../common/layout.js';
 
 class Lineage extends Component {
 
@@ -21,6 +21,8 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
+            // ref: useRef(),
+            // isVisible: useOnScreen(ref)
         };
 
         this.nodeTypes = {
@@ -28,6 +30,9 @@ class Lineage extends Component {
         };
 
         this.reactFlowInstance = null;
+
+        // const ref = useRef();
+        // const isVisible = useOnScreen(ref);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -240,7 +245,9 @@ class Lineage extends Component {
         console.log('render() :: state == ');
         console.log(this.state);
         
-        return (
+        // ref = useRef()
+        // isVisible && 
+        return (            
             <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
                 {this.state.elements && 
                 <ReactFlowProvider>

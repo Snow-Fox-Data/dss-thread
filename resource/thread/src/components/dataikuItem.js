@@ -269,12 +269,14 @@ class DataikuItem extends Component {
         // });
     }
 
-    tabClicked() {
+    tabClicked(e) {
         console.log('tabClicked() :: this == ');
         console.log(this);
 
-        // this.forceUpdate();
+        console.log('e.target.tab == ');
+        console.log(e.target.tab);
 
+        // this.forceUpdate();
         // let item = this.state.item;
         // this.setState({
         //     item: item
