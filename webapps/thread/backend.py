@@ -240,7 +240,7 @@ class dss_utils:
 
         # get the project's folder
         folder = proj.get_project_folder().name
-        if len(folder) == 0:
+        if folder is None or len(folder) == 0:
             folder = 'root'
 
         p['folder'] = folder
