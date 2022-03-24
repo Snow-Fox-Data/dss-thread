@@ -28,12 +28,13 @@ function getIconForDataikuItemType(type, size = "11px") {
     }   
 }
 
-const useOnScreen = (ref) => {
+const useOnScreen = (isVisible, ref) => {
 
-    const [isIntersecting, setIntersecting] = useState(false)
+    // const [isIntersecting, setIntersecting] = useState(false)
   
     const observer = new IntersectionObserver(
-      ([entry]) => setIntersecting(entry.isIntersecting)
+        ([entry]) => isVisible
+    //   ([entry]) => setIntersecting(entry.isVisible)
     )
   
     useEffect(() => {
@@ -42,7 +43,7 @@ const useOnScreen = (ref) => {
       return () => { observer.disconnect() }
     }, [])
   
-    return isIntersecting
+    return isVisible
 }
 
 const useIntersection = (element, rootMargin) => {

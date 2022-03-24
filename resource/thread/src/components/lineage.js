@@ -22,6 +22,7 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
+            isVisible: false
         };
 
         this.nodeTypes = {
@@ -31,8 +32,8 @@ class Lineage extends Component {
         this.reactFlowInstance = null;
 
         // THIS EXAMPLE WORKS, BUT USE STATE IN useOnScreen is failing
-        const ref = React.createRef();
-        const isVisible = false;
+        // const ref = React.createRef();
+        // const isVisible = false;
         // const inViewport = Common.useIntersection(ref, '0px');
         // const isVisible = Common.useOnScreen(ref);
     }
@@ -222,6 +223,11 @@ class Lineage extends Component {
         console.log('componentDidMount() :: state == ');
         console.log(this.state);
 
+        const ref = React.createRef();
+        this.setState(Common.useOnScreen(this.state.isVisible, ref), () => {
+            console.log(this.state.count);
+        })
+        
         // this.isVisible = Common.useOnScreen(this.ref);
 
         // this.setState({
