@@ -24,7 +24,8 @@ class DataikuItem extends Component {
             tempSelDef: {
             },
             newDefSelected: true,
-            defSearchResults: []
+            defSearchResults: [], 
+            isLineageVisible: false
         };
 
     }
@@ -258,17 +259,6 @@ class DataikuItem extends Component {
         }
     }
 
-    refreshLineage() {
-        console.log('refreshLineage() :: ');
-
-        // this.forceUpdate();
-
-        // let item = this.state.item;
-        // this.setState({
-        //     item: item
-        // });
-    }
-
     tabClicked(e) {
         console.log('tabClicked() :: this == ');
         console.log(this);
@@ -281,9 +271,12 @@ class DataikuItem extends Component {
 
         // this.forceUpdate();
         // let item = this.state.item;
-        // this.setState({
-        //     item: item
-        // });
+        this.setState({
+            isLineageVisible: (e === 'lineage')
+        });
+
+        console.log('this.state == ');
+        console.log(this.state);
     }
 
     renderColumn() {
