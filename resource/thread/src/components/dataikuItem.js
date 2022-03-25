@@ -287,10 +287,9 @@ class DataikuItem extends Component {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
 
-
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
-        const tabClicked = (e) => console.log('e == ' + e);
+        const tabClicked = (e) => this.setState({ isLineageVisible: (e === 'lineage') });
 
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
