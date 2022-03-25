@@ -267,6 +267,12 @@ class DataikuItem extends Component {
         }
     }
 
+    renderDefinition() {
+        return <Col>
+
+        </Col>
+    }
+
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;

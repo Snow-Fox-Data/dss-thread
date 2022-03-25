@@ -229,6 +229,12 @@ class App extends Component {
             <span style={{ paddingRight: '5px' }}>
                 {Common.getIconForDataikuItemType(option.object_type, '13px')}
             </span>
+            {option.object_type == 'definition' &&
+                <span>
+                    <span style={{}}>Definition:</span>
+                    <span style={{}}>{option.name}</span>
+                </span>
+            }
             {option.object_type == 'column' &&
                 <span>
                     <span style={{}}>Project:</span>
