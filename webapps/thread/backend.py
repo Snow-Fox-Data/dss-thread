@@ -132,6 +132,7 @@ def load_item():
 @app.route('/update-desc', methods=['POST'])
 def update_desc():
     dss = dss_utils()
+    df = None
 
     try:
         desc_ds = dataiku.Dataset(THREAD_DEFINITIONS_NAME)
