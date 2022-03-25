@@ -435,13 +435,7 @@ class DataikuItem extends Component {
             </Row>
 
             <Row style={{ paddingTop: '20px' }}>
-                <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3" onSelect={tabClicked}>
-                    <Tab eventKey="lineage" title="Lineage">
-                        {
-                            this.state.isLineageVisible && 
-                            <div class="lineage" id="lineage-container">{lineage}</div>
-                        }
-                    </Tab>
+                <Tabs defaultActiveKey="columns" id="uncontrolled-tab-example" className="mb-3" onSelect={tabClicked}>                   
                     <Tab eventKey="columns" title="Columns" def>
                         <Table striped bordered hover>
                             <thead>
@@ -455,6 +449,12 @@ class DataikuItem extends Component {
                                 {listItems}
                             </tbody>
                         </Table>
+                    </Tab>
+                    <Tab eventKey="lineage" title="Lineage">
+                        {
+                            this.state.isLineageVisible && 
+                            <div class="lineage" id="lineage-container">{lineage}</div>
+                        }
                     </Tab>
                 </Tabs>
             </Row>
@@ -512,7 +512,6 @@ class DataikuItem extends Component {
         let itemDetails = this.renderItemDetailsByType();
         if (this.props.item != null) {
             item = <Row className="align-items-start">
-
                 {itemDetails}
             </Row>
         } else {
