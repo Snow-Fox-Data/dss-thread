@@ -169,6 +169,16 @@ def update_desc():
             df = df.append(desc, ignore_index=True)
         else:
             df = pd.DataFrame.from_dict([desc])
+
+        index_ds = dss.get_index_ds()
+        new_record_df = pd.DataFrame.from_dict([{
+                "name": data['name'],
+                "object_type": "definition",
+                "key": data['id']
+            }]);
+
+        index_ds.write_dataframe(new_record_df)
+        
     else:
         desc = {
             "id": desc_id,
