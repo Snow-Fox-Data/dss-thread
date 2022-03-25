@@ -27,7 +27,7 @@ class DataikuItem extends Component {
             tempSelDef: {
             },
             newDefSelected: true,
-            defSearchResults: [], 
+            defSearchResults: [],
             isLineageVisible: false
         };
 
@@ -151,6 +151,7 @@ class DataikuItem extends Component {
         this.setState({
             newDefModal: true,
             tempSelDef: {
+                applied_to: [],
                 description: this.props.item.comment,
                 name: this.props.item.name,
                 id: -1
@@ -381,7 +382,7 @@ class DataikuItem extends Component {
                                     <Button variant="primary"
                                         onClick={() => this.newDef()}
                                     >Add Definition</Button>{' '}
-                                    <div>
+                                    <div style={{ padding: '10px' }}>
                                         {this.props.item.comment}
                                     </div>
                                 </div>
@@ -400,9 +401,9 @@ class DataikuItem extends Component {
                         </Tab>
                         <Tab eventKey="lineage" title="Lineage" def>
                             {
-                                this.state.isLineageVisible && 
+                                this.state.isLineageVisible &&
                                 <div class="lineage" id="lineage-container">{lineage}</div>
-                            }                            
+                            }
                         </Tab>
                     </Tabs>
                 </div>
@@ -413,7 +414,7 @@ class DataikuItem extends Component {
     renderDataset() {
         let tags = this.buildTagsString(this.props.item.meta.tags);
         let lineage = this.buildLineage();
-        
+
         var listItems = this.props.item.schema.map((col) =>
             <tr onClick={() => this.openColumn(col.key)}>
                 <td>{col.name}</td>
@@ -439,7 +440,7 @@ class DataikuItem extends Component {
             </Row>
 
             <Row style={{ paddingTop: '20px' }}>
-                <Tabs defaultActiveKey="columns" id="uncontrolled-tab-example" className="mb-3" onSelect={tabClicked}>                   
+                <Tabs defaultActiveKey="columns" id="uncontrolled-tab-example" className="mb-3" onSelect={tabClicked}>
                     <Tab eventKey="columns" title="Columns" def>
                         <Table striped bordered hover>
                             <thead>
@@ -456,7 +457,7 @@ class DataikuItem extends Component {
                     </Tab>
                     <Tab eventKey="lineage" title="Lineage">
                         {
-                            this.state.isLineageVisible && 
+                            this.state.isLineageVisible &&
                             <div class="lineage" id="lineage-container">{lineage}</div>
                         }
                     </Tab>
