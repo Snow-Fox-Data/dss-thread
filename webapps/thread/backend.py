@@ -148,7 +148,8 @@ def update_desc():
     applied_to_json = json.dumps(data['applied_to'])
 
     # remove old definition for this colimn
-    df = dss.reset_col_definition(df, col_key)
+    if df is not None:
+        df = dss.reset_col_definition(df, col_key)
 
     # print(desc_id, exists)
     if desc_id == -1:
