@@ -33,8 +33,6 @@ class Lineage extends Component {
 
         // THIS EXAMPLE WORKS, BUT USE STATE IN useOnScreen is failing
         // const ref = React.createRef();
-        // const isVisible = false;
-        // const inViewport = Common.useIntersection(ref, '0px');
         // const isVisible = Common.useOnScreen(ref);
     }
 
@@ -229,45 +227,39 @@ class Lineage extends Component {
         // })
         
         // this.isVisible = Common.useOnScreen(this.ref);
-
-        // this.setState({
-        //     ref: useRef(null),
-        //     isVisible: Common.useOnScreen(this.ref)
-        // });
-
-        // this._unsubscribe = navigation.addListener('focus', () => {
-        //   //Your refresh code gets here
-        // });
     }
-    
+
     componentWillUnmount() {
         console.log('componentWillUnmount() :: state == ');
         console.log(this.state);
-
-        // this._unsubscribe();
     }
 
     useEffect() {
         console.log("useEffect() :: ");
     }
 
+    // isVisible() {
+    //     // id="lineage-container"
+    //     const lineage = document.getElementById('lineage-container');
+    //     const tabPane = child.closest('.tab-pane');
+
+    //     console.log("lineage == ");
+    //     console.log(lineage);
+    //     console.log("tabPane == ");
+    //     console.log(tabPane);
+    // }
+
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }
-
-        // TODO onNodesChange isn't trigger when changing the screen.
-        // none of the event listens seem to trigger when changing view.
-        // need to trigger the fitview when changing over.
  
         console.log('render() :: state == ');
         console.log(this.state);
-        
-        // ref = useRef()
-        // isVisible && 
+
         return (            
-            <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
+            <div className='react-flow-container' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
                 {this.state.elements && 
                 <ReactFlowProvider>
                     <ReactFlow 

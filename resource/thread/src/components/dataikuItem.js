@@ -328,7 +328,7 @@ class DataikuItem extends Component {
                                                     </div>
                                                 }
                                                 {this.state.selectedDef.id == -1 &&
-                                                    <h3>New Defintion</h3>
+                                                    <h3>New Definition</h3>
                                                 }
                                                 <Form.Label>Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
@@ -390,7 +390,7 @@ class DataikuItem extends Component {
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>
-                    <Tabs defaultActiveKey="definition" className="mb-3" onClick={this.tabClicked}>
+                    <Tabs defaultActiveKey="definition" className="mb-3" onChange={this.tabClicked}>
                         <Tab eventKey="definition" title="Definition" def>
                             {
                                 this.props.item.definition.id == -1 &&
@@ -417,7 +417,7 @@ class DataikuItem extends Component {
                         </Tab>
                         <Tab eventKey="lineage" title="Lineage" def
                             onClick={this.refreshLineage}>
-                            <div class="lineage">{lineage}</div>
+                            <div class="lineage" id="lineage-container">{lineage}</div>
                         </Tab>
                     </Tabs>
                 </div>
@@ -454,7 +454,7 @@ class DataikuItem extends Component {
             <Row style={{ paddingTop: '20px' }}>
                 <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="lineage" title="Lineage">
-                        <div class="lineage">{lineage}</div>
+                        <div class="lineage" id="lineage-container">{lineage}</div>
                     </Tab>
                     <Tab eventKey="columns" title="Columns" def>
                         <Table striped bordered hover>
