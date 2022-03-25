@@ -562,13 +562,13 @@ class dss_utils:
                     ds_list.append(obj)
 
         # add definitions to index
-        df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-        for idx, row in df.iterrows():
-            index_list.append({
-                    "name": row['name'],
-                    "object_type": "definition",
-                    "key": row['id']
-                })
+        # df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+        # for idx, row in df.iterrows():
+        #     index_list.append({
+        #             "name": row['name'],
+        #             "object_type": "definition",
+        #             "key": row['id']
+        #         })
 
         # datasets dataset
         df = pd.DataFrame.from_dict(ds_list)
