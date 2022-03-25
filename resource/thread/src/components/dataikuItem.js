@@ -273,8 +273,11 @@ class DataikuItem extends Component {
         console.log('tabClicked() :: this == ');
         console.log(this);
 
-        console.log('e.target.tab == ');
-        console.log(e.target.tab);
+        console.log('e == ');
+        console.log(e);
+        
+        // console.log('e.target.tab == ');
+        // console.log(e.target.tab);
 
         // this.forceUpdate();
         // let item = this.state.item;
