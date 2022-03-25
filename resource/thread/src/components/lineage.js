@@ -214,6 +214,7 @@ class Lineage extends Component {
         console.log(prevProps);
         console.log("prevState == ");
         console.log(prevState);
+        // this.forceUpdate();
     }
 
     componentDidMount() { }

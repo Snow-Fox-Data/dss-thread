@@ -140,8 +140,7 @@ class DataikuItem extends Component {
         if (this.props.object_type == 'column') {
             if (prevProps.item == null && this.props.item != null) {
                 this.resetSelectedDef();
-            }
-            else {
+            } else {
                 if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id))
                     this.resetSelectedDef();
             }
