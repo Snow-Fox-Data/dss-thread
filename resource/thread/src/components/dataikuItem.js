@@ -291,7 +291,7 @@ class DataikuItem extends Component {
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => {
             console.log('e == ' + e);        
-            this.setState({ isLineageVisible: (e === 'lineage') })
+            this.setState({ isLineageVisible: (e === "lineage") })
             console.log('this.state == ');
             console.log(this.state);
         };
