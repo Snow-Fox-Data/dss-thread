@@ -178,9 +178,10 @@ def update_desc():
             }
 
         # index_ds.write_dataframe(new_record_df, infer_schema=False, dropAndCreate=False)
-        writer = index_ds.get_writer()
-        writer.write_row_dict(new_record)
-        
+        with index_ds.get_writer() as writer:
+            writer = index_ds.get_writer()
+            writer.write_row_dict(new_record)
+            
     else:
         desc = {
             "id": desc_id,
