@@ -132,6 +132,11 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log("componentDidUpdate() :: prevProps == ");
+        console.log(prevProps);
+        console.log("prevState == ");
+        console.log(prevState);
+
         if (this.props.object_type == 'column') {
             if (prevProps.item == null && this.props.item != null) {
                 this.resetSelectedDef();

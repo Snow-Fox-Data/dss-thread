@@ -218,9 +218,6 @@ class Lineage extends Component {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
         }
- 
-        console.log('render() :: state == ');
-        console.log(this.state);
 
         return (            
             <div className='react-flow-container' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
