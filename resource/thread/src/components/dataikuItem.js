@@ -390,7 +390,7 @@ class DataikuItem extends Component {
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>
-                    <Tabs defaultActiveKey="definition" className="mb-3" onChange={this.tabClicked}>
+                    <Tabs defaultActiveKey="definition" className="mb-3" onSelect={this.tabClicked}>
                         <Tab eventKey="definition" title="Definition" def>
                             {
                                 this.props.item.definition.id == -1 &&
