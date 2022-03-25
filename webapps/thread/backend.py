@@ -154,10 +154,10 @@ def update_desc():
 
     # print(desc_id, exists)
     if desc_id == -1:
-        print('new desc')
+        new_id = random.randint(100000,100000000)
         # new description
         desc = {
-            "id": random.randint(100000,100000000),
+            "id": new_id,
             "name": data['name'],
             "description": data['description'],
             "applied_to": applied_to_json,
@@ -174,7 +174,7 @@ def update_desc():
         new_record_df = pd.DataFrame.from_dict([{
                 "name": data['name'],
                 "object_type": "definition",
-                "key": data['id']
+                "key": new_id
             }]);
 
         index_ds.write_dataframe(new_record_df)
