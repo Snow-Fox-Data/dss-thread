@@ -421,9 +421,11 @@ class DataikuItem extends Component {
                                 </div>
                             }
                         </Tab>
-                        <Tab eventKey="lineage" title="Lineage" def
-                            onClick={this.refreshLineage}>
-                            <div class="lineage" id="lineage-container">{lineage}</div>
+                        <Tab eventKey="lineage" title="Lineage" def>
+                            {
+                                this.state.isLineageVisible && 
+                                <div class="lineage" id="lineage-container">{lineage}</div>
+                            }                            
                         </Tab>
                     </Tabs>
                 </div>
