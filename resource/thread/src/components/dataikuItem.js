@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
@@ -269,14 +269,18 @@ class DataikuItem extends Component {
         // console.log('e.target.tab == ');
         // console.log(e.target.tab);
 
+        const [isLineageVisible, setIsLineageVisible] = useState();
+
         // this.forceUpdate();
         // let item = this.state.item;
-        this.setState({
-            isLineageVisible: (e === 'lineage')
-        });
+        // this.setState({
+        //     isLineageVisible: (e === 'lineage')
+        // });
 
-        console.log('this.state == ');
-        console.log(this.state);
+        setIsLineageVisible((e === 'lineage'));
+
+        console.log('isLineageVisible == ');
+        console.log(isLineageVisible);
     }
 
     renderColumn() {
