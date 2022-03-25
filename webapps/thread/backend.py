@@ -181,7 +181,7 @@ def update_desc():
         idx_df = index_ds.get_dataframe()
         idx_df = idx_df.append(new_record)
 
-        index_ds.write_dataset(idx_df)
+        index_ds.write_dataframe(idx_df)
             
     else:
         desc = {
