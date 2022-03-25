@@ -1,7 +1,8 @@
-import React, { Component, useCallback, useState } from 'react';
+import React, { Component, useCallback, useState, useEffect, useRef } from 'react';
 import ReactFlow, { Controls, ReactFlowProvider, useStoreState, useStoreActions } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
+import Common from '../common/common.js';
 
 class Lineage extends Component {
 
@@ -21,6 +22,7 @@ class Lineage extends Component {
             nodes: [],
             edges: [],
             flowInstance: null,
+            isVisible: false
         };
 
         this.nodeTypes = {
@@ -28,6 +30,12 @@ class Lineage extends Component {
         };
 
         this.reactFlowInstance = null;
+
+        // THIS EXAMPLE WORKS, BUT USE STATE IN useOnScreen is failing
+        // const ref = React.createRef();
+        // const isVisible = false;
+        // const inViewport = Common.useIntersection(ref, '0px');
+        // const isVisible = Common.useOnScreen(ref);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -211,6 +219,38 @@ class Lineage extends Component {
         console.log(rv);
     }
 
+    componentDidMount() {
+        console.log('componentDidMount() :: state == ');
+        console.log(this.state);
+
+        // const ref = React.createRef();
+        // this.setState(Common.useOnScreen(this.state.isVisible, ref), () => {
+        //     console.log(this.state.count);
+        // })
+        
+        // this.isVisible = Common.useOnScreen(this.ref);
+
+        // this.setState({
+        //     ref: useRef(null),
+        //     isVisible: Common.useOnScreen(this.ref)
+        // });
+
+        // this._unsubscribe = navigation.addListener('focus', () => {
+        //   //Your refresh code gets here
+        // });
+    }
+    
+    componentWillUnmount() {
+        console.log('componentWillUnmount() :: state == ');
+        console.log(this.state);
+
+        // this._unsubscribe();
+    }
+
+    useEffect() {
+        console.log("useEffect() :: ");
+    }
+
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
@@ -224,7 +264,9 @@ class Lineage extends Component {
         console.log('render() :: state == ');
         console.log(this.state);
         
-        return (
+        // ref = useRef()
+        // isVisible && 
+        return (            
             <div className='REACT-FLOW-CONTAINER' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
                 {this.state.elements && 
                 <ReactFlowProvider>

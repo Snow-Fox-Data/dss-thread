@@ -269,6 +269,20 @@ class DataikuItem extends Component {
         // });
     }
 
+    tabClicked(e) {
+        console.log('tabClicked() :: this == ');
+        console.log(this);
+
+        console.log('e.target.tab == ');
+        console.log(e.target.tab);
+
+        // this.forceUpdate();
+        // let item = this.state.item;
+        // this.setState({
+        //     item: item
+        // });
+    }
+
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
@@ -376,7 +390,7 @@ class DataikuItem extends Component {
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>
-                    <Tabs defaultActiveKey="definition" className="mb-3" destroyInactiveTabPane>
+                    <Tabs defaultActiveKey="definition" className="mb-3" onClick={this.tabClicked}>
                         <Tab eventKey="definition" title="Definition" def>
                             {
                                 this.props.item.definition.id == -1 &&
