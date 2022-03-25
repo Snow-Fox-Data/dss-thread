@@ -15,6 +15,9 @@ class DataikuItem extends Component {
     constructor(props) {
         super(props);
 
+        console.log('props == ');
+        console.log(props);
+
         this.state = {
             lineage: null,
             newDefModal: false,
@@ -259,30 +262,6 @@ class DataikuItem extends Component {
         }
     }
 
-    // tabClicked(e) {
-    //     console.log('tabClicked() :: this == ');
-    //     console.log(this);
-
-    //     console.log('e == ');
-    //     console.log(e);
-        
-    //     // console.log('e.target.tab == ');
-    //     // console.log(e.target.tab);
-
-    //     // const [isLineageVisible, setIsLineageVisible] = useState();
-
-    //     // this.forceUpdate();
-    //     // let item = this.state.item;
-    //     // this.setState({
-    //     //     isLineageVisible: (e === 'lineage')
-    //     // });
-
-    //     // setIsLineageVisible((e === 'lineage'));
-
-    //     console.log('isLineageVisible == ');
-    //     console.log(isLineageVisible);
-    // }
-
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
@@ -440,8 +419,6 @@ class DataikuItem extends Component {
         );
 
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
-
-        this.setState({ isLineageVisible: true })
 
         return <Col>
             <Row>
