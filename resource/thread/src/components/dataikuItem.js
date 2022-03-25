@@ -143,7 +143,7 @@ class DataikuItem extends Component {
         this.setState({
             newDefModal: true,
             tempSelDef: {
-                description: this.props.comment,
+                description: this.props.item.comment,
                 name: this.props.item.name,
                 id: -1
             }
@@ -366,7 +366,7 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.name}<a style={{marginLeft:"10px"}} href={Common.createDatasetLink(this.props.item.project,this.props.item.dataset)} target="_blank"><ArrowUpRightSquare size={22} /></a></h1>
+                    <h1>{this.props.item.name}<a style={{ marginLeft: "10px" }} href={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} target="_blank"><ArrowUpRightSquare size={22} /></a></h1>
                     <p class="name">
                         <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
                         <span style={{ padding: "0px 3px" }}>|</span>
@@ -384,6 +384,9 @@ class DataikuItem extends Component {
                                     <Button variant="primary"
                                         onClick={() => this.newDef()}
                                     >Add Definition</Button>{' '}
+                                    <div>
+                                        {this.props.item.comment}
+                                    </div>
                                 </div>
                             }
                             {
@@ -479,7 +482,7 @@ class DataikuItem extends Component {
                     </span>
                     </h1>
                     <p>Project<span style={{ paddingLeft: '4px' }}>
-                        in {this.props.item.folder} folder</span></p>
+                        in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
             </Row>
