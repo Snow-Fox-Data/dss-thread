@@ -259,29 +259,29 @@ class DataikuItem extends Component {
         }
     }
 
-    tabClicked(e) {
-        console.log('tabClicked() :: this == ');
-        console.log(this);
+    // tabClicked(e) {
+    //     console.log('tabClicked() :: this == ');
+    //     console.log(this);
 
-        console.log('e == ');
-        console.log(e);
+    //     console.log('e == ');
+    //     console.log(e);
         
-        // console.log('e.target.tab == ');
-        // console.log(e.target.tab);
+    //     // console.log('e.target.tab == ');
+    //     // console.log(e.target.tab);
 
-        const [isLineageVisible, setIsLineageVisible] = useState();
+    //     // const [isLineageVisible, setIsLineageVisible] = useState();
 
-        // this.forceUpdate();
-        // let item = this.state.item;
-        // this.setState({
-        //     isLineageVisible: (e === 'lineage')
-        // });
+    //     // this.forceUpdate();
+    //     // let item = this.state.item;
+    //     // this.setState({
+    //     //     isLineageVisible: (e === 'lineage')
+    //     // });
 
-        setIsLineageVisible((e === 'lineage'));
+    //     // setIsLineageVisible((e === 'lineage'));
 
-        console.log('isLineageVisible == ');
-        console.log(isLineageVisible);
-    }
+    //     console.log('isLineageVisible == ');
+    //     console.log(isLineageVisible);
+    // }
 
     renderColumn() {
         const filterBy = () => true;
@@ -290,6 +290,7 @@ class DataikuItem extends Component {
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
+        const tabClicked = (e) => console.log('e == ' + e);
 
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
@@ -390,7 +391,7 @@ class DataikuItem extends Component {
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>
-                    <Tabs defaultActiveKey="definition" className="mb-3" onSelect={this.tabClicked}>
+                    <Tabs defaultActiveKey="definition" className="mb-3" onSelect={tabClicked}>
                         <Tab eventKey="definition" title="Definition" def>
                             {
                                 this.props.item.definition.id == -1 &&
