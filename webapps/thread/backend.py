@@ -171,13 +171,15 @@ def update_desc():
             df = pd.DataFrame.from_dict([desc])
 
         index_ds = dss.get_index_ds()
-        new_record_df = pd.DataFrame.from_dict([{
+        new_record = {
                 "name": data['name'],
                 "object_type": "definition",
                 "key": new_id
-            }]);
+            }
 
-        index_ds.write_dataframe(new_record_df)
+        # index_ds.write_dataframe(new_record_df, infer_schema=False, dropAndCreate=False)
+        writer = index_ds.get_writer()
+        writer.write_row_dict(new_record)
         
     else:
         desc = {
