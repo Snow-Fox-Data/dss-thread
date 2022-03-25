@@ -171,16 +171,17 @@ def update_desc():
             df = pd.DataFrame.from_dict([desc])
 
         index_ds = dss.get_index_ds()
-        new_record = {
+        new_record = pd.DataFrame.from_dict([{
                 "name": data['name'],
                 "object_type": "definition",
                 "key": new_id
-            }
+            }])
 
-        # index_ds.write_dataframe(new_record_df, infer_schema=False, dropAndCreate=False)
-        with index_ds.get_writer() as writer:
-            writer = index_ds.get_writer()
-            writer.write_row_dict(new_record)
+        # todo: really don't like reading this whole dataset
+        idx_df = index_ds.get_dataframe()
+        idx_df = idx_df.append(new_record)
+
+        index_ds.write_dataset(idx_df)
             
     else:
         desc = {
