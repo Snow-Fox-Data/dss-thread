@@ -20,20 +20,12 @@ class Lineage extends Component {
             elements: [],
             last_ds: '',
             nodes: [],
-            edges: [],
-            flowInstance: null,
-            isVisible: false
+            edges: []
         };
 
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
-
-        this.reactFlowInstance = null;
-
-        // THIS EXAMPLE WORKS, BUT USE STATE IN useOnScreen is failing
-        // const ref = React.createRef();
-        // const isVisible = Common.useOnScreen(ref);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -217,37 +209,9 @@ class Lineage extends Component {
         console.log(rv);
     }
 
-    componentDidMount() {
-        console.log('componentDidMount() :: state == ');
-        console.log(this.state);
+    componentDidMount() { }
 
-        // const ref = React.createRef();
-        // this.setState(Common.useOnScreen(this.state.isVisible, ref), () => {
-        //     console.log(this.state.count);
-        // })
-        
-        // this.isVisible = Common.useOnScreen(this.ref);
-    }
-
-    componentWillUnmount() {
-        console.log('componentWillUnmount() :: state == ');
-        console.log(this.state);
-    }
-
-    useEffect() {
-        console.log("useEffect() :: ");
-    }
-
-    // isVisible() {
-    //     // id="lineage-container"
-    //     const lineage = document.getElementById('lineage-container');
-    //     const tabPane = child.closest('.tab-pane');
-
-    //     console.log("lineage == ");
-    //     console.log(lineage);
-    //     console.log("tabPane == ");
-    //     console.log(tabPane);
-    // }
+    componentWillUnmount() { }
 
     render() {
         if (this.props.deets.name != this.state.last_ds) {
@@ -264,12 +228,9 @@ class Lineage extends Component {
                 <ReactFlowProvider>
                     <ReactFlow 
                         onLoad={this.onLoad} 
-                        // onFitView={this.onFitView}
                         elements={this.state.elements}
-                        // onElementsRemove={this.onElementsRemove}
                         nodeTypes={this.nodeTypes} 
                         style={{ height: "100%", width: "100%" }}
-                        // fitView
                     >
                         <Controls showInteractive="false" />
                     </ReactFlow>

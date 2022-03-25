@@ -289,13 +289,7 @@ class DataikuItem extends Component {
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
-        const tabClicked = (e) => {
-            console.log('e == ' + e);
-            console.log('(e === "lineage") == ' + (e === "lineage"));        
-            this.setState({ isLineageVisible: (e === "lineage") })
-            console.log('this.state == ');
-            console.log(this.state);
-        };
+        const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
 
         return <Col>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
@@ -436,7 +430,7 @@ class DataikuItem extends Component {
     renderDataset() {
         let tags = this.buildTagsString(this.props.item.meta.tags);
         let lineage = this.buildLineage();
-
+        
         var listItems = this.props.item.schema.map((col) =>
             <tr onClick={() => this.openColumn(col.key)}>
                 <td>{col.name}</td>
@@ -444,6 +438,10 @@ class DataikuItem extends Component {
                 <td>{col.comment}</td>
             </tr>
         );
+
+        const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
+
+        this.setState({ isLineageVisible: true })
 
         return <Col>
             <Row>
@@ -460,9 +458,12 @@ class DataikuItem extends Component {
             </Row>
 
             <Row style={{ paddingTop: '20px' }}>
-                <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3">
+                <Tabs defaultActiveKey="lineage" id="uncontrolled-tab-example" className="mb-3" onSelect={tabClicked}>
                     <Tab eventKey="lineage" title="Lineage">
-                        <div class="lineage" id="lineage-container">{lineage}</div>
+                        {
+                            this.state.isLineageVisible && 
+                            <div class="lineage" id="lineage-container">{lineage}</div>
+                        }
                     </Tab>
                     <Tab eventKey="columns" title="Columns" def>
                         <Table striped bordered hover>
