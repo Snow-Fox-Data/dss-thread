@@ -143,6 +143,20 @@ class DataikuItem extends Component {
                     this.resetSelectedDef();
             }
         }
+        else {
+            if (this.props.object_type == 'definition') {
+                if (prevProps.item == null && this.props.item != null) {
+                    this.setState({
+                        tempSelDef: {
+                            name: this.props.item.definition.name,
+                            applied_to: this.props.item.definition.applied_to,
+                            description: this.props.item.definition.description,
+                            id: this.props.item.definition.id
+                        }
+                    })
+                }
+            }
+        }
     }
 
     newDef() {
@@ -264,7 +278,6 @@ class DataikuItem extends Component {
             })
         }
     }
-
 
     renderColumn() {
         const filterBy = () => true;
@@ -411,16 +424,6 @@ class DataikuItem extends Component {
     }
 
     renderDefinition() {
-
-        this.setState({
-            tempSelDef: {
-                name: this.props.item.name,
-                description: this.props.item.description,
-                id: this.props.item.id,
-                applied_to: this.props.item.applied_to
-            }
-        })
-
         return <Col>
             <Row>
                 <Col xs="auto">
@@ -429,6 +432,7 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
+                    <h1>{this.props.item.name}</h1>
 
                     <Container>
                         <Row>
