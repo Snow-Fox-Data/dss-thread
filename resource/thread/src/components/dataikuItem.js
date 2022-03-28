@@ -124,10 +124,8 @@ class DataikuItem extends Component {
                 return this.renderProject();
             case 'column':
                 return this.renderColumn();
-            case 'dataset':
-                return <Col>
-                    <p>No rendering has been setup for this item.</p>
-                </Col>;
+            case 'description':
+                return this.renderDescription();
         }
     }
 
@@ -413,6 +411,22 @@ class DataikuItem extends Component {
                         </Tab>
                     </Tabs>
                 </div>
+            </Row>
+        </Col>
+    }
+
+    renderDescription() {
+        return <Col>
+            <Row>
+                <Col xs="auto">
+                    <div class="icon">
+                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                    </div>
+                </Col>
+                <Col>
+                    <h1>{this.props.item.id}</h1>
+
+                </Col>
             </Row>
         </Col>
     }
