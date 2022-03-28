@@ -102,12 +102,12 @@ class App extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        let obj_type = 'project';
-        let splitCt = (itemKey.split("|").length - 1);
-        if (splitCt == 1)
-            obj_type = 'dataset';
-        else if (splitCt == 2)
-            obj_type = 'column'
+        // let obj_type = 'project';
+        // let splitCt = (itemKey.split("|").length - 1);
+        // if (splitCt == 1)
+        //     obj_type = 'dataset';
+        // else if (splitCt == 2)
+        //     obj_type = 'column'
 
         fetch(window.getWebAppBackendUrl('load-item') + '?key=' + itemKey, requestOptions)
             .then(res => res.json())
@@ -118,7 +118,7 @@ class App extends Component {
                 this.setState({
                     loading: false,
                     selectedItem: response,
-                    selectedItemType: obj_type
+                    selectedItemType: response.object_type
                 });
             });
     }

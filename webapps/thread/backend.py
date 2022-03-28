@@ -94,11 +94,13 @@ def load_item():
     res = df.query(f'key=="{key}"').iloc[0]
     if res['object_type'] == 'dataset':
         ds = dss.load_dataset(key, 'none')
+        ds['object_type'] = 'project'
 
         return json.dumps(ds)
     else:
         if res['object_type'] == 'project':
             p = dss.load_project(key)
+            p['object_type'] = 'project'
 
             return json.dumps(p)
         else:
@@ -112,12 +114,14 @@ def load_item():
                     def_df = ''
 
                 p_name, d_name, c_name = dss.extract_name_project(key)
-                print(f'loading col: {key}, {c_name}')
+                
+                
                 p = dss.load_dataset(p_name + '|' + d_name, c_name)
                 col = next(item for item in p['schema'] if item["name"] == c_name)
                 col['project'] = p_name
                 col['dataset'] = d_name
                 col['definition'] = { "id": -1}
+                col['object_type'] = 'column'
 
                 if len(def_df) > 0:
                     col['definition'] = def_df.to_dict('records')[0]
@@ -126,8 +130,8 @@ def load_item():
             if res['object_type'] == 'definition':
                 print(f'searching for definition key: {key}')
                 df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+                df['object_type'] = 'definition'
                 res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
-
 
     response_json = json.dumps(res) 
     # print(response_json)
