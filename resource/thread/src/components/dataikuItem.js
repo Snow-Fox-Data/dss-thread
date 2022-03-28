@@ -447,9 +447,6 @@ class DataikuItem extends Component {
                                                     <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
                                                 </div>
                                             }
-                                            {this.state.selectedDef.id == -1 &&
-                                                <h3>New Definition</h3>
-                                            }
                                             <Form.Label>Name</Form.Label>
                                             <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                 onChange={e => this.state.tempSelDef.name = e.target.value}
@@ -470,6 +467,9 @@ class DataikuItem extends Component {
                                                 Will appear in the Dataiku Dataset's column description.
                                             </Form.Text>
                                         </Form.Group>
+                                        <Form.Footer>
+                                            <Button variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
+                                        </Form.Footer>
                                     </Form>
                                 </div>
                             </Col>
