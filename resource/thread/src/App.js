@@ -43,6 +43,7 @@ class App extends Component {
                 column: true,
                 dataset: true,
                 project: true,
+                definition: true
             },
             currentUser: '',
             loading: true,
@@ -61,7 +62,6 @@ class App extends Component {
             var dataikuItem = response[results];
             if (types.indexOf(dataikuItem.object_type.toString()) >= 0) {
                 p_list[p_list.length] = dataikuItem;
-
             }
         });
 
@@ -237,7 +237,7 @@ class App extends Component {
             }
             {option.object_type == 'column' &&
                 <span>
-                    <span style={{}}>Project:</span>
+                    <span style={{}}>Project: </span>
                     <span style={{}}>{option.key.split('|')[0]}</span>
 
                     <span style={{ padding: '0px 4px' }}>|</span>
