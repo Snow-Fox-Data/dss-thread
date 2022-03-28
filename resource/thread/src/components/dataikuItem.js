@@ -93,7 +93,7 @@ class DataikuItem extends Component {
 
     buildLineage() {
         return <Row>
-            <Lineage deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.type}></Lineage>
+            <Lineage deets={this.props.item} full_ds_name={this.props.item.name} type={this.props.object_type}></Lineage>
         </Row>
     }
 
@@ -130,11 +130,6 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log("componentDidUpdate() :: prevProps == ");
-        // console.log(prevProps);
-        // console.log("prevState == ");
-        // console.log(prevState);
-
         if (this.props.object_type == 'column') {
             if (prevProps.item == null && this.props.item != null) {
                 this.resetSelectedDef();
