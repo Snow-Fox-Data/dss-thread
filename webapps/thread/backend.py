@@ -524,7 +524,7 @@ class dss_utils:
             scan_obj[proj]['folders'] = folders
 
             index_list.append({
-                "name": project.get_summary()['name'],
+                "name": proj.replace('|', ' | '), # project.get_summary()['name'],
                 "object_type": "project",
                 "key": proj
             })

@@ -345,10 +345,11 @@ class App extends Component {
                                 filterBy={filterBy}
                                 id="async-search"
                                 delay={300}
-                                labelKey={option => {
-                                    return option.key.replaceAll('|', ' | ') + ' ' + option.name
-                                }
-                                }
+                                // labelKey={option => {
+                                //     return option.key.replaceAll('|', ' | ') + ' (' + option.name + ')'
+                                // }
+                                // }
+                                labelKey="name"
                                 ref={this.searchRef}
                                 minLength={3}
                                 onChange={this.loadItem}
