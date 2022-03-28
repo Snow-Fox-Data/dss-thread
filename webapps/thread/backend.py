@@ -329,17 +329,18 @@ class dss_utils:
             column_array = [column_array]
             
         for i in column_array:
-            print(f'setting description for {i}')
-            lst = i.split('|')
-            project, dataset, column = lst[0], lst[1], lst[2]
-            p = self.client.get_project(project)
-            ds = p.get_dataset(dataset)
-            ds_schema = ds.get_schema()
-            for z in ds_schema['columns']: 
-                if z['name']==column:
-                    z['comment']=description
+            if i is not None and len(i) > 0:
+                print(f'setting description for {i}')
+                lst = i.split('|')
+                project, dataset, column = lst[0], lst[1], lst[2]
+                p = self.client.get_project(project)
+                ds = p.get_dataset(dataset)
+                ds_schema = ds.get_schema()
+                for z in ds_schema['columns']: 
+                    if z['name']==column:
+                        z['comment']=description
 
-            ds.set_schema(ds_schema)
+                ds.set_schema(ds_schema)
 
     def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
         dir = 'lineage_downstream'
