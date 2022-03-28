@@ -1,5 +1,5 @@
-import React, { Component, useCallback, useState, useEffect, useRef } from 'react';
-import ReactFlow, { Controls, ReactFlowProvider, useStoreState, useStoreActions } from 'react-flow-renderer';
+import React, { Component } from 'react';
+import ReactFlow, { Controls, ReactFlowProvider, useZoomPanHelper } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 import Common from '../common/common.js';
@@ -26,6 +26,11 @@ class Lineage extends Component {
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
+
+        var flowInstance = null;
+        // const { fitView } = useZoomPanHelper();
+        // console.log('fitView == ');
+        // console.log(fitView);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -123,9 +128,6 @@ class Lineage extends Component {
             var edgeId = 'edge_down_' + x.toString();
             var edge = { id: edgeId, source: baseElementId, target: elementId, arrowHeadType: 'arrow' };
 
-            console.log('down_res == ');
-            console.log(down_res);
-
             if (down_res[x].count > 0) {
                 edge.label = '[' + down_res[x].count + ']';
                 edge.animated = true;
@@ -169,9 +171,6 @@ class Lineage extends Component {
             var edgeId = 'edge_up_' + x.toString();
             var edge = { id: edgeId, source: elementId, target: baseElementId, arrowHeadType: 'arrow' };
 
-            console.log('up_res == ');
-            console.log(up_res);
-
             if (up_res[x].count > 0) {
                 edge.animated = true;
                 edge.label = '[' + up_res[x].count + ']';
@@ -193,24 +192,34 @@ class Lineage extends Component {
     }
 
     onLoad(rv) {
-        console.log('onLoad() :: rv == ');
+        console.log('LINEAGE :: onLoad() :: rv == ');
         console.log(rv);
 
         setTimeout(() => rv.fitView(), 1000);
+
+        // this.flowInstance = rv;
+        // console.log('this.flowInstance == ');
+        // console.log(this.flowInstance);
+
+        console.log('this == ');
+        console.log(this);
     }
 
     onElementsRemove(elements) {
-        console.log('onElementsRemove() :: elements == ');
+        console.log('LINEAGE :: onElementsRemove() :: elements == ');
         console.log(elements);
     }
 
     onFitView(rv) {
-        console.log('onFitView() :: rv == ');
+        console.log('LINEAGE :: onFitView() :: rv == ');
         console.log(rv);
+
+        console.log('this == ');
+        console.log(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("componentDidUpdate() :: prevProps == ");
+        console.log("LINEAGE :: componentDidUpdate() :: prevProps == ");
         console.log(prevProps);
         console.log("prevState == ");
         console.log(prevState);

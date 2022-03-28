@@ -151,9 +151,12 @@ class App extends Component {
                 .then(res => res.json())
                 .then((response) => {
 
-                    this.setState({ dataiku: window.dataiku, currentUser: response['you_are'] });
-                    this.setState({ rendered: true });
-                    this.setState({ loading: false });
+                    this.setState({ 
+                        dataiku: window.dataiku, 
+                        currentUser: response['you_are'],
+                        rendered: true,
+                        loading: false
+                    });
 
                     this.navDeepLink();
 
