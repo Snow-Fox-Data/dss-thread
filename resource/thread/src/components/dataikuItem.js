@@ -266,6 +266,15 @@ class DataikuItem extends Component {
     }
 
     renderDefinition() {
+        this.setState({
+            tempSelDef: {
+                name: this.props.item.name,
+                description: this.props.item.description,
+                id: this.props.item.id,
+                applied_to: this.props.item.applied_to
+            }
+        })
+
         return <Col>
 
         </Col>
@@ -424,7 +433,6 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.name}</h1>
 
                     <Container>
                         <Row>
