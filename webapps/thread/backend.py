@@ -123,6 +123,10 @@ def load_item():
                     col['definition'] = def_df.to_dict('records')[0]
 
                 return col
+            if res['object_type'] == 'definition':
+                df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+                res = df.query(f'key=={key}').to_dict('records')[0]    
+
 
     response_json = json.dumps(res) 
     # print(response_json)
@@ -517,7 +521,7 @@ class dss_utils:
             
             datasets = project.list_datasets()
             recipes = project.list_recipes()
-            folders = project.list_managed_folders()
+            foldeloadrs = project.list_managed_folders()
 
             scan_obj[proj]['datasets'] = datasets
             scan_obj[proj]['recipes'] = recipes
