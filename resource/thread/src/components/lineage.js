@@ -234,6 +234,7 @@ class Lineage extends Component {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
+            this.forceUpdate();
         }
 
         return (            
