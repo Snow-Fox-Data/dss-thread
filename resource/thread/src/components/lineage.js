@@ -26,11 +26,6 @@ class Lineage extends Component {
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
-
-        var flowInstance = null;
-        // const { fitView } = useZoomPanHelper();
-        // console.log('fitView == ');
-        // console.log(fitView);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -64,14 +59,11 @@ class Lineage extends Component {
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], },
             position: { x: basePositionX, y: basePositionY },
-            // style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
             style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
             sourcePosition: 'right',
             targetPosition: 'left',
             draggable: false
         };
-
-        // console.log('base-node :: base_splits[1].length == ' + base_splits[1].length);
 
         var elements = [baseNode];
         var _nodes = [baseNode];
@@ -114,7 +106,6 @@ class Lineage extends Component {
                 className: 'thread-node',
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                // style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
@@ -157,7 +148,6 @@ class Lineage extends Component {
                 className: 'thread-node',
                 type: 'customFlowNode',
                 data: { project: project, dataset: dataset, column: col },
-                // style: {  minHeight: Lineage.DEFAULT_NODE_HEIGHT, minWidth: Lineage.DEFAULT_NODE_WIDTH },
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
@@ -234,7 +224,7 @@ class Lineage extends Component {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
-            this.forceUpdate();
+            // this.forceUpdate();
         }
 
         return (            
