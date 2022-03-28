@@ -124,8 +124,8 @@ class DataikuItem extends Component {
                 return this.renderProject();
             case 'column':
                 return this.renderColumn();
-            case 'description':
-                return this.renderDescription();
+            case 'definition':
+                return this.renderDefinition();
         }
     }
 
@@ -410,7 +410,7 @@ class DataikuItem extends Component {
         </Col>
     }
 
-    renderDescription() {
+    renderDefinition() {
         return <Col>
             <Row>
                 <Col xs="auto">
