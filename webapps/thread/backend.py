@@ -124,8 +124,9 @@ def load_item():
 
                 return col
             if res['object_type'] == 'definition':
+                print(f'searching for definition key: {key}')
                 df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-                res = df.query(f'key=={key}').to_dict('records')[0]    
+                res = df.query(f'key=="{key}"').to_dict('records')[0]    
 
 
     response_json = json.dumps(res) 
