@@ -265,20 +265,6 @@ class DataikuItem extends Component {
         }
     }
 
-    renderDefinition() {
-        this.setState({
-            tempSelDef: {
-                name: this.props.item.name,
-                description: this.props.item.description,
-                id: this.props.item.id,
-                applied_to: this.props.item.applied_to
-            }
-        })
-
-        return <Col>
-
-        </Col>
-    }
 
     renderColumn() {
         const filterBy = () => true;
@@ -425,6 +411,16 @@ class DataikuItem extends Component {
     }
 
     renderDefinition() {
+
+        this.setState({
+            tempSelDef: {
+                name: this.props.item.name,
+                description: this.props.item.description,
+                id: this.props.item.id,
+                applied_to: this.props.item.applied_to
+            }
+        })
+
         return <Col>
             <Row>
                 <Col xs="auto">
