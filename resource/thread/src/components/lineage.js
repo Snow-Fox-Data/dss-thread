@@ -203,10 +203,12 @@ class Lineage extends Component {
 
         setTimeout(() => rv.fitView(), 1000);
 
-        this.flowInstance = rv;
+        // this.flowInstance = rv;
+        // console.log('this.flowInstance == ');
+        // console.log(this.flowInstance);
 
-        console.log('this.flowInstance == ');
-        console.log(this.flowInstance);
+        console.log('this == ');
+        console.log(this);
     }
 
     onElementsRemove(elements) {
@@ -217,6 +219,9 @@ class Lineage extends Component {
     onFitView(rv) {
         console.log('onFitView() :: rv == ');
         console.log(rv);
+
+        console.log('this == ');
+        console.log(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
