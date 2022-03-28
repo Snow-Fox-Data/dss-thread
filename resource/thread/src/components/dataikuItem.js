@@ -470,9 +470,8 @@ class DataikuItem extends Component {
                                                 Will appear in the Dataiku Dataset's column description.
                                             </Form.Text>
                                         </Form.Group>
-                                        <Form.Footer>
-                                            <Button variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
-                                        </Form.Footer>
+                                        <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
+
                                     </Form>
                                 </div>
                             </Col>
