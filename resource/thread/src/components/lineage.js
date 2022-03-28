@@ -27,9 +27,10 @@ class Lineage extends Component {
             customFlowNode: customFlowNode,
         };
 
-        const { fitView } = useZoomPanHelper();
-        console.log('fitView == ');
-        console.log(fitView);
+        var flowInstance = null;
+        // const { fitView } = useZoomPanHelper();
+        // console.log('fitView == ');
+        // console.log(fitView);
     }
 
     traverse = (lst, node, prop, ct = 0) => {
@@ -201,6 +202,11 @@ class Lineage extends Component {
         console.log(rv);
 
         setTimeout(() => rv.fitView(), 1000);
+
+        this.flowInstance = rv;
+
+        console.log('this.flowInstance == ');
+        console.log(this.flowInstance);
     }
 
     onElementsRemove(elements) {
