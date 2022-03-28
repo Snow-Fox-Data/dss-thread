@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactFlow, { Controls, ReactFlowProvider } from 'react-flow-renderer';
+import ReactFlow, { Controls, ReactFlowProvider, useZoomPanHelper } from 'react-flow-renderer';
 import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 import Common from '../common/common.js';
@@ -26,6 +26,10 @@ class Lineage extends Component {
         this.nodeTypes = {
             customFlowNode: customFlowNode,
         };
+
+        const { fitView } = useZoomPanHelper();
+        console.log('fitView == ');
+        console.log(fitView);
     }
 
     traverse = (lst, node, prop, ct = 0) => {

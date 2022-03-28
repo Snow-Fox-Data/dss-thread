@@ -5,8 +5,7 @@
         "label": "Thread",
         "description": "",
         "author": "Excelion Partners",
-         // "icon": "icon-puzzle-piece"
-         "icon": "icon-sitemap",
+        "icon": "icon-sitemap",
         "tags": [],
         "url": "",
         "licenseInfo": "GPL-3.0 License"
