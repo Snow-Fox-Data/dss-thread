@@ -128,9 +128,6 @@ class Lineage extends Component {
             var edgeId = 'edge_down_' + x.toString();
             var edge = { id: edgeId, source: baseElementId, target: elementId, arrowHeadType: 'arrow' };
 
-            console.log('down_res == ');
-            console.log(down_res);
-
             if (down_res[x].count > 0) {
                 edge.label = '[' + down_res[x].count + ']';
                 edge.animated = true;
@@ -174,9 +171,6 @@ class Lineage extends Component {
             var edgeId = 'edge_up_' + x.toString();
             var edge = { id: edgeId, source: elementId, target: baseElementId, arrowHeadType: 'arrow' };
 
-            console.log('up_res == ');
-            console.log(up_res);
-
             if (up_res[x].count > 0) {
                 edge.animated = true;
                 edge.label = '[' + up_res[x].count + ']';
@@ -198,7 +192,7 @@ class Lineage extends Component {
     }
 
     onLoad(rv) {
-        console.log('onLoad() :: rv == ');
+        console.log('LINEAGE :: onLoad() :: rv == ');
         console.log(rv);
 
         setTimeout(() => rv.fitView(), 1000);
@@ -212,12 +206,12 @@ class Lineage extends Component {
     }
 
     onElementsRemove(elements) {
-        console.log('onElementsRemove() :: elements == ');
+        console.log('LINEAGE :: onElementsRemove() :: elements == ');
         console.log(elements);
     }
 
     onFitView(rv) {
-        console.log('onFitView() :: rv == ');
+        console.log('LINEAGE :: onFitView() :: rv == ');
         console.log(rv);
 
         console.log('this == ');
@@ -225,7 +219,7 @@ class Lineage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("componentDidUpdate() :: prevProps == ");
+        console.log("LINEAGE :: componentDidUpdate() :: prevProps == ");
         console.log(prevProps);
         console.log("prevState == ");
         console.log(prevState);
