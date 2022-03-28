@@ -346,7 +346,7 @@ class App extends Component {
                                 id="async-search"
                                 delay={300}
                                 labelKey={option => {
-                                    return option.key.replaceAll('|', ' | ')
+                                    return option.key.replaceAll('|', ' | ') + ' ' + option.name
                                 }
                                 }
                                 ref={this.searchRef}
