@@ -54,35 +54,6 @@ class App extends Component {
         }
     }
 
-    displayLogo() {
-        return <image id="image0" width="70" height="69" x="0" y="0"
-                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABFCAMAAADAZGAYAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABp1BMVEX////+68L+14j/yF7/
-                uUD+ry/+qSf+piT/qSj/ry/+uD7/xVv+1oX+6r/+6bv/ymT/riz/rCv/yGD+5rX+4aX+ukH+uD3+
-                4J/+7Mb+vkn+vET/6r/+1YH+03r//ff/xFb+1ID+2Iv/wU//+e3/9uH/+e7/6bv+03v+tjn/8tb/
-                9N7/tTf+46r+3pr+sjL/8NP/+vD/uDz/zWz/xl7/tDX+9uL+sTD+tjr/wVH+qyn/vUX+0Hb/9N3+
-                2Ir/7sz/y2j/6Lj+4aP/u0X//vr+2pL+0nr/tDT/qij+1oT/+Ov/7cb+36D+037/ymb+46n/vkn+
-                tzz+3pn+rCv/9uP/zGv/7MP/9Nz+5K3+6br+4KH+357+4aT/8M//xl3+5rP/+Oz/7s3+rSz++vH+
-                vkj+0nj/xVn/6Ln/25X/rSz/9uL/y2n/wE3+4qb/wE//6r3/4aP/yGL+wE//+ev/ry7+qCf/46n+
-                3Zn/1YD+z3T/yF//yGP+25T/2Yz+7cn/u0T+68H+2Iz//vn+sjP/+vL/5rX/szT+5K//9eH/znD/
-                xFj/xVj/zm//5K18dJCaAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAAASAAAAEgARslrPgAAAAd0SU1F
-                B+YDHQQ0H9gx8XMAAAK4SURBVFjD7ZbnX9NQFIaPqFwtVRScuCqlrUJbsdWESEsligMVVw11oOLe
-                4gYnLpx/tLlJmtxxsvjor++XpDnvfZrzntsmAC211FKolrQtXba8nZAVKxMdyVWLY6zuXEM4re3q
-                jg1Zt54g2rAxFmTTZuKjni3RKVtJgLZFhGzfYZpTO1GlzFJvOgqlL0G/M5PNIcpmaG3X7nBK/4B1
-                6/k81lC+YB2Ke8Iog3vtBaU0hoGyfdy3PwTT6yxQQJUpQ6A5ZweCKcPukkpOxlRH3NNaEOUgswSr
-                V736aAAm4dk0HZHm1ZVDvpTDTAPqGCIGE7ANjzCuchYRG/vRQR/KKImlYyHDjqgBnHJc2COiCiJn
-                HMWc4DyK9IPSRcxJFHMqrAt9QuU+n0YxZziPxsxZsW7vLGQ1znIOxbRznjJTKVMqVKSuziOUvqB+
-                6ulMWb56AcGM+0OGjEyO9qPyTZFJBNMtLKXXDJqK3oACPaoN8c/jIoKZ5C3WwEt2snS1Zh7FcC4h
-                mAbWTjNZbSxdGZKqlxHMlYBkp8xwkPJVBHPNN1kajmbBhGyuY/tmmvc0k6XhOElXhUndwDA3hUnZ
-                yTrhKBM2jFUR3cW3+ElZY5mywzFhI9IeJrdRzB3JpxtghdOE1fn7uYti4J6wc5xwmrB6usJj7uOY
-                B9yOcbabB7PH5ukhTuF/VTnMwQ38kQ8GHnMRBz+niOpHgSdsUz2IWMxTXwzMeK4CVmcevs/8KfD8
-                hWszStL8Sc5wT18Gviq98jpXZYwO7sRfQ6DeOLZShiBy/0lnIUR125cvYJjmq9xMGAWgZhnBaCAy
-                7Fe5uXAKwCx1vh1G1WE1HIUC8I4E6n00CsCHj/6QxKeoFFPz0zhES8aAmPqc/CJDlNTXeBSqb7Xv
-                LKPYuRCfYevHQvVn16/fc3/a/vYvltHSf6l/CRGp1zHVdqcAAAAldEVYdGRhdGU6Y3JlYXRlADIw
-                MjItMDMtMjlUMDE6NTI6MzErMDM6MDAapLGBAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIyLTAzLTI5
-                VDAxOjUyOjMxKzAzOjAwa/kJPQAAAABJRU5ErkJggg==" />;
-    }
-
     filterDataikuItems = (response) => {
         let types = this.formatQueryTypes();
 
@@ -335,8 +306,7 @@ class App extends Component {
             <Container style={{ paddingTop: '10px' }}>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
-                        {/* <img src="../public/images/icon_thread.png" /> */}
-                        {this.displayLogo()}
+                        <img src="./logo.svg" />
                         <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
