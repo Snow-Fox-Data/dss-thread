@@ -19,7 +19,6 @@ class DataikuItem extends Component {
         console.log(props);
 
         this.state = {
-            lineage: null,
             newDefModal: false,
             selectedDef: {
                 id: -1
@@ -117,8 +116,6 @@ class DataikuItem extends Component {
     }
 
     renderItemDetailsByType() {
-        // this.state.isLineageVisible
-        // this.setState({ isLineageVisible: false })
         switch (this.props.object_type) {
             case 'dataset':
                 return this.renderDataset();
@@ -129,7 +126,6 @@ class DataikuItem extends Component {
             case 'definition':
                 return this.renderDefinition();
         }
-        // this.setState({ isLineageVisible: true })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -237,7 +233,7 @@ class DataikuItem extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                this.state.defSearchResults = response
+                this.state.defSearchResults = response;                
             });
     }
 
