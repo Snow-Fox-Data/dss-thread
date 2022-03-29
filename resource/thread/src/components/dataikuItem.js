@@ -353,7 +353,7 @@ class DataikuItem extends Component {
         }
 
         return <Col>
-            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={this.cancelLineageSave}>
+            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave() }>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition To Lineage</Modal.Title>
                 </Modal.Header>
