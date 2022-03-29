@@ -43,38 +43,6 @@ class DataikuItem extends Component {
         return orig;
     }
 
-    saveDefinition() {
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "name": this.props.item.name,
-                "description": this.props.item.description,
-                "applied_to": this.props.item.applied_to,
-                "id": this.props.item.id
-            })
-        }
-
-        eventBus.dispatch("loading", true);
-
-        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.props.item = result.value;
-
-                    this.setState({
-                        newDefModal: false,
-                        selectedDef: result.value
-                    });
-
-                    eventBus.dispatch("loading", false);
-                });
-    }
-
     saveCol(applyUp, applyDown) {
         let applyTo = eval(this.state.tempSelDef.applied_to)
         applyTo.push(this.props.item.key);
@@ -436,56 +404,56 @@ class DataikuItem extends Component {
         </Col>
     }
 
-    renderDefinition() {
-        return <Col>
-            <Row>
-                <Col xs="auto">
-                    <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
-                    </div>
-                </Col>
-                <Col>
-                    <h1>{this.props.item.name}</h1>
+    // renderDefinition() {
+    //     return <Col>
+    //         <Row>
+    //             <Col xs="auto">
+    //                 <div class="icon">
+    //                     {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+    //                 </div>
+    //             </Col>
+    //             <Col>
+    //                 <h1>{this.props.item.name}</h1>
 
-                    <Container>
-                        <Row>
-                            <Col>
+    //                 <Container>
+    //                     <Row>
+    //                         <Col>
 
-                                <div>
-                                    <Form style={{ paddingTop: '10px' }}>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Name</Form.Label>
-                                            <Form.Control type="text" defaultValue={this.props.item.name}
-                                                onChange={e => this.props.item.name = e.target.value}
-                                            />
-                                            {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
-                                                <div style={{ padding: "10px 0px" }}>
-                                                    <Form.Label>Applied To</Form.Label>
-                                                    <div>
-                                                        {this.buildTagsString(eval(this.props.item.applied_to), 'light')}
-                                                    </div>
-                                                </div>
-                                            }
-                                            <Form.Label>Description</Form.Label>
-                                            <Form.Control as="textarea" rows="3" defaultValue={this.props.item.description}
-                                                onChange={e => this.props.item.description = e.target.value}
-                                            />
-                                            <Form.Text className="text-muted">
-                                                Will appear in the Dataiku Dataset's column description.
-                                            </Form.Text>
-                                        </Form.Group>
-                                        <Button variant="primary" onClick={() => this.saveDefinition()}>Save</Button>
+    //                             <div>
+    //                                 <Form style={{ paddingTop: '10px' }}>
+    //                                     <Form.Group className="mb-3">
+    //                                         <Form.Label>Name</Form.Label>
+    //                                         <Form.Control type="text" defaultValue={this.props.item.name}
+    //                                             onChange={e => this.state.tempSelDef.name = e.target.value}
+    //                                         />
+    //                                         {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+    //                                             <div style={{ padding: "10px 0px" }}>
+    //                                                 <Form.Label>Applied To</Form.Label>
+    //                                                 <div>
+    //                                                     {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+    //                                                 </div>
+    //                                             </div>
+    //                                         }
+    //                                         <Form.Label>Description</Form.Label>
+    //                                         <Form.Control as="textarea" rows="3" defaultValue={this.pro.description}
+    //                                             onChange={e => this.item.description = e.target.value}
+    //                                         />
+    //                                         <Form.Text className="text-muted">
+    //                                             Will appear in the Dataiku Dataset's column description.
+    //                                         </Form.Text>
+    //                                     </Form.Group>
+    //                                     <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
 
-                                    </Form>
-                                </div>
-                            </Col>
+    //                                 </Form>
+    //                             </div>
+    //                         </Col>
 
-                        </Row>
-                    </Container>
-                </Col>
-            </Row>
-        </Col>
-    }
+    //                     </Row>
+    //                 </Container>
+    //             </Col>
+    //         </Row>
+    //     </Col>
+    // }
 
     renderDataset() {
         let tags = this.buildTagsString(this.props.item.meta.tags);
