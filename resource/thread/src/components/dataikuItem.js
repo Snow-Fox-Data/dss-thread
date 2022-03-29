@@ -77,8 +77,40 @@ class DataikuItem extends Component {
                     this.props.item.definition = result.value;
 
                     this.setState({
-                        newDefModal: false,
-                        selectedDef: result.value
+                        newDefModal: false
+                    });
+
+                    eventBus.dispatch("loading", false);
+                });
+    };
+
+    saveDef() {
+        let applyTo = eval(this.state.tempSelDef.applied_to);
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "name": this.props.item.name,
+                "description": this.props.item.description,
+                "applied_to": applyTo,
+                "id": this.props.item.id
+            })
+        }
+
+        eventBus.dispatch("loading", true);
+
+        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.props.item.definition = result.value;
+
+                    this.setState({
+                        newDefModal: false
                     });
 
                     eventBus.dispatch("loading", false);
@@ -436,19 +468,19 @@ class DataikuItem extends Component {
                                         <Form.Group className="mb-3">
                                             <Form.Label>Name</Form.Label>
                                             <Form.Control type="text" defaultValue={this.props.item.name}
-                                                onChange={e => this.state.tempSelDef.name = e.target.value}
+                                                onChange={e => this.props.item.name = e.target.value}
                                             />
-                                            {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+                                            {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
                                                     <div>
-                                                        {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+                                                        {this.buildTagsString(eval(this.props.item.applied_to), 'light')}
                                                     </div>
                                                 </div>
                                             }
                                             <Form.Label>Description</Form.Label>
-                                            <Form.Control as="textarea" rows="3" defaultValue={this.pro.description}
-                                                onChange={e => this.item.description = e.target.value}
+                                            <Form.Control as="textarea" rows="3" defaultValue={this.props.item.description}
+                                                onChange={e => this.props.item.description = e.target.value}
                                             />
                                             <Form.Text className="text-muted">
                                                 Will appear in the Dataiku Dataset's column description.
