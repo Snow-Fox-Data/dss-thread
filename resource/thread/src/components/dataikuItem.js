@@ -332,20 +332,20 @@ class DataikuItem extends Component {
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
         const handleLineageCheck = (e) => {
             var cb = e.target;
-            var upstream = cb.id.indexOf('ul');
+            var upstream = cb.id.indexOf('ul') > -1;
             if (cb.checked) {
                 if (upstream) {
-                    this.state.selectedUpLineage.push(cb.id.substr(2));
+                    this.state.selectedUpLineage.push(cb.id.substr(3));
                 }
                 else
-                    this.state.selectedDownLineage.push(cb.id.substr(2));
+                    this.state.selectedDownLineage.push(cb.id.substr(3));
             }
             else {
                 if (upstream) {
-                    this.state.selectedUpLineage = this.state.selectedUpLineage.filter(item => item == cb.id.substr(2));
+                    this.state.selectedUpLineage = this.state.selectedUpLineage.filter(item => item == cb.id.substr(3));
                 }
                 else
-                    this.state.selectedDownLineage = this.state.selectedDownLineage.filter(item => item == cb.id.substr(2));
+                    this.state.selectedDownLineage = this.state.selectedDownLineage.filter(item => item == cb.id.substr(3));
             }
         }
 
