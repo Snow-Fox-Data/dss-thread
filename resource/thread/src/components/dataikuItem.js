@@ -513,7 +513,7 @@ class DataikuItem extends Component {
                 <td>{col.name}</td>
                 <td>{col.type}</td>
                 <td>
-                    {col.definition.id > -1 &&
+                    {col.definition!= null && col.definition.id > -1 &&
                         <span className='app-link' onClick={() => this.openDefinition(col.definition)}>
                             {col.definition.name}</span>
                     }
