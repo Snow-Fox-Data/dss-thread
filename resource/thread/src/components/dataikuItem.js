@@ -22,7 +22,8 @@ class DataikuItem extends Component {
             },
             newDefSelected: true,
             defSearchResults: [],
-            isLineageVisible: false
+            isLineageVisible: false,
+            applyLineageModal: false
         };
     }
 
@@ -272,6 +273,12 @@ class DataikuItem extends Component {
         </Fragment>;
     }
 
+    showLineageSelection() {
+        this.setState({
+            applyLineageModal: true
+        })
+    }
+
     selectDef = (item) => {
         this.setState({
             tempSelDef: item[0],
@@ -315,6 +322,16 @@ class DataikuItem extends Component {
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
 
         return <Col>
+            <Modal size="md" show={this.state.applyLineageModal} animation={false} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Apply Definition</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+
+                    </Container>
+                </Modal.Body>
+            </Modal>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition</Modal.Title>
