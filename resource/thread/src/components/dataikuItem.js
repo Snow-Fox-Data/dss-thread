@@ -593,7 +593,8 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.id}</h1>
+                    <h1>{this.props.item.id}</h1><a href={Common.createDatasetLink(this.props.item.project, this.props.item.name)} target="_blank"><ArrowUpRightSquare size={22} /></a>
+
                     <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
@@ -620,6 +621,9 @@ class DataikuItem extends Component {
                             this.state.isLineageVisible &&
                             <div class="lineage" id="lineage-container">{lineage}</div>
                         }
+                    </Tab>
+                    <Tab eventKey='flow' title="Flow" def>
+                        <iframe style={{ width: '100%', height: '500px' }} src={Common.createDatasetLink(this.props.item.project, this.props.item.name)} ></iframe>
                     </Tab>
                 </Tabs>
             </Row>
@@ -667,7 +671,7 @@ class DataikuItem extends Component {
                             </Table>
                         </Tab>
                         <Tab eventKey='flow' title="Flow" def>
-                            <iframe width='500' height='500' src={Common.createProjectLink(this.props.item.projectKey)} ></iframe>
+                            <iframe style={{ width: '100%', height: '500px' }} src={Common.createProjectLink(this.props.item.projectKey)} ></iframe>
                         </Tab>
                     </Tabs>
                 </div>
