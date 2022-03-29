@@ -328,19 +328,23 @@ class DataikuItem extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <span style={{ fontWeight: 'bold' }}>Upstream</span>
+                        {this.props.item.lineage_upstream.length > 0 &&
+                            <span style={{ fontWeight: 'bold' }}>Upstream</span>
+                        }
                         {this.props.item.lineage_upstream.map((type) => (
                             <Form.Check type='checkbox' label={type.name}></Form.Check>
                         ))}
-                        <span style={{ fontWeight: 'bold' }}>Downstream</span>
+                        {this.props.item.lineage_downstream.length > 0 &&
+                            <span style={{ fontWeight: 'bold' }}>Downstream</span>
+                        }
                         {this.props.item.lineage_downstream.map((type) => (
                             <Form.Check type='checkbox' label={type.name}></Form.Check>
                         ))}
                     </Container>
                 </Modal.Body>
-                <Col ms-auto>
+                <Modal.Footer>
                     <Button variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
-                </Col>
+                </Modal.Footer>
             </Modal>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
