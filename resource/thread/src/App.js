@@ -58,6 +58,9 @@ class App extends Component {
             searchResults: [],
             loggedIn: false
         }
+
+        console.log("window.location.href == " + window.location.href);
+        console.log("window.location == " + window.location);
     }
 
     filterDataikuItems = (response) => {
@@ -339,8 +342,8 @@ class App extends Component {
                                     {/* <Link to="{App.currentUrl}/">Home</Link>
                                     <Link to="/catalog">Catalog</Link> */}
 
-                                    <Link to={App.currentUrl + "/"}>Home</Link>
-                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link>
+                                    {/* <Link to={App.currentUrl + "/"}>Home</Link>
+                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link> */}
                                 </ul>
                             </div>
                             <ul class="navbar-nav">
