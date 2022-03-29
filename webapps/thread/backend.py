@@ -27,12 +27,17 @@ def get_user():
     headers = dict(request.headers)
     # Get the auth info of the user performing the request
     auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
-    print ("User doing the query is %s" % auth_info["authIdentifier"])
+    
+    
     # If the user's group is not TRUSTED_GROUP, raise an exception
     # if TRUSTED_GROUP not in auth_info["groups"] :
         # raise Exception("You do not belong here, go away")
     # else:
-    data = {"status": "ok", "you_are": auth_info["authIdentifier"]}
+    
+    if 'authIdentifier' in auth_info:
+        data = {"status": "ok", "you_are": auth_info["authIdentifier"]}
+    else:
+        data = {"status": "denied", "you_are": 'not logged in'}
 
     return json.dumps(data)
 
