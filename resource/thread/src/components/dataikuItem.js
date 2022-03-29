@@ -42,16 +42,16 @@ class DataikuItem extends Component {
         return orig;
     }
 
-    saveCol(applyUp, applyDown) {
+    saveCol() {
         let applyTo = eval(this.state.tempSelDef.applied_to);
 
         if (!applyTo.includes(this.props.item.key))
             applyTo.push(this.props.item.key);
 
-        if (applyUp)
-            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
-        if (applyDown)
-            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
+        if (this.state.selectedUpLineage.length > 0)
+            applyTo = applyTo.concat(this.state.selectedUpLineage); //this.flattenArray(this.props.item, 'lineage_upstream'))
+        if (this.state.selectedDownLineage.length > 0)
+            applyTo = applyTo.concat(this.state.selectedDownLineage); //this.flattenArray(this.props.item, 'lineage_downstream'))
 
         let val = '';
         if (this.state.tempSelDef.description != null)
@@ -333,15 +333,15 @@ class DataikuItem extends Component {
         const handleLineageCheck = (e) => {
             var cb = e.target;
             var upstream = cb.id.indexOf('ul') > -1;
-            if (cb.checked == true) {
-                if (upstream == true) {
+            if (cb.checked) {
+                if (upstream) {
                     this.state.selectedUpLineage.push(cb.id.substr(3));
                 }
                 else
                     this.state.selectedDownLineage.push(cb.id.substr(3));
             }
             else {
-                if (upstream == true) {
+                if (upstream) {
                     this.state.selectedUpLineage = this.state.selectedUpLineage.filter(item => item == cb.id.substr(3));
                 }
                 else
@@ -372,7 +372,7 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="light" onClick={() => this.cancelLineageSave()}>Cancel</Button>
-                    <Button variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
+                    <Button variant="primary" onClick={() => this.saveCol()}>Apply</Button>
                 </Modal.Footer>
             </Modal>
             <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
@@ -452,7 +452,7 @@ class DataikuItem extends Component {
                     </Col>
                     <Col ms-auto>
                         <Button variant="secondary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
-                        <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
+                        <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol()}>Apply</Button>
                     </Col>
                 </Modal.Footer>
             </Modal>
