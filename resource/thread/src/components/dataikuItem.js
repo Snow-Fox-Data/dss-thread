@@ -44,14 +44,17 @@ class DataikuItem extends Component {
 
     saveCol() {
         let applyTo = eval(this.state.tempSelDef.applied_to);
-
-        if (!applyTo.includes(this.props.item.key))
-            applyTo.push(this.props.item.key);
+        applyTo.push(this.props.item.key);
 
         if (this.state.selectedUpLineage.length > 0)
             applyTo = applyTo.concat(this.state.selectedUpLineage); //this.flattenArray(this.props.item, 'lineage_upstream'))
         if (this.state.selectedDownLineage.length > 0)
             applyTo = applyTo.concat(this.state.selectedDownLineage); //this.flattenArray(this.props.item, 'lineage_downstream'))
+
+        // de-dupe array
+        applyTo = applyTo.filter(function (item, pos) {
+            return applyTo.indexOf(item) == pos;
+        })
 
         let val = '';
         if (this.state.tempSelDef.description != null)
