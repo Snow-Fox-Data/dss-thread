@@ -181,15 +181,15 @@ class DataikuItem extends Component {
     editDef() {
         this.resetSelectedDef();
 
-        // this.setState({
-        //     tempSelDef: {
-        //         name: this.props.item.definition.name,
-        //         description: this.props.item.definition.description,
-        //         id: this.props.item.definition.id,
-        //         applied_to: this.props.item.definition.applied_to
-        //     }
-        // })
-        this.setState({ newDefModal: true });
+        this.setState({
+            tempSelDef: {
+                name: this.props.item.definition.name,
+                description: this.props.item.definition.description,
+                id: this.props.item.definition.id,
+                applied_to: this.props.item.definition.applied_to
+            },
+            newDefModal: true
+        })
     }
 
     openColumn(col) {
@@ -304,21 +304,21 @@ class DataikuItem extends Component {
                                                         <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
                                                     </div>
                                                 }
-                                                {this.state.selectedDef.id == -1 &&
+                                                {this.state.tempSelDef.id == -1 &&
                                                     <h3>New Definition</h3>
                                                 }
                                                 <Form.Label>Name</Form.Label>
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
-                                                {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+                                                {/* {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Applied To</Form.Label>
                                                         <div>
                                                             {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
                                                         </div>
                                                     </div>
-                                                }
+                                                } */}
                                                 <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
