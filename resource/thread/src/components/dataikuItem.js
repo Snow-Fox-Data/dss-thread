@@ -330,7 +330,8 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
-        const handleLineageCheck = (cb) => {
+        const handleLineageCheck = (e) => {
+            var cb = e.target;
             var upstream = cb.id.indexOf('ul');
             if (cb.checked) {
                 if (upstream) {
