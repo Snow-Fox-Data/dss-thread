@@ -246,6 +246,10 @@ class DataikuItem extends Component {
         eventBus.dispatch("datasetSelected", ds);
     }
 
+    openDefinition(definition) {
+        eventBus.dispatch("definitionSelected", definition);
+    }
+
     openProject(proj) {
         eventBus.dispatch("projectSelected", proj);
     }
@@ -460,6 +464,9 @@ class DataikuItem extends Component {
                 </Col>
                 <Col>
                     <h1>{this.props.item.name}</h1>
+                    <p class="name">
+                        Definition
+                    </p>
                 </Col>
             </Row>
             <Row>
@@ -501,10 +508,16 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
 
         var listItems = this.props.item.schema.map((col) =>
-            <tr onClick={() => this.openColumn(col.key)}>
+            //onClick={() => this.openColumn(col.key)}
+            <tr>
                 <td>{col.name}</td>
                 <td>{col.type}</td>
-                <td>{col.comment}</td>
+                <td>
+                    {col.definition.id > -1 &&
+                        <span className='app-link' onClick={() => this.openDefinition(col.definition)}>
+                            {col.definition.name}</span>
+                    }
+                </td>
             </tr>
         );
 

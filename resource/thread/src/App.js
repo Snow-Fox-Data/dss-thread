@@ -175,6 +175,19 @@ class App extends Component {
                     }
                     );
 
+                    eventBus.on("definitionSelected", (ds) => {
+                        this.loadItem([{
+                            key: ds,
+                            object_type: 'definition'
+                        }])
+
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(ds)
+                    }
+                    );
+
+
                     eventBus.on("projectSelected", (proj) => {
                         this.loadItem([{
                             key: proj,
