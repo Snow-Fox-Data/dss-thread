@@ -31,6 +31,7 @@ import {
 
 import Common from "./common/common";
 import DataikuItem from "./components/dataikuItem";
+import logo from "./assets/images/icon_thread.png"
 
 class App extends Component {
     constructor(props) {
@@ -306,7 +307,7 @@ class App extends Component {
             <Container style={{ paddingTop: '10px' }}>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
-                        {/* <img src="../public/images/icon_thread.png" /> */}
+                        <img src={logo} className="App-logo" alt="logo" />
                         <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -412,7 +413,7 @@ class App extends Component {
                     </div>
                 </Row>
                 <Row>
-                    {this.dataikuItem}
+                    {!this.state.loading ? this.dataikuItem : null}
                 </Row>
             </Container>
         );

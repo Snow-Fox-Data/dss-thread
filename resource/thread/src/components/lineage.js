@@ -210,21 +210,24 @@ class Lineage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         console.log("LINEAGE :: componentDidUpdate() :: prevProps == ");
-        console.log(prevProps);
-        console.log("prevState == ");
-        console.log(prevState);
+        // console.log(prevProps);
+        // console.log("prevState == ");
+        // console.log(prevState);
         // this.forceUpdate();
     }
 
-    componentDidMount() { }
+    componentDidMount() {
+        console.log("LINEAGE :: componentDidMount() :: ");
+    }
 
-    componentWillUnmount() { }
+    componentWillUnmount() {
+        console.log("LINEAGE :: componentWillUnmount() :: ");
+    }
 
     render() {
         if (this.props.deets.name != this.state.last_ds) {
             this.state.last_ds = this.props.deets.name;
             this.update('elements', this.props.deets);
-            // this.forceUpdate();
         }
 
         return (            
