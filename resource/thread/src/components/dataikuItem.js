@@ -276,14 +276,14 @@ class DataikuItem extends Component {
     cancelLineageSave() {
         this.setState({
             applyLineageModal: false,
-            newDefSelected: true
+            newDefModal: true
         })
     }
 
     showLineageSelection() {
         this.setState({
             applyLineageModal: true,
-            newDefSelected: false
+            newDefModal: false
         })
     }
 
@@ -328,6 +328,9 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
+        const handleLineageCheck = (c) => {
+            let e = '';
+        }
 
         return <Col>
             <Modal size="md" show={this.state.applyLineageModal} animation={false} onHide={handleClose}>
@@ -340,7 +343,7 @@ class DataikuItem extends Component {
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
                         {this.props.item.lineage_upstream.map((type) => (
-                            <Form.Check type='checkbox' label={type.name}></Form.Check>
+                            <Form.Check type='switch' onChange={this.handleLineageCheck} label={type.name}></Form.Check>
                         ))}
                         {this.props.item.lineage_downstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
