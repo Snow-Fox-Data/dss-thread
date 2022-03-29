@@ -61,6 +61,7 @@ class App extends Component {
 
         console.log("window.location.href == " + window.location.href);
         console.log("window.location == " + window.location);
+        console.log("window.location.pathname == " + window.location.pathname);
     }
 
     filterDataikuItems = (response) => {
