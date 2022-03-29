@@ -18,9 +18,6 @@ class DataikuItem extends Component {
         this.state = {
             lineage: null,
             newDefModal: false,
-            selectedDef: {
-                id: -1
-            },
             tempSelDef: {
             },
             newDefSelected: true,
@@ -44,7 +41,7 @@ class DataikuItem extends Component {
     }
 
     saveCol(applyUp, applyDown) {
-        let applyTo = this.state.tempSelDef.applied_to;
+        let applyTo = this.state.tempSelDef.applied_to_arr;
         applyTo.push(this.props.item.key);
 
         if (applyUp)
@@ -133,7 +130,7 @@ class DataikuItem extends Component {
         switch (this.props.object_type) {
             case 'column':
                 this.props.item.definition.applied_to_arr = eval(this.props.item.definition.applied_to);
-                this.resetSelectedDef();
+                // this.resetSelectedDef();
                 break;
             case 'definition':
                 this.props.item.applied_to_arr = eval(this.props.item.applied_to);
@@ -168,34 +165,35 @@ class DataikuItem extends Component {
         });
     }
 
-    resetSelectedDef() {
-        this.state.tempSelDef = {
-            id: -1
-        };
+    // resetSelectedDef() {
+    //     this.state.tempSelDef = {
+    //         id: -1
+    //     };
 
-        if (this.props.item.definition.id == -1) {
-            this.setState({
-                selectedDef: {
-                    name: this.props.item.name,
-                    description: this.props.item.comment,
-                    id: -1
-                }
-            })
-        }
-        else {
-            this.setState({
-                selectedDef: {
-                    name: this.props.item.definition.name,
-                    description: this.props.item.definition.description,
-                    id: this.props.item.definition.id,
-                    applied_to_arr: this.props.item.definition.applied_to_arr
-                }
-            })
-        }
-    }
+    //     if (this.props.item.definition.id == -1) {
+    //         this.setState({
+    //             selectedDef: {
+    //                 name: this.props.item.name,
+    //                 description: this.props.item.comment,
+    //                 applied_to_arr:[],
+    //                 id: -1
+    //             }
+    //         })
+    //     }
+    //     else {
+    //         this.setState({
+    //             selectedDef: {
+    //                 name: this.props.item.definition.name,
+    //                 description: this.props.item.definition.description,
+    //                 id: this.props.item.definition.id,
+    //                 applied_to_arr: this.props.item.definition.applied_to_arr
+    //             }
+    //         })
+    //     }
+    // }
 
     editDef() {
-        this.resetSelectedDef();
+        // this.resetSelectedDef();
 
         this.setState({
             tempSelDef: {
@@ -314,7 +312,7 @@ class DataikuItem extends Component {
                                     <div>
                                         <Form style={{ paddingTop: '10px' }}>
                                             <Form.Group className="mb-3">
-                                                {this.state.selectedDef.id > -1 &&
+                                                {this.state.tempSelDef.id > -1 &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Definition ID</Form.Label>
                                                         <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
@@ -403,7 +401,7 @@ class DataikuItem extends Component {
                                         onClick={() => this.editDef()}
                                     >Edit Definition</Button>{' '}
                                     <div style={{ padding: '10px' }}>
-                                        <Definition definition={this.state.selectedDef}></Definition>
+                                        <Definition definition={this.props.item.definition}></Definition>
                                     </div>
                                 </div>
                             }
