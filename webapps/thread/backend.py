@@ -115,7 +115,6 @@ def load_item():
 
                 p_name, d_name, c_name = dss.extract_name_project(key)
                 
-                
                 p = dss.load_dataset(p_name + '|' + d_name, c_name)
                 col = next(item for item in p['schema'] if item["name"] == c_name)
                 col['project'] = p_name

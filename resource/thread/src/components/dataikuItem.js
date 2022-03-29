@@ -510,13 +510,12 @@ class DataikuItem extends Component {
         var listItems = this.props.item.schema.map((col) =>
             //onClick={() => this.openColumn(col.key)}
             <tr>
-                <td>{col.name}</td>
+                <td>
+                    <span className='app-link' onClick={() => this.openColumn(col.key)}>{col.name}</span>
+                </td>
                 <td>{col.type}</td>
                 <td>
-                    {col.definition!= null && col.definition.id > -1 &&
-                        <span className='app-link' onClick={() => this.openDefinition(col.definition)}>
-                            {col.definition.name}</span>
-                    }
+                    {col.comment}
                 </td>
             </tr>
         );
@@ -545,7 +544,7 @@ class DataikuItem extends Component {
                                 <tr>
                                     <th>Name</th>
                                     <th>Type</th>
-                                    <th>Definition</th>
+                                    <th>Description</th>
                                 </tr>
                             </thead>
                             <tbody>
