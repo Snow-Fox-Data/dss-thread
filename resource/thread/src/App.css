@@ -3,9 +3,13 @@ html {
 }
 
 .app-link {
-  text-decoration: 'underline';
+  text-decoration: underline;
   color: #3399f3;
   cursor: pointer;
+}
+
+.app-logo {
+  max-width: 75px;
 }
 
 .cellLink {

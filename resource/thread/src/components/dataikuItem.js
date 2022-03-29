@@ -24,7 +24,6 @@ class DataikuItem extends Component {
             defSearchResults: [],
             isLineageVisible: false
         };
-
     }
 
     flattenArray(elem, key, orig = []) {
