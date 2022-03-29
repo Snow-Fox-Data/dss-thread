@@ -161,9 +161,7 @@ class App extends Component {
 
                     this.navDeepLink();
 
-                    window.onhashchange = function() {
-                        this.navDeepLink();
-                    }
+                    window.addEventListener("hashchange", this.navDeepLink, false);
 
                     eventBus.on("datasetSelected", (ds) => {
                         this.loadItem([{
