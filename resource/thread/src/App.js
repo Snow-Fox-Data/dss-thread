@@ -161,6 +161,10 @@ class App extends Component {
 
                     this.navDeepLink();
 
+                    window.onhashchange = function() {
+                        this.navDeepLink();
+                    }
+
                     eventBus.on("datasetSelected", (ds) => {
                         this.loadItem([{
                             key: ds,
@@ -281,29 +285,12 @@ class App extends Component {
     render() {
         this.searchRef = React.createRef();
 
-        // <Router>
-        //     <main>
-        //       <nav>
-        //         <ul>
-        //           <li><Link to="/">Home</Link></li>
-        //           <li><a href="/about">About</a></li>
-        //           <li><a href="/contact">Contact</a></li>
-        //         </ul>
-        //       </nav>
-
-        //         <Routes>
-        //             <Route path="/" exact component={Home} />
-        //         </Routes>
-        //     </main>
-        // </Router>
-
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
         const filterBy = () => true;
 
         this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
 
         return (
-
             <Container style={{ paddingTop: '10px' }}>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
