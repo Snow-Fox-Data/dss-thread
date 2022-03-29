@@ -359,7 +359,10 @@ class DataikuItem extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <div style={{ padding: '10px' }}>Select the up and downstream datasets to apply this definition to</div>
+                        <div style={{ padding: '10px' }}>Select the up and downstream datasets to apply this definition</div>
+                        <span style={{ fontWeight: 'bold' }}>This Dataset</span>
+                        <Form.Check className='lineage-check' disabled='true' type='switch' label={this.state.item.name}></Form.Check>
+
                         {this.props.item.lineage_upstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
