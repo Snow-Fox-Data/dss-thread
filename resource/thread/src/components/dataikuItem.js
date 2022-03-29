@@ -6,7 +6,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import { Modal, Button, Form, Toast, ButtonGroup } from "react-bootstrap";
 import eventBus from "../eventBus";
-import { ArrowUpRightSquare } from 'react-bootstrap-icons'
+import { ArrowUpRightSquare, ThermometerSnow } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
@@ -23,7 +23,9 @@ class DataikuItem extends Component {
             newDefSelected: true,
             defSearchResults: [],
             isLineageVisible: false,
-            applyLineageModal: false
+            applyLineageModal: false,
+            selectedUpLineage: [],
+            selectedDownLineage: []
         };
     }
 
@@ -328,8 +330,22 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
-        const handleLineageCheck = (c) => {
-            console.log(c);
+        const handleLineageCheck = (cb) => {
+            var upstream = cb.id.indexOf('ul');
+            if (cb.checked) {
+                if (upstream) {
+                    this.state.selectedUpLineage.push(cb.id.substr(2));
+                }
+                else
+                    this.state.selectedDownLineage.push(cb.id.substr(2));
+            }
+            else {
+                if (upstream) {
+                    this.state.selectedUpLineage = this.state.selectedUpLineage.filter(item => item == cb.id.substr(2));
+                }
+                else
+                    this.state.selectedDownLineage = this.state.selectedDownLineage.filter(item => item == cb.id.substr(2));
+            }
         }
 
         return <Col>
@@ -343,13 +359,13 @@ class DataikuItem extends Component {
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
                         {this.props.item.lineage_upstream.map((type) => (
-                            <Form.Check type='switch' onChange={handleLineageCheck} label={type.name}></Form.Check>
+                            <Form.Check type='switch' onChange={handleLineageCheck} id={'ul-' + type.name} label={type.name}></Form.Check>
                         ))}
                         {this.props.item.lineage_downstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
                         {this.props.item.lineage_downstream.map((type) => (
-                            <Form.Check type='checkbox' label={type.name}></Form.Check>
+                            <Form.Check type='checkbox' id={'dl-' + type.name} label={type.name}></Form.Check>
                         ))}
                     </Container>
                 </Modal.Body>
