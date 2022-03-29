@@ -221,6 +221,10 @@ class App extends Component {
                             this.setState({ "loading": isLoading })
                         );
                     }
+                    else
+                        this.setState({
+                            loading: false
+                        })
                 });
 
         });
@@ -310,7 +314,10 @@ class App extends Component {
 
         return (
             <Container style={{ paddingTop: '10px' }}>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                {!this.state.loggedIn &&
+                    <div>Unauthorized</div>
+                }
+                <nav hidden={!this.state.loggedIn} class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
                         <img src={logo} className="app-logo" alt="logo" />
                         <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
@@ -402,9 +409,6 @@ class App extends Component {
                             </Spinner>
                             : null}
                     </div>
-                    {!this.state.loggedIn &&
-                        <div>Unauthorized</div>
-                    }
                 </Row>
                 <Row>
                     {!loading ? this.dataikuItem : null}
