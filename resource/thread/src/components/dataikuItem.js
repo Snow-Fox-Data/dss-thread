@@ -132,9 +132,11 @@ class DataikuItem extends Component {
     componentDidMount() {
         switch (this.props.object_type) {
             case 'column':
+                this.props.item.definition.applied_to_arr = eval(this.props.item.definition.applied_to);
                 this.resetSelectedDef();
                 break;
             case 'definition':
+                this.props.item.applied_to_arr = eval(this.props.item.applied_to);
                 break;
         }
     }
