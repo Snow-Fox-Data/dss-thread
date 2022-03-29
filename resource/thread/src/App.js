@@ -32,8 +32,8 @@ import {
 import Common from "./common/common";
 import DataikuItem from "./components/dataikuItem";
 import logo from "./assets/images/icon_thread.png";
-import Home from "./components/home";
-import Catalog from "./components/catalog";
+import Home from "./pages/home";
+import Catalog from "./pages/catalog";
 
 class App extends Component {
     constructor(props) {
@@ -57,243 +57,243 @@ class App extends Component {
         }
     }
 
-    // filterDataikuItems = (response) => {
-    //     let types = this.formatQueryTypes();
+    filterDataikuItems = (response) => {
+        let types = this.formatQueryTypes();
 
-    //     var p_list = [];
-    //     Object.keys(response).forEach(function (results) {
-    //         var dataikuItem = response[results];
-    //         if (types.indexOf(dataikuItem.object_type.toString()) >= 0) {
-    //             p_list[p_list.length] = dataikuItem;
-    //         }
-    //     });
+        var p_list = [];
+        Object.keys(response).forEach(function (results) {
+            var dataikuItem = response[results];
+            if (types.indexOf(dataikuItem.object_type.toString()) >= 0) {
+                p_list[p_list.length] = dataikuItem;
+            }
+        });
 
-    //     return p_list;
-    // }
+        return p_list;
+    }
 
-    // formatQueryTypes = () => {
-    //     let types = [];
-    //     Object.entries(this.state.filters).sort().map(([key, value]) => {
-    //         if (value == true) {
-    //             types[types.length] = key.toString();
-    //         }
-    //     });
+    formatQueryTypes = () => {
+        let types = [];
+        Object.entries(this.state.filters).sort().map(([key, value]) => {
+            if (value == true) {
+                types[types.length] = key.toString();
+            }
+        });
 
-    //     return types;
-    // }
+        return types;
+    }
 
-    // handleOnChange = (type) => {
-    //     let tempFilters = this.state.filters;
-    //     tempFilters[type] = !tempFilters[type];
+    handleOnChange = (type) => {
+        let tempFilters = this.state.filters;
+        tempFilters[type] = !tempFilters[type];
 
-    //     this.setState({
-    //         filters: tempFilters
-    //     });
-    // }
+        this.setState({
+            filters: tempFilters
+        });
+    }
 
-    // loadItem = (item) => {
-    //     this.setState({ loading: true });
-    //     if (item.length > 0) {
-    //         this.loadItemByKey(item[0].key)
-    //         this.navToObject(item[0].key)
-    //     }
-    // }
+    loadItem = (item) => {
+        this.setState({ loading: true });
+        if (item.length > 0) {
+            this.loadItemByKey(item[0].key)
+            this.navToObject(item[0].key)
+        }
+    }
 
-    // loadItemByKey = (itemKey) => {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         headers: { 'Content-Type': 'application/json' },
-    //     };
+    loadItemByKey = (itemKey) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
 
-    //     // let obj_type = 'project';
-    //     // let splitCt = (itemKey.split("|").length - 1);
-    //     // if (splitCt == 1)
-    //     //     obj_type = 'dataset';
-    //     // else if (splitCt == 2)
-    //     //     obj_type = 'column'
+        // let obj_type = 'project';
+        // let splitCt = (itemKey.split("|").length - 1);
+        // if (splitCt == 1)
+        //     obj_type = 'dataset';
+        // else if (splitCt == 2)
+        //     obj_type = 'column'
 
-    //     fetch(window.getWebAppBackendUrl('load-item') + '?key=' + itemKey, requestOptions)
-    //         .then(res => res.json())
-    //         .then((response) => {
-    //             console.log('response == ');
-    //             console.log(response);
+        fetch(window.getWebAppBackendUrl('load-item') + '?key=' + itemKey, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                console.log('response == ');
+                console.log(response);
 
-    //             this.setState({
-    //                 loading: false,
-    //                 selectedItem: response,
-    //                 selectedItemType: response.object_type
-    //             });
-    //         });
-    // }
+                this.setState({
+                    loading: false,
+                    selectedItem: response,
+                    selectedItemType: response.object_type
+                });
+            });
+    }
 
-    // search = (term) => {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         headers: { 'Content-Type': 'application/json' },
-    //     };
+    search = (term) => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
 
-    //     let url = window.getWebAppBackendUrl('search') + '?term=' + term;
-    //     this.setState({ loading: true });
-    //     fetch(url, requestOptions)
-    //         .then(res => res.json())
-    //         .then((response) => {
-    //             var p_list = this.filterDataikuItems(response);
+        let url = window.getWebAppBackendUrl('search') + '?term=' + term;
+        this.setState({ loading: true });
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                var p_list = this.filterDataikuItems(response);
 
-    //             this.setState({
-    //                 searchResults: p_list,
-    //                 loading: false
-    //             });
-    //         });
-    // }
+                this.setState({
+                    searchResults: p_list,
+                    loading: false
+                });
+            });
+    }
 
-    // componentDidMount() {
+    componentDidMount() {
 
-    //     window.$(document).ready(() => {
+        window.$(document).ready(() => {
 
-    //         fetch(window.getWebAppBackendUrl('get-user'))
-    //             .then(res => res.json())
-    //             .then((response) => {
+            fetch(window.getWebAppBackendUrl('get-user'))
+                .then(res => res.json())
+                .then((response) => {
 
-    //                 this.setState({
-    //                     dataiku: window.dataiku,
-    //                     currentUser: response['you_are'],
-    //                     rendered: true,
-    //                     loading: false
-    //                 });
+                    this.setState({
+                        dataiku: window.dataiku,
+                        currentUser: response['you_are'],
+                        rendered: true,
+                        loading: false
+                    });
 
-    //                 this.navDeepLink();
+                    this.navDeepLink();
 
-    //                 window.addEventListener("hashchange", () => this.navDeepLink());
+                    window.addEventListener("hashchange", () => this.navDeepLink());
 
-    //                 eventBus.on("datasetSelected", (ds) => {
-    //                     this.loadItem([{
-    //                         key: ds,
-    //                         object_type: 'dataset'
-    //                     }])
+                    eventBus.on("datasetSelected", (ds) => {
+                        this.loadItem([{
+                            key: ds,
+                            object_type: 'dataset'
+                        }])
 
-    //                     // clear the search bar
-    //                     // this.searchRef.clear()
-    //                     this.navToObject(ds)
-    //                 }
-    //                 );
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(ds)
+                    }
+                    );
 
-    //                 eventBus.on("definitionSelected", (ds) => {
-    //                     this.loadItem([{
-    //                         key: ds,
-    //                         object_type: 'definition'
-    //                     }])
+                    eventBus.on("definitionSelected", (ds) => {
+                        this.loadItem([{
+                            key: ds,
+                            object_type: 'definition'
+                        }])
 
-    //                     // clear the search bar
-    //                     // this.searchRef.clear()
-    //                     this.navToObject(ds)
-    //                 }
-    //                 );
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(ds)
+                    }
+                    );
 
 
-    //                 eventBus.on("projectSelected", (proj) => {
-    //                     this.loadItem([{
-    //                         key: proj,
-    //                         object_type: 'project'
-    //                     }])
+                    eventBus.on("projectSelected", (proj) => {
+                        this.loadItem([{
+                            key: proj,
+                            object_type: 'project'
+                        }])
 
-    //                     // clear the search bar
-    //                     // this.searchRef.clear()
-    //                     this.navToObject(proj)
-    //                 }
-    //                 );
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(proj)
+                    }
+                    );
 
-    //                 eventBus.on("columnSelected", (col) => {
-    //                     this.loadItem([{
-    //                         key: col,
-    //                         object_type: 'column'
-    //                     }])
+                    eventBus.on("columnSelected", (col) => {
+                        this.loadItem([{
+                            key: col,
+                            object_type: 'column'
+                        }])
 
-    //                     // clear the search bar
-    //                     // this.searchRef.clear()
-    //                     this.navToObject(col)
-    //                 }
-    //                 );
+                        // clear the search bar
+                        // this.searchRef.clear()
+                        this.navToObject(col)
+                    }
+                    );
 
-    //                 eventBus.on("loading", (isLoading) =>
-    //                     this.setState({ "loading": isLoading })
-    //                 );
-    //             });
-    //     });
-    // }
+                    eventBus.on("loading", (isLoading) =>
+                        this.setState({ "loading": isLoading })
+                    );
+                });
+        });
+    }
 
-    // navDeepLink() {
-    //     let parts = window.top.location.href.split('#o=')
+    navDeepLink() {
+        let parts = window.top.location.href.split('#o=')
 
-    //     if (parts.length > 1) {
-    //         this.setState({ "loading": true });
-    //         this.loadItemByKey(parts[1])
-    //     }
-    // }
+        if (parts.length > 1) {
+            this.setState({ "loading": true });
+            this.loadItemByKey(parts[1])
+        }
+    }
 
-    // navToObject(obj) {
-    //     let base_url = window.top.location.href.split('#')[0]
-    //     window.top.location.href = base_url + "#o=" + obj
-    // }
+    navToObject(obj) {
+        let base_url = window.top.location.href.split('#')[0]
+        window.top.location.href = base_url + "#o=" + obj
+    }
 
-    // rescan() {
-    //     this.setState({ loading: true });
-    //     fetch(window.getWebAppBackendUrl('scan'))
-    //         .then(res => res.json())
-    //         .then((response) => {
-    //             this.setState({ loading: false });
-    //         });
-    // }
+    rescan() {
+        this.setState({ loading: true });
+        fetch(window.getWebAppBackendUrl('scan'))
+            .then(res => res.json())
+            .then((response) => {
+                this.setState({ loading: false });
+            });
+    }
 
-    // renderMenuItemChildren(option, props) {
-    //     return <Fragment>
+    renderMenuItemChildren(option, props) {
+        return <Fragment>
 
-    //         <span style={{ paddingRight: '5px' }}>
-    //             {Common.getIconForDataikuItemType(option.object_type, '13px')}
-    //         </span>
-    //         {option.object_type == 'definition' &&
-    //             <span>
-    //                 <span style={{}}>Definition: </span>
-    //                 <span style={{}}>{option.name}</span>
-    //             </span>
-    //         }
-    //         {option.object_type == 'column' &&
-    //             <span>
-    //                 <span style={{}}>Project: </span>
-    //                 <span style={{}}>{option.key.split('|')[0]}</span>
+            <span style={{ paddingRight: '5px' }}>
+                {Common.getIconForDataikuItemType(option.object_type, '13px')}
+            </span>
+            {option.object_type == 'definition' &&
+                <span>
+                    <span style={{}}>Definition: </span>
+                    <span style={{}}>{option.name}</span>
+                </span>
+            }
+            {option.object_type == 'column' &&
+                <span>
+                    <span style={{}}>Project: </span>
+                    <span style={{}}>{option.key.split('|')[0]}</span>
 
-    //                 <span style={{ padding: '0px 4px' }}>|</span>
+                    <span style={{ padding: '0px 4px' }}>|</span>
 
-    //                 <span style={{}}>Dataset:</span>
-    //                 <span style={{ padding: '0px 4px' }}>{option.key.split('|')[1]}</span>
+                    <span style={{}}>Dataset:</span>
+                    <span style={{ padding: '0px 4px' }}>{option.key.split('|')[1]}</span>
 
-    //                 <span style={{ padding: '0px 4px' }}>|</span>
+                    <span style={{ padding: '0px 4px' }}>|</span>
 
-    //                 <span>Column:</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
-    //             </span>
-    //         }
-    //         {option.object_type == 'dataset' &&
-    //             <span>
-    //                 <span style={{}}>Project:</span>
-    //                 <span style={{}}>{option.key.split('|')[0]}</span>
+                    <span>Column:</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
+                </span>
+            }
+            {option.object_type == 'dataset' &&
+                <span>
+                    <span style={{}}>Project:</span>
+                    <span style={{}}>{option.key.split('|')[0]}</span>
 
-    //                 <span style={{ padding: '0px 4px' }}>|</span>
+                    <span style={{ padding: '0px 4px' }}>|</span>
 
-    //                 <span style={{}}>Dataset:</span>
-    //                 <span style={{ padding: '0px 4px', fontWeight: 'bold' }}>{option.name}</span>
-    //             </span>
-    //         }
-    //         {option.object_type == 'project' &&
-    //             <span>
-    //                 <span>Project: </span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
-    //             </span>
-    //         }
+                    <span style={{}}>Dataset:</span>
+                    <span style={{ padding: '0px 4px', fontWeight: 'bold' }}>{option.name}</span>
+                </span>
+            }
+            {option.object_type == 'project' &&
+                <span>
+                    <span>Project: </span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
+                </span>
+            }
 
-    //     </Fragment >;
-    // }
+        </Fragment >;
+    }
 
-    // toggleFilter() {
-    //     this.setState({ openFilter: !this.state.openFilter });
-    // }
+    toggleFilter() {
+        this.setState({ openFilter: !this.state.openFilter });
+    }
 
     render() {
         this.searchRef = React.createRef();
