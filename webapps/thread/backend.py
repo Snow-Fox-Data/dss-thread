@@ -163,6 +163,7 @@ def update_desc():
         df = dss.reset_col_definition(df, col_key)
 
     # print(desc_id, exists)
+    index_ds = dss.get_index_ds()
     if desc_id == -1:
         new_id = random.randint(100000,100000000)
         # new description
@@ -180,7 +181,6 @@ def update_desc():
         else:
             df = pd.DataFrame.from_dict([desc])
 
-        index_ds = dss.get_index_ds()
         new_record = pd.DataFrame.from_dict([{
                 "name": data['name'],
                 "object_type": "definition",
@@ -206,6 +206,11 @@ def update_desc():
         df.loc[df['id']==desc_id, 'name'] = desc['name']
         df.loc[df['id']==desc_id, 'description'] = desc['description']
         df.loc[df['id']==desc_id, 'applied_to'] = applied_to_json
+
+        # update the name in the index
+        idx_df = index_ds.get_dataframe()
+        idx_df.loc[idx_df['key'] == desc_id, 'name'] = desc['name']
+        index_ds.write_dataframe(idx_df)
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
