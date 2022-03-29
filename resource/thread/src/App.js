@@ -36,6 +36,8 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 class App extends Component {
+    static currentUrl = window.location.href;
+
     constructor(props) {
         super(props)
 
@@ -328,26 +330,30 @@ class App extends Component {
                             <div class="collapse navbar-collapse" id="navbarContent">
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                     {/* <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Catalog</a>
-                                </li> */}
-
-                                    <Link to="/">Home</Link>
-                                    <Link to="/catalog">Catalog</Link>
-                                </ul>
-                                <ul class="navbar-nav">
-                                    <li style={{ padding: '12px' }}>
-                                        <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
+                                        <a class="nav-link active" href="#">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link">{this.state.currentUser}</a>
-                                    </li>
+                                        <a class="nav-link" href="#">Catalog</a>
+                                    </li> */}                                
+
+                                    {/* <Link to="{App.currentUrl}/">Home</Link>
+                                    <Link to="/catalog">Catalog</Link> */}
+
+                                    <Link to={App.currentUrl + "/"}>Home</Link>
+                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link>
                                 </ul>
                             </div>
+                            <ul class="navbar-nav">
+                                <li style={{ padding: '12px' }}>
+                                    <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">{this.state.currentUser}</a>
+                                </li>
+                            </ul>
                         </div>
                     </nav>
+
                     <Row>
                         <Col>
                             <div className="input-group" style={{ width: "100%" }}>
