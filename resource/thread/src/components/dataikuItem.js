@@ -666,6 +666,9 @@ class DataikuItem extends Component {
                                 </tbody>
                             </Table>
                         </Tab>
+                        <Tab eventKey='flow' title="Flow" def>
+                            <iframe width='500' height='500' src={Common.createProjectLink(this.props.item.projectKey)} ></iframe>
+                        </Tab>
                     </Tabs>
                 </div>
             </Row>
