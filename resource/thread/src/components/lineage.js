@@ -182,46 +182,7 @@ class Lineage extends Component {
     }
 
     onLoad(rv) {
-        console.log('LINEAGE :: onLoad() :: rv == ');
-        console.log(rv);
-
         setTimeout(() => rv.fitView(), 1000);
-
-        // this.flowInstance = rv;
-        // console.log('this.flowInstance == ');
-        // console.log(this.flowInstance);
-
-        console.log('this == ');
-        console.log(this);
-    }
-
-    onElementsRemove(elements) {
-        console.log('LINEAGE :: onElementsRemove() :: elements == ');
-        console.log(elements);
-    }
-
-    onFitView(rv) {
-        console.log('LINEAGE :: onFitView() :: rv == ');
-        console.log(rv);
-
-        console.log('this == ');
-        console.log(this);
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("LINEAGE :: componentDidUpdate() :: prevProps == ");
-        // console.log(prevProps);
-        // console.log("prevState == ");
-        // console.log(prevState);
-        // this.forceUpdate();
-    }
-
-    componentDidMount() {
-        console.log("LINEAGE :: componentDidMount() :: ");
-    }
-
-    componentWillUnmount() {
-        console.log("LINEAGE :: componentWillUnmount() :: ");
     }
 
     render() {
