@@ -154,6 +154,7 @@ def update_desc():
     
     data = request.json
     desc_id = int(data['id'])
+    
     applied_to_json = json.dumps(data['applied_to'])
 
     # remove old definition for this colimn

@@ -85,7 +85,7 @@ class DataikuItem extends Component {
     };
 
     saveDef() {
-        let applyTo = eval(this.state.tempSelDef.applied_to);
+        let applyTo = eval(this.props.item.applied_to);
 
         const requestOptions = {
             method: 'POST',
