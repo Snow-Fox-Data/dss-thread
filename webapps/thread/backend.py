@@ -208,7 +208,7 @@ def update_desc():
 
         # update the name in the index
         idx_df = index_ds.get_dataframe()
-        idx_df.loc[idx_df['key'] == desc_id, 'name'] = desc['name']
+        idx_df.loc[idx_df['key'] == str(desc_id), 'name'] = desc['name']
         index_ds.write_dataframe(idx_df)
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
