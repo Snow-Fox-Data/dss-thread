@@ -333,15 +333,15 @@ class DataikuItem extends Component {
         const handleLineageCheck = (e) => {
             var cb = e.target;
             var upstream = cb.id.indexOf('ul') > -1;
-            if (cb.checked) {
-                if (upstream) {
+            if (cb.checked == true) {
+                if (upstream == true) {
                     this.state.selectedUpLineage.push(cb.id.substr(3));
                 }
                 else
                     this.state.selectedDownLineage.push(cb.id.substr(3));
             }
             else {
-                if (upstream) {
+                if (upstream == true) {
                     this.state.selectedUpLineage = this.state.selectedUpLineage.filter(item => item == cb.id.substr(3));
                 }
                 else
