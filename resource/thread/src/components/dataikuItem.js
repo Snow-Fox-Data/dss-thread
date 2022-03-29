@@ -132,7 +132,7 @@ class DataikuItem extends Component {
         let tags = [];
 
         arrayTags.forEach(element => {
-            tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom:'5px' }} variant={variant} size="sm">
+            tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
                 {element}
             </Button>
         });
@@ -567,7 +567,7 @@ class DataikuItem extends Component {
         let tags = this.buildTagsString(this.props.item.tags);
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
-                <td class="cellLink" onClick={() => this.openDataset(col)}>{col.split('|')[1]}</td>
+                <td><span class="app-link" onClick={() => this.openDataset(col)}>{col.split('|')[1]}</span></td>
             </tr>
         );
 
