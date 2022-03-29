@@ -593,7 +593,7 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.id}</h1><a href={Common.createDatasetLink(this.props.item.project, this.props.item.name)} target="_blank"><ArrowUpRightSquare size={22} /></a>
+                    <h1>{this.props.item.id}<span style={{ paddingLeft: "6px", paddingBottom: "2px" }}><a href={Common.createDatasetLink(this.props.item.name.split('|')[0], this.props.item.name.split('|')[1])} target="_blank"><ArrowUpRightSquare size={22} /></a></span></h1>
 
                     <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
@@ -623,7 +623,7 @@ class DataikuItem extends Component {
                         }
                     </Tab>
                     <Tab eventKey='flow' title="Flow" def>
-                        <iframe style={{ width: '100%', height: '500px' }} src={Common.createDatasetLink(this.props.item.project, this.props.item.name)} ></iframe>
+                        <iframe style={{ width: '100%', height: '500px' }} src={Common.createDatasetLink(this.props.item.name.split('|')[0], this.props.item.name.split('|')[1])} ></iframe>
                     </Tab>
                 </Tabs>
             </Row>
