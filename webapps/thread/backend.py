@@ -208,7 +208,7 @@ def update_desc():
 
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
-    if 'applied_to' in data and len(data['applied_to']) > 0:
+    if len(data['applied_to']) > 0:
         dss.update_column_description(data['applied_to'], data['description'])
      
     return json.dumps({"success": True,
