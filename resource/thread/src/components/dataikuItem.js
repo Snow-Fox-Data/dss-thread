@@ -53,7 +53,6 @@ class DataikuItem extends Component {
             body: JSON.stringify({
                 "name": this.props.item.name,
                 "description": this.props.item.description,
-                "applied_to": this.props.item.applied_to,
                 "id": this.props.item.id
             })
         }
