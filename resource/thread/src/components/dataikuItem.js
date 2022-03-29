@@ -408,7 +408,7 @@ class DataikuItem extends Component {
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Button disabled="true" variant="secondary" onClick={() => this.saveCol(true, true)}>Apply to Lineage</Button>
+                        <Button  variant="secondary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
                         <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
                     </Col>
                 </Modal.Footer>

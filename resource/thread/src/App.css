@@ -4416,7 +4416,7 @@ div.react-confirm-alert-overlay {
    justify-content: space-between;
    /* padding-top: 0.5rem; */
    /* padding-bottom: 0.5rem; */
-   border:none;
+   border:none !important;
  }
  
  .navbar > .container,
