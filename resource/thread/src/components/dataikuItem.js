@@ -327,14 +327,14 @@ class DataikuItem extends Component {
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
-                                                {/* {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+                                                {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Applied To</Form.Label>
                                                         <div>
                                                             {this.buildTagsString(this.state.tempSelDef.applied_to, 'light')}
                                                         </div>
                                                     </div>
-                                                } */}
+                                                }
                                                 <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
@@ -420,56 +420,56 @@ class DataikuItem extends Component {
         </Col>
     }
 
-    // renderDefinition() {
-    //     return <Col>
-    //         <Row>
-    //             <Col xs="auto">
-    //                 <div class="icon">
-    //                     {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
-    //                 </div>
-    //             </Col>
-    //             <Col>
-    //                 <h1>{this.props.item.name}</h1>
+    renderDefinition() {
+        return <Col>
+            <Row>
+                <Col xs="auto">
+                    <div class="icon">
+                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                    </div>
+                </Col>
+                <Col>
+                    <h1>{this.props.item.name}</h1>
 
-    //                 <Container>
-    //                     <Row>
-    //                         <Col>
+                    <Container>
+                        <Row>
+                            <Col>
 
-    //                             <div>
-    //                                 <Form style={{ paddingTop: '10px' }}>
-    //                                     <Form.Group className="mb-3">
-    //                                         <Form.Label>Name</Form.Label>
-    //                                         <Form.Control type="text" defaultValue={this.props.item.name}
-    //                                             onChange={e => this.state.tempSelDef.name = e.target.value}
-    //                                         />
-    //                                         {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
-    //                                             <div style={{ padding: "10px 0px" }}>
-    //                                                 <Form.Label>Applied To</Form.Label>
-    //                                                 <div>
-    //                                                     {this.buildTagsString(this.state.tempSelDef.applied_to, 'light')}
-    //                                                 </div>
-    //                                             </div>
-    //                                         }
-    //                                         <Form.Label>Description</Form.Label>
-    //                                         <Form.Control as="textarea" rows="3" defaultValue={this.pro.description}
-    //                                             onChange={e => this.item.description = e.target.value}
-    //                                         />
-    //                                         <Form.Text className="text-muted">
-    //                                             Will appear in the Dataiku Dataset's column description.
-    //                                         </Form.Text>
-    //                                     </Form.Group>
-    //                                     <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
+                                <div>
+                                    <Form style={{ paddingTop: '10px' }}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control type="text" defaultValue={this.props.item.name}
+                                                onChange={e => this.state.tempSelDef.name = e.target.value}
+                                            />
+                                            {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+                                                <div style={{ padding: "10px 0px" }}>
+                                                    <Form.Label>Applied To</Form.Label>
+                                                    <div>
+                                                        {this.buildTagsString(this.state.tempSelDef.applied_to, 'light')}
+                                                    </div>
+                                                </div>
+                                            }
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control as="textarea" rows="3" defaultValue={this.pro.description}
+                                                onChange={e => this.item.description = e.target.value}
+                                            />
+                                            <Form.Text className="text-muted">
+                                                Will appear in the Dataiku Dataset's column description.
+                                            </Form.Text>
+                                        </Form.Group>
+                                        <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
 
-    //                                 </Form>
-    //                             </div>
-    //                         </Col>
+                                    </Form>
+                                </div>
+                            </Col>
 
-    //                     </Row>
-    //                 </Container>
-    //             </Col>
-    //         </Row>
-    //     </Col>
-    // }
+                        </Row>
+                    </Container>
+                </Col>
+            </Row>
+        </Col>
+    }
 
     renderDataset() {
         let tags = this.buildTagsString(this.props.item.meta.tags);
