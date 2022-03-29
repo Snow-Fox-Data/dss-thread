@@ -320,6 +320,11 @@ class App extends Component {
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Catalog</a>
                                 </li> */}
+
+                                <Routes>
+                                    <Route path="/" element={<Home />} />
+                                    <Route path="catalog" element={<Catalog />} />
+                                </Routes>
                             </ul>
                             <ul class="navbar-nav">
                                 <li style={{ padding: '12px' }}>
@@ -333,12 +338,6 @@ class App extends Component {
                     </div>
                 </nav>
                 <Row>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="catalog" element={<Catalog />} />
-                    </Routes>
-                </Row>
-                {/* <Row>
                     <Col>
                         <div className="input-group" style={{ width: "100%" }}>
                             <AsyncTypeahead
@@ -367,9 +366,9 @@ class App extends Component {
                             </div>
                         </div>
                     </Col>
-                </Row> */}
+                </Row>
 
-                {/* {openFilter ?
+                {openFilter ?
                     <Row className="filter" style={{ marginTop: "0.5em" }}>
                         {Object.entries(filters).map(([key, value]) => {
                             return (
@@ -390,9 +389,9 @@ class App extends Component {
                             );
                         })}
                     </Row>
-                    : null} */}
+                    : null}
 
-                {/* <Row>
+                <Row>
                     <div style={{ padding: '10px' }}>
                         {loading ?
                             <Spinner animation="border" role="status">
@@ -400,10 +399,10 @@ class App extends Component {
                             </Spinner>
                             : null}
                     </div>
-                </Row> */}
-                {/* <Row>
+                </Row>
+                <Row>
                     {!loading ? this.dataikuItem : null}
-                </Row> */}
+                </Row>
             </Container>
         );
     }
