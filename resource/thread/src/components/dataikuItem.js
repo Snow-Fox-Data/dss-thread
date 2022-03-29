@@ -353,7 +353,7 @@ class DataikuItem extends Component {
         }
 
         return <Col>
-            <Modal size="md" show={this.state.applyLineageModal} animation={false} onHide={handleClose}>
+            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition To Lineage</Modal.Title>
                 </Modal.Header>
@@ -361,7 +361,7 @@ class DataikuItem extends Component {
                     <Container>
                         <div style={{ padding: '10px' }}>Select the up and downstream datasets to apply this definition</div>
                         <span style={{ fontWeight: 'bold' }}>This Dataset</span>
-                        <Form.Check className='lineage-check' disabled='true' type='switch' label={this.state.item.name}></Form.Check>
+                        <Form.Check className='lineage-check' disabled='true' type='switch' label={this.props.item.name}></Form.Check>
 
                         {this.props.item.lineage_upstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
