@@ -273,9 +273,17 @@ class DataikuItem extends Component {
         </Fragment>;
     }
 
+    cancelLineageSave() {
+        this.setState({
+            applyLineageModal: false,
+            newDefSelected: true
+        })
+    }
+
     showLineageSelection() {
         this.setState({
-            applyLineageModal: true
+            applyLineageModal: true,
+            newDefSelected: false
         })
     }
 
@@ -343,6 +351,7 @@ class DataikuItem extends Component {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button variant="light" onClick={() => this.cancelLineageSave()}>Cancel</Button>
                     <Button variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
                 </Modal.Footer>
             </Modal>
