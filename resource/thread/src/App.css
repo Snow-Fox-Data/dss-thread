@@ -98,7 +98,7 @@ div.react-confirm-alert-overlay {
 
 .thread-node-base {
   background-color: #FFF;
-  border: solid 2px red;
+  border: solid 1px blue;
   border-radius: 3px;
   box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5);
