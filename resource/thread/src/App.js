@@ -317,102 +317,104 @@ class App extends Component {
                 {!this.state.loggedIn &&
                     <div>Unauthorized</div>
                 }
-                <nav hidden={!this.state.loggedIn} class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container-fluid">
-                        <img src={logo} className="app-logo" alt="logo" />
-                        <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                {/* <li class="nav-item">
+                <div hidden={!this.state.loggedIn}>
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <div class="container-fluid">
+                            <img src={logo} className="app-logo" alt="logo" />
+                            <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    {/* <li class="nav-item">
                                     <a class="nav-link active" href="#">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Catalog</a>
                                 </li> */}
 
-                                <Link to="/">Home</Link>
-                                <Link to="/catalog">Catalog</Link>
-                            </ul>
-                            <ul class="navbar-nav">
-                                <li style={{ padding: '12px' }}>
-                                    <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">{this.state.currentUser}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <Row>
-                    <Col>
-                        <div className="input-group" style={{ width: "100%" }}>
-                            <AsyncTypeahead
-                                filterBy={filterBy}
-                                id="async-search"
-                                delay={300}
-                                labelKey="name"
-                                ref={this.searchRef}
-                                minLength={3}
-                                onChange={this.loadItem}
-                                onSearch={this.search}
-                                options={searchResults}
-                                placeholder='Search'
-                                renderMenuItemChildren={this.renderMenuItemChildren}
-                                style={{ width: "97.5%" }}
-                            />
-                            <div className="input-group-btn">
-                                <FaFilter onClick={() => this.toggleFilter()} style={{
-                                    backgroundColor: "#66a3ff",
-                                    color: "#FFFFFF",
-                                    cursor: 'pointer',
-                                    height: '34px',
-                                    padding: "8px",
-                                    width: '34px'
-                                }} />
+                                    <Link to="/">Home</Link>
+                                    <Link to="/catalog">Catalog</Link>
+                                </ul>
+                                <ul class="navbar-nav">
+                                    <li style={{ padding: '12px' }}>
+                                        <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">{this.state.currentUser}</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </Col>
-                </Row>
-
-                {openFilter ?
-                    <Row className="filter" style={{ marginTop: "0.5em" }}>
-                        {Object.entries(filters).map(([key, value]) => {
-                            return (
-                                <Col xs={1}>
-                                    <div className="filter-types" key={key}>
-                                        <input
-                                            type="checkbox"
-                                            id={`filter-${key}`}
-                                            name={key}
-                                            value={key}
-                                            checked={value}
-                                            onChange={() => this.handleOnChange(key)}
-                                            style={{ marginRight: "5px" }}
-                                        />
-                                        <label htmlFor={`filter-${key}`}>{key}s</label>
-                                    </div>
-                                </Col>
-                            );
-                        })}
+                    </nav>
+                    <Row>
+                        <Col>
+                            <div className="input-group" style={{ width: "100%" }}>
+                                <AsyncTypeahead
+                                    filterBy={filterBy}
+                                    id="async-search"
+                                    delay={300}
+                                    labelKey="name"
+                                    ref={this.searchRef}
+                                    minLength={3}
+                                    onChange={this.loadItem}
+                                    onSearch={this.search}
+                                    options={searchResults}
+                                    placeholder='Search'
+                                    renderMenuItemChildren={this.renderMenuItemChildren}
+                                    style={{ width: "97.5%" }}
+                                />
+                                <div className="input-group-btn">
+                                    <FaFilter onClick={() => this.toggleFilter()} style={{
+                                        backgroundColor: "#66a3ff",
+                                        color: "#FFFFFF",
+                                        cursor: 'pointer',
+                                        height: '34px',
+                                        padding: "8px",
+                                        width: '34px'
+                                    }} />
+                                </div>
+                            </div>
+                        </Col>
                     </Row>
-                    : null}
 
-                <Row>
-                    <div style={{ padding: '10px' }}>
-                        {loading ?
-                            <Spinner animation="border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
-                            : null}
-                    </div>
-                </Row>
-                <Row>
-                    {!loading ? this.dataikuItem : null}
-                </Row>
+                    {openFilter ?
+                        <Row className="filter" style={{ marginTop: "0.5em" }}>
+                            {Object.entries(filters).map(([key, value]) => {
+                                return (
+                                    <Col xs={1}>
+                                        <div className="filter-types" key={key}>
+                                            <input
+                                                type="checkbox"
+                                                id={`filter-${key}`}
+                                                name={key}
+                                                value={key}
+                                                checked={value}
+                                                onChange={() => this.handleOnChange(key)}
+                                                style={{ marginRight: "5px" }}
+                                            />
+                                            <label htmlFor={`filter-${key}`}>{key}s</label>
+                                        </div>
+                                    </Col>
+                                );
+                            })}
+                        </Row>
+                        : null}
+
+                    <Row>
+                        <div style={{ padding: '10px' }}>
+                            {loading ?
+                                <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                                : null}
+                        </div>
+                    </Row>
+                    <Row>
+                        {!loading ? this.dataikuItem : null}
+                    </Row>
+                </div>
             </Container>
         );
     }
