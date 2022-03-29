@@ -48,12 +48,14 @@ class DataikuItem extends Component {
 
     saveCol(applyUp, applyDown) {
         let applyTo = eval(this.state.tempSelDef.applied_to)
-        applyTo.push(this.props.item.key);
+        if (this.props.object_type == 'column') {
+            applyTo.push(this.props.item.key);
 
-        if (applyUp)
-            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
-        if (applyDown)
-            applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
+            if (applyUp)
+                applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_upstream'))
+            if (applyDown)
+                applyTo = applyTo.concat(this.flattenArray(this.props.item, 'lineage_downstream'))
+        }
 
         let val = '';
         if (this.state.tempSelDef.description != null)
@@ -436,49 +438,49 @@ class DataikuItem extends Component {
                 </Col>
                 <Col>
                     <h1>{this.props.item.name}</h1>
-
-                    <Container>
-                        <Row>
-                            <Col>
-
-                                <div>
-                                    <Form style={{ paddingTop: '10px' }}>
-                                        <Form.Group className="mb-3">
-                                            {this.state.selectedDef.id > -1 &&
-                                                <div style={{ padding: "10px 0px" }}>
-                                                    <Form.Label>Definition ID</Form.Label>
-                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
-                                                </div>
-                                            }
-                                            <Form.Label>Name</Form.Label>
-                                            <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
-                                                onChange={e => this.state.tempSelDef.name = e.target.value}
-                                            />
-                                            {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
-                                                <div style={{ padding: "10px 0px" }}>
-                                                    <Form.Label>Applied To</Form.Label>
-                                                    <div>
-                                                        {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
-                                                    </div>
-                                                </div>
-                                            }
-                                            <Form.Label>Description</Form.Label>
-                                            <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
-                                                onChange={e => this.state.tempSelDef.description = e.target.value}
-                                            />
-                                            <Form.Text className="text-muted">
-                                                Will appear in the Dataiku Dataset's column description.
-                                            </Form.Text>
-                                        </Form.Group>
-                                        <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
-
-                                    </Form>
-                                </div>
-                            </Col>
-
-                        </Row>
-                    </Container>
                 </Col>
+            </Row>
+            <Row style={{ paddingTop: '20px' }}>
+                <Container>
+                    <Row>
+                        <Col>
+
+                            <div>
+                                <Form style={{ paddingTop: '10px' }}>
+                                    <Form.Group className="mb-3">
+                                        {this.state.selectedDef.id > -1 &&
+                                            <div style={{ padding: "10px 0px" }}>
+                                                <Form.Label>Definition ID</Form.Label>
+                                                <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
+                                            </div>
+                                        }
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
+                                            onChange={e => this.state.tempSelDef.name = e.target.value}
+                                        />
+                                        {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+                                            <div style={{ padding: "10px 0px" }}>
+                                                <Form.Label>Applied To</Form.Label>
+                                                <div>
+                                                    {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+                                                </div>
+                                            </div>
+                                        }
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
+                                            onChange={e => this.state.tempSelDef.description = e.target.value}
+                                        />
+                                        <Form.Text className="text-muted">
+                                            Will appear in the Dataiku Dataset's column description.
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Button variant="primary" onClick={() => this.saveCol(false, false)}>Save</Button>
+
+                                </Form>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
             </Row>
         </Col>
     }
