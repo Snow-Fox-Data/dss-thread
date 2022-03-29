@@ -153,9 +153,9 @@ class DataikuItem extends Component {
     }
 
     resetSelectedDef() {
-        this.state.tempSelDef = {
-            id: -1
-        };
+        // this.state.tempSelDef = {
+        //     id: -1
+        // };
 
         if (this.props.item.definition.id == -1) {
             this.setState({
