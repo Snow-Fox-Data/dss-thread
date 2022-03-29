@@ -436,14 +436,8 @@ class DataikuItem extends Component {
                                 <div>
                                     <Form style={{ paddingTop: '10px' }}>
                                         <Form.Group className="mb-3">
-                                            {this.state.selectedDef.id > -1 &&
-                                                <div style={{ padding: "10px 0px" }}>
-                                                    <Form.Label>Definition ID</Form.Label>
-                                                    <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
-                                                </div>
-                                            }
                                             <Form.Label>Name</Form.Label>
-                                            <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
+                                            <Form.Control type="text" defaultValue={this.props.item.name}
                                                 onChange={e => this.state.tempSelDef.name = e.target.value}
                                             />
                                             {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
