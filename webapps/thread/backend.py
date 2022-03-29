@@ -94,7 +94,7 @@ def load_item():
     res = df.query(f'key=="{key}"').iloc[0]
     if res['object_type'] == 'dataset':
         ds = dss.load_dataset(key, 'none')
-        ds['object_type'] = 'project'
+        ds['object_type'] = 'dataset'
 
         return json.dumps(ds)
     else:
