@@ -319,12 +319,10 @@ class App extends Component {
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Catalog</a>
-                                </li> */}
+                                </li> */}                                
 
-                                <Routes>
-                                    <Route path="/" element={<Home />} />
-                                    <Route path="catalog" element={<Catalog />} />
-                                </Routes>
+                                <Link to="/">Home</Link>
+                                <Link to="/catalog">Catalog</Link>
                             </ul>
                             <ul class="navbar-nav">
                                 <li style={{ padding: '12px' }}>

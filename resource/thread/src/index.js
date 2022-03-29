@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/home';
+import Catalog from './pages/catalog';
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="catalog" element={<Catalog />} />
+      </Routes>
+
       <App />
     </React.StrictMode>
   </BrowserRouter>,
