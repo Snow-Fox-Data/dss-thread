@@ -43,6 +43,38 @@ class DataikuItem extends Component {
         return orig;
     }
 
+    saveDefinition() {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "name": this.props.item.name,
+                "description": this.props.item.description,
+                "applied_to": this.props.item.id,
+                "id": this.props.item.id
+            })
+        }
+
+        eventBus.dispatch("loading", true);
+
+        fetch(window.getWebAppBackendUrl('update-desc'), requestOptions)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.props.item = result.value;
+
+                    this.setState({
+                        newDefModal: false,
+                        selectedDef: result.value
+                    });
+
+                    eventBus.dispatch("loading", false);
+                });
+    }
+
     saveCol(applyUp, applyDown) {
         let applyTo = eval(this.state.tempSelDef.applied_to)
         applyTo.push(this.props.item.key);
