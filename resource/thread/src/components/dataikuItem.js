@@ -363,13 +363,13 @@ class DataikuItem extends Component {
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
                         {this.props.item.lineage_upstream.map((type) => (
-                            <Form.Check type='switch' onChange={handleLineageCheck} id={'ul-' + type.name} label={type.name}></Form.Check>
+                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type.name} label={type.name}></Form.Check>
                         ))}
                         {this.props.item.lineage_downstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
                         {this.props.item.lineage_downstream.map((type) => (
-                            <Form.Check type='checkbox' id={'dl-' + type.name} label={type.name}></Form.Check>
+                            <Form.Check className='lineage-check' type='switch' id={'dl-' + type.name} label={type.name}></Form.Check>
                         ))}
                     </Container>
                 </Modal.Body>
