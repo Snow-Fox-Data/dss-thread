@@ -329,7 +329,7 @@ class DataikuItem extends Component {
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
         const handleLineageCheck = (c) => {
-            let e = '';
+            console.log(c);
         }
 
         return <Col>
@@ -343,7 +343,7 @@ class DataikuItem extends Component {
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
                         {this.props.item.lineage_upstream.map((type) => (
-                            <Form.Check type='switch' onChange={this.handleLineageCheck} label={type.name}></Form.Check>
+                            <Form.Check type='switch' onChange={(e) => this.handleLineageCheck(e)} label={type.name}></Form.Check>
                         ))}
                         {this.props.item.lineage_downstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
