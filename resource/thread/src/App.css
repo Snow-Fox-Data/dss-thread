@@ -16,6 +16,10 @@ html {
   cursor: pointer;
 }
 
+.card-text {
+  font-size: 1rem;
+}
+
 .dataiku-item .icon {
   max-width: 90px;
   max-height: 90px;

@@ -511,6 +511,9 @@ class DataikuItem extends Component {
                                 <div class="lineage" id="lineage-container">{lineage}</div>
                             }
                         </Tab>
+                        <Tab eventKey='flow' title="Flow" def>
+                            <iframe style={{ width: '100%', height: '500px' }} src={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} ></iframe>
+                        </Tab>
                     </Tabs>
                 </div>
             </Row>
