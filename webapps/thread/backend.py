@@ -87,6 +87,13 @@ def search():
 def load_item():
     # passing "key" as querystring param
     # load full info (including lineage) for project, dataset, column or definition
+    # headers = dict(request.headers)
+    # # Get the auth info of the user performing the request
+    # auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
+    
+    # user = dataiku.api_client().get_user(auth_info["authIdentifier"])
+    # client_as_user = user.get_client_as()
+
     args = request.args
     key = args.get('key')
     key = key.replace(' | ', '|')
