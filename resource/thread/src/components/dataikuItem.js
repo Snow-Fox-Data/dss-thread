@@ -132,7 +132,7 @@ class DataikuItem extends Component {
         let tags = [];
 
         arrayTags.forEach(element => {
-            tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px' }} variant={variant} size="sm">
+            tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom:'5px' }} variant={variant} size="sm">
                 {element}
             </Button>
         });

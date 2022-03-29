@@ -532,7 +532,7 @@ class dss_utils:
             
             datasets = project.list_datasets()
             recipes = project.list_recipes()
-            foldeloadrs = project.list_managed_folders()
+            folders = project.list_managed_folders()
 
             scan_obj[proj]['datasets'] = datasets
             scan_obj[proj]['recipes'] = recipes
