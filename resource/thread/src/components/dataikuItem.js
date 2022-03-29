@@ -130,16 +130,14 @@ class DataikuItem extends Component {
     }
 
     componentDidMount() {
-        if (this.props.object_type == 'column') {
-            // if (prevProps.item == null && this.props.item != null) {
-            this.props.item.applied_to = eval(this.props.item.applied_to);
-            this.resetSelectedDef();
-            // } else {
-            // if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id)) {
-            // this.props.item.applied_to = eval(this.props.item.applied_to);
-            // this.resetSelectedDef();
-            // }
-            // }
+        switch (this.props.object_type) {
+            case 'column':
+                this.props.item.definition.applied_to = eval(this.props.item.definition.applied_to);
+                this.resetSelectedDef();
+                break;
+            case 'definition':
+                this.props.item.applied_to = eval(this.props.item.applied_to);
+                break;
         }
     }
 
