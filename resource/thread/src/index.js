@@ -3,19 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  // <BrowserRouter>
-  //   <Route path="/" element={<App />}>
-  //     <Route path="expenses" element={<Expenses />} />
-  //     {/* <Route path="invoices" element={<Invoices />} /> */}
-  //   </Route>
-  // </BrowserRouter>,
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

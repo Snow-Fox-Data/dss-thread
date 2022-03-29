@@ -58,6 +58,14 @@ html {
   left:0px;
 }
 
+.navbar {
+  padding: 0;
+}
+
+.navbar .container-fluid {
+  padding: 0;
+}
+
 .title-row {
   padding-bottom: 6px;
 }
