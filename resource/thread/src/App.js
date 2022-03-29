@@ -152,8 +152,8 @@ class App extends Component {
                 .then(res => res.json())
                 .then((response) => {
 
-                    this.setState({ 
-                        dataiku: window.dataiku, 
+                    this.setState({
+                        dataiku: window.dataiku,
                         currentUser: response['you_are'],
                         rendered: true,
                         loading: false
@@ -161,7 +161,7 @@ class App extends Component {
 
                     this.navDeepLink();
 
-                    window.addEventListener("hashchange", this.navDeepLink, false);
+                    window.addEventListener("hashchange", () => this.navDeepLink());
 
                     eventBus.on("datasetSelected", (ds) => {
                         this.loadItem([{
