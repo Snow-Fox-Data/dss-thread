@@ -148,7 +148,7 @@ class DataikuItem extends Component {
         }
         else {
             if (this.props.object_type == 'definition') {
-                if (prevProps.item == null && this.props.item != null) {
+                if (prevProps.item != this.props.item && this.props.item != null) {
                     this.setState({
                         tempSelDef: {
                             name: this.props.item.name,
