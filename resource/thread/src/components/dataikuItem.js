@@ -359,9 +359,9 @@ class DataikuItem extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <div style={{ padding: '10px' }}>Select the up and downstream datasets to apply this definition</div>
+                        <div style={{ paddingBottom: '10px' }}>Select the up and downstream datasets to apply this definition</div>
                         <span style={{ fontWeight: 'bold' }}>This Dataset</span>
-                        <Form.Check className='lineage-check' disabled='true' type='switch' label={this.props.item.name}></Form.Check>
+                        <Form.Check className='lineage-check' disabled='true' checked='true' type='switch' id='this-cb' label={this.props.item.name}></Form.Check>
 
                         {this.props.item.lineage_upstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
@@ -373,7 +373,7 @@ class DataikuItem extends Component {
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
                         {this.props.item.lineage_downstream.map((type) => (
-                            <Form.Check className='lineage-check' type='switch' id={'dl-' + type.name} label={type.name}></Form.Check>
+                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type.name}></Form.Check>
                         ))}
                     </Container>
                 </Modal.Body>
