@@ -129,20 +129,34 @@ class DataikuItem extends Component {
         // this.setState({ isLineageVisible: true })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log('component update!')
+    componentDidMount() {
         if (this.props.object_type == 'column') {
-            if (prevProps.item == null && this.props.item != null) {
-                this.props.item.applied_to = eval(this.props.item.applied_to);
-                this.resetSelectedDef();
-            } else {
-                if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id)) {
-                    this.props.item.applied_to = eval(this.props.item.applied_to);
-                    this.resetSelectedDef();
-                }
-            }
+            // if (prevProps.item == null && this.props.item != null) {
+            this.props.item.applied_to = eval(this.props.item.applied_to);
+            this.resetSelectedDef();
+            // } else {
+            // if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id)) {
+            // this.props.item.applied_to = eval(this.props.item.applied_to);
+            // this.resetSelectedDef();
+            // }
+            // }
         }
     }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     console.log('component update!')
+    //     if (this.props.object_type == 'column') {
+    //         if (prevProps.item == null && this.props.item != null) {
+    //             this.props.item.applied_to = eval(this.props.item.applied_to);
+    //             this.resetSelectedDef();
+    //         } else {
+    //             if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id)) {
+    //                 this.props.item.applied_to = eval(this.props.item.applied_to);
+    //                 this.resetSelectedDef();
+    //             }
+    //         }
+    //     }
+    // }
 
     newDef() {
         this.setState({
