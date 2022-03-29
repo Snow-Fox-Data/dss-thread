@@ -15,9 +15,6 @@ class DataikuItem extends Component {
     constructor(props) {
         super(props);
 
-        console.log('props == ');
-        console.log(props);
-
         this.state = {
             lineage: null,
             newDefModal: false,
@@ -133,11 +130,6 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("DATAIKU ITEM :: componentDidUpdate() :: prevProps == ");
-        console.log(prevProps);
-        console.log("prevState == ");
-        console.log(prevState);
-
         if (this.props.object_type == 'column') {
             if (prevProps.item == null && this.props.item != null) {
                 this.resetSelectedDef();
