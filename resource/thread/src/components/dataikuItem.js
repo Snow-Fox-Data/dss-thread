@@ -355,10 +355,11 @@ class DataikuItem extends Component {
         return <Col>
             <Modal size="md" show={this.state.applyLineageModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Select Lineage</Modal.Title>
+                    <Modal.Title>Apply Definition To Lineage</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
+                        <div style={{ padding: '10px' }}>Select the up and downstream datasets to apply this definition to</div>
                         {this.props.item.lineage_upstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
@@ -454,7 +455,7 @@ class DataikuItem extends Component {
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Button variant="secondary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
+                        <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
                         <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol()}>Apply</Button>
                     </Col>
                 </Modal.Footer>
