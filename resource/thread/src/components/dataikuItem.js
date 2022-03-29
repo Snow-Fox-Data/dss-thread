@@ -132,11 +132,9 @@ class DataikuItem extends Component {
     componentDidMount() {
         switch (this.props.object_type) {
             case 'column':
-                this.props.item.definition.applied_to = eval(this.props.item.definition.applied_to);
                 this.resetSelectedDef();
                 break;
             case 'definition':
-                this.props.item.applied_to = eval(this.props.item.applied_to);
                 break;
         }
     }
@@ -160,7 +158,7 @@ class DataikuItem extends Component {
         this.setState({
             newDefModal: true,
             tempSelDef: {
-                applied_to: [],
+                applied_to_arr: [],
                 description: this.props.item.comment,
                 name: this.props.item.name,
                 id: -1
@@ -188,7 +186,7 @@ class DataikuItem extends Component {
                     name: this.props.item.definition.name,
                     description: this.props.item.definition.description,
                     id: this.props.item.definition.id,
-                    applied_to: this.props.item.definition.applied_to
+                    applied_to_arr: this.props.item.definition.applied_to_arr
                 }
             })
         }
@@ -202,7 +200,7 @@ class DataikuItem extends Component {
                 name: this.props.item.definition.name,
                 description: this.props.item.definition.description,
                 id: this.props.item.definition.id,
-                applied_to: this.props.item.definition.applied_to
+                applied_to_arr: this.props.item.definition.applied_to_arr
             },
             newDefModal: true
         })
@@ -259,7 +257,7 @@ class DataikuItem extends Component {
                 tempSelDef: {
                     name: this.props.item.name,
                     description: this.props.item.comment,
-                    applied_to: [],
+                    applied_to_arr: [],
                     id: -1
                 }
             })
@@ -268,7 +266,7 @@ class DataikuItem extends Component {
             this.setState({
                 tempSelDef: {
                     name: this.props.item.definition.name,
-                    applied_to: this.props.item.definition.applied_to,
+                    applied_to_arr: this.props.item.definition.applied_to_arr,
                     description: this.props.item.definition.description,
                     id: this.props.item.definition.id
                 }
@@ -327,11 +325,11 @@ class DataikuItem extends Component {
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
-                                                {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+                                                {(this.state.tempSelDef.applied_to_arr != null && this.state.tempSelDef.applied_to.length > 0) &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Applied To</Form.Label>
                                                         <div>
-                                                            {this.buildTagsString(this.state.tempSelDef.applied_to, 'light')}
+                                                            {this.buildTagsString(this.state.tempSelDef.applied_to_arr, 'light')}
                                                         </div>
                                                     </div>
                                                 }
@@ -442,11 +440,11 @@ class DataikuItem extends Component {
                                             <Form.Control type="text" defaultValue={this.props.item.name}
                                                 onChange={e => this.state.tempSelDef.name = e.target.value}
                                             />
-                                            {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
+                                            {(this.state.tempSelDef.applied_to_arr != null && this.state.tempSelDef.applied_to_arr.length > 0) &&
                                                 <div style={{ padding: "10px 0px" }}>
                                                     <Form.Label>Applied To</Form.Label>
                                                     <div>
-                                                        {this.buildTagsString(this.state.tempSelDef.applied_to, 'light')}
+                                                        {this.buildTagsString(this.state.tempSelDef.applied_to_arr, 'light')}
                                                     </div>
                                                 </div>
                                             }
