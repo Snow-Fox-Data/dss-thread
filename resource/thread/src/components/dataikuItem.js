@@ -324,11 +324,13 @@ class DataikuItem extends Component {
         return <Col>
             <Modal size="md" show={this.state.applyLineageModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Apply Definition</Modal.Title>
+                    <Modal.Title>Select Lineage</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-
+                        {this.props.item.lineage_upstream.map((type) => (
+                            <Form.Check type='checkbox' label={type.name}></Form.Check>
+                        ))}
                     </Container>
                 </Modal.Body>
             </Modal>
@@ -408,7 +410,7 @@ class DataikuItem extends Component {
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Button  variant="secondary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
+                        <Button variant="secondary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
                         <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol(false, false)}>Apply</Button>
                     </Col>
                 </Modal.Footer>
