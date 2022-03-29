@@ -413,7 +413,7 @@ class App extends Component {
                     </div>
                 </Row>
                 <Row>
-                    {this.state.loading ? this.dataikuItem : null}
+                    {!this.state.loading ? this.dataikuItem : null}
                 </Row>
             </Container>
         );
