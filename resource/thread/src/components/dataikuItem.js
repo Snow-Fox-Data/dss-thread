@@ -44,7 +44,7 @@ class DataikuItem extends Component {
     }
 
     saveCol(applyUp, applyDown) {
-        let applyTo = eval(this.state.tempSelDef.applied_to)
+        let applyTo = this.state.tempSelDef.applied_to;
         applyTo.push(this.props.item.key);
 
         if (applyUp)
@@ -133,10 +133,13 @@ class DataikuItem extends Component {
         console.log('component update!')
         if (this.props.object_type == 'column') {
             if (prevProps.item == null && this.props.item != null) {
+                this.props.item.applied_to = eval(this.props.item.applied_to);
                 this.resetSelectedDef();
             } else {
-                if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id))
+                if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id)) {
+                    this.props.item.applied_to = eval(this.props.item.applied_to);
                     this.resetSelectedDef();
+                }
             }
         }
     }
@@ -316,7 +319,7 @@ class DataikuItem extends Component {
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Applied To</Form.Label>
                                                         <div>
-                                                            {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+                                                            {this.buildTagsString(this.state.tempSelDef.applied_to, 'light')}
                                                         </div>
                                                     </div>
                                                 } */}
@@ -431,7 +434,7 @@ class DataikuItem extends Component {
     //                                             <div style={{ padding: "10px 0px" }}>
     //                                                 <Form.Label>Applied To</Form.Label>
     //                                                 <div>
-    //                                                     {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
+    //                                                     {this.buildTagsString(this.state.tempSelDef.applied_to, 'light')}
     //                                                 </div>
     //                                             </div>
     //                                         }

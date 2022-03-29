@@ -124,8 +124,8 @@ def load_item():
                 col['object_type'] = 'column'
 
                 if len(def_df) > 0:
-                    col['definition'] = json.loads(def_df.to_dict('records')[0])
-
+                    col['definition'] = def_df.to_dict('records')[0]
+                    
                 return col
             if res['object_type'] == 'definition':
                 print(f'searching for definition key: {key}')
