@@ -383,6 +383,13 @@ class DataikuItem extends Component {
                         {this.props.item.lineage_downstream.map((type) => (
                             <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type.name}></Form.Check>
                         ))}
+
+                        {this.props.item.lineage_downstream.length > 0 &&
+                            <span style={{ fontWeight: 'bold' }}>Additional</span>
+                        }
+                        {eval(this.props.item.applied_to).map((type) => (
+                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type}></Form.Check>
+                        ))}
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
@@ -471,7 +478,7 @@ class DataikuItem extends Component {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => this.saveCol()}>Apply to {this.props.item.name}</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.saveCol()}>Apply to column: {this.props.item.name}</Dropdown.Item>
                                 <Dropdown.Item onClick={() => this.showLineageSelection()}>Apply to Lineage</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
