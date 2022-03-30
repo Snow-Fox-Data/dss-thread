@@ -374,13 +374,13 @@ class DataikuItem extends Component {
                         {this.props.item.lineage_upstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
-                        {this.props.item.lineage_upstream.map((type) => (
+                        {this.props.item.lineage_upstream.map((type) => (!eval(this.props.item.definition.applied_to).contains(type) &&
                             <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type.name} label={type.name}></Form.Check>
                         ))}
                         {this.props.item.lineage_downstream.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
-                        {this.props.item.lineage_downstream.map((type) => (
+                        {this.props.item.lineage_downstream.map((type) => (!eval(this.props.item.definition.applied_to).contains(type) &&
                             <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type.name}></Form.Check>
                         ))}
 
