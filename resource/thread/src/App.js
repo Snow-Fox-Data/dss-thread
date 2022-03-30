@@ -339,16 +339,8 @@ class App extends Component {
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Catalog</a>
                                     </li> */}                                
-
-                                    {/* <Link to="{App.currentUrl}/">Home</Link>
-                                    <Link to="/catalog">Catalog</Link> */}
-
-
-                                    <Routes>
-                                        <Route path="/" element={<Home />} />
-                                        <Route path="/catalog" element={<Catalog />} />
-                                    </Routes>
-
+                                    
+                                    {/* THIS EXAMPLE BREAK APP */}
                                     {/* <Routes>
                                         <Route path="/catalog">
                                             <Catalog />
@@ -359,8 +351,14 @@ class App extends Component {
                                         </Route>
                                     </Routes> */}
 
+                                    {/* LINKS WORK FOR THIS BUT CAN'T DISPLAY COMPONENT */}
+                                    {/* <Routes>
+                                        <Route path="/" element={<Home />} />
+                                        <Route path="/catalog" element={<Catalog />} />
+                                    </Routes>
+
                                     <Link to={App.currentUrl}>Home</Link>
-                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link>                                    
+                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link> */}
                                 </ul>
                             </div>
                             <ul class="navbar-nav">
