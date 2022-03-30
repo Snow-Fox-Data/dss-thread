@@ -25,8 +25,7 @@ class DataikuItem extends Component {
             defSearchResults: [],
             isLineageVisible: false,
             applyLineageModal: false,
-            selectedUpLineage: [],
-            selectedDownLineage: []
+            applyToDataSets: []
         };
     }
 
@@ -44,13 +43,8 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
-        let applyTo = eval(this.state.tempSelDef.applied_to);
+        let applyTo = this.state.applyToDataSets; // eval(this.state.tempSelDef.applied_to);
         applyTo.push(this.props.item.key);
-
-        if (this.state.selectedUpLineage.length > 0)
-            applyTo = applyTo.concat(this.state.selectedUpLineage); //this.flattenArray(this.props.item, 'lineage_upstream'))
-        if (this.state.selectedDownLineage.length > 0)
-            applyTo = applyTo.concat(this.state.selectedDownLineage); //this.flattenArray(this.props.item, 'lineage_downstream'))
 
         // de-dupe array
         applyTo = applyTo.filter(function (item, pos) {
@@ -296,7 +290,8 @@ class DataikuItem extends Component {
     showLineageSelection() {
         this.setState({
             applyLineageModal: true,
-            newDefModal: false
+            newDefModal: false,
+            applyToDataSets: eval(this.props.applied_to)
         })
     }
 
@@ -343,20 +338,12 @@ class DataikuItem extends Component {
         const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
         const handleLineageCheck = (e) => {
             var cb = e.target;
-            var upstream = cb.id.indexOf('ul') > -1;
+            // var upstream = cb.id.indexOf('ul') > -1;
             if (cb.checked) {
-                if (upstream) {
-                    this.state.selectedUpLineage.push(cb.id.substr(3));
-                }
-                else
-                    this.state.selectedDownLineage.push(cb.id.substr(3));
+                this.state.applyToDataSets.push(cb.id.substr(3));
             }
             else {
-                if (upstream) {
-                    this.state.selectedUpLineage = this.state.selectedUpLineage.filter(item => item == cb.id.substr(3));
-                }
-                else
-                    this.state.selectedDownLineage = this.state.selectedDownLineage.filter(item => item == cb.id.substr(3));
+                this.state.applyToDataSets = this.state.applyToDataSets.filter(item => item == cb.id.substr(3));
             }
         }
 
