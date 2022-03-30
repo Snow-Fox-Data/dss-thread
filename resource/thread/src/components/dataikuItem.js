@@ -4,7 +4,7 @@ import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import { Modal, Button, Form, Toast, ButtonGroup } from "react-bootstrap";
+import { Modal, Button, Form, Toast, ButtonGroup, Dropdown } from "react-bootstrap";
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare, ThermometerSnow } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
@@ -465,8 +465,18 @@ class DataikuItem extends Component {
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
-                        <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol()}>Apply</Button>
+                        <Dropdown>
+                            <Dropdown.Toggle id="dropdown-basic">
+                                Apply
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={() => this.saveCol()}>Apply to {this.props.item.name}</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.showLineageSelection()}>Apply to Lineage</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        {/* <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
+                        <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol()}>Apply</Button> */}
                     </Col>
                 </Modal.Footer>
             </Modal>
