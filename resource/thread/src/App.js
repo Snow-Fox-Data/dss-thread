@@ -36,7 +36,7 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 class App extends Component {
-    static currentUrl = window.location.href;
+    static currentUrl = window.location.pathname;
 
     constructor(props) {
         super(props)
@@ -343,8 +343,8 @@ class App extends Component {
                                     {/* <Link to="{App.currentUrl}/">Home</Link>
                                     <Link to="/catalog">Catalog</Link> */}
 
-                                    {/* <Link to={App.currentUrl + "/"}>Home</Link>
-                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link> */}
+                                    <Link to={App.currentUrl + "/"}>Home</Link>
+                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link>
                                 </ul>
                             </div>
                             <ul class="navbar-nav">
