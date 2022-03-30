@@ -10,6 +10,7 @@ import { ArrowUpRightSquare, ThermometerSnow } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { FaTags } from "react-icons/fa";
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -144,7 +145,7 @@ class DataikuItem extends Component {
             }
             else
                 tags[tags.length] = <Button style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                    <i class="fa-solid fa-tags"></i>{element}
+                   <FaTags></FaTags>{element}
                 </Button>
 
         });
