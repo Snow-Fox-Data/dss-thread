@@ -348,16 +348,18 @@ class DataikuItem extends Component {
         }
 
         let downstreams = [];
-        this.props.item.lineage_downstream.map((type) => {
-            if (!eval(this.props.item.definition.applied_to).includes(type.name))
-                downstreams.push(type.name)
-        });
-
         let upstreams = [];
-        this.props.item.lineage_upstream.map((type) => {
-            if (!eval(this.props.item.definition.applied_to).includes(type.name))
-                upstreams.push(type.name)
-        });
+        if (this.props.item.definition.id > -1) {
+            this.props.item.lineage_downstream.map((type) => {
+                if (!eval(this.props.item.definition.applied_to).includes(type.name))
+                    downstreams.push(type.name)
+            });
+
+            this.props.item.lineage_upstream.map((type) => {
+                if (!eval(this.props.item.definition.applied_to).includes(type.name))
+                    upstreams.push(type.name)
+            });
+        }
 
         return <Col>
             <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
@@ -482,7 +484,7 @@ class DataikuItem extends Component {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and Apply to Lineage</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         {/* <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
