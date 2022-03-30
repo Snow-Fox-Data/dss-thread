@@ -52,7 +52,7 @@ def scan():
 
     dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
     dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
-    dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_descriptions.csv')
+    dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_descriptions.csv', False)
 
     result = dss.scan_server()
 
@@ -244,7 +244,7 @@ class dss_utils:
         self.client = dataiku.api_client()
         # self.init_description_dataset()
 
-    def init_thread_ds(self, name, location):
+    def init_thread_ds(self, name, location, overwrite=True):
         proj = self.client.get_default_project()
 
         ds_loc = location
@@ -252,6 +252,9 @@ class dss_utils:
 
         exists = ds.exists()
         if exists:
+            if not overwrite:
+                return
+            
             ds.delete(drop_data=True)
             
         project_variables = dataiku.get_custom_variables()
@@ -500,19 +503,19 @@ class dss_utils:
                                 d['lineage_upstream'].append(i)
 
         # get the full dataset lineage
-        for p in all_projects:
-            project = all_projects[p]
-            for d in range(len(project['datasets'])):
-                ds = project['datasets'][d]
-                ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
+        # for p in all_projects:
+        #     project = all_projects[p]
+        #     for d in range(len(project['datasets'])):
+        #         ds = project['datasets'][d]
+        #         ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
 
-                if 'lineage_upstream' in ds:
-                    result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
-                    ds['lineage_upstream_full'] = result_up
+        #         if 'lineage_upstream' in ds:
+        #             result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
+        #             ds['lineage_upstream_full'] = result_up
         
-                if 'lineage_downstream' in ds:
-                    result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
-                    ds['lineage_downstream_full'] = result_down
+        #         if 'lineage_downstream' in ds:
+        #             result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
+        #             ds['lineage_downstream_full'] = result_down
 
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
@@ -535,12 +538,7 @@ class dss_utils:
 
         dss_projects = self.client.list_project_keys()
         for proj in dss_projects:
-            # if 'VMCHURNPREDICTION' in proj.upper():
             scan_obj[proj] = {}
-
-            # project_list.append(proj)
-
-            # # print(proj)
             project = self.client.get_project(proj)
             
             datasets = project.list_datasets()
@@ -552,7 +550,7 @@ class dss_utils:
             scan_obj[proj]['folders'] = folders
 
             index_list.append({
-                "name": proj.replace('|', ' | '), # project.get_summary()['name'],
+                "name": proj.replace('|', ' | '), 
                 "object_type": "project",
                 "key": proj
             })
@@ -571,12 +569,9 @@ class dss_utils:
                     "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
                      }) 
 
-        # print('start get lineage...')
+        # compute the dataset lineage
         self.get_ds_lineage(scan_obj)
-        # print('end get lineage')
-
-        # print(json.dumps(scan_obj))
-
+        
         ds_list = []
         for p in scan_obj:
             datasets = scan_obj[p]['datasets']
