@@ -367,7 +367,7 @@ class DataikuItem extends Component {
                 <Modal.Body>
                     <Container>
                         <div style={{ paddingBottom: '10px' }}>Select the up and downstream datasets to apply this definition</div>
-                        <span style={{ fontWeight: 'bold' }}>This Dataset</span>
+                        <span style={{ fontWeight: 'bold' }}>This Column</span>
                         <Form.Check className='lineage-check' disabled='true' checked='true' type='switch' id='this-cb' label={this.props.item.name}></Form.Check>
 
                         {upstreams.length > 0 &&
@@ -469,20 +469,20 @@ class DataikuItem extends Component {
                     {/* onClick={() => this.saveColLineage()} */}
                     <Col style={{ textAlign: "left" }}>
                         {/* <ButtonGroup style={{ float: "right" }}> */}
-                        <Button variant="secondary" onClick={() => this.toggleNew(true)}>New</Button>
-                        <Button variant="secondary" onClick={() => this.toggleNew(false)}>Search</Button>
+                        <Button variant="link" onClick={() => this.toggleNew(true)}>New</Button>
+                        <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                         {/* </ButtonGroup> */}
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
                         <Dropdown>
                             <Dropdown.Toggle id="dropdown-basic">
-                                Apply
+                                Save and Apply
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => this.saveCol()}>Apply to column: {this.props.item.name}</Dropdown.Item>
-                                <Dropdown.Item onClick={() => this.showLineageSelection()}>Apply to Lineage</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and Apply to Lineage</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         {/* <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
