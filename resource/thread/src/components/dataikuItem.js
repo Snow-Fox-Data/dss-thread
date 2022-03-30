@@ -281,7 +281,7 @@ class DataikuItem extends Component {
 
     renderDefSearchMenuItem(option, props) {
         return <Fragment>
-            <div style={{ fontWeight: 'bold' }}>{option.name} (option.id)</div>
+            <div style={{ fontWeight: 'bold' }}>{option.name} ({option.id})</div>
             <div>{option.description}</div>
         </Fragment>;
     }
@@ -459,8 +459,8 @@ class DataikuItem extends Component {
                     {/* onClick={() => this.saveColLineage()} */}
                     <Col style={{ textAlign: "left" }}>
                         {/* <ButtonGroup style={{ float: "right" }}> */}
-                        <Button variant="dark" onClick={() => this.toggleNew(true)}>New</Button>
-                        <Button variant="dark" onClick={() => this.toggleNew(false)}>Search</Button>
+                        <Button variant="secondary" onClick={() => this.toggleNew(true)}>New</Button>
+                        <Button variant="secondary" onClick={() => this.toggleNew(false)}>Search</Button>
                         {/* </ButtonGroup> */}
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
