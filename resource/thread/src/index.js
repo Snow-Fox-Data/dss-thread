@@ -12,7 +12,7 @@ ReactDOM.render(
     <React.StrictMode>
       <Routes>
         <Route path="/" component={<Home />} />
-        <Route path="catalog" component={<Catalog />} />
+        <Route path="/catalog" component={<Catalog />} />
       </Routes>
 
       <App />
