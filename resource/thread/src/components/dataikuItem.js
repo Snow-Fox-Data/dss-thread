@@ -384,12 +384,16 @@ class DataikuItem extends Component {
                             <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type.name}></Form.Check>
                         ))}
 
-                        {this.props.item.lineage_downstream.length > 0 &&
-                            <span style={{ fontWeight: 'bold' }}>Additional</span>
+                        {(this.props.item.definition != null && this.props.item.definition.id > -1) &&
+                            <div>
+                                {this.props.item.lineage_downstream.length > 0 &&
+                                    <span style={{ fontWeight: 'bold' }}>Additional</span>
+                                }
+                                {eval(this.props.item.definition.applied_to).map((type) => (
+                                    <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type}></Form.Check>
+                                ))}
+                            </div>
                         }
-                        {eval(this.props.item.applied_to).map((type) => (
-                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type}></Form.Check>
-                        ))}
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
