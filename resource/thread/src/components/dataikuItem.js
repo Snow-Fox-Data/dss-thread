@@ -145,7 +145,7 @@ class DataikuItem extends Component {
             }
             else
                 tags[tags.length] = <Button style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                   <FaTags></FaTags>{element}
+                    <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{element}</span>
                 </Button>
 
         });
