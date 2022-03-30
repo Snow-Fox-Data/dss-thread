@@ -503,19 +503,19 @@ class dss_utils:
                                 d['lineage_upstream'].append(i)
 
         # get the full dataset lineage
-        # for p in all_projects:
-        #     project = all_projects[p]
-        #     for d in range(len(project['datasets'])):
-        #         ds = project['datasets'][d]
-        #         ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
+        for p in all_projects:
+            project = all_projects[p]
+            for d in range(len(project['datasets'])):
+                ds = project['datasets'][d]
+                ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
 
-        #         if 'lineage_upstream' in ds:
-        #             result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
-        #             ds['lineage_upstream_full'] = result_up
+                if 'lineage_upstream' in ds:
+                    result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
+                    ds['lineage_upstream_full'] = result_up
         
-        #         if 'lineage_downstream' in ds:
-        #             result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
-        #             ds['lineage_downstream_full'] = result_down
+                if 'lineage_downstream' in ds:
+                    result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
+                    ds['lineage_downstream_full'] = result_down
 
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
@@ -578,11 +578,11 @@ class dss_utils:
             for ds in datasets:
                     obj = { "project": p, "name": ds.name, "key": self.get_full_dataset_name(ds.name, p)}
                     if 'lineage_downstream' in ds:
-                        obj['lineage_downstream'] = json.dumps(ds['lineage_downstream']) # _full
+                        obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full']) 
                     else:
                         obj['lineage_downstream'] = []
                     if 'lineage_upstream' in ds:
-                        obj['lineage_upstream'] = json.dumps(ds['lineage_upstream']) # _full
+                        obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
                     else:
                         obj['lineage_upstream'] = []
                         
