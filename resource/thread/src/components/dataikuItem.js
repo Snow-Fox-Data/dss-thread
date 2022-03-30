@@ -291,7 +291,7 @@ class DataikuItem extends Component {
         this.setState({
             applyLineageModal: true,
             newDefModal: false,
-            applyToDataSets: eval(this.props.applied_to)
+            applyToDataSets: eval(this.props.definition.applied_to)
         })
     }
 
