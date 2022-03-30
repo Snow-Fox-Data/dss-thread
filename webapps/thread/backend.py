@@ -571,6 +571,8 @@ class dss_utils:
 
         # compute the dataset lineage
         self.get_ds_lineage(scan_obj)
+
+        print(scan_obj)
         
         ds_list = []
         for p in scan_obj:
