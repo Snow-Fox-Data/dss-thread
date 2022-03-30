@@ -572,19 +572,22 @@ class dss_utils:
         # compute the dataset lineage
         self.get_ds_lineage(scan_obj)
 
-        print(scan_obj)
+        # print(scan_obj)
         
         ds_list = []
+        # create an object to save 
         for p in scan_obj:
             datasets = scan_obj[p]['datasets']
             for ds in datasets:
                     obj = { "project": p, "name": ds.name, "key": self.get_full_dataset_name(ds.name, p)}
                     if 'lineage_downstream' in ds:
                         obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full']) 
+                        obj['lineage_downstream_l1'] = json.dumps(ds['lineage_downstream']) 
                     else:
                         obj['lineage_downstream'] = []
                     if 'lineage_upstream' in ds:
                         obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
+                        obj['lineage_upstream_l1'] = json.dumps(ds['lineage_upstream'])
                     else:
                         obj['lineage_upstream'] = []
                         
