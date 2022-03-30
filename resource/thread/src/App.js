@@ -343,7 +343,13 @@ class App extends Component {
                                     {/* <Link to="{App.currentUrl}/">Home</Link>
                                     <Link to="/catalog">Catalog</Link> */}
 
+
                                     <Routes>
+                                        <Route path="/" element={<Home />} />
+                                        <Route path="/catalog" element={<Catalog />} />
+                                    </Routes>
+
+                                    {/* <Routes>
                                         <Route path="/catalog">
                                             <Catalog />
                                         </Route>
@@ -351,7 +357,7 @@ class App extends Component {
                                         <Route path="/">
                                             <Home />
                                         </Route>
-                                    </Routes>
+                                    </Routes> */}
 
                                     <Link to={App.currentUrl}>Home</Link>
                                     <Link to={App.currentUrl + "/catalog"}>Catalog</Link>                                    
