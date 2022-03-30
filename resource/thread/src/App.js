@@ -343,8 +343,18 @@ class App extends Component {
                                     {/* <Link to="{App.currentUrl}/">Home</Link>
                                     <Link to="/catalog">Catalog</Link> */}
 
+                                    <Routes>
+                                        <Route path="/catalog">
+                                            <Catalog />
+                                        </Route>
+
+                                        <Route path="/">
+                                            <Home />
+                                        </Route>
+                                    </Routes>
+
                                     <Link to={App.currentUrl}>Home</Link>
-                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link>
+                                    <Link to={App.currentUrl + "/catalog"}>Catalog</Link>                                    
                                 </ul>
                             </div>
                             <ul class="navbar-nav">
