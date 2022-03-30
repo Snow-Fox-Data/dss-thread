@@ -378,13 +378,13 @@ class DataikuItem extends Component {
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
                         {upstreams.map((type) => (
-                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type.name} label={type.name}></Form.Check>
+                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type} label={type}></Form.Check>
                         ))}
                         {downstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
                         {downstreams.map((type) => (
-                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type.name}></Form.Check>
+                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
                         ))}
 
                         {(this.props.item.definition != null && this.props.item.definition.id > -1) &&
