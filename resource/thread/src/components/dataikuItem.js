@@ -584,7 +584,7 @@ class DataikuItem extends Component {
             //onClick={() => this.openColumn(col.key)}
             <tr>
                 <td>
-                    {Common.getIconForDataikuItemType('dataset', "20px")}
+                    {Common.getIconForDataikuItemType('column', "16px")}
                     <span className='app-link' style={{ marginLeft: '10px' }} onClick={() => this.openColumn(col.key)}>{col.name}</span>
                 </td>
                 <td>{col.type}</td>
@@ -645,7 +645,7 @@ class DataikuItem extends Component {
         let tags = this.buildTagsString(this.props.item.tags, 'light', false);
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
-                <td>{Common.getIconForDataikuItemType('dataset', "20px")}
+                <td>{Common.getIconForDataikuItemType('dataset', "16px")}
                     <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col)}>{col.split('|')[1]}</span></td>
             </tr>
         );
