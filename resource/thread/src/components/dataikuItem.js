@@ -349,13 +349,17 @@ class DataikuItem extends Component {
 
         let downstreams = [];
         let upstreams = [];
+        let applieds = [];
+        if (this.props.item.definition.id > -1) {
+            applieds = eval(this.props.item.definition.applied_to)
+        }
         this.props.item.lineage_downstream.map((type) => {
-            if (this.props.item.definition.id == -1 || !eval(this.props.item.definition.applied_to).includes(type.name))
+            if (!applieds.includes(type.name))
                 downstreams.push(type.name)
         });
 
         this.props.item.lineage_upstream.map((type) => {
-            if (this.props.item.definition.id == -1 || !eval(this.props.item.definition.applied_to).includes(type.name))
+            if (!applieds.includes(type.name))
                 upstreams.push(type.name)
         });
 
