@@ -386,7 +386,7 @@ class DataikuItem extends Component {
 
                         {(this.props.item.definition != null && this.props.item.definition.id > -1) &&
                             <div>
-                                {this.props.item.lineage_downstream.length > 0 &&
+                                {eval(this.props.item.definition.applied_to).length > 0 &&
                                     <span style={{ fontWeight: 'bold' }}>Additional</span>
                                 }
                                 {eval(this.props.item.definition.applied_to).map((type) => (
