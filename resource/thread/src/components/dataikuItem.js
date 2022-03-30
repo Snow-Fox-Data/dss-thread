@@ -360,6 +360,18 @@ class DataikuItem extends Component {
             }
         }
 
+        let downstreams = [];
+        this.props.item.lineage_downstream.map((type) => {
+            if (!eval(this.props.item.definition.applied_to).includes(type.name))
+                downstreams.push(type.name)
+        });
+
+        let upstreams = [];
+        this.props.item.lineage_upstream.map((type) => {
+            if (!eval(this.props.item.definition.applied_to).includes(type.name))
+                upstreams.push(type.name)
+        });
+
         return <Col>
             <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
                 <Modal.Header closeButton>
@@ -371,23 +383,23 @@ class DataikuItem extends Component {
                         <span style={{ fontWeight: 'bold' }}>This Dataset</span>
                         <Form.Check className='lineage-check' disabled='true' checked='true' type='switch' id='this-cb' label={this.props.item.name}></Form.Check>
 
-                        {this.props.item.lineage_upstream.length > 0 &&
+                        {upstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
-                        {this.props.item.lineage_upstream.map((type) => (!eval(this.props.item.definition.applied_to).includes(type.name) &&
+                        {upstreams.map((type) => (
                             <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type.name} label={type.name}></Form.Check>
                         ))}
-                        {this.props.item.lineage_downstream.length > 0 &&
+                        {downstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
-                        {this.props.item.lineage_downstream.map((type) => (!eval(this.props.item.definition.applied_to).includes(type.name) &&
+                        {downstreams.map((type) => (
                             <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type.name}></Form.Check>
                         ))}
 
                         {(this.props.item.definition != null && this.props.item.definition.id > -1) &&
                             <div>
                                 {eval(this.props.item.definition.applied_to).length > 0 &&
-                                    <span style={{ fontWeight: 'bold' }}>Additional</span>
+                                    <span style={{ fontWeight: 'bold' }}>Currently Applied</span>
                                 }
                                 {eval(this.props.item.definition.applied_to).map((type) => (
                                     <Form.Check className='lineage-check' type='switch' checked='true' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
