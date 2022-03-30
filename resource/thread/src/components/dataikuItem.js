@@ -130,16 +130,23 @@ class DataikuItem extends Component {
         </Row>
     }
 
-    buildTagsString(arrayTags, variant = "primary") {
+    buildTagsString(arrayTags, variant = "primary", link = true) {
         if (arrayTags == null)
             return;
 
         let tags = [];
 
         arrayTags.forEach(element => {
-            tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                {element}
-            </Button>
+            if (link) {
+                tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
+                    {element}
+                </Button>
+            }
+            else
+                tags[tags.length] = <Button style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
+                    <i class="fa-solid fa-tags"></i>{element}
+                </Button>
+
         });
 
         return tags;
@@ -273,7 +280,7 @@ class DataikuItem extends Component {
 
     renderDefSearchMenuItem(option, props) {
         return <Fragment>
-            <div style={{ fontWeight: 'bold' }}>{option.name}</div>
+            <div style={{ fontWeight: 'bold' }}>{option.name} (option.id)</div>
             <div>{option.description}</div>
         </Fragment>;
     }
@@ -353,7 +360,7 @@ class DataikuItem extends Component {
         }
 
         return <Col>
-            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave() }>
+            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition To Lineage</Modal.Title>
                 </Modal.Header>
@@ -569,7 +576,7 @@ class DataikuItem extends Component {
     }
 
     renderDataset() {
-        let tags = this.buildTagsString(this.props.item.meta.tags);
+        let tags = this.buildTagsString(this.props.item.meta.tags, 'light', false);
         let lineage = this.buildLineage();
 
         var listItems = this.props.item.schema.map((col) =>
@@ -633,7 +640,7 @@ class DataikuItem extends Component {
     }
 
     renderProject() {
-        let tags = this.buildTagsString(this.props.item.tags);
+        let tags = this.buildTagsString(this.props.item.tags, 'light', false);
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
                 <td><span class="app-link" onClick={() => this.openDataset(col)}>{col.split('|')[1]}</span></td>
