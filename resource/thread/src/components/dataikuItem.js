@@ -397,7 +397,6 @@ class DataikuItem extends Component {
                                             id="def-search"
                                             labelKey="search_def"
                                             filterBy={['name', 'description']}
-                                            caseSensitive="false"
                                             minLength={2}
                                             onChange={this.selectDef}
                                             onSearch={this.defSearch}
