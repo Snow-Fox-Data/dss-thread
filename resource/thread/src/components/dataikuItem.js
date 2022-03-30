@@ -349,17 +349,15 @@ class DataikuItem extends Component {
 
         let downstreams = [];
         let upstreams = [];
-        if (this.props.item.definition.id > -1) {
-            this.props.item.lineage_downstream.map((type) => {
-                if (!eval(this.props.item.definition.applied_to).includes(type.name))
-                    downstreams.push(type.name)
-            });
+        this.props.item.lineage_downstream.map((type) => {
+            if (this.item.definition.id == -1 || !eval(this.props.item.definition.applied_to).includes(type.name))
+                downstreams.push(type.name)
+        });
 
-            this.props.item.lineage_upstream.map((type) => {
-                if (!eval(this.props.item.definition.applied_to).includes(type.name))
-                    upstreams.push(type.name)
-            });
-        }
+        this.props.item.lineage_upstream.map((type) => {
+            if (this.item.definition.id == -1 || !eval(this.props.item.definition.applied_to).includes(type.name))
+                upstreams.push(type.name)
+        });
 
         return <Col>
             <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
