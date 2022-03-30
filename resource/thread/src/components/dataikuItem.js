@@ -395,7 +395,7 @@ class DataikuItem extends Component {
                                         <AsyncTypeahead
                                             // filterBy={filterBy}
                                             id="def-search"
-                                            labelKey="name"
+                                            labelKey="search_def"
                                             filterBy={['name', 'description']}
                                             caseSensitive="false"
                                             minLength={2}
