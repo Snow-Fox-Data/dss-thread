@@ -390,7 +390,7 @@ class DataikuItem extends Component {
                                     <span style={{ fontWeight: 'bold' }}>Additional</span>
                                 }
                                 {eval(this.props.item.definition.applied_to).map((type) => (
-                                    <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type.name} label={type}></Form.Check>
+                                    <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
                                 ))}
                             </div>
                         }
