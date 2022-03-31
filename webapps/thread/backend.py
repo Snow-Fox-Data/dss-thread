@@ -479,8 +479,8 @@ class dss_utils:
         for p in all_projects:
             project = all_projects[p]
             
-            if not 'ADVANCEDDESIGNERVM' in p:
-                continue
+            # if not 'ADVANCEDDESIGNERVM' in p:
+            #     continue
             
             for r in project['recipes']:
                 ins = self.get_stream(r, 'inputs', p)            
