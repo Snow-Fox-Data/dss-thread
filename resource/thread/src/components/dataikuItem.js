@@ -356,14 +356,14 @@ class DataikuItem extends Component {
 
         let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
         down_flat.map((type) => {
-            if (!applieds.includes(type.name))
-                downstreams.push(type.name)
+            if (!applieds.includes(type))
+                downstreams.push(type)
         });
 
         let up_flat = this.flattenArray(this.props.item, 'lineage_upstream')
         up_flat.map((type) => {
-            if (!applieds.includes(type.name))
-                upstreams.push(type.name)
+            if (!applieds.includes(type))
+                upstreams.push(type)
         });
 
         return <Col>
