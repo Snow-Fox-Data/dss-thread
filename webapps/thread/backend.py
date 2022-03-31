@@ -512,12 +512,12 @@ class dss_utils:
 
                 if 'lineage_upstream' in ds:
                     # result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
-                    result_up = self.traverse_lineage2(ds['full_name'], 'upstream', all_projects)
+                    result_up = self.traverse_lineage2(ds['full_name'], 'lineage_upstream', all_projects)
                     ds['lineage_upstream_full'] = result_up
         
                 if 'lineage_downstream' in ds:
                     # result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
-                    result_down = self.traverse_lineage2(ds['full_name'], 'downstream', all_projects)
+                    result_down = self.traverse_lineage2(ds['full_name'], 'lineage_downstream', all_projects)
                     ds['lineage_downstream_full'] = result_down
                             
                         
@@ -530,7 +530,7 @@ class dss_utils:
                     node[dir] = self.traverse_lineage2(node, dir, all_projects)
 
                 ds['lineage_complete'] = True
-
+                
                 return ds[dir]
             else:
                 return []        
