@@ -522,7 +522,7 @@ class dss_utils:
                     ds['lineage_downstream_full'] = result_down
                             
                         
-    def traverse_lineage(self, ds_name, dir, all_projects):
+    def traverse_lineage(self, ds_name, dir, all_projects, recur_ct = 0):
         ds = self.get_ds_by_name(ds_name, all_projects)
         
         full = dir + '_full'
@@ -530,6 +530,11 @@ class dss_utils:
             if dir in ds:
                 lins = []
                 for node in ds[dir]:
+                    recur_ct = recur_ct + 1
+                    if recur_ct > 100:
+                        print(f'recursive error {dir} - {ds_name}, {ds[dir]}')
+                        return []
+                        
                     if node != ds_name:
                         lin = self.traverse_lineage(node, dir, all_projects)
                         lins.append({'name': node, dir:lin})
