@@ -524,18 +524,21 @@ class dss_utils:
     def traverse_lineage2(self, ds_name, dir, all_projects):
         ds = self.get_ds_by_name(ds_name, all_projects)
         
-        if not 'lineage_complete' in ds:
+        full = dir + '_full'
+        if not full in ds:
             if dir in ds:
+                lins = []
                 for node in ds[dir]:
-                    node[dir] = self.traverse_lineage2(node, dir, all_projects)
+                    lin = self.traverse_lineage2(node, dir, all_projects)
+                    lins.append(lin)
 
-                ds['lineage_complete'] = True
+                ds[full] = lins
                 
-                return ds[dir]
+                return lins
             else:
                 return []        
         else:
-            return ds[dir]
+            return ds[full]
         
 
     def get_datasets_ds(self):
