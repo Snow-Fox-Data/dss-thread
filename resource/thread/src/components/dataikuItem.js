@@ -354,13 +354,13 @@ class DataikuItem extends Component {
             applieds = eval(this.props.item.definition.applied_to)
         }
 
-        let down_flat = this.flattenArray(this.props.item.lineage_downstream, 'lineage_downstream')
+        let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
         down_flat.map((type) => {
             if (!applieds.includes(type.name))
                 downstreams.push(type.name)
         });
 
-        let up_flat = this.flattenArray(this.props.item.lineage_downstream, 'lineage_upstream')
+        let up_flat = this.flattenArray(this.props.item, 'lineage_upstream')
         up_flat.map((type) => {
             if (!applieds.includes(type.name))
                 upstreams.push(type.name)
