@@ -531,7 +531,7 @@ class dss_utils:
                 lins = []
                 for node in ds[dir]:
                     if node != ds_name:
-                        lin = self.traverse_lineage2(node, dir, all_projects)
+                        lin = self.traverse_lineage(node, dir, all_projects)
                         lins.append({'name': node, dir:lin})
 
                 ds[full] = lins
