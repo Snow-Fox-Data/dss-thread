@@ -531,12 +531,12 @@ class dss_utils:
                 lins = []
                 for node in ds[dir]:
                     recur_ct = recur_ct + 1
-                    if recur_ct > 100:
+                    if recur_ct > 200:
                         print(f'recursive error {dir} - {ds_name}, {ds[dir]}')
                         return []
-                        
+
                     if node != ds_name:
-                        lin = self.traverse_lineage(node, dir, all_projects)
+                        lin = self.traverse_lineage(node, dir, all_projects, recur_ct)
                         lins.append({'name': node, dir:lin})
 
                 ds[full] = lins
