@@ -489,10 +489,12 @@ class dss_utils:
             for d in project['datasets']:
                 d['lineage_downstream'] = []
                 d['lineage_upstream'] = []
-                
+                full_nm = self.get_full_dataset_name(d['name'], d['projectKey'])
+
+                d['full_name'] = full_nm
+
                 for r in project['recipes']:
     #                 print(d['name'], r['ins'])
-                    full_nm = self.get_full_dataset_name(d['name'], d['projectKey'])
                     if full_nm in r['ins']:
                         for o in r['outs']:
                             if not o in d['lineage_downstream']:
@@ -507,15 +509,32 @@ class dss_utils:
             project = all_projects[p]
             for d in range(len(project['datasets'])):
                 ds = project['datasets'][d]
-                ds['full_name'] = self.get_full_dataset_name(ds['name'], p)
 
                 if 'lineage_upstream' in ds:
-                    result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
+                    result_up = self.traverse_lineage2(ds['full_name'], all_projects, upstream=True)
                     ds['lineage_upstream_full'] = result_up
         
                 if 'lineage_downstream' in ds:
                     result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
                     ds['lineage_downstream_full'] = result_down
+                            
+                        
+    def traverse_lineage2(self, ds_name, dir, all_projects):
+        ds = self.get_ds_by_name(ds_name, all_projects)
+        
+        if not 'lineage_complete' in ds:
+            if dir in ds:
+                for node in ds[dir]:
+                    node[dir] = self.traverse_lineage2(node, dir, all_projects)
+
+                ds['lineage_complete'] = True
+
+                return ds[dir]
+            else:
+                return []        
+        else:
+            return ds[dir]
+        
 
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
