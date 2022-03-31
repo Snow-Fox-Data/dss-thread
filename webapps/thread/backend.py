@@ -511,11 +511,13 @@ class dss_utils:
                 ds = project['datasets'][d]
 
                 if 'lineage_upstream' in ds:
-                    result_up = self.traverse_lineage2(ds['full_name'], all_projects, upstream=True)
+                    # result_up = self.traverse_lineage(ds['full_name'], all_projects, upstream=True)
+                    result_up = self.traverse_lineage2(ds['full_name'], 'upstream', all_projects)
                     ds['lineage_upstream_full'] = result_up
         
                 if 'lineage_downstream' in ds:
-                    result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
+                    # result_down = self.traverse_lineage(ds['full_name'], all_projects, upstream=False)
+                    result_down = self.traverse_lineage2(ds['full_name'], 'downstream', all_projects)
                     ds['lineage_downstream_full'] = result_down
                             
                         
