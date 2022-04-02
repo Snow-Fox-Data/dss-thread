@@ -63,16 +63,17 @@ export default memo(({ data, isConnectable }) => {
         <div style={{ float: 'left' }}>
           <div>
             <div >
-              <div className="node-item">
+              <div className="lineage-node-icon">
                 <FaProjectDiagram size='16px' />
               </div>
-              <div className="node-name">{project}</div>
+              <div className="lineage-node-name">{project}</div>
               <div style={{ float: 'clear' }}></div>
             </div>
             {dataset != '' &&
               <div>
                 <div className="lineage-node-icon">
-                  <FaDatabase size='16px' /></div><div class="node-name">{dataset}</div>
+                  <FaDatabase size='16px' /></div>
+                <div class="lineage-node-name">{dataset}</div>
                 <div style={{ float: 'clear' }}></div>
               </div>
             }
@@ -81,7 +82,7 @@ export default memo(({ data, isConnectable }) => {
                 <div className="lineage-node-name">
                   <FaList size='16px' />
                 </div>
-                <div className="node-name">{column}</div>
+                <div className="lineage-node-name">{column}</div>
                 <div style={{ float: 'clear' }}></div>
               </div>
             }
