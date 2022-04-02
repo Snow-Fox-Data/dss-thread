@@ -66,7 +66,7 @@ export default memo(({ data, isConnectable }) => {
                 <FaProjectDiagram size='16px' />
               </div>
               <div className="lineage-node-name">{project}</div>
-              <div style={{ float: 'clear' }}></div>
+              <div style={{ clear:'both' }}></div>
             </div>
             {dataset != '' &&
               <div>
@@ -74,7 +74,7 @@ export default memo(({ data, isConnectable }) => {
                   <FaDatabase size='16px' />
                 </div>
                 <div class="lineage-node-name">{dataset}</div>
-                <div style={{ float: 'clear' }}></div>
+                <div style={{ clear:'both' }}></div>
               </div>
             }
             {column != '' &&
@@ -83,7 +83,7 @@ export default memo(({ data, isConnectable }) => {
                   <FaList size='16px' />
                 </div>
                 <div className="lineage-node-name">{column}</div>
-                <div style={{ float: 'clear' }}></div>
+                <div style={{ clear:'both' }}></div>
               </div>
             }
           </div>
