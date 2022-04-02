@@ -74,18 +74,18 @@ html {
   padding: 0;
 }
 
-.node-item {
+.lineage-node-icon {
   float: 'left';
   padding-top: '2px';
 }
 
-.node-name {
+.lineage-node-name {
   padding-left: '6px';
   float: 'left';
   width: '200px';
   white-space: 'no-wrap';
   overflow: 'hidden';
-  text-Overflow: 'ellipsis';
+  text-overflow: 'ellipsis';
 }
 
 .react-flow {

@@ -22,13 +22,13 @@ export default memo(({ data, isConnectable }) => {
       case 2:
         project = project_splits[0];
         dataset = project_splits[1];
-        link = Common.createDatasetLinkTag(project, dataset);
+        link = Common.createDatasetLink(project, dataset);
         break;
       case 3:
         project = project_splits[0];
         dataset = project_splits[1];
         column = project_splits[2];
-        link = Common.createDatasetLinkTag(project, dataset);
+        link = Common.createDatasetLink(project, dataset);
         break;
       default:
         project = _data.project;
@@ -71,14 +71,14 @@ export default memo(({ data, isConnectable }) => {
             </div>
             {dataset != '' &&
               <div>
-                <div className="node-item">
+                <div className="lineage-node-icon">
                   <FaDatabase size='16px' /></div><div class="node-name">{dataset}</div>
                 <div style={{ float: 'clear' }}></div>
               </div>
             }
             {column != '' &&
               <div>
-                <div className="node-item">
+                <div className="lineage-node-name">
                   <FaList size='16px' />
                 </div>
                 <div className="node-name">{column}</div>
