@@ -56,15 +56,15 @@ export default memo(({ data, isConnectable }) => {
       <div>
 
         <div style={{ float: 'right' }}>
-          <ArrowUpRightSquare size={18} />
+          <a href={link}>
+            <ArrowUpRightSquare size={18} />
+          </a>
         </div>
         <div style={{ float: 'left' }}>
           <div>
             <div >
               <div className="node-item">
-                <a href={link}>
-                  <FaProjectDiagram size='16px' />
-                </a>
+                <FaProjectDiagram size='16px' />
               </div>
               <div className="node-name">{project}</div>
               <div style={{ float: 'clear' }}></div>
