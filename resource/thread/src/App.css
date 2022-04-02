@@ -80,12 +80,12 @@ html {
 }
 
 .lineage-node-name {
-  padding-left: '6px';
-  float: 'left';
-  width: '200px';
-  white-space: 'no-wrap';
-  overflow: 'hidden';
-  text-overflow: 'ellipsis';
+  padding-left: 6px;
+  float: left;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .react-flow {
