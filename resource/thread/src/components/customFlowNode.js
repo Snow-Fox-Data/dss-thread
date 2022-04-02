@@ -11,7 +11,7 @@ export default memo(({ data, isConnectable }) => {
   var column = "";
 
   function formatData(_data) {
-    var project_splits = _data.project.split('|');
+    var project_splits = _data.key.split('|');
     switch (project_splits.length) {
       case 1:
         project = _data.project;
