@@ -37,6 +37,13 @@ export default memo(({ data, isConnectable }) => {
     }
   }
 
+  function openItem() {
+    if (dataset != '')
+      eventBus.dispatch("datasetSelected", data.project);
+    else
+      eventBus.dispatch("project", data.project);
+  }
+
   function selectDataset(e) {
     e.preventDefault();
     eventBus.dispatch("datasetSelected", project + '|' + dataset);
@@ -55,18 +62,18 @@ export default memo(({ data, isConnectable }) => {
 
       <div>
         <div style={{ float: 'right' }}>
-          <a href={link}>
+          <a onClick={() => openItem()} href='#'>
             <ArrowUpRightSquare size={18} />
           </a>
         </div>
-        <div style={{ float: 'left', width:'220px' }}>
+        <div style={{ float: 'left', width: '220px' }}>
           <div>
             <div>
               <div className="lineage-node-icon">
                 <FaProjectDiagram size='16px' />
               </div>
               <div className="lineage-node-name">{project}</div>
-              <div style={{ clear:'both' }}></div>
+              <div style={{ clear: 'both' }}></div>
             </div>
             {dataset != '' &&
               <div>
@@ -74,7 +81,7 @@ export default memo(({ data, isConnectable }) => {
                   <FaDatabase size='16px' />
                 </div>
                 <div class="lineage-node-name">{dataset}</div>
-                <div style={{ clear:'both' }}></div>
+                <div style={{ clear: 'both' }}></div>
               </div>
             }
             {column != '' &&
@@ -83,7 +90,7 @@ export default memo(({ data, isConnectable }) => {
                   <FaList size='16px' />
                 </div>
                 <div className="lineage-node-name">{column}</div>
-                <div style={{ clear:'both' }}></div>
+                <div style={{ clear: 'both' }}></div>
               </div>
             }
           </div>
