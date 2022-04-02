@@ -54,7 +54,6 @@ export default memo(({ data, isConnectable }) => {
       />
 
       <div>
-
         <div style={{ float: 'right' }}>
           <a href={link}>
             <ArrowUpRightSquare size={18} />
@@ -62,7 +61,7 @@ export default memo(({ data, isConnectable }) => {
         </div>
         <div style={{ float: 'left' }}>
           <div>
-            <div >
+            <div>
               <div className="lineage-node-icon">
                 <FaProjectDiagram size='16px' />
               </div>
@@ -72,7 +71,8 @@ export default memo(({ data, isConnectable }) => {
             {dataset != '' &&
               <div>
                 <div className="lineage-node-icon">
-                  <FaDatabase size='16px' /></div>
+                  <FaDatabase size='16px' />
+                </div>
                 <div class="lineage-node-name">{dataset}</div>
                 <div style={{ float: 'clear' }}></div>
               </div>
