@@ -59,7 +59,7 @@ export default memo(({ data, isConnectable }) => {
             <ArrowUpRightSquare size={18} />
           </a>
         </div>
-        <div style={{ float: 'left', width:'190px' }}>
+        <div style={{ float: 'left', width:'220px' }}>
           <div>
             <div>
               <div className="lineage-node-icon">
