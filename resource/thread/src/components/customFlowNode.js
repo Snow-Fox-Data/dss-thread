@@ -62,9 +62,10 @@ export default memo(({ data, isConnectable }) => {
             </div>
             {dataset != '' &&
               <div>
-                <FaDatabase size='15px' /><span style={{
-                  paddingLeft: '6px', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis'
-                }}>{dataset}</span>
+                <div style={{ float: 'left' }}>
+                  <FaDatabase size='15px' /></div><div style={{
+                    paddingLeft: '6px', float: 'left', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis'
+                  }}>{dataset}</div>
               </div>
             }
             {column != '' &&
