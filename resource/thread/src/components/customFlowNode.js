@@ -51,23 +51,24 @@ export default memo(({ data, isConnectable }) => {
       />
 
       <div>
-        <div>
-          <FaProjectDiagram size='15px' /><span style={{ paddingLeft: '6px' }}>{project}</span>
-        </div>
-        {dataset != '' &&
-          <div>
-            <FaDatabase size='15px' /><span style={{ paddingLeft: '6px' }}>{dataset}</span>
-            {/* <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a> */}
-          </div>
-        }
-        {column != '' &&
-          <div>
-            <FaList size='15px' /><span style={{ paddingLeft: '6px' }}>{column}</span>
-            {/* <p>{column}</p> */}
-          </div>
-        }
+
         <div style={{ float: 'right' }}>
           <ArrowUpRightSquare size={22} />
+        </div>
+        <div style={{ float: 'left' }}>
+          <div>
+            <FaProjectDiagram size='15px' /><span style={{ paddingLeft: '6px' }}>{project}</span>
+          </div>
+          {dataset != '' &&
+            <div>
+              <FaDatabase size='15px' /><span style={{ paddingLeft: '6px' }}>{dataset}</span>
+            </div>
+          }
+          {column != '' &&
+            <div>
+              <FaList size='15px' /><span style={{ paddingLeft: '6px' }}>{column}</span>
+            </div>
+          }
         </div>
       </div>
 
