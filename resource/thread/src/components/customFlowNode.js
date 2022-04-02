@@ -58,28 +58,31 @@ export default memo(({ data, isConnectable }) => {
         <div style={{ float: 'left' }}>
           <div>
             <div >
-              <div style={{ float: 'left' }}>
+              <div style={{ float: 'left', paddingTop: '2px' }}>
                 <FaProjectDiagram size='16px' />
               </div>
               <div style={{
                 paddingLeft: '6px',
                 float: 'left', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis'
               }}>{project}</div>
+              <div style={{ float: 'clear' }}></div>
             </div>
             {dataset != '' &&
               <div>
-                <div style={{ float: 'left' }}>
+                <div style={{ float: 'left', paddingTop: '2px' }}>
                   <FaDatabase size='16px' /></div><div style={{
                     paddingLeft: '6px', float: 'left', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis'
                   }}>{dataset}</div>
+                <div style={{ float: 'clear' }}></div>
               </div>
             }
             {column != '' &&
               <div>
-                <div style={{ float: 'left' }}>
+                <div style={{ float: 'left', paddingTop: '2px' }}>
                   <FaList size='16px' />
                 </div>
                 <div style={{ paddingLeft: '6px', float: 'left', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{column}</div>
+                <div style={{ float: 'clear' }}></div>
               </div>
             }
           </div>
