@@ -47,7 +47,7 @@ class Lineage extends Component {
     }
 
     update = (st, base_elem) => {
-        var base_splits = base_elem.name.split('.');
+        var base_splits = base_elem.key.split('.');
 
         let basePositionX = 0;
         let basePositionY = 0;
