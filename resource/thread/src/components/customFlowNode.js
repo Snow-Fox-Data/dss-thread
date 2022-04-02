@@ -37,7 +37,8 @@ export default memo(({ data, isConnectable }) => {
     }
   }
 
-  function openItem() {
+  function openItem(e) {
+    e.preventDefault();
     if (dataset != '')
       eventBus.dispatch("datasetSelected", data.project);
     else
@@ -62,7 +63,7 @@ export default memo(({ data, isConnectable }) => {
 
       <div>
         <div style={{ float: 'right' }}>
-          <a onClick={() => openItem()} href='#'>
+          <a onClick={(e) => openItem(e)} href='#'>
             <ArrowUpRightSquare size={18} />
           </a>
         </div>
