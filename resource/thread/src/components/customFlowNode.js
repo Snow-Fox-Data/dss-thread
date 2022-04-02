@@ -55,14 +55,16 @@ export default memo(({ data, isConnectable }) => {
         <div style={{ float: 'right' }}>
           <ArrowUpRightSquare size={18} />
         </div>
-        <div style={{ float: 'left' }} style={{ maxWidth: '222px', overflow: 'auto' }}>
+        <div style={{ float: 'left' }}>
           <div>
             <div >
               <FaProjectDiagram size='15px' /><span style={{ paddingLeft: '6px' }}>{project}</span>
             </div>
             {dataset != '' &&
               <div>
-                <FaDatabase size='15px' /><span style={{ paddingLeft: '6px' }}>{dataset}</span>
+                <FaDatabase size='15px' /><span style={{
+                  paddingLeft: '6px', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis'
+                }}>{dataset}</span>
               </div>
             }
             {column != '' &&
