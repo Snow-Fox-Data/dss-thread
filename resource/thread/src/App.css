@@ -93,7 +93,7 @@ div.react-confirm-alert-overlay {
 
 .thread-node {
   background-color: #FFF;
-  border: solid 1px #333;
+  border: solid 1px #F2F2F2;
   /* border-radius: 3px; */
   /* box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5);
@@ -106,7 +106,7 @@ div.react-confirm-alert-overlay {
 
 .thread-node-base {
   background-color: #f9f9f9;
-  /* border: solid 1px blue; */
+  border: solid 1px #111;
   /* border-radius: 3px; */
   /* box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
   /* -webkit-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
