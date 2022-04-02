@@ -3,15 +3,16 @@ import eventBus from "../eventBus";
 
 import { Handle } from 'react-flow-renderer';
 import Common from '../common/common';
+import { FaColumns, FaDatabase, FaList, FaProjectDiagram, FaQuestionCircle } from "react-icons/fa";
 
 export default memo(({ data, isConnectable }) => {
   var project = "";
   var dataset = "";
   var column = "";
 
-  function formatData(_data)  {  
+  function formatData(_data) {
     var project_splits = _data.project.split('|');
-    switch(project_splits.length) {
+    switch (project_splits.length) {
       case 1:
         project = _data.project;
         dataset = _data.dataset;
@@ -50,13 +51,15 @@ export default memo(({ data, isConnectable }) => {
 
       <div>
         <div>
-          <h6>{project}</h6>
+          <FaProjectDiagram size='15px' />{project}
         </div>
         <div>
-          <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a>
+        <FaDatabase size='15px' />{dataset}
+          {/* <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a> */}
         </div>
         <div>
-          <p>{column}</p>
+          <FaList size='15px'></FaList>{column}
+          {/* <p>{column}</p> */}
         </div>
       </div>
 
