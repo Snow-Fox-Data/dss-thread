@@ -291,7 +291,6 @@ class DataikuItem extends Component {
         let app_to = [];
         if (this.props.item.definition.id > -1)
             app_to = eval(this.props.item.definition.applied_to);
-            
         this.setState({
             applyLineageModal: true,
             newDefModal: false,

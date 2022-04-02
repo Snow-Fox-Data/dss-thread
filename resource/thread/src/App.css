@@ -78,6 +78,10 @@ html {
   background: white;
 }
 
+.react-flow-container {
+  background: white;
+}
+
 .title-row {
   padding-bottom: 6px;
 }
@@ -115,7 +119,7 @@ div.react-confirm-alert-overlay {
   /* box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
   /* -webkit-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
   /* -moz-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
-  font-weight: bold;
+  /* font-weight: bold; */
   /* height: auto; */
   overflow: hidden;
   padding: 5px;
