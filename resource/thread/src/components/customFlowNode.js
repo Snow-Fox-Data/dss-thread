@@ -53,10 +53,10 @@ export default memo(({ data, isConnectable }) => {
       <div>
 
         <div style={{ float: 'right' }}>
-          <ArrowUpRightSquare size={22} />
+          <ArrowUpRightSquare size={20} />
         </div>
-        <div style={{ float: 'left' }}>
-          <div>
+        <div style={{ float: 'left' }} style={{ maxWidth: '220px' }}>
+          <div >
             <FaProjectDiagram size='15px' /><span style={{ paddingLeft: '6px' }}>{project}</span>
           </div>
           {dataset != '' &&
