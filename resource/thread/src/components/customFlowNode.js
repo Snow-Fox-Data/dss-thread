@@ -10,22 +10,25 @@ export default memo(({ data, isConnectable }) => {
   var project = "";
   var dataset = "";
   var column = "";
+  var link = "";
 
   function formatData(_data) {
     var project_splits = _data.project.split('|');
     switch (project_splits.length) {
       case 1:
         project = _data.project;
-        dataset = _data.dataset;
+        link = Common.createProjectLink(project);
         break;
       case 2:
         project = project_splits[0];
         dataset = project_splits[1];
+        link = Common.createDatasetLinkTag(project, dataset);
         break;
       case 3:
         project = project_splits[0];
         dataset = project_splits[1];
         column = project_splits[2];
+        link = Common.createDatasetLinkTag(project, dataset);
         break;
       default:
         project = _data.project;
@@ -58,30 +61,27 @@ export default memo(({ data, isConnectable }) => {
         <div style={{ float: 'left' }}>
           <div>
             <div >
-              <div style={{ float: 'left', paddingTop: '2px' }}>
-                <FaProjectDiagram size='16px' />
+              <div className="node-item">
+                <a href={link}>
+                  <FaProjectDiagram size='16px' />
+                </a>
               </div>
-              <div style={{
-                paddingLeft: '6px',
-                float: 'left', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis'
-              }}>{project}</div>
+              <div className="node-name">{project}</div>
               <div style={{ float: 'clear' }}></div>
             </div>
             {dataset != '' &&
               <div>
-                <div style={{ float: 'left', paddingTop: '2px' }}>
-                  <FaDatabase size='16px' /></div><div style={{
-                    paddingLeft: '6px', float: 'left', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis'
-                  }}>{dataset}</div>
+                <div className="node-item">
+                  <FaDatabase size='16px' /></div><div class="node-name">{dataset}</div>
                 <div style={{ float: 'clear' }}></div>
               </div>
             }
             {column != '' &&
               <div>
-                <div style={{ float: 'left', paddingTop: '2px' }}>
+                <div className="node-item">
                   <FaList size='16px' />
                 </div>
-                <div style={{ paddingLeft: '6px', float: 'left', width: '200px', whiteSpace: 'no-wrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{column}</div>
+                <div className="node-name">{column}</div>
                 <div style={{ float: 'clear' }}></div>
               </div>
             }
