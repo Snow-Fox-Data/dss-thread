@@ -75,8 +75,8 @@ html {
 }
 
 .lineage-node-icon {
-  float: 'left';
-  padding-top: '2px';
+  float:left;
+  padding-top: 2px;
 }
 
 .lineage-node-name {
