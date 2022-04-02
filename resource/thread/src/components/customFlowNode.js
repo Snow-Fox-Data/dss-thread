@@ -53,14 +53,18 @@ export default memo(({ data, isConnectable }) => {
         <div>
           <FaProjectDiagram size='15px' />{project}
         </div>
-        <div>
-        <FaDatabase size='15px' />{dataset}
-          {/* <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a> */}
-        </div>
-        <div>
-          <FaList size='15px'></FaList>{column}
-          {/* <p>{column}</p> */}
-        </div>
+        {dataset != null &&
+          <div>
+            <FaDatabase size='15px' />{dataset}
+            {/* <a href='javascript:void(0)' onClick={selectDataset}>{dataset}</a> */}
+          </div>
+        }
+        {column != null &&
+          <div>
+            <FaList size='15px'></FaList>{column}
+            {/* <p>{column}</p> */}
+          </div>
+        }
       </div>
 
       <Handle
