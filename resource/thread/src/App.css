@@ -75,11 +75,11 @@ html {
 }
 
 .react-flow {
-  background: white;
+  background-color: white !important;
 }
 
 .react-flow-container {
-  background: white;
+  background-color: white !important;
 }
 
 .title-row {
