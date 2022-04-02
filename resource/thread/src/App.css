@@ -104,29 +104,17 @@ div.react-confirm-alert-overlay {
   /* width: auto */
 }
 
-.thread-node h6,
-.thread-node-base h6 {
-  margin: 0;
-  /* text-align: center; */
-}
-
-.thread-node p,
-.thread-node-base p {
-  /* flex-wrap: wrap; */
-  font-size: 1.0em;
-}
-
 .thread-node-base {
-  background-color: #FFF;
-  border: solid 1px blue;
-  border-radius: 3px;
-  box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5);
-  -moz-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5);
+  background-color: #f9f9f9;
+  /* border: solid 1px blue; */
+  /* border-radius: 3px; */
+  /* box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
+  /* -webkit-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
+  /* -moz-box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.5); */
   font-weight: bold;
   /* height: auto; */
   overflow: hidden;
-  padding: 10px;
+  padding: 5px;
   /* width: auto */
 }
 
