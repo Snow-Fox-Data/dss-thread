@@ -59,7 +59,7 @@ export default memo(({ data, isConnectable }) => {
             <ArrowUpRightSquare size={18} />
           </a>
         </div>
-        <div style={{ float: 'left' }}>
+        <div style={{ float: 'left', width:'190px' }}>
           <div>
             <div>
               <div className="lineage-node-icon">
@@ -79,7 +79,7 @@ export default memo(({ data, isConnectable }) => {
             }
             {column != '' &&
               <div>
-                <div className="lineage-node-name">
+                <div className="lineage-node-icon">
                   <FaList size='16px' />
                 </div>
                 <div className="lineage-node-name">{column}</div>
