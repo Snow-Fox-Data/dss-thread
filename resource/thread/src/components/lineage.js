@@ -120,8 +120,8 @@ class Lineage extends Component {
             var edge = { id: edgeId, source: baseElementId, target: elementId, arrowHeadType: 'arrow' };
 
             if (down_res[x].count > 0) {
-                edge.label = '<span data-tmp="test">[' + down_res[x].count + ']</span>';
-                // edge.animated = true;
+                edge.label = '[' + down_res[x].count + ']';
+                edge.animated = true;
             }
 
             elements[elements.length] = edge;
