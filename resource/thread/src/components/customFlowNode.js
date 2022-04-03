@@ -3,7 +3,7 @@ import eventBus from "../eventBus";
 
 import { Handle } from 'react-flow-renderer';
 import Common from '../common/common';
-import { ArrowUpRightSquare, ThermometerSnow, ArrowRightSquareFill } from 'react-bootstrap-icons'
+import { ArrowUpRightSquare, ThermometerSnow, ArrowRightSquare } from 'react-bootstrap-icons'
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram,  } from "react-icons/fa";
 
 export default memo(({ data, isConnectable }) => {
@@ -64,7 +64,7 @@ export default memo(({ data, isConnectable }) => {
       <div>
         <div style={{ float: 'right' }}>
           <a onClick={(e) => openItem(e)} href='#'>
-            <ArrowRightSquareFill size={18} />
+            <ArrowRightSquare size={18} />
           </a>
         </div>
         <div style={{ float: 'left', width: '220px' }}>
