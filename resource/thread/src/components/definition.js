@@ -14,10 +14,10 @@ class Definition extends Component {
             <Card.Header>Definition: {this.props.definition.name}</Card.Header>
             <Card.Body>
                 <Card.Text>
-                    <h5>
+                    {/* <h5>
                         ID
                     </h5>
-                    {/* <div style={{ paddingBottom: "10px" }}>
+                    <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.id}
                     </div> */}
                     <h5>

@@ -446,12 +446,12 @@ class DataikuItem extends Component {
                                     <div>
                                         <Form style={{ paddingTop: '10px' }}>
                                             <Form.Group className="mb-3">
-                                                {this.state.tempSelDef.id > -1 &&
+                                                {/* {this.state.tempSelDef.id > -1 &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Definition ID</Form.Label>
                                                         <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
                                                     </div>
-                                                }
+                                                } */}
                                                 {this.state.tempSelDef.id == -1 &&
                                                     <h3>New Definition</h3>
                                                 }
