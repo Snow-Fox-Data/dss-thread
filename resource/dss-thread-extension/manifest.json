@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  
+  "name": "DSS Thread Extension",
+  "version": "0.1.0",
+  "description": "Extension to add quick links to view dataiku object in thread plugin.",
+
+  "background": {
+    "service_worker": "dss-thread-extension.js"
+  },
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/get_started16.png",
+      "32": "/images/get_started32.png",
+      "48": "/images/get_started48.png",
+      "128": "/images/get_started128.png"
+    }
+  },
+  "icons": {
+    "16": "/images/get_started16.png",
+    "32": "/images/get_started32.png",
+    "48": "/images/get_started48.png",
+    "128": "/images/get_started128.png"
+  },
+  
+  "content_scripts": [{
+    "css": ["styles.css"],
+    "js": ["dss-thread-extension.js"],
+    "matches": ["https://*/projects/"]
+  }]
+
+}
