@@ -25,7 +25,8 @@ class DataikuItem extends Component {
             defSearchResults: [],
             isLineageVisible: false,
             applyLineageModal: false,
-            applyToDataSets: []
+            applyToDataSets: [],
+            dssSrc: ''
         };
     }
 
@@ -338,7 +339,14 @@ class DataikuItem extends Component {
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
-        const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
+        const tabClicked = (e) => {
+            if (e == 'flow')
+                this.setState({
+                    'dssLink': Common.createDatasetLink(this.props.item.project, this.props.item.dataset)
+                });
+
+            this.setState({ isLineageVisible: (e === "lineage") })
+        };
         const handleLineageCheck = (e) => {
             var cb = e.target;
             // var upstream = cb.id.indexOf('ul') > -1;
@@ -549,7 +557,7 @@ class DataikuItem extends Component {
                             }
                         </Tab>
                         <Tab eventKey='flow' title="DSS" def>
-                            <iframe style={{ width: '100%', height: '500px' }} src={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} ></iframe>
+                            <iframe style={{ width: '100%', height: '500px' }} src={this.state.dssSrc} ></iframe>
                         </Tab>
                     </Tabs>
                 </div>
@@ -624,7 +632,14 @@ class DataikuItem extends Component {
             </tr>
         );
 
-        const tabClicked = (e) => { this.setState({ isLineageVisible: (e === "lineage") }) };
+        const tabClicked = (e) => {
+            if (e == 'flow')
+                this.setState({
+                    'dssLink': Common.createDatasetLink(this.props.item.project, this.props.item.id)
+                });
+
+            this.setState({ isLineageVisible: (e === "lineage") })
+        };
 
         return <Col>
             <Row>
@@ -664,7 +679,7 @@ class DataikuItem extends Component {
                         }
                     </Tab>
                     <Tab eventKey='flow' title="DSS" def>
-                        <iframe style={{ width: '100%', height: '500px' }} src={Common.createDatasetLink(this.props.item.project, this.props.item.id)} ></iframe>
+                        <iframe style={{ width: '100%', height: '500px' }} src={this.state.dssSrc} ></iframe>
                     </Tab>
                 </Tabs>
             </Row>
@@ -679,6 +694,13 @@ class DataikuItem extends Component {
                     <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col)}>{col.split('|')[1]}</span></td>
             </tr>
         );
+
+        const tabSelected = (e) => {
+            if (e == 'flow')
+                this.setState({
+                    'dssSrc': Common.createProjectLink(this.props.item.projectKey)
+                });
+        }
 
         return <Col>
             <Row>
@@ -699,7 +721,7 @@ class DataikuItem extends Component {
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>
-                    <Tabs defaultActiveKey="datasets" className="mb-3" id='project-tabs'>
+                    <Tabs defaultActiveKey="datasets" className="mb-3" id='project-tabs' onSelect={tabSelected}>
                         <Tab eventKey="datasets" title="Datasets" def>
                             <Table striped bordered hover>
                                 <thead>
@@ -713,7 +735,7 @@ class DataikuItem extends Component {
                             </Table>
                         </Tab>
                         <Tab eventKey='flow' title="DSS" def>
-                            <iframe style={{ width: '100%', height: '500px' }} src={Common.createProjectLink(this.props.item.projectKey)} ></iframe>
+                            <iframe style={{ width: '100%', height: '500px' }} src={this.state.dssSrc} ></iframe>
                         </Tab>
                     </Tabs>
                 </div>
