@@ -630,7 +630,7 @@ class dss_utils:
 
         # add definitions to index
         df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-        for idx, row in df.iterrows():
+        for idx, row in df.fillna('', inplace=True).iterrows():
             index_list.append({
                     "name": row['name'],
                     "object_type": "definition",
