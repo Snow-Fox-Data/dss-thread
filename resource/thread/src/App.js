@@ -268,7 +268,7 @@ class App extends Component {
             {option.object_type == 'definition' &&
                 <span>
                     <span style={{}}>Definition: </span>
-                    <span style={{}}>{option.name}</span>
+                    <span style={{}}>{option.description}</span>
                 </span>
             }
             {option.object_type == 'column' &&
