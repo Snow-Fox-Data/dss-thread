@@ -592,12 +592,14 @@ class dss_utils:
                 index_list.append({
                     "name": dataset['name'],
                     "object_type": "dataset",
-                    "key": self.get_full_dataset_name(dataset['name'], proj)
+                    "key": self.get_full_dataset_name(dataset['name'], proj),
+                    "description": dataset['name']
                 })
 
                 for column in dataset['schema']['columns']:
                    index_list.append({
                      "name": column['name'],
+                     "description": column['name'],
                      "object_type": "column",
                     "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
                      }) 
