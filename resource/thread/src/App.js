@@ -332,7 +332,7 @@ class App extends Component {
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarContent">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 float-right">
                                     {/* <li class="nav-item">
                                         <a class="nav-link active" href="#">Home</a>
                                     </li>

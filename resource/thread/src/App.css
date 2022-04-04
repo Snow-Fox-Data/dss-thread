@@ -74,15 +74,16 @@ html {
   padding: 0;
 }
 
-ul.navbar-nav {
+/* ul.navbar-nav {
   float: right;
-}
+} */
 
 ul.navbar-nav li.nav-item {
   min-width: 100px;
 }
 
 ul.navbar-nav li.nav-item a {
+  text-align: center;
   text-decoration: none;
 }
 
