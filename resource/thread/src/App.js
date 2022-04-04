@@ -338,7 +338,14 @@ class App extends Component {
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Catalog</a>
-                                    </li> */}                                
+                                    </li> */}
+
+                                    <li class="nav-item">
+                                        <Link to={App.currentUrl}>Home</Link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <Link to={App.currentUrl + "/catalog"}>Catalog</Link>
+                                    </li>
                                     
                                     {/* THIS EXAMPLE BREAK APP */}
                                     {/* <Routes>
@@ -371,6 +378,13 @@ class App extends Component {
                             </ul>
                         </div>
                     </nav>
+
+                    <Row>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/catalog" element={<Catalog />} />
+                        </Routes>
+                    </Row>
 
                     <Row>
                         <Col>
@@ -435,6 +449,7 @@ class App extends Component {
                                 : null}
                         </div>
                     </Row>
+
                     <Row>
                         {!loading ? this.dataikuItem : null}
                     </Row>
