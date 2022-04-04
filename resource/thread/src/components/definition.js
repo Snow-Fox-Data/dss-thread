@@ -17,9 +17,9 @@ class Definition extends Component {
                     <h5>
                         ID
                     </h5>
-                    <div style={{ paddingBottom: "10px" }}>
+                    {/* <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.id}
-                    </div>
+                    </div> */}
                     <h5>
                         Name
                     </h5>

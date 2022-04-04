@@ -11,6 +11,7 @@ import random
 from sentry_sdk import capture_exception
 from sentry_sdk import capture_message
 import re
+import logging
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -123,7 +124,7 @@ def load_item():
                     search_key = re.escape(key)
                     def_df = df[df['applied_to'].str.contains(search_key, case=False, na=False)].fillna('')                    
                 except Exception as e:
-                    print(e)
+                    logging.info(e)
                     def_df = ''
 
                 p_name, d_name, c_name = dss.extract_name_project(key)
@@ -140,13 +141,13 @@ def load_item():
                     
                 return col
             if res['object_type'] == 'definition':
-                print(f'searching for definition key: {key}')
+                logging.info(f'searching for definition key: {key}')
                 df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                 df['object_type'] = 'definition'
                 res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
 
     response_json = json.dumps(res) 
-    # print(response_json)
+    # logging.info(response_json)
 
     return response_json
 
@@ -174,7 +175,7 @@ def update_desc():
         col_key = data['column_key']
         df = dss.reset_col_definition(df, col_key)
 
-    # print(desc_id, exists)
+    # logging.info(desc_id, exists)
     index_ds = dss.get_index_ds()
     if desc_id == -1:
         new_id = random.randint(100000,100000000)
@@ -319,7 +320,7 @@ class dss_utils:
                         col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)         
         except Exception as e:
             # capture_exception(e)
-            print(f'no schema for {key} {e}')
+            logging.info(f'no schema for {key} {e}')
 
         # tags
         p = self.client.get_project(p_name)
@@ -352,7 +353,7 @@ class dss_utils:
             
         for i in column_array:
             if i is not None and len(i) > 0:
-                print(f'setting description for {i}')
+                logging.info(f'setting description for {i}')
                 lst = i.split('|')
                 project, dataset, column = lst[0], lst[1], lst[2]
                 p = self.client.get_project(project)
@@ -377,7 +378,7 @@ class dss_utils:
                     
                 if column['name'].lower() == col.lower():
                     # direct column name match!
-                    # print(col, ds['name'], ds[dir])
+                    # logging.info(col, ds['name'], ds[dir])
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
@@ -399,7 +400,7 @@ class dss_utils:
                         exist = dataiku.Dataset(d_name, p_name).get_location_info()
                         refs.append(self.get_full_dataset_name(d_name, p_name))
                     except: 
-                        print(f'{p_name}.{d_name} doesnt exist')
+                        logging.info(f'{p_name}.{d_name} doesnt exist')
                         # doesn't exist, this is probably a folder or other item we don't currently support
 
         except Exception as e:
@@ -411,7 +412,7 @@ class dss_utils:
         return refs
 
     def get_ds_by_name(self, name, all_projects, p_name=None):
-        # print(name)
+        # logging.info(name)
         if '|' in name:
             p_name, d_name, c_name = self.extract_name_project(name)
         else:
@@ -444,7 +445,7 @@ class dss_utils:
     #                     try:
     #                         recur_ct = recur_ct + 1
     #                         if recur_ct > 300:
-    #                             print(f'recursive error {dir} - {ds_name}, {l}, {ds[dir]}')
+    #                             logging.info(f'recursive error {dir} - {ds_name}, {l}, {ds[dir]}')
     #                             return []
 
     #                         nxt = self.traverse_lineage(l, all_projects, upstream, recur_ct)
@@ -459,7 +460,7 @@ class dss_utils:
                 
 
     #     except Exception as e: 
-    #         print(f'error traversing {ds_name}')
+    #         logging.info(f'error traversing {ds_name}')
     #         return []
 
     def extract_name_project(self, full_ds_name):
@@ -498,7 +499,7 @@ class dss_utils:
                 d['full_name'] = full_nm
 
                 for r in project['recipes']:
-    #                 print(d['name'], r['ins'])
+    #                 logging.info(d['name'], r['ins'])
                     if full_nm in r['ins']:
                         for o in r['outs']:
                             if not o in d['lineage_downstream']:
@@ -533,7 +534,7 @@ class dss_utils:
                 for node in ds[dir]:
                     recur_ct = recur_ct + 1
                     if recur_ct > 200:
-                        print(f'recursive error {dir} - {ds_name}, {ds[dir]}')
+                        logging.info(f'recursive error {dir} - {ds_name}, {ds[dir]}')
                         return []
 
                     if node != ds_name:
@@ -607,7 +608,7 @@ class dss_utils:
         # compute the dataset lineage
         self.get_ds_lineage(scan_obj)
 
-        # print(scan_obj)
+        # logging.info(scan_obj)
         
         ds_list = []
         # create an object to save 
