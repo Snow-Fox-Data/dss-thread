@@ -74,6 +74,23 @@ html {
   padding: 0;
 }
 
+ul.navbar-nav {
+  float: right;
+}
+
+ul.navbar-nav li.nav-item {
+  min-width: 100px;
+}
+
+ul.navbar-nav li.nav-item a {
+  text-decoration: none;
+}
+
+ul.navbar-nav li.nav-item:hover {
+  background-color: #333;
+  color: #FFF;
+}
+
 .lineage-node-icon {
   float:left;
   padding-top: 2px;
