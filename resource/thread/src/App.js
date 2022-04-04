@@ -153,88 +153,88 @@ class App extends Component {
     //         });
     // }
 
-    // componentDidMount() {
+    componentDidMount() {
 
-    //     window.$(document).ready(() => {
+        window.$(document).ready(() => {
 
-    //         fetch(window.getWebAppBackendUrl('get-user'))
-    //             .then(res => res.json())
-    //             .then((response) => {
+            fetch(window.getWebAppBackendUrl('get-user'))
+                .then(res => res.json())
+                .then((response) => {
 
-    //                 if (response.status == 'ok') {
+                    if (response.status == 'ok') {
 
-    //                     this.setState({
-    //                         dataiku: window.dataiku,
-    //                         currentUser: response['you_are'],
-    //                         loading: false,
-    //                         loggedIn: true
-    //                     });
+                        this.setState({
+                            dataiku: window.dataiku,
+                            currentUser: response['you_are'],
+                            loading: false,
+                            loggedIn: true
+                        });
 
-    //                     this.navDeepLink();
+                        // this.navDeepLink();
 
-    //                     window.addEventListener("hashchange", () => this.navDeepLink());
+                        // window.addEventListener("hashchange", () => this.navDeepLink());
 
-    //                     eventBus.on("datasetSelected", (ds) => {
-    //                         this.loadItem([{
-    //                             key: ds,
-    //                             object_type: 'dataset'
-    //                         }])
+                        // eventBus.on("datasetSelected", (ds) => {
+                        //     this.loadItem([{
+                        //         key: ds,
+                        //         object_type: 'dataset'
+                        //     }])
 
-    //                         // clear the search bar
-    //                         // this.searchRef.clear()
-    //                         this.navToObject(ds)
-    //                     }
-    //                     );
+                        //     // clear the search bar
+                        //     // this.searchRef.clear()
+                        //     this.navToObject(ds)
+                        // }
+                        // );
 
-    //                     eventBus.on("definitionSelected", (ds) => {
-    //                         this.loadItem([{
-    //                             key: ds,
-    //                             object_type: 'definition'
-    //                         }])
+                        // eventBus.on("definitionSelected", (ds) => {
+                        //     this.loadItem([{
+                        //         key: ds,
+                        //         object_type: 'definition'
+                        //     }])
 
-    //                         // clear the search bar
-    //                         // this.searchRef.clear()
-    //                         this.navToObject(ds)
-    //                     }
-    //                     );
+                        //     // clear the search bar
+                        //     // this.searchRef.clear()
+                        //     this.navToObject(ds)
+                        // }
+                        // );
 
 
-    //                     eventBus.on("projectSelected", (proj) => {
-    //                         this.loadItem([{
-    //                             key: proj,
-    //                             object_type: 'project'
-    //                         }])
+                        // eventBus.on("projectSelected", (proj) => {
+                        //     this.loadItem([{
+                        //         key: proj,
+                        //         object_type: 'project'
+                        //     }])
 
-    //                         // clear the search bar
-    //                         // this.searchRef.clear()
-    //                         this.navToObject(proj)
-    //                     }
-    //                     );
+                        //     // clear the search bar
+                        //     // this.searchRef.clear()
+                        //     this.navToObject(proj)
+                        // }
+                        // );
 
-    //                     eventBus.on("columnSelected", (col) => {
-    //                         this.loadItem([{
-    //                             key: col,
-    //                             object_type: 'column'
-    //                         }])
+                        // eventBus.on("columnSelected", (col) => {
+                        //     this.loadItem([{
+                        //         key: col,
+                        //         object_type: 'column'
+                        //     }])
 
-    //                         // clear the search bar
-    //                         // this.searchRef.clear()
-    //                         this.navToObject(col)
-    //                     }
-    //                     );
+                        //     // clear the search bar
+                        //     // this.searchRef.clear()
+                        //     this.navToObject(col)
+                        // }
+                        // );
 
-    //                     eventBus.on("loading", (isLoading) =>
-    //                         this.setState({ "loading": isLoading })
-    //                     );
-    //                 }
-    //                 else
-    //                     this.setState({
-    //                         loading: false
-    //                     })
-    //             });
+                        eventBus.on("loading", (isLoading) =>
+                            this.setState({ "loading": isLoading })
+                        );
+                    }
+                    else
+                        this.setState({
+                            loading: false
+                        })
+                });
 
-    //     });
-    // }
+        });
+    }
 
     // navDeepLink() {
     //     let parts = window.top.location.href.split('#o=')
