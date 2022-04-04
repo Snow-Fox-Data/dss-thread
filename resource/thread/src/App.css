@@ -74,10 +74,6 @@ html {
   padding: 0;
 }
 
-/* ul.navbar-nav {
-  float: right;
-} */
-
 ul.navbar-nav li.nav-item {
   min-width: 150px;
 }
@@ -91,10 +87,13 @@ ul.navbar-nav li.nav-item a {
   width: inherit;
 }
 
-ul.navbar-nav li.nav-item a:hover {
-  /* background-color: #333; */
+ul.navbar-nav li.nav-item a.active {
   border-bottom: solid 2px #FFF;
-  color: #FFF;
+}
+
+ul.navbar-nav li.nav-item a:hover {
+  border-bottom: solid 2px #DDD;
+  color: #DDD;
 }
 
 .lineage-node-icon {
