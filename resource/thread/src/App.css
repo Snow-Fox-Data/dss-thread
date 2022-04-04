@@ -84,6 +84,7 @@ ul.navbar-nav li.nav-item {
 
 ul.navbar-nav li.nav-item a {
   color: #FFF;
+  display: block;
   font-size: 1.25em;
   text-align: center;
   text-decoration: none;
