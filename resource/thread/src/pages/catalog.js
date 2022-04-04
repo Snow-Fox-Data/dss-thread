@@ -4,14 +4,16 @@ import { Row } from 'react-bootstrap';
 class Catalog extends Component {
 
     constructor(props) {
+        super(props);
+
         this.state = {
-            
+            title: "Catelog View"
         };
     }
 
     render() {
         return <Row>
-            <p>Catelog View</p>
+            <p>{this.state.title}</p>
         </Row>
     }
 }
