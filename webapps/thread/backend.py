@@ -80,7 +80,7 @@ def search():
     idx_ds = dss.get_index_ds()
     df = idx_ds.get_dataframe()
 
-    result = df[df['name'].str.contains(args.get('term'), case=False)]
+    result = df[df['description'].str.contains(args.get('term'), case=False)]
     
     return result.to_json(orient="records")
 
