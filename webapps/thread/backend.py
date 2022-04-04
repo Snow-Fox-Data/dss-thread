@@ -195,6 +195,7 @@ def update_desc():
 
         new_record = pd.DataFrame.from_dict([{
                 "name": data['name'],
+                "description": data['name'] + ' | ' + data['description'],
                 "object_type": "definition",
                 "key": new_id
             }])
@@ -583,7 +584,8 @@ class dss_utils:
             index_list.append({
                 "name": proj.replace('|', ' | '), 
                 "object_type": "project",
-                "key": proj
+                "key": proj,
+                "description": proj.replace('|', ' | ')
             })
 
             for dataset in datasets:
