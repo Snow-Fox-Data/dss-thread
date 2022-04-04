@@ -342,7 +342,7 @@ class DataikuItem extends Component {
         const tabClicked = (e) => {
             if (e == 'flow')
                 this.setState({
-                    'dssLink': Common.createDatasetLink(this.props.item.project, this.props.item.dataset)
+                    'dssSrc': Common.createDatasetLink(this.props.item.project, this.props.item.dataset)
                 });
 
             this.setState({ isLineageVisible: (e === "lineage") })
@@ -635,7 +635,7 @@ class DataikuItem extends Component {
         const tabClicked = (e) => {
             if (e == 'flow')
                 this.setState({
-                    'dssLink': Common.createDatasetLink(this.props.item.project, this.props.item.id)
+                    'dssSrc': Common.createDatasetLink(this.props.item.project, this.props.item.id)
                 });
 
             this.setState({ isLineageVisible: (e === "lineage") })
