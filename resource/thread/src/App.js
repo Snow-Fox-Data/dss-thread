@@ -338,7 +338,7 @@ class App extends Component {
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarContent">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ?  'active' : ''} onClick={() => this.setState({ activeTab: App.HOME })} to={App.currentUrl}>Home</Link>
                                     </li>
