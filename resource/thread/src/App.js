@@ -379,7 +379,7 @@ class App extends Component {
                                     filterBy={filterBy}
                                     id="async-search"
                                     delay={300}
-                                    labelKey="name"
+                                    labelKey="description"
                                     ref={this.searchRef}
                                     minLength={3}
                                     onChange={this.loadItem}
