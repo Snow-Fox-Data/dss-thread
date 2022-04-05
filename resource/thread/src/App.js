@@ -26,7 +26,8 @@ import {
     Switch,
     Route,
     Routes,
-    Link
+    Link,
+    useHistory
 } from "react-router-dom";
 
 import Common from "./common/common";
@@ -36,7 +37,7 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 class App extends Component {
-    static currentUrl = window.location.pathname;
+    static CURRENT_URL = window.location.pathname;
 
     static HOME = "HOME";
     static CATALOG = "CATALOG";
@@ -68,94 +69,20 @@ class App extends Component {
         console.log("window.location.pathname == " + window.location.pathname);
     }
 
-    // filterDataikuItems = (response) => {
-    //     let types = this.formatQueryTypes();
+    checkActiveTabab() {
+        let url = window.location.pathname;
+        let activeTab = App.HOME;
 
-    //     var p_list = [];
-    //     Object.keys(response).forEach(function (results) {
-    //         var dataikuItem = response[results];
-    //         if (types.indexOf(dataikuItem.object_type.toString()) >= 0) {
-    //             p_list[p_list.length] = dataikuItem;
-    //         }
-    //     });
+        if(App.CURRENT_URL.indexOf('catalog') !== -1) {
+            activeTab = App.CATALOG;
+        } else {
+            activeTab = App.HOME;
+        }
 
-    //     return p_list;
-    // }
-
-    // formatQueryTypes = () => {
-    //     let types = [];
-    //     Object.entries(this.state.filters).sort().map(([key, value]) => {
-    //         if (value == true) {
-    //             types[types.length] = key.toString();
-    //         }
-    //     });
-
-    //     return types;
-    // }
-
-    // handleOnChange = (type) => {
-    //     let tempFilters = this.state.filters;
-    //     tempFilters[type] = !tempFilters[type];
-
-    //     this.setState({
-    //         filters: tempFilters
-    //     });
-    // }
-
-    // loadItem = (item) => {
-    //     this.setState({ loading: true });
-    //     if (item.length > 0) {
-    //         this.loadItemByKey(item[0].key)
-    //         this.navToObject(item[0].key)
-    //     }
-    // }
-
-    // loadItemByKey = (itemKey) => {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         headers: { 'Content-Type': 'application/json' },
-    //     };
-
-    //     // let obj_type = 'project';
-    //     // let splitCt = (itemKey.split("|").length - 1);
-    //     // if (splitCt == 1)
-    //     //     obj_type = 'dataset';
-    //     // else if (splitCt == 2)
-    //     //     obj_type = 'column'
-
-    //     fetch(window.getWebAppBackendUrl('load-item') + '?key=' + itemKey, requestOptions)
-    //         .then(res => res.json())
-    //         .then((response) => {
-    //             console.log('response == ');
-    //             console.log(response);
-
-    //             this.setState({
-    //                 loading: false,
-    //                 selectedItem: response,
-    //                 selectedItemType: response.object_type
-    //             });
-    //         });
-    // }
-
-    // search = (term) => {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         headers: { 'Content-Type': 'application/json' },
-    //     };
-
-    //     let url = window.getWebAppBackendUrl('search') + '?term=' + term;
-    //     this.setState({ loading: true });
-    //     fetch(url, requestOptions)
-    //         .then(res => res.json())
-    //         .then((response) => {
-    //             var p_list = this.filterDataikuItems(response);
-
-    //             this.setState({
-    //                 searchResults: p_list,
-    //                 loading: false
-    //             });
-    //         });
-    // }
+        this.setState({
+            activeTab: activeTab
+        });
+    }
 
     componentDidMount() {
 
@@ -174,59 +101,6 @@ class App extends Component {
                             loggedIn: true
                         });
 
-                        // this.navDeepLink();
-
-                        // window.addEventListener("hashchange", () => this.navDeepLink());
-
-                        // eventBus.on("datasetSelected", (ds) => {
-                        //     this.loadItem([{
-                        //         key: ds,
-                        //         object_type: 'dataset'
-                        //     }])
-
-                        //     // clear the search bar
-                        //     // this.searchRef.clear()
-                        //     this.navToObject(ds)
-                        // }
-                        // );
-
-                        // eventBus.on("definitionSelected", (ds) => {
-                        //     this.loadItem([{
-                        //         key: ds,
-                        //         object_type: 'definition'
-                        //     }])
-
-                        //     // clear the search bar
-                        //     // this.searchRef.clear()
-                        //     this.navToObject(ds)
-                        // }
-                        // );
-
-
-                        // eventBus.on("projectSelected", (proj) => {
-                        //     this.loadItem([{
-                        //         key: proj,
-                        //         object_type: 'project'
-                        //     }])
-
-                        //     // clear the search bar
-                        //     // this.searchRef.clear()
-                        //     this.navToObject(proj)
-                        // }
-                        // );
-
-                        // eventBus.on("columnSelected", (col) => {
-                        //     this.loadItem([{
-                        //         key: col,
-                        //         object_type: 'column'
-                        //     }])
-
-                        //     // clear the search bar
-                        //     // this.searchRef.clear()
-                        //     this.navToObject(col)
-                        // }
-                        // );
-
                         eventBus.on("loading", (isLoading) =>
                             this.setState({ "loading": isLoading })
                         );
@@ -240,20 +114,6 @@ class App extends Component {
         });
     }
 
-    // navDeepLink() {
-    //     let parts = window.top.location.href.split('#o=')
-
-    //     if (parts.length > 1) {
-    //         this.setState({ "loading": true });
-    //         this.loadItemByKey(parts[1])
-    //     }
-    // }
-
-    // navToObject(obj) {
-    //     let base_url = window.top.location.href.split('#')[0]
-    //     window.top.location.href = base_url + "#o=" + obj
-    // }
-
     rescan() {
         this.setState({ loading: true });
         fetch(window.getWebAppBackendUrl('scan'))
@@ -263,65 +123,7 @@ class App extends Component {
             });
     }
 
-    // renderMenuItemChildren(option, props) {
-    //     return <Fragment>
-
-    //         <span style={{ paddingRight: '5px' }}>
-    //             {Common.getIconForDataikuItemType(option.object_type, '13px')}
-    //         </span>
-    //         {option.object_type == 'definition' &&
-    //             <span>
-    //                 <span style={{}}>Definition: </span>
-    //                 <span style={{}}>{option.description}</span>
-    //             </span>
-    //         }
-    //         {option.object_type == 'column' &&
-    //             <span>
-    //                 <span style={{}}>Project: </span>
-    //                 <span style={{}}>{option.key.split('|')[0]}</span>
-
-    //                 <span style={{ padding: '0px 4px' }}>|</span>
-
-    //                 <span style={{}}>Dataset:</span>
-    //                 <span style={{ padding: '0px 4px' }}>{option.key.split('|')[1]}</span>
-
-    //                 <span style={{ padding: '0px 4px' }}>|</span>
-
-    //                 <span>Column:</span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
-    //             </span>
-    //         }
-    //         {option.object_type == 'dataset' &&
-    //             <span>
-    //                 <span style={{}}>Project:</span>
-    //                 <span style={{}}>{option.key.split('|')[0]}</span>
-
-    //                 <span style={{ padding: '0px 4px' }}>|</span>
-
-    //                 <span style={{}}>Dataset:</span>
-    //                 <span style={{ padding: '0px 4px', fontWeight: 'bold' }}>{option.name}</span>
-    //             </span>
-    //         }
-    //         {option.object_type == 'project' &&
-    //             <span>
-    //                 <span>Project: </span><span style={{ fontWeight: 'bold', padding: '0px 4px' }}>{option.name}</span>
-    //             </span>
-    //         }
-
-    //     </Fragment >;
-    // }
-
-    // toggleFilter() {
-    //     this.setState({ openFilter: !this.state.openFilter });
-    // }
-
     render() {
-        // this.searchRef = React.createRef();
-
-        // const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
-        // const filterBy = () => true;
-
-        // this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
-
         const { activeTab, loading } = this.state;
 
         return (
@@ -340,10 +142,10 @@ class App extends Component {
                             <div class="collapse navbar-collapse" id="navbarContent">
                                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ?  'active' : ''} onClick={() => this.setState({ activeTab: App.HOME })} to={App.currentUrl}>Home</Link>
+                                        <Link className={activeTab == App.HOME ?  'active' : ''} onClick={() => this.setState({ activeTab: App.HOME })} to="/">Home</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} onClick={() => this.setState({ activeTab: App.CATALOG })} to={App.currentUrl + "/catalog"}>Catalog</Link>
+                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} onClick={() => this.setState({ activeTab: App.CATALOG })} to="/catalog">Catalog</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -360,64 +162,13 @@ class App extends Component {
 
                     <Row>
                         <Routes>
-                            <Route path={App.currentUrl} element={<Home />} />
-                            <Route path={App.currentUrl + "/catalog"} element={<Catalog />} />
+                            <Route path="/" element={<Home />} />
+                            <Route path="/catalog" element={<Catalog />} />
+
+                            {/* <Route path={App.CURRENT_URL} element={<Home />} />
+                            <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
                         </Routes>
                     </Row>
-
-                    {/* <Row>
-                        <Col>
-                            <div className="input-group" style={{ width: "100%" }}>
-                                <AsyncTypeahead
-                                    filterBy={filterBy}
-                                    id="async-search"
-                                    delay={300}
-                                    labelKey="description"
-                                    ref={this.searchRef}
-                                    minLength={3}
-                                    onChange={this.loadItem}
-                                    onSearch={this.search}
-                                    options={searchResults}
-                                    placeholder='Search'
-                                    renderMenuItemChildren={this.renderMenuItemChildren}
-                                    style={{ width: "97.5%" }}
-                                />
-                                <div className="input-group-btn">
-                                    <FaFilter onClick={() => this.toggleFilter()} style={{
-                                        backgroundColor: "#66a3ff",
-                                        color: "#FFFFFF",
-                                        cursor: 'pointer',
-                                        height: '34px',
-                                        padding: "8px",
-                                        width: '34px'
-                                    }} />
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-
-                    {openFilter ?
-                        <Row className="filter" style={{ marginTop: "0.5em" }}>
-                            {Object.entries(filters).map(([key, value]) => {
-                                return (
-                                    <Col xs={1}>
-                                        <div className="filter-types" key={key}>
-                                            <input
-                                                type="checkbox"
-                                                id={`filter-${key}`}
-                                                name={key}
-                                                value={key}
-                                                checked={value}
-                                                onChange={() => this.handleOnChange(key)}
-                                                style={{ marginRight: "5px" }}
-                                            />
-                                            <label htmlFor={`filter-${key}`}>{key}s</label>
-                                        </div>
-                                    </Col>
-                                );
-                            })}
-                        </Row>
-                        : null} */}
 
                     <Row>
                         <div style={{ padding: '10px' }}>
@@ -428,10 +179,6 @@ class App extends Component {
                                 : null}
                         </div>
                     </Row>
-
-                    {/* <Row>
-                        {!loading ? this.dataikuItem : null}
-                    </Row>  */}
                 </div>
             </Container>
         );
