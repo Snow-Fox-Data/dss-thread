@@ -142,10 +142,10 @@ class App extends Component {
                             <div class="collapse navbar-collapse" id="navbarContent">
                                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ?  'active' : ''} onClick={() => this.setState({ activeTab: App.HOME })} to="/">Home</Link>
+                                        <Link className={activeTab == App.HOME ?  'active' : ''} onClick={() => this.setState({ activeTab: App.HOME })} to={App.CURRENT_URL}>Home</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} onClick={() => this.setState({ activeTab: App.CATALOG })} to="/catalog">Catalog</Link>
+                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} onClick={() => this.setState({ activeTab: App.CATALOG })} to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -162,11 +162,8 @@ class App extends Component {
 
                     <Row>
                         <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/catalog" element={<Catalog />} />
-
-                            {/* <Route path={App.CURRENT_URL} element={<Home />} />
-                            <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
+                            <Route path={App.CURRENT_URL} element={<Home />} />
+                            <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
                         </Routes>
                     </Row>
 
