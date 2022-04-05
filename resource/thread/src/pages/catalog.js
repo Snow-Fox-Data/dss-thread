@@ -19,7 +19,9 @@ class Catalog extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        let url = window.getWebAppBackendUrl('def-search');
+        let term = 'Add';
+
+        let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
