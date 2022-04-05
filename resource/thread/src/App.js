@@ -1,37 +1,24 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Component } from 'react';
-import { useEffect } from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
 
-import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import {
-    FaFilter,
-    FaRedo
-} from 'react-icons/fa';
+import { FaRedo } from 'react-icons/fa';
 
 import {
-    Button,
     Container,
-    Col,
     Row,
     Spinner,
 } from 'react-bootstrap';
-import InputGroup from "react-bootstrap/InputGroup";
 
 import {
-    BrowserRouter as Router,
-    Switch,
     Route,
     Routes,
-    Link,
-    useHistory
+    Link
 } from "react-router-dom";
 
-import Common from "./common/common";
-import DataikuItem from "./components/dataikuItem";
 import logo from "./assets/images/icon_thread.png";
 import Home from "./pages/home";
 import Catalog from "./pages/catalog";
@@ -48,19 +35,8 @@ class App extends Component {
         this.state = {
             activeTab: 'HOME',
             dataiku: undefined,
-            dataikuItem: null,
-            filters: {
-                column: true,
-                dataset: true,
-                project: true,
-                definition: true
-            },
             currentUser: '',
             loading: true,
-            openFilter: true,
-            selectedItem: null,
-            selectedItemType: null,
-            searchResults: [],
             loggedIn: false
         }
 
@@ -70,7 +46,6 @@ class App extends Component {
     }
 
     checkActiveTabab() {
-        let url = window.location.pathname;
         let activeTab = App.HOME;
 
         if(App.CURRENT_URL.indexOf('catalog') !== -1) {
