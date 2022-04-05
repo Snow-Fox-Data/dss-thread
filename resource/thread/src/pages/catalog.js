@@ -14,8 +14,13 @@ class Catalog extends Component {
     }
 
     getDefinitions() {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
 
-        fetch(window.getWebAppBackendUrl('def-search'))
+        let url = window.getWebAppBackendUrl('def-search');
+        fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
                 console.log('response == ');
