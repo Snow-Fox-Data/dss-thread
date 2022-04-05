@@ -9,6 +9,18 @@ class Catalog extends Component {
         this.state = {
             title: "Catelog View"
         };
+
+        this.getDefinitions();
+    }
+
+    getDefinitions() {
+
+        fetch(window.getWebAppBackendUrl('def-search'))
+            .then(res => res.json())
+            .then((response) => {
+                console.log('response == ');
+                console.log(response);
+            });
     }
 
     render() {
