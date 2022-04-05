@@ -19,7 +19,7 @@ class Catalog extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        let term = 'Add';
+        let term = "Add";
 
         let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
         fetch(url, requestOptions)
