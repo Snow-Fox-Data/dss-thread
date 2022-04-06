@@ -238,18 +238,20 @@ class Catalog extends Component {
             );
 
             return <Row>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Applied To</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listItems}
-                    </tbody>
-                </Table>
+                <Col>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Applied To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listItems}
+                        </tbody>
+                    </Table>
+                </Col>
             </Row>;
         } else {
             return <p>{this.state.title}</p>

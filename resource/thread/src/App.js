@@ -135,6 +135,16 @@ class App extends Component {
                         </div>
                     </nav>
 
+                    {loading ?
+                        <Row>
+                            <div style={{ padding: '10px' }}>
+                                <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                            </div>
+                        </Row>
+                    : null}
+
                     <Row>
                         <Routes>
                             <Route path={App.CURRENT_URL} element={<Home />} />
@@ -142,15 +152,6 @@ class App extends Component {
                         </Routes>
                     </Row>
 
-                    <Row>
-                        <div style={{ padding: '10px' }}>
-                            {loading ?
-                                <Spinner animation="border" role="status">
-                                    <span className="visually-hidden">Loading...</span>
-                                </Spinner>
-                                : null}
-                        </div>
-                    </Row>
                 </div>
             </Container>
         );
