@@ -244,36 +244,58 @@ class Catalog extends Component {
         let _definitions = this.state.definitions;
         let _sortBy = this.state.sortBy;
 
-        switch(sortBy) {
-            case Catalog.NAME: 
-                if(_sortBy[Catalog.NAME] == null || _sortBy[Catalog.NAME] == 'DESC') {
-                    _definitions = _definitions.sort((a, b) => {
-                        console.log('sortBy == ' + sortBy);
-                        var tempA = a; var tempB = b;
-                        if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
-                        return tempA.name.toLowerCase() > tempB.name.toLowerCase() ? 1 : -1;
-                    }); 
+        if(_sortBy[sortBy] == null || _sortBy[sortBy] == 'DESC') {
+            _definitions = _definitions.sort((a, b) => {
+                console.log('sortBy == ' + sortBy); // THIS
+                var tempA = a; var tempB = b;
+                if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
+                return tempA[sortBy].toLowerCase() > tempB[sortBy].toLowerCase() ? 1 : -1;
+            }); 
 
-                    _sortBy[Catalog.NAME] = 'ASC';
-                } else {
-                    _definitions = _definitions.sort((a, b) => {
-                        console.log('sortBy == ' + sortBy);
-                        var tempA = a; var tempB = b;
-                        if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
-                        return tempA.name.toLowerCase() < tempB.name.toLowerCase() ? 1 : -1;
-                    }); 
+            _sortBy[sortBy] = 'ASC';
+        } else {
+            _definitions = _definitions.sort((a, b) => {
+                console.log('sortBy == ' + sortBy);
+                var tempA = a; var tempB = b;
+                if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
+                return tempA[sortBy].toLowerCase() < tempB[sortBy].toLowerCase() ? 1 : -1;
+            }); 
 
-                    _sortBy[Catalog.NAME] = 'DESC';
-                }
-
-                _sortBy[Catalog.DESCRIPTION] = null;
-
-                break;
-
-            default:
-                console.log('No Sort setup for this column.');
-                break;
+            _sortBy[sortBy] = 'DESC';
         }
+
+        // _sortBy[Catalog.DESCRIPTION] = null;
+
+        // switch(sortBy) {
+        //     case Catalog.NAME: 
+        //         if(_sortBy[Catalog.NAME] == null || _sortBy[Catalog.NAME] == 'DESC') {
+        //             _definitions = _definitions.sort((a, b) => {
+        //                 console.log('sortBy == ' + sortBy); // THIS
+        //                 var tempA = a; var tempB = b;
+        //                 if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
+        //                 return tempA.name.toLowerCase() > tempB.name.toLowerCase() ? 1 : -1;
+        //             }); 
+
+        //             _sortBy[Catalog.NAME] = 'ASC';
+        //         } else {
+        //             _definitions = _definitions.sort((a, b) => {
+        //                 console.log('sortBy == ' + sortBy);
+        //                 var tempA = a; var tempB = b;
+        //                 if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
+        //                 return tempA.name.toLowerCase() < tempB.name.toLowerCase() ? 1 : -1;
+        //             }); 
+
+        //             _sortBy[Catalog.NAME] = 'DESC';
+        //         }
+
+        //         _sortBy[Catalog.DESCRIPTION] = null;
+
+        //         break;
+
+        //     default:
+        //         console.log('No Sort setup for this column.');
+        //         break;
+        // }
 
         this.setState({
             definitions: _definitions,
@@ -329,8 +351,8 @@ class Catalog extends Component {
     }
 
     render() {
-        console.log('Definitions == ');
-        console.log(this.state.definitions);
+        console.log('render() :: STATE == ');
+        console.log(this.state);
 
         return <Col>
             {this.renderDefinitions()}
