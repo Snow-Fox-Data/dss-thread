@@ -118,8 +118,8 @@ ul.navbar-nav li.nav-item a:hover {
   background-color: white !important;
 }
 
-.table-definitions > td {
-  max-width: 250px;
+.table-definitions table > tbody > tr > td {
+  max-width: 300px;
 }
 
 .title-row {
