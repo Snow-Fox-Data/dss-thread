@@ -119,7 +119,9 @@ ul.navbar-nav li.nav-item a:hover {
 }
 
 .table-definitions table > tbody > tr > td {
+  height: auto;
   max-width: 300px;
+  white-space: normal;
 }
 
 .title-row {
