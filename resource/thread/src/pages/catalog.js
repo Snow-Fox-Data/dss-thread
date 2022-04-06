@@ -3,18 +3,28 @@ import { Col, Row, Table } from 'react-bootstrap';
 import Common from '../common/common';
 
 class Catalog extends Component {
+    static NAME = 'NAME';
 
     constructor(props) {
         super(props);
 
         this.state = {
             definitions: [],
+            sortBy: {  },
             title: "Catelog View"
-        };        
+        };
+
+
     }
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
+
+        var _sortBy = [];
+        _sortBy[Catalog.Name] = null;
+
+        console.log("_sortBy == ");
+        console.log(_sortBy);
 
         this.fetchDefinitions();
     }
@@ -219,9 +229,6 @@ class Catalog extends Component {
     }
 
     formatAppliedTo(appliedTo) {
-        console.log("formatAppliedTo(appliedTo) :: appliedTo == ");
-        console.log(appliedTo);
-
         if(appliedTo.length > 0) {
             let formattedAppliedTo = appliedTo.map((col) => {
                 return <span>{col}<br/></span>;
