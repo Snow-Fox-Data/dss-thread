@@ -239,7 +239,7 @@ class Catalog extends Component {
 
             return <Row>
                 <Col>
-                    <div className='table-responsive'>
+                    <div className='table-definitions table-responsive'>
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
