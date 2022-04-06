@@ -239,7 +239,7 @@ class Catalog extends Component {
                 //onClick={() => this.openColumn(col.key)}
                 <tr>
                     <td>
-                        {Common.getIconForDataikuItemType('definition', "16px")}
+                        {/* {Common.getIconForDataikuItemType('definition', "16px")} */}
                         <span style={{ marginLeft: '10px' }}>{col.name}</span>
                         {/* <span className='app-link' style={{ marginLeft: '10px' }} onClick={() => this.openColumn(col.key)}>{col.name}</span> */}
                     </td>                    
@@ -257,6 +257,9 @@ class Catalog extends Component {
                     <div className='table-definitions table-responsive'>
                         <Table striped bordered hover>
                             <thead>
+                                <tr colspan="3">
+                                    <th className='text-center'>Definitions</th>
+                                </tr>
                                 <tr>
                                     <th>Name</th>
                                     <th>Description</th>
