@@ -257,8 +257,8 @@ class Catalog extends Component {
                     <div className='table-definitions table-responsive'>
                         <Table striped bordered hover>
                             <thead>
-                                <tr colspan="3">
-                                    <th className='text-center'>Definitions</th>
+                                <tr>
+                                    <th className='text-center' colSpan={3}>Definitions</th>
                                 </tr>
                                 <tr>
                                     <th>Name</th>
