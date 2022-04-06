@@ -239,18 +239,20 @@ class Catalog extends Component {
 
             return <Row>
                 <Col>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Applied To</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {listItems}
-                        </tbody>
-                    </Table>
+                    <div className='table-responsive'>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Applied To</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listItems}
+                            </tbody>
+                        </Table>
+                    </div>                    
                 </Col>
             </Row>;
         } else {
