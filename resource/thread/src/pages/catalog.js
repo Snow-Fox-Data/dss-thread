@@ -236,7 +236,12 @@ class Catalog extends Component {
     sortDefinitions(sortBy) { 
         console.log('sortDefinitions() :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions
-            .sort((a, b) => a.name > b.name ? 1 : -1);
+            .sort((a, b) => {
+                var tempA = a;
+                var tempB = b;
+                if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
+                return tempA.name.toLowerCase() > tempB.name.toLowerCase() ? 1 : -1;
+            });
 
         this.setState({
             definitions: _definitions
