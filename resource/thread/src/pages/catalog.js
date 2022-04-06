@@ -234,12 +234,13 @@ class Catalog extends Component {
     }
 
     sortDefinitions(sortBy) { 
-        let _definitions = this.state.definitions
-            .sort((a, b) => a.name > b.name ? 1 : -1);
+        console.log('sortDefinitions() :: sortBy == ' + sortBy);
+        // let _definitions = this.state.definitions
+        //     .sort((a, b) => a.name > b.name ? 1 : -1);
 
-        this.setState({
-            definitions: _definitions
-        });
+        // this.setState({
+        //     definitions: _definitions
+        // });
     }
 
     renderDefinitions() {
