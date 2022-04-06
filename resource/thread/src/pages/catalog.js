@@ -10,9 +10,7 @@ class Catalog extends Component {
         this.state = {
             definitions: [],
             title: "Catelog View"
-        };
-
-        
+        };        
     }
 
     componentDidMount() {
@@ -263,7 +261,7 @@ class Catalog extends Component {
         console.log(this.state.definitions);
 
         return <Col>
-            {/* {this.renderDefinitions()} */}
+            {this.renderDefinitions()}
         </Col>
     }
 }
