@@ -34,8 +34,8 @@ class Catalog extends Component {
             </span>;
         } else {
             return <span className="header-icons-container">
-                <FaCaretUp style={{ color: "#999" }} />
-                <FaCaretDown style={{ color: "#999" }}  />
+                <FaCaretUp style={{ color: "#777" }} />
+                <FaCaretDown style={{ color: "#777" }}  />
             </span>;
         }
     }
@@ -255,6 +255,13 @@ class Catalog extends Component {
         let _definitions = this.state.definitions;
         let _sortBy = this.state.sortBy;
 
+        _sortBy = _sortBy.map((item, index) => {
+            console.log('sortBy == ' + sortBy);
+            console.log('index == ' + index);
+            console.log('item == ');
+            console.log(item);
+        });
+
         if(_sortBy[sortBy] == null || _sortBy[sortBy] == 'DESC') {
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
@@ -285,9 +292,7 @@ class Catalog extends Component {
                 //onClick={() => this.openColumn(col.key)}
                 <tr>
                     <td>
-                        {/* {Common.getIconForDataikuItemType('definition', "16px")} */}
                         <span style={{ marginLeft: '10px' }}>{col.name}</span>
-                        {/* <span className='app-link' style={{ marginLeft: '10px' }} onClick={() => this.openColumn(col.key)}>{col.name}</span> */}
                     </td>                    
                     <td>
                         {col.description}
