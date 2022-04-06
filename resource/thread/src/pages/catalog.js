@@ -222,7 +222,11 @@ class Catalog extends Component {
         console.log("formatAppliedTo(appliedTo) :: appliedTo == ");
         console.log(appliedTo);
 
-        return appliedTo;
+        let formattedAppliedTo = appliedTo.map((col) => {
+            return col + "<br>";
+        });
+
+        return formattedAppliedTo;
     }
 
     renderDefinitions() {
