@@ -67,7 +67,7 @@ def defintition_list():
     result = df[df['name'].str.contains(args.get('term'), case=False)]
     result2 = df[df['description'].str.contains(args.get('term'), case=False)]
 
-    merged_df = pd.concat([result, result2], ignore_index=False)
+    merged_df = pd.concat([result, result2], ignore_index=True)
     merged_df.drop_duplicates(subset=['id'],inplace=True)
 
     merged_df['search_def'] = merged_df['name'] + ' | ' + merged_df['description']
