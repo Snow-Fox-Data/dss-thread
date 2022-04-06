@@ -12,10 +12,17 @@ class Catalog extends Component {
             title: "Catelog View"
         };
 
+        
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount() :: ');
+
         this.fetchDefinitions();
     }
 
     fetchDefinitions() {
+        console.log('fetchDefinitions() :: ');
         let _definitions = [
             {
               "applied_to": "",
