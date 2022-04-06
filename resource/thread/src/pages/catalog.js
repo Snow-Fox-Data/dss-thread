@@ -26,16 +26,16 @@ class Catalog extends Component {
         let sortBy = this.state.sortBy[columnHeader];
         if(sortBy === 'ASC') {
             return <span className="header-icons-container">
-                <FaCaretUp style={{ backgroundColor: "#000" }} />
+                <FaCaretUp style={{ color: "#000" }} />
             </span>;
         } else if(sortBy === 'DESC') {
             return <span className="header-icons-container">
-                <FaCaretDown style={{ backgroundColor: "#000" }}  />
+                <FaCaretDown style={{ color: "#000" }}  />
             </span>;
         } else {
             return <span className="header-icons-container">
-                <FaCaretUp style={{ backgroundColor: "#333" }} />
-                <FaCaretDown style={{ backgroundColor: "#333" }}  />
+                <FaCaretUp style={{ color: "#333" }} />
+                <FaCaretDown style={{ color: "#333" }}  />
             </span>;
         }
     }
