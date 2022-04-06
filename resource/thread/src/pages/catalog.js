@@ -14,8 +14,6 @@ class Catalog extends Component {
             sortBy: {  },
             title: "Catelog View"
         };
-
-
     }
 
     componentDidMount() {
@@ -250,8 +248,8 @@ class Catalog extends Component {
             case Catalog.NAME: 
                 if(_sortBy[Catalog.NAME] == null || _sortBy[Catalog.NAME] == 'DESC') {
                     _definitions = _definitions.sort((a, b) => {
-                        var tempA = a;
-                        var tempB = b;
+                        console.log('sortBy == ' + sortBy);
+                        var tempA = a; var tempB = b;
                         if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
                         return tempA.name.toLowerCase() > tempB.name.toLowerCase() ? 1 : -1;
                     }); 
@@ -259,8 +257,8 @@ class Catalog extends Component {
                     _sortBy[Catalog.NAME] = 'ASC';
                 } else {
                     _definitions = _definitions.sort((a, b) => {
-                        var tempA = a;
-                        var tempB = b;
+                        console.log('sortBy == ' + sortBy);
+                        var tempA = a; var tempB = b;
                         if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
                         return tempA.name.toLowerCase() < tempB.name.toLowerCase() ? 1 : -1;
                     }); 
@@ -271,6 +269,7 @@ class Catalog extends Component {
                 _sortBy[Catalog.DESCRIPTION] = null;
 
                 break;
+
             default:
                 console.log('No Sort setup for this column.');
                 break;
