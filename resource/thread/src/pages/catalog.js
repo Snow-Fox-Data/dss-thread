@@ -224,7 +224,7 @@ class Catalog extends Component {
 
         if(appliedTo.length > 0) {
             let formattedAppliedTo = appliedTo.map((col) => {
-                return <span>{col}</span>;
+                return <span>{col}<br/></span>;
             });
     
             return formattedAppliedTo;
