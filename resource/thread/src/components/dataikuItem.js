@@ -495,8 +495,8 @@ class DataikuItem extends Component {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item disabled={(this.state.tempSelDef.name != null && this.state.tempSelDef.name.length > 0) && (this.state.tempSelDef.description != null && this.state.tempSelDef.description.length > 0)} onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                <Dropdown.Item disabled={(this.state.tempSelDef.name != null && this.state.tempSelDef.name.length > 0) && (this.state.tempSelDef.description != null && this.state.tempSelDef.description.length > 0)} onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                <Dropdown.Item disabled={(this.state.tempSelDef.name == null || this.state.tempSelDef.name.length == 0) || (this.state.tempSelDef.description == null || this.state.tempSelDef.description.length == 0)} onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
+                                <Dropdown.Item disabled={(this.state.tempSelDef.name != null && this.state.tempSelDef.name.length > 0) && (this.state.tempSelDef.description == null || this.state.tempSelDef.description.length == 0)} onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         {/* <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
