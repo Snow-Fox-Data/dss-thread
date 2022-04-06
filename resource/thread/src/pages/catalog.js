@@ -8,7 +8,7 @@ class Catalog extends Component {
         super(props);
 
         this.state = {
-            definition: [],
+            definitions: [],
             title: "Catelog View"
         };
 
@@ -16,7 +16,7 @@ class Catalog extends Component {
     }
 
     fetchDefinitions() {
-        let definitions = [
+        let _definitions = [
             {
               "applied_to": "",
               "description": "the address would go here",
@@ -209,7 +209,7 @@ class Catalog extends Component {
         //     });
 
         this.setState({
-            definitions: definitions            
+            definitions: _definitions            
         });
     }
 
@@ -252,8 +252,11 @@ class Catalog extends Component {
     }
 
     render() {
+        console.log('Definitions == ');
+        console.log(this.state.definitions);
+
         return <Col>
-            {this.renderDefinitions()}
+            {/* {this.renderDefinitions()} */}
         </Col>
     }
 }
