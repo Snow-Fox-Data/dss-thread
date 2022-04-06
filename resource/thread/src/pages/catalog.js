@@ -244,7 +244,7 @@ class Catalog extends Component {
     sortDefinitions(sortBy) { 
         console.log('sortDefinitions() :: START :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions;
-        let _sortBy = this.state.sort;
+        let _sortBy = this.state.sortBy;
 
         switch(sortBy) {
             case Catalog.NAME: 
