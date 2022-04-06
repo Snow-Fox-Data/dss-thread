@@ -271,7 +271,7 @@ class Catalog extends Component {
                                     <th className='text-center' colSpan={3}>Definitions</th>
                                 </tr>
                                 <tr>
-                                    <th onClick={this.sortDefinitions('Name')}>Name</th>
+                                    <th onClick={() => this.sortDefinitions('Name')}>Name</th>
                                     <th>Description</th>
                                     <th>Applied To</th>
                                 </tr>
