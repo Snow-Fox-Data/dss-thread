@@ -18,10 +18,10 @@ class Catalog extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount() :: Catalog.Name == ' + Catalog.Name);
+        console.log('componentDidMount() :: Catalog.Name == ' + Catalog.NAME);
 
         var _sortBy = [];
-        _sortBy[Catalog.Name] = null;
+        _sortBy[Catalog.NAME] = null;
 
         console.log("_sortBy == ");
         console.log(_sortBy);
