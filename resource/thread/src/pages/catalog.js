@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import Common from '../common/common';
+import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 
 class Catalog extends Component {
     static NAME = 'name';
@@ -19,13 +20,22 @@ class Catalog extends Component {
     componentDidMount() {
         console.log('componentDidMount() :: Catalog.Name == ' + Catalog.NAME);
 
-        var _sortBy = [];
-        _sortBy[Catalog.NAME] = null;
+        // var _sortBy = [];
+        // _sortBy[Catalog.NAME] = null;
 
-        console.log("_sortBy == ");
-        console.log(_sortBy);
+        // console.log("_sortBy == ");
+        // console.log(_sortBy);
 
         this.fetchDefinitions();
+    }
+
+    displayTableHeaderCarets() {
+        // sortBy
+        return <>
+            <FaCaretUp />
+            <FaCaretDown />
+        </>;
+        // <FaRedo style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
     }
 
     fetchDefinitions() {
@@ -240,7 +250,6 @@ class Catalog extends Component {
     }
 
     sortDefinitions(sortBy) { 
-        console.log('sortDefinitions() :: START :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions;
         let _sortBy = this.state.sortBy;
 
@@ -262,45 +271,10 @@ class Catalog extends Component {
             _sortBy[sortBy] = 'DESC';
         }
 
-        // _sortBy[Catalog.DESCRIPTION] = null;
-
-        // switch(sortBy) {
-        //     case Catalog.NAME: 
-        //         if(_sortBy[Catalog.NAME] == null || _sortBy[Catalog.NAME] == 'DESC') {
-        //             _definitions = _definitions.sort((a, b) => {
-        //                 console.log('sortBy == ' + sortBy); // THIS
-        //                 var tempA = a; var tempB = b;
-        //                 if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
-        //                 return tempA.name.toLowerCase() > tempB.name.toLowerCase() ? 1 : -1;
-        //             }); 
-
-        //             _sortBy[Catalog.NAME] = 'ASC';
-        //         } else {
-        //             _definitions = _definitions.sort((a, b) => {
-        //                 console.log('sortBy == ' + sortBy);
-        //                 var tempA = a; var tempB = b;
-        //                 if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
-        //                 return tempA.name.toLowerCase() < tempB.name.toLowerCase() ? 1 : -1;
-        //             }); 
-
-        //             _sortBy[Catalog.NAME] = 'DESC';
-        //         }
-
-        //         _sortBy[Catalog.DESCRIPTION] = null;
-
-        //         break;
-
-        //     default:
-        //         console.log('No Sort setup for this column.');
-        //         break;
-        // }
-
         this.setState({
             definitions: _definitions,
             sortBy: _sortBy
         });
-
-        console.log('sortDefinitions() :: END :: sortBy == ' + sortBy);
     }
 
     renderDefinitions() {
@@ -331,7 +305,10 @@ class Catalog extends Component {
                                     <th className='text-center' colSpan={3}>Definitions</th>
                                 </tr>
                                 <tr>
-                                    <th onClick={() => this.sortDefinitions(Catalog.NAME)}>Name</th>
+                                    <th onClick={() => this.sortDefinitions(Catalog.NAME)}>
+                                        Name
+                                        {this.displayTableHeaderCarets()}
+                                    </th>
                                     <th onClick={() => this.sortDefinitions(Catalog.DESCRIPTION)}>Description</th>
                                     <th>Applied To</th>
                                 </tr>
