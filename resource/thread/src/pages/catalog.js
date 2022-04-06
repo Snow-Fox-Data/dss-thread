@@ -246,21 +246,17 @@ class Catalog extends Component {
 
         if(_sortBy[sortBy] == null || _sortBy[sortBy] == 'DESC') {
             _definitions = _definitions.sort((a, b) => {
-                console.log('sortBy == ' + sortBy);
                 var tempA = a; var tempB = b;
-                console.log('tempA[sortBy] == ' + tempA[sortBy]);
-                console.log('tempA[{sortBy}] == ' + tempA[{sortBy}]);
-                if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
-                return tempA.name.toLowerCase() > tempB.name.toLowerCase() ? 1 : -1;
+                if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
+                return tempA[sortBy].toLowerCase() > tempB[sortBy].toLowerCase() ? 1 : -1;
             }); 
 
             _sortBy[sortBy] = 'ASC';
         } else {
             _definitions = _definitions.sort((a, b) => {
-                console.log('sortBy == ' + sortBy);
                 var tempA = a; var tempB = b;
-                if( tempA.name.toLowerCase() === tempB.name.toLowerCase()) return 0;
-                return tempA.name.toLowerCase() < tempB.name.toLowerCase() ? 1 : -1;
+                if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
+                return tempA[sortBy].toLowerCase() < tempB[sortBy].toLowerCase() ? 1 : -1;
             }); 
 
             _sortBy[sortBy] = 'DESC';
