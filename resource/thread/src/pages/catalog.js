@@ -218,6 +218,13 @@ class Catalog extends Component {
         });
     }
 
+    formatAppliedTo(appliedTo) {
+        console.log("formatAppliedTo(appliedTo) :: appliedTo == ");
+        console.log(appliedTo);
+
+        return appliedTo;
+    }
+
     renderDefinitions() {
         if(this.state.definitions.length > 0) {
             var listItems = this.state.definitions.map((col) =>
@@ -232,7 +239,7 @@ class Catalog extends Component {
                         {col.description}
                     </td>
                     <td>
-                        {col.applied_to}
+                        {this.formatAppliedTo(col.applied_to)}
                     </td>
                 </tr>
             );
