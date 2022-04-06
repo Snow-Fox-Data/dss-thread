@@ -489,7 +489,7 @@ class DataikuItem extends Component {
                         <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                     </Col>
                     <Col ms-auto>
-                        <Dropdown disabled={(this.state.this.state.tempSelDef.name.length > 0 && this.state.this.state.tempSelDef.description.length > 0)}> 
+                        <Dropdown disabled={(this.state.tempSelDef.name.length > 0 && this.state.tempSelDef.description.length > 0)}> 
                             <Dropdown.Toggle id="dropdown-basic">
                                 Save and Apply
                             </Dropdown.Toggle>
