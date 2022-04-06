@@ -214,7 +214,7 @@ class Catalog extends Component {
         //     });
 
         this.setState({
-            definitions: _definitions            
+            definitions: _definitions
         });
     }
 
@@ -231,6 +231,15 @@ class Catalog extends Component {
         } else {
             return <span>{appliedTo}</span>;
         }
+    }
+
+    sortDefinitions(sortBy) { 
+        let _definitions = this.state.definitions
+            .sort((a, b) => a.name > b.name ? 1 : -1);
+
+        this.setState({
+            definitions: _definitions
+        });
     }
 
     renderDefinitions() {
@@ -261,7 +270,7 @@ class Catalog extends Component {
                                     <th className='text-center' colSpan={3}>Definitions</th>
                                 </tr>
                                 <tr>
-                                    <th>Name</th>
+                                    <th onClick={this.sortDefinitions('Name')}>Name</th>
                                     <th>Description</th>
                                     <th>Applied To</th>
                                 </tr>
