@@ -279,6 +279,14 @@ class dss_utils:
 
         return ds2
 
+    # def dataset_project_shares(project):
+    #     exposed = project.get_settings().settings['exposedObjects']['objects']
+    #     for e in exposed:
+    #         if e['type'] == "DATASET":
+    #             rules = e['rules']
+    #             for r in rules:
+    #                 proj = r['targetProject']
+
     def load_project(self, key):
         proj = self.client.get_project(key)
         p = proj.get_summary()

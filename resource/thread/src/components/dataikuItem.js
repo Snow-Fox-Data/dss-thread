@@ -487,13 +487,13 @@ class DataikuItem extends Component {
                     {/* onClick={() => this.saveColLineage()} */}
                     <Col style={{ textAlign: "left" }}>
                         {/* <ButtonGroup style={{ float: "right" }}> */}
-                        <Button variant="link" onClick={() => this.toggleNew(true)}>New</Button>
+                        <Button disabled={this.state.newDefSelected} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
                         <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                         {/* </ButtonGroup> */}
                         {/* // variant={this.state.newDefSelected ? "primary" : "secondary"} */}
                     </Col>
                     <Col ms-auto>
-                        <Dropdown>
+                        <Dropdown disabled={(this.state.this.state.tempSelDef.name.length > 0 && this.state.this.state.tempSelDef.description.length > 0)}> 
                             <Dropdown.Toggle id="dropdown-basic">
                                 Save and Apply
                             </Dropdown.Toggle>
