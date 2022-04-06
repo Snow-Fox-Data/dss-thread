@@ -4,6 +4,7 @@ import Common from '../common/common';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 
 class Catalog extends Component {
+    // These values NEED to match data KEYS for sorting to work
     static NAME = 'name';
     static DESCRIPTION = 'description';
 
@@ -18,24 +19,25 @@ class Catalog extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount() :: Catalog.Name == ' + Catalog.NAME);
-
-        // var _sortBy = [];
-        // _sortBy[Catalog.NAME] = null;
-
-        // console.log("_sortBy == ");
-        // console.log(_sortBy);
-
         this.fetchDefinitions();
     }
 
-    displayTableHeaderCarets() {
-        // sortBy
-        return <>
-            <FaCaretUp />
-            <FaCaretDown />
-        </>;
-        // <FaRedo style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
+    displayTableHeaderCarets(columnHeader) {
+        let sortBy = this.state.sortBy[columnHeader];
+        if(sortBy === 'ASC') {
+            return <span className="header-icons-container">
+                <FaCaretUp style={{ backgroundColor: "#000" }} />
+            </span>;
+        } else if(sortBy === 'DESC') {
+            return <span className="header-icons-container">
+                <FaCaretDown style={{ backgroundColor: "#000" }}  />
+            </span>;
+        } else {
+            return <span className="header-icons-container">
+                <FaCaretUp style={{ backgroundColor: "#333" }} />
+                <FaCaretDown style={{ backgroundColor: "#333" }}  />
+            </span>;
+        }
     }
 
     fetchDefinitions() {
@@ -307,9 +309,12 @@ class Catalog extends Component {
                                 <tr>
                                     <th onClick={() => this.sortDefinitions(Catalog.NAME)}>
                                         Name
-                                        {this.displayTableHeaderCarets()}
+                                        {this.displayTableHeaderCarets(Catalog.NAME)}
                                     </th>
-                                    <th onClick={() => this.sortDefinitions(Catalog.DESCRIPTION)}>Description</th>
+                                    <th onClick={() => this.sortDefinitions(Catalog.DESCRIPTION)}>
+                                        Description
+                                        {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
+                                    </th>
                                     <th>Applied To</th>
                                 </tr>
                             </thead>
