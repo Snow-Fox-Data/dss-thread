@@ -44,6 +44,8 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
+
+
         let applyTo = this.state.applyToDataSets; // eval(this.state.tempSelDef.applied_to);
         applyTo.push(this.props.item.key);
 
@@ -55,6 +57,9 @@ class DataikuItem extends Component {
         let val = '';
         if (this.state.tempSelDef.description != null)
             val = this.state.tempSelDef.description;
+
+        if (val.length < 4 || this.state.tempSelDef.name.length < 4)
+            alert('Name and desription must be at least 4 characters')
 
         const requestOptions = {
             method: 'POST',
@@ -489,14 +494,14 @@ class DataikuItem extends Component {
                         <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                     </Col>
                     <Col ms-auto>
-                        <Dropdown > 
+                        <Dropdown >
                             <Dropdown.Toggle id="dropdown-basic">
                                 Save and Apply
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item disabled={(this.state.tempSelDef.name == null || this.state.tempSelDef.name.length == 0) || (this.state.tempSelDef.description == null || this.state.tempSelDef.description.length == 0)} onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                <Dropdown.Item disabled={(this.state.tempSelDef.name != null && this.state.tempSelDef.name.length > 0) && (this.state.tempSelDef.description == null || this.state.tempSelDef.description.length == 0)} onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         {/* <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>

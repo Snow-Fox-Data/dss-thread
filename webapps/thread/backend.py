@@ -170,6 +170,10 @@ def update_desc():
     
     applied_to_json = json.dumps(data['applied_to'])
 
+    desc = ''
+    if 'description' in data and len(data['description']) > 0:
+        desc = data['description']
+
     # remove old definition for this colimn
     if df is not None and ('column_key' in data):
         col_key = data['column_key']
@@ -183,7 +187,7 @@ def update_desc():
         desc = {
             "id": new_id,
             "name": data['name'],
-            "description": data['description'],
+            "description": desc,
             "applied_to": applied_to_json,
             "sources": [],
             "destinations":[]
@@ -196,7 +200,7 @@ def update_desc():
 
         new_record = pd.DataFrame.from_dict([{
                 "name": data['name'],
-                "description": data['name'] + ' | ' + data['description'],
+                "description": data['name'] + ' | ' + desc,
                 "object_type": "definition",
                 "key": new_id
             }])
@@ -211,7 +215,7 @@ def update_desc():
         desc = {
             "id": desc_id,
             "name": data['name'],
-            "description": data['description'],
+            "description": desc,
             "applied_to": applied_to_json,
             "sources": [],
             "destinations":[]
@@ -279,13 +283,16 @@ class dss_utils:
 
         return ds2
 
-    # def dataset_project_shares(project):
-    #     exposed = project.get_settings().settings['exposedObjects']['objects']
-    #     for e in exposed:
-    #         if e['type'] == "DATASET":
-    #             rules = e['rules']
-    #             for r in rules:
-    #                 proj = r['targetProject']
+    def dataset_project_shares(project):
+        exposed = project.get_settings().settings['exposedObjects']['objects']
+        exposed_ds = []
+        for e in exposed:
+            if e['type'] == "DATASET":
+                rules = e['rules']
+                for r in rules:
+                    exposed_ds.append(r['targetProject'])
+                
+        return exposed_ds
 
     def load_project(self, key):
         proj = self.client.get_project(key)
@@ -507,7 +514,6 @@ class dss_utils:
                 d['full_name'] = full_nm
 
                 for r in project['recipes']:
-    #                 logging.info(d['name'], r['ins'])
                     if full_nm in r['ins']:
                         for o in r['outs']:
                             if not o in d['lineage_downstream']:
