@@ -58,8 +58,10 @@ class DataikuItem extends Component {
         if (this.state.tempSelDef.description != null)
             val = this.state.tempSelDef.description;
 
-        if (val.length < 4 || this.state.tempSelDef.name.length < 4)
-            alert('Name and desription must be at least 4 characters')
+        if (val.length < 4 || this.state.tempSelDef.name.length < 4) {
+            alert('Name and desription must be at least 4 characters');
+            return;
+        }
 
         const requestOptions = {
             method: 'POST',
