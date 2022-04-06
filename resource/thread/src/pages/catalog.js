@@ -3,8 +3,8 @@ import { Col, Row, Table } from 'react-bootstrap';
 import Common from '../common/common';
 
 class Catalog extends Component {
-    static NAME = 'NAME';
-    static DESCRIPTION = 'DESCRIPTION';
+    static NAME = 'name';
+    static DESCRIPTION = 'description';
 
     constructor(props) {
         super(props);
