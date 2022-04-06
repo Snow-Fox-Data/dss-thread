@@ -34,8 +34,8 @@ class Catalog extends Component {
             </span>;
         } else {
             return <span className="header-icons-container">
-                <FaCaretUp style={{ color: "#333" }} />
-                <FaCaretDown style={{ color: "#333" }}  />
+                <FaCaretUp style={{ color: "#999" }} />
+                <FaCaretDown style={{ color: "#999" }}  />
             </span>;
         }
     }
