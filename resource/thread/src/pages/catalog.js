@@ -376,6 +376,8 @@ class Catalog extends Component {
             <Row>
               <Col>
                 <div className="input-group" style={{ width: "100%" }}>
+                    <input className="search-bar" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
+
                     <div className="input-group-btn">
                         <FaSearch onClick={() => this.toggleFilter()} style={{
                             color: "#66a3ff",
@@ -385,7 +387,6 @@ class Catalog extends Component {
                             width: '27px'
                         }} />
                     </div>
-                    <input className="search-bar" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
                 </div>
               </Col>
             </Row>
