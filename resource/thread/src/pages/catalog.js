@@ -380,16 +380,16 @@ class Catalog extends Component {
                 <div className="input-group" style={{ width: "100%" }}>                  
                     <span className="input-group-addon">
                         <FaSearch onClick={() => this.toggleFilter()} style={{
-                            backgroundColor: "#DDD",
+                            // backgroundColor: "#DDD",
                             color: "#000",
                             height: '27px',
-                            padding: "4px",
-                            border: "solid 0.2em #000",
+                            // padding: "4px",
+                            // border: "solid 0.2em #000",
                             width: '27px'
                         }} />
                     </span>
 
-                    <input className="search-bar" placeholder="Search Definitions" 
+                    <input className="form-control" placeholder="Search Definitions" 
                         onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
                 </div>
               </Col>
