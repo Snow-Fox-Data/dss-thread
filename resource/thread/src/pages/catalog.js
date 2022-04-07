@@ -273,6 +273,17 @@ class Catalog extends Component {
         //     }
         //   });
         // }
+        if(_sortBy.length > 0) {
+          _sortBy = _sortBy.map((item, index) => {
+            console.log('sortBy == ' + sortBy);
+            console.log('index == ' + index);
+            console.log('item == ');
+            console.log(item);
+            // if(item !== sortBy) {
+            //   _sortBy[item] = null
+            // }
+          });
+        }
         
         console.log('_sortBy[sortBy] == ');
         console.log(_sortBy[sortBy]);
