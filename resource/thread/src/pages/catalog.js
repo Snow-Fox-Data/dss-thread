@@ -255,12 +255,15 @@ class Catalog extends Component {
         let _definitions = this.state.definitions;
         let _sortBy = this.state.sortBy;
 
-        _sortBy = _sortBy.map((item, index) => {
-            console.log('sortBy == ' + sortBy);
-            console.log('index == ' + index);
-            console.log('item == ');
-            console.log(item);
-        });
+        console.log('_sortBy == ');
+        console.log(_sortBy);
+
+        // _sortBy = _sortBy.map((item, index) => {
+        //     console.log('sortBy == ' + sortBy);
+        //     console.log('index == ' + index);
+        //     console.log('item == ');
+        //     console.log(item);
+        // });
 
         if(_sortBy[sortBy] == null || _sortBy[sortBy] == 'DESC') {
             _definitions = _definitions.sort((a, b) => {
