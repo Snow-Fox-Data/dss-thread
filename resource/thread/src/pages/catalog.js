@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import Common from '../common/common';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 
 class Catalog extends Component {
     // These values NEED to match data KEYS for sorting to work
@@ -13,7 +14,7 @@ class Catalog extends Component {
 
         this.state = {
             definitions: [],
-            sortBy: [],
+            sortBy: {},
             title: "Catelog View"
         };
     }
@@ -255,6 +256,28 @@ class Catalog extends Component {
         }
     }
 
+    search = (term) => {
+      const requestOptions = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+      };
+
+      let url = window.getWebAppBackendUrl('search') + '?term=' + term;
+      // this.setState({ loading: true });
+      fetch(url, requestOptions)
+          .then(res => res.json())
+          .then((response) => {
+              console.log('response == ');
+              console.log(response);
+
+              // var p_list = this.filterDataikuItems(response);
+              // this.setState({
+              //     searchResults: p_list,
+              //     loading: false
+              // });
+          });
+    }
+
     sortDefinitions(sortBy) { 
         console.log('sortDefinitions() :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions;
@@ -268,13 +291,13 @@ class Catalog extends Component {
         let sortByKeys = Object.keys(_sortBy);
         console.log('sortByKeys == ');
         console.log(sortByKeys);
-        if(sortByKeys.length > 0) {
-          _sortBy = Object.keys(_sortBy).map((item, index) => {
-            if(item !== sortBy) {
-              _sortBy[item] = null
-            }
-          });
-        }
+        // if(sortByKeys.length > 0) {
+        //   _sortBy = Object.keys(_sortBy).map((item, index) => {
+        //     if(item !== sortBy) {
+        //       _sortBy[item] = null
+        //     }
+        //   });
+        // }
         // if(_sortBy.length > 0) {
         //   _sortBy = _sortBy.map((item, index) => {
         //     console.log('sortBy == ' + sortBy);
@@ -333,7 +356,21 @@ class Catalog extends Component {
                 </tr>
             );
 
-            return <Row>
+            return <>
+              <Row>
+                <Col>
+                  <AsyncTypeahead
+                    id="async-search"
+                    delay={300}
+                    labelKey="description"
+                    ref={this.searchRef}
+                    minLength={3}
+                    onChange={this.search}
+                    placeholder='Search'
+                  />
+                </Col>
+              </Row>
+              <Row>
                 <Col>
                     <div className='table-definitions table-responsive'>
                         <Table striped bordered hover>
@@ -359,7 +396,8 @@ class Catalog extends Component {
                         </Table>
                     </div>                    
                 </Col>
-            </Row>;
+              </Row>
+            </>;
         } else {
             return <p>{this.state.title}</p>
         }
