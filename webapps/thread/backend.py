@@ -502,9 +502,9 @@ class dss_utils:
                 for l in ds['lineage_upstream']:
                     if not p in l:
                         # this is a reference to a share
-                        shared_dataset = self.get_ds_by_name(ds['name'], all_projects, p)
-                        shared_dataset['lineage_downstream'].append(l)
-                        logging.info(f'added shared dataset: {l}')
+                        shared_dataset = self.get_ds_by_name(l, all_projects)
+                        shared_dataset['lineage_downstream'].append(ds['full_name'])
+                        logging.info(f'added shared dataset: {l} => {ds["full_name"]}')
 
         # get the full dataset lineage
         for p in all_projects:
