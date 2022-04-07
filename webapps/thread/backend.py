@@ -286,7 +286,7 @@ class dss_utils:
     def dataset_project_shares(self, project_key):
         project = self.client.get_project(project_key)
         exposed = project.get_settings().settings['exposedObjects']['objects']
-        exposed_ds = []
+        exposed_ds = {}
         for e in exposed:
             if e['type'] == "DATASET":
                 rules = e['rules']
@@ -296,7 +296,7 @@ class dss_utils:
                 for r in rules:
                     shares.append(r['targetProject'] + '|' + name)
             
-                exposed_ds.append({'dataset': name, 'shares': shares})
+                exposed_ds[name] = shares
 
         return exposed_ds
 
@@ -484,8 +484,8 @@ class dss_utils:
                 d['full_name'] = full_nm
 
                 # add the project shares as downstream lineage
-                if d['name'] in shares:
-                    for s in shares['shares']:
+                if d in shares:
+                    for s in shares[d]:
                         d['lineage_downstream'].append(s)
 
                 rec_name = full_nm 
