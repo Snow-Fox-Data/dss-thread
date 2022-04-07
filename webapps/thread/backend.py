@@ -283,15 +283,21 @@ class dss_utils:
 
         return ds2
 
-    def dataset_project_shares(project):
+    def dataset_project_shares(self, project_key):
+        project = self.client.get_project(project_key)
         exposed = project.get_settings().settings['exposedObjects']['objects']
         exposed_ds = []
         for e in exposed:
             if e['type'] == "DATASET":
                 rules = e['rules']
+                name = e['localName']
+        
+                shares = []
                 for r in rules:
-                    exposed_ds.append(r['targetProject'])
-                
+                    shares.append(r['targetProject'] + '|' + name)
+            
+                exposed_ds.append({'dataset': name, 'shares': shares})
+
         return exposed_ds
 
     def load_project(self, key):
@@ -439,44 +445,6 @@ class dss_utils:
                 return ds
 
         return None
-                
-    # def traverse_lineage(self, ds_name, all_projects, upstream=True, recur_ct = 0):
-    #     try:
-    #         ds = self.get_ds_by_name(ds_name, all_projects)
-
-    #         next_levels = []
-    #         if not ds is None:
-    #             dir = 'lineage_upstream'
-    #             if upstream == False:
-    #                 dir = 'lineage_downstream'
-
-    #             dir_full = dir + '_full'
-
-    #             if (dir + '_complete') in ds:
-    #                 return ds[dir_full]
-
-    #             if dir in ds:
-    #                 for l in ds[dir]:
-    #                     try:
-    #                         recur_ct = recur_ct + 1
-    #                         if recur_ct > 300:
-    #                             logging.info(f'recursive error {dir} - {ds_name}, {l}, {ds[dir]}')
-    #                             return []
-
-    #                         nxt = self.traverse_lineage(l, all_projects, upstream, recur_ct)
-    #                         next_levels.append({'name':l, dir: nxt})
-
-    #                         ds[dir + '_complete'] = True
-    #                         ds[dir_full] = nxt
-    #                     except Exception as e:
-    #                         capture_exception(e)
-                
-    #         return next_levels
-                
-
-    #     except Exception as e: 
-    #         logging.info(f'error traversing {ds_name}')
-    #         return []
 
     def extract_name_project(self, full_ds_name):
         splits = full_ds_name.split('|')
@@ -506,6 +474,8 @@ class dss_utils:
                 r['ins'] = ins
                 r['outs'] = outs
 
+            shares = self.dataset_project_shares(p)
+
             for d in project['datasets']:
                 d['lineage_downstream'] = []
                 d['lineage_upstream'] = []
@@ -513,7 +483,12 @@ class dss_utils:
 
                 d['full_name'] = full_nm
 
-                rec_name = full_nm # .replace("|", ".", 1)
+                # add the project shares as downstream lineage
+                if d['name'] in shares:
+                    for s in shares['shares']:
+                        d['lineage_downstream'].append(s)
+
+                rec_name = full_nm 
                 for r in project['recipes']:
                     if rec_name in r['ins']:
                         for o in r['outs']:
@@ -564,7 +539,6 @@ class dss_utils:
         else:
             return ds[full]
         
-
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
 
