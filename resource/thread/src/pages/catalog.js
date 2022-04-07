@@ -257,6 +257,7 @@ class Catalog extends Component {
     }
 
     search = (term) => {
+      console.log('search() :: term == ' + term);
       const requestOptions = {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -341,6 +342,8 @@ class Catalog extends Component {
 
     renderDefinitions() {
         if(this.state.definitions.length > 0) {
+            this.searchRef = React.createRef();
+
             var listItems = this.state.definitions.map((col) =>
                 //onClick={() => this.openColumn(col.key)}
                 <tr>
