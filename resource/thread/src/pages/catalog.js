@@ -380,12 +380,11 @@ class Catalog extends Component {
 
                     <div className="input-group-btn">
                         <FaSearch onClick={() => this.toggleFilter()} style={{
-                            backgroundColor: "#66a3ff",
-                            color: "#FFFFFF",
-                            cursor: 'pointer',
-                            height: '34px',
+                            color: "#66a3ff",
+                            height: '27px',
                             padding: "8px",
-                            width: '34px'
+                            border: "solid 0.1em #66a3ff",
+                            width: '27px'
                         }} />
                     </div>
                 </div>
