@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row, Spinner, Table } from 'react-bootstrap';
 import Common from '../common/common';
 import { FaCaretDown, FaCaretUp, FaSearch } from 'react-icons/fa';
+import App from '../App';
 
 class Catalog extends Component {
     // These values NEED to match data KEYS for sorting to work
@@ -257,7 +258,9 @@ class Catalog extends Component {
     }
 
     openDefinition(defKey) {
+      // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8#o=88189549
       console.log("openDefinition(defKey) :: defKey == " + defKey);
+      console.log("App.CURRENT_URL == " + App.CURRENT_URL);
     }
 
     sortDefinitions(sortBy) { 
@@ -321,7 +324,7 @@ class Catalog extends Component {
     }
 
     renderDefinitions() {
-        // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8#o=88189549
+        
 
         if(this.state.definitions.length > 0) {
             this.searchRef = React.createRef();
