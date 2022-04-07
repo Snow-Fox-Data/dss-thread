@@ -383,7 +383,7 @@ class DataikuItem extends Component {
         });
 
         return <Col>
-            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
+            <Modal size="sm" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition To Lineage</Modal.Title>
                 </Modal.Header>
@@ -423,7 +423,7 @@ class DataikuItem extends Component {
                     <Button variant="primary" onClick={() => this.saveCol()}>Apply</Button>
                 </Modal.Footer>
             </Modal>
-            <Modal size="lg" show={this.state.newDefModal} animation={false} onHide={handleClose}>
+            <Modal size="xl" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition</Modal.Title>
                 </Modal.Header>
@@ -472,7 +472,8 @@ class DataikuItem extends Component {
                                                         </div>
                                                     </div>
                                                 }
-                                                <div>
+                                                <div style={{ padding: '5px' }}>
+                                                    <Form.Label>Tags</Form.Label>
                                                     {this.buildTagsString(['PII Data', 'Sales'], 'light')}
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
