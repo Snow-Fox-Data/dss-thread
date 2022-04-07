@@ -38,11 +38,6 @@ html {
   padding-top: 5px;
 }
 
-.definition-search {
-  margin-bottom: 1.0em;
-  width: 100%;
-}
-
 .lineage-check {
   font-weight: normal;
 }
@@ -121,6 +116,11 @@ ul.navbar-nav li.nav-item a:hover {
 
 .react-flow-container {
   background-color: white !important;
+}
+
+.search-bar {
+  margin-bottom: 1.0em;
+  width: 100%;
 }
 
 .table-definitions table > tbody > tr > td {
