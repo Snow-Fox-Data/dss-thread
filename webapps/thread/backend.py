@@ -513,12 +513,13 @@ class dss_utils:
 
                 d['full_name'] = full_nm
 
+                rec_name = full_nm.replace("|", ".", 1)
                 for r in project['recipes']:
-                    if full_nm in r['ins']:
+                    if rec_name in r['ins']:
                         for o in r['outs']:
                             if not o in d['lineage_downstream']:
                                 d['lineage_downstream'].append(o)
-                    if full_nm in r['outs']:
+                    if rec_name in r['outs']:
                         for i in r['ins']:
                             if not i in d['lineage_upstream']:
                                 d['lineage_upstream'].append(i)
