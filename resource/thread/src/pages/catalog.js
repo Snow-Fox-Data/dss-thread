@@ -362,7 +362,9 @@ class Catalog extends Component {
             return <>
               <Row>
                 <Col>
-                  <AsyncTypeahead
+                  <input placeholder="Search Definitions" onChange={event => this.search(event.target.value)} />
+
+                  {/* <AsyncTypeahead
                     id="async-search"
                     delay={300}
                     labelKey="description"
@@ -370,7 +372,7 @@ class Catalog extends Component {
                     minLength={3}
                     onChange={this.search}
                     placeholder='Search'
-                  />
+                  /> */}
                 </Col>
               </Row>
               <Row>
