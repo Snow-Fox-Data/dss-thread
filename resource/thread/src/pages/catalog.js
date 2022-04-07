@@ -256,28 +256,28 @@ class Catalog extends Component {
         }
     }
 
-    search = (term) => {
-      console.log('search() :: term == ' + term);
-      const requestOptions = {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-      };
+    // search = (term) => {
+    //   console.log('search() :: term == ' + term);
+    //   const requestOptions = {
+    //       method: 'GET',
+    //       headers: { 'Content-Type': 'application/json' },
+    //   };
 
-      let url = window.getWebAppBackendUrl('search') + '?term=' + term;
-      // this.setState({ loading: true });
-      fetch(url, requestOptions)
-          .then(res => res.json())
-          .then((response) => {
-              console.log('response == ');
-              console.log(response);
+    //   let url = window.getWebAppBackendUrl('search') + '?term=' + term;
+    //   // this.setState({ loading: true });
+    //   fetch(url, requestOptions)
+    //       .then(res => res.json())
+    //       .then((response) => {
+    //           console.log('response == ');
+    //           console.log(response);
 
-              // var p_list = this.filterDataikuItems(response);
-              // this.setState({
-              //     searchResults: p_list,
-              //     loading: false
-              // });
-          });
-    }
+    //           // var p_list = this.filterDataikuItems(response);
+    //           // this.setState({
+    //           //     searchResults: p_list,
+    //           //     loading: false
+    //           // });
+    //       });
+    // }
 
     sortDefinitions(sortBy) { 
         console.log('sortDefinitions() :: sortBy == ' + sortBy);
@@ -362,7 +362,7 @@ class Catalog extends Component {
             return <>
               <Row>
                 <Col>
-                  <input placeholder="Search Definitions" onChange={event => this.search(event.target.value)} />
+                  <input placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
 
                   {/* <AsyncTypeahead
                     id="async-search"
