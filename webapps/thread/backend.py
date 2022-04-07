@@ -405,7 +405,7 @@ class dss_utils:
         try:
             for j in recipe[inputs_outputs]:
                 for i in range(len(recipe[inputs_outputs][j]['items'])):
-                    name = recipe[inputs_outputs][j]['items'][i]['ref']
+                    name = recipe[inputs_outputs][j]['items'][i]['ref'].replace('.', '|', 1)
                     if '|' in name:
                         p_name, d_name, c_name = self.extract_name_project(name)
                     else:
@@ -513,7 +513,7 @@ class dss_utils:
 
                 d['full_name'] = full_nm
 
-                rec_name = full_nm.replace("|", ".", 1)
+                rec_name = full_nm # .replace("|", ".", 1)
                 for r in project['recipes']:
                     if rec_name in r['ins']:
                         for o in r['outs']:
