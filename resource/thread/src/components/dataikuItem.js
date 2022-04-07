@@ -44,8 +44,6 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
-
-
         let applyTo = this.state.applyToDataSets; // eval(this.state.tempSelDef.applied_to);
         applyTo.push(this.props.item.key);
 
@@ -474,6 +472,9 @@ class DataikuItem extends Component {
                                                         </div>
                                                     </div>
                                                 }
+                                                <div>
+                                                    {this.buildTagsString(['PII Data', 'Sales'], 'light')}
+                                                </div>
                                                 <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
