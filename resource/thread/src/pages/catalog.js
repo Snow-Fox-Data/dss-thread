@@ -265,12 +265,12 @@ class Catalog extends Component {
 
         // LEFT OFF TRYING TO GET THIS LOOP TO WORK FOR RESETTING ICONS.
         // MAKE SURE TO CHECK sortBy value to prevent current sort from breaking.
-        _sortBy = _sortBy.keys.map((item, index) => {
-            console.log('sortBy == ' + sortBy);
-            console.log('index == ' + index);
-            console.log('item == ');
-            console.log(item);
-        });
+        // _sortBy = _sortBy.keys.map((item, index) => {
+        //     console.log('sortBy == ' + sortBy);
+        //     console.log('index == ' + index);
+        //     console.log('item == ');
+        //     console.log(item);
+        // });
 
         console.log('_sortBy[sortBy] == ');
         console.log(_sortBy[sortBy]);
