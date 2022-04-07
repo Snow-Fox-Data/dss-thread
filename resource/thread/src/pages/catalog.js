@@ -228,7 +228,7 @@ class Catalog extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        let term = "Add";
+        let term = "";
 
         let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
         fetch(url, requestOptions)
@@ -252,6 +252,7 @@ class Catalog extends Component {
     }
 
     sortDefinitions(sortBy) { 
+        console.log('sortDefinitions() :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions;
         let _sortBy = this.state.sortBy;
 
@@ -267,7 +268,11 @@ class Catalog extends Component {
             console.log(item);
         });
 
+        console.log('_sortBy[sortBy] == ');
+        console.log(_sortBy[sortBy]);
+
         if(_sortBy[sortBy] == null || _sortBy[sortBy] == 'DESC') {
+            console.log("SORT BY ASC");
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
                 if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
@@ -276,6 +281,7 @@ class Catalog extends Component {
 
             _sortBy[sortBy] = 'ASC';
         } else {
+            console.log("SORT BY DESC");
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
                 if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
