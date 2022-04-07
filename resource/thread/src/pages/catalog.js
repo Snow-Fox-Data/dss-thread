@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import Common from '../common/common';
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
-import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { FaCaretDown, FaCaretUp, FaSearch } from 'react-icons/fa';
 
 class Catalog extends Component {
     // These values NEED to match data KEYS for sorting to work
@@ -42,7 +41,7 @@ class Catalog extends Component {
     }
 
     fetchDefinitions(term = "") {
-        console.log('fetchDefinitions() :: ');
+        console.log('fetchDefinitions() :: term == ' + term);
         // let _definitions = [
         //     {
         //       "applied_to": "",
@@ -362,7 +361,7 @@ class Catalog extends Component {
             return listItems;
         } else {
             return  <tr>
-                      <td colSpan={3}>
+                      <td colSpan={3} className="text-center">
                           <span>No results for your search</span>
                       </td>
                     </tr>;
@@ -376,7 +375,20 @@ class Catalog extends Component {
         return <Col>
             <Row>
               <Col>
-                <input placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
+                <div className="input-group" style={{ width: "100%" }}>
+                    <input id="definition-search" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
+
+                    <div className="input-group-btn">
+                        <FaSearch onClick={() => this.toggleFilter()} style={{
+                            backgroundColor: "#66a3ff",
+                            color: "#FFFFFF",
+                            cursor: 'pointer',
+                            height: '34px',
+                            padding: "8px",
+                            width: '34px'
+                        }} />
+                    </div>
+                </div>
               </Col>
             </Row>
             <Row>

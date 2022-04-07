@@ -38,6 +38,11 @@ html {
   padding-top: 5px;
 }
 
+.definition-search {
+  margin-bottom: 1.0em;
+  width: 100%;
+}
+
 .lineage-check {
   font-weight: normal;
 }
