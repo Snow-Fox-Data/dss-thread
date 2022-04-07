@@ -502,7 +502,7 @@ class dss_utils:
                 for l in ds['lineage_upstream']:
                     if not p in l:
                         # this is a reference to a share
-                        shared_dataset = self.get_ds_by_name(ds['name', all_projects, p])
+                        shared_dataset = self.get_ds_by_name(ds['name'], all_projects, p)
                         shared_dataset['lineage_downstream'].append(l)
                         logging.info(f'added shared dataset: {l}')
 
