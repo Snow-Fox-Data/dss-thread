@@ -474,20 +474,13 @@ class dss_utils:
                 r['ins'] = ins
                 r['outs'] = outs
 
-            shares = self.dataset_project_shares(p)
-
             for d in project['datasets']:
                 d['lineage_downstream'] = []
                 d['lineage_upstream'] = []
                 full_nm = self.get_full_dataset_name(d['name'], d['projectKey'])
 
                 d['full_name'] = full_nm
-
-                # add the project shares as downstream lineage
-                if d['name'] in shares:
-                    for s in shares[d['name']]:
-                        d['lineage_downstream'].append(s)
-                        logging.info(f'adding share - {d["name"]} : {s}')
+                d['project'] = p
 
                 rec_name = full_nm 
                 for r in project['recipes']:
@@ -499,6 +492,19 @@ class dss_utils:
                         for i in r['ins']:
                             if not i in d['lineage_upstream']:
                                 d['lineage_upstream'].append(i)
+
+        # add all shares
+        for p in all_projects:
+            project = all_projects[p]
+            for d in range(len(project['datasets'])):
+                ds = project['datasets'][d]
+
+                for l in ds['lineage_upstream']:
+                    if not p in l:
+                        # this is a reference to a share
+                        shared_dataset = self.get_ds_by_name(ds['name', all_projects, p])
+                        shared_dataset['lineage_downstream'].append(l)
+                        logging.info(f'added shared dataset: {l}')
 
         # get the full dataset lineage
         for p in all_projects:
