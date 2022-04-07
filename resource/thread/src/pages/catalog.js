@@ -359,52 +359,13 @@ class Catalog extends Component {
                 </tr>
             );
 
-            return <>
-              <Row>
-                <Col>
-                  <input placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
-
-                  {/* <AsyncTypeahead
-                    id="async-search"
-                    delay={300}
-                    labelKey="description"
-                    ref={this.searchRef}
-                    minLength={3}
-                    onChange={this.search}
-                    placeholder='Search'
-                  /> */}
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                    <div className='table-definitions table-responsive'>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th className='text-center' colSpan={3}>Definitions</th>
-                                </tr>
-                                <tr>
-                                    <th onClick={() => this.sortDefinitions(Catalog.NAME)}>
-                                        Name
-                                        {this.displayTableHeaderCarets(Catalog.NAME)}
-                                    </th>
-                                    <th onClick={() => this.sortDefinitions(Catalog.DESCRIPTION)}>
-                                        Description
-                                        {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
-                                    </th>
-                                    <th>Applied To</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {listItems}
-                            </tbody>
-                        </Table>
-                    </div>                    
-                </Col>
-              </Row>
-            </>;
+            return listItems;
         } else {
-            return <p>{this.state.title}</p>
+            return  <tr>
+                      <td colSpan={3}>
+                          <span>No results for your search</span>
+                      </td>
+                    </tr>;
         }
     }
 
@@ -413,7 +374,38 @@ class Catalog extends Component {
         console.log(this.state);
 
         return <Col>
-            {this.renderDefinitions()}
+            <Row>
+              <Col>
+                <input placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                  <div className='table-definitions table-responsive'>
+                      <Table striped bordered hover>
+                          <thead>
+                              <tr>
+                                  <th className='text-center' colSpan={3}>Definitions</th>
+                              </tr>
+                              <tr>
+                                  <th onClick={() => this.sortDefinitions(Catalog.NAME)}>
+                                      Name
+                                      {this.displayTableHeaderCarets(Catalog.NAME)}
+                                  </th>
+                                  <th onClick={() => this.sortDefinitions(Catalog.DESCRIPTION)}>
+                                      Description
+                                      {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
+                                  </th>
+                                  <th>Applied To</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {this.renderDefinitions()}
+                          </tbody>
+                      </Table>
+                  </div>                    
+              </Col>
+            </Row>
         </Col>
     }
 }
