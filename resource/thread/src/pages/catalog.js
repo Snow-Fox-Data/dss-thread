@@ -255,29 +255,6 @@ class Catalog extends Component {
         }
     }
 
-    // search = (term) => {
-    //   console.log('search() :: term == ' + term);
-    //   const requestOptions = {
-    //       method: 'GET',
-    //       headers: { 'Content-Type': 'application/json' },
-    //   };
-
-    //   let url = window.getWebAppBackendUrl('search') + '?term=' + term;
-    //   // this.setState({ loading: true });
-    //   fetch(url, requestOptions)
-    //       .then(res => res.json())
-    //       .then((response) => {
-    //           console.log('response == ');
-    //           console.log(response);
-
-    //           // var p_list = this.filterDataikuItems(response);
-    //           // this.setState({
-    //           //     searchResults: p_list,
-    //           //     loading: false
-    //           // });
-    //       });
-    // }
-
     sortDefinitions(sortBy) { 
         console.log('sortDefinitions() :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions;
@@ -285,6 +262,8 @@ class Catalog extends Component {
 
         console.log('_sortBy == ');
         console.log(_sortBy);
+        console.log('_sortBy[sortBy] == ');
+        console.log(_sortBy[sortBy]);
 
         // LEFT OFF TRYING TO GET THIS LOOP TO WORK FOR RESETTING ICONS.
         // MAKE SURE TO CHECK sortBy value to prevent current sort from breaking.
@@ -309,9 +288,6 @@ class Catalog extends Component {
         //     // }
         //   });
         // }
-        
-        console.log('_sortBy[sortBy] == ');
-        console.log(_sortBy[sortBy]);
 
         if(_sortBy[sortBy] == null || _sortBy[sortBy] === 'DESC') {
             console.log("SORT BY ASC");
@@ -340,11 +316,13 @@ class Catalog extends Component {
     }
 
     renderDefinitions() {
+        // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8#o=88189549
+
         if(this.state.definitions.length > 0) {
             this.searchRef = React.createRef();
 
             var listItems = this.state.definitions.map((col) =>
-                //onClick={() => this.openColumn(col.key)}
+                // onClick={() => this.openColumn(col.key)}
                 <tr>
                     <td>
                         <span style={{ marginLeft: '10px' }}>{col.name}</span>
@@ -368,7 +346,7 @@ class Catalog extends Component {
         }
     }
 
-    render() {
+    render() {      
         console.log('render() :: STATE == ');
         console.log(this.state);
 

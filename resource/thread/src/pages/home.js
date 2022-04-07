@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Spinner } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaFilter } from 'react-icons/fa';
 import Common from '../common/common';
@@ -277,6 +277,16 @@ class Home extends Component {
 
         return (
             <>
+                {loading ?
+                    <Row>
+                        <div style={{ padding: '10px' }}>
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </div>
+                    </Row>
+                : null}
+
                 <Row>
                     <Col>
                         <div className="input-group" style={{ width: "100%" }}>
@@ -330,16 +340,6 @@ class Home extends Component {
                         })}
                     </Row>
                     : null}
-
-                {/* <Row>
-                    <div style={{ padding: '10px' }}>
-                        {loading ?
-                            <Spinner animation="border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
-                            : null}
-                    </div>
-                </Row> */}
 
                 <Row>
                     {!loading ? this.dataikuItem : null}
