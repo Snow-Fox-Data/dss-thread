@@ -13,7 +13,7 @@ class Catalog extends Component {
 
         this.state = {
             definitions: [],
-            sortBy: {  },
+            sortBy: [],
             title: "Catelog View"
         };
     }
