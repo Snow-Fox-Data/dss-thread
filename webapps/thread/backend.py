@@ -486,7 +486,7 @@ class dss_utils:
                 # add the project shares as downstream lineage
                 if d['name'] in shares:
                     for s in shares[d['name']]:
-                        # d['lineage_downstream'].append(s)
+                        d['lineage_downstream'].append(s)
                         logging.info(f'adding share - {d["name"]} : {s}')
 
                 rec_name = full_nm 
@@ -519,26 +519,29 @@ class dss_utils:
         ds = self.get_ds_by_name(ds_name, all_projects)
         
         full = dir + '_full'
-        if not full in ds:
-            if dir in ds:
-                lins = []
-                for node in ds[dir]:
-                    recur_ct = recur_ct + 1
-                    if recur_ct > 200:
-                        logging.info(f'recursive error {dir} - {ds_name}, {ds[dir]}')
-                        return []
+        try:
+            if not full in ds:
+                if dir in ds:
+                    lins = []
+                    for node in ds[dir]:
+                        recur_ct = recur_ct + 1
+                        if recur_ct > 200:
+                            logging.info(f'recursive error {dir} - {ds_name}, {ds[dir]}')
+                            return []
 
-                    if node != ds_name:
-                        lin = self.traverse_lineage(node, dir, all_projects, recur_ct)
-                        lins.append({'name': node, dir:lin})
+                        if node != ds_name:
+                            lin = self.traverse_lineage(node, dir, all_projects, recur_ct)
+                            lins.append({'name': node, dir:lin})
 
-                ds[full] = lins
-                
-                return lins
+                    ds[full] = lins
+                    
+                    return lins
+                else:
+                    return []        
             else:
-                return []        
-        else:
-            return ds[full]
+                return ds[full]
+        except:
+            logging.info(f'error traversing {ds_name}')
         
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
