@@ -486,7 +486,7 @@ class dss_utils:
                 # add the project shares as downstream lineage
                 if d['name'] in shares:
                     for s in shares[d['name']]:
-                        d['lineage_downstream'].append(s)
+                        # d['lineage_downstream'].append(s)
                         logging.info(f'adding share - {d["name"]} : {s}')
 
                 rec_name = full_nm 
