@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row, Spinner, Table } from 'react-bootstrap';
 import Common from '../common/common';
 import { FaCaretDown, FaCaretUp, FaSearch } from 'react-icons/fa';
-import { App } from 'react-bootstrap-icons';
+import App from '../App';
 
 class Catalog extends Component {
     // These values NEED to match data KEYS for sorting to work
