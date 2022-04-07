@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Col, Row, Spinner, Table } from 'react-bootstrap';
 import Common from '../common/common';
 import { FaCaretDown, FaCaretUp, FaSearch } from 'react-icons/fa';
 
@@ -13,6 +13,7 @@ class Catalog extends Component {
 
         this.state = {
             definitions: [],
+            loading: false,
             sortBy: {},
             title: "Catelog View"
         };
@@ -255,6 +256,10 @@ class Catalog extends Component {
         }
     }
 
+    openDefinition(defKey) {
+      console.log("openDefinition(defKey) :: defKey == " + defKey);
+    }
+
     sortDefinitions(sortBy) { 
         console.log('sortDefinitions() :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions;
@@ -322,9 +327,8 @@ class Catalog extends Component {
             this.searchRef = React.createRef();
 
             var listItems = this.state.definitions.map((col) =>
-                // onClick={() => this.openColumn(col.key)}
                 <tr>
-                    <td>
+                    <td onClick={() => this.openDefinition(col.id)}>
                         <span style={{ marginLeft: '10px' }}>{col.name}</span>
                     </td>                    
                     <td>
@@ -349,8 +353,18 @@ class Catalog extends Component {
     render() {      
         console.log('render() :: STATE == ');
         console.log(this.state);
+        const { loading } = this.state;
 
         return <Col>
+              {loading ?
+                <Row>
+                    <div style={{ padding: '10px' }}>
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+                </Row>
+              : null}
             <Row>
               <Col>
                 <div className="input-group" style={{ width: "100%" }}>
