@@ -268,11 +268,6 @@ class Catalog extends Component {
         let sortByKeys = Object.keys(_sortBy);
         if(sortByKeys.length > 0) {
           _sortBy = Object.keys(_sortBy).map((item, index) => {
-            console.log('sortBy == ' + sortBy);
-            console.log('index == ' + index);
-            console.log('item == ');
-            console.log(item);
-
             if(item !== sortBy) {
               _sortBy[item] = null
             }
@@ -281,8 +276,10 @@ class Catalog extends Component {
         
         console.log('_sortBy[sortBy] == ');
         console.log(_sortBy[sortBy]);
+        console.log('_sortBy.sortBy == ');
+        console.log(_sortBy.sortBy);
 
-        if(_sortBy[sortBy] == null || _sortBy[sortBy] == 'DESC') {
+        if(_sortBy[sortBy] == null || _sortBy[sortBy] === 'DESC') {
             console.log("SORT BY ASC");
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
