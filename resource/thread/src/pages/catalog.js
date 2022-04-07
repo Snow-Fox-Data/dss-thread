@@ -265,7 +265,9 @@ class Catalog extends Component {
 
         // LEFT OFF TRYING TO GET THIS LOOP TO WORK FOR RESETTING ICONS.
         // MAKE SURE TO CHECK sortBy value to prevent current sort from breaking.
-        // let sortByKeys = Object.keys(_sortBy);
+        let sortByKeys = Object.keys(_sortBy);
+        console.log('sortByKeys == ');
+        console.log(sortByKeys);
         // if(sortByKeys.length > 0) {
         //   _sortBy = Object.keys(_sortBy).map((item, index) => {
         //     if(item !== sortBy) {
