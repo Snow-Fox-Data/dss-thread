@@ -257,10 +257,17 @@ class Catalog extends Component {
         }
     }
 
+    // import {browserHistory} from "react-router";
+
+    // functionName() {
+    // browserHistory.push("/path-to-link");
+    // }
+
     openDefinition(defKey) {
       // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8#o=88189549
       console.log("openDefinition(defKey) :: defKey == " + defKey);
       console.log("App.CURRENT_URL == " + App.CURRENT_URL);
+      // window.location = App.CURRENT_URL + "#o=" + defKey;
     }
 
     sortDefinitions(sortBy) { 
@@ -370,10 +377,8 @@ class Catalog extends Component {
               : null}
             <Row>
               <Col>
-                <div className="input-group" style={{ width: "100%" }}>
-                    <input className="search-bar" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} />
-
-                    <div className="input-group-btn">
+                <div className="input-group" style={{ width: "100%" }}>                  
+                    <span className="input-group-addon">
                         <FaSearch onClick={() => this.toggleFilter()} style={{
                             backgroundColor: "#DDD",
                             color: "#000",
@@ -382,7 +387,10 @@ class Catalog extends Component {
                             border: "solid 0.2em #000",
                             width: '27px'
                         }} />
-                    </div>
+                    </span>
+
+                    <input className="search-bar" placeholder="Search Definitions" 
+                        onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
                 </div>
               </Col>
             </Row>
