@@ -289,8 +289,6 @@ class Catalog extends Component {
         
         console.log('_sortBy[sortBy] == ');
         console.log(_sortBy[sortBy]);
-        console.log('_sortBy.sortBy == ');
-        console.log(_sortBy.sortBy);
 
         if(_sortBy[sortBy] == null || _sortBy[sortBy] === 'DESC') {
             console.log("SORT BY ASC");
