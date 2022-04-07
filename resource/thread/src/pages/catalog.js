@@ -13,7 +13,7 @@ class Catalog extends Component {
 
         this.state = {
             definitions: [],
-            sortBy: [],
+            sortBy: {},
             title: "Catelog View"
         };
     }
@@ -243,9 +243,6 @@ class Catalog extends Component {
     }
 
     formatAppliedTo(appliedTo) {
-        console.log("formatAppliedTo(appliedTo) :: appliedTo == ");
-        console.log(appliedTo);
-
         appliedTo = JSON.parse(appliedTo);
         if(appliedTo.length > 0) {
             let formattedAppliedTo = appliedTo.map((col) => {
@@ -268,7 +265,7 @@ class Catalog extends Component {
 
         // LEFT OFF TRYING TO GET THIS LOOP TO WORK FOR RESETTING ICONS.
         // MAKE SURE TO CHECK sortBy value to prevent current sort from breaking.
-        _sortBy = _sortBy.map((item, index) => {
+        _sortBy = _sortBy.keys.map((item, index) => {
             console.log('sortBy == ' + sortBy);
             console.log('index == ' + index);
             console.log('item == ');
