@@ -263,8 +263,8 @@ class Catalog extends Component {
         console.log('_sortBy == ');
         console.log(_sortBy);
 
-        console.log('_sortBy.keys == ');
-        console.log(_sortBy.keys);
+        console.log('Object.keys(_sortBy) == ');
+        console.log(Object.keys(_sortBy));
 
         // LEFT OFF TRYING TO GET THIS LOOP TO WORK FOR RESETTING ICONS.
         // MAKE SURE TO CHECK sortBy value to prevent current sort from breaking.
