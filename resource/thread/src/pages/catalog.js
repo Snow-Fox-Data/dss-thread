@@ -382,7 +382,7 @@ class Catalog extends Component {
                         <FaSearch onClick={() => this.toggleFilter()} style={{
                             color: "#66a3ff",
                             height: '27px',
-                            padding: "8px",
+                            padding: "4px",
                             border: "solid 0.1em #66a3ff",
                             width: '27px'
                         }} />
