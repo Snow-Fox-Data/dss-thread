@@ -219,24 +219,24 @@ class Catalog extends Component {
             }
         ];
 
-        // const requestOptions = {
-        //     method: 'GET',
-        //     headers: { 'Content-Type': 'application/json' },
-        // };
-
-        // let term = "Add";
-
-        // let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
-        // fetch(url, requestOptions)
-        //     .then(res => res.json())
-        //     .then((response) => {
-        //         console.log('response == ');
-        //         console.log(response);
-        //     });
-
         this.setState({
-            definitions: _definitions
+          definitions: _definitions
         });
+
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        let term = "Add";
+
+        let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                console.log('response == ');
+                console.log(response);
+            });
     }
 
     formatAppliedTo(appliedTo) {
@@ -260,12 +260,12 @@ class Catalog extends Component {
 
         // LEFT OFF TRYING TO GET THIS LOOP TO WORK FOR RESETTING ICONS.
         // MAKE SURE TO CHECK sortBy value to prevent current sort from breaking.
-        // _sortBy = _sortBy.map((item, index) => {
-        //     console.log('sortBy == ' + sortBy);
-        //     console.log('index == ' + index);
-        //     console.log('item == ');
-        //     console.log(item);
-        // });
+        _sortBy = _sortBy.map((item, index) => {
+            console.log('sortBy == ' + sortBy);
+            console.log('index == ' + index);
+            console.log('item == ');
+            console.log(item);
+        });
 
         if(_sortBy[sortBy] == null || _sortBy[sortBy] == 'DESC') {
             _definitions = _definitions.sort((a, b) => {
