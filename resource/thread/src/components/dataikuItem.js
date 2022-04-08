@@ -11,6 +11,8 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags } from "react-icons/fa";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -340,7 +342,7 @@ class DataikuItem extends Component {
 
     renderColumn() {
         const filterBy = () => true;
-        const { defSearchResults } = this.state;
+        const { defSearchResults, editorState } = this.state;
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
@@ -472,9 +474,11 @@ class DataikuItem extends Component {
                                                         </div>
                                                     </div>
                                                 }
-                                                <div style={{ padding: '5px' }}>
+                                                <div>
                                                     <Form.Label>Tags</Form.Label>
-                                                    {this.buildTagsString(['PII Data', 'Sales'], 'light')}
+                                                    <div style={{ padding: '5px' }}>
+                                                        {this.buildTagsString(['PII Data', 'Sales'], 'light', false)}
+                                                    </div>
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
                                                 <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
@@ -483,6 +487,14 @@ class DataikuItem extends Component {
                                                 <Form.Text className="text-muted">
                                                     Will appear in the Dataiku Dataset's column description.
                                                 </Form.Text>
+
+                                                <Editor
+                                                    editorState={editorState}
+                                                    toolbarClassName="toolbarClassName"
+                                                    wrapperClassName="wrapperClassName"
+                                                    editorClassName="editorClassName"
+                                                // onEditorStateChange={this.onEditorStateChange}
+                                                />;
                                             </Form.Group>
                                         </Form>
                                     </div>
