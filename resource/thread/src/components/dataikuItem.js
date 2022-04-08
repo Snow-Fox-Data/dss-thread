@@ -4,7 +4,7 @@ import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import { Modal, Button, Form, Toast, ButtonGroup, Dropdown, Badge } from "react-bootstrap";
+import { Modal, Button, Form, Card, Dropdown, Badge } from "react-bootstrap";
 import eventBus from "../eventBus";
 import { ArrowUpRightSquare, ThermometerSnow } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
@@ -695,8 +695,7 @@ class DataikuItem extends Component {
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col>
-                    <h1>
-                        <Badge bg="secondary">{this.props.item.total_cols_def} / {this.props.item.total_cols} documented ({(this.props.item.total_cols_def / this.props.item.total_cols).toFixed(2) * 100}%)</Badge></h1>
+                    {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
 
@@ -728,6 +727,22 @@ class DataikuItem extends Component {
                 </Tabs>
             </Row>
         </Col>;
+    }
+
+    createDocPctCard(total_cols, documented_cols) {
+        return <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+                <Card.Title> <Badge bg="secondary">
+                    <h1>({(documented_cols / total_cols).toFixed(2) * 100}%)</h1>
+
+                </Badge>
+                </Card.Title>
+                <Card.Text>
+                    {documented_cols} / {total_cols} columns documented
+                </Card.Text>
+            </Card.Body>
+        </Card>
     }
 
     renderProject() {
@@ -763,8 +778,7 @@ class DataikuItem extends Component {
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col>
-                    <h1>
-                        <Badge bg="secondary">{this.props.item.total_cols_def} / {this.props.item.total_cols} documented ({(this.props.item.total_cols_def / this.props.item.total_cols).toFixed(2) * 100}%)</Badge></h1>
+                    {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
             <Row>
