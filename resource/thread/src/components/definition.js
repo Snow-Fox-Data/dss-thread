@@ -34,7 +34,7 @@ class Definition extends Component {
 
     render() {
 
-        return (<Card style={{ width: '30rem' }}>
+        return (<Card style={{ width: '50rem' }}>
             <Card.Header>Definition: {this.props.definition.name}</Card.Header>
             <Card.Body>
                 <Card.Text>
@@ -50,6 +50,9 @@ class Definition extends Component {
                     <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.name}
                     </div>
+                    <h5>
+                        Tags
+                    </h5>
                     <div style={{ paddingBottom: "10px" }}>
                         {this.buildTagsString(eval(this.props.definition.tags), 'light', false)}
                     </div>
