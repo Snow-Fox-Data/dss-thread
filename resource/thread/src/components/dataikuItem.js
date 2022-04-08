@@ -10,7 +10,7 @@ import { ArrowUpRightSquare, ThermometerSnow } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { FaTags } from "react-icons/fa";
+import { FaTags, FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 
 const ReactTags = require('react-tag-autocomplete')
 
@@ -529,7 +529,9 @@ class DataikuItem extends Component {
                     <Col ms-auto>
                         {this.state.tempSelDef.id != -1 &&
                             <div>
-                                <Button variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
+                                {(upstreams.length > 0 || downstreams.length > 0) &&
+                                    <Button variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
+                                }
                                 <Button onClick={() => this.saveCol()}>Save Definition</Button>
                             </div>
                         }
@@ -541,7 +543,9 @@ class DataikuItem extends Component {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                    {(upstreams.length > 0 || downstreams.length > 0) &&
+                                        <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                    }
                                 </Dropdown.Menu>
                             </Dropdown>
                         }
@@ -561,20 +565,20 @@ class DataikuItem extends Component {
                         <span style={{ padding: "0px 3px" }}>|</span>
                         <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
                     </p>
-                </Col>
-                <Col>
-                    <div className="float-end">
+                    <div>
                         {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
-                            <Badge bg="success">
-                                <div style={{ fontSize: "30px" }}>Documented
+                            <Button variant="success">
+                                <div><FaThumbsUp></FaThumbsUp>
+                                    <span style={{ paddingLeft: '4px' }}>Documented</span>
                                 </div>
-                            </Badge>
+                            </Button>
                         }
                         {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
-                            <Badge bg="danger">
-                                <div style={{ fontSize: "30px" }}>Undocumented
+                            <Button bg="danger">
+                                <div>
+                                    <FaThumbsDown></FaThumbsDown><span style={{ paddingLeft: '4px' }}>Undocumented</span>
                                 </div>
-                            </Badge>
+                            </Button>
                         }
                     </div>
                 </Col>
@@ -803,7 +807,7 @@ class DataikuItem extends Component {
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
                     </span>
                     </h1>
-                    <h3>({this.props.item.projectKey})</h3>
+                    <h4>({this.props.item.projectKey})</h4>
                     <p>Project<span style={{ paddingLeft: '4px' }}>
                         in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
