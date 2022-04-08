@@ -11,8 +11,8 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags } from "react-icons/fa";
-import ReactDOM from 'react-dom';
-import { Editor, EditorState } from 'draft-js';
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -342,25 +342,16 @@ class DataikuItem extends Component {
 
     renderColumn() {
         const filterBy = () => true;
-        const { defSearchResults, editorState } = this.state;
+        const { defSearchResults } = this.state;
 
+        const [editorState, setEditorState] = React.useState(() =>
+            EditorState.createEmpty()
+        );
 
-        this.state.editorState = EditorState.createEmpty();
-        this.onChange = (editorState) => this.setState({ editorState });
-        const styles = {
-            editor: {
-                border: '1px solid gray',
-                minHeight: '6em'
-            }
-        };
-        // this.setEditor = (editor) => {
-        //     this.editor = editor;
-        // };
-        // this.focusEditor = () => {
-        //     if (this.editor) {
-        //         this.editor.focus();
-        //     }
-        // };
+        const editor = React.useRef(null);
+        function focusEditor() {
+            editor.current.focus();
+        }
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
@@ -499,18 +490,21 @@ class DataikuItem extends Component {
                                                     </div>
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
-                                                <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
+                                                {/* <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
                                                 />
                                                 <Form.Text className="text-muted">
                                                     Will appear in the Dataiku Dataset's column description.
-                                                </Form.Text>
-
-                                                <div style={styles.editor} onClick={this.focusEditor}>
+                                                </Form.Text> */}
+                                                <div
+                                                    style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
+                                                    onClick={focusEditor}
+                                                >
                                                     <Editor
-                                                        ref={this.setEditor}
-                                                        editorState={this.state.editorState}
-                                                        onChange={this.onChange}
+                                                        ref={editor}
+                                                        editorState={editorState}
+                                                        onChange={setEditorState}
+                                                        placeholder="Write something!"
                                                     />
                                                 </div>
                                             </Form.Group>
