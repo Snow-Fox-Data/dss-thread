@@ -204,8 +204,7 @@ def update_desc():
                 "name": data['name'],
                 "description": data['name'] + ' | ' + desc_txt,
                 "object_type": "definition",
-                "key": new_id,
-                "tags":tags
+                "key": new_id
             }])
 
         # todo: really don't like reading this whole dataset
