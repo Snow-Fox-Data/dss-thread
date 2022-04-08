@@ -562,6 +562,20 @@ class DataikuItem extends Component {
                         <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
                     </p>
                 </Col>
+                <Col>
+                    {this.props.item.definition.id > -1 &&
+                        <Badge bg="success">
+                            <div style={{ fontSize: "50px" }}>Documented
+                            </div>
+                        </Badge>
+                    }
+                    {this.props.item.definition.id == -1 &&
+                        <Badge bg="warning">
+                            <div style={{ fontSize: "50px" }}>Undocumented
+                            </div>
+                        </Badge>
+                    }
+                </Col>
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>
@@ -730,7 +744,7 @@ class DataikuItem extends Component {
     }
 
     createDocPctCard(total_cols, documented_cols) {
-        return <Card style={{ width: '16rem' }} className="float-right">
+        return <Card style={{ width: '16rem' }} className="float-end">
             <Card.Body>
                 <Card.Title>
                     <div style={{ textAlign: "center" }}>
