@@ -334,7 +334,10 @@ class dss_utils:
 
         p['datasets'] = []
         for idx, row in datasets.iterrows():
-            p['datasets'].append(row['key'])
+            tot_cols, def_cols = self.calc_dataset_def_ct(row['key'])
+            p['datasets'].append({'key': row['key'],
+            'total_columns': tot_cols, 'documented_columns': def_cols
+            })
 
         return p
    

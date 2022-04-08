@@ -567,14 +567,14 @@ class DataikuItem extends Component {
                     </p>
                     <div>
                         {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
-                            <Button variant="success">
+                            <Button size="sm" variant="success">
                                 <div><FaThumbsUp></FaThumbsUp>
                                     <span style={{ paddingLeft: '4px' }}>Documented</span>
                                 </div>
                             </Button>
                         }
                         {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
-                            <Button bg="danger">
+                            <Button size="sm" bg="danger">
                                 <div>
                                     <FaThumbsDown></FaThumbsDown><span style={{ paddingLeft: '4px' }}>Undocumented</span>
                                 </div>
