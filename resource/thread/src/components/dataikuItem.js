@@ -29,15 +29,11 @@ class DataikuItem extends Component {
             applyLineageModal: false,
             applyToDataSets: [],
             dssSrc: '',
-            tags: [
-                { id: 1, name: "Apples" },
-                { id: 2, name: "Pears" }
+            defTags: [
+                { id: 1, name: "PII Data" },
+                { id: 2, name: "Sales Forecasts" }
             ],
-            suggestions: [
-                { id: 3, name: "Bananas" },
-                { id: 4, name: "Mangos" },
-                { id: 5, name: "Lemons" },
-                { id: 6, name: "Apricots" }
+            defSuggestions: [
             ]
         };
     }
@@ -84,7 +80,8 @@ class DataikuItem extends Component {
                 "description": val,
                 "applied_to": applyTo,
                 "id": this.state.tempSelDef.id,
-                "column_key": this.props.item.key
+                "column_key": this.props.item.key,
+                "tags": this.state.defTags
             })
         }
 
@@ -355,14 +352,14 @@ class DataikuItem extends Component {
         const { defSearchResults } = this.state;
 
         const onDelete = (i) => {
-            const tags = this.state.tags.slice(0)
-            tags.splice(i, 1)
-            this.setState({ tags })
+            const defTags = this.state.defTags.slice(0)
+            defTags.splice(i, 1)
+            this.setState({ defTags })
         }
 
         const onAddition = (tag) => {
-            const tags = [].concat(this.state.tags, tag)
-            this.setState({ tags })
+            const defTags = [].concat(this.state.defTags, tag)
+            this.setState({ defTags })
         }
 
         let lineage = this.buildLineage();
@@ -497,13 +494,10 @@ class DataikuItem extends Component {
                                                 }
                                                 <div>
                                                     <Form.Label>Tags</Form.Label>
-                                                    <div style={{ padding: '5px' }}>
-                                                        {this.buildTagsString(['PII Data', 'Sales'], 'light', false)}
-                                                    </div>
                                                     <div>
                                                         <ReactTags
-                                                            tags={this.state.tags}
-                                                            suggestions={this.state.suggestions}
+                                                            tags={this.state.defTags}
+                                                            suggestions={this.state.defSuggestions}
                                                             onDelete={(i) => onDelete(i)}
                                                             onAddition={(tag) => onAddition(tag)} />
                                                     </div>
