@@ -574,9 +574,9 @@ class DataikuItem extends Component {
                             </Button>
                         }
                         {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
-                            <Button size="sm" bg="danger">
+                            <Button size="sm" variant="danger">
                                 <div>
-                                    <FaThumbsDown></FaThumbsDown><span style={{ paddingLeft: '4px' }}>Undocumented</span>
+                                    Undocumented
                                 </div>
                             </Button>
                         }
@@ -786,7 +786,7 @@ class DataikuItem extends Component {
                 <td>{Common.getIconForDataikuItemType('dataset', "16px")}
                     <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col.key)}>{col.key.split('|')[1]}</span></td>
                 <td>
-                    {col.total_columns} / {col.documented_columns} ({((col.documented_columns / col.total_columns).toFixed(2) * 100)})
+                    {col.total_columns} / {col.documented_columns} ({((col.documented_columns / col.total_columns).toFixed(2) * 100)}%)
                 </td>
             </tr>
         );
