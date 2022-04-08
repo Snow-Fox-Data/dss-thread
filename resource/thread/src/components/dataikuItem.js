@@ -510,7 +510,7 @@ class DataikuItem extends Component {
                                                     <Form.Label>Tags</Form.Label>
                                                     <div>
                                                         <ReactTags
-                                                            tags={this.state.tempSelDef.tags}
+                                                            tags={this.state.columnTags}
                                                             allowNew='true'
                                                             // suggestions={this.state.defSuggestions}
                                                             onDelete={(i) => onDelete(i)}
