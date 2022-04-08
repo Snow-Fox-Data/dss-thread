@@ -569,20 +569,27 @@ class DataikuItem extends Component {
                 </Col>
                 <Col>
                     <div className="float-end">
-                        {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
-                            <Button variant="success">
-                                <div><FaThumbsUp></FaThumbsUp>
-                                    <span style={{ paddingLeft: '4px' }}>Documented</span>
-                                </div>
-                            </Button>
-                        }
-                        {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
-                            <Button variant="danger">
-                                <div>
-                                    Undocumented
-                                </div>
-                            </Button>
-                        }
+                        <Card>
+                            <Card.Header>
+                                Documentation Stats
+                            </Card.Header>
+                            <Card.Body>
+                                {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
+                                    <Button variant="success">
+                                        <div><FaThumbsUp></FaThumbsUp>
+                                            <span style={{ paddingLeft: '4px' }}>Documented</span>
+                                        </div>
+                                    </Button>
+                                }
+                                {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
+                                    <Button variant="danger">
+                                        <div>
+                                            Undocumented
+                                        </div>
+                                    </Button>
+                                }
+                            </Card.Body>
+                        </Card>
                     </div>
                 </Col>
             </Row>
