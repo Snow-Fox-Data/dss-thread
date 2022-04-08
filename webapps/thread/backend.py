@@ -53,7 +53,7 @@ def scan():
 
     dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
     dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
-    dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_descriptions.csv', False)
+    dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
 
     result = dss.scan_server()
 
