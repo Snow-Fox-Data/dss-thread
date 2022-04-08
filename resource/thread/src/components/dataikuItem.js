@@ -555,7 +555,7 @@ class DataikuItem extends Component {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                    <Dropdown.Item variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         }
