@@ -260,6 +260,7 @@ class DataikuItem extends Component {
                 id: this.props.item.definition.id,
                 applied_to: this.props.item.definition.applied_to
             },
+            newDefSelected: false,
             columnTags: tags,
             newDefModal: true
         })
