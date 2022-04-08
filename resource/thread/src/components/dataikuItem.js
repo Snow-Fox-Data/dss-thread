@@ -786,7 +786,7 @@ class DataikuItem extends Component {
                 <td>{Common.getIconForDataikuItemType('dataset', "16px")}
                     <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col.key)}>{col.key.split('|')[1]}</span></td>
                 <td>
-                    {col.total_columns} / {col.documented_columns}
+                    {col.total_columns} / {col.documented_columns} ({((col.documented_columns / col.total_columns).toFixed(2) * 100)})
                 </td>
             </tr>
         );
@@ -827,6 +827,7 @@ class DataikuItem extends Component {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Columns / Documented</th>
                                     </tr>
                                 </thead>
                                 <tbody>
