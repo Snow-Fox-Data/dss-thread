@@ -404,6 +404,9 @@ class DataikuItem extends Component {
                 <Modal.Body>
                     <Container>
                         <div style={{ paddingBottom: '10px' }}>Select the up and downstream datasets to apply this definition</div>
+                        
+                        {/* <Button onClick={()=>selectAllLineage()}>Select All</Button> */}
+
                         <span style={{ fontWeight: 'bold' }}>This Column</span>
                         <Form.Check className='lineage-check' disabled='true' checked='true' type='switch' id='this-cb' label={this.props.item.name}></Form.Check>
 
@@ -722,7 +725,7 @@ class DataikuItem extends Component {
                 <Col>
                     <h1>{this.props.item.id}<span style={{ paddingLeft: "6px", paddingBottom: "2px" }}><a href={Common.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={22} /></a></span></h1>
 
-                    <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                    <p>{this.props.item.ds_type} Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col sm>
