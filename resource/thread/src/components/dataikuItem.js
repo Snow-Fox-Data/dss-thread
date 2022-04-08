@@ -249,8 +249,9 @@ class DataikuItem extends Component {
     editDef() {
 
         let tags = [];
-        for (var x = 0; x < this.props.item.tags.length; x++) {
-            tags.push({ id: x, name: this.props.item.tags[x] })
+        let tag_def = eval(this.props.item.definition.tags);
+        for (var x = 0; x < tag_def.length; x++) {
+            tags.push({ id: x, name: tag_def[x] })
         }
         this.setState({
             tempSelDef: {
