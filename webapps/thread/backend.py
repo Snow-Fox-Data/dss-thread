@@ -564,10 +564,6 @@ class dss_utils:
         return proj_dataset
 
     def scan_server(self):
-
-        # root_folder = client.get_root_project_folder()
-        # dss_folders = root_folder.list_child_folders()
-        
         project_list = []
         index_list = []
         scan_obj = {}

@@ -315,13 +315,11 @@ class DataikuItem extends Component {
         let tags = [];
         if (this.props.item.definition.id > -1) {
             app_to = eval(this.props.item.definition.applied_to);
-            tags = eval(this.props.item.definition.tags);
         }
         this.setState({
             applyLineageModal: true,
             newDefModal: false,
-            applyToDataSets: app_to,
-            columnTags: tags
+            applyToDataSets: app_to
         })
     }
 
@@ -544,7 +542,7 @@ class DataikuItem extends Component {
                         {this.state.tempSelDef.id!=-1 &&
                             <div>
                                 <Button onClick={() => this.saveCol()}>Save Definition</Button>
-                                <Button onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
+                                <Button variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
                             </div>
                         }
                         {this.state.tempSelDef.id==-1 &&
@@ -555,7 +553,7 @@ class DataikuItem extends Component {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                    <Dropdown.Item variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         }
