@@ -333,7 +333,7 @@ class dss_utils:
     #     return exposed_ds
 
     def get_collection_stats(self):
-        ds = dataiku.Dataset(THREAD_INDEX_NAME)
+        ds = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
         col_ct = len(ds.query('object_type=="column"'))
         dataset_ct = len(ds.query('object_type=="dataset"'))
         project_ct = len(ds.query('object_type=="project"'))
