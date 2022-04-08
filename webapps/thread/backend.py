@@ -172,7 +172,7 @@ def update_desc():
 
     desc_txt = ''
     if 'description' in data and len(data['description']) > 0:
-        desc = data['description']
+        desc_txt = data['description']
 
     # remove old definition for this colimn
     if df is not None and ('column_key' in data):
