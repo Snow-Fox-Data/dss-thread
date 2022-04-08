@@ -725,7 +725,7 @@ class DataikuItem extends Component {
                     <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
-                <Col>
+                <Col sm>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
