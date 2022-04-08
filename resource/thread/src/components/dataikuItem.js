@@ -565,7 +565,7 @@ class DataikuItem extends Component {
                         <span style={{ padding: "0px 3px" }}>|</span>
                         <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
                     </p>
-                    <div>
+                    <div style={{ paddingTop: '3px' }}>
                         {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
                             <Button size="sm" variant="success">
                                 <div><FaThumbsUp></FaThumbsUp>
@@ -786,7 +786,7 @@ class DataikuItem extends Component {
                 <td>{Common.getIconForDataikuItemType('dataset', "16px")}
                     <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col.key)}>{col.key.split('|')[1]}</span></td>
                 <td>
-                    {col.total_columns} / {col.documented_columns} ({((col.documented_columns / col.total_columns).toFixed(2) * 100)}%)
+                    {col.documented_columns} / {col.total_columns} ({((col.documented_columns / col.total_columns).toFixed(2) * 100)}%)
                 </td>
             </tr>
         );
@@ -827,7 +827,7 @@ class DataikuItem extends Component {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Columns / Documented</th>
+                                        <th>Documented / Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>

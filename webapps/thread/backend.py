@@ -111,7 +111,11 @@ def load_item():
     idx_ds = dss.get_index_ds()
     df = idx_ds.get_dataframe()
 
-    res = df.query(f'key=="{key}"').iloc[0]
+    idx_df = df.query(f'key=="{key}"')
+    if len(idx_df) == 0:
+        logging.info(f'{key} not found')
+        
+    res = idx_df.iloc[0]
     if res['object_type'] == 'dataset':
         ds = dss.load_dataset(key, 'none')
         ds['object_type'] = 'dataset'
