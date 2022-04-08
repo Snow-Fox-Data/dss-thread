@@ -612,6 +612,7 @@ class dss_utils:
         for proj in dss_projects:
             scan_obj[proj] = {}
             project = self.client.get_project(proj)
+            proj_meta = project.get_metadata()
             
             datasets = project.list_datasets()
             recipes = project.list_recipes()
@@ -625,7 +626,7 @@ class dss_utils:
                 "name": proj.replace('|', ' | '), 
                 "object_type": "project",
                 "key": proj,
-                "description": proj.replace('|', ' | ')
+                "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
             })
 
             for dataset in datasets:

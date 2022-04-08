@@ -694,6 +694,9 @@ class DataikuItem extends Component {
                     <p>Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
+                <Col>
+                    {this.props.item.total_cols_def} / {this.props.item.total_cols} documented ({this.props.item.total_cols_def / this.props.item.total_cols}%)
+                </Col>
             </Row>
 
             <Row style={{ paddingTop: '20px' }}>
@@ -750,7 +753,7 @@ class DataikuItem extends Component {
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.name}<span style={{ paddingLeft: "6px", paddingBottom: "2px" }}>
+                    <h1>{this.props.item.name} ({this.props.item.projectKey})<span style={{ paddingLeft: "6px", paddingBottom: "2px" }}>
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
                     </span>
                     </h1>
