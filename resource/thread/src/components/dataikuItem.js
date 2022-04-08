@@ -803,7 +803,7 @@ class DataikuItem extends Component {
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
                     </span>
                     </h1>
-                    <h2>{this.props.item.projectKey}</h2>
+                    <h3>({this.props.item.projectKey})</h3>
                     <p>Project<span style={{ paddingLeft: '4px' }}>
                         in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
