@@ -491,6 +491,7 @@ class DataikuItem extends Component {
                                                         <ReactTags
                                                             tags={this.state.columnTags}
                                                             allowNew='true'
+                                                            minQueryLength='1'
                                                             suggestions={this.state.columnTagSuggestions}
                                                             onDelete={(i) => onDelete(i)}
                                                             onAddition={(tag) => onAddition(tag)} />
