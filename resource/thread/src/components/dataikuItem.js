@@ -784,7 +784,10 @@ class DataikuItem extends Component {
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
                 <td>{Common.getIconForDataikuItemType('dataset', "16px")}
-                    <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col)}>{col.split('|')[1]}</span></td>
+                    <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col.key)}>{col.key.split('|')[1]}</span></td>
+                <td>
+                    {col.total_columns} / {col.documented_columns}
+                </td>
             </tr>
         );
 
