@@ -94,6 +94,7 @@ class DataikuItem extends Component {
             .then(
                 (result) => {
                     this.props.item.definition = result.value;
+                    this.props.item.comment = result.value.description;
 
                     this.setState({
                         newDefModal: false
@@ -573,7 +574,7 @@ class DataikuItem extends Component {
                             <Card.Header>
                                 Documentation Status
                             </Card.Header>
-                            <Card.Body style={{ fontSize: '20px', textAlign: 'center' }}>
+                            <Card.Body style={{ fontSize: '22px', textAlign: 'center' }}>
                                 {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
                                     <Badge bg="success" >
                                         <div><FaThumbsUp></FaThumbsUp>
