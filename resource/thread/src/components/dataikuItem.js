@@ -731,15 +731,16 @@ class DataikuItem extends Component {
 
     createDocPctCard(total_cols, documented_cols) {
         return <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
             <Card.Body>
                 <Card.Title> <Badge bg="secondary">
-                    <h1>({(documented_cols / total_cols).toFixed(2) * 100}%)</h1>
-
+                    <div style={{ textAlign:"center", fontSize:"50px" }}>{(documented_cols / total_cols).toFixed(2) * 100}%
+                    </div>
                 </Badge>
                 </Card.Title>
                 <Card.Text>
-                    {documented_cols} / {total_cols} columns documented
+                    <div style={{ textAlign:"center", fontSize:"20px" }}>
+                        {documented_cols} / {total_cols} columns documented
+                    </div>
                 </Card.Text>
             </Card.Body>
         </Card>
