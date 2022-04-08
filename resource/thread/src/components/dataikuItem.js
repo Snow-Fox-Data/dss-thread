@@ -543,8 +543,8 @@ class DataikuItem extends Component {
                     <Col ms-auto>
                         {this.state.tempSelDef.id != -1 &&
                             <div>
-                                <Button onClick={() => this.saveCol()}>Save Definition</Button>
                                 <Button variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
+                                <Button onClick={() => this.saveCol()}>Save Definition</Button>
                             </div>
                         }
                         {this.state.tempSelDef.id == -1 &&
