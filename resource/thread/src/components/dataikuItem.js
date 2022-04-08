@@ -565,16 +565,19 @@ class DataikuItem extends Component {
                         <span style={{ padding: "0px 3px" }}>|</span>
                         <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
                     </p>
-                    <div style={{ paddingTop: '3px' }}>
+
+                </Col>
+                <Col>
+                    <div className="float-end">
                         {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
-                            <Button size="sm" variant="success">
+                            <Button variant="success">
                                 <div><FaThumbsUp></FaThumbsUp>
                                     <span style={{ paddingLeft: '4px' }}>Documented</span>
                                 </div>
                             </Button>
                         }
                         {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
-                            <Button size="sm" variant="danger">
+                            <Button variant="danger">
                                 <div>
                                     Undocumented
                                 </div>
