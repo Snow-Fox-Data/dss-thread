@@ -390,9 +390,11 @@ class dss_utils:
         p = self.client.get_project(p_name)
         d = p.get_dataset(d_name)
         tags = d.get_metadata()['tags']         
+        ds_type = d.get_settings().get_raw()['type']
 
         res = {
             "object_type": 'dataset',
+            "ds_type": ds_type,
             "tags": tags,
             "schema": schema,
             "name": ds.full_name,
