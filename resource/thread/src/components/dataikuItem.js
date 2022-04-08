@@ -541,18 +541,24 @@ class DataikuItem extends Component {
                         <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                     </Col>
                     <Col ms-auto>
-                        <Dropdown >
-                            <Dropdown.Toggle id="dropdown-basic">
-                                Save and Apply
-                            </Dropdown.Toggle>
+                        {!this.state.newDefSelected &&
+                            <div>
+                                <Button onClick={() => this.saveCol()}>Save Definition</Button>
+                                <Button onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
+                            </div>
+                        }
+                        {this.state.newDefSelected &&
+                            <Dropdown >
+                                <Dropdown.Toggle id="dropdown-basic">
+                                    Save and Apply
+                                </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        {/* <Button variant="outline-primary" onClick={() => this.showLineageSelection()}>Apply to Lineage</Button>
-                        <Button disabled={!this.state.newDefSelected} variant="primary" onClick={() => this.saveCol()}>Apply</Button> */}
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        }
                     </Col>
                 </Modal.Footer>
             </Modal>
