@@ -69,6 +69,11 @@ class DataikuItem extends Component {
             return;
         }
 
+        var tagList = [];
+        for (var x = 0; x < this.state.defTags.length; x++) {
+            tagList = this.state.defTags[x].name;
+        }
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -81,7 +86,7 @@ class DataikuItem extends Component {
                 "applied_to": applyTo,
                 "id": this.state.tempSelDef.id,
                 "column_key": this.props.item.key,
-                "tags": this.state.defTags
+                "tags": tagList
             })
         }
 

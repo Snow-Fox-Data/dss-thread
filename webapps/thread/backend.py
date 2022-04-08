@@ -141,7 +141,7 @@ def load_item():
                     
                 return col
             if res['object_type'] == 'definition':
-                logging.info(f'searching for definition key: {key}')
+                # logging.info(f'searching for definition key: {key}')
                 df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                 df['object_type'] = 'definition'
                 res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
@@ -167,6 +167,7 @@ def update_desc():
     
     data = request.json
     desc_id = int(data['id'])
+    tags = json.dumps(data['tags'])
     
     applied_to_json = json.dumps(data['applied_to'])
 
@@ -190,7 +191,8 @@ def update_desc():
             "description": desc_txt,
             "applied_to": applied_to_json,
             "sources": [],
-            "destinations":[]
+            "destinations":[],
+            "tags": tags
         }
 
         if exists:
@@ -202,7 +204,8 @@ def update_desc():
                 "name": data['name'],
                 "description": data['name'] + ' | ' + desc_txt,
                 "object_type": "definition",
-                "key": new_id
+                "key": new_id,
+                "tags":tags
             }])
 
         # todo: really don't like reading this whole dataset
@@ -218,7 +221,8 @@ def update_desc():
             "description": desc_txt,
             "applied_to": applied_to_json,
             "sources": [],
-            "destinations":[]
+            "destinations":[],
+            "tags": tags
         }
 
         df.loc[df['id']==desc_id, 'name'] = desc['name']
