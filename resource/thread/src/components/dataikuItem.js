@@ -725,7 +725,7 @@ class DataikuItem extends Component {
                 <Col>
                     <h1>{this.props.item.id}<span style={{ paddingLeft: "6px", paddingBottom: "2px" }}><a href={Common.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={22} /></a></span></h1>
 
-                    <p>{this.props.item.ds_type} Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                    <p><span style={{fontWeight:'bold'}}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col sm>
