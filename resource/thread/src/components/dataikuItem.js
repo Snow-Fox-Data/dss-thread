@@ -30,8 +30,8 @@ class DataikuItem extends Component {
             applyToDataSets: [],
             dssSrc: '',
             defTags: [
-                { id: 1, name: "PII Data" },
-                { id: 2, name: "Sales Forecasts" }
+                // { id: 1, name: "PII Data" },
+                // { id: 2, name: "Sales Forecasts" }
             ],
             defSuggestions: [
             ]
