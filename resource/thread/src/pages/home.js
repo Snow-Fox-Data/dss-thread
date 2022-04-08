@@ -219,6 +219,16 @@ class Home extends Component {
     renderMenuItemChildren(option, props) {
         return <Fragment>
 
+            {this.state.loading &&
+                <Row>
+                    <div style={{ padding: '10px' }}>
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+                </Row>
+            }
+
             <span style={{ paddingRight: '5px' }}>
                 {Common.getIconForDataikuItemType(option.object_type, '13px')}
             </span>
@@ -285,7 +295,7 @@ class Home extends Component {
                             </Spinner>
                         </div>
                     </Row>
-                : null}
+                    : null}
 
                 <Row>
                     <Col>
