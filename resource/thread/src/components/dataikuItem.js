@@ -497,18 +497,21 @@ class DataikuItem extends Component {
                                                     <div>
                                                         <ReactTags
                                                             tags={this.state.defTags}
-                                                            suggestions={this.state.defSuggestions}
+                                                            allowNew='true'
+                                                            // suggestions={this.state.defSuggestions}
                                                             onDelete={(i) => onDelete(i)}
                                                             onAddition={(tag) => onAddition(tag)} />
                                                     </div>
                                                 </div>
-                                                <Form.Label>Description</Form.Label>
-                                                <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
-                                                    onChange={e => this.state.tempSelDef.description = e.target.value}
-                                                />
-                                                <Form.Text className="text-muted">
-                                                    Will appear in the Dataiku Dataset's column description.
-                                                </Form.Text>
+                                                <div style={{ padding: "10px 0px" }}>
+                                                    <Form.Label>Description</Form.Label>
+                                                    <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
+                                                        onChange={e => this.state.tempSelDef.description = e.target.value}
+                                                    />
+                                                    <Form.Text className="text-muted">
+                                                        Will appear in the Dataiku Dataset's column description.
+                                                    </Form.Text>
+                                                </div>F
                                             </Form.Group>
                                         </Form>
                                     </div>
