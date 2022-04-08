@@ -36,12 +36,22 @@ def get_user():
     # else:
     
     if 'authIdentifier' in auth_info:
-        data = {"status": "ok", "you_are": auth_info["authIdentifier"]}
+        dss = dss_utils()
+        res = dss.get_collection_stats()
+
+        data = {"status": "ok", "you_are": auth_info["authIdentifier"], "stats": res}
     else:
         data = {"status": "denied", "you_are": 'not logged in'}
 
     return json.dumps(data)
 
+# @app.route('/collection-stats', methods=['GET'])
+# def collection_stats():
+#     dss = dss_utils()
+    
+#     res = dss.get_collection_stats()
+
+#     return json.dumps(res)
 
 @app.route('/init', methods=['GET'])
 def init():
@@ -114,7 +124,7 @@ def load_item():
     idx_df = df.query(f'key=="{key}"')
     if len(idx_df) == 0:
         logging.info(f'{key} not found')
-        
+
     res = idx_df.iloc[0]
     if res['object_type'] == 'dataset':
         ds = dss.load_dataset(key, 'none')
@@ -321,6 +331,14 @@ class dss_utils:
     #             exposed_ds[name] = shares
 
     #     return exposed_ds
+
+    def get_collection_stats(self):
+        ds = dataiku.Dataset(THREAD_INDEX_NAME)
+        col_ct = len(ds.query('object_type=="column"'))
+        dataset_ct = len(ds.query('object_type=="dataset"'))
+        project_ct = len(ds.query('object_type=="project"'))
+
+        return { "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct}
 
     def load_project(self, key):
         proj = self.client.get_project(key)
