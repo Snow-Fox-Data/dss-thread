@@ -270,10 +270,10 @@ class Home extends Component {
     }
 
     collectionStats() {
-        return <div>
-            <h1>{this.state.collectionStats.project_count} Projects</h1>
-            <h1>{this.state.collectionStats.dataset_count} Datasets</h1>
-            <h1>{this.state.collectionStats.column_count} Columns</h1>
+        return <div style={{padding:'20px'}}>
+            <h1><span style={{color:'red'}}>{this.state.collectionStats.project_ct}</span> Projects</h1>
+            <h1><span style={{color:'red'}}>{this.state.collectionStats.dataset_ct}</span> Datasets</h1>
+            <h1><span style={{color:'red'}}>{this.state.collectionStats.column_ct}</span> Columns</h1>
         </div>
     }
 
