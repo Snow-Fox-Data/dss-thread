@@ -563,18 +563,20 @@ class DataikuItem extends Component {
                     </p>
                 </Col>
                 <Col>
-                    {this.props.item.definition.id > -1 &&
-                        <Badge bg="success">
-                            <div style={{ fontSize: "50px" }}>Documented
-                            </div>
-                        </Badge>
-                    }
-                    {this.props.item.definition.id == -1 &&
-                        <Badge bg="warning">
-                            <div style={{ fontSize: "50px" }}>Undocumented
-                            </div>
-                        </Badge>
-                    }
+                    <div className="float-end">
+                        {this.props.item.comment > -1 &&
+                            <Badge bg="success">
+                                <div style={{ fontSize: "30px" }}>Documented
+                                </div>
+                            </Badge>
+                        }
+                        {this.props.item.definition.id == -1 &&
+                            <Badge bg="danger">
+                                <div style={{ fontSize: "30px" }}>Undocumented
+                                </div>
+                            </Badge>
+                        }
+                    </div>
                 </Col>
             </Row>
             <Row>
