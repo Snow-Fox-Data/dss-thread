@@ -59,6 +59,19 @@ def scan():
 
     return json.dumps({"result": "scan complete"})
 
+@app.route('/tag-list', methods=['GET'])
+def tag_list():
+    df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+
+    tags = []
+    for idx, row in df.iterrows():
+        row_tags = json.loads(row['tags'])
+        for t in row_tags:
+            if not t in tags:
+                tags.append(t)
+
+    return json.dumps(tags)
+
 @app.route('/def-search', methods=['GET'])
 def defintition_list():
     args = request.args
