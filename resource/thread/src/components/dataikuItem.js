@@ -11,8 +11,9 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags } from "react-icons/fa";
-import { Editor, EditorState } from "draft-js";
-import "draft-js/dist/Draft.css";
+import ReactDOM from 'react-dom';
+import { Editor, EditorState } from 'draft-js';
+import 'draft-js/dist/Draft.css';
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -344,14 +345,11 @@ class DataikuItem extends Component {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
 
-        const [editorState, setEditorState] = React.useState(() =>
+        const [editorState] = React.useState(() =>
             EditorState.createEmpty()
         );
 
-        const editor = React.useRef(null);
-        function focusEditor() {
-            editor.current.focus();
-        }
+        this.onChange = editorState => this.setState({ editorState });
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
@@ -496,16 +494,8 @@ class DataikuItem extends Component {
                                                 <Form.Text className="text-muted">
                                                     Will appear in the Dataiku Dataset's column description.
                                                 </Form.Text> */}
-                                                <div
-                                                    style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
-                                                    onClick={focusEditor}
-                                                >
-                                                    <Editor
-                                                        ref={editor}
-                                                        editorState={editorState}
-                                                        onChange={setEditorState}
-                                                        placeholder="Write something!"
-                                                    />
+                                                <div>
+                                                    <Editor editorState={this.state.editorState} onChange={this.onChange} />
                                                 </div>
                                             </Form.Group>
                                         </Form>
