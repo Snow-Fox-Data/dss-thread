@@ -61,16 +61,9 @@ def scan():
 
 @app.route('/tag-list', methods=['GET'])
 def tag_list():
-    df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+    dss = dss_utils()
 
-    tags = []
-    for idx, row in df.iterrows():
-        row_tags = json.loads(row['tags'])
-        for t in row_tags:
-            if not t in tags:
-                tags.append(t)
-
-    return json.dumps(tags)
+    return json.dumps(dss.get_tag_list())
 
 @app.route('/def-search', methods=['GET'])
 def defintition_list():
@@ -148,6 +141,7 @@ def load_item():
                 col['dataset'] = d_name
                 col['definition'] = { "id": -1}
                 col['object_type'] = 'column'
+                col['tag_list'] = dss.get_tag_list()
 
                 if len(def_df) > 0:
                     col['definition'] = def_df.to_dict('records')[0]
@@ -448,6 +442,18 @@ class dss_utils:
             return []
 
         return refs
+
+    def get_tag_list(self):
+        df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+
+        tags = []
+        for idx, row in df.iterrows():
+            row_tags = json.loads(row['tags'])
+            for t in row_tags:
+                if not t in tags:
+                    tags.append(t)
+
+        return tags
 
     def get_ds_by_name(self, name, all_projects, p_name=None):
         # logging.info(name)
