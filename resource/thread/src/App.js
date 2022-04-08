@@ -37,7 +37,7 @@ class App extends Component {
             dataiku: undefined,
             currentUser: '',
             loading: true,
-            loggedIn: false
+            loggedIn: null
         }
 
         console.log("window.location.href == " + window.location.href);
@@ -103,7 +103,7 @@ class App extends Component {
 
         return (
             <Container style={{ paddingTop: '10px' }}>
-                {!this.state.loggedIn &&
+                {this.state.loggedIn != null && this.state.loggedIn === false &&
                     <div>Unauthorized</div>
                 }
                 <div hidden={!this.state.loggedIn}>
