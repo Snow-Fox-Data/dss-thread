@@ -28,7 +28,17 @@ class DataikuItem extends Component {
             isLineageVisible: false,
             applyLineageModal: false,
             applyToDataSets: [],
-            dssSrc: ''
+            dssSrc: '',
+            tags: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Pears" }
+            ],
+            suggestions: [
+                { id: 3, name: "Bananas" },
+                { id: 4, name: "Mangos" },
+                { id: 5, name: "Lemons" },
+                { id: 6, name: "Apricots" }
+            ]
         };
     }
 
@@ -343,19 +353,6 @@ class DataikuItem extends Component {
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
-
-        this.setState({
-            tags: [
-                { id: 1, name: "Apples" },
-                { id: 2, name: "Pears" }
-            ],
-            suggestions: [
-                { id: 3, name: "Bananas" },
-                { id: 4, name: "Mangos" },
-                { id: 5, name: "Lemons" },
-                { id: 6, name: "Apricots" }
-            ]
-        });
 
         const onDelete = (i) => {
             const tags = this.state.tags.slice(0)
