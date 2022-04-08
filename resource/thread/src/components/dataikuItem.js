@@ -564,13 +564,13 @@ class DataikuItem extends Component {
                 </Col>
                 <Col>
                     <div className="float-end">
-                        {this.props.item.comment > -1 &&
+                        {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
                             <Badge bg="success">
                                 <div style={{ fontSize: "30px" }}>Documented
                                 </div>
                             </Badge>
                         }
-                        {this.props.item.definition.id == -1 &&
+                        {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
                             <Badge bg="danger">
                                 <div style={{ fontSize: "30px" }}>Undocumented
                                 </div>
