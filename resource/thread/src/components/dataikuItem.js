@@ -29,10 +29,6 @@ class DataikuItem extends Component {
             applyLineageModal: false,
             applyToDataSets: [],
             dssSrc: '',
-            defTags: [
-                // { id: 1, name: "PII Data" },
-                // { id: 2, name: "Sales Forecasts" }
-            ],
             defSuggestions: [
             ]
         };
@@ -70,8 +66,8 @@ class DataikuItem extends Component {
         }
 
         var tagList = [];
-        for (var x = 0; x < this.state.defTags.length; x++) {
-            tagList.push(this.state.defTags[x].name);
+        for (var x = 0; x < this.state.tempSelDef.tags.length; x++) {
+            tagList.push(this.state.tempSelDef.tags[x].name);
         }
 
         const requestOptions = {
@@ -319,8 +315,7 @@ class DataikuItem extends Component {
         this.setState({
             applyLineageModal: true,
             newDefModal: false,
-            applyToDataSets: app_to,
-            defTags: tags
+            applyToDataSets: app_to
         })
     }
 
@@ -342,9 +337,9 @@ class DataikuItem extends Component {
                     name: this.props.item.name,
                     description: this.props.item.comment,
                     applied_to: [],
-                    id: -1
-                },
-                defTags: []
+                    id: -1,
+                    tags:[]
+                }
             })
         }
         else {
@@ -353,9 +348,9 @@ class DataikuItem extends Component {
                     name: this.props.item.definition.name,
                     applied_to: this.props.item.definition.applied_to,
                     description: this.props.item.definition.description,
-                    id: this.props.item.definition.id
+                    id: this.props.item.definition.id,
+                    tags: this.props.item.definition.tags
                 },
-                defTags: this.props.item.definition.tags
             })
         }
     }
@@ -509,7 +504,7 @@ class DataikuItem extends Component {
                                                     <Form.Label>Tags</Form.Label>
                                                     <div>
                                                         <ReactTags
-                                                            tags={this.state.defTags}
+                                                            tags={this.state.tempSelDef.tags}
                                                             allowNew='true'
                                                             // suggestions={this.state.defSuggestions}
                                                             onDelete={(i) => onDelete(i)}
