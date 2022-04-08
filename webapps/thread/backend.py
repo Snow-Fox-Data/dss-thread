@@ -393,7 +393,7 @@ class dss_utils:
         total_ct = 0
         total_documented = 0
         for d in datasets:
-            tot, doced = self.calc_dataset_def_ct(proj_name + '|' + d['id'])
+            tot, doced = self.calc_dataset_def_ct(proj_name + '|' + d.id)
             total_ct += tot
             total_documented += doced
 
