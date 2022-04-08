@@ -213,7 +213,7 @@ class Home extends Component {
 
     navToObject(obj) {
         let base_url = window.top.location.href.split('#')[0]
-        window.top.location.href = base_url + "#o=" + obj
+        window.top.location.href = base_url + "#o=" + encodeURIComponent(obj);
     }
 
     renderMenuItemChildren(option, props) {
