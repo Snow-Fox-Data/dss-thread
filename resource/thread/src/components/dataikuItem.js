@@ -12,6 +12,8 @@ import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags } from "react-icons/fa";
 
+const ReactTags = require('react-tag-autocomplete')
+
 class DataikuItem extends Component {
     constructor(props) {
         super(props);
@@ -342,6 +344,30 @@ class DataikuItem extends Component {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
 
+        this.setState({
+            tags: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Pears" }
+            ],
+            suggestions: [
+                { id: 3, name: "Bananas" },
+                { id: 4, name: "Mangos" },
+                { id: 5, name: "Lemons" },
+                { id: 6, name: "Apricots" }
+            ]
+        });
+
+        const onDelete = (i) => {
+            const tags = this.state.tags.slice(0)
+            tags.splice(i, 1)
+            this.setState({ tags })
+        }
+
+        const onAddition = (tag) => {
+            const tags = [].concat(this.state.tags, tag)
+            this.setState({ tags })
+        }
+
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => {
@@ -476,6 +502,13 @@ class DataikuItem extends Component {
                                                     <Form.Label>Tags</Form.Label>
                                                     <div style={{ padding: '5px' }}>
                                                         {this.buildTagsString(['PII Data', 'Sales'], 'light', false)}
+                                                    </div>
+                                                    <div>
+                                                        <ReactTags
+                                                            tags={this.state.tags}
+                                                            suggestions={this.state.suggestions}
+                                                            onDelete={this.onDelete.bind(this)}
+                                                            onAddition={this.onAddition.bind(this)} />
                                                     </div>
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
