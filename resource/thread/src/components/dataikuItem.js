@@ -71,7 +71,7 @@ class DataikuItem extends Component {
 
         var tagList = [];
         for (var x = 0; x < this.state.defTags.length; x++) {
-            tagList.append(this.state.defTags[x].name);
+            tagList.push(this.state.defTags[x].name);
         }
 
         const requestOptions = {
