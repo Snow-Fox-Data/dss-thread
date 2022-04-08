@@ -776,7 +776,7 @@ class DataikuItem extends Component {
 
         return <Card style={{ width: '15rem' }} className="float-end">
             <Card.Header>
-                Documentation Stats
+                Documentation Status
             </Card.Header>
             <Card.Body>
                 <Card.Title>
@@ -844,7 +844,7 @@ class DataikuItem extends Component {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Documentation Stats</th>
+                                        <th>Documentation Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
