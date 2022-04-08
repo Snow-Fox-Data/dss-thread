@@ -537,8 +537,14 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Col style={{ textAlign: "left" }}>
-                        <Button disabled={this.state.newDefSelected || this.state.tempSelDef.id==-1} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
-                        <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
+                        <Button disabled={this.state.tempSelDef.id == -1} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
+
+                        {this.state.newDefSelected &&
+                            <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
+                        }
+                        {!this.state.newDefSelected &&
+                            <Button variant="link" onClick={() => this.toggleNew(true)}>Exit Search</Button>
+                        }
                     </Col>
                     <Col ms-auto>
                         {this.state.tempSelDef.id != -1 &&
