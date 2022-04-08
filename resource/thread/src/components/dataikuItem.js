@@ -764,10 +764,10 @@ class DataikuItem extends Component {
         }
 
         return <Card style={{ width: '15rem' }} className="float-end">
+            <Card.Header>
+                Documentation Stats
+            </Card.Header>
             <Card.Body>
-                <Card.Header>
-                    Documentation Stats
-                </Card.Header>
                 <Card.Title>
                     <div style={{ textAlign: "center" }}>
                         <Badge bg={bg}>
