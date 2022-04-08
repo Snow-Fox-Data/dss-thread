@@ -442,7 +442,7 @@ class DataikuItem extends Component {
             </Modal>
             <Modal size="xl" show={this.state.newDefModal} animation={false} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Apply Definition</Modal.Title>
+                    <Modal.Title>Apply Definition to column {this.props.item.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
