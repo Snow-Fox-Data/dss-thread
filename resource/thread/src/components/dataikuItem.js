@@ -571,22 +571,22 @@ class DataikuItem extends Component {
                     <div className="float-end">
                         <Card>
                             <Card.Header>
-                                Documentation Stats
+                                Documentation Status
                             </Card.Header>
                             <Card.Body>
                                 {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
-                                    <Button variant="success">
+                                    <Badge bg="success">
                                         <div><FaThumbsUp></FaThumbsUp>
                                             <span style={{ paddingLeft: '4px' }}>Documented</span>
                                         </div>
-                                    </Button>
+                                    </Badge>
                                 }
                                 {((this.props.item.comment == null || this.props.item.comment.length == 0) && this.props.item.definition.id == -1) &&
-                                    <Button variant="danger">
+                                    <Badge bg="danger">
                                         <div>
                                             Undocumented
                                         </div>
-                                    </Button>
+                                    </Badge>
                                 }
                             </Card.Body>
                         </Card>
