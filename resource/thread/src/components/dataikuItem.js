@@ -765,6 +765,9 @@ class DataikuItem extends Component {
 
         return <Card style={{ width: '16rem' }} className="float-end">
             <Card.Body>
+                <Card.Header>
+                    Documentation Stats
+                </Card.Header>
                 <Card.Title>
                     <div style={{ textAlign: "center" }}>
                         <Badge bg={bg}>
@@ -775,7 +778,7 @@ class DataikuItem extends Component {
                 </Card.Title>
                 <Card.Text>
                     <div style={{ textAlign: "center", fontSize: "15px" }}>
-                        {documented_cols} / {total_cols} columns<br />documented
+                        {documented_cols} / {total_cols} columns
                     </div>
                 </Card.Text>
             </Card.Body>
