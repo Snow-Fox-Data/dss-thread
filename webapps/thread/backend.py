@@ -116,6 +116,10 @@ def load_item():
         ds = dss.load_dataset(key, 'none')
         ds['object_type'] = 'dataset'
 
+        col_ct, col_def = dss.calc_dataset_def_ct(key)
+        ds['total_cols'] = col_ct
+        ds['total_cols_def'] = col_def
+
         return json.dumps(ds)
     else:
         if res['object_type'] == 'project':
@@ -378,6 +382,23 @@ class dss_utils:
         df['applied_to'] = df['applied_to'].replace({f'["{col_name}"\'],': ''}).replace({f'["{col_name}"]': ''})  
 
         return df
+
+    def calc_dataset_def_ct(self, dataset_name):
+        p, d, c = self.extract_name_project(dataset_name)
+        p = self.client.get_project(p)
+        ds = p.get_dataset(d)
+        ds_schema = ds.get_schema()
+        
+        total_ct = len(ds_schema['columns'])
+        defined_ct = 0
+        for z in ds_schema['columns']: 
+            df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+            search_key = re.escape(dataset_name + '|' + z['name'])
+            def_df = df[df['applied_to'].str.contains(search_key, case=False, na=False)].fillna('')  
+            if len(def_df) > 0:
+                defined_ct = defined_ct + 1
+
+        return total_ct, defined_ct
 
     def update_column_description(self, column_array, description):
         if type(column_array)==str:
