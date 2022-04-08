@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState, useRef } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Common from "../common/common";
 import Table from 'react-bootstrap/Table';
@@ -11,7 +11,6 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags } from "react-icons/fa";
-import { Editor } from '@tinymce/tinymce-react';
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -343,8 +342,6 @@ class DataikuItem extends Component {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
 
-        const editorRef = useRef(null);
-
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => {
@@ -386,7 +383,7 @@ class DataikuItem extends Component {
         });
 
         return <Col>
-            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
+            <Modal size="sm" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition To Lineage</Modal.Title>
                 </Modal.Header>
@@ -482,32 +479,12 @@ class DataikuItem extends Component {
                                                     </div>
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
-                                                {/* <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
+                                                <Form.Control as="textarea" rows="3" defaultValue={this.state.tempSelDef.description}
                                                     onChange={e => this.state.tempSelDef.description = e.target.value}
                                                 />
                                                 <Form.Text className="text-muted">
                                                     Will appear in the Dataiku Dataset's column description.
-                                                </Form.Text> */}
-                                                <div>
-                                                    <Editor
-                                                    onInit={(evt, editor) => editorRef.current = editor}
-                                                    initialValue="<p>This is the initial content of the editor.</p>"
-                                                    init={{
-                                                        height: 500,
-                                                        menubar: false,
-                                                        plugins: [
-                                                            'advlist autolink lists link image charmap print preview anchor',
-                                                            'searchreplace visualblocks code fullscreen',
-                                                            'insertdatetime media table paste code help wordcount'
-                                                        ],
-                                                        toolbar: 'undo redo | formatselect | ' +
-                                                            'bold italic backcolor | alignleft aligncenter ' +
-                                                            'alignright alignjustify | bullist numlist outdent indent | ' +
-                                                            'removeformat | help',
-                                                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                                                    }}
-       />
-                                                </div>
+                                                </Form.Text>
                                             </Form.Group>
                                         </Form>
                                     </div>
