@@ -746,12 +746,22 @@ class DataikuItem extends Component {
     }
 
     createDocPctCard(total_cols, documented_cols) {
+        var pct = (documented_cols / total_cols).toFixed(2) * 100;
+
+        var bg = "secondary";
+        if (pct > 80)
+            bg = "success";
+        else {
+            if (pct < 40)
+                bg = "danger"
+        }
+
         return <Card style={{ width: '16rem' }} className="float-end">
             <Card.Body>
                 <Card.Title>
                     <div style={{ textAlign: "center" }}>
-                        <Badge bg="secondary">
-                            <div style={{ fontSize: "50px" }}>{(documented_cols / total_cols).toFixed(2) * 100}%
+                        <Badge bg={bg}>
+                            <div style={{ fontSize: "50px" }}>{pct}%
                             </div>
                         </Badge>
                     </div>
