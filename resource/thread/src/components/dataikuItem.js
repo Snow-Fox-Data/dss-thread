@@ -71,7 +71,7 @@ class DataikuItem extends Component {
 
         var tagList = [];
         for (var x = 0; x < this.state.defTags.length; x++) {
-            tagList = this.state.defTags[x].name;
+            tagList.append(this.state.defTags[x].name);
         }
 
         const requestOptions = {
@@ -516,7 +516,7 @@ class DataikuItem extends Component {
                                                     <Form.Text className="text-muted">
                                                         Will appear in the Dataiku Dataset's column description.
                                                     </Form.Text>
-                                                </div>F
+                                                </div>
                                             </Form.Group>
                                         </Form>
                                     </div>
