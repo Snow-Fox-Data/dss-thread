@@ -489,6 +489,10 @@ class DataikuItem extends Component {
                                                 </Form.Text>
 
                                                 <Editor
+                                                    toolbar={
+                                                        { options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'link'] }
+                                                    }
+                                                    defaultEditorState={this.state.tempSelDef.description}
                                                     editorState={editorState}
                                                     toolbarClassName="toolbarClassName"
                                                     wrapperClassName="wrapperClassName"
