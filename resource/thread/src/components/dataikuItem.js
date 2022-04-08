@@ -541,7 +541,7 @@ class DataikuItem extends Component {
                         <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                     </Col>
                     <Col ms-auto>
-                        {!this.state.tempSelDef.id==-1 &&
+                        {this.state.tempSelDef.id!=-1 &&
                             <div>
                                 <Button onClick={() => this.saveCol()}>Save Definition</Button>
                                 <Button onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
