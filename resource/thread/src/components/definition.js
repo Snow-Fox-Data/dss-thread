@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import Common from "../common/common";
-
+import { Modal, Button, Form, Toast, ButtonGroup, Dropdown } from "react-bootstrap";
+import { FaTags } from "react-icons/fa";
 
 class Definition extends Component {
 
@@ -9,7 +10,30 @@ class Definition extends Component {
         super(props);
     }
 
+    buildTagsString(arrayTags, variant = "primary", link = true) {
+        if (arrayTags == null)
+            return;
+
+        let tags = [];
+
+        arrayTags.forEach(element => {
+            if (link) {
+                tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
+                    {element}
+                </Button>
+            }
+            else
+                tags[tags.length] = <Button style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
+                    <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{element}</span>
+                </Button>
+
+        });
+
+        return tags;
+    }
+
     render() {
+
         return (<Card style={{ width: '30rem' }}>
             <Card.Header>Definition: {this.props.definition.name}</Card.Header>
             <Card.Body>
@@ -25,6 +49,9 @@ class Definition extends Component {
                     </h5>
                     <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.name}
+                    </div>
+                    <div style={{ paddingBottom: "10px" }}>
+                        {this.buildTagsString(eval(this.props.definition.tags), 'light', false)}
                     </div>
                     <h5>
                         Description
