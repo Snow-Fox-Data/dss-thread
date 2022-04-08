@@ -507,8 +507,8 @@ class DataikuItem extends Component {
                                                         <ReactTags
                                                             tags={this.state.tags}
                                                             suggestions={this.state.suggestions}
-                                                            onDelete={this.onDelete.bind(this)}
-                                                            onAddition={this.onAddition.bind(this)} />
+                                                            onDelete={(i) => onDelete(i)}
+                                                            onAddition={(tag) => onAddition(tag)} />
                                                     </div>
                                                 </div>
                                                 <Form.Label>Description</Form.Label>
