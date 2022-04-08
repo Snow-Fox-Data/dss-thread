@@ -260,7 +260,6 @@ class DataikuItem extends Component {
                 id: this.props.item.definition.id,
                 applied_to: this.props.item.definition.applied_to
             },
-            newDefSelected: false,
             columnTags: tags,
             newDefModal: true
         })
@@ -538,17 +537,17 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Col style={{ textAlign: "left" }}>
-                        <Button disabled={this.state.newDefSelected} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
+                        <Button disabled={this.state.tempSelDef.id==-1} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
                         <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                     </Col>
                     <Col ms-auto>
-                        {!this.state.newDefSelected &&
+                        {!this.state.tempSelDef.id==-1 &&
                             <div>
                                 <Button onClick={() => this.saveCol()}>Save Definition</Button>
                                 <Button onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
                             </div>
                         }
-                        {this.state.newDefSelected &&
+                        {this.state.tempSelDef.id==-1 &&
                             <Dropdown >
                                 <Dropdown.Toggle id="dropdown-basic">
                                     Save and Apply
