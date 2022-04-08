@@ -184,8 +184,13 @@ class DataikuItem extends Component {
     componentDidMount() {
         switch (this.props.object_type) {
             case 'column':
-                // this.resetSelectedDef();
-                this.state.columnTagSuggestions = this.props.item.tag_list;
+                var tags = [];
+                for (var x = 0; x < this.props.item.tag_list.length; x++) {
+                    tags.push({ id: x, name: this.props.item.tag_list[x] })
+                }
+                this.setState({
+                    columnTagSuggestions:tags
+                })
                 break;
             case 'definition':
                 break;
