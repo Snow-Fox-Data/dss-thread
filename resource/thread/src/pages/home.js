@@ -27,7 +27,7 @@ class Home extends Component {
             selectedItemType: null,
             searchResults: [],
             loggedIn: false,
-            collectionStats:{}
+            collectionStats: {}
         }
     }
 
@@ -350,8 +350,12 @@ class Home extends Component {
                         </div>
                     </Row>
                     : null}
+
+                {selectedItem == null &&
+                    this.collectionStats()
+                }
                 <Row>
-                    {!loading ? this.dataikuItem : this.collectionStats()}
+                    {!loading ? this.dataikuItem : null}
                 </Row>
             </>
         );
