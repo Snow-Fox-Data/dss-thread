@@ -170,7 +170,7 @@ def update_desc():
     
     applied_to_json = json.dumps(data['applied_to'])
 
-    desc = ''
+    desc_txt = ''
     if 'description' in data and len(data['description']) > 0:
         desc = data['description']
 
@@ -187,7 +187,7 @@ def update_desc():
         desc = {
             "id": new_id,
             "name": data['name'],
-            "description": desc,
+            "description": desc_txt,
             "applied_to": applied_to_json,
             "sources": [],
             "destinations":[]
@@ -200,7 +200,7 @@ def update_desc():
 
         new_record = pd.DataFrame.from_dict([{
                 "name": data['name'],
-                "description": data['name'] + ' | ' + desc,
+                "description": data['name'] + ' | ' + desc_txt,
                 "object_type": "definition",
                 "key": new_id
             }])
@@ -215,7 +215,7 @@ def update_desc():
         desc = {
             "id": desc_id,
             "name": data['name'],
-            "description": desc,
+            "description": desc_txt,
             "applied_to": applied_to_json,
             "sources": [],
             "destinations":[]
