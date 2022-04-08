@@ -763,7 +763,7 @@ class DataikuItem extends Component {
                 bg = "danger"
         }
 
-        return <Card style={{ width: '16rem' }} className="float-end">
+        return <Card style={{ width: '15rem' }} className="float-end">
             <Card.Body>
                 <Card.Header>
                     Documentation Stats
