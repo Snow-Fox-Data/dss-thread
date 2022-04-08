@@ -520,7 +520,7 @@ class DataikuItem extends Component {
                         <Button disabled={this.state.tempSelDef.id == -1} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
 
                         {this.state.newDefSelected &&
-                            <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
+                            <Button variant="link" onClick={() => this.toggleNew(false)}>Search for Definition</Button>
                         }
                         {!this.state.newDefSelected &&
                             <Button variant="link" onClick={() => this.toggleNew(true)}>Exit Search</Button>
