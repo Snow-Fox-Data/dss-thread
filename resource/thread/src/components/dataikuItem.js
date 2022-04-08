@@ -28,6 +28,7 @@ class DataikuItem extends Component {
             isLineageVisible: false,
             applyLineageModal: false,
             applyToDataSets: [],
+            columnTags: [],
             dssSrc: '',
             defSuggestions: [
             ]
@@ -66,8 +67,8 @@ class DataikuItem extends Component {
         }
 
         var tagList = [];
-        for (var x = 0; x < this.state.tempSelDef.tags.length; x++) {
-            tagList.push(this.state.tempSelDef.tags[x].name);
+        for (var x = 0; x < this.state.columnTags.length; x++) {
+            tagList.push(this.state.columnTags[x].name);
         }
 
         const requestOptions = {
@@ -212,9 +213,9 @@ class DataikuItem extends Component {
                 applied_to: [],
                 description: this.props.item.comment,
                 name: this.props.item.name,
-                id: -1,
-                tags: []
-            }
+                id: -1
+            },
+            columnTags: []
         });
     }
 
@@ -246,16 +247,19 @@ class DataikuItem extends Component {
     // }
 
     editDef() {
-        // this.resetSelectedDef();
 
+        let tags = [];
+        for (var x = 0; x < this.props.item.tags.length; x++) {
+            tags.push({ id: x, name: this.props.item.tags[x] })
+        }
         this.setState({
             tempSelDef: {
                 name: this.props.item.definition.name,
                 description: this.props.item.definition.description,
                 id: this.props.item.definition.id,
-                applied_to: this.props.item.definition.applied_to,
-                tags: this.props.item.definition.tags
+                applied_to: this.props.item.definition.applied_to
             },
+            columnTags: tags,
             newDefModal: true
         })
     }
@@ -315,7 +319,8 @@ class DataikuItem extends Component {
         this.setState({
             applyLineageModal: true,
             newDefModal: false,
-            applyToDataSets: app_to
+            applyToDataSets: app_to,
+            columnTags: tags
         })
     }
 
@@ -338,7 +343,7 @@ class DataikuItem extends Component {
                     description: this.props.item.comment,
                     applied_to: [],
                     id: -1,
-                    tags:[]
+                    tags: []
                 }
             })
         }
@@ -360,14 +365,14 @@ class DataikuItem extends Component {
         const { defSearchResults } = this.state;
 
         const onDelete = (i) => {
-            const defTags = this.state.defTags.slice(0)
-            defTags.splice(i, 1)
-            this.setState({ defTags })
+            const columnTags = this.state.columnTags.slice(0)
+            columnTags.splice(i, 1)
+            this.setState({ columnTags })
         }
 
         const onAddition = (tag) => {
-            const defTags = [].concat(this.state.defTags, tag)
-            this.setState({ defTags })
+            const columnTags = [].concat(this.state.columnTags, tag)
+            this.setState({ columnTags })
         }
 
         let lineage = this.buildLineage();
