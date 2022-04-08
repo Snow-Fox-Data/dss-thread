@@ -216,7 +216,8 @@ class DataikuItem extends Component {
                 applied_to: [],
                 description: this.props.item.comment,
                 name: this.props.item.name,
-                id: -1
+                id: -1,
+                tags: []
             }
         });
     }
@@ -256,7 +257,8 @@ class DataikuItem extends Component {
                 name: this.props.item.definition.name,
                 description: this.props.item.definition.description,
                 id: this.props.item.definition.id,
-                applied_to: this.props.item.definition.applied_to
+                applied_to: this.props.item.definition.applied_to,
+                tags: this.props.item.definition.tags
             },
             newDefModal: true
         })
@@ -309,12 +311,16 @@ class DataikuItem extends Component {
 
     showLineageSelection() {
         let app_to = [];
-        if (this.props.item.definition.id > -1)
+        let tags = [];
+        if (this.props.item.definition.id > -1) {
             app_to = eval(this.props.item.definition.applied_to);
+            tags = eval(this.props.item.definition.tags);
+        }
         this.setState({
             applyLineageModal: true,
             newDefModal: false,
-            applyToDataSets: app_to
+            applyToDataSets: app_to,
+            defTags: tags
         })
     }
 
@@ -337,7 +343,8 @@ class DataikuItem extends Component {
                     description: this.props.item.comment,
                     applied_to: [],
                     id: -1
-                }
+                },
+                defTags: []
             })
         }
         else {
@@ -347,7 +354,8 @@ class DataikuItem extends Component {
                     applied_to: this.props.item.definition.applied_to,
                     description: this.props.item.definition.description,
                     id: this.props.item.definition.id
-                }
+                },
+                defTags: this.props.item.definition.tags
             })
         }
     }
