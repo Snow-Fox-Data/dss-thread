@@ -762,6 +762,10 @@ class DataikuItem extends Component {
                         in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
+                <Col>
+                    <h1>
+                        <Badge bg="secondary">{this.props.item.total_cols_def} / {this.props.item.total_cols} documented ({(this.props.item.total_cols_def / this.props.item.total_cols).toFixed(2) * 100}%)</Badge></h1>
+                </Col>
             </Row>
             <Row>
                 <div style={{ paddingTop: '10px' }}>

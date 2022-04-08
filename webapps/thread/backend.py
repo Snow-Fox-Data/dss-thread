@@ -125,6 +125,9 @@ def load_item():
         if res['object_type'] == 'project':
             p = dss.load_project(key)
             p['object_type'] = 'project'
+            col_ct, col_def = dss.calc_project_def_ct(key)
+            p['total_cols'] = col_ct
+            p['total_cols_def'] = col_def
 
             return json.dumps(p)
         else:
@@ -383,6 +386,19 @@ class dss_utils:
 
         return df
 
+    def calc_project_def_ct(self, proj_name):
+        p = self.client.get_project(proj_name)
+        datasets = p.list_datasets()
+
+        total_ct = 0
+        total_documented = 0
+        for d in datasets:
+            tot, doced = self.calc_dataset_def_ct(proj_name + '|' + d['id'])
+            total_ct += tot
+            total_documented += doced
+
+        return total_ct, total_documented
+
     def calc_dataset_def_ct(self, dataset_name):
         p, d, c = self.extract_name_project(dataset_name)
         p = self.client.get_project(p)
@@ -392,10 +408,12 @@ class dss_utils:
         total_ct = len(ds_schema['columns'])
         defined_ct = 0
         for z in ds_schema['columns']: 
-            df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-            search_key = re.escape(dataset_name + '|' + z['name'])
-            def_df = df[df['applied_to'].str.contains(search_key, case=False, na=False)].fillna('')  
-            if len(def_df) > 0:
+            # df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+            # search_key = re.escape(dataset_name + '|' + z['name'])
+            # def_df = df[df['applied_to'].str.contains(search_key, case=False, na=False)].fillna('')  
+            # if len(def_df) > 0:
+            #     defined_ct = defined_ct + 1
+            if 'comment' in z and len(z['comment']) > 0:
                 defined_ct = defined_ct + 1
 
         return total_ct, defined_ct
