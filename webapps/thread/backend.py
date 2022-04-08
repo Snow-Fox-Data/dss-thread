@@ -228,6 +228,7 @@ def update_desc():
         df.loc[df['id']==desc_id, 'name'] = desc['name']
         df.loc[df['id']==desc_id, 'description'] = desc['description']
         df.loc[df['id']==desc_id, 'applied_to'] = applied_to_json
+        df.loc[df['id']==desc_id, 'tags'] = tags
 
         # update the name in the index
         idx_df = index_ds.get_dataframe()
@@ -287,22 +288,22 @@ class dss_utils:
 
         return ds2
 
-    def dataset_project_shares(self, project_key):
-        project = self.client.get_project(project_key)
-        exposed = project.get_settings().settings['exposedObjects']['objects']
-        exposed_ds = {}
-        for e in exposed:
-            if e['type'] == "DATASET":
-                rules = e['rules']
-                name = e['localName']
+    # def dataset_project_shares(self, project_key):
+    #     project = self.client.get_project(project_key)
+    #     exposed = project.get_settings().settings['exposedObjects']['objects']
+    #     exposed_ds = {}
+    #     for e in exposed:
+    #         if e['type'] == "DATASET":
+    #             rules = e['rules']
+    #             name = e['localName']
         
-                shares = []
-                for r in rules:
-                    shares.append(r['targetProject'] + '|' + name)
+    #             shares = []
+    #             for r in rules:
+    #                 shares.append(r['targetProject'] + '|' + name)
             
-                exposed_ds[name] = shares
+    #             exposed_ds[name] = shares
 
-        return exposed_ds
+    #     return exposed_ds
 
     def load_project(self, key):
         proj = self.client.get_project(key)
