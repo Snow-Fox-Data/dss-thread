@@ -11,8 +11,8 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags } from "react-icons/fa";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import ReactDOM from 'react-dom';
+import { Editor, EditorState } from 'draft-js';
 
 class DataikuItem extends Component {
     constructor(props) {
@@ -344,6 +344,24 @@ class DataikuItem extends Component {
         const filterBy = () => true;
         const { defSearchResults, editorState } = this.state;
 
+
+        this.state.editorState = EditorState.createEmpty();
+        this.onChange = (editorState) => this.setState({ editorState });
+        const styles = {
+            editor: {
+                border: '1px solid gray',
+                minHeight: '6em'
+            }
+        };
+        // this.setEditor = (editor) => {
+        //     this.editor = editor;
+        // };
+        // this.focusEditor = () => {
+        //     if (this.editor) {
+        //         this.editor.focus();
+        //     }
+        // };
+
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
         const tabClicked = (e) => {
@@ -385,7 +403,7 @@ class DataikuItem extends Component {
         });
 
         return <Col>
-            <Modal size="sm" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
+            <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Apply Definition To Lineage</Modal.Title>
                 </Modal.Header>
@@ -488,17 +506,13 @@ class DataikuItem extends Component {
                                                     Will appear in the Dataiku Dataset's column description.
                                                 </Form.Text>
 
-                                                <Editor
-                                                    toolbar={
-                                                        { options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'link'] }
-                                                    }
-                                                    defaultEditorState={this.state.tempSelDef.description}
-                                                    editorState={editorState}
-                                                    toolbarClassName="toolbarClassName"
-                                                    wrapperClassName="wrapperClassName"
-                                                    editorClassName="editorClassName"
-                                                // onEditorStateChange={this.onEditorStateChange}
-                                                />;
+                                                <div style={styles.editor} onClick={this.focusEditor}>
+                                                    <Editor
+                                                        ref={this.setEditor}
+                                                        editorState={this.state.editorState}
+                                                        onChange={this.onChange}
+                                                    />
+                                                </div>
                                             </Form.Group>
                                         </Form>
                                     </div>

@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "../../resource/thread/build/static/css/main.b6ff5816.chunk.css",
-    "main.js": "../../resource/thread/build/static/js/main.92b03874.chunk.js",
-    "main.js.map": "../../resource/thread/build/static/js/main.92b03874.chunk.js.map",
+    "main.js": "../../resource/thread/build/static/js/main.4acf04a7.chunk.js",
+    "main.js.map": "../../resource/thread/build/static/js/main.4acf04a7.chunk.js.map",
     "runtime-main.js": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js",
     "runtime-main.js.map": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js.map",
-    "static/css/2.a4703d55.chunk.css": "../../resource/thread/build/static/css/2.a4703d55.chunk.css",
-    "static/js/2.a4580a17.chunk.js": "../../resource/thread/build/static/js/2.a4580a17.chunk.js",
-    "static/js/2.a4580a17.chunk.js.map": "../../resource/thread/build/static/js/2.a4580a17.chunk.js.map",
+    "static/css/2.68a81a89.chunk.css": "../../resource/thread/build/static/css/2.68a81a89.chunk.css",
+    "static/js/2.27af450f.chunk.js": "../../resource/thread/build/static/js/2.27af450f.chunk.js",
+    "static/js/2.27af450f.chunk.js.map": "../../resource/thread/build/static/js/2.27af450f.chunk.js.map",
     "index.html": "../../resource/thread/build/index.html",
-    "precache-manifest.cafef6bdf91be3824897af4718cd3c15.js": "../../resource/thread/build/precache-manifest.cafef6bdf91be3824897af4718cd3c15.js",
+    "precache-manifest.dfd027997fcc4b02145ee34bf762e1fc.js": "../../resource/thread/build/precache-manifest.dfd027997fcc4b02145ee34bf762e1fc.js",
     "service-worker.js": "../../resource/thread/build/service-worker.js",
-    "static/css/2.a4703d55.chunk.css.map": "../../resource/thread/build/static/css/2.a4703d55.chunk.css.map",
+    "static/css/2.68a81a89.chunk.css.map": "../../resource/thread/build/static/css/2.68a81a89.chunk.css.map",
     "static/css/main.b6ff5816.chunk.css.map": "../../resource/thread/build/static/css/main.b6ff5816.chunk.css.map",
-    "static/js/2.a4580a17.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.a4580a17.chunk.js.LICENSE.txt"
+    "static/js/2.27af450f.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.27af450f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8e4d5060.js",
-    "static/css/2.a4703d55.chunk.css",
-    "static/js/2.a4580a17.chunk.js",
+    "static/css/2.68a81a89.chunk.css",
+    "static/js/2.27af450f.chunk.js",
     "static/css/main.b6ff5816.chunk.css",
-    "static/js/main.92b03874.chunk.js"
+    "static/js/main.4acf04a7.chunk.js"
   ]
 }
