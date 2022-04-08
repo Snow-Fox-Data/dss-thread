@@ -761,7 +761,7 @@ class DataikuItem extends Component {
     }
 
     createDocPctCard(total_cols, documented_cols) {
-        var pct = (documented_cols / total_cols).toFixed(2) * 100;
+        var pct = ((documented_cols / total_cols) * 100).toFixed(0);
 
         var bg = "secondary";
         if (pct > 80)
