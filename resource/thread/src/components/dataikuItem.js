@@ -370,8 +370,10 @@ class DataikuItem extends Component {
         }
 
         const onAddition = (tag) => {
-            const columnTags = [].concat(this.state.columnTags, tag)
-            this.setState({ columnTags })
+            if (!this.state.columnTags.some(e => e.name === tag.name)) {
+                const columnTags = [].concat(this.state.columnTags, tag)
+                this.setState({ columnTags })
+            }
         }
 
         let lineage = this.buildLineage();
@@ -535,17 +537,17 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Col style={{ textAlign: "left" }}>
-                        <Button disabled={this.state.tempSelDef.id==-1} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
+                        <Button disabled={this.state.tempSelDef.id == -1} variant="link" onClick={() => this.toggleNew(true)}>New</Button>
                         <Button variant="link" onClick={() => this.toggleNew(false)}>Search</Button>
                     </Col>
                     <Col ms-auto>
-                        {this.state.tempSelDef.id!=-1 &&
+                        {this.state.tempSelDef.id != -1 &&
                             <div>
                                 <Button onClick={() => this.saveCol()}>Save Definition</Button>
                                 <Button variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
                             </div>
                         }
-                        {this.state.tempSelDef.id==-1 &&
+                        {this.state.tempSelDef.id == -1 &&
                             <Dropdown >
                                 <Dropdown.Toggle id="dropdown-basic">
                                     Save and Apply
