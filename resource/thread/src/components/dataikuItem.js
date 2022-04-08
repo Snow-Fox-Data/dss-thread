@@ -28,9 +28,9 @@ class DataikuItem extends Component {
             isLineageVisible: false,
             applyLineageModal: false,
             applyToDataSets: [],
-            columnTags: [],
             dssSrc: '',
-            defSuggestions: [
+            columnTags: [],
+            columnTagSuggestions: [
             ]
         };
     }
@@ -185,6 +185,7 @@ class DataikuItem extends Component {
         switch (this.props.object_type) {
             case 'column':
                 // this.resetSelectedDef();
+                this.state.columnTagSuggestions = this.props.item.tag_list;
                 break;
             case 'definition':
                 break;
@@ -218,33 +219,6 @@ class DataikuItem extends Component {
             columnTags: []
         });
     }
-
-    // resetSelectedDef() {
-    //     this.state.tempSelDef = {
-    //         id: -1
-    //     };
-
-    //     if (this.props.item.definition.id == -1) {
-    //         this.setState({
-    //             selectedDef: {
-    //                 name: this.props.item.name,
-    //                 description: this.props.item.comment,
-    //                 applied_to:[],
-    //                 id: -1
-    //             }
-    //         })
-    //     }
-    //     else {
-    //         this.setState({
-    //             selectedDef: {
-    //                 name: this.props.item.definition.name,
-    //                 description: this.props.item.definition.description,
-    //                 id: this.props.item.definition.id,
-    //                 applied_to: this.props.item.definition.applied_to
-    //             }
-    //         })
-    //     }
-    // }
 
     editDef() {
 
@@ -512,7 +486,7 @@ class DataikuItem extends Component {
                                                         <ReactTags
                                                             tags={this.state.columnTags}
                                                             allowNew='true'
-                                                            // suggestions={this.state.defSuggestions}
+                                                            suggestions={this.state.columnTagSuggestions}
                                                             onDelete={(i) => onDelete(i)}
                                                             onAddition={(tag) => onAddition(tag)} />
                                                     </div>
