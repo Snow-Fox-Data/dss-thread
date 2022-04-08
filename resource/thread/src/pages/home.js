@@ -26,7 +26,8 @@ class Home extends Component {
             selectedItem: null,
             selectedItemType: null,
             searchResults: [],
-            loggedIn: false
+            loggedIn: false,
+            collectionStats:{}
         }
     }
 
@@ -44,7 +45,8 @@ class Home extends Component {
                             dataiku: window.dataiku,
                             currentUser: response['you_are'],
                             loading: false,
-                            loggedIn: true
+                            loggedIn: true,
+                            collectionStats: response.stats
                         });
 
                         this.navDeepLink();
@@ -267,6 +269,14 @@ class Home extends Component {
         this.setState({ openFilter: !this.state.openFilter });
     }
 
+    collectionStats() {
+        return <div>
+            <h1>{this.state.collectionStats.project_count} Projects</h1>
+            <h1>{this.state.collectionStats.dataset_count} Datasets</h1>
+            <h1>{this.state.collectionStats.column_count} Columns</h1>
+        </div>
+    }
+
     render() {
         this.searchRef = React.createRef();
 
@@ -277,7 +287,6 @@ class Home extends Component {
 
         return (
             <>
-
                 <Row>
                     <Col>
                         <div className="input-group" style={{ width: "100%" }}>
@@ -342,7 +351,7 @@ class Home extends Component {
                     </Row>
                     : null}
                 <Row>
-                    {!loading ? this.dataikuItem : null}
+                    {!loading ? this.dataikuItem : this.collectionStats()}
                 </Row>
             </>
         );
