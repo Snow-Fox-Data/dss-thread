@@ -573,9 +573,9 @@ class DataikuItem extends Component {
                             <Card.Header>
                                 Documentation Status
                             </Card.Header>
-                            <Card.Body>
+                            <Card.Body style={{ fontSize: '20px', textAlign: 'center' }}>
                                 {(this.props.item.comment != null && this.props.item.comment.length > 0) &&
-                                    <Badge bg="success">
+                                    <Badge bg="success" >
                                         <div><FaThumbsUp></FaThumbsUp>
                                             <span style={{ paddingLeft: '4px' }}>Documented</span>
                                         </div>
