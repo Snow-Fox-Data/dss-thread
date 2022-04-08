@@ -244,8 +244,12 @@ class Catalog extends Component {
             });
     }
 
-    formatAppliedTo(appliedTo) {
+    formatAppliedTo(appliedTo) {    
         appliedTo = JSON.parse(appliedTo);
+        
+        console.log('appliedTo == ');
+        console.log(appliedTo);
+
         if(appliedTo.length > 0) {
             let formattedAppliedTo = appliedTo.map((col) => {
                 return <span>{col}<br/></span>;
@@ -331,8 +335,6 @@ class Catalog extends Component {
     }
 
     renderDefinitions() {
-        
-
         if(this.state.definitions.length > 0) {
             this.searchRef = React.createRef();
 
