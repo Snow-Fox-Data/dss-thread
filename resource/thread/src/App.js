@@ -23,7 +23,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Routes
   } from "react-router-dom";
 
 import logo from "./assets/images/icon_thread.png";
@@ -162,10 +163,10 @@ class App extends Component {
                             <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
                         </Routes> */}
 
-                        {/* <Routes>
+                        <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/catalog" element={<Catalog />} />
-                        </Routes> */}
+                        </Routes>
 
                         {/* <Switch>
                             <Route path="/" element={<Home />} />
