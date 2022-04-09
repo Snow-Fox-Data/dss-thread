@@ -268,6 +268,11 @@ class Catalog extends Component {
       console.log("openDefinition(defKey) :: defKey == " + defKey);
       console.log("App.CURRENT_URL == " + App.CURRENT_URL);
       // window.location = App.CURRENT_URL + "#o=" + defKey;
+
+      
+      // THIS CODE SHOULD NAVIGATE TO LINK
+    //   let navigate = useNavigate();
+    //   navigate(`/invoices/${newInvoice.id}`);
     }
 
     sortDefinitions(sortBy) { 

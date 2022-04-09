@@ -21,10 +21,9 @@ import {
 
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
-    Link,
-    Routes
+    Routes,    
+    Link
   } from "react-router-dom";
 
 import logo from "./assets/images/icon_thread.png";
@@ -115,49 +114,64 @@ class App extends Component {
                     <div>Unauthorized</div>
                 }
                 <div hidden={!this.state.loggedIn}>
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <div class="container-fluid">
-                            <img src={logo} className="app-logo" alt="logo" />
-                            <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarContent">
-                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                    {/* <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.HOME })} 
-                                            to={App.CURRENT_URL}>Home</Link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.CATALOG })} 
-                                            to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
-                                    </li> */}
-                                     <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.HOME })} 
-                                            to="/">Home</Link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.CATALOG })} 
-                                            to="/catalog">Catalog</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="navbar-nav">
-                                <li style={{ padding: '12px' }}>
-                                    <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">{this.state.currentUser}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+                    <Router>
+                        <div>
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                                <div class="container-fluid">
+                                    <img src={logo} className="app-logo" alt="logo" />
+                                    <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarContent">
+                                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                            {/* <li class="nav-item">
+                                                <Link className={activeTab == App.HOME ?  'active' : ''} 
+                                                    onClick={() => this.setState({ activeTab: App.HOME })} 
+                                                    to={App.CURRENT_URL}>Home</Link>
+                                            </li>
+                                            <li class="nav-item">
+                                                <Link className={activeTab == App.CATALOG ?  'active' : ''} 
+                                                    onClick={() => this.setState({ activeTab: App.CATALOG })} 
+                                                    to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
+                                            </li> */}
+                                            <li class="nav-item">
+                                                <Link className={activeTab == App.HOME ?  'active' : ''} 
+                                                    onClick={() => this.setState({ activeTab: App.HOME })} 
+                                                    to="/">Home</Link>
+                                            </li>
+                                            <li class="nav-item">
+                                                <Link className={activeTab == App.CATALOG ?  'active' : ''} 
+                                                    onClick={() => this.setState({ activeTab: App.CATALOG })} 
+                                                    to="/catalog">Catalog</Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <ul class="navbar-nav">
+                                        <li style={{ padding: '12px' }}>
+                                            <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link">{this.state.currentUser}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
 
-                    <Row>
+                            <Routes>
+                                <Route exact path="/">
+                                    <Home />
+                                </Route>
+                                <Route path="/catalog">
+                                    <Catalog />
+                                </Route>
+                            </Routes>
+                        </div>
+                    </Router>
+
+                    
+
+                    {/* <Row> */}
                         {/* <Routes>
                             <Route path={App.CURRENT_URL} element={<Home />} />
                             <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
@@ -170,16 +184,23 @@ class App extends Component {
                             </Route>
                         </Routes> */}
 
-                        <Routes>
+                        {/* <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/catalog" element={<Catalog />} />
-                        </Routes>
+                        </Routes> */}
 
                         {/* <Switch>
                             <Route path="/" element={<Home />} />
                             <Route path="/catalog" element={<Catalog />} />
-                        </Switch> */}                        
-                    </Row>
+                        </Switch> */}
+
+                        {/* <Routes>
+                            <Route path="/" element={<App />}>
+                                <Route index element={<Home />} />
+                                <Route path="/catalog" element={<Catalog />} />
+                            </Route>
+                        </Routes> */}
+                    {/* </Row> */}
 
                 </div>
             </Container>
