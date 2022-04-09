@@ -163,10 +163,15 @@ class App extends Component {
                             <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
                         </Routes> */}
 
-                        <Routes>
+                        <Route path="/" element={<App />}>
+                            <Route index element={<Home />} />
+                            <Route path="/catalog" element={<Catalog />} />
+                        </Route>
+
+                        {/* <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/catalog" element={<Catalog />} />
-                        </Routes>
+                        </Routes> */}
 
                         {/* <Switch>
                             <Route path="/" element={<Home />} />
