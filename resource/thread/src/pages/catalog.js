@@ -246,10 +246,6 @@ class Catalog extends Component {
 
     formatAppliedTo(appliedTo) {    
         appliedTo = JSON.parse(appliedTo);
-
-        console.log('appliedTo == ');
-        console.log(appliedTo);
-
         if(appliedTo != null && appliedTo.length > 0) {
             let formattedAppliedTo = appliedTo.map((col) => {
                 return <span>{col}<br/></span>;

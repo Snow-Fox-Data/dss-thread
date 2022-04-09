@@ -9,7 +9,10 @@ import Catalog from './pages/catalog';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={App.CURRENT_URL}>
+      <Route path="/" element={<Home />} />
+      <Route path="/catalog" element={<Catalog />} />
+
       <App />
     </BrowserRouter>
   </React.StrictMode>,
