@@ -50,7 +50,7 @@ class Definition extends Component {
                     <div style={{ paddingBottom: "10px" }}>
                         {this.props.definition.name}
                     </div>
-                    {this.props.definition.tags.length > 0 &&
+                    {eval(this.props.definition.tags).length > 0 &&
                         <div>
                             <h5>
                                 Tags
