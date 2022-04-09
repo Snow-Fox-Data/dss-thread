@@ -21,9 +21,10 @@ import {
 
 import {
     BrowserRouter as Router,
+    Switch,
     Route,
-    Routes,    
-    Link
+    Link,
+    Routes
   } from "react-router-dom";
 
 import logo from "./assets/images/icon_thread.png";
@@ -133,7 +134,7 @@ class App extends Component {
                                             onClick={() => this.setState({ activeTab: App.CATALOG })} 
                                             to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
                                     </li> */}
-                                    <li class="nav-item">
+                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ?  'active' : ''} 
                                             onClick={() => this.setState({ activeTab: App.HOME })} 
                                             to="/">Home</Link>
@@ -156,17 +157,12 @@ class App extends Component {
                         </div>
                     </nav>
 
-                    
-                    {/* <Router basename={App.CURRENT_URL}>
-                        <div>
-                            <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />
-                            </Routes>
-                        </div>
-                    </Router> */}
-
-                    
+                    <Row>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/catalog" element={<Catalog />} />
+                        </Routes>
+                    </Row>
 
                     {/* <Row> */}
                         {/* <Routes>
