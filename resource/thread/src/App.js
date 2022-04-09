@@ -159,8 +159,15 @@ class App extends Component {
 
                     <Row>
                         <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/catalog" element={<Catalog />} />
+                            {/* <Route path="/" element={<Home />} />
+                            <Route path="/catalog" element={<Catalog />} /> */}
+
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+                            <Route path="/catalog">
+                                <Catalog />
+                            </Route>
                         </Routes>
                     </Row>
 
