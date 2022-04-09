@@ -114,7 +114,7 @@ class App extends Component {
                     <div>Unauthorized</div>
                 }
                 <div hidden={!this.state.loggedIn}>
-                    <Router>
+                    <Router basename={App.CURRENT_URL}>
                         <div>
                             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                                 <div class="container-fluid">
@@ -159,12 +159,8 @@ class App extends Component {
                             </nav>
 
                             <Routes>
-                                <Route exact path="/">
-                                    <Home />
-                                </Route>
-                                <Route path="/catalog">
-                                    <Catalog />
-                                </Route>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/catalog" element={<Catalog />} />
                             </Routes>
                         </div>
                     </Router>
