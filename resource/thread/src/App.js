@@ -116,7 +116,7 @@ class App extends Component {
         const { activeTab, loading, scanning } = this.state;
 
         var publicApp = true;
-        if (window.location.href.indexOf('/projects/') > -1) {
+        if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
             // not accessing the public app
             publicApp = false;
         }
