@@ -112,10 +112,7 @@ class App extends Component {
         }
     }
 
-    render() {
-        const { activeTab, loading, scanning } = this.state;
-
-        var publicApp = 'true';
+    checkPublic() {
         if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
             const queryParams = new URLSearchParams(window.location.search)
             // not accessing the public app
@@ -123,8 +120,16 @@ class App extends Component {
             var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
-            publicApp = url;
+            return <a href={url}>Public Web URL</a>;
         }
+
+        return '';
+    }
+
+    render() {
+        const { activeTab, loading, scanning } = this.state;
+
+        var publicApp = this.checkPublic();
 
         return (
             <Container style={{ paddingTop: '10px' }}>
