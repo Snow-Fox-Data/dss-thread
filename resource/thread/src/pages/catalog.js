@@ -387,7 +387,7 @@ class Catalog extends Component {
                 </div> */}
 
                 {/* style={{ width: "100%" }} */}
-                <div className="input-group">                
+                <div className="input-group input-group-lg">                
                     <span className="input-group-addon">
                         <FaSearch onClick={() => this.toggleFilter()} style={{
                             // backgroundColor: "#DDD",
