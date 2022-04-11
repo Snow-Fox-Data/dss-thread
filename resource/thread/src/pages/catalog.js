@@ -389,14 +389,16 @@ class Catalog extends Component {
                 {/* style={{ width: "100%" }} */}
                 <div className="input-group input-group-lg">                
                     <span className="input-group-addon input-group-text">
-                        <FaSearch onClick={() => this.toggleFilter()} style={{
-                            // backgroundColor: "#DDD",
-                            color: "#000",
-                            // height: '27px',
-                            // padding: "4px",
-                            // border: "solid 0.2em #000",
-                            // width: '27px'
-                        }} />
+                        <div style={{display: "block"}}>
+                            <FaSearch onClick={() => this.toggleFilter()} style={{
+                                // backgroundColor: "#DDD",
+                                color: "#000",
+                                height: '27px',
+                                // padding: "4px",
+                                // border: "solid 0.2em #000",
+                                width: '27px'
+                            }} />
+                        </div>
                     </span>
 
                     {/* search-bar */}
