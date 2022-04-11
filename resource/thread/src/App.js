@@ -1,6 +1,5 @@
 import React from "react";
 import { Component } from 'react';
-import { useSearchParams } from "react-router-dom";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -115,13 +114,13 @@ class App extends Component {
 
     render() {
         const { activeTab, loading, scanning } = this.state;
-        const [searchParams, setSearchParams] = useSearchParams();
 
         var publicApp = 'true';
         if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
+            const queryParams = new URLSearchParams(window.location.search)
             // not accessing the public app
-            var proj = searchParams.get("projectKey");
-            var id = searchParams.get("webAppId");
+            var proj = queryParams.get("projectKey");
+            var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
             publicApp = url;
