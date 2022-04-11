@@ -121,7 +121,7 @@ class App extends Component {
             var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
-            return <Button onClick={()=>window.opener.location.href=url}>Public Web URL</Button>;
+            return <a target="_parent" href={url}>Public Web URL</a>;
         }
 
         return '';
