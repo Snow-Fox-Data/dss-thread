@@ -120,7 +120,7 @@ class App extends Component {
             var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
-            return <a onClick={()=>window.opener.location.href=url}>Public Web URL</a>;
+            return <Link onClick={()=>window.opener.location.href=url}>Public Web URL</Link>;
         }
 
         return '';
@@ -204,7 +204,7 @@ class App extends Component {
                         </Row>
                         : <Row>
                             <h4>
-                                Please access Thread through the ({publicApp}).
+                                Please access Thread through the {publicApp}.
                             </h4></Row>
                     }
 
