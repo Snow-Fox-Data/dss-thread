@@ -272,9 +272,9 @@ class Home extends Component {
     collectionStats() {
         return <div style={{padding:'20px'}}>
             <h1>Dataiku Instance Stats</h1>
-            <h2><span style={{color:'red'}}>{this.state.collectionStats.project_ct}</span> Projects</h2>
-            <h2><span style={{color:'red'}}>{this.state.collectionStats.dataset_ct}</span> Datasets</h2>
-            <h2><span style={{color:'red'}}>{this.state.collectionStats.column_ct}</span> Columns</h2>
+            <h2><span style={{color:'red'}}>{this.state.collectionStats.project_ct.toLocaleString("en-US")}</span> Projects</h2>
+            <h2><span style={{color:'red'}}>{this.state.collectionStats.dataset_ct.toLocaleString("en-US")}</span> Datasets</h2>
+            <h2><span style={{color:'red'}}>{this.state.collectionStats.column_ct.toLocaleString("en-US")}</span> Columns</h2>
         </div>
     }
 
