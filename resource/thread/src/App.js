@@ -105,14 +105,21 @@ class App extends Component {
             fetch(window.getWebAppBackendUrl('scan'))
                 .then(res => res.json())
                 .then((response) => {
-                    this.setState({ scanning: false });
-                    this.refreshUser();
+                    // this.setState({ scanning: false });
+                    // this.refreshUser();
+                    window.location.reload();
                 });
         }
     }
 
     render() {
         const { activeTab, loading, scanning } = this.state;
+
+        var publicApp = true;
+        if (window.location.indexOf('/projects/') > -1) {
+            // not accessing the public app
+            publicApp = false;
+        }
 
         return (
             <Container style={{ paddingTop: '10px' }}>
@@ -170,19 +177,26 @@ class App extends Component {
                             </div>
                         </Row>
                         : null}
-                    <Row>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/catalog" element={<Catalog />} />
 
-                            {/* <Route path="/">
+                    {publicApp ?
+                        <Row>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/catalog" element={<Catalog />} />
+
+                                {/* <Route path="/">
                                 <Home />
                             </Route>
                             <Route path="/catalog">
                                 <Catalog />
                             </Route> */}
-                        </Routes>
-                    </Row>
+                            </Routes>
+                        </Row>
+                        : <Row>
+                            <h4>
+                                Please access Thread through the public url.
+                            </h4></Row>
+                    }
 
                     {/* <Row> */}
                     {/* <Routes>
