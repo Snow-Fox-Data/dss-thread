@@ -390,7 +390,7 @@ class Catalog extends Component {
                 <div className="input-group input-group-lg">                
                     <span className="input-group-addon">
                         <div style={{display: "block"}}>
-                            <FaSearch onClick={() => this.toggleFilter()} style={{
+                            <FaSearch onClick={() => this.toggleFilter()} size="lg" style={{
                                 // backgroundColor: "#DDD",
                                 color: "#000",
                                 // height: '27px',
