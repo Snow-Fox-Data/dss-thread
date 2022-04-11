@@ -25,7 +25,7 @@ import {
     Route,
     Link,
     Routes
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import logo from "./assets/images/icon_thread.png";
 import Home from "./pages/home";
@@ -45,7 +45,8 @@ class App extends Component {
             dataiku: undefined,
             currentUser: '',
             loading: true,
-            loggedIn: null
+            loggedIn: null,
+            scanning: false
         }
 
         console.log("window.location.href == " + window.location.href);
@@ -56,7 +57,7 @@ class App extends Component {
     checkActiveTabab() {
         let activeTab = App.HOME;
 
-        if(App.CURRENT_URL.indexOf('catalog') !== -1) {
+        if (App.CURRENT_URL.indexOf('catalog') !== -1) {
             activeTab = App.CATALOG;
         } else {
             activeTab = App.HOME;
@@ -68,46 +69,50 @@ class App extends Component {
     }
 
     componentDidMount() {
-
         window.$(document).ready(() => {
-
-            fetch(window.getWebAppBackendUrl('get-user'))
-                .then(res => res.json())
-                .then((response) => {
-
-                    if (response.status == 'ok') {
-
-                        this.setState({
-                            dataiku: window.dataiku,
-                            currentUser: response['you_are'],
-                            loading: false,
-                            loggedIn: true
-                        });
-
-                        eventBus.on("loading", (isLoading) =>
-                            this.setState({ "loading": isLoading })
-                        );
-                    }
-                    else
-                        this.setState({
-                            loading: false
-                        })
-                });
-
+            this.refreshUser();
         });
     }
 
-    rescan() {
-        this.setState({ loading: true });
-        fetch(window.getWebAppBackendUrl('scan'))
+    refreshUser() {
+        fetch(window.getWebAppBackendUrl('get-user'))
             .then(res => res.json())
             .then((response) => {
-                this.setState({ loading: false });
+
+                if (response.status == 'ok') {
+
+                    this.setState({
+                        dataiku: window.dataiku,
+                        currentUser: response['you_are'],
+                        scanning: false,
+                        loggedIn: true
+                    });
+
+                    eventBus.on("loading", (isLoading) =>
+                        this.setState({ "loading": isLoading })
+                    );
+                }
+                else
+                    this.setState({
+                        scanning: false
+                    })
             });
     }
 
+    rescan() {
+        if (!this.state.scanning) {
+            this.setState({ scanning: true });
+            fetch(window.getWebAppBackendUrl('scan'))
+                .then(res => res.json())
+                .then((response) => {
+                    this.setState({ scanning: false });
+                    this.refreshUser();
+                });
+        }
+    }
+
     render() {
-        const { activeTab, loading } = this.state;
+        const { activeTab, loading, scanning } = this.state;
 
         return (
             <Container style={{ paddingTop: '10px' }}>
@@ -134,14 +139,14 @@ class App extends Component {
                                             onClick={() => this.setState({ activeTab: App.CATALOG })} 
                                             to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
                                     </li> */}
-                                     <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.HOME })} 
+                                    <li class="nav-item">
+                                        <Link className={activeTab == App.HOME ? 'active' : ''}
+                                            onClick={() => this.setState({ activeTab: App.HOME })}
                                             to="/">Home</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.CATALOG })} 
+                                        <Link className={activeTab == App.CATALOG ? 'active' : ''}
+                                            onClick={() => this.setState({ activeTab: App.CATALOG })}
                                             to="/catalog">Catalog</Link>
                                     </li>
                                 </ul>
@@ -156,7 +161,15 @@ class App extends Component {
                             </ul>
                         </div>
                     </nav>
-
+                    {scanning ?
+                        <Row>
+                            <div style={{ padding: '10px' }}>
+                                <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                            </div>
+                        </Row>
+                        : null}
                     <Row>
                         <Routes>
                             <Route path="/" element={<Home />} />
@@ -172,29 +185,29 @@ class App extends Component {
                     </Row>
 
                     {/* <Row> */}
-                        {/* <Routes>
+                    {/* <Routes>
                             <Route path={App.CURRENT_URL} element={<Home />} />
                             <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
                         </Routes> */}
 
-                        {/* <Routes>
+                    {/* <Routes>
                             <Route path="/" element={<App />}>
                                 <Route index element={<Home />} />
                                 <Route path="/catalog" element={<Catalog />} />
                             </Route>
                         </Routes> */}
 
-                        {/* <Routes>
+                    {/* <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/catalog" element={<Catalog />} />
                         </Routes> */}
 
-                        {/* <Switch>
+                    {/* <Switch>
                             <Route path="/" element={<Home />} />
                             <Route path="/catalog" element={<Catalog />} />
                         </Switch> */}
 
-                        {/* <Routes>
+                    {/* <Routes>
                             <Route path="/" element={<App />}>
                                 <Route index element={<Home />} />
                                 <Route path="/catalog" element={<Catalog />} />
