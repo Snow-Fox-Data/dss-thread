@@ -61,8 +61,8 @@ class DataikuItem extends Component {
         if (this.state.tempSelDef.description != null)
             val = this.state.tempSelDef.description;
 
-        if (val.length < 4 || this.state.tempSelDef.name.length < 4) {
-            alert('Name and desription must be at least 4 characters');
+        if (val.length < 2 || this.state.tempSelDef.name.length < 2) {
+            alert('Name and desription must be at least 2 characters');
             return;
         }
 
@@ -414,13 +414,13 @@ class DataikuItem extends Component {
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
                         {upstreams.map((type) => (
-                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type} label={type}></Form.Check>
+                            <Form.Check className='lineage-check' defaultChecked='true' type='switch' onChange={handleLineageCheck} id={'ul-' + type} label={type}></Form.Check>
                         ))}
                         {downstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
                         {downstreams.map((type) => (
-                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
+                            <Form.Check className='lineage-check' defaultChecked='true' type='switch' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
                         ))}
 
                         {(this.props.item.definition != null && this.props.item.definition.id > -1) &&
@@ -429,7 +429,7 @@ class DataikuItem extends Component {
                                     <span style={{ fontWeight: 'bold' }}>Currently Applied</span>
                                 }
                                 {eval(this.props.item.definition.applied_to).map((type) => (
-                                    <Form.Check className='lineage-check' type='switch' checked='true' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
+                                    <Form.Check className='lineage-check' type='switch' defaultChecked='true' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
                                 ))}
                             </div>
                         }
