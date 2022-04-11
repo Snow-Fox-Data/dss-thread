@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from 'react';
+import { useSearchParams } from "react-router-dom";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -114,11 +115,16 @@ class App extends Component {
 
     render() {
         const { activeTab, loading, scanning } = this.state;
+        const [searchParams, setSearchParams] = useSearchParams();
 
-        var publicApp = true;
+        var publicApp = 'true';
         if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
             // not accessing the public app
-            publicApp = false;
+            var proj = searchParams.get("projectKey");
+            var id = searchParams.get("webAppId");
+            var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
+
+            publicApp = url;
         }
 
         return (
@@ -178,7 +184,7 @@ class App extends Component {
                         </Row>
                         : null}
 
-                    {publicApp ?
+                    {publicApp.length == 0 ?
                         <Row>
                             <Routes>
                                 <Route path="/" element={<Home />} />
@@ -194,7 +200,7 @@ class App extends Component {
                         </Row>
                         : <Row>
                             <h4>
-                                Please access Thread through the public url.
+                                Please access Thread through the public url ({publicApp}).
                             </h4></Row>
                     }
 
