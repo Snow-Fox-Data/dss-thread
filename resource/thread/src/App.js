@@ -4,6 +4,7 @@ import { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
+import {Button } from "react-bootstrap";
 
 import { FaRedo } from 'react-icons/fa';
 
@@ -120,7 +121,7 @@ class App extends Component {
             var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
-            return <Link onClick={()=>window.opener.location.href=url}>Public Web URL</Link>;
+            return <Button onClick={()=>window.opener.location.href=url}>Public Web URL</Button>;
         }
 
         return '';
