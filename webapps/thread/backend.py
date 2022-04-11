@@ -329,8 +329,9 @@ class dss_utils:
             col_ct = len(ds.query('object_type=="column"'))
             dataset_ct = len(ds.query('object_type=="dataset"'))
             project_ct = len(ds.query('object_type=="project"'))
+            def_ct = len(ds.query('object_type=="definition"'))
 
-            return { "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct}
+            return { "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
         except:
             return { "column_ct": 0, "dataset_ct": 0, "project_ct": 0}
 

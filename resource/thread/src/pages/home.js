@@ -275,6 +275,7 @@ class Home extends Component {
             <h2><span style={{color:'red'}}>{this.state.collectionStats.project_ct}</span> Projects</h2>
             <h2><span style={{color:'red'}}>{this.state.collectionStats.dataset_ct}</span> Datasets</h2>
             <h2><span style={{color:'red'}}>{this.state.collectionStats.column_ct}</span> Columns</h2>
+            <h2><span style={{color:'red'}}>{this.state.collectionStats.definition_ct}</span> Definitions</h2>
         </div>
     }
 
