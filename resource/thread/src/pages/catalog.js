@@ -386,8 +386,9 @@ class Catalog extends Component {
                     <span class="input-group-addon">.00</span>
                 </div> */}
 
-                <div className="input-group" style={{ width: "100%" }}>                
-                    <span className="input-group-btn">
+                {/* style={{ width: "100%" }} */}
+                <div className="input-group">                
+                    <span className="input-group-addon">
                         <FaSearch onClick={() => this.toggleFilter()} style={{
                             backgroundColor: "#DDD",
                             color: "#000",
@@ -398,8 +399,25 @@ class Catalog extends Component {
                         }} />
                     </span>
 
-                    <input className="form-control search-bar" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
+                    {/* search-bar */}
+                    <input className="form-control" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
                 </div>
+
+                {/* WORKING EXAMPLE */}
+                {/* <div className="input-group" style={{ width: "100%" }}>     
+                    <input className="search-bar" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
+                        
+                    <div className="input-group-btn">
+                        <FaSearch onClick={() => this.toggleFilter()} style={{
+                            backgroundColor: "#DDD",
+                            color: "#000",
+                            height: '27px',
+                            padding: "4px",
+                            border: "solid 0.2em #000",
+                            width: '27px'
+                        }} />
+                    </div>
+                </div> */}
               </Col>
             </Row>
             <Row>
