@@ -379,47 +379,31 @@ class Catalog extends Component {
                 </Row>
               : null}
             <Row>
-              <Col>
-                {/* <div class="input-group">
-                    <span class="input-group-addon">$</span>	
-                    <input type="text" class="form-control" aria-label="Amount (rounded to the nearest dollar)" />
-                    <span class="input-group-addon">.00</span>
-                </div> */}
-
-                {/* style={{ width: "100%" }} */}
-                <div className="input-group input-group-lg">                
-                    <span className="input-group-addon input-group-text" style={{width: "auto"}}>
-                        <div style={{display: "block"}}>
-                            <FaSearch onClick={() => this.toggleFilter()} style={{
-                                // backgroundColor: "#DDD",
-                                color: "#000",
-                                height: '27px',
-                                // padding: "4px",
-                                // border: "solid 0.2em #000",
-                                width: '27px'
-                            }} />
-                        </div>
-                    </span>
-
-                    {/* search-bar */}
-                    <input className="form-control" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
+            <Col>
+                <div>
+                    <h3>Definitions</h3>
                 </div>
+              </Col>
+              <Col>
+                <div className='search-bar'>
+                    <div className="input-group input-group-lg">                
+                        <span className="input-group-addon input-group-text" style={{width: "auto"}}>
+                            <div style={{display: "block"}}>
+                                <FaSearch onClick={() => this.toggleFilter()} style={{
+                                    // backgroundColor: "#DDD",
+                                    color: "#000",
+                                    height: '27px',
+                                    // padding: "4px",
+                                    // border: "solid 0.2em #000",
+                                    width: '27px'
+                                }} />
+                            </div>
+                        </span>
 
-                {/* WORKING EXAMPLE */}
-                {/* <div className="input-group" style={{ width: "100%" }}>     
-                    <input className="search-bar" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
-                        
-                    <div className="input-group-btn">
-                        <FaSearch onClick={() => this.toggleFilter()} style={{
-                            backgroundColor: "#DDD",
-                            color: "#000",
-                            height: '27px',
-                            padding: "4px",
-                            border: "solid 0.2em #000",
-                            width: '27px'
-                        }} />
+                        {/* search-bar */}
+                        <input className="form-control" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
                     </div>
-                </div> */}
+                </div>
               </Col>
             </Row>
             <Row>
@@ -427,9 +411,9 @@ class Catalog extends Component {
                   <div className='table-definitions table-responsive'>
                       <Table striped bordered hover>
                           <thead>
-                              <tr>
+                              {/* <tr>
                                   <th className='text-center' colSpan={3}>Definitions</th>
-                              </tr>
+                              </tr> */}
                               <tr>
                                   <th onClick={() => this.sortDefinitions(Catalog.NAME)}>
                                       Name
