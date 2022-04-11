@@ -4,7 +4,7 @@ import { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
-import {Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import { FaRedo } from 'react-icons/fa';
 
@@ -121,7 +121,13 @@ class App extends Component {
             var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
-            return <a target="_parent" href={url}>Public Web URL</a>;
+            return <div>
+                <h4>Please access Thread through the </h4>
+                <a target="_parent" href={url}>Public Web URL</a>
+                <div style={{paddingTop:'15px'}}>
+                    Public App Key: {proj}.{id}                    
+                </div>
+            </div>
         }
 
         return '';
@@ -204,9 +210,8 @@ class App extends Component {
                             </Routes>
                         </Row>
                         : <Row>
-                            <h4>
-                                Please access Thread through the {publicApp}.
-                            </h4></Row>
+                            {publicApp}
+                        </Row>
                     }
 
                     {/* <Row> */}
