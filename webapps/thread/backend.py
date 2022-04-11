@@ -29,7 +29,6 @@ def get_user():
     # Get the auth info of the user performing the request
     auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
     
-    
     # If the user's group is not TRUSTED_GROUP, raise an exception
     # if TRUSTED_GROUP not in auth_info["groups"] :
         # raise Exception("You do not belong here, go away")
@@ -44,14 +43,6 @@ def get_user():
         data = {"status": "denied", "you_are": 'not logged in'}
 
     return json.dumps(data)
-
-# @app.route('/collection-stats', methods=['GET'])
-# def collection_stats():
-#     dss = dss_utils()
-    
-#     res = dss.get_collection_stats()
-
-#     return json.dumps(res)
 
 @app.route('/init', methods=['GET'])
 def init():
@@ -333,12 +324,15 @@ class dss_utils:
     #     return exposed_ds
 
     def get_collection_stats(self):
-        ds = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
-        col_ct = len(ds.query('object_type=="column"'))
-        dataset_ct = len(ds.query('object_type=="dataset"'))
-        project_ct = len(ds.query('object_type=="project"'))
+        try:
+            ds = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
+            col_ct = len(ds.query('object_type=="column"'))
+            dataset_ct = len(ds.query('object_type=="dataset"'))
+            project_ct = len(ds.query('object_type=="project"'))
 
-        return { "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct}
+            return { "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct}
+        except:
+            return { "column_ct": 0, "dataset_ct": 0, "project_ct": 0}
 
     def load_project(self, key):
         proj = self.client.get_project(key)
