@@ -128,8 +128,8 @@ def load_item():
     df = idx_ds.get_dataframe()
 
     idx_df = df.query(f'key=="{key}"')
-    if len(idx_df) == 0:
-        logging.info(f'{key} not found')
+    # if len(idx_df) == 0:
+        # logging.info(f'{key} not found')
 
     res = idx_df.iloc[0]
     if res['object_type'] == 'dataset':
@@ -494,7 +494,7 @@ class dss_utils:
                     # print('remap found!', column['name'], col)
 
                 if ((ds_name + '|' + column['name']) == 'ACSDEMO|sensordata_joined|Measure1') or ((ds_name + '|' + column['name'] + '|' + col) == 'ACSDEMO|sensordata_joined|Measure1'):
-                    print(f'remap! {column["name"]}, {col}')
+                    logging.info(f'remap! {column["name"]}, {col}')
 
                 if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
@@ -639,7 +639,7 @@ class dss_utils:
                         # this is a reference to a share
                         shared_dataset = self.get_ds_by_name(l, all_projects)
                         shared_dataset['lineage_downstream'].append(ds['full_name'])
-                        logging.info(f'added shared dataset: {l} => {ds["full_name"]}')
+                        # logging.info(f'added shared dataset: {l} => {ds["full_name"]}')
 
         # get the full dataset lineage
         for p in all_projects:
