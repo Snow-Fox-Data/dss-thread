@@ -493,14 +493,15 @@ class dss_utils:
                     from_col = obj['name'] + '|' + str(column['name'])
                     to_col = obj['name'] + '|' + str(col)
 
-                remap_found = len(remapping_df[(remapping_df['to'] == to_col)&(remapping_df['from'] == from_col)])>0
+                # &(remapping_df['from'] == from_col)]
+                remap_found = len(remapping_df[(remapping_df['to'] == to_col))>0
 
                 # logging.info(column['name'], col)
                 if remap_found:
-                    print('remap found!', column['name'], col)
-                if column['name'].lower() == col.lower() : #or remap_found
+                    print(f'remap found! {to_col}, {from_col})
+                if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
-                    logging.info(to_col, from_col)
+                    # print(to_col, from_col)
 
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
