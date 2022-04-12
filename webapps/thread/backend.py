@@ -490,7 +490,7 @@ class dss_utils:
 
                 remap_found = len(remapping_df[(remapping_df['to'] == (ds_name + '|' + column['name']))&(remapping_df['from'] == (ds_name + '|' + col))])>0
 
-                # logging.info(column['name'], col)
+                logging.info(column['name'], col)
                 if remap_found:
                     print('remap found!', column['name'], col)
                 if column['name'].lower() == col.lower() or remap_found:
