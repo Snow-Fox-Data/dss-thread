@@ -281,13 +281,6 @@ class dss_utils:
 
         exists = ds.exists()
         if exists:
-            try:
-                # make sure it has a schema
-                schema = ds.get_schema()
-            except:
-                logging.info(f'dataset {name} has no schema, overwriting')
-                overwrite = True
-
             if not overwrite:
                 return
             
@@ -512,15 +505,19 @@ class dss_utils:
         return refs
 
     def get_tag_list(self):
-        df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-
         tags = []
-        for idx, row in df.iterrows():
-            row_tags = json.loads(row['tags'])
-            for t in row_tags:
-                if not t in tags:
-                    tags.append(t)
 
+        try:
+            df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+
+            for idx, row in df.iterrows():
+                row_tags = json.loads(row['tags'])
+                for t in row_tags:
+                    if not t in tags:
+                        tags.append(t)
+        except:
+            logging.info('error loading definitions - tags')
+            
         return tags
 
     def get_ds_by_name(self, name, all_projects, p_name=None):
