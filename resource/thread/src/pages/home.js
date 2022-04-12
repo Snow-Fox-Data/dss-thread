@@ -272,7 +272,7 @@ class Home extends Component {
     collectionStats() {
         return <div style={{ padding: '20px' }}>
             <h1>Dataiku Instance Stats</h1>
-            <Row>
+            <Row style={{ paddingTop: '20px' }}>
                 <Col>
                     <Card style={{ width: '15rem' }} >
                         <Card.Header>
@@ -280,11 +280,8 @@ class Home extends Component {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                <div style={{ textAlign: "center" }}>
-                                    <Badge>
-                                        <div style={{ fontSize: "50px" }}>{this.state.collectionStats.project_ct}
-                                        </div>
-                                    </Badge>
+                                <div style={{ fontSize: "50px", textAlign: "center" }}>
+                                    {this.state.collectionStats.project_ct}
                                 </div>
                             </Card.Title>
                         </Card.Body>
@@ -296,11 +293,7 @@ class Home extends Component {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                <div style={{ textAlign: "center" }}>
-                                    <Badge>
-                                        <div style={{ fontSize: "50px" }}>{this.state.collectionStats.dataset_ct}
-                                        </div>
-                                    </Badge>
+                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.dataset_ct}
                                 </div>
                             </Card.Title>
                         </Card.Body>
@@ -313,11 +306,7 @@ class Home extends Component {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                <div style={{ textAlign: "center" }}>
-                                    <Badge>
-                                        <div style={{ fontSize: "50px" }}>{this.state.collectionStats.column_ct}
-                                        </div>
-                                    </Badge>
+                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.column_ct}
                                 </div>
                             </Card.Title>
                         </Card.Body>
@@ -330,11 +319,7 @@ class Home extends Component {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                <div style={{ textAlign: "center" }}>
-                                    <Badge>
-                                        <div style={{ fontSize: "50px" }}>{this.state.collectionStats.definition_ct}
-                                        </div>
-                                    </Badge>
+                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.definition_ct}
                                 </div>
                             </Card.Title>
                         </Card.Body>
@@ -342,14 +327,6 @@ class Home extends Component {
                 </Col>
             </Row >
         </div>
-
-        // return <div style={{ padding: '20px' }}>
-        //     <h1>Dataiku Instance Stats</h1>
-        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.project_ct}</span> Projects</h2>
-        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.dataset_ct}</span> Datasets</h2>
-        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.column_ct}</span> Columns</h2>
-        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.definition_ct}</span> Definitions</h2>
-        // </div>
     }
 
     render() {
