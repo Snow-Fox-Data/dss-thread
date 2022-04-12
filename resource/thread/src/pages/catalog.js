@@ -82,11 +82,12 @@ class Catalog extends Component {
     // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8/#o=83529576
       console.log("openDefinition(defKey) :: defKey == " + defKey);
       console.log("App.CURRENT_URL == " + App.CURRENT_URL);
-    //   window.location = App.CURRENT_URL + "#o=" + defKey;
+      let url = App.CURRENT_URL + "#o=" + defKey;
+      window.location = url;
 
       // THIS CODE SHOULD NAVIGATE TO LINK
-      let navigate = useNavigate();
-      navigate(App.CURRENT_URL + "#o=" + defKey);
+    //   let navigate = useNavigate();
+    //   navigate(url);
     }
 
     sortDefinitions(sortBy) { 
@@ -105,7 +106,8 @@ class Catalog extends Component {
         console.log('sortByKeys == ');
         console.log(sortByKeys);
         if(sortByKeys.length > 0) {
-          _sortBy = sortByKeys.map((item, index) => {
+        //   _sortBy = 
+          sortByKeys.map((item, index) => {
             console.log('sortBy == ' + sortBy);
             console.log('index == ' + index);
             console.log('item == ');
