@@ -481,10 +481,15 @@ class dss_utils:
 
         nxt = []
 
+        remapping_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
+
         for obj in ds_lineage_obj:
             ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
-                if column['name'].lower() == col.lower():
+                remap_found = len(remapping_df[(remapping_df['to'] == column['name'])&(remapping_df['from'] == col)])>0
+                if remap_found:
+                    print('remap found!', column['name'], col)
+                if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
                     # logging.info(col, ds['name'], ds[dir])
                     lin = self.get_col_lineage(col, ds[dir], upstream)
