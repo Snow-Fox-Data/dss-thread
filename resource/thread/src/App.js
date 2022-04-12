@@ -56,13 +56,17 @@ class App extends Component {
     }
 
     checkActiveTab(activeTab = App.HOME) {
+        console.log('checkActiveTab() :: START :: activeTab == ' + activeTab);
         // let activeTab = App.HOME;
         if (App.CURRENT_URL.indexOf('catalog') !== -1) {
+            console.log('CHANGE TO CATALOG :: ');
             activeTab = App.CATALOG;
         } else {
+            console.log('CHANGE TO HOME :: ');
             activeTab = App.HOME;
         }
 
+        console.log('checkActiveTab() :: END :: activeTab == ' + activeTab);
         this.setState({
             activeTab: activeTab
         });
