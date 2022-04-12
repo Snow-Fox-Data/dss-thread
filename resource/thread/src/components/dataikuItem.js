@@ -105,17 +105,19 @@ class DataikuItem extends Component {
     };
 
     deleteDef() {
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        };
+        if (window.confirm('Are you sure you\'d like to delete this definition?')) {
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            };
 
-        fetch(window.getWebAppBackendUrl('delete-definition?id=' + this.props.item.id), requestOptions)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    window.location.reload();
-                });
+            fetch(window.getWebAppBackendUrl('delete-definition?id=' + this.props.item.id), requestOptions)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        window.location.reload();
+                    });
+        }
     }
 
     saveDef() {
@@ -736,7 +738,7 @@ class DataikuItem extends Component {
                                     Will appear in the Dataiku Dataset's column description.
                                 </Form.Text>
                             </Form.Group>
-                            <Button variant="warning" onClick={() => this.deleteDef()}>Delete</Button>
+                            <Button variant="danger" onClick={() => this.deleteDef()}>Delete</Button>{' '}
                             <Button variant="primary" onClick={() => this.saveDef()}>Save</Button>
                         </Form>
                     </div>

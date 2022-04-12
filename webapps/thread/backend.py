@@ -98,7 +98,7 @@ def search():
 @app.route('/delete-definition', methods=['GET'])
 def delete_definition():
     args = request.args
-    id = args.get('id')
+    id = int(args.get('id'))
 
     dss = dss_utils()
     dss.delete_definition(id)
