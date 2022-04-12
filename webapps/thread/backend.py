@@ -570,6 +570,13 @@ class dss_utils:
             #     continue
             
             for r in project['recipes']:
+
+                settings = r.to_recipe().get_settings()
+                if 'PrepareRecipe' in type(settings):
+                    for step in settings.raw_steps:
+                        if step['type'] == 'ColumnRenamer':
+                            print(step)
+                
                 ins = self.get_stream(r, 'inputs', p)            
                 outs = self.get_stream(r, 'outputs', p)  
                 
