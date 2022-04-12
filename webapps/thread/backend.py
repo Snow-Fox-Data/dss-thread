@@ -491,11 +491,11 @@ class dss_utils:
                 remap_found = len(remapping_df[(remapping_df['to'] == (ds_name + '|' + column['name']))&(remapping_df['from'] == (ds_name + '|' + col))])>0
 
                 # logging.info(column['name'], col)
-                # if remap_found:
-                    # print('remap found!', column['name'], col)
+                if remap_found:
+                    print('remap found!', column['name'], col)
                 if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
-                    logging.info(col, ds['name'], ds[dir])
+                    # logging.info(col, ds['name'], ds[dir])
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
