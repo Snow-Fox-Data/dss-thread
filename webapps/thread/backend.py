@@ -486,7 +486,7 @@ class dss_utils:
         for obj in ds_lineage_obj:
             ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
-                ds_name = self.get_full_dataset_name(ds['name'], ds['projectKey'])
+                ds_name = self.get_full_dataset_name(ds['name'], ds['project'])
 
                 remap_found = len(remapping_df[(remapping_df['to'] == (ds_name + '|' + column['name']))&(remapping_df['from'] == (ds_name + '|' + col))])>0
 
