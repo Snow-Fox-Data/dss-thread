@@ -55,9 +55,8 @@ class App extends Component {
         console.log("window.location.pathname == " + window.location.pathname);
     }
 
-    checkActiveTabab() {
-        let activeTab = App.HOME;
-
+    checkActiveTab(activeTab = App.HOME) {
+        // let activeTab = App.HOME;
         if (App.CURRENT_URL.indexOf('catalog') !== -1) {
             activeTab = App.CATALOG;
         } else {
@@ -165,12 +164,12 @@ class App extends Component {
                                     </li> */}
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
-                                            onClick={() => this.setState({ activeTab: App.HOME })}
+                                            onClick={() => this.checkActiveTab({ activeTab: App.HOME })}
                                             to="/">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link className={activeTab == App.CATALOG ? 'active' : ''}
-                                            onClick={() => this.setState({ activeTab: App.CATALOG })}
+                                            onClick={() => this.checkActiveTab({ activeTab: App.CATALOG })}
                                             to="/catalog">Catalog</Link>
                                     </li>
                                 </ul>

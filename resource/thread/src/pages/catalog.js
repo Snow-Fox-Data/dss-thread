@@ -183,8 +183,8 @@ class Catalog extends Component {
                             <div style={{display: "block"}}>
                                 <FaSearch onClick={() => this.toggleFilter()} style={{
                                     color: "#000",
-                                    height: '22px',
-                                    width: '22px'
+                                    height: '21px',
+                                    width: '21px'
                                 }} />
                             </div>
                         </span>
