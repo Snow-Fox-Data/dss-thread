@@ -95,6 +95,16 @@ def search():
     
     return result.to_json(orient="records")
 
+@app.route('/delete-definition', methods=['GET'])
+def delete_definition():
+    args = request.args
+    id = args.get('id')
+
+    dss = dss_utils()
+    dss.delete_definition(id)
+
+    return json.dumps({'success':True})
+
 @app.route('/load-item', methods=['GET'])
 def load_item():
     # passing "key" as querystring param
@@ -167,6 +177,7 @@ def load_item():
                 df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                 df['object_type'] = 'definition'
                 res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
+                res = 
 
     response_json = json.dumps(res) 
     # logging.info(response_json)
@@ -609,8 +620,7 @@ class dss_utils:
         
                 if 'lineage_downstream' in ds:
                     result_down = self.traverse_lineage(ds['full_name'], 'lineage_downstream', all_projects)
-                    ds['lineage_downstream_full'] = result_down
-                            
+                    ds['lineage_downstream_full'] = result_down                       
                         
     def traverse_lineage(self, ds_name, dir, all_projects, recur_ct = 0):
         ds = self.get_ds_by_name(ds_name, all_projects)
@@ -649,6 +659,14 @@ class dss_utils:
         proj_dataset = dataiku.Dataset(THREAD_INDEX_NAME)
 
         return proj_dataset
+
+    def delete_definition(self, id):
+        ds = dataiku.Dataset(THREAD_DEFINITIONS_NAME)
+        
+        df = ds.get_dataframe()
+        df = df.drop(df[df.id==id].index)
+
+        ds.write_dataframe(df)
 
     def scan_server(self):
         project_list = []

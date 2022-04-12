@@ -696,10 +696,8 @@ class DataikuItem extends Component {
                                 <Form.Control type="text" defaultValue={this.props.item.name}
                                     onChange={e => this.props.item.name = e.target.value}
                                 />
-                                <div>
-                                    <h5>
-                                        Tags
-                                    </h5>
+                                <div style={{ padding: "10px 0px" }}>
+                                    <Form.Label>Tags</Form.Label>
                                     {eval(this.props.item.tags).length > 0 ?
                                         <div style={{ paddingBottom: "10px" }}>
                                             {this.buildTagsString(eval(this.props.item.tags), 'light', false)}
