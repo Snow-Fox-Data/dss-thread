@@ -57,6 +57,7 @@ def scan():
 
     dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
     dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
+    dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
     dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
 
     result = dss.scan_server()
@@ -280,6 +281,7 @@ def update_desc():
 THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
 THREAD_DATASETS_NAME = '--Thread-Datasets--'
 THREAD_INDEX_NAME = '--Thread-Index--'
+THREAD_REMAPPING_NAME = '--Thread-Column-Mapping--'
 
 class dss_utils:
 
@@ -482,7 +484,6 @@ class dss_utils:
         for obj in ds_lineage_obj:
             ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
-                    
                 if column['name'].lower() == col.lower():
                     # direct column name match!
                     # logging.info(col, ds['name'], ds[dir])
@@ -563,6 +564,10 @@ class dss_utils:
         return project + '|' + name
 
     def get_ds_lineage(self, all_projects):
+
+        remapping_ds = dataiku.Dataset(THREAD_REMAPPING_NAME)
+        remappings = []
+
         for p in all_projects:
             project = all_projects[p]
             
@@ -576,13 +581,19 @@ class dss_utils:
                     for step in settings.raw_steps:
                         if 'type' in step and step['type'] == 'ColumnRenamer' and step['disabled'] == False:
                             for renaming in step['params']['renamings']:
-                                print(f'from: {renaming["from"]} to: {renaming["to"]}')
+                                in_set = settings.get_recipe_inputs()['main']['items'][0]['ref']
+                                out_set = settings.get_recipe_outputs()['main']['items'][0]['ref']
+
+                                remappings.append({'from': p + '|' + in_set + '|' + renaming['from'], 'to': p + '|' + out_set + '|' +renaming['to']})
+                                # print(f'from: {renaming["from"]} to: {renaming["to"]}')
                 
                 ins = self.get_stream(r, 'inputs', p)            
                 outs = self.get_stream(r, 'outputs', p)  
                 
                 r['ins'] = ins
                 r['outs'] = outs
+
+            remapping_ds.write_dataframe(pd.DataFrame.from_dict(remappings))
 
             for d in project['datasets']:
                 d['lineage_downstream'] = []
