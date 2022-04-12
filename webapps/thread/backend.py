@@ -490,8 +490,12 @@ class dss_utils:
 
                 remap_found = len(remapping_df[(remapping_df['to'] == (ds_name + '|' + column['name']))&(remapping_df['from'] == (ds_name + '|' + col))])>0
 
-                if remap_found:
-                    print('remap found!', column['name'], col)
+                # if remap_found:
+                    # print('remap found!', column['name'], col)
+
+                if ((ds_name + '|' + column['name']) == 'ACSDEMO|sensordata_joined|Measure1') or ((ds_name + '|' + column['name'] + '|' + col) == 'ACSDEMO|sensordata_joined|Measure1'):
+                    print(f'remap! {column["name"]}, {col}')
+
                 if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
                     # logging.info(col, ds['name'], ds[dir])
