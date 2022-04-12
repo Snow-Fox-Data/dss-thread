@@ -593,8 +593,7 @@ class dss_utils:
                 r['ins'] = ins
                 r['outs'] = outs
 
-            remapping_ds.write_dataframe(pd.DataFrame.from_dict(remappings), infer_schema=True, dropAndCreate=True)
-
+            
             for d in project['datasets']:
                 d['lineage_downstream'] = []
                 d['lineage_upstream'] = []
@@ -613,6 +612,9 @@ class dss_utils:
                         for i in r['ins']:
                             if not i in d['lineage_upstream']:
                                 d['lineage_upstream'].append(i)
+
+        # write out the remappings
+        remapping_ds.write_dataframe(pd.DataFrame.from_dict(remappings), infer_schema=True, dropAndCreate=True)
 
         # add all shares
         for p in all_projects:
@@ -639,7 +641,7 @@ class dss_utils:
         
                 if 'lineage_downstream' in ds:
                     result_down = self.traverse_lineage(ds['full_name'], 'lineage_downstream', all_projects)
-                    ds['lineage_downstream_full'] = result_down                       
+                    ds['lineage_downstream_full'] = result_down                   
                         
     def traverse_lineage(self, ds_name, dir, all_projects, recur_ct = 0):
         ds = self.get_ds_by_name(ds_name, all_projects)
