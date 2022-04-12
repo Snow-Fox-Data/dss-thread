@@ -437,7 +437,7 @@ class DataikuItem extends Component {
                 <Modal.Body>
                     <Container>
                         <div style={{ paddingBottom: '10px' }}>Select the up and downstream datasets to apply this definition</div>
-                        
+
                         {/* <Button onClick={()=>selectAllLineage()}>Select All</Button> */}
 
                         <span style={{ fontWeight: 'bold' }}>This Column</span>
@@ -758,7 +758,7 @@ class DataikuItem extends Component {
                 <Col>
                     <h1>{this.props.item.id}<span style={{ paddingLeft: "6px", paddingBottom: "2px" }}><a href={Common.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank"><ArrowUpRightSquare size={22} /></a></span></h1>
 
-                    <p><span style={{fontWeight:'bold'}}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                    <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col sm>
@@ -828,8 +828,7 @@ class DataikuItem extends Component {
                     </span>
                     </h1>
                     <h4>({this.props.item.projectKey})</h4>
-                    <p>Project<span style={{ paddingLeft: '4px' }}> owned by {this.props.item.ownerDisplayName}
-                        in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
+                    <p><span style={{ paddingLeft: '4px' }}>Project owned by {this.props.item.ownerDisplayName} in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col>
