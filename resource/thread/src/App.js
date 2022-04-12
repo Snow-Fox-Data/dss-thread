@@ -53,12 +53,18 @@ class App extends Component {
         console.log("window.location.href == " + window.location.href);
         console.log("window.location == " + window.location);
         console.log("window.location.pathname == " + window.location.pathname);
+
+        this.buildBaseUrl();
     }
 
-    checkActiveTab(activeTab = App.HOME) {
-        console.log('checkActiveTab() :: START :: activeTab == ' + activeTab);
-        // let activeTab = App.HOME;
-        if (App.CURRENT_URL.indexOf('catalog') !== -1) {
+    buildBaseUrl()  {
+
+    }
+
+    checkActiveTab() {
+        console.log('checkActiveTab() :: START :: ');
+        let activeTab = App.HOME;
+        if (App.CURRENT_URL.indexOf(App.CATALOG) !== -1) {
             console.log('CHANGE TO CATALOG :: ');
             activeTab = App.CATALOG;
         } else {
@@ -168,12 +174,12 @@ class App extends Component {
                                     </li> */}
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
-                                            onClick={() => this.checkActiveTab(App.HOME)}
+                                            onClick={() => this.setState({ activeTab: App.HOME })}
                                             to="/">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link className={activeTab == App.CATALOG ? 'active' : ''}
-                                            onClick={() => this.checkActiveTab(App.CATALOG)}
+                                            onClick={() => this.setState({ activeTab: App.CATALOG })}
                                             to="/catalog">Catalog</Link>
                                     </li>
                                 </ul>
