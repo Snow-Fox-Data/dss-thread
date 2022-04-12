@@ -70,7 +70,7 @@ class App extends Component {
             console.log('path == ' + path);
 
             return (path.length > 0) ? path : null;
-        });
+        }).filter((path) => path !== null);
 
         console.log('arrayUrlPath == ');
         console.log(arrayUrlPath);
