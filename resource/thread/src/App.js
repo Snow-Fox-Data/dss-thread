@@ -54,16 +54,22 @@ class App extends Component {
         console.log("window.location == " + window.location);
         console.log("window.location.pathname == " + window.location.pathname);
 
-        // this.buildBaseUrl();
+        this.buildBaseUrl();
         this.checkActiveTab();
     }
 
     buildBaseUrl()  {
+        console.log('buildBaseUrl() :: START :: ');
 
+        let arrayUrlPath = App.CURRENT_URL.split('/');
+        console.log('arrayUrlPath == ');
+        console.log(arrayUrlPath);
+
+        console.log('buildBaseUrl() :: END :: ');
     }
 
     checkActiveTab() {
-        console.log('checkActiveTab() :: START :: ');
+        console.log('checkActiveTab() :: START :: App.CURRENT_URL.indexOf(App.CATALOG) === ' + App.CURRENT_URL.indexOf(App.CATALOG));
         let activeTab = App.HOME;
         if (App.CURRENT_URL.indexOf(App.CATALOG) !== -1) {
             console.log('CHANGE TO CATALOG :: ');
