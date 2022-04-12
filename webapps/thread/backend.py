@@ -495,7 +495,7 @@ class dss_utils:
                     print('remap found!', column['name'], col)
                 if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
-                    # logging.info(col, ds['name'], ds[dir])
+                    logging.info(col)
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
