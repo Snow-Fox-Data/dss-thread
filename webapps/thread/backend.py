@@ -177,7 +177,6 @@ def load_item():
                 df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
                 df['object_type'] = 'definition'
                 res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
-                res = 
 
     response_json = json.dumps(res) 
     # logging.info(response_json)
