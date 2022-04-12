@@ -175,9 +175,9 @@ def load_item():
             if res['object_type'] == 'definition':
                 # logging.info(f'searching for definition key: {key}')
                 df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-                df['object_type'] = 'definition'
                 res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
-
+                res['object_type'] = 'definition'
+               
     response_json = json.dumps(res) 
     # logging.info(response_json)
 
@@ -417,7 +417,7 @@ class dss_utils:
         return res
 
     def reset_col_definition(self, df, col_name):
-        df['applied_to'] = df['applied_to'].replace({f'["{col_name}"\'],': ''}).replace({f'["{col_name}"]': ''})  
+        df['applied_to'] = df['applied_to'].replace({f'["{col_name}"],': ''}).replace({f',["{col_name}"]': ''}).replace({f'["{col_name}"]': '[]'})  
 
         return df
 
