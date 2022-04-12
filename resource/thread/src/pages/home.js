@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Col, Row, Spinner } from 'react-bootstrap';
+import { Col, Row, Spinner, Card, Badge } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaFilter } from 'react-icons/fa';
 import Common from '../common/common';
@@ -270,13 +270,76 @@ class Home extends Component {
     }
 
     collectionStats() {
-        return <div style={{padding:'20px'}}>
-            <h1>Dataiku Instance Stats</h1>
-            <h2><span style={{color:'red'}}>{this.state.collectionStats.project_ct}</span> Projects</h2>
-            <h2><span style={{color:'red'}}>{this.state.collectionStats.dataset_ct}</span> Datasets</h2>
-            <h2><span style={{color:'red'}}>{this.state.collectionStats.column_ct}</span> Columns</h2>
-            <h2><span style={{color:'red'}}>{this.state.collectionStats.definition_ct}</span> Definitions</h2>
+        return <div>
+            <Card style={{ width: '15rem' }} >
+                <Card.Header>
+                    Projects
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title>
+                        <div style={{ textAlign: "center" }}>
+                            <Badge>
+                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.project_ct}%
+                                </div>
+                            </Badge>
+                        </div>
+                    </Card.Title>
+                </Card.Body>
+            </Card>
+            <Card style={{ width: '15rem' }} >
+                <Card.Header>
+                    Datasets
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title>
+                        <div style={{ textAlign: "center" }}>
+                            <Badge>
+                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.dataset_ct}%
+                                </div>
+                            </Badge>
+                        </div>
+                    </Card.Title>
+                </Card.Body>
+            </Card>
+            <Card style={{ width: '15rem' }} >
+                <Card.Header>
+                    Columns
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title>
+                        <div style={{ textAlign: "center" }}>
+                            <Badge>
+                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.column_ct}%
+                                </div>
+                            </Badge>
+                        </div>
+                    </Card.Title>
+                </Card.Body>
+            </Card>
+            <Card style={{ width: '15rem' }} >
+                <Card.Header>
+                    Definitions
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title>
+                        <div style={{ textAlign: "center" }}>
+                            <Badge>
+                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.definition_ct}%
+                                </div>
+                            </Badge>
+                        </div>
+                    </Card.Title>
+                </Card.Body>
+            </Card>
         </div>
+
+        // return <div style={{ padding: '20px' }}>
+        //     <h1>Dataiku Instance Stats</h1>
+        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.project_ct}</span> Projects</h2>
+        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.dataset_ct}</span> Datasets</h2>
+        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.column_ct}</span> Columns</h2>
+        //     <h2><span style={{ color: 'red' }}>{this.state.collectionStats.definition_ct}</span> Definitions</h2>
+        // </div>
     }
 
     render() {
