@@ -486,8 +486,6 @@ class dss_utils:
         for obj in ds_lineage_obj:
             ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
-                # &(remapping_df['from'] == (obj['name'] + '|' + col))]
-
                 if not upstream:
                     to_col = obj['name'] + '|' + column['name']
                     from_col = obj['name'] + '|' + col
@@ -502,7 +500,8 @@ class dss_utils:
                     print('remap found!', column['name'], col)
                 if column['name'].lower() == col.lower() : #or remap_found
                     # direct column name match!
-                    logging.info(obj['name'] + '|' + col)
+                    logging.info(to_col, from_col)
+                    
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
