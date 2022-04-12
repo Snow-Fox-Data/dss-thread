@@ -574,7 +574,7 @@ class dss_utils:
                 settings = r.to_recipe().get_settings()
                 if 'PrepareRecipe' in str(type(settings)):
                     for step in settings.raw_steps:
-                        if step['type'] == 'ColumnRenamer':
+                        if 'type' in step and step['type'] == 'ColumnRenamer':
                             print(step)
                 
                 ins = self.get_stream(r, 'inputs', p)            
