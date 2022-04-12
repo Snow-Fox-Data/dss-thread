@@ -828,7 +828,7 @@ class DataikuItem extends Component {
                     </span>
                     </h1>
                     <h4>({this.props.item.projectKey})</h4>
-                    <p><span style={{ paddingLeft: '4px' }}>Project owned by {this.props.item.ownerDisplayName} in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
+                    <p><span style={{ paddingLeft: '4px' }}>Project owned by <span style={{ fontWeight: "bold" }}>{this.props.item.ownerDisplayName}</span> in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col>

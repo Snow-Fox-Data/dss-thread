@@ -281,6 +281,12 @@ class dss_utils:
 
         exists = ds.exists()
         if exists:
+            try:
+                # make sure it has a schema
+                schema = ds.get_schema()
+            except:
+                overwrite = True
+
             if not overwrite:
                 return
             
