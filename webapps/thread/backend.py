@@ -572,7 +572,7 @@ class dss_utils:
             for r in project['recipes']:
 
                 settings = r.to_recipe().get_settings()
-                if 'PrepareRecipe' in type(settings):
+                if 'PrepareRecipe' in str(type(settings)):
                     for step in settings.raw_steps:
                         if step['type'] == 'ColumnRenamer':
                             print(step)
