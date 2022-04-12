@@ -91,47 +91,19 @@ class Catalog extends Component {
     }
 
     sortDefinitions(sortBy) { 
-        console.log('sortDefinitions() :: sortBy == ' + sortBy);
         let _definitions = this.state.definitions;
         let _sortBy = this.state.sortBy;
 
-        console.log('_sortBy == ');
-        console.log(_sortBy);
-        console.log('_sortBy[sortBy] == ');
-        console.log(_sortBy[sortBy]);
-
-        // LEFT OFF TRYING TO GET THIS LOOP TO WORK FOR RESETTING ICONS.
-        // MAKE SURE TO CHECK sortBy value to prevent current sort from breaking.
         let sortByKeys = Object.keys(_sortBy);
-        console.log('sortByKeys == ');
-        console.log(sortByKeys);
         if(sortByKeys.length > 0) {
-        //   _sortBy = 
           sortByKeys.map((item, index) => {
-            console.log('sortBy == ' + sortBy);
-            console.log('index == ' + index);
-            console.log('item == ');
-            console.log(item);
-
             if(item !== sortBy) {
               _sortBy[item] = null
             }
           });
         }
-        // if(_sortBy.length > 0) {
-        //   _sortBy = _sortBy.map((item, index) => {
-        //     console.log('sortBy == ' + sortBy);
-        //     console.log('index == ' + index);
-        //     console.log('item == ');
-        //     console.log(item);
-        //     // if(item !== sortBy) {
-        //     //   _sortBy[item] = null
-        //     // }
-        //   });
-        // }
 
         if(_sortBy[sortBy] == null || _sortBy[sortBy] === 'DESC') {
-            console.log("SORT BY ASC");
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
                 if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
@@ -140,7 +112,6 @@ class Catalog extends Component {
 
             _sortBy[sortBy] = 'ASC';
         } else {
-            console.log("SORT BY DESC");
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
                 if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
@@ -212,8 +183,8 @@ class Catalog extends Component {
                             <div style={{display: "block"}}>
                                 <FaSearch onClick={() => this.toggleFilter()} style={{
                                     color: "#000",
-                                    height: '24px',
-                                    width: '24px'
+                                    height: '22px',
+                                    width: '22px'
                                 }} />
                             </div>
                         </span>
