@@ -168,12 +168,12 @@ class App extends Component {
                                     </li> */}
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
-                                            onClick={() => this.checkActiveTab({ activeTab: App.HOME })}
+                                            onClick={() => this.checkActiveTab(App.HOME)}
                                             to="/">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link className={activeTab == App.CATALOG ? 'active' : ''}
-                                            onClick={() => this.checkActiveTab({ activeTab: App.CATALOG })}
+                                            onClick={() => this.checkActiveTab(App.CATALOG)}
                                             to="/catalog">Catalog</Link>
                                     </li>
                                 </ul>
