@@ -487,11 +487,11 @@ class dss_utils:
             ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
                 if not upstream:
-                    to_col = obj['name'] + '|' + column['name']
-                    from_col = obj['name'] + '|' + col
+                    to_col = obj['name'] + '|' + str(column['name'])
+                    from_col = obj['name'] + '|' + str(col)
                 else:
-                    from_col = obj['name'] + '|' + column['name']
-                    to_col = obj['name'] + '|' + col
+                    from_col = obj['name'] + '|' + str(column['name'])
+                    to_col = obj['name'] + '|' + str(col)
 
                 remap_found = len(remapping_df[(remapping_df['to'] == to_col)&(remapping_df['from'] == from_col)])>0
 
@@ -501,7 +501,7 @@ class dss_utils:
                 if column['name'].lower() == col.lower() : #or remap_found
                     # direct column name match!
                     logging.info(to_col, from_col)
-                    
+
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
