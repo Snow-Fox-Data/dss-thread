@@ -25,21 +25,24 @@ sentry_sdk.init(
 
 @app.route('/get-user')
 def get_user():
-    headers = dict(request.headers)
-    # Get the auth info of the user performing the request
-    auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
-    
-    # If the user's group is not TRUSTED_GROUP, raise an exception
-    # if TRUSTED_GROUP not in auth_info["groups"] :
-        # raise Exception("You do not belong here, go away")
-    # else:
-    
-    if 'authIdentifier' in auth_info:
-        dss = dss_utils()
-        res = dss.get_collection_stats()
+    try:
+        headers = dict(request.headers)
+        # Get the auth info of the user performing the request
+        auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
+        
+        # If the user's group is not TRUSTED_GROUP, raise an exception
+        # if TRUSTED_GROUP not in auth_info["groups"] :
+            # raise Exception("You do not belong here, go away")
+        # else:
+        
+        if 'authIdentifier' in auth_info:
+            dss = dss_utils()
+            res = dss.get_collection_stats()
 
-        data = {"status": "ok", "you_are": auth_info["authIdentifier"], "stats": res}
-    else:
+            data = {"status": "ok", "you_are": auth_info["authIdentifier"], "stats": res}
+        else:
+            data = {"status": "denied", "you_are": 'not logged in'}
+    except:
         data = {"status": "denied", "you_are": 'not logged in'}
 
     return json.dumps(data)
@@ -517,7 +520,7 @@ class dss_utils:
                         tags.append(t)
         except:
             logging.info('error loading definitions - tags')
-            
+
         return tags
 
     def get_ds_by_name(self, name, all_projects, p_name=None):
