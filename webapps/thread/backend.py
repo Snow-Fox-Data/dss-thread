@@ -494,11 +494,11 @@ class dss_utils:
                     to_col = obj['name'] + '|' + str(col)
 
                 # &(remapping_df['from'] == from_col)]
-                remap_found = len(remapping_df[(remapping_df['to'] == to_col))>0
+                remap_found = len(remapping_df[(remapping_df['to'] == to_col)])>0
 
                 # logging.info(column['name'], col)
                 if remap_found:
-                    print(f'remap found! {to_col}, {from_col})
+                    print(f'remap found! {to_col}, {from_col}')
                 if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
                     # print(to_col, from_col)
