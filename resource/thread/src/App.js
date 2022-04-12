@@ -65,6 +65,18 @@ class App extends Component {
         console.log('arrayUrlPath == ');
         console.log(arrayUrlPath);
 
+        let urlBuilder = arrayUrlPath.map((path, index) => {
+            console.log('index == ' + index);
+            console.log('path == ' + path);
+
+            if(path.length > 0) {
+                return path;
+            }
+        });
+
+        console.log('urlBuilder == ');
+        console.log(urlBuilder);
+
         console.log('buildBaseUrl() :: END :: ');
     }
 
