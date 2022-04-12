@@ -1,5 +1,6 @@
 {
   "files": {
+<<<<<<< HEAD
     "main.css": "../../resource/thread/build/static/css/main.98d2779e.chunk.css",
     "main.js": "../../resource/thread/build/static/js/main.f3696961.chunk.js",
     "main.js.map": "../../resource/thread/build/static/js/main.f3696961.chunk.js.map",
@@ -14,12 +15,34 @@
     "static/css/2.68a81a89.chunk.css.map": "../../resource/thread/build/static/css/2.68a81a89.chunk.css.map",
     "static/css/main.98d2779e.chunk.css.map": "../../resource/thread/build/static/css/main.98d2779e.chunk.css.map",
     "static/js/2.5ebb9767.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.5ebb9767.chunk.js.LICENSE.txt"
+=======
+    "main.css": "../../resource/thread/build/static/css/main.703e8ae4.chunk.css",
+    "main.js": "../../resource/thread/build/static/js/main.f1a58981.chunk.js",
+    "main.js.map": "../../resource/thread/build/static/js/main.f1a58981.chunk.js.map",
+    "runtime-main.js": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js",
+    "runtime-main.js.map": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js.map",
+    "static/css/2.68a81a89.chunk.css": "../../resource/thread/build/static/css/2.68a81a89.chunk.css",
+    "static/js/2.7c32d66d.chunk.js": "../../resource/thread/build/static/js/2.7c32d66d.chunk.js",
+    "static/js/2.7c32d66d.chunk.js.map": "../../resource/thread/build/static/js/2.7c32d66d.chunk.js.map",
+    "index.html": "../../resource/thread/build/index.html",
+    "precache-manifest.8f55124fe90852d7d2fb9be0cd2ecfe8.js": "../../resource/thread/build/precache-manifest.8f55124fe90852d7d2fb9be0cd2ecfe8.js",
+    "service-worker.js": "../../resource/thread/build/service-worker.js",
+    "static/css/2.68a81a89.chunk.css.map": "../../resource/thread/build/static/css/2.68a81a89.chunk.css.map",
+    "static/css/main.703e8ae4.chunk.css.map": "../../resource/thread/build/static/css/main.703e8ae4.chunk.css.map",
+    "static/js/2.7c32d66d.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.7c32d66d.chunk.js.LICENSE.txt"
+>>>>>>> 9f265188467d99aa2e021639436de555ced150ac
   },
   "entrypoints": [
     "static/js/runtime-main.8e4d5060.js",
     "static/css/2.68a81a89.chunk.css",
+<<<<<<< HEAD
     "static/js/2.5ebb9767.chunk.js",
     "static/css/main.98d2779e.chunk.css",
     "static/js/main.f3696961.chunk.js"
+=======
+    "static/js/2.7c32d66d.chunk.js",
+    "static/css/main.703e8ae4.chunk.css",
+    "static/js/main.f1a58981.chunk.js"
+>>>>>>> 9f265188467d99aa2e021639436de555ced150ac
   ]
 }

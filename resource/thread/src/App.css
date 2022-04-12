@@ -120,7 +120,9 @@ ul.navbar-nav li.nav-item a:hover {
 
 .search-bar {
   margin-bottom: 1.0em;
-  width: 97.5%;
+  margin-left: auto;
+  /* width: 50%; */
+  /* width: 97.5%; */
 }
 
 .table-definitions table > tbody > tr > td {
