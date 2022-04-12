@@ -58,7 +58,7 @@ class App extends Component {
         this.checkActiveTab();
     }
 
-    buildBaseUrl()  {
+    buildBaseUrl() {
         console.log('buildBaseUrl() :: START :: ');
 
         let arrayUrlPath = App.CURRENT_URL.split('/');
@@ -101,6 +101,10 @@ class App extends Component {
     componentDidMount() {
         window.$(document).ready(() => {
             this.refreshUser();
+
+            eventBus.on('catalog', () => {
+                this.setState({ activeTab: App.CATALOG })
+            })
         });
     }
 

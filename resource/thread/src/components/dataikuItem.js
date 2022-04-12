@@ -115,7 +115,7 @@ class DataikuItem extends Component {
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        window.location.reload();
+                        eventBus.dispatch('catalog')
                     });
         }
     }
