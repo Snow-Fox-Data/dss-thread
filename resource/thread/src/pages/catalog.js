@@ -113,9 +113,9 @@ class Catalog extends Component {
             console.log('item == ');
             console.log(item);
 
-            // if(item !== sortBy) {
-            //   _sortBy[item] = null
-            // }
+            if(item !== sortBy) {
+              _sortBy[item] = null
+            }
           });
         }
         // if(_sortBy.length > 0) {
@@ -212,8 +212,8 @@ class Catalog extends Component {
                             <div style={{display: "block"}}>
                                 <FaSearch onClick={() => this.toggleFilter()} style={{
                                     color: "#000",
-                                    height: '27px',
-                                    width: '27px'
+                                    height: '24px',
+                                    width: '24px'
                                 }} />
                             </div>
                         </span>
