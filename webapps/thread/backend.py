@@ -391,8 +391,8 @@ class dss_utils:
                 col['key'] = key + '|' + col['name']
                 if col_lineage != 'none':
                     if col_lineage == 'all' or col['name'] == col_lineage:
-                        col['lineage_upstream'] = self.get_col_lineage(col['name'], lin_up, True)
-                        col['lineage_downstream'] = self.get_col_lineage(col['name'], lin_down, False)         
+                        col['lineage_upstream'] = self.get_col_lineage(key, col['name'], lin_up, True)
+                        col['lineage_downstream'] = self.get_col_lineage(key, col['name'], lin_down, False)         
         except Exception as e:
             # capture_exception(e)
             logging.info(f'no schema for {key} {e}')
@@ -474,7 +474,7 @@ class dss_utils:
 
                 ds.set_schema(ds_schema)
 
-    def get_col_lineage(self, col, ds_lineage_obj, upstream=False):
+    def get_col_lineage(self, ds_name, col, ds_lineage_obj, upstream=False):
         dir = 'lineage_downstream'
         if upstream:
             dir = 'lineage_upstream'
@@ -488,10 +488,10 @@ class dss_utils:
             for column in ds['schema']:
                 if not upstream:
                     to_col = obj['name'] + '|' + str(column['name'])
-                    from_col = obj['name'] + '|' + str(col)
+                    from_col = ds_name + '|' + str(col)
                 else:
                     from_col = obj['name'] + '|' + str(column['name'])
-                    to_col = obj['name'] + '|' + str(col)
+                    to_col = ds_name + '|' + str(col)
 
                 # &(remapping_df['from'] == from_col)]
                 remap_found = len(remapping_df[(remapping_df['to'] == to_col)])>0
@@ -503,7 +503,7 @@ class dss_utils:
                     # direct column name match!
                     # print(to_col, from_col)
 
-                    lin = self.get_col_lineage(col, ds[dir], upstream)
+                    lin = self.get_col_lineage(obj['name'], col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
         
