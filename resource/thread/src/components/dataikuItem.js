@@ -700,9 +700,9 @@ class DataikuItem extends Component {
                                     <h5>
                                         Tags
                                     </h5>
-                                    {eval(this.props.definition.tags).length > 0 ?
+                                    {eval(this.props.item.tags).length > 0 ?
                                         <div style={{ paddingBottom: "10px" }}>
-                                            {this.buildTagsString(eval(this.props.definition.tags), 'light', false)}
+                                            {this.buildTagsString(eval(this.props.item.tags), 'light', false)}
                                         </div>
                                         : <div>No tags</div>
                                     }
