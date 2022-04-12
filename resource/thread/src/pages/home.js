@@ -270,68 +270,75 @@ class Home extends Component {
     }
 
     collectionStats() {
-        return <div>
-            <Card style={{ width: '15rem' }} >
-                <Card.Header>
-                    Projects
-                </Card.Header>
-                <Card.Body>
-                    <Card.Title>
-                        <div style={{ textAlign: "center" }}>
-                            <Badge>
-                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.project_ct}%
-                                </div>
-                            </Badge>
-                        </div>
-                    </Card.Title>
-                </Card.Body>
-            </Card>
-            <Card style={{ width: '15rem' }} >
-                <Card.Header>
-                    Datasets
-                </Card.Header>
-                <Card.Body>
-                    <Card.Title>
-                        <div style={{ textAlign: "center" }}>
-                            <Badge>
-                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.dataset_ct}%
-                                </div>
-                            </Badge>
-                        </div>
-                    </Card.Title>
-                </Card.Body>
-            </Card>
-            <Card style={{ width: '15rem' }} >
-                <Card.Header>
-                    Columns
-                </Card.Header>
-                <Card.Body>
-                    <Card.Title>
-                        <div style={{ textAlign: "center" }}>
-                            <Badge>
-                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.column_ct}%
-                                </div>
-                            </Badge>
-                        </div>
-                    </Card.Title>
-                </Card.Body>
-            </Card>
-            <Card style={{ width: '15rem' }} >
-                <Card.Header>
-                    Definitions
-                </Card.Header>
-                <Card.Body>
-                    <Card.Title>
-                        <div style={{ textAlign: "center" }}>
-                            <Badge>
-                                <div style={{ fontSize: "50px" }}>{this.state.collectionStats.definition_ct}%
-                                </div>
-                            </Badge>
-                        </div>
-                    </Card.Title>
-                </Card.Body>
-            </Card>
-        </div>
+        return <Row>
+            <Col>
+                <Card style={{ width: '15rem' }} >
+                    <Card.Header>
+                        Projects
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>
+                            <div style={{ textAlign: "center" }}>
+                                <Badge>
+                                    <div style={{ fontSize: "50px" }}>{this.state.collectionStats.project_ct}
+                                    </div>
+                                </Badge>
+                            </div>
+                        </Card.Title>
+                    </Card.Body>
+                </Card>
+            </Col><Col>
+                <Card style={{ width: '15rem' }} >
+                    <Card.Header>
+                        Datasets
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>
+                            <div style={{ textAlign: "center" }}>
+                                <Badge>
+                                    <div style={{ fontSize: "50px" }}>{this.state.collectionStats.dataset_ct}
+                                    </div>
+                                </Badge>
+                            </div>
+                        </Card.Title>
+                    </Card.Body>
+                </Card>
+            </Col>
+            <Col>
+                <Card style={{ width: '15rem' }} >
+                    <Card.Header>
+                        Columns
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>
+                            <div style={{ textAlign: "center" }}>
+                                <Badge>
+                                    <div style={{ fontSize: "50px" }}>{this.state.collectionStats.column_ct}
+                                    </div>
+                                </Badge>
+                            </div>
+                        </Card.Title>
+                    </Card.Body>
+                </Card>
+            </Col>
+            <Col>
+                <Card style={{ width: '15rem' }} >
+                    <Card.Header>
+                        Definitions
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>
+                            <div style={{ textAlign: "center" }}>
+                                <Badge>
+                                    <div style={{ fontSize: "50px" }}>{this.state.collectionStats.definition_ct}
+                                    </div>
+                                </Badge>
+                            </div>
+                        </Card.Title>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </Row >
 
         // return <div style={{ padding: '20px' }}>
         //     <h1>Dataiku Instance Stats</h1>
