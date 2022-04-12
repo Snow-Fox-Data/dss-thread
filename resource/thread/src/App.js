@@ -54,7 +54,8 @@ class App extends Component {
         console.log("window.location == " + window.location);
         console.log("window.location.pathname == " + window.location.pathname);
 
-        this.buildBaseUrl();
+        // this.buildBaseUrl();
+        this.checkActiveTab();
     }
 
     buildBaseUrl()  {
@@ -73,9 +74,9 @@ class App extends Component {
         }
 
         console.log('checkActiveTab() :: END :: activeTab == ' + activeTab);
-        this.setState({
-            activeTab: activeTab
-        });
+        // this.setState({
+        //     activeTab: activeTab
+        // });
     }
 
     componentDidMount() {
