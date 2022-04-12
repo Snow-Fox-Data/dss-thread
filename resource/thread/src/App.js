@@ -201,11 +201,11 @@ class App extends Component {
                                 <Route path="/catalog" element={<Catalog />} />
 
                                 {/* <Route path="/">
-                                <Home />
-                            </Route>
-                            <Route path="/catalog">
-                                <Catalog />
-                            </Route> */}
+                                        <Home />
+                                    </Route>
+                                    <Route path="/catalog">
+                                        <Catalog />
+                                    </Route> */}
                             </Routes>
                         </Row>
                         : <Row>

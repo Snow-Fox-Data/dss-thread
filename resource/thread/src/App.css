@@ -38,6 +38,15 @@ html {
   padding-top: 5px;
 }
 
+.definition-name {
+  cursor: pointer;
+}
+
+.definition-name > span {
+  color: #3399f3;
+  text-decoration: underline
+}
+
 .lineage-check {
   font-weight: normal;
 }
@@ -121,13 +130,10 @@ ul.navbar-nav li.nav-item a:hover {
 .search-bar {
   margin-bottom: 1.0em;
   margin-left: auto;
-  /* width: 50%; */
-  /* width: 97.5%; */
 }
 
 .table-definitions table > tbody > tr > td {
   height: auto;
-  /* max-width: 300px; */
   white-space: pre-wrap;
 }
 
