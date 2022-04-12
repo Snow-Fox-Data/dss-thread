@@ -500,7 +500,7 @@ class dss_utils:
                 if column['name'].lower() == col.lower() or remap_found:
                     lin = self.get_col_lineage(remapping_df, obj['name'], column['name'], ds[dir], upstream)
 
-                    nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
+                    nxt.append({'name':obj['name'] + '|' + column['name'], dir:lin})#
         
         return nxt
                     
