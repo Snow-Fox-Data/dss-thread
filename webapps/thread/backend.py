@@ -285,6 +285,7 @@ class dss_utils:
                 # make sure it has a schema
                 schema = ds.get_schema()
             except:
+                logging.info(f'dataset {name} has no schema, overwriting')
                 overwrite = True
 
             if not overwrite:
@@ -339,7 +340,7 @@ class dss_utils:
 
             return { "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
         except:
-            return { "column_ct": 0, "dataset_ct": 0, "project_ct": 0}
+            return { "column_ct": 0, "dataset_ct": 0, "project_ct": 0, "definition_ct": 0}
 
     def load_project(self, key):
         proj = self.client.get_project(key)
