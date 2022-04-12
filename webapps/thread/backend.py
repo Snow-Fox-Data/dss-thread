@@ -128,8 +128,8 @@ def load_item():
     df = idx_ds.get_dataframe()
 
     idx_df = df.query(f'key=="{key}"')
-    # if len(idx_df) == 0:
-        # logging.info(f'{key} not found')
+    if len(idx_df) == 0:
+        logging.info(f'{key} not found')
 
     res = idx_df.iloc[0]
     if res['object_type'] == 'dataset':
@@ -490,15 +490,12 @@ class dss_utils:
 
                 remap_found = len(remapping_df[(remapping_df['to'] == (ds_name + '|' + column['name']))&(remapping_df['from'] == (ds_name + '|' + col))])>0
 
+                # logging.info(column['name'], col)
                 # if remap_found:
                     # print('remap found!', column['name'], col)
-
-                if ((ds_name + '|' + column['name']) == 'ACSDEMO|sensordata_joined|Measure1') or ((ds_name + '|' + column['name'] + '|' + col) == 'ACSDEMO|sensordata_joined|Measure1'):
-                    logging.info(f'remap! {column["name"]}, {col}')
-
                 if column['name'].lower() == col.lower() or remap_found:
                     # direct column name match!
-                    # logging.info(col, ds['name'], ds[dir])
+                    logging.info(col, ds['name'], ds[dir])
                     lin = self.get_col_lineage(col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
@@ -519,8 +516,9 @@ class dss_utils:
                     try:
                         exist = dataiku.Dataset(d_name, p_name).get_location_info()
                         refs.append(self.get_full_dataset_name(d_name, p_name))
-                    except: 
-                        logging.info(f'{p_name}.{d_name} doesnt exist')
+                    except:
+                        err = 'doesnt exist' 
+                        # logging.info(f'{p_name}.{d_name} doesnt exist')
                         # doesn't exist, this is probably a folder or other item we don't currently support
 
         except Exception as e:
