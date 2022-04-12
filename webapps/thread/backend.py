@@ -593,7 +593,7 @@ class dss_utils:
                 r['ins'] = ins
                 r['outs'] = outs
 
-            remapping_ds.write_dataframe(pd.DataFrame.from_dict(remappings))
+            remapping_ds.write_dataframe(pd.DataFrame.from_dict(remappings), infer_schema=True, dropAndCreate=True))
 
             for d in project['datasets']:
                 d['lineage_downstream'] = []
