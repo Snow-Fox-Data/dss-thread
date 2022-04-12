@@ -95,7 +95,8 @@ class App extends Component {
                 }
                 else
                     this.setState({
-                        scanning: false
+                        scanning: false,
+                        loggedIn: false
                     })
             });
     }
