@@ -1,13 +1,13 @@
 {
     "id": "dss-thread",
-    "version": "0.0.1",
+    "version": "0.5.0",
     "meta": {
         "label": "Thread",
         "description": "",
         "author": "Excelion Partners",
-        "icon": "icon-sitemap",
+        "icon": "icon-book",
         "tags": [],
-        "url": "",
+        "url": "https://excelion.io",
         "licenseInfo": "GPL-3.0 License"
     }
 }

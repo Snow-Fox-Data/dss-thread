@@ -339,6 +339,39 @@ class DataikuItem extends Component {
         }
     }
 
+    createDocPctCard(total_cols, documented_cols) {
+        var pct = ((documented_cols / total_cols) * 100).toFixed(0);
+
+        var bg = "secondary";
+        if (pct > 80)
+            bg = "success";
+        else {
+            if (pct < 40)
+                bg = "danger"
+        }
+
+        return <Card style={{ width: '15rem' }} className="float-end">
+            <Card.Header>
+                Documentation Status
+            </Card.Header>
+            <Card.Body>
+                <Card.Title>
+                    <div style={{ textAlign: "center" }}>
+                        <Badge bg={bg}>
+                            <div style={{ fontSize: "50px" }}>{pct}%
+                            </div>
+                        </Badge>
+                    </div>
+                </Card.Title>
+                <Card.Text>
+                    <div style={{ textAlign: "center", fontSize: "15px" }}>
+                        {documented_cols} / {total_cols} columns
+                    </div>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+    }
+
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
@@ -763,39 +796,6 @@ class DataikuItem extends Component {
         </Col>;
     }
 
-    createDocPctCard(total_cols, documented_cols) {
-        var pct = ((documented_cols / total_cols) * 100).toFixed(0);
-
-        var bg = "secondary";
-        if (pct > 80)
-            bg = "success";
-        else {
-            if (pct < 40)
-                bg = "danger"
-        }
-
-        return <Card style={{ width: '15rem' }} className="float-end">
-            <Card.Header>
-                Documentation Status
-            </Card.Header>
-            <Card.Body>
-                <Card.Title>
-                    <div style={{ textAlign: "center" }}>
-                        <Badge bg={bg}>
-                            <div style={{ fontSize: "50px" }}>{pct}%
-                            </div>
-                        </Badge>
-                    </div>
-                </Card.Title>
-                <Card.Text>
-                    <div style={{ textAlign: "center", fontSize: "15px" }}>
-                        {documented_cols} / {total_cols} columns
-                    </div>
-                </Card.Text>
-            </Card.Body>
-        </Card>
-    }
-
     renderProject() {
         let tags = this.buildTagsString(this.props.item.tags, 'light', false);
         let dataSetRows = this.props.item.datasets.map((col) =>
@@ -828,7 +828,7 @@ class DataikuItem extends Component {
                     </span>
                     </h1>
                     <h4>({this.props.item.projectKey})</h4>
-                    <p>Project<span style={{ paddingLeft: '4px' }}>
+                    <p>Project<span style={{ paddingLeft: '4px' }}> owned by {this.props.item.ownerDisplayName}
                         in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
