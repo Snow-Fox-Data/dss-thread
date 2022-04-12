@@ -486,12 +486,13 @@ class dss_utils:
         for obj in ds_lineage_obj:
             ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
-                remap_found = len(remapping_df[(remapping_df['to'] == (obj['name'] + '|' + column['name']))&(remapping_df['from'] == (obj['name'] + '|' + col))])>0
+                # &(remapping_df['from'] == (obj['name'] + '|' + col))]
+                remap_found = len(remapping_df[(remapping_df['to'] == (obj['name'] + '|' + column['name']))])>0
 
                 # logging.info(column['name'], col)
                 if remap_found:
                     print('remap found!', column['name'], col)
-                if column['name'].lower() == col.lower() or remap_found:
+                if column['name'].lower() == col.lower() : #or remap_found
                     # direct column name match!
                     logging.info(obj['name'] + '|' + col)
                     lin = self.get_col_lineage(col, ds[dir], upstream)
