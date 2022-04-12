@@ -103,12 +103,12 @@ class App extends Component {
         window.$(document).ready(() => {
             this.refreshUser();
 
-            eventBus.on('catalog', () => {
-                let navigate = useNavigate();
+            // eventBus.on('catalog', () => {
+            //     let navigate = useNavigate();
 
-                navigate('/catalog', { replace: true })
-                this.setState({ activeTab: App.CATALOG })
-            })
+            //     navigate('/catalog', { replace: true })
+            //     this.setState({ activeTab: App.CATALOG })
+            // })
         });
     }
 

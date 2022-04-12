@@ -76,8 +76,9 @@ def defintition_list():
     df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
     result = df[df['name'].str.contains(args.get('term'), case=False)]
     result2 = df[df['description'].str.contains(args.get('term'), case=False)]
+    result3 = df[df['tags'].str.contains(args.get('term'), case=False)]
 
-    merged_df = pd.concat([result, result2], ignore_index=True)
+    merged_df = pd.concat([result, result2, result3], ignore_index=True)
     merged_df.drop_duplicates(subset=['id'],inplace=True)
 
     merged_df['search_def'] = merged_df['name'] + ' | ' + merged_df['description']
