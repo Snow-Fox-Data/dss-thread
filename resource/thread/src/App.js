@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -103,6 +104,9 @@ class App extends Component {
             this.refreshUser();
 
             eventBus.on('catalog', () => {
+                let navigate = useNavigate();
+
+                navigate('/catalog', { replace: true })
                 this.setState({ activeTab: App.CATALOG })
             })
         });
