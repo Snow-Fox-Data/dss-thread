@@ -487,7 +487,15 @@ class dss_utils:
             ds = self.load_dataset(obj['name'], False)
             for column in ds['schema']:
                 # &(remapping_df['from'] == (obj['name'] + '|' + col))]
-                remap_found = len(remapping_df[(remapping_df['to'] == (obj['name'] + '|' + column['name']))])>0
+
+                if not upstream:
+                    to_col = obj['name'] + '|' + column['name']
+                    from_col = obj['name'] + '|' + col
+                else:
+                    from_col = obj['name'] + '|' + column['name']
+                    to_col = obj['name'] + '|' + col
+
+                remap_found = len(remapping_df[(remapping_df['to'] == to_col)&(remapping_df['from'] == from_col)])>0
 
                 # logging.info(column['name'], col)
                 if remap_found:
