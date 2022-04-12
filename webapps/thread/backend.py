@@ -385,14 +385,15 @@ class dss_utils:
         lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
         schema = []
+        remapping_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
         try:
             schema = ds.read_schema()
             for col in schema:
                 col['key'] = key + '|' + col['name']
                 if col_lineage != 'none':
                     if col_lineage == 'all' or col['name'] == col_lineage:
-                        col['lineage_upstream'] = self.get_col_lineage(key, col['name'], lin_up, True)
-                        col['lineage_downstream'] = self.get_col_lineage(key, col['name'], lin_down, False)         
+                        col['lineage_upstream'] = self.get_col_lineage(remapping_df, key, col['name'], lin_up, True)
+                        col['lineage_downstream'] = self.get_col_lineage(remapping_df, key, col['name'], lin_down, False)         
         except Exception as e:
             # capture_exception(e)
             logging.info(f'no schema for {key} {e}')
@@ -474,14 +475,12 @@ class dss_utils:
 
                 ds.set_schema(ds_schema)
 
-    def get_col_lineage(self, ds_name, col, ds_lineage_obj, upstream=False):
+    def get_col_lineage(self, remapping_df, ds_name, col, ds_lineage_obj, upstream=False):
         dir = 'lineage_downstream'
         if upstream:
             dir = 'lineage_upstream'
 
         nxt = []
-
-        remapping_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
 
         for obj in ds_lineage_obj:
             ds = self.load_dataset(obj['name'], False)
@@ -496,13 +495,10 @@ class dss_utils:
                 remap_found = len(remapping_df[(remapping_df['to'] == to_col)&(remapping_df['from'] == from_col)])>0
 
                 if remap_found:
-                    logging.info(f'remap found! {to_col}, {from_col}')
+                    logging.info(f'remap found! {from_col}, {to_col}')
 
                 if column['name'].lower() == col.lower() or remap_found:
-                    # direct column name match!
-                    # print(to_col, from_col)
-
-                    lin = self.get_col_lineage(obj['name'], col, ds[dir], upstream)
+                    lin = self.get_col_lineage(remapping_df, obj['name'], col, ds[dir], upstream)
 
                     nxt.append({'name':obj['name'] + '|' + col, dir:lin})#
         
