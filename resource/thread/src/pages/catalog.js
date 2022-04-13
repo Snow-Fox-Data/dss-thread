@@ -186,7 +186,7 @@ class Catalog extends Component {
                         {col.description}
                     </td>
                     <td>
-                        {this.formatAppliedTo(col.appliedTo)}
+                        {this.formatAppliedTo(col.applied_to)}
                     </td>
                     <td>
                         {this.formatTags(col.tags)}
