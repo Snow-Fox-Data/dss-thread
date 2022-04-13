@@ -67,7 +67,7 @@ class Catalog extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        let url = window.getWebAppBackendUrl('def-search');
+        let url = window.getWebAppBackendUrl('tag-list');
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
