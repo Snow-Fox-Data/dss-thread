@@ -105,7 +105,8 @@ class Catalog extends Component {
         tags = JSON.parse(tags);
         if(tags != null && tags.length > 0) {
             let formattedTags = tags.map((tag) => {
-                return <span>{tag}<br/></span>;
+                return <span className='definition-tag' onClick={this.onClickTag(tag)}>{tag}</span>;
+                // return <span className='definition-tag' onClick={this.onClickTag(tag)}>{tag}<br/></span>;
             });
     
             return formattedTags;
@@ -116,6 +117,10 @@ class Catalog extends Component {
 
     onChangeTag(tag) {  
         console.log('onChangeTag(tag) :: tag == ' + tag);
+    }
+
+    onClickTag(tag) {
+        console.log('onClickTag(tag) :: tag == ' + tag);
     }
 
     // import {browserHistory} from "react-router";

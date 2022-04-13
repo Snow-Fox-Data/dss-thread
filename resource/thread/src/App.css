@@ -47,6 +47,19 @@ html {
   text-decoration: underline
 }
 
+.definition-tag {
+  background-color: #EEE;
+  border: solid #000 1.0em;
+  color: #000;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.5em 1.0em;
+}
+
+.definition-tag:hover {
+  background-color: #DDD;
+}
+
 .lineage-check {
   font-weight: normal;
 }
