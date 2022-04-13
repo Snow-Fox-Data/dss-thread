@@ -82,14 +82,33 @@ class Catalog extends Component {
 
     formatAppliedTo(appliedTo) {    
         appliedTo = JSON.parse(appliedTo);
-        if(appliedTo != null && appliedTo.length > 0) {
-            let formattedAppliedTo = appliedTo.map((col) => {
-                return <span>{col}<br/></span>;
+        if(appliedTo != null && appliedTo.length > 0) {    
+            return appliedTo.length;
+        } else {
+            return <span>0</span>;
+        }
+
+        // if(appliedTo != null && appliedTo.length > 0) {
+        //     let formattedAppliedTo = appliedTo.map((col) => {
+        //         return <span>{col}<br/></span>;
+        //     });
+    
+        //     return formattedAppliedTo;
+        // } else {
+        //     return <span>{appliedTo}</span>;
+        // }
+    }
+
+    formatTags(tags) {    
+        tags = JSON.parse(tags);
+        if(tags != null && tags.length > 0) {
+            let formattedTags = tags.map((tag) => {
+                return <span>{tag}<br/></span>;
             });
     
-            return formattedAppliedTo;
+            return formattedTags;
         } else {
-            return <span>{appliedTo}</span>;
+            return <span>{tags}</span>;
         }
     }
 
@@ -165,7 +184,10 @@ class Catalog extends Component {
                         {col.description}
                     </td>
                     <td>
-                        {this.formatAppliedTo(col.applied_to)}
+                        {this.formatAppliedTo(col.appliedTo)}
+                    </td>
+                    <td>
+                        {this.formatTags(col.tags)}
                     </td>
                 </tr>
             );
@@ -173,7 +195,7 @@ class Catalog extends Component {
             return listItems;
         } else {
             return  <tr>
-                      <td colSpan={3} className="text-center">
+                      <td colSpan={4} className="text-center">
                           <span>No results for your search</span>
                       </td>
                     </tr>;
@@ -261,6 +283,7 @@ class Catalog extends Component {
                                       {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
                                   </th>
                                   <th>Applied To</th>
+                                  <th>Tags</th>
                               </tr>
                           </thead>
                           <tbody>
