@@ -210,9 +210,10 @@ class DataikuItem extends Component {
                 })
                 break;
             case 'definition':
+                var tag_list = eval(this.props.item.tags);
                 var tags = [];
-                for (var x = 0; x < this.props.item.tag_list.length; x++) {
-                    tags.push({ id: x, name: this.props.item.tag_list[x] })
+                for (var x = 0; x < tag_list.length; x++) {
+                    tags.push({ id: x, name: tag_list[x] })
                 }
                 this.setState({
                     columnTagSuggestions: tags
