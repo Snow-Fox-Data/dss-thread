@@ -1,38 +1,25 @@
 {
   "files": {
     "main.css": "../../resource/thread/build/static/css/main.5f7ffb97.chunk.css",
-<<<<<<< HEAD
-    "main.js": "../../resource/thread/build/static/js/main.ef594a78.chunk.js",
-    "main.js.map": "../../resource/thread/build/static/js/main.ef594a78.chunk.js.map",
-=======
-    "main.js": "../../resource/thread/build/static/js/main.7242bf30.chunk.js",
-    "main.js.map": "../../resource/thread/build/static/js/main.7242bf30.chunk.js.map",
->>>>>>> 59e7911a3cb6308b10e7315fb4219693c599c44c
+    "main.js": "../../resource/thread/build/static/js/main.0fed946e.chunk.js",
+    "main.js.map": "../../resource/thread/build/static/js/main.0fed946e.chunk.js.map",
     "runtime-main.js": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js",
     "runtime-main.js.map": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js.map",
     "static/css/2.68a81a89.chunk.css": "../../resource/thread/build/static/css/2.68a81a89.chunk.css",
-    "static/js/2.7c9f1e87.chunk.js": "../../resource/thread/build/static/js/2.7c9f1e87.chunk.js",
-    "static/js/2.7c9f1e87.chunk.js.map": "../../resource/thread/build/static/js/2.7c9f1e87.chunk.js.map",
+    "static/js/2.49995658.chunk.js": "../../resource/thread/build/static/js/2.49995658.chunk.js",
+    "static/js/2.49995658.chunk.js.map": "../../resource/thread/build/static/js/2.49995658.chunk.js.map",
     "index.html": "../../resource/thread/build/index.html",
-<<<<<<< HEAD
-    "precache-manifest.38c7b76202d99a9d9ee97ae530cca36a.js": "../../resource/thread/build/precache-manifest.38c7b76202d99a9d9ee97ae530cca36a.js",
-=======
-    "precache-manifest.08abe37d115797e7be65b7ba69ba3476.js": "../../resource/thread/build/precache-manifest.08abe37d115797e7be65b7ba69ba3476.js",
->>>>>>> 59e7911a3cb6308b10e7315fb4219693c599c44c
+    "precache-manifest.50006dd970d9d32db1ac1caba5d9ef35.js": "../../resource/thread/build/precache-manifest.50006dd970d9d32db1ac1caba5d9ef35.js",
     "service-worker.js": "../../resource/thread/build/service-worker.js",
     "static/css/2.68a81a89.chunk.css.map": "../../resource/thread/build/static/css/2.68a81a89.chunk.css.map",
     "static/css/main.5f7ffb97.chunk.css.map": "../../resource/thread/build/static/css/main.5f7ffb97.chunk.css.map",
-    "static/js/2.7c9f1e87.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.7c9f1e87.chunk.js.LICENSE.txt"
+    "static/js/2.49995658.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.49995658.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8e4d5060.js",
     "static/css/2.68a81a89.chunk.css",
-    "static/js/2.7c9f1e87.chunk.js",
+    "static/js/2.49995658.chunk.js",
     "static/css/main.5f7ffb97.chunk.css",
-<<<<<<< HEAD
-    "static/js/main.ef594a78.chunk.js"
-=======
-    "static/js/main.7242bf30.chunk.js"
->>>>>>> 59e7911a3cb6308b10e7315fb4219693c599c44c
+    "static/js/main.0fed946e.chunk.js"
   ]
 }
