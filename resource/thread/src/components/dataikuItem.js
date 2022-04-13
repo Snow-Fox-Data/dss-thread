@@ -894,7 +894,8 @@ class DataikuItem extends Component {
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
                     </span>
                     </h1>
-                    <h4>({this.props.item.projectKey})</h4><span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span>
+                    <h4>({this.props.item.projectKey})</h4>
+                    {/* <span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span> */}
                     <p><span style={{ paddingLeft: '4px' }}>Project owned by <span style={{ fontWeight: "bold" }}>{this.props.item.ownerDisplayName}</span> in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>

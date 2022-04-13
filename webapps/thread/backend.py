@@ -54,6 +54,7 @@ def init():
 
 @app.route('/scan-project', methods=['GET'])
 def scan_project():
+    # not complete!!!
     dss = dss_utils()
 
     args = request.args
