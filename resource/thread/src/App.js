@@ -34,7 +34,8 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 class App extends Component {
-    static CURRENT_URL = window.location.pathname;
+    static CURRENT_URL = this.buildBaseUrl();
+    // static CURRENT_URL = window.location.pathname;
 
     static HOME = "HOME";
     static CATALOG = "CATALOG";
@@ -67,19 +68,20 @@ class App extends Component {
         console.log(arrayUrlPath);
 
         arrayUrlPath = arrayUrlPath.map((path, index) => {
-            console.log('index == ' + index);
-            console.log('path == ' + path);
+            // console.log('index == ' + index);
+            // console.log('path == ' + path);
 
             return (path.length > 0) ? path : null;
         }).filter((path) => path !== null);
 
-        console.log('arrayUrlPath == ');
-        console.log(arrayUrlPath);
+        // console.log('arrayUrlPath == ');
+        // console.log(arrayUrlPath);
 
         let urlBuilder = '/' + arrayUrlPath[0] + '/' + arrayUrlPath[1] + '/' + arrayUrlPath[2];
         console.log('urlBuilder == ' + urlBuilder);
 
         console.log('buildBaseUrl() :: END :: ');
+        return urlBuilder;
     }
 
     checkActiveTab() {
@@ -235,15 +237,11 @@ class App extends Component {
                     {publicApp.length == 0 ?
                         <Row>
                             <Routes>
-                                <Route exact path="/" element={<Home />} />
-                                <Route exact path="/catalog" element={<Catalog />} />
+                                {/* <Route exact path="/" element={<Home />} />
+                                <Route path="/catalog" element={<Catalog />} /> */}
 
-                                {/* <Route path="/">
-                                        <Home />
-                                    </Route>
-                                    <Route path="/catalog">
-                                        <Catalog />
-                                    </Route> */}
+                                <Route exact path={App.CURRENT_URL} element={<Home />} />
+                                <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
                             </Routes>
                         </Row>
                         : <Row>
