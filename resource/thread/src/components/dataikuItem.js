@@ -210,6 +210,13 @@ class DataikuItem extends Component {
                 })
                 break;
             case 'definition':
+                var tags = [];
+                for (var x = 0; x < this.props.item.tag_list.length; x++) {
+                    tags.push({ id: x, name: this.props.item.tag_list[x] })
+                }
+                this.setState({
+                    columnTagSuggestions: tags
+                })
                 break;
         }
     }
@@ -388,22 +395,22 @@ class DataikuItem extends Component {
         </Card>
     }
 
+    onDefTagDelete = (i) => {
+        const columnTags = this.state.columnTags.slice(0)
+        columnTags.splice(i, 1)
+        this.setState({ columnTags })
+    }
+
+    onDefTagAddition = (tag) => {
+        if (!this.state.columnTags.some(e => e.name === tag.name)) {
+            const columnTags = [].concat(this.state.columnTags, tag)
+            this.setState({ columnTags })
+        }
+    }
+
     renderColumn() {
         const filterBy = () => true;
         const { defSearchResults } = this.state;
-
-        const onDelete = (i) => {
-            const columnTags = this.state.columnTags.slice(0)
-            columnTags.splice(i, 1)
-            this.setState({ columnTags })
-        }
-
-        const onAddition = (tag) => {
-            if (!this.state.columnTags.some(e => e.name === tag.name)) {
-                const columnTags = [].concat(this.state.columnTags, tag)
-                this.setState({ columnTags })
-            }
-        }
 
         let lineage = this.buildLineage();
         const handleClose = () => this.setState({ newDefModal: false });
@@ -546,8 +553,8 @@ class DataikuItem extends Component {
                                                             allowNew='true'
                                                             minQueryLength='1'
                                                             suggestions={this.state.columnTagSuggestions}
-                                                            onDelete={(i) => onDelete(i)}
-                                                            onAddition={(tag) => onAddition(tag)} />
+                                                            onDelete={(i) => this.onDefTagDelete(i)}
+                                                            onAddition={(tag) => this.onDefTagAddition(tag)} />
                                                     </div>
                                                 </div>
                                                 <div style={{ padding: "10px 0px" }}>
@@ -714,12 +721,19 @@ class DataikuItem extends Component {
                                 />
                                 <div style={{ padding: "10px 0px" }}>
                                     <Form.Label>Tags</Form.Label>
-                                    {eval(this.props.item.tags).length > 0 ?
+                                    <ReactTags
+                                        tags={this.state.columnTags}
+                                        allowNew='true'
+                                        minQueryLength='1'
+                                        suggestions={this.state.columnTagSuggestions}
+                                        onDelete={(i) => this.onDefTagDelete(i)}
+                                        onAddition={(tag) => this.onDefTagAddition(tag)} />
+                                    {/* {eval(this.props.item.tags).length > 0 ?
                                         <div style={{ paddingBottom: "10px" }}>
                                             {this.buildTagsString(eval(this.props.item.tags), 'light', false)}
                                         </div>
                                         : <div>No tags</div>
-                                    }
+                                    } */}
                                 </div>
 
                                 {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
