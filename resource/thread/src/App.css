@@ -49,7 +49,8 @@ html {
 
 .definition-tag {
   background-color: #EEE;
-  border: solid #000 1.0em;
+  border: solid #000 0.1em;
+  border-radius: 1.0em;
   color: #000;
   cursor: pointer;
   font-weight: 700;
