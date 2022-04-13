@@ -18,6 +18,7 @@ class Catalog extends Component {
             loading: false,
             searchBy: "",
             sortBy: {},
+            tag: "",
             tags: [],
             title: "Catelog View"
         };
@@ -72,8 +73,6 @@ class Catalog extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                console.log('response == ');
-                console.log(response);
                 this.setState({
                   tags: response
                 });
@@ -81,7 +80,6 @@ class Catalog extends Component {
     }
 
     formatAppliedTo(appliedTo) {    
-        console.log('formatAppliedTo(appliedTo) :: appliedTo == ' + appliedTo);
         appliedTo = JSON.parse(appliedTo);
         if(appliedTo != null && appliedTo.length > 0) {    
             return appliedTo.length;
@@ -101,12 +99,10 @@ class Catalog extends Component {
     }
 
     formatTags(tags) {    
-        console.log('formatTags(tags) :: tags == ' + tags);
         tags = JSON.parse(tags);
         if(tags != null && tags.length > 0) {
             let formattedTags = tags.map((tag) => {
                 return <span className='definition-tag' onClick={event => this.onClickTag(tag)}>{tag}</span>;
-                // return <span className='definition-tag' onClick={this.onClickTag(tag)}>{tag}<br/></span>;
             });
     
             return formattedTags;
@@ -115,12 +111,20 @@ class Catalog extends Component {
         }
     }
 
-    onChangeTag(tag) {  
-        console.log('onChangeTag(tag) :: tag == ' + tag);
+    onChangeTag(_tag) {  
+        console.log('onChangeTag(tag) :: _tag == ' + _tag);
+        this.setState({
+            tag: _tag,
+            searchBy: _tag
+        });
     }
 
-    onClickTag(tag) {
-        console.log('onClickTag(tag) :: tag == ' + tag);
+    onClickTag(_tag) {
+        console.log('onClickTag(tag) :: _tag == ' + _tag);
+        this.setState({
+            tag: _tag,
+            searchBy: _tag
+        });
     }
 
     // import {browserHistory} from "react-router";
@@ -130,15 +134,16 @@ class Catalog extends Component {
     // }
 
     openDefinition(defKey) {
-    // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8/#o=83529576
-      console.log("openDefinition(defKey) :: defKey == " + defKey);
-      console.log("App.CURRENT_URL == " + App.CURRENT_URL);
-      let url = App.CURRENT_URL + "#o=" + defKey;
-      window.location = url;
+        // TODO update this to use the navigation 
+        // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8/#o=83529576
+        console.log("openDefinition(defKey) :: defKey == " + defKey);
+        console.log("App.CURRENT_URL == " + App.CURRENT_URL);
+        let url = App.CURRENT_URL + "#o=" + defKey;
+        window.location = url;
 
-      // THIS CODE SHOULD NAVIGATE TO LINK
-    //   let navigate = useNavigate();
-    //   navigate(url);
+        // THIS CODE SHOULD NAVIGATE TO LINK
+        //   let navigate = useNavigate();
+        //   navigate(url);
     }
 
     sortDefinitions(sortBy) { 
@@ -212,12 +217,11 @@ class Catalog extends Component {
     renderTagSelect() {
         if(this.state.tags.length > 0) {
             var tags = this.state.tags.map((tag) =>
-                <option value={tag}>{tag}</option>
+                <option value={tag} {...(this.state.tag === tag) ? 'selected' : ''}>{tag}</option>
             );
 
             return <div>
-                <select class="form-control" 
-                    onChange={event => this.onChangeTag(event.target.value)} >
+                <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
                     <option value="">Filter By Tag</option>
                     {tags}
                 </select>
