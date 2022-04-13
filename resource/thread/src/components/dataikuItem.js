@@ -220,7 +220,7 @@ class DataikuItem extends Component {
                 for (var x = 0; x < tags.length; x++) {
                     tagsArr.push({ id: x, name: tags[x] })
                 }
-                var tagList = eval(this.props.item.tags_list);
+                var tagList = eval(this.props.item.tag_list);
                 var tagsListArr = [];
                 for (var x = 0; x < tagList.length; x++) {
                     tagsListArr.push({ id: x, name: tagList[x] })
