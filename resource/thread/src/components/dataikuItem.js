@@ -148,11 +148,11 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.props.item.definition = result.value;
+                    // this.props.item.definition = result.value;
 
-                    this.setState({
-                        newDefModal: false
-                    });
+                    // this.setState({
+                    //     newDefModal: false
+                    // });
 
                     eventBus.dispatch("loading", false);
                 });
@@ -418,6 +418,22 @@ class DataikuItem extends Component {
             const columnTags = [].concat(this.state.columnTags, tag)
             this.setState({ columnTags })
         }
+    }
+
+    scanProject = () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        let url = window.getWebAppBackendUrl('scan-project') + '?id=' + this.props.item.key;
+        this.setState({ loading: true });
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                this.setState({ loading: false });
+            });
+    
     }
 
     renderColumn() {
@@ -879,7 +895,7 @@ class DataikuItem extends Component {
                         <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
                     </span>
                     </h1>
-                    <h4>({this.props.item.projectKey})</h4>
+                    <h4>({this.props.item.projectKey})</h4><span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span>
                     <p><span style={{ paddingLeft: '4px' }}>Project owned by <span style={{ fontWeight: "bold" }}>{this.props.item.ownerDisplayName}</span> in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
                 </Col>

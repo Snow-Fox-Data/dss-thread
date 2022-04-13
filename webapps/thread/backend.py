@@ -1,6 +1,7 @@
 from ctypes import util
 from dis import disassemble
 import json
+from tkinter import E
 import dataiku
 import pandas as pd
 from flask import request
@@ -50,6 +51,17 @@ def get_user():
 @app.route('/init', methods=['GET'])
 def init():
     return json.dumps({"result": "initialized"})
+
+@app.route('/scan-project', methods=['GET'])
+def scan_project():
+    dss = dss_utils()
+
+    args = request.args
+    id = args.get('id')
+
+    dss.scan_project(id)
+
+    return json.dumps({"result": "scan complete"})
 
 @app.route('/scan', methods=['GET'])
 def scan():
@@ -605,7 +617,6 @@ class dss_utils:
                 
                 r['ins'] = ins
                 r['outs'] = outs
-
             
             for d in project['datasets']:
                 d['lineage_downstream'] = []
@@ -794,6 +805,95 @@ class dss_utils:
         df2 = pd.DataFrame.from_dict(index_list)
         
         idx_ds = dataiku.Dataset(THREAD_INDEX_NAME)
+        idx_ds.write_dataframe(df2, infer_schema=True, dropAndCreate=True)
+
+        return True
+    
+    def scan_project(self, project_key):
+
+        proj = project_key
+
+        project_list = []
+        index_list = []
+        scan_obj = {}
+
+        scan_obj[proj] = {}
+        project = self.client.get_project(proj)
+        proj_meta = project.get_metadata()
+        
+        datasets = project.list_datasets()
+        recipes = project.list_recipes()
+        folders = project.list_managed_folders()
+
+        scan_obj[proj]['datasets'] = datasets
+        scan_obj[proj]['recipes'] = recipes
+        scan_obj[proj]['folders'] = folders
+
+        index_list.append({
+            "name": proj.replace('|', ' | '), 
+            "object_type": "project",
+            "key": proj,
+            "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
+        })
+
+        for dataset in datasets:
+            index_list.append({
+                "name": dataset['name'],
+                "object_type": "dataset",
+                "key": self.get_full_dataset_name(dataset['name'], proj),
+                "description": dataset['name']
+            })
+
+            for column in dataset['schema']['columns']:
+                index_list.append({
+                    "name": column['name'],
+                    "description": column['name'],
+                    "object_type": "column",
+                "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
+                    }) 
+
+        # compute the dataset lineage
+        self.get_ds_lineage(scan_obj)
+        
+        ds_list = []
+        # create an object to save 
+        for p in scan_obj:
+            datasets = scan_obj[p]['datasets']
+            for ds in datasets:
+                    obj = { "project": p, "name": ds.name, "key": self.get_full_dataset_name(ds.name, p)}
+                    if 'lineage_downstream' in ds:
+                        obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full']) 
+                        obj['lineage_downstream_l1'] = json.dumps(ds['lineage_downstream']) 
+                    else:
+                        obj['lineage_downstream'] = []
+                    if 'lineage_upstream' in ds:
+                        obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
+                        obj['lineage_upstream_l1'] = json.dumps(ds['lineage_upstream'])
+                    else:
+                        obj['lineage_upstream'] = []
+                        
+                    ds_list.append(obj)
+
+        # save datasets
+        df = pd.DataFrame.from_dict(ds_list)
+        df = df.astype({"lineage_upstream": str})
+        df = df.astype({"lineage_downstream": str})
+        proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
+        exist = proj_dataset.get_dataframe()
+
+        # drop all the old records for this project
+        exist = exist[exist.key != proj]
+        df = df.append(exist, ignore_index=True)
+
+        proj_dataset.write_dataframe(df, infer_schema=True, dropAndCreate=True)
+
+        # save index dataset
+        df2 = pd.DataFrame.from_dict(index_list)
+        idx_ds = dataiku.Dataset(THREAD_INDEX_NAME)
+        exist = idx_ds.get_dataframe()
+        exist = exist[exist.key != proj]
+        df2 = df2.append(exist, ignore_index=True)
+
         idx_ds.write_dataframe(df2, infer_schema=True, dropAndCreate=True)
 
         return True
