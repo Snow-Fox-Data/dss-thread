@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Spinner, Table } from 'react-bootstrap';
 import Common from '../common/common';
-import { FaCaretDown, FaCaretUp, FaSearch } from 'react-icons/fa';
+import { FaCaretDown, FaCaretUp, FaFilter, FaSearch } from 'react-icons/fa';
 import App from '../App';
 import { useNavigate } from 'react-router-dom';
 
@@ -222,12 +222,31 @@ class Catalog extends Component {
                 <option value={tag} {...(this.state.tag === tag) ? 'selected' : ''}>{tag}</option>
             );
 
-            return <div>
-                <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
-                    <option value="">Filter By Tag</option>
-                    {tags}
-                </select>
+            return <div className='search-bar'>
+                <div className="input-group">                
+                    <span className="input-group-addon input-group-text" style={{width: "auto"}}>
+                        <div style={{display: "block"}}>
+                            <FaFilter style={{
+                                color: "#000",
+                                height: '21px',
+                                width: '21px'
+                            }} />
+                        </div>
+                    </span>
+
+                    <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
+                        <option value="">Filter By Tag</option>
+                        {tags}
+                    </select>
+                </div>
             </div>;
+
+            // return <div>
+            //     <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
+            //         <option value="">Filter By Tag</option>
+            //         {tags}
+            //     </select>
+            // </div>;
         } else {
             return <div>
                 <select class="form-control">
@@ -266,7 +285,7 @@ class Catalog extends Component {
                     <div className="input-group">                
                         <span className="input-group-addon input-group-text" style={{width: "auto"}}>
                             <div style={{display: "block"}}>
-                                <FaSearch onClick={() => this.toggleFilter()} style={{
+                                <FaSearch style={{
                                     color: "#000",
                                     height: '21px',
                                     width: '21px'
