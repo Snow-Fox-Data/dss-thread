@@ -57,7 +57,7 @@ def scan_project():
     dss = dss_utils()
 
     args = request.args
-    id = args.get('id')
+    id = args.get('key')
 
     dss.scan_project(id)
 
@@ -809,11 +809,8 @@ class dss_utils:
 
         return True
     
-    def scan_project(self, project_key):
+    def scan_project(self, proj):
 
-        proj = project_key
-
-        project_list = []
         index_list = []
         scan_obj = {}
 

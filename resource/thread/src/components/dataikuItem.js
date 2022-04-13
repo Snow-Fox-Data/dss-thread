@@ -426,14 +426,13 @@ class DataikuItem extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        let url = window.getWebAppBackendUrl('scan-project') + '?id=' + this.props.item.projectKey;
+        let url = window.getWebAppBackendUrl('scan-project') + '?key=' + this.props.item.projectKey;
         this.setState({ loading: true });
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
                 this.setState({ loading: false });
             });
-    
     }
 
     renderColumn() {
