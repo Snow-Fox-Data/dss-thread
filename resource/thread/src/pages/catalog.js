@@ -183,7 +183,7 @@ class Catalog extends Component {
     renderTagSelect() {
         if(this.state.tags.length > 0) {
             var tags = this.state.tags.map((tag) =>
-                <option value={tag}>tag</option>
+                <option value={tag}>{tag}</option>
             );
 
             return <div>
