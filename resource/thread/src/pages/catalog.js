@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Spinner, Table } from 'react-bootstrap';
 import Common from '../common/common';
-import { FaCaretDown, FaCaretUp, FaSearch } from 'react-icons/fa';
+import { FaCaretDown, FaCaretUp, FaFilter, FaSearch } from 'react-icons/fa';
 import App from '../App';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,13 +16,17 @@ class Catalog extends Component {
         this.state = {
             definitions: [],
             loading: false,
+            searchBy: "",
             sortBy: {},
+            tag: "",
+            tags: [],
             title: "Catelog View"
         };
     }
 
     componentDidMount() {
         this.fetchDefinitions();
+        this.fetchTags();
     }
 
     displayTableHeaderCarets(columnHeader) {
@@ -59,17 +63,68 @@ class Catalog extends Component {
             });
     }
 
+    fetchTags() {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        let url = window.getWebAppBackendUrl('tag-list');
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                this.setState({
+                  tags: response
+                });
+            });
+    }
+
     formatAppliedTo(appliedTo) {    
         appliedTo = JSON.parse(appliedTo);
-        if(appliedTo != null && appliedTo.length > 0) {
-            let formattedAppliedTo = appliedTo.map((col) => {
-                return <span>{col}<br/></span>;
+        if(appliedTo != null && appliedTo.length > 0) {    
+            return appliedTo.length;
+        } else {
+            return <span>0</span>;
+        }
+
+        // if(appliedTo != null && appliedTo.length > 0) {
+        //     let formattedAppliedTo = appliedTo.map((col) => {
+        //         return <span>{col}<br/></span>;
+        //     });
+    
+        //     return formattedAppliedTo;
+        // } else {
+        //     return <span>{appliedTo}</span>;
+        // }
+    }
+
+    formatTags(tags) {    
+        tags = JSON.parse(tags);
+        if(tags != null && tags.length > 0) {
+            let formattedTags = tags.map((tag) => {
+                return <span className='definition-tag' onClick={event => this.onClickTag(tag)}>{tag}</span>;
             });
     
-            return formattedAppliedTo;
+            return formattedTags;
         } else {
-            return <span>{appliedTo}</span>;
+            return <span>{tags}</span>;
         }
+    }
+
+    onChangeTag(_tag) {  
+        this.fetchDefinitions(_tag);
+        this.setState({
+            tag: _tag,
+            searchBy: _tag
+        });
+    }
+
+    onClickTag(_tag) {
+        this.fetchDefinitions(_tag);
+        this.setState({
+            tag: _tag,
+            searchBy: _tag
+        });
     }
 
     // import {browserHistory} from "react-router";
@@ -79,15 +134,16 @@ class Catalog extends Component {
     // }
 
     openDefinition(defKey) {
-    // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8/#o=83529576
-      console.log("openDefinition(defKey) :: defKey == " + defKey);
-      console.log("App.CURRENT_URL == " + App.CURRENT_URL);
-      let url = App.CURRENT_URL + "#o=" + defKey;
-      window.location = url;
+        // TODO update this to use the navigation 
+        // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8/#o=83529576
+        console.log("openDefinition(defKey) :: defKey == " + defKey);
+        console.log("App.CURRENT_URL == " + App.CURRENT_URL);
+        let url = App.CURRENT_URL + "#o=" + defKey;
+        window.location = url;
 
-      // THIS CODE SHOULD NAVIGATE TO LINK
-    //   let navigate = useNavigate();
-    //   navigate(url);
+        // THIS CODE SHOULD NAVIGATE TO LINK
+        //   let navigate = useNavigate();
+        //   navigate(url);
     }
 
     sortDefinitions(sortBy) { 
@@ -142,23 +198,59 @@ class Catalog extends Component {
                     <td>
                         {this.formatAppliedTo(col.applied_to)}
                     </td>
+                    <td>
+                        {this.formatTags(col.tags)}
+                    </td>
                 </tr>
             );
 
             return listItems;
         } else {
             return  <tr>
-                      <td colSpan={3} className="text-center">
+                      <td colSpan={4} className="text-center">
                           <span>No results for your search</span>
                       </td>
                     </tr>;
         }
     }
 
+    renderTagSelect() {
+        if(this.state.tags.length > 0) {
+            var tags = this.state.tags.map((tag) =>
+                <option value={tag} {...(this.state.tag === tag) ? 'selected' : ''}>{tag}</option>
+            );
+
+            return <div className='search-bar'>
+                <div className="input-group">                
+                    <span className="input-group-addon input-group-text" style={{width: "auto"}}>
+                        <div style={{display: "block"}}>
+                            <FaFilter style={{
+                                color: "#000",
+                                height: '21px',
+                                width: '21px'
+                            }} />
+                        </div>
+                    </span>
+
+                    <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
+                        <option value="">Filter By Tag</option>
+                        {tags}
+                    </select>
+                </div>
+            </div>;
+        } else {
+            return <div>
+                <select class="form-control">
+                    <option value="">No tags found</option>                    
+                </select>
+            </div>;
+        }
+    }
+
     render() {      
         console.log('render() :: STATE == ');
         console.log(this.state);
-        const { loading } = this.state;
+        const { loading, searchBy } = this.state;
 
         return <Col>
               {loading ?
@@ -171,17 +263,20 @@ class Catalog extends Component {
                 </Row>
               : null}
             <Row>
-            <Col>
+              <Col md={6}>
                 <div>
                     <h2>Definitions</h2>
                 </div>
+              </Col>
+              <Col>
+                {this.renderTagSelect()}                
               </Col>
               <Col>
                 <div className='search-bar'>
                     <div className="input-group">                
                         <span className="input-group-addon input-group-text" style={{width: "auto"}}>
                             <div style={{display: "block"}}>
-                                <FaSearch onClick={() => this.toggleFilter()} style={{
+                                <FaSearch style={{
                                     color: "#000",
                                     height: '21px',
                                     width: '21px'
@@ -189,7 +284,9 @@ class Catalog extends Component {
                             </div>
                         </span>
 
-                        <input className="form-control" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
+                        <input className="form-control" placeholder="Search Definitions" 
+                            onChange={event => this.fetchDefinitions(event.target.value)} 
+                            type="text" value={searchBy} />
                     </div>
                 </div>
               </Col>
@@ -209,6 +306,7 @@ class Catalog extends Component {
                                       {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
                                   </th>
                                   <th>Applied To</th>
+                                  <th>Tags</th>
                               </tr>
                           </thead>
                           <tbody>

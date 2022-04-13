@@ -34,6 +34,30 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 class App extends Component {
+    // static CURRENT_URL = () => {
+    //     console.log('buildBaseUrl() :: START :: ');
+
+    //     // let arrayUrlPath = App.CURRENT_URL.split('/');
+    //     let arrayUrlPath = window.location.pathname.split('/');
+    //     console.log('arrayUrlPath == ');
+    //     console.log(arrayUrlPath);
+
+    //     arrayUrlPath = arrayUrlPath.map((path, index) => {
+    //         // console.log('index == ' + index);
+    //         // console.log('path == ' + path);
+
+    //         return (path.length > 0) ? path : null;
+    //     }).filter((path) => path !== null);
+
+    //     // console.log('arrayUrlPath == ');
+    //     // console.log(arrayUrlPath);
+
+    //     let urlBuilder = '/' + arrayUrlPath[0] + '/' + arrayUrlPath[1] + '/' + arrayUrlPath[2];
+    //     console.log('urlBuilder == ' + urlBuilder);
+
+    //     console.log('buildBaseUrl() :: END :: ');
+    //     return urlBuilder;
+    // };
     static CURRENT_URL = window.location.pathname;
 
     static HOME = "HOME";
@@ -62,24 +86,26 @@ class App extends Component {
     buildBaseUrl() {
         console.log('buildBaseUrl() :: START :: ');
 
-        let arrayUrlPath = App.CURRENT_URL.split('/');
+        // let arrayUrlPath = App.CURRENT_URL.split('/');
+        let arrayUrlPath = window.location.pathname.split('/');
         console.log('arrayUrlPath == ');
         console.log(arrayUrlPath);
 
         arrayUrlPath = arrayUrlPath.map((path, index) => {
-            console.log('index == ' + index);
-            console.log('path == ' + path);
+            // console.log('index == ' + index);
+            // console.log('path == ' + path);
 
             return (path.length > 0) ? path : null;
         }).filter((path) => path !== null);
 
-        console.log('arrayUrlPath == ');
-        console.log(arrayUrlPath);
+        // console.log('arrayUrlPath == ');
+        // console.log(arrayUrlPath);
 
         let urlBuilder = '/' + arrayUrlPath[0] + '/' + arrayUrlPath[1] + '/' + arrayUrlPath[2];
         console.log('urlBuilder == ' + urlBuilder);
 
         console.log('buildBaseUrl() :: END :: ');
+        return urlBuilder;
     }
 
     checkActiveTab() {
@@ -235,15 +261,11 @@ class App extends Component {
                     {publicApp.length == 0 ?
                         <Row>
                             <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />
+                                {/* <Route exact path="/" element={<Home />} />
+                                <Route path="/catalog" element={<Catalog />} /> */}
 
-                                {/* <Route path="/">
-                                        <Home />
-                                    </Route>
-                                    <Route path="/catalog">
-                                        <Catalog />
-                                    </Route> */}
+                                <Route exact path={App.CURRENT_URL} element={<Home />} />
+                                <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
                             </Routes>
                         </Row>
                         : <Row>
