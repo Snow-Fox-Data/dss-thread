@@ -63,7 +63,8 @@ class App extends Component {
     buildBaseUrl() {
         console.log('buildBaseUrl() :: START :: ');
 
-        let arrayUrlPath = App.CURRENT_URL.split('/');
+        // let arrayUrlPath = App.CURRENT_URL.split('/');
+        let arrayUrlPath = window.location.pathname.split('/');
         console.log('arrayUrlPath == ');
         console.log(arrayUrlPath);
 
