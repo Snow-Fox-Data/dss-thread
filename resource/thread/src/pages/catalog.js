@@ -17,12 +17,14 @@ class Catalog extends Component {
             definitions: [],
             loading: false,
             sortBy: {},
+            tags: [],
             title: "Catelog View"
         };
     }
 
     componentDidMount() {
         this.fetchDefinitions();
+        this.fetchTags();
     }
 
     displayTableHeaderCarets(columnHeader) {
@@ -56,6 +58,24 @@ class Catalog extends Component {
                 this.setState({
                   definitions: response
                 });
+            });
+    }
+
+    fetchTags() {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        let url = window.getWebAppBackendUrl('def-search');
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                console.log('response == ');
+                console.log(response);
+                // this.setState({
+                //   tags: response
+                // });
             });
     }
 
