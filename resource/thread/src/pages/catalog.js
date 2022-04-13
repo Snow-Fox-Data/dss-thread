@@ -113,6 +113,7 @@ class Catalog extends Component {
 
     onChangeTag(_tag) {  
         console.log('onChangeTag(tag) :: _tag == ' + _tag);
+        this.fetchDefinitions(_tag);
         this.setState({
             tag: _tag,
             searchBy: _tag
@@ -121,6 +122,7 @@ class Catalog extends Component {
 
     onClickTag(_tag) {
         console.log('onClickTag(tag) :: _tag == ' + _tag);
+        this.fetchDefinitions(_tag);
         this.setState({
             tag: _tag,
             searchBy: _tag
