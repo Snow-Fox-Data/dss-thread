@@ -215,13 +215,19 @@ class DataikuItem extends Component {
                 })
                 break;
             case 'definition':
-                var tag_list = eval(this.props.item.tags);
-                var tags = [];
-                for (var x = 0; x < tag_list.length; x++) {
-                    tags.push({ id: x, name: tag_list[x] })
+                var tags = eval(this.props.item.tags);
+                var tagsArr = [];
+                for (var x = 0; x < tags.length; x++) {
+                    tagsArr.push({ id: x, name: tags[x] })
+                }
+                var tagList = eval(this.props.item.tags_list);
+                var tagsListArr = [];
+                for (var x = 0; x < tagList.length; x++) {
+                    tagsListArr.push({ id: x, name: tagList[x] })
                 }
                 this.setState({
-                    columnTags: tags
+                    columnTags: tagsArr,
+                    columnTagSuggestions: tagsListArr
                 })
                 break;
         }
