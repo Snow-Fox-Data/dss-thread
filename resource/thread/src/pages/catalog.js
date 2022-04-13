@@ -16,6 +16,7 @@ class Catalog extends Component {
         this.state = {
             definitions: [],
             loading: false,
+            searchBy: "",
             sortBy: {},
             tags: [],
             title: "Catelog View"
@@ -73,9 +74,9 @@ class Catalog extends Component {
             .then((response) => {
                 console.log('response == ');
                 console.log(response);
-                // this.setState({
-                //   tags: response
-                // });
+                this.setState({
+                  tags: response
+                });
             });
     }
 
@@ -90,6 +91,10 @@ class Catalog extends Component {
         } else {
             return <span>{appliedTo}</span>;
         }
+    }
+
+    onChangeTag(tag) {  
+        console.log('onChangeTag(tag) :: tag == ' + tag);
     }
 
     // import {browserHistory} from "react-router";
@@ -175,10 +180,32 @@ class Catalog extends Component {
         }
     }
 
+    renderTagSelect() {
+        if(this.state.tags.length > 0) {
+            var tags = this.state.tags.map((tag) =>
+                <option value={tag}>tag</option>
+            );
+
+            return <div>
+                <select class="form-control" 
+                    onChange={event => this.onChangeTag(event.target.value)} >
+                    <option value="">Filter By Tag</option>
+                    {tags}
+                </select>
+            </div>;
+        } else {
+            return <div>
+                <select class="form-control">
+                    <option value="">No tags found</option>                    
+                </select>
+            </div>;
+        }
+    }
+
     render() {      
         console.log('render() :: STATE == ');
         console.log(this.state);
-        const { loading } = this.state;
+        const { loading, searchBy } = this.state;
 
         return <Col>
               {loading ?
@@ -191,10 +218,13 @@ class Catalog extends Component {
                 </Row>
               : null}
             <Row>
-            <Col>
+              <Col>
                 <div>
                     <h2>Definitions</h2>
                 </div>
+              </Col>
+              <Col>
+                {this.renderTagSelect()}                
               </Col>
               <Col>
                 <div className='search-bar'>
@@ -209,7 +239,9 @@ class Catalog extends Component {
                             </div>
                         </span>
 
-                        <input className="form-control" placeholder="Search Definitions" onChange={event => this.fetchDefinitions(event.target.value)} type="text" />
+                        <input className="form-control" placeholder="Search Definitions" 
+                            onChange={event => this.fetchDefinitions(event.target.value)} 
+                            type="text" value={searchBy} />
                     </div>
                 </div>
               </Col>
