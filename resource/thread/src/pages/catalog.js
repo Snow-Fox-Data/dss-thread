@@ -105,7 +105,7 @@ class Catalog extends Component {
         tags = JSON.parse(tags);
         if(tags != null && tags.length > 0) {
             let formattedTags = tags.map((tag) => {
-                return <span className='definition-tag' onClick={this.onClickTag(tag)}>{tag}</span>;
+                return <span className='definition-tag' onClick={event => this.onClickTag(tag)}>{tag}</span>;
                 // return <span className='definition-tag' onClick={this.onClickTag(tag)}>{tag}<br/></span>;
             });
     

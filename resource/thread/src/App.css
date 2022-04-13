@@ -55,8 +55,9 @@ html {
   cursor: pointer;
   display: inline-block;
   font-weight: 700;
+  margin-bottom: 0.5em;
   margin-right: 0.5em;
-  padding: 0.5em 1.0em;
+  padding: 0.25em 0.5em;
 }
 
 .definition-tag:hover {
@@ -150,6 +151,7 @@ ul.navbar-nav li.nav-item a:hover {
 
 .table-definitions table > tbody > tr > td {
   height: auto;
+  min-width: 100px;
   white-space: pre-wrap;
 }
 
