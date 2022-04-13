@@ -123,6 +123,10 @@ class DataikuItem extends Component {
     saveDef() {
         let applyTo = eval(this.props.item.applied_to);
 
+        var tagList = [];
+        for (var x = 0; x < this.state.columnTags.length; x++) {
+            tagList.push(this.state.columnTags[x].name);
+        }
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -133,7 +137,8 @@ class DataikuItem extends Component {
                 "name": this.props.item.name,
                 "description": this.props.item.description,
                 "applied_to": applyTo,
-                "id": this.props.item.id
+                "id": this.props.item.id,
+                "tags": tagList
             })
         }
 
