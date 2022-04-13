@@ -81,6 +81,7 @@ class Catalog extends Component {
     }
 
     formatAppliedTo(appliedTo) {    
+        console.log('formatAppliedTo(appliedTo) :: appliedTo == ' + appliedTo);
         appliedTo = JSON.parse(appliedTo);
         if(appliedTo != null && appliedTo.length > 0) {    
             return appliedTo.length;
@@ -100,6 +101,7 @@ class Catalog extends Component {
     }
 
     formatTags(tags) {    
+        console.log('formatTags(tags) :: tags == ' + tags);
         tags = JSON.parse(tags);
         if(tags != null && tags.length > 0) {
             let formattedTags = tags.map((tag) => {
