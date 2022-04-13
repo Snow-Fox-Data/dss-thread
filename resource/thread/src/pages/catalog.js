@@ -112,7 +112,6 @@ class Catalog extends Component {
     }
 
     onChangeTag(_tag) {  
-        console.log('onChangeTag(tag) :: _tag == ' + _tag);
         this.fetchDefinitions(_tag);
         this.setState({
             tag: _tag,
@@ -121,7 +120,6 @@ class Catalog extends Component {
     }
 
     onClickTag(_tag) {
-        console.log('onClickTag(tag) :: _tag == ' + _tag);
         this.fetchDefinitions(_tag);
         this.setState({
             tag: _tag,
@@ -240,13 +238,6 @@ class Catalog extends Component {
                     </select>
                 </div>
             </div>;
-
-            // return <div>
-            //     <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
-            //         <option value="">Filter By Tag</option>
-            //         {tags}
-            //     </select>
-            // </div>;
         } else {
             return <div>
                 <select class="form-control">
@@ -272,7 +263,7 @@ class Catalog extends Component {
                 </Row>
               : null}
             <Row>
-              <Col>
+              <Col md={6}>
                 <div>
                     <h2>Definitions</h2>
                 </div>

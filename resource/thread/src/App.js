@@ -235,8 +235,8 @@ class App extends Component {
                     {publicApp.length == 0 ?
                         <Row>
                             <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />
+                                <Route exact path="/" element={<Home />} />
+                                <Route exact path="/catalog" element={<Catalog />} />
 
                                 {/* <Route path="/">
                                         <Home />
