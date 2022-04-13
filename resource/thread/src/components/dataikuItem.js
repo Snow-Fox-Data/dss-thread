@@ -221,7 +221,7 @@ class DataikuItem extends Component {
                     tags.push({ id: x, name: tag_list[x] })
                 }
                 this.setState({
-                    columnTagSuggestions: tags
+                    columnTags: tags
                 })
                 break;
         }
