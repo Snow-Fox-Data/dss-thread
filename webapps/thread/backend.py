@@ -1,7 +1,7 @@
 from ctypes import util
 from dis import disassemble
 import json
-from tkinter import E
+# from tkinter import E
 import dataiku
 import pandas as pd
 from flask import request
