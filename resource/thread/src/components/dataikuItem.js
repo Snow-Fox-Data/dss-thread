@@ -10,7 +10,7 @@ import { ArrowUpRightSquare, ThermometerSnow } from 'react-bootstrap-icons'
 import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { FaTags, FaThumbsDown, FaThumbsUp } from "react-icons/fa";
+import { FaTags, FaThumbsDown, FaThumbsUp, FaRedo } from "react-icons/fa";
 
 const ReactTags = require('react-tag-autocomplete')
 
