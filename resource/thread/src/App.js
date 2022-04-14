@@ -138,6 +138,13 @@ class App extends Component {
             //     this.setState({ activeTab: App.CATALOG })
             // })
 
+
+            eventBus.on("scanning", (isScanning) => {
+                if (isScanning)
+                    this.setState({ "logo": loading_logo })
+                else
+                    this.setState({ "logo": logo })
+            });
         });
     }
 
@@ -198,10 +205,6 @@ class App extends Component {
     }
 
     render() {
-
-        eventBus.on("loading", (isLoading) =>
-            this.setState({ "scanning": isLoading })
-        );
 
         const { activeTab, loading, scanning } = this.state;
 

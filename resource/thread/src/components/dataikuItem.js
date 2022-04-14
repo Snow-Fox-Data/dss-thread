@@ -426,11 +426,12 @@ class DataikuItem extends Component {
 
         let url = window.getWebAppBackendUrl('scan-project') + '?key=' + this.props.item.projectKey;
 
-        eventBus.dispatch("loading", true);
+        eventBus.dispatch("scanning", true);
 
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
+                eventBus.dispatch("scanning", false);
                 this.openProject(this.props.item.projectKey)
             });
     }
