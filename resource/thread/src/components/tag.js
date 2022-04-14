@@ -5,10 +5,6 @@ class Tag extends Component {
 
     constructor(props) {
         super(props);
-
-        this.props.cursor = 'pointer'
-        if (this.props.onClick == null)
-            this.props.cursor = 'arrow';
     }
 
     onClick = () => {
@@ -18,7 +14,11 @@ class Tag extends Component {
 
     render() {
 
-        return (<div class="item-tag" style={{ cursor: this.props.cursor }} onClick={() => this.onClick()}>
+        var cursor = 'pointer'
+        if (this.props.onClick == null)
+            cursor = 'arrow';
+
+        return (<div class="item-tag" style={{ cursor: cursor }} onClick={() => this.onClick()}>
             <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{this.props.tag}</span>
         </div>)
     }
