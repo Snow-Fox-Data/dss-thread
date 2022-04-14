@@ -567,10 +567,11 @@ class dss_utils:
         else:
             d_name = name
 
-        for i in range(len(all_projects[p_name]['datasets'])):
-            ds = all_projects[p_name]['datasets'][i]
-            if ds['name'] == d_name:
-                return ds
+        if p_name in all_projects:
+            for i in range(len(all_projects[p_name]['datasets'])):
+                ds = all_projects[p_name]['datasets'][i]
+                if ds['name'] == d_name:
+                    return ds
 
         return None
 
@@ -672,8 +673,11 @@ class dss_utils:
                         
     def traverse_lineage(self, ds_name, dir, all_projects, recur_ct = 0):
         ds = self.get_ds_by_name(ds_name, all_projects)
-        
         full = dir + '_full'
+
+        if ds == None:
+            ds[full] = [] # we're doing a project scan and this is a shared dataset (we don't have in memory)
+
         try:
             if not full in ds:
                 if dir in ds:
