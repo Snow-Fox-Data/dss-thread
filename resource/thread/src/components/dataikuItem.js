@@ -640,7 +640,7 @@ class DataikuItem extends Component {
                 <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                    <div style={{ paddingTop: '4px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="link">
@@ -737,7 +737,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                    <div style={{ paddingTop: '4px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="link">
@@ -840,7 +840,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                    <div style={{ paddingTop: '4px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="link">
@@ -919,7 +919,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                    <div style={{ paddingTop: '4px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="link">
