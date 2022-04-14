@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
-import { Button } from "react-bootstrap";
+import { Button, NavDropdown } from "react-bootstrap";
 
 import { FaRedo } from 'react-icons/fa';
 
@@ -239,6 +239,9 @@ class App extends Component {
                                 </ul>
                             </div>
                             <ul class="navbar-nav">
+                                <NavDropdown title={this.state.currentUser}>
+                                    <NavDropdown.Item onClick={() => this.rescan()}>Rescan DSS</NavDropdown.Item>
+                                </NavDropdown>
                                 <li style={{ padding: '12px' }}>
                                     <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
                                 </li>
