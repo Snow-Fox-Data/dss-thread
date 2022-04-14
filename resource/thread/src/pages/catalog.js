@@ -220,13 +220,13 @@ class Catalog extends Component {
 
     renderTagSelect() {
         if(this.state.tags.length > 0) {
-            var tags = this.state.tags.map((tag) =>
+            var tags = this.state.tags.map((tag) => 
                 <option value={tag} {...(this.state.tag === tag) ? 'selected' : ''}>{tag}</option>
             );
 
             return <div className='search-bar'>
                 <div className="input-group">                
-                    <span className="input-group-addon input-group-text" style={{width: "auto"}}>
+                    <span className="input-group-addon input-group-text" style={{ width: "auto" }}>
                         <div style={{display: "block"}}>
                             <FaFilter style={{
                                 color: "#000",
@@ -237,7 +237,7 @@ class Catalog extends Component {
                     </span>
 
                     <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
-                        <option value="">Filter By Tag</option>
+                        <option value="" selected>Filter By Tag</option>
                         {tags}
                     </select>
                 </div>
