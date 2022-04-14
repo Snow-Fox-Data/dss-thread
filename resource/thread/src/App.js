@@ -244,7 +244,7 @@ class App extends Component {
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="navbar-nav" style={{ paddingRight: '5px' }}>
+                            <ul class="navbar-nav" style={{ paddingRight: '15px' }}>
                                 <NavDropdown title={this.state.currentUser}>
                                     <NavDropdown.Item onClick={() => this.rescan()}>Rescan DSS</NavDropdown.Item>
                                 </NavDropdown>

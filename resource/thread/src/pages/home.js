@@ -187,7 +187,7 @@ class Home extends Component {
         };
 
         let url = window.getWebAppBackendUrl('search') + '?term=' + term;
-        this.setState({ loading: true });
+        // this.setState({ loading: true });
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
@@ -195,7 +195,7 @@ class Home extends Component {
                 this.setState({
                     dataikuItems: response,
                     searchResults: p_list,
-                    loading: false
+                    // loading: false
                 });
             });
     }
