@@ -900,19 +900,20 @@ class DataikuItem extends Component {
                     {/* <span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span> */}
                     <p><span style={{ paddingLeft: '4px' }}>Project owned by <span style={{ fontWeight: "bold" }}>{this.props.item.ownerDisplayName}</span> in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
-                </Col>
-                <Col>
-                    <Dropdown>
-                        <Dropdown.Toggle id="dropdown-basic">
-                            Options
-                        </Dropdown.Toggle>
+                    <div style={{ float: 'right' }}>
+                        <Dropdown>
+                            <Dropdown.Toggle id="dropdown-basic">
+                                Options
+                            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item><a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</a></Dropdown.Item>
-                            <Dropdown.Item><a onClick={() => this.scanProject()}>Rescan Project</a></Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                            <Dropdown.Menu>
+                                <Dropdown.Item href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</Dropdown.Item>
+                                <Dropdown.Item nClick={() => this.scanProject()}>Rescan Project</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
                 </Col>
+
                 <Col>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
