@@ -11,6 +11,7 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags, FaThumbsDown, FaThumbsUp, FaRedo } from "react-icons/fa";
+import Tag from "./tag"
 
 const ReactTags = require('react-tag-autocomplete')
 
@@ -177,9 +178,11 @@ class DataikuItem extends Component {
                 </Button>
             }
             else
-                tags[tags.length] = <Button style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                    <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{element}</span>
-                </Button>
+                tags[tags.length] = <Tag></Tag>
+                
+                // <Button style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
+                //     <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{element}</span>
+                // </Button>
 
         });
 
