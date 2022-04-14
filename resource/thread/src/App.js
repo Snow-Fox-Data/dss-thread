@@ -29,7 +29,8 @@ import {
     Routes
 } from "react-router-dom";
 
-import logo from "./assets/images/thread-spinner.gif";
+import logo from "./assets/images/icon_thread.png";
+import loading_logo from "./assets/images/thread-spinner.gif";
 import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
@@ -135,6 +136,13 @@ class App extends Component {
             //     navigate('/catalog', { replace: true })
             //     this.setState({ activeTab: App.CATALOG })
             // })
+
+            eventBus.on("loading", (isLoading) => {
+                if (isLoading)
+                    this.setState({ "logo": logo })
+                else
+                    this.setState({ "logo": loading_logo })
+            });
         });
     }
 
@@ -238,7 +246,7 @@ class App extends Component {
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="navbar-nav" style={{paddingRight:'5px'}}>
+                            <ul class="navbar-nav" style={{ paddingRight: '5px' }}>
                                 <NavDropdown title={this.state.currentUser}>
                                     <NavDropdown.Item onClick={() => this.rescan()}>Rescan DSS</NavDropdown.Item>
                                 </NavDropdown>
