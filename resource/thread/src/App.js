@@ -154,14 +154,6 @@ class App extends Component {
                         loggedIn: true
                     });
 
-                    eventBus.on("loading", (isLoading) => {
-                        this.setState({ "loading": isLoading });
-                        if (isLoading)
-                            this.setState({ "logo": logo })
-                        else
-                            this.setState({ "logo": loading_logo })
-                    }
-                    );
                 }
                 else
                     this.setState({
@@ -173,6 +165,9 @@ class App extends Component {
 
     rescan() {
         if (!this.state.scanning) {
+            // this.setState({ "loading": isLoading });
+            this.setState({ "logo": loading_logo })
+
             this.setState({ scanning: true });
             fetch(window.getWebAppBackendUrl('scan'))
                 .then(res => res.json())
