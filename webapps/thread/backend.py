@@ -676,8 +676,7 @@ class dss_utils:
         full = dir + '_full'
 
         if ds == None:
-            ds[full] = [] # we're doing a project scan and this is a shared dataset (we don't have in memory)
-            return ds[full]
+            return [] # we're doing a project scan and this is a shared dataset (we don't have in memory)
             
         else:
             try:
