@@ -151,14 +151,12 @@ class App extends Component {
                     this.setState({
                         dataiku: window.dataiku,
                         currentUser: response['you_are'],
-                        scanning: false,
                         loggedIn: true
                     });
 
                 }
                 else
                     this.setState({
-                        scanning: false,
                         loggedIn: false
                     })
             });
@@ -200,6 +198,11 @@ class App extends Component {
     }
 
     render() {
+
+        eventBus.on("loading", (isLoading) =>
+            this.setState({ "scanning": isLoading })
+        );
+
         const { activeTab, loading, scanning } = this.state;
 
         var publicApp = this.checkPublic();
@@ -248,7 +251,7 @@ class App extends Component {
                             </ul>
                         </div>
                     </nav>
-                    {scanning ?
+                    {/* {scanning ?
                         <Row>
                             <div style={{ padding: '10px' }}>
                                 <Spinner animation="border" role="status">
@@ -256,7 +259,7 @@ class App extends Component {
                                 </Spinner>
                             </div>
                         </Row>
-                        : null}
+                        : null} */}
 
                     {publicApp.length == 0 ?
                         <Row>
