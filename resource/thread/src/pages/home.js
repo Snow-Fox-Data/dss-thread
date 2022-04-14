@@ -14,6 +14,7 @@ class Home extends Component {
         this.state = {
             dataiku: undefined,
             dataikuItem: null,
+            dataikuItems: [],
             filters: {
                 column: true,
                 dataset: true,
@@ -147,7 +148,7 @@ class Home extends Component {
         this.setState({ filters: tempFilters });
 
         // Filter definitions after filter is updated.
-        var p_list = this.filterDataikuItems(this.state.searchResults);
+        var p_list = this.filterDataikuItems(this.state.dataikuItems);
         this.setState({ searchResults: p_list });
     }
 
@@ -164,13 +165,6 @@ class Home extends Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
-
-        // let obj_type = 'project';
-        // let splitCt = (itemKey.split("|").length - 1);
-        // if (splitCt == 1)
-        //     obj_type = 'dataset';
-        // else if (splitCt == 2)
-        //     obj_type = 'column'
 
         fetch(window.getWebAppBackendUrl('load-item') + '?key=' + itemKey, requestOptions)
             .then(res => res.json())
@@ -198,8 +192,8 @@ class Home extends Component {
             .then(res => res.json())
             .then((response) => {
                 var p_list = this.filterDataikuItems(response);
-
                 this.setState({
+                    dataikuItems: response,
                     searchResults: p_list,
                     loading: false
                 });
