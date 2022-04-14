@@ -272,38 +272,6 @@ class App extends Component {
                             {publicApp}
                         </Row>
                     }
-
-                    {/* <Row> */}
-                    {/* <Routes>
-                            <Route path={App.CURRENT_URL} element={<Home />} />
-                            <Route path={App.CURRENT_URL + "/catalog"} element={<Catalog />} />
-                        </Routes> */}
-
-                    {/* <Routes>
-                            <Route path="/" element={<App />}>
-                                <Route index element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />
-                            </Route>
-                        </Routes> */}
-
-                    {/* <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/catalog" element={<Catalog />} />
-                        </Routes> */}
-
-                    {/* <Switch>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/catalog" element={<Catalog />} />
-                        </Switch> */}
-
-                    {/* <Routes>
-                            <Route path="/" element={<App />}>
-                                <Route index element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />
-                            </Route>
-                        </Routes> */}
-                    {/* </Row> */}
-
                 </div>
             </Container>
         );

@@ -17,7 +17,7 @@ class Catalog extends Component {
             definitions: [],
             loading: false,
             searchBy: "",
-            sortBy: {},
+            sortBy: { },
             tag: "",
             tags: [],
             title: "Catelog View"
@@ -60,6 +60,8 @@ class Catalog extends Component {
                 this.setState({
                   definitions: response
                 });
+                this.sortDefinitions(Catalog.NAME);
+                // this.displayTableHeaderCarets(Catalog.NAME)
             });
     }
 
