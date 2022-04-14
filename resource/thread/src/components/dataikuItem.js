@@ -427,13 +427,13 @@ class DataikuItem extends Component {
         };
 
         let url = window.getWebAppBackendUrl('scan-project') + '?key=' + this.props.item.projectKey;
-        
+
         eventBus.dispatch("loading", true);
 
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                 this.openProject(this.props.item.projectKey)
+                this.openProject(this.props.item.projectKey)
             });
     }
 
@@ -893,13 +893,25 @@ class DataikuItem extends Component {
                 </Col>
                 <Col>
                     <h1>{this.props.item.name} <span style={{ paddingLeft: "6px", paddingBottom: "2px" }}>
-                        <a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank"><ArrowUpRightSquare size={22} /></a>
+
                     </span>
                     </h1>
                     <h4>({this.props.item.projectKey})</h4>
-                    <span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span>
+                    {/* <span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span> */}
                     <p><span style={{ paddingLeft: '4px' }}>Project owned by <span style={{ fontWeight: "bold" }}>{this.props.item.ownerDisplayName}</span> in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
                     <div class="tags">{tags}</div>
+                </Col>
+                <Col>
+                    <Dropdown>
+                        <Dropdown.Toggle id="dropdown-basic">
+                            Options
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item><a href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</a></Dropdown.Item>
+                            <Dropdown.Item><a onClick={() => this.scanProject()}>Rescan Project</a></Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Col>
                 <Col>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
