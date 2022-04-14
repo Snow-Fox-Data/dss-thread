@@ -637,7 +637,7 @@ class DataikuItem extends Component {
             </Modal>
             <Row>
                 <Col xs="auto">
-                    <div class="icon">
+                <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
                     <div style={{ paddingTop: '4px', textAlign: 'center' }}>
@@ -840,19 +840,10 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
-
-                </Col>
-                <Col>
-                    <h1>{this.props.item.id}</h1>
-
-                    <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
-                    <div class="tags">{tags}</div>
-                </Col>
-                <Col sm={2}>
                     <div style={{ paddingTop: '4px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
-                                variant="link">
+                                variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
 
@@ -861,6 +852,12 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
+                </Col>
+                <Col>
+                    <h1>{this.props.item.id}</h1>
+
+                    <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                    <div class="tags">{tags}</div>
                 </Col>
                 <Col sm={2}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
