@@ -127,18 +127,12 @@ class Catalog extends Component {
 
     onChangeTag(_tag) {  
         this.fetchDefinitionsByTag(_tag);
-        this.setState({
-            tag: _tag,
-            searchBy: _tag
-        });
+        this.setState({ tag: _tag });
     }
 
     onClickTag(_tag) {
         this.fetchDefinitions(_tag);
-        this.setState({
-            tag: _tag,
-            searchBy: _tag
-        });
+        this.setState({ tag: _tag });
     }
 
     // import {browserHistory} from "react-router";
