@@ -882,7 +882,7 @@ class dss_utils:
         exist = proj_dataset.get_dataframe()
 
         # drop all the old records for this project
-        exist = exist[exist.key != proj]
+        exist = exist[exist.project != proj]
         df = df.append(exist, ignore_index=True)
 
         proj_dataset.write_dataframe(df, infer_schema=True, dropAndCreate=True)
