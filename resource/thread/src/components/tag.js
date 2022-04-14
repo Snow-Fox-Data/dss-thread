@@ -13,7 +13,7 @@ class Tag extends Component {
     render() {
 
         return (<div class="item-tag">
-            <FaTags></FaTags>{this.props.tag}
+            <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{this.props.tag}</span>
         </div>)
     }
 }
