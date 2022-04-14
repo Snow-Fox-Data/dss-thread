@@ -29,7 +29,7 @@ import {
     Routes
 } from "react-router-dom";
 
-import logo from "./assets/images/icon_thread.png";
+import logo from "./assets/images/thread-spinner.gif";
 import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
