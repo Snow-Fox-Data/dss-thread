@@ -4,6 +4,7 @@ import Common from '../common/common';
 import { FaCaretDown, FaCaretUp, FaFilter, FaSearch } from 'react-icons/fa';
 import App from '../App';
 import { useNavigate } from 'react-router-dom';
+import Tag from "../components/tag"
 
 class Catalog extends Component {
     // These values NEED to match data KEYS for sorting to work
@@ -116,7 +117,8 @@ class Catalog extends Component {
         tags = JSON.parse(tags);
         if(tags != null && tags.length > 0) {
             let formattedTags = tags.map((tag) => {
-                return <span className='definition-tag' onClick={event => this.onClickTag(tag)}>{tag}</span>;
+                return <Tag onClick={event => this.onClickTag(tag)} tag={tag}></Tag>
+                // <span className='definition-tag' onClick={event => this.onClickTag(tag)}>{tag}</span>;
             });
     
             return formattedTags;
