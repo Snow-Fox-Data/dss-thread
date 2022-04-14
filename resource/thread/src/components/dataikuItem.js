@@ -902,7 +902,7 @@ class DataikuItem extends Component {
                     <div class="tags">{tags}</div>
 
                 </Col>
-                <Col xs="1">
+                <Col sm={2}>
                     <Dropdown>
                         <Dropdown.Toggle id="dropdown-basic">
                             Options
@@ -914,7 +914,7 @@ class DataikuItem extends Component {
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
-                <Col xs="1">
+                <Col sm={2}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
