@@ -729,7 +729,19 @@ class DataikuItem extends Component {
             <Row>
                 <Col xs="auto">
                     <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                        {Common.getIconForDataikuItemType(this.props.object_type, '85px')}
+                    </div>
+                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                        <Dropdown>
+                            <Dropdown.Toggle size="sm"
+                                variant="secondary">
+                                Options
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={() => this.deleteDef()}>Delete</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
                 </Col>
                 <Col>
@@ -781,7 +793,6 @@ class DataikuItem extends Component {
                                     Will appear in the Dataiku Dataset's column description.
                                 </Form.Text>
                             </Form.Group>
-                            <Button variant="danger" onClick={() => this.deleteDef()}>Delete</Button>{' '}
                             <Button variant="primary" onClick={() => this.saveDef()}>Save</Button>
                         </Form>
                     </div>
@@ -823,7 +834,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "85px")}
                     </div>
-                    <div style={{paddingTop:'8px'}}>
+                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="secondary">
@@ -902,10 +913,10 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, '85px')}
                     </div>
-                    <div style={{paddingTop:'8px'}}>
+                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
-                            variant="secondary">
+                                variant="secondary">
                                 Options
                             </Dropdown.Toggle>
 
