@@ -610,7 +610,7 @@ class dss_utils:
                                 in_set = settings.get_recipe_inputs()['main']['items'][0]['ref']
                                 out_set = settings.get_recipe_outputs()['main']['items'][0]['ref']
 
-                                remappings.append({'from': p + '|' + in_set + '|' + renaming['from'], 'to': p + '|' + out_set + '|' +renaming['to']})
+                                remappings.append({'project': p, 'from': p + '|' + in_set + '|' + renaming['from'], 'to': p + '|' + out_set + '|' +renaming['to']})
                                 # print(f'from: {renaming["from"]} to: {renaming["to"]}')
                 
                 ins = self.get_stream(r, 'inputs', p)            
@@ -639,7 +639,13 @@ class dss_utils:
                                 d['lineage_upstream'].append(i)
 
         # write out the remappings...
-        remapping_ds.write_dataframe(pd.DataFrame.from_dict(remappings), infer_schema=True, dropAndCreate=True)
+        mapping_df = pd.DataFrame.from_dict(remappings)
+        if len(all_projects) == 1: # we're doing a single project scan
+            remap_df = remapping_ds.get_dataframe()
+            remap_df = remap_df[remap_df.project!=p]
+            mapping_df = mapping_df.append(remap_df, ignore_index=True)
+
+        remapping_ds.write_dataframe(mapping_df, infer_schema=True, dropAndCreate=True)
 
         # add all shares
         for p in all_projects:
