@@ -374,7 +374,7 @@ class Home extends Component {
                     <Row className="filter" style={{ marginTop: "0.5em" }}>
                         {Object.entries(filters).map(([key, value]) => {
                             return (
-                                <Col xs={1}>
+                                <Col xs={3} md={2} lg={1}>
                                     <div className="filter-types" key={key}>
                                         <input
                                             type="checkbox"
