@@ -199,9 +199,9 @@ class Catalog extends Component {
                     <td>
                         {col.description}
                     </td>
-                    <td>
+                    {/* <td>
                         {this.formatAppliedTo(col.applied_to)}
-                    </td>
+                    </td> */}
                     <td>
                         {this.formatTags(col.tags)}
                     </td>
@@ -211,7 +211,7 @@ class Catalog extends Component {
             return listItems;
         } else {
             return  <tr>
-                      <td colSpan={4} className="text-center">
+                      <td colSpan={3} className="text-center">
                           <span>No results for your search</span>
                       </td>
                     </tr>;
@@ -309,7 +309,7 @@ class Catalog extends Component {
                                       Description
                                       {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
                                   </th>
-                                  <th>Applied To</th>
+                                  {/* <th>Applied To</th> */}
                                   <th>Tags</th>
                               </tr>
                           </thead>
