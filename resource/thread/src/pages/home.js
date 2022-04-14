@@ -141,12 +141,14 @@ class Home extends Component {
     }
 
     handleOnChange = (type) => {
+        // Update Filters and store to state.
         let tempFilters = this.state.filters;
         tempFilters[type] = !tempFilters[type];
+        this.setState({ filters: tempFilters });
 
-        this.setState({
-            filters: tempFilters
-        });
+        // Filter definitions after filter is updated.
+        var p_list = this.filterDataikuItems(this.state.searchResults);
+        this.setState({ searchResults: p_list });
     }
 
     loadItem = (item) => {
