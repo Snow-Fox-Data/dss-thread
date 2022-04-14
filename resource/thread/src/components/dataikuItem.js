@@ -427,11 +427,13 @@ class DataikuItem extends Component {
         };
 
         let url = window.getWebAppBackendUrl('scan-project') + '?key=' + this.props.item.projectKey;
-        this.setState({ loading: true });
+        
+        eventBus.dispatch("loading", true);
+
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                this.setState({ loading: false });
+                 this.openProject(this.props.item.projectKey)
             });
     }
 
