@@ -57,11 +57,23 @@ class Catalog extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                this.setState({
-                  definitions: response
-                });
+                this.setState({ definitions: response });
                 this.sortDefinitions(Catalog.NAME);
-                // this.displayTableHeaderCarets(Catalog.NAME)
+            });
+    }
+
+    fetchDefinitionsByTag(term = "") {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        let url = window.getWebAppBackendUrl('def-by-tag') + '?term=' + term;
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                this.setState({ definitions: response });
+                this.sortDefinitions(Catalog.NAME);
             });
     }
 
@@ -114,7 +126,7 @@ class Catalog extends Component {
     }
 
     onChangeTag(_tag) {  
-        this.fetchDefinitions(_tag);
+        this.fetchDefinitionsByTag(_tag);
         this.setState({
             tag: _tag,
             searchBy: _tag
@@ -155,9 +167,7 @@ class Catalog extends Component {
         let sortByKeys = Object.keys(_sortBy);
         if(sortByKeys.length > 0) {
           sortByKeys.map((item, index) => {
-            if(item !== sortBy) {
-              _sortBy[item] = null
-            }
+            if(item !== sortBy) { _sortBy[item] = null }
           });
         }
 
@@ -187,8 +197,6 @@ class Catalog extends Component {
 
     renderDefinitions() {
         if(this.state.definitions.length > 0) {
-            this.searchRef = React.createRef();
-
             var listItems = this.state.definitions.map((col) =>
                 <tr>
                     <td className='definition-name' onClick={() => this.openDefinition(col.id)}>
