@@ -73,7 +73,8 @@ class App extends Component {
             currentUser: '',
             loading: true,
             loggedIn: null,
-            scanning: false
+            scanning: false,
+            logo: logo
         }
 
         console.log("window.location.href == " + window.location.href);
