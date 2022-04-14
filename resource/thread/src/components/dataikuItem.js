@@ -625,7 +625,7 @@ class DataikuItem extends Component {
                             </div>
                         }
                         {this.state.tempSelDef.id == -1 &&
-                            <Dropdown >
+                            <Dropdown>
                                 <Dropdown.Toggle id="dropdown-basic">
                                     Save and Apply
                                 </Dropdown.Toggle>
@@ -823,7 +823,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "75px")}
                     </div>
-                    <div>
+                    <div style={{paddingTop:'6px'}}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="secondary">
@@ -902,7 +902,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
                     </div>
-                    <div>
+                    <div style={{paddingTop:'6px'}}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                             variant="secondary">
