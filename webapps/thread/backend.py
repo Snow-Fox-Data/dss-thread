@@ -677,31 +677,33 @@ class dss_utils:
 
         if ds == None:
             ds[full] = [] # we're doing a project scan and this is a shared dataset (we don't have in memory)
+            return ds[full]
+            
+        else:
+            try:
+                if not full in ds:
+                    if dir in ds:
+                        lins = []
+                        for node in ds[dir]:
+                            recur_ct = recur_ct + 1
+                            if recur_ct > 200:
+                                logging.info(f'recursive error {dir} - {ds_name}, {ds[dir]}')
+                                return []
 
-        try:
-            if not full in ds:
-                if dir in ds:
-                    lins = []
-                    for node in ds[dir]:
-                        recur_ct = recur_ct + 1
-                        if recur_ct > 200:
-                            logging.info(f'recursive error {dir} - {ds_name}, {ds[dir]}')
-                            return []
+                            if node != ds_name:
+                                lin = self.traverse_lineage(node, dir, all_projects, recur_ct)
+                                lins.append({'name': node, dir:lin})
 
-                        if node != ds_name:
-                            lin = self.traverse_lineage(node, dir, all_projects, recur_ct)
-                            lins.append({'name': node, dir:lin})
-
-                    ds[full] = lins
-                    
-                    return lins
+                        ds[full] = lins
+                        
+                        return lins
+                    else:
+                        return []        
                 else:
-                    return []        
-            else:
-                return ds[full]
-        except Exception as e:
-            logging.info(f'error traversing {ds_name}')
-            logging.info(e)
+                    return ds[full]
+            except Exception as e:
+                logging.info(f'error traversing {ds_name}')
+                logging.info(e)
         
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
