@@ -823,16 +823,18 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
                     </div>
-                    <Dropdown size="sm"
-                        variant="secondary">
-                        <Dropdown.Toggle>
-                            Options
-                        </Dropdown.Toggle>
+                    <div>
+                        <Dropdown size="sm"
+                            variant="secondary">
+                            <Dropdown.Toggle>
+                                Options
+                            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item href={Common.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank">Open Dataset in new Tab</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                            <Dropdown.Menu>
+                                <Dropdown.Item href={Common.createDatasetLink(this.props.item.project, this.props.item.id)} target="_blank">Open Dataset in new Tab</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
                 </Col>
                 <Col>
                     <h1>{this.props.item.id}</h1>
@@ -900,17 +902,19 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
                     </div>
-                    <Dropdown size="sm"
-                        variant="secondary">
-                        <Dropdown.Toggle id="dropdown-basic">
-                            Options
-                        </Dropdown.Toggle>
+                    <div>
+                        <Dropdown size="sm"
+                            variant="secondary">
+                            <Dropdown.Toggle id="dropdown-basic">
+                                Options
+                            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.scanProject()}>Rescan Project</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                            <Dropdown.Menu>
+                                <Dropdown.Item href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.scanProject()}>Rescan Project</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
                 </Col>
                 <Col>
                     <h1>{this.props.item.name} <span style={{ paddingLeft: "6px", paddingBottom: "2px" }}>
