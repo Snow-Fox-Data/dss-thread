@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import Common from "../common/common";
 import { Modal, Button, Form, Toast, ButtonGroup, Dropdown } from "react-bootstrap";
-import { FaTags } from "react-icons/fa";
+import Tag from "./tag"
 
 class Definition extends Component {
 
@@ -10,23 +10,14 @@ class Definition extends Component {
         super(props);
     }
 
-    buildTagsString(arrayTags, variant = "primary", link = true) {
+    buildTagsString(arrayTags) {
         if (arrayTags == null)
             return;
 
         let tags = [];
 
         arrayTags.forEach(element => {
-            if (link) {
-                tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                    {element}
-                </Button>
-            }
-            else
-                tags[tags.length] = <Button style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                    <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{element}</span>
-                </Button>
-
+                         tags[tags.length] = <Tag tag={element}></Tag>
         });
 
         return tags;
@@ -38,12 +29,6 @@ class Definition extends Component {
             <Card.Header>Definition: {this.props.definition.name}</Card.Header>
             <Card.Body>
                 <Card.Text>
-                    {/* <h5>
-                        ID
-                    </h5>
-                    <div style={{ paddingBottom: "10px" }}>
-                        {this.props.definition.id}
-                    </div> */}
                     <h5>
                         Name
                     </h5>
@@ -56,7 +41,7 @@ class Definition extends Component {
                                 Tags
                             </h5>
                             <div style={{ paddingBottom: "10px" }}>
-                                {this.buildTagsString(eval(this.props.definition.tags), 'light', false)}
+                                {this.buildTagsString(eval(this.props.definition.tags))}
                             </div>
                         </div>
                     }
