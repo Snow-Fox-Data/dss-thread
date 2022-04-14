@@ -821,7 +821,7 @@ class DataikuItem extends Component {
             <Row>
                 <Col xs="auto">
                     <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                        {Common.getIconForDataikuItemType(this.props.object_type, "60px")}
                     </div>
                     <div>
                         <Dropdown size="sm"
