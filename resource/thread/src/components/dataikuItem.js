@@ -643,7 +643,7 @@ class DataikuItem extends Component {
                     <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
-                                variant="secondary">
+                                variant="link">
                                 Options
                             </Dropdown.Toggle>
 
@@ -740,7 +740,7 @@ class DataikuItem extends Component {
                     <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
-                                variant="secondary">
+                                variant="link">
                                 Options
                             </Dropdown.Toggle>
 
@@ -922,7 +922,7 @@ class DataikuItem extends Component {
                     <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
-                                variant="secondary">
+                                variant="link">
                                 Options
                             </Dropdown.Toggle>
 
