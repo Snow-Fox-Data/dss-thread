@@ -8,11 +8,13 @@ class Tag extends Component {
 
     constructor(props) {
         super(props);
+
+        this.onClick = this.onClick.bind(this);
     }
 
     render() {
 
-        return (<div class="item-tag">
+        return (<div class="item-tag" style={{cursor:'pointer'}}>
             <FaTags></FaTags><span style={{ paddingLeft: '4px' }}>{this.props.tag}</span>
         </div>)
     }
