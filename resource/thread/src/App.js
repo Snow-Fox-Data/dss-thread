@@ -238,16 +238,10 @@ class App extends Component {
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav" style={{paddingRight:'5px'}}>
                                 <NavDropdown title={this.state.currentUser}>
                                     <NavDropdown.Item onClick={() => this.rescan()}>Rescan DSS</NavDropdown.Item>
                                 </NavDropdown>
-                                {/* <li style={{ padding: '12px' }}>
-                                    <FaRedo onClick={() => this.rescan()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">{this.state.currentUser}</a>
-                                </li> */}
                             </ul>
                         </div>
                     </nav>

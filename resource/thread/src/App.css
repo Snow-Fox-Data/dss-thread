@@ -112,6 +112,10 @@ html {
   padding: 0;
 }
 
+.nav-item .dropdown {
+  font-size:18px;
+}
+
 ul.navbar-nav li.nav-item {
   min-width: 150px;
 }
