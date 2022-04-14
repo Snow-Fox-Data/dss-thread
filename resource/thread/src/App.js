@@ -211,7 +211,7 @@ class App extends Component {
                 <div hidden={!this.state.loggedIn}>
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                         <div class="container-fluid">
-                            <img src={logo} className="app-logo" alt="logo" />
+                            <img src={this.state.logo} className="app-logo" alt="logo" />
                             <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
