@@ -137,12 +137,6 @@ class App extends Component {
             //     this.setState({ activeTab: App.CATALOG })
             // })
 
-            eventBus.on("loading", (isLoading) => {
-                if (isLoading)
-                    this.setState({ "logo": logo })
-                else
-                    this.setState({ "logo": loading_logo })
-            });
         });
     }
 
@@ -160,8 +154,13 @@ class App extends Component {
                         loggedIn: true
                     });
 
-                    eventBus.on("loading", (isLoading) =>
-                        this.setState({ "loading": isLoading })
+                    eventBus.on("loading", (isLoading) => {
+                        this.setState({ "loading": isLoading });
+                        if (isLoading)
+                            this.setState({ "logo": logo })
+                        else
+                            this.setState({ "logo": loading_logo })
+                    }
                     );
                 }
                 else
