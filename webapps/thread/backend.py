@@ -82,6 +82,16 @@ def tag_list():
 
     return json.dumps(dss.get_tag_list())
 
+@app.route('/def-by-tag', methods=['GET'])
+def def_by_tag():
+    args = request.args
+    df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+    result3 = df[df['tags'].str.contains(args.get('term'), case=False)]
+   
+    result3['search_def'] = result3['name'] + ' | ' + result3['description']
+
+    return result3.to_json(orient='records')
+
 @app.route('/def-search', methods=['GET'])
 def defintition_list():
     args = request.args
