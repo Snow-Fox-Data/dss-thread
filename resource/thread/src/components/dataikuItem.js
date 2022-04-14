@@ -910,7 +910,7 @@ class DataikuItem extends Component {
 
                         <Dropdown.Menu>
                             <Dropdown.Item href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</Dropdown.Item>
-                            <Dropdown.Item nClick={() => this.scanProject()}>Rescan Project</Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.scanProject()}>Rescan Project</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
