@@ -821,9 +821,9 @@ class DataikuItem extends Component {
             <Row>
                 <Col xs="auto">
                     <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, "75px")}
+                        {Common.getIconForDataikuItemType(this.props.object_type, "85px")}
                     </div>
-                    <div style={{paddingTop:'6px'}}>
+                    <div style={{paddingTop:'8px'}}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="secondary">
@@ -900,9 +900,9 @@ class DataikuItem extends Component {
             <Row>
                 <Col xs="auto">
                     <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                        {Common.getIconForDataikuItemType(this.props.object_type, '85px')}
                     </div>
-                    <div style={{paddingTop:'6px'}}>
+                    <div style={{paddingTop:'8px'}}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                             variant="secondary">
