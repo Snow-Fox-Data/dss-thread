@@ -553,12 +553,6 @@ class DataikuItem extends Component {
                                     <div>
                                         <Form style={{ paddingTop: '10px' }}>
                                             <Form.Group className="mb-3">
-                                                {/* {this.state.tempSelDef.id > -1 &&
-                                                    <div style={{ padding: "10px 0px" }}>
-                                                        <Form.Label>Definition ID</Form.Label>
-                                                        <Form.Control disabled="true" type="text" defaultValue={this.state.tempSelDef.id}></Form.Control>
-                                                    </div>
-                                                } */}
                                                 {this.state.tempSelDef.id == -1 &&
                                                     <h3>New Definition</h3>
                                                 }
@@ -643,12 +637,24 @@ class DataikuItem extends Component {
             </Modal>
             <Row>
                 <Col xs="auto">
-                    <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, "100%")}
+                <div class="icon">
+                        {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
+                    </div>
+                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                        <Dropdown>
+                            <Dropdown.Toggle size="sm"
+                                variant="secondary">
+                                Options
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} target="_blank">Open Dataset in new Tab</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
                 </Col>
                 <Col>
-                    <h1>{this.props.item.name}<a style={{ marginLeft: "10px" }} href={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} target="_blank"><ArrowUpRightSquare size={22} /></a></h1>
+                    <h1>{this.props.item.name}</h1>
                     <p class="name">
                         <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
                         <span style={{ padding: "0px 3px" }}>|</span>
@@ -729,7 +735,7 @@ class DataikuItem extends Component {
             <Row>
                 <Col xs="auto">
                     <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, '85px')}
+                        {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
                     </div>
                     <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
@@ -832,7 +838,7 @@ class DataikuItem extends Component {
             <Row>
                 <Col xs="auto">
                     <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, "85px")}
+                        {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
                     <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
@@ -911,7 +917,7 @@ class DataikuItem extends Component {
             <Row>
                 <Col xs="auto">
                     <div class="icon">
-                        {Common.getIconForDataikuItemType(this.props.object_type, '85px')}
+                        {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
                     </div>
                     <div style={{ paddingTop: '8px', textAlign: 'center' }}>
                         <Dropdown>
