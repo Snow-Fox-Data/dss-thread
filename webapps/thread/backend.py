@@ -699,8 +699,9 @@ class dss_utils:
                     return []        
             else:
                 return ds[full]
-        except:
+        except Exception as e:
             logging.info(f'error traversing {ds_name}')
+            logging.info(e)
         
     def get_datasets_ds(self):
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
