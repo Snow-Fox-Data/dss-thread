@@ -12,8 +12,8 @@ class Tag extends Component {
 
     render() {
 
-        return (<div class="react-tags__selected-tag">
-         <FaTags></FaTags>   here
+        return (<div class="item-tag">
+            <FaTags></FaTags>{this.props.tag}
         </div>)
     }
 }
