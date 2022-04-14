@@ -221,7 +221,7 @@ class Catalog extends Component {
     renderTagSelect() {
         if(this.state.tags.length > 0) {
             var tags = this.state.tags.map((tag) => 
-                <option value={tag} {...(this.state.tag === tag) ? 'selected' : ''}>{tag}</option>
+                <option value={tag}>{tag}</option>
             );
 
             return <div className='search-bar'>
@@ -236,8 +236,8 @@ class Catalog extends Component {
                         </div>
                     </span>
 
-                    <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} >
-                        <option value="" selected>Filter By Tag</option>
+                    <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} value={this.state.tag}>
+                        <option value={""}>Filter By Tag</option>
                         {tags}
                     </select>
                 </div>
