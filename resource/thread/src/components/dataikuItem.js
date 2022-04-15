@@ -117,7 +117,7 @@ class DataikuItem extends Component {
                 .then(
                     (result) => {
                         // go back to the home page
-                        window.location = window.location.toString().replace(window.location.search, "");
+                        window.location = window.location.origin + window.location.pathname;
                     });
         }
     }
