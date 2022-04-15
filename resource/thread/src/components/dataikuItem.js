@@ -758,49 +758,53 @@ class DataikuItem extends Component {
             </Row>
             <Row>
                 <Col>
-                    <div>
-                        <Form style={{ paddingTop: '10px' }}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" defaultValue={this.props.item.name}
-                                    onChange={e => this.props.item.name = e.target.value}
-                                />
-                                <div style={{ padding: "10px 0px" }}>
-                                    <Form.Label>Tags</Form.Label>
-                                    <ReactTags
-                                        tags={this.state.columnTags}
-                                        allowNew='true'
-                                        minQueryLength='1'
-                                        suggestions={this.state.columnTagSuggestions}
-                                        onDelete={(i) => this.onDefTagDelete(i)}
-                                        onAddition={(tag) => this.onDefTagAddition(tag)} />
-                                    {/* {eval(this.props.item.tags).length > 0 ?
+                    <Tabs defaultActiveKey="details">
+                        <Tab eventKey="details" title="Details" def>
+                            <div>
+                                <Form style={{ paddingTop: '10px' }}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control type="text" defaultValue={this.props.item.name}
+                                            onChange={e => this.props.item.name = e.target.value}
+                                        />
+                                        <div style={{ padding: "10px 0px" }}>
+                                            <Form.Label>Tags</Form.Label>
+                                            <ReactTags
+                                                tags={this.state.columnTags}
+                                                allowNew='true'
+                                                minQueryLength='1'
+                                                suggestions={this.state.columnTagSuggestions}
+                                                onDelete={(i) => this.onDefTagDelete(i)}
+                                                onAddition={(tag) => this.onDefTagAddition(tag)} />
+                                            {/* {eval(this.props.item.tags).length > 0 ?
                                         <div style={{ paddingBottom: "10px" }}>
                                             {this.buildTagsString(eval(this.props.item.tags), 'light', false)}
                                         </div>
                                         : <div>No tags</div>
                                     } */}
-                                </div>
-
-                                {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
-                                    <div style={{ padding: "10px 0px" }}>
-                                        <Form.Label>Applied To</Form.Label>
-                                        <div>
-                                            {this.buildTagsString(eval(this.props.item.applied_to), 'light')}
                                         </div>
-                                    </div>
-                                }
-                                <Form.Label>Description</Form.Label>
-                                <Form.Control as="textarea" rows="3" defaultValue={this.props.item.description}
-                                    onChange={e => this.props.item.description = e.target.value}
-                                />
-                                <Form.Text className="text-muted">
-                                    Will appear in the Dataiku Dataset's column description.
-                                </Form.Text>
-                            </Form.Group>
-                            <Button variant="primary" onClick={() => this.saveDef()}>Save</Button>
-                        </Form>
-                    </div>
+
+                                        {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
+                                            <div style={{ padding: "10px 0px" }}>
+                                                <Form.Label>Applied To</Form.Label>
+                                                <div>
+                                                    {this.buildTagsString(eval(this.props.item.applied_to), 'light')}
+                                                </div>
+                                            </div>
+                                        }
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control as="textarea" rows="3" defaultValue={this.props.item.description}
+                                            onChange={e => this.props.item.description = e.target.value}
+                                        />
+                                        <Form.Text className="text-muted">
+                                            Will appear in the Dataiku Dataset's column description.
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Button variant="primary" onClick={() => this.saveDef()}>Save</Button>
+                                </Form>
+                            </div>
+                        </Tab>
+                    </Tabs>
                 </Col>
             </Row>
         </Col>
