@@ -104,7 +104,7 @@ def defintition_list():
     merged_df = pd.concat([result, result2, result3], ignore_index=True)
     merged_df.drop_duplicates(subset=['id'],inplace=True)
 
-    merged_df['search_def'] = merged_df['name'] + ' | ' + merged_df['description']
+    merged_df['search_def'] = merged_df['name'] + ' | ' + merged_df['description'] + ' | ' + merged_df['tags']
     return merged_df.to_json(orient='records')
 
 @app.route('/search', methods=['GET'])
