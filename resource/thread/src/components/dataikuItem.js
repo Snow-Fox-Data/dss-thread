@@ -116,8 +116,8 @@ class DataikuItem extends Component {
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        var url, proj, id = Common.getBaseUrl();
-                        window.location = url;
+                        // go back to the "home" page
+                        window.location = window.location.toString().replace(window.location.search, "");
                     });
         }
     }
