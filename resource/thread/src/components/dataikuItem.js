@@ -116,7 +116,7 @@ class DataikuItem extends Component {
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        // go back to the "home" page
+                        // go back to the home page
                         window.location = window.location.toString().replace(window.location.search, "");
                     });
         }
