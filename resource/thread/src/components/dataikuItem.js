@@ -311,7 +311,7 @@ class DataikuItem extends Component {
 
     renderDefSearchMenuItem(option, props) {
         return <Fragment>
-            <div style={{ fontWeight: 'bold' }}>{option.name} ({option.id})</div>
+            <div style={{ fontWeight: 'bold' }}>{option.name}</div>
             <div>{option.description}</div>
         </Fragment>;
     }
@@ -536,6 +536,7 @@ class DataikuItem extends Component {
                                     <div>
                                         <AsyncTypeahead
                                             // filterBy={filterBy}
+                                            delay="300"
                                             id="def-search"
                                             labelKey="search_def"
                                             filterBy={['name', 'description']}
@@ -731,7 +732,7 @@ class DataikuItem extends Component {
 
     renderDefinition() {
         return <Col>
-            <Row style={{ paddingTop: '15px' }}>
+            <Row>
                 <Col xs="auto">
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
@@ -756,7 +757,7 @@ class DataikuItem extends Component {
                     </p>
                 </Col>
             </Row>
-            <Row>
+            <Row style={{ paddingTop: '15px' }}>
                 <Col>
                     <Tabs defaultActiveKey="details">
                         <Tab eventKey="details" title="Details" def>
