@@ -305,7 +305,9 @@ class DataikuItem extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                this.state.defSearchResults = response
+                this.setState({
+                    defSearchResults: response
+                });
             });
     }
 
@@ -540,7 +542,7 @@ class DataikuItem extends Component {
                                             id="def-search"
                                             labelKey="search_def"
                                             // filterBy={['name', 'description']}
-                                            minLength={2}
+                                            minLength={3}
                                             onChange={this.selectDef}
                                             onSearch={this.defSearch}
                                             options={defSearchResults}
