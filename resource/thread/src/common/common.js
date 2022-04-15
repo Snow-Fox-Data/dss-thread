@@ -13,8 +13,18 @@ function createDatasetLinkTag(proj, ds) {
     return '<a href="' + this.createDatasetLink(proj, ds) + '" target="_blank">' + proj + '.' + ds + '</a>';
 }
 
+function getBaseUrl() {
+    const queryParams = new URLSearchParams(window.location.search)
+    // not accessing the public app
+    var proj = queryParams.get("projectKey");
+    var id = queryParams.get("webAppId");
+    var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
+
+    return url, proj, id;
+}
+
 function getIconForDataikuItemType(type, size = "11px") {
-    switch(type) {
+    switch (type) {
         case "project":
             return <FaProjectDiagram size={size} />;
         case "dataset":
@@ -23,9 +33,9 @@ function getIconForDataikuItemType(type, size = "11px") {
             return <FaColumns size={size} />;
         case "definition":
             return <FaList size={size} />;
-        default: 
+        default:
             return <FaQuestionCircle size={size} />;
-    }   
+    }
 }
 
 const Common = {
@@ -33,6 +43,7 @@ const Common = {
     createProjectLink,
     createDatasetLinkTag,
     getIconForDataikuItemType,
+    getBaseUrl
 };
 
 export default Common;

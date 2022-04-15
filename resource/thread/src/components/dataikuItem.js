@@ -116,7 +116,8 @@ class DataikuItem extends Component {
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        window.location = window.getWebAppBackendUrl('')
+                        var url, proj, id = Common.getBaseUrl();
+                        window.location = url;
                     });
         }
     }

@@ -33,6 +33,7 @@ import logo from "./assets/images/icon_thread.png";
 import loading_logo from "./assets/images/thread-spinner.gif";
 import Home from "./pages/home";
 import Catalog from "./pages/catalog";
+import Common from "./common/common";
 
 class App extends Component {
     // static CURRENT_URL = () => {
@@ -187,11 +188,7 @@ class App extends Component {
 
     checkPublic() {
         if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
-            const queryParams = new URLSearchParams(window.location.search)
-            // not accessing the public app
-            var proj = queryParams.get("projectKey");
-            var id = queryParams.get("webAppId");
-            var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
+            var url, proj, id = Common.getBaseUrl();
 
             return <div>
                 <h4>Please access Thread through the <a target="_parent" href={url}>public web URL</a></h4>
