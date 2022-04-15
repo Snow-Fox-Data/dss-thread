@@ -334,7 +334,7 @@ class DataikuItem extends Component {
         }
         else {
             if (this.state.tempSelDef.id > -1)
-                app_to = eval(this.props.tempSelDef.applied_to); // applying an existing definition
+                app_to = eval(this.state.tempSelDef.applied_to); // applying an existing definition
         }
         this.setState({
             applyLineageModal: true,
