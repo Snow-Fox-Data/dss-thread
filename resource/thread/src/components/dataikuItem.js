@@ -333,7 +333,7 @@ class DataikuItem extends Component {
             app_to = eval(this.props.item.definition.applied_to);
         }
         else {
-            if (this.props.tempSelDef.id > -1)
+            if (this.state.tempSelDef.id > -1)
                 app_to = eval(this.props.tempSelDef.applied_to); // applying an existing definition
         }
         this.setState({
