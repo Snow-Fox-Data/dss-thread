@@ -1,5 +1,6 @@
 from ctypes import util
 from dis import disassemble
+from http import client
 import json
 # from tkinter import E
 import dataiku
@@ -191,6 +192,7 @@ def load_item():
                 col['definition'] = { "id": -1}
                 col['object_type'] = 'column'
                 col['tag_list'] = dss.get_tag_list()
+                col['user_security'] = can_user_access_project(p_name)
 
                 if len(def_df) > 0:
                     col['definition'] = def_df.to_dict('records')[0]
@@ -299,6 +301,19 @@ def update_desc():
     return json.dumps({"success": True,
         "value": desc
     })
+
+def can_user_access_project(project_key):
+    headers = dict(request.headers)
+    auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
+    user = dataiku.api_client().client.get_user(auth_info['authIdentifier'])
+    client_as_user = user.get_client_as()
+
+    try:
+        proj = client_as_user.get_project(project_key)
+        proj.get_metadata()
+        return True
+    except:
+        return False
 
 
 THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'

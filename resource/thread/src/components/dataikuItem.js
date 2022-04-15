@@ -698,7 +698,7 @@ class DataikuItem extends Component {
                     <Tabs defaultActiveKey="definition" className="mb-3" onSelect={tabClicked}>
                         <Tab eventKey="definition" title="Definition" def>
                             {
-                                this.props.item.definition.id == -1 &&
+                                (this.props.item.definition.id == -1 && this.props.item.user_security) &&
                                 <div>
                                     <Button variant="primary"
                                         onClick={() => this.newDef()}
