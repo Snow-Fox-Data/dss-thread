@@ -188,7 +188,11 @@ class App extends Component {
 
     checkPublic() {
         if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
-            var url, proj, id = Common.getBaseUrl();
+            const queryParams = new URLSearchParams(window.location.search)
+            // not accessing the public app
+            var proj = queryParams.get("projectKey");
+            var id = queryParams.get("webAppId");
+            var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
             return <div>
                 <h4>Please access Thread through the <a target="_parent" href={url}>public web URL</a></h4>

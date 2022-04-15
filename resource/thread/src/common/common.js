@@ -13,16 +13,6 @@ function createDatasetLinkTag(proj, ds) {
     return '<a href="' + this.createDatasetLink(proj, ds) + '" target="_blank">' + proj + '.' + ds + '</a>';
 }
 
-function getBaseUrl() {
-    const queryParams = new URLSearchParams(window.location.search)
-    // not accessing the public app
-    var proj = queryParams.get("projectKey");
-    var id = queryParams.get("webAppId");
-    var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
-
-    return url, proj, id;
-}
-
 function getIconForDataikuItemType(type, size = "11px") {
     switch (type) {
         case "project":
@@ -42,8 +32,7 @@ const Common = {
     createDatasetLink,
     createProjectLink,
     createDatasetLinkTag,
-    getIconForDataikuItemType,
-    getBaseUrl
+    getIconForDataikuItemType
 };
 
 export default Common;
