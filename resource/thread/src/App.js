@@ -195,7 +195,7 @@ class App extends Component {
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
             return <div>
-                <h4>Please access Thread through the <a target="_parent" href={url}>public web URL</a></h4>
+                <h4>Please access Thread through the <a target="_blank" href={url}>public web URL</a></h4>
                 <div style={{ paddingTop: '15px' }}>
                     <span style={{ fontWeight: 'bold' }}>Public App Key:</span> {proj}.{id}
                 </div>
