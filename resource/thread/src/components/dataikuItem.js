@@ -731,7 +731,7 @@ class DataikuItem extends Component {
 
     renderDefinition() {
         return <Col>
-            <Row>
+            <Row style={{ paddingTop: '15px' }}>
                 <Col xs="auto">
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
