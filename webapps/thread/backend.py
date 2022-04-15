@@ -305,7 +305,7 @@ def update_desc():
 def can_user_access_project(project_key):
     headers = dict(request.headers)
     auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
-    user = dataiku.api_client().client.get_user(auth_info['authIdentifier'])
+    user = dataiku.api_client().get_user(auth_info['authIdentifier'])
     client_as_user = user.get_client_as()
 
     try:
