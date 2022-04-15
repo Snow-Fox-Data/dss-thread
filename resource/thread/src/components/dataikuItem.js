@@ -709,7 +709,7 @@ class DataikuItem extends Component {
                                 </div>
                             }
                             {
-                                this.props.item.definition.id > 0 &&
+                                (this.props.item.definition.id > 0 && this.props.item.user_security) &&
                                 <div>
                                     <Button variant="primary"
                                         onClick={() => this.editDef()}
