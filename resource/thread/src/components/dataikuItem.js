@@ -332,10 +332,7 @@ class DataikuItem extends Component {
         if (this.props.item.definition.id > -1) {
             app_to = eval(this.props.item.definition.applied_to);
         }
-        else {
-            if (this.state.tempSelDef.id > -1)
-                app_to = eval(this.state.tempSelDef.applied_to); // applying an existing definition
-        }
+
         this.setState({
             applyLineageModal: true,
             newDefModal: false,
@@ -473,6 +470,9 @@ class DataikuItem extends Component {
         let applieds = [];
         if (this.props.item.definition.id > -1) {
             applieds = eval(this.props.item.definition.applied_to)
+        } else {
+            if (this.state.tempSelDef.id > -1)
+                applieds = eval(this.state.tempSelDef.applied_to); // applying an existing definition
         }
 
         let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
