@@ -500,7 +500,13 @@ class DataikuItem extends Component {
         ));
 
         const selectAll = (all) => {
-            alert(all)
+            var checked = 'false';
+            if (all)
+                checked = 'true';
+
+            for (const key in refs) {
+                refs[key].current.checked = checked;
+            }
         }
 
         return <Col>
