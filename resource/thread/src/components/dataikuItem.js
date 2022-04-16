@@ -505,7 +505,7 @@ class DataikuItem extends Component {
                 checked = 'true';
 
             for (const key in refs) {
-                key.current.checked = checked;
+                refs[key].current.checked = checked;
             }
         }
 
