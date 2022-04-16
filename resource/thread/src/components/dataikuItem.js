@@ -487,6 +487,10 @@ class DataikuItem extends Component {
                 upstreams.push(type)
         });
 
+        const selectAll = (all) => {
+            
+        }
+
         return <Col>
             <Modal size="lg" show={this.state.applyLineageModal} animation={false} onHide={() => this.cancelLineageSave()}>
                 <Modal.Header closeButton>
@@ -501,6 +505,7 @@ class DataikuItem extends Component {
                         <span style={{ fontWeight: 'bold' }}>This Column</span>
                         <Form.Check className='lineage-check' disabled='true' checked='true' type='switch' id='this-cb' label={this.props.item.name}></Form.Check>
 
+                        <span onClick={() => selectAll(true)}>All</span>&nbsp;|&nbsp;<span onClick={() => selectAll(false)}>None</span>
                         {upstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
