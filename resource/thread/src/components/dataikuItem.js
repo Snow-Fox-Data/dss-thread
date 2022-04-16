@@ -468,11 +468,13 @@ class DataikuItem extends Component {
         let downstreams = [];
         let upstreams = [];
         let applieds = [];
+        let refs = {};
         if (this.props.item.definition.id > -1) {
             applieds = eval(this.props.item.definition.applied_to)
         } else {
-            if (this.state.tempSelDef.id > -1)
+            if (this.state.tempSelDef.id > -1) {
                 applieds = eval(this.state.tempSelDef.applied_to); // applying an existing definition
+            }
         }
 
         let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
@@ -487,8 +489,18 @@ class DataikuItem extends Component {
                 upstreams.push(type)
         });
 
+        applieds.map((type) => (
+            refs['ap-' + type] = React.createRef()
+        ));
+        down_flat.map((type) => (
+            refs['dl-' + type] = React.createRef()
+        ));
+        up_flat.map((type) => (
+            refs['up-' + type] = React.createRef()
+        ));
+
         const selectAll = (all) => {
-            
+            var sd = all;
         }
 
         return <Col>
@@ -505,25 +517,25 @@ class DataikuItem extends Component {
                         <span style={{ fontWeight: 'bold' }}>This Column</span>
                         <Form.Check className='lineage-check' disabled='true' checked='true' type='switch' id='this-cb' label={this.props.item.name}></Form.Check>
 
-                        <span onClick={() => selectAll(true)}>All</span>&nbsp;|&nbsp;<span onClick={() => selectAll(false)}>None</span>
+                        <span class="app-link" onClick={() => selectAll(true)}>All</span>&nbsp;|&nbsp;<span class="app-link" onClick={() => selectAll(false)}>None</span>
                         {upstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
                         {upstreams.map((type) => (
-                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type} label={type}></Form.Check>
+                            <Form.Check ref={refs['ul-' + type]} className='lineage-check' type='switch' onChange={handleLineageCheck} id={'ul-' + type} label={type}></Form.Check>
                         ))}
                         {downstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Downstream</span>
                         }
                         {downstreams.map((type) => (
-                            <Form.Check className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
+                            <Form.Check ref={refs['dl-' + type]} className='lineage-check' type='switch' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
                         ))}
 
                         {(applieds.length > 0) &&
                             <div>
                                 <span style={{ fontWeight: 'bold' }}>Currently Applied</span>
                                 {applieds.map((type) => (
-                                    <Form.Check className='lineage-check' type='switch' defaultChecked='true' onChange={handleLineageCheck} id={'dl-' + type} label={type}></Form.Check>
+                                    <Form.Check ref={refs['ap-' + type]} className='lineage-check' type='switch' defaultChecked='true' onChange={handleLineageCheck} id={'ap-' + type} label={type}></Form.Check>
                                 ))}
                             </div>
                         }
