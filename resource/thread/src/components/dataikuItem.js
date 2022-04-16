@@ -500,7 +500,7 @@ class DataikuItem extends Component {
         ));
 
         const selectAll = (all) => {
-            var sd = all;
+            alert(all)
         }
 
         return <Col>
@@ -517,7 +517,7 @@ class DataikuItem extends Component {
                         <span style={{ fontWeight: 'bold' }}>This Column</span>
                         <Form.Check className='lineage-check' disabled='true' checked='true' type='switch' id='this-cb' label={this.props.item.name}></Form.Check>
 
-                        <span class="app-link" onClick={() => selectAll(true)}>All</span>&nbsp;|&nbsp;<span class="app-link" onClick={() => selectAll(false)}>None</span>
+                        <span class="app-link" onClick={() => selectAll(true)}>All</span>&nbsp;|&nbsp;<span class="app-link" onClick={() => selectAll(false)}>None</span><br />
                         {upstreams.length > 0 &&
                             <span style={{ fontWeight: 'bold' }}>Upstream</span>
                         }
