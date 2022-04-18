@@ -306,6 +306,7 @@ class Home extends Component {
                     </Card>
                 </Col>
             </Row >
+            {this.state.recents!= null && 
             <Row>
                 <Col>
                     <Table>
@@ -317,6 +318,7 @@ class Home extends Component {
                     </Table>
                 </Col>
             </Row>
+            }
         </div>
     }
 
