@@ -676,18 +676,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
-                        <Dropdown>
-                            <Dropdown.Toggle size="sm"
-                                variant="outline-secondary">
-                                Options
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item href={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} target="_blank">Open Dataset in new Tab</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
+                    
                 </Col>
                 <Col>
                     <h1>{this.props.item.name}</h1>
@@ -698,7 +687,20 @@ class DataikuItem extends Component {
                     </p>
 
                 </Col>
-                <Col>
+                <Col xs={2}>
+                <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                        <Dropdown>
+                            <Dropdown.Toggle size="sm"
+                                variant="outline-secondary">
+                                Options
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} target="_blank">Open Dataset in new Tab</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div></Col>
+                    <Col xs={2}>
                     <div className="float-end">
                         <Card>
                             <Card.Header>
