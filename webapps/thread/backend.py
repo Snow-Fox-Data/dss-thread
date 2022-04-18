@@ -68,35 +68,39 @@ def scan_project():
 
 @app.route('/scan', methods=['GET'])
 def scan():
-    p = dataiku.Project() # create a project handle
-    proj_vars = p.get_variables() # retrieve your variables as a dictionary
-    # if 'scanning' in proj_vars["standard"]:
-    #     if proj_vars["standard"]['scanning'] == 'True':
-    #         return json.dumps({"result": "already scanning"})
-    
-    # proj_vars["standard"]['scanning'] = 'True'
-    # p.set_variables(proj_vars) # set the updated dictionary
-    dss = dss_utils()
+    try:
+        p = dataiku.Project() # create a project handle
+        proj_vars = p.get_variables() # retrieve your variables as a dictionary
+        # if 'scanning' in proj_vars["standard"]:
+        #     if proj_vars["standard"]['scanning'] == 'True':
+        #         return json.dumps({"result": "already scanning"})
+        
+        # proj_vars["standard"]['scanning'] = 'True'
+        # p.set_variables(proj_vars) # set the updated dictionary
+        dss = dss_utils()
 
-    # initializing the datasets
-    dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
-    dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
-    dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
-    dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
+        # initializing the datasets
+        dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
+        dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
+        dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
+        dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
 
-    # limit to folders
-    folders = []
-    if 'limit_to_folders' in proj_vars["standard"]:
-        folders = proj_vars["standard"]['limit_to_folders']
+        # limit to folders
+        folders = []
+        if 'limit_to_folders' in proj_vars["standard"]:
+            folders = proj_vars["standard"]['limit_to_folders']
 
-    result = dss.scan_server(folders)
+        result = dss.scan_server(folders)
 
-    # reset the project variables
-    # proj_vars["standard"]['scanning'] = 'False'
-    proj_vars["standard"]['limit_to_folders'] = folders
-    p.set_variables(proj_vars) 
+        # reset the project variables
+        # proj_vars["standard"]['scanning'] = 'False'
+        proj_vars["standard"]['limit_to_folders'] = folders
+        p.set_variables(proj_vars) 
 
-    return json.dumps({"result": "scan complete"})
+        return json.dumps({"result": "scan complete"})
+    except Exception as e:
+        capture_exception(e)
+        json.dumps({"result": "error", "message": e})
 
 @app.route('/tag-list', methods=['GET'])
 def tag_list():

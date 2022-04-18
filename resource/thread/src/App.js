@@ -35,7 +35,7 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 import Common from "./common/common";
 
-class App extends Component {    
+class App extends Component {
     static CURRENT_URL = window.location.pathname;
 
     static HOME = "HOME";
@@ -157,9 +157,10 @@ class App extends Component {
             fetch(window.getWebAppBackendUrl('scan'))
                 .then(res => res.json())
                 .then((response) => {
-                    // this.setState({ scanning: false });
-                    // this.refreshUser();
-                    window.location.reload();
+                    if (response.result == 'error')
+                        alert(response.msg)
+                    else
+                        window.location.reload();
                 });
         }
     }
