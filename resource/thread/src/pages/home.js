@@ -184,6 +184,7 @@ class Home extends Component {
                 else {
                     this.setState({
                         loading: false,
+                        selectedItem: null,
                         errorMsg: 'There was a problem loading this object'
                     });
                 }
@@ -409,10 +410,10 @@ class Home extends Component {
                     </Row>
                     : null}
 
-                {this.state.errorMsg.length>0 ?
+                {this.state.errorMsg.length > 0 ?
                     <Row>
                         <div style={{ padding: '10px' }}>
-                            <h1>{this.state.errorMsg}</h1>
+                            <h2>{this.state.errorMsg}</h2>
                         </div>
                     </Row>
                     : null}

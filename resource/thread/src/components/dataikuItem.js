@@ -667,7 +667,7 @@ class DataikuItem extends Component {
                     </p>
 
                 </Col>
-                <Col xs={2}>
+                <Col>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
@@ -763,7 +763,7 @@ class DataikuItem extends Component {
                         Definition
                     </p>
                 </Col>
-                <Col xs={2}>
+                <Col>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
@@ -872,7 +872,7 @@ class DataikuItem extends Component {
                     <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
-                <Col xs={2}>
+                <Col>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
@@ -959,7 +959,7 @@ class DataikuItem extends Component {
                     <div class="tags">{tags}</div>
 
                 </Col>
-                <Col xs={2}>
+                <Col>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
