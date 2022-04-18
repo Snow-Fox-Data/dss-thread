@@ -92,6 +92,7 @@ def scan():
 
     # reset the project variables
     proj_vars["standard"]['scanning'] = 'False'
+    proj_vars["standard"]['limit_to_folders'] = []
     p.set_variables(proj_vars) 
 
     return json.dumps({"result": "scan complete"})
