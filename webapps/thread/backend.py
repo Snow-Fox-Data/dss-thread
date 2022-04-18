@@ -93,6 +93,7 @@ def scan():
 
     # reset the project variables
     proj_vars['scanning'] = 'False'
+    proj_vars["standard"] = proj_vars
     p.set_variables(proj_vars) 
 
     return json.dumps({"result": "scan complete"})
