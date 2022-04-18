@@ -66,15 +66,6 @@ def scan_project():
 
     return json.dumps({"result": "scan complete"})
 
-@app.route('/recents', methods['GET'])
-def recents():
-    dss = dss_utils()
-    idx_ds = dss.get_index_ds()
-    df = idx_ds.get_dataframe()
-
-    df.nlargest(n=10, columns=['last_modified'])
-
-    return df.to_json(orient='records')
 
 @app.route('/scan', methods=['GET'])
 def scan():
