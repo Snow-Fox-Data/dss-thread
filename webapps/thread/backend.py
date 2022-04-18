@@ -2,6 +2,8 @@ from ctypes import util
 from dis import disassemble
 from http import client
 import json
+
+from matplotlib.font_manager import json_load
 # from tkinter import E
 import dataiku
 import pandas as pd
@@ -66,14 +68,33 @@ def scan_project():
 
 @app.route('/scan', methods=['GET'])
 def scan():
+    p = dataiku.Project() # create a project handle
+    variables = p.get_variables() # retrieve your variables as a dictionary
+    proj_vars = variables["standard"]
+    if ['scanning'] in proj_vars:
+        if proj_vars['scanning'] == 'True':
+            return json.dumps({"result": "already scanning"})
+    
+    proj_vars['scanning'] = 'True'
+    p.set_variables(proj_vars) # set the updated dictionary
     dss = dss_utils()
 
+    # initializing the datasets
     dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
     dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
     dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
     dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
 
-    result = dss.scan_server()
+    # limit to folders
+    folders = []
+    if 'limit_to_folders' in proj_vars:
+        folders = json.loads(proj_vars['limit_to_folders'])
+
+    result = dss.scan_server(folders)
+
+    # reset the project variables
+    proj_vars['scanning'] = 'False'
+    p.set_variables(proj_vars) 
 
     return json.dumps({"result": "scan complete"})
 
@@ -753,7 +774,7 @@ class dss_utils:
 
         ds.write_dataframe(df)
 
-    def scan_server(self):
+    def scan_server(self, limit_to_folders = []):
         project_list = []
         index_list = []
         scan_obj = {}
@@ -762,6 +783,11 @@ class dss_utils:
         for proj in dss_projects:
             scan_obj[proj] = {}
             project = self.client.get_project(proj)
+
+            folder = project.get_project_folder().name
+            if len(limit_to_folders) == 0 or folder not in limit_to_folders:
+                continue
+
             proj_meta = project.get_metadata()
             
             datasets = project.list_datasets()
