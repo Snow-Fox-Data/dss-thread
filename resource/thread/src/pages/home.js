@@ -48,7 +48,8 @@ class Home extends Component {
                             currentUser: response['you_are'],
                             loading: false,
                             loggedIn: true,
-                            collectionStats: response.stats
+                            collectionStats: response.stats,
+                            recents: eval(response.stats.recents)
                         });
 
                         this.navDeepLink();
