@@ -509,6 +509,8 @@ class DataikuItem extends Component {
 
                 this.state.applyToDataSets = allArr;
             }
+            else
+                this.state.applyToDataSets = [this.props.item.key];
 
             for (const key in refs) {
                 refs[key].current.checked = checked;
