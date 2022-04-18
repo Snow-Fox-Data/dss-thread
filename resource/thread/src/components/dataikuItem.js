@@ -496,7 +496,7 @@ class DataikuItem extends Component {
             refs['dl-' + type] = React.createRef()
         ));
         up_flat.map((type) => (
-            refs['up-' + type] = React.createRef()
+            refs['ul-' + type] = React.createRef()
         ));
 
         const selectAll = (all) => {
