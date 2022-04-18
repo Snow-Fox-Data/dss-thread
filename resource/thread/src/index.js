@@ -6,11 +6,12 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
 import Catalog from './pages/catalog';
+import Common from './common/common';
 
 ReactDOM.render(
   <React.StrictMode>
      {/* basename={App.CURRENT_URL} */}
-    <BrowserRouter basename={App.CURRENT_URL}>
+    <BrowserRouter basename={Common.formatBasePath()}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
