@@ -183,6 +183,7 @@ def load_item():
             col_ct, col_def = dss.calc_dataset_def_ct(key)
             ds['total_cols'] = col_ct
             ds['total_cols_def'] = col_def
+            ds['success'] = True
 
             return json.dumps(ds)
         else:
@@ -192,6 +193,7 @@ def load_item():
                 col_ct, col_def = dss.calc_project_def_ct(key)
                 p['total_cols'] = col_ct
                 p['total_cols_def'] = col_def
+                p['success'] = True
 
                 return json.dumps(p)
             else:
@@ -214,6 +216,7 @@ def load_item():
                     col['object_type'] = 'column'
                     col['tag_list'] = dss.get_tag_list()
                     col['user_security'] = can_user_access_project(p_name)
+                    col['success'] = True
 
                     if len(def_df) > 0:
                         col['definition'] = def_df.to_dict('records')[0]
