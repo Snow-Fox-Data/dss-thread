@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
      {/* basename={App.CURRENT_URL} */}
      {/* basename={Common.formatBasePath()} */}
-    <BrowserRouter basename={App.CURRENT_URL}>
+    <BrowserRouter basename={Common.formatBasePath()}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

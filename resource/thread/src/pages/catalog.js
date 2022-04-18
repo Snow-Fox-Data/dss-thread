@@ -26,6 +26,8 @@ class Catalog extends Component {
     }
 
     componentDidMount() {
+        console.log('window == ');
+        console.log(window);
         this.fetchDefinitions();
         this.fetchTags();
     }
