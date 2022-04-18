@@ -21,6 +21,7 @@ class Home extends Component {
                 project: true,
                 definition: true
             },
+            errorMsg: '',
             currentUser: '',
             loading: true,
             openFilter: true,
@@ -172,11 +173,20 @@ class Home extends Component {
                 console.log('response == ');
                 console.log(response);
 
-                this.setState({
-                    loading: false,
-                    selectedItem: response,
-                    selectedItemType: response.object_type
-                });
+                if (response.success) {
+                    this.setState({
+                        errorMsg: '',
+                        loading: false,
+                        selectedItem: response,
+                        selectedItemType: response.object_type
+                    });
+                }
+                else {
+                    this.setState({
+                        loading: false,
+                        errorMsg: 'There was a problem loading this object'
+                    });
+                }
             });
     }
 
@@ -395,6 +405,14 @@ class Home extends Component {
                             <Spinner animation="border" role="status">
                                 <span className="visually-hidden">Loading...</span>
                             </Spinner>
+                        </div>
+                    </Row>
+                    : null}
+
+                {this.state.errorMsg.length>0 ?
+                    <Row>
+                        <div style={{ padding: '10px' }}>
+                            <h1>{this.state.errorMsg}</h1>
                         </div>
                     </Row>
                     : null}
