@@ -18,7 +18,7 @@ class Catalog extends Component {
             definitions: [],
             loading: false,
             searchBy: "",
-            sortBy: { },
+            sortBy: {},
             tag: "",
             tags: [],
             title: "Catelog View"
@@ -32,18 +32,18 @@ class Catalog extends Component {
 
     displayTableHeaderCarets(columnHeader) {
         let sortBy = this.state.sortBy[columnHeader];
-        if(sortBy === 'ASC') {
+        if (sortBy === 'ASC') {
             return <span className="header-icons-container">
                 <FaCaretUp style={{ color: "#000" }} />
             </span>;
-        } else if(sortBy === 'DESC') {
+        } else if (sortBy === 'DESC') {
             return <span className="header-icons-container">
-                <FaCaretDown style={{ color: "#000" }}  />
+                <FaCaretDown style={{ color: "#000" }} />
             </span>;
         } else {
             return <span className="header-icons-container">
                 <FaCaretUp style={{ color: "#777" }} />
-                <FaCaretDown style={{ color: "#777" }}  />
+                <FaCaretDown style={{ color: "#777" }} />
             </span>;
         }
     }
@@ -89,14 +89,14 @@ class Catalog extends Component {
             .then(res => res.json())
             .then((response) => {
                 this.setState({
-                  tags: response
+                    tags: response
                 });
             });
     }
 
-    formatAppliedTo(appliedTo) {    
+    formatAppliedTo(appliedTo) {
         appliedTo = JSON.parse(appliedTo);
-        if(appliedTo != null && appliedTo.length > 0) {    
+        if (appliedTo != null && appliedTo.length > 0) {
             return appliedTo.length;
         } else {
             return <span>0</span>;
@@ -106,28 +106,28 @@ class Catalog extends Component {
         //     let formattedAppliedTo = appliedTo.map((col) => {
         //         return <span>{col}<br/></span>;
         //     });
-    
+
         //     return formattedAppliedTo;
         // } else {
         //     return <span>{appliedTo}</span>;
         // }
     }
 
-    formatTags(tags) {    
+    formatTags(tags) {
         tags = JSON.parse(tags);
-        if(tags != null && tags.length > 0) {
+        if (tags != null && tags.length > 0) {
             let formattedTags = tags.map((tag) => {
                 return <Tag onClick={event => this.onClickTag(tag)} tag={tag}></Tag>
                 // <span className='definition-tag' onClick={event => this.onClickTag(tag)}>{tag}</span>;
             });
-    
+
             return formattedTags;
         } else {
             return <span>{tags}</span>;
         }
     }
 
-    onChangeTag(_tag) {  
+    onChangeTag(_tag) {
         this.fetchDefinitionsByTag(_tag);
         this.setState({ tag: _tag });
     }
@@ -156,31 +156,31 @@ class Catalog extends Component {
         //   navigate(url);
     }
 
-    sortDefinitions(sortBy) { 
+    sortDefinitions(sortBy) {
         let _definitions = this.state.definitions;
         let _sortBy = this.state.sortBy;
 
         let sortByKeys = Object.keys(_sortBy);
-        if(sortByKeys.length > 0) {
-          sortByKeys.map((item, index) => {
-            if(item !== sortBy) { _sortBy[item] = null }
-          });
+        if (sortByKeys.length > 0) {
+            sortByKeys.map((item, index) => {
+                if (item !== sortBy) { _sortBy[item] = null }
+            });
         }
 
-        if(_sortBy[sortBy] == null || _sortBy[sortBy] === 'DESC') {
+        if (_sortBy[sortBy] == null || _sortBy[sortBy] === 'DESC') {
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
-                if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
+                if (tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
                 return tempA[sortBy].toLowerCase() > tempB[sortBy].toLowerCase() ? 1 : -1;
-            }); 
+            });
 
             _sortBy[sortBy] = 'ASC';
         } else {
             _definitions = _definitions.sort((a, b) => {
                 var tempA = a; var tempB = b;
-                if( tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
+                if (tempA[sortBy].toLowerCase() === tempB[sortBy].toLowerCase()) return 0;
                 return tempA[sortBy].toLowerCase() < tempB[sortBy].toLowerCase() ? 1 : -1;
-            }); 
+            });
 
             _sortBy[sortBy] = 'DESC';
         }
@@ -192,12 +192,14 @@ class Catalog extends Component {
     }
 
     renderDefinitions() {
-        if(this.state.definitions.length > 0) {
+        if (this.state.definitions.length > 0) {
             var listItems = this.state.definitions.map((col) =>
                 <tr>
+                    <td>{Common.getIconForDataikuItemType('definition', "16px")}
+                    </td>
                     <td className='definition-name' onClick={() => this.openDefinition(col.id)}>
-                        <span style={{ marginLeft: '10px' }}>{col.name}</span>
-                    </td>                    
+                        <span>{col.name}</span>
+                    </td>
                     <td>
                         {col.description}
                     </td>
@@ -212,24 +214,24 @@ class Catalog extends Component {
 
             return listItems;
         } else {
-            return  <tr>
-                      <td colSpan={3} className="text-center">
-                          <span>No results for your search</span>
-                      </td>
-                    </tr>;
+            return <tr>
+                <td colSpan={3} className="text-center">
+                    <span>No results for your search</span>
+                </td>
+            </tr>;
         }
     }
 
     renderTagSelect() {
-        if(this.state.tags.length > 0) {
-            var tags = this.state.tags.map((tag) => 
+        if (this.state.tags.length > 0) {
+            var tags = this.state.tags.map((tag) =>
                 <option value={tag}>{tag}</option>
             );
 
             return <div className='search-bar'>
-                <div className="input-group">                
+                <div className="input-group">
                     <span className="input-group-addon input-group-text" style={{ width: "auto" }}>
-                        <div style={{display: "block"}}>
+                        <div style={{ display: "block" }}>
                             <FaFilter style={{
                                 color: "#000",
                                 height: '21px',
@@ -247,19 +249,19 @@ class Catalog extends Component {
         } else {
             return <div>
                 <select class="form-control">
-                    <option value="">No tags found</option>                    
+                    <option value="">No tags found</option>
                 </select>
             </div>;
         }
     }
 
-    render() {      
+    render() {
         console.log('render() :: STATE == ');
         console.log(this.state);
         const { loading, searchBy } = this.state;
 
         return <Col>
-              {loading ?
+            {loading ?
                 <Row>
                     <div style={{ padding: '10px' }}>
                         <Spinner animation="border" role="status">
@@ -267,60 +269,60 @@ class Catalog extends Component {
                         </Spinner>
                     </div>
                 </Row>
-              : null}
+                : null}
             <Row>
-              <Col md={6}>
-                <div>
-                    <h2>Definitions</h2>
-                </div>
-              </Col>
-              <Col>
-                {this.renderTagSelect()}                
-              </Col>
-              <Col>
-                <div className='search-bar'>
-                    <div className="input-group">                
-                        <span className="input-group-addon input-group-text" style={{width: "auto"}}>
-                            <div style={{display: "block"}}>
-                                <FaSearch style={{
-                                    color: "#000",
-                                    height: '21px',
-                                    width: '21px'
-                                }} />
-                            </div>
-                        </span>
-
-                        <input className="form-control" placeholder="Search Definitions" 
-                            onChange={event => this.fetchDefinitions(event.target.value)} 
-                            type="text" value={searchBy} />
+                <Col md={6}>
+                    <div>
+                        <h2>Definitions</h2>
                     </div>
-                </div>
-              </Col>
+                </Col>
+                <Col>
+                    {this.renderTagSelect()}
+                </Col>
+                <Col>
+                    <div className='search-bar'>
+                        <div className="input-group">
+                            <span className="input-group-addon input-group-text" style={{ width: "auto" }}>
+                                <div style={{ display: "block" }}>
+                                    <FaSearch style={{
+                                        color: "#000",
+                                        height: '21px',
+                                        width: '21px'
+                                    }} />
+                                </div>
+                            </span>
+
+                            <input className="form-control" placeholder="Search Definitions"
+                                onChange={event => this.fetchDefinitions(event.target.value)}
+                                type="text" value={searchBy} />
+                        </div>
+                    </div>
+                </Col>
             </Row>
             <Row>
-              <Col>
-                  <div className='table-definitions table-responsive'>
-                      <Table striped bordered hover>
-                          <thead>
-                              <tr>
-                                  <th onClick={() => this.sortDefinitions(Catalog.NAME)}>
-                                      Name
-                                      {this.displayTableHeaderCarets(Catalog.NAME)}
-                                  </th>
-                                  <th onClick={() => this.sortDefinitions(Catalog.DESCRIPTION)}>
-                                      Description
-                                      {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
-                                  </th>
-                                  {/* <th>Applied To</th> */}
-                                  <th>Tags</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            {this.renderDefinitions()}
-                          </tbody>
-                      </Table>
-                  </div>                    
-              </Col>
+                <Col>
+                    <div className='table-definitions table-responsive'>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th onClick={() => this.sortDefinitions(Catalog.NAME)}>
+                                        Name
+                                        {this.displayTableHeaderCarets(Catalog.NAME)}
+                                    </th>
+                                    <th onClick={() => this.sortDefinitions(Catalog.DESCRIPTION)}>
+                                        Description
+                                        {this.displayTableHeaderCarets(Catalog.DESCRIPTION)}
+                                    </th>
+                                    {/* <th>Applied To</th> */}
+                                    <th>Tags</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.renderDefinitions()}
+                            </tbody>
+                        </Table>
+                    </div>
+                </Col>
             </Row>
         </Col>
     }
