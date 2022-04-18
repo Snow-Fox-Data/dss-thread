@@ -492,10 +492,10 @@ class DataikuItem extends Component {
         applieds.map((type) => (
             refs['ap-' + type] = React.createRef()
         ));
-        down_flat.map((type) => (
+        downstreams.map((type) => (
             refs['dl-' + type] = React.createRef()
         ));
-        up_flat.map((type) => (
+        upstreams.map((type) => (
             refs['ul-' + type] = React.createRef()
         ));
 
