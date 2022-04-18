@@ -56,50 +56,22 @@ class Home extends Component {
                         window.addEventListener("hashchange", () => this.navDeepLink());
 
                         eventBus.on("datasetSelected", (ds) => {
-                            // this.loadItem([{
-                            //     key: ds,
-                            //     object_type: 'dataset'
-                            // }])
-
-                            // clear the search bar
-                            // this.searchRef.clear()
                             this.navToObject(ds)
                         }
                         );
 
                         eventBus.on("definitionSelected", (ds) => {
-                            this.loadItem([{
-                                key: ds,
-                                object_type: 'definition'
-                            }])
-
-                            // clear the search bar
-                            // this.searchRef.clear()
                             this.navToObject(ds)
                         }
                         );
 
 
                         eventBus.on("projectSelected", (proj) => {
-                            this.loadItem([{
-                                key: proj,
-                                object_type: 'project'
-                            }])
-
-                            // clear the search bar
-                            // this.searchRef.clear()
                             this.navToObject(proj)
                         }
                         );
 
                         eventBus.on("columnSelected", (col) => {
-                            this.loadItem([{
-                                key: col,
-                                object_type: 'column'
-                            }])
-
-                            // clear the search bar
-                            // this.searchRef.clear()
                             this.navToObject(col)
                         }
                         );
@@ -412,13 +384,13 @@ class Home extends Component {
 
                 {this.state.errorMsg.length > 0 ?
                     <Row>
-                        <div style={{ padding: '10px' }}>
+                        <div style={{ padding: '20px' }}>
                             <h2>{this.state.errorMsg}</h2>
                         </div>
                     </Row>
                     : null}
 
-                {selectedItem == null &&
+                {(selectedItem == null && this.state.errorMsg.length == 0) &&
                     this.collectionStats()
                 }
                 <Row>
