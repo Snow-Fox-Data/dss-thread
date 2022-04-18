@@ -965,7 +965,7 @@ class DataikuItem extends Component {
 
                 </Col>
                 <Col>
-                    {this.props.user_security &&
+                    {this.props.item.user_security &&
                         <div style={{ padding: '8px', textAlign: 'right' }}>
                             <Dropdown>
                                 <Dropdown.Toggle size="sm"
