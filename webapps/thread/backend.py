@@ -327,17 +327,21 @@ def update_desc():
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
     if len(data['applied_to']) > 0:
-        dss.update_column_description(data['applied_to'], data['description'])
+        client_as_user = get_user_client()
+        dss.update_column_description(data['applied_to'], data['description'], client_as_user)
      
     return json.dumps({"success": True,
         "value": desc
     })
 
-def can_user_access_project(project_key):
+def get_user_client():
     headers = dict(request.headers)
     auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
     user = dataiku.api_client().get_user(auth_info['authIdentifier'])
-    client_as_user = user.get_client_as()
+    return user.get_client_as()
+
+def can_user_access_project(project_key):
+    client_as_user = get_user_client()
 
     try:
         proj = client_as_user.get_project(project_key)
@@ -526,7 +530,7 @@ class dss_utils:
 
         return total_ct, defined_ct
 
-    def update_column_description(self, column_array, description):
+    def update_column_description(self, column_array, description, dss_client):
         if type(column_array)==str:
             column_array = [column_array]
             
@@ -535,7 +539,7 @@ class dss_utils:
                 logging.info(f'setting description for {i}')
                 lst = i.split('|')
                 project, dataset, column = lst[0], lst[1], lst[2]
-                p = self.client.get_project(project)
+                p = dss_client.get_project(project)
                 ds = p.get_dataset(dataset)
                 ds_schema = ds.get_schema()
                 for z in ds_schema['columns']: 
