@@ -676,7 +676,7 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
-                    
+
                 </Col>
                 <Col>
                     <h1>{this.props.item.name}</h1>
@@ -688,7 +688,7 @@ class DataikuItem extends Component {
 
                 </Col>
                 <Col xs={2}>
-                <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+                    <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="outline-secondary">
@@ -700,7 +700,7 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div></Col>
-                    <Col xs={2}>
+                <Col xs={2}>
                     <div className="float-end">
                         <Card>
                             <Card.Header>
