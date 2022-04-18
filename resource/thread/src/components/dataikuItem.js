@@ -646,7 +646,7 @@ class DataikuItem extends Component {
                     <Col ms-auto>
                         {/* {this.state.tempSelDef.id != -1 &&
                             <div>
-                                {(upstreams.length > 0 || downstreams.length > 0) &&
+                                {(upstreams.length > 0 || downstreams.length > 0 || applieds.length > 1) &&
                                     <Button variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
                                 }
                                 <Button onClick={() => this.saveCol()}>Save Definition</Button>
@@ -660,7 +660,7 @@ class DataikuItem extends Component {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                {(upstreams.length > 0 || downstreams.length > 0) &&
+                                {(upstreams.length > 0 || downstreams.length > 0 || applieds.length > 0) &&
                                     <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
                                 }
                             </Dropdown.Menu>
