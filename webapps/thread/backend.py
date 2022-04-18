@@ -791,45 +791,48 @@ class dss_utils:
 
         dss_projects = self.client.list_project_keys()
         for proj in dss_projects:
-            project = self.client.get_project(proj)
+            try:
+                project = self.client.get_project(proj)
 
-            folder = project.get_project_folder().name
-            if len(limit_to_folders) > 0 and folder not in limit_to_folders:
-                continue
+                folder = project.get_project_folder().name
+                if len(limit_to_folders) > 0 and folder not in limit_to_folders:
+                    continue
 
-            scan_obj[proj] = {}
-            proj_meta = project.get_metadata()
-            
-            datasets = project.list_datasets()
-            recipes = project.list_recipes()
-            folders = project.list_managed_folders()
+                scan_obj[proj] = {}
+                proj_meta = project.get_metadata()
+                
+                datasets = project.list_datasets()
+                recipes = project.list_recipes()
+                folders = project.list_managed_folders()
 
-            scan_obj[proj]['datasets'] = datasets
-            scan_obj[proj]['recipes'] = recipes
-            scan_obj[proj]['folders'] = folders
+                scan_obj[proj]['datasets'] = datasets
+                scan_obj[proj]['recipes'] = recipes
+                scan_obj[proj]['folders'] = folders
 
-            index_list.append({
-                "name": proj.replace('|', ' | '), 
-                "object_type": "project",
-                "key": proj,
-                "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
-            })
-
-            for dataset in datasets:
                 index_list.append({
-                    "name": dataset['name'],
-                    "object_type": "dataset",
-                    "key": self.get_full_dataset_name(dataset['name'], proj),
-                    "description": dataset['name']
+                    "name": proj.replace('|', ' | '), 
+                    "object_type": "project",
+                    "key": proj,
+                    "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
                 })
 
-                for column in dataset['schema']['columns']:
-                   index_list.append({
-                     "name": column['name'],
-                     "description": column['name'],
-                     "object_type": "column",
-                    "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
-                     }) 
+                for dataset in datasets:
+                    index_list.append({
+                        "name": dataset['name'],
+                        "object_type": "dataset",
+                        "key": self.get_full_dataset_name(dataset['name'], proj),
+                        "description": dataset['name']
+                    })
+
+                    for column in dataset['schema']['columns']:
+                        index_list.append({
+                            "name": column['name'],
+                            "description": column['name'],
+                            "object_type": "column",
+                            "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
+                            }) 
+            except Exception as e:
+                logging.error(e)
 
         # compute the dataset lineage
         self.get_ds_lineage(scan_obj)

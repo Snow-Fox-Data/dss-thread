@@ -158,7 +158,7 @@ class App extends Component {
                 .then(res => res.json())
                 .then((response) => {
                     if (response.result == 'error')
-                        alert(response.msg)
+                        alert(response.message)
                     else
                         window.location.reload();
                 });
