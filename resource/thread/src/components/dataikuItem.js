@@ -646,6 +646,7 @@ class DataikuItem extends Component {
                         }
                     </Col>
                     <Col ms-auto>
+                        <Button onClick={() => this.showLineageSelection()}>Select Appllied Datasets</Button>
                         {/* {this.state.tempSelDef.id != -1 &&
                             <div>
                                 {(upstreams.length > 0 || downstreams.length > 0 || applieds.length > 1) &&
@@ -655,7 +656,7 @@ class DataikuItem extends Component {
                             </div>
                         }
                         {this.state.tempSelDef.id == -1 && */}
-                        <Dropdown>
+                        {/* <Dropdown>
                             <Dropdown.Toggle id="dropdown-basic">
                                 Save and Apply
                             </Dropdown.Toggle>
@@ -666,7 +667,7 @@ class DataikuItem extends Component {
                                     <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
                                 }
                             </Dropdown.Menu>
-                        </Dropdown>
+                        </Dropdown> */}
                         {/* } */}
                     </Col>
                 </Modal.Footer>
