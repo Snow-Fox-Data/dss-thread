@@ -100,7 +100,7 @@ def scan():
         return json.dumps({"result": "scan complete"})
     except Exception as e:
         capture_exception(e)
-        json.dumps({"result": "error", "message": e})
+        json.dumps({"result": "error", "message": str(e)})
 
 @app.route('/tag-list', methods=['GET'])
 def tag_list():
