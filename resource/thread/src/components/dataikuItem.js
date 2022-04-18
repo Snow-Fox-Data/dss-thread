@@ -646,7 +646,7 @@ class DataikuItem extends Component {
                         }
                     </Col>
                     <Col ms-auto>
-                        <Button onClick={() => this.showLineageSelection()}>Select Appllied Datasets</Button>
+                        <Button variant="info" onClick={() => this.showLineageSelection()}>Select Applied Datasets &gt;</Button>
                         {/* {this.state.tempSelDef.id != -1 &&
                             <div>
                                 {(upstreams.length > 0 || downstreams.length > 0 || applieds.length > 1) &&
