@@ -798,13 +798,13 @@ class dss_utils:
                 if len(limit_to_folders) > 0 and folder not in limit_to_folders:
                     continue
 
-                scan_obj[proj] = {}
                 proj_meta = project.get_metadata()
                 
                 datasets = project.list_datasets()
                 recipes = project.list_recipes()
                 folders = project.list_managed_folders()
 
+                scan_obj[proj] = {}
                 scan_obj[proj]['datasets'] = datasets
                 scan_obj[proj]['recipes'] = recipes
                 scan_obj[proj]['folders'] = folders
