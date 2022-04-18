@@ -70,7 +70,7 @@ def scan():
     p = dataiku.Project() # create a project handle
     variables = p.get_variables() # retrieve your variables as a dictionary
     proj_vars = variables["standard"]
-    if ['scanning'] in proj_vars:
+    if 'scanning' in proj_vars:
         if proj_vars['scanning'] == 'True':
             return json.dumps({"result": "already scanning"})
     
