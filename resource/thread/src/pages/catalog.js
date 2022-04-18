@@ -195,9 +195,8 @@ class Catalog extends Component {
         if (this.state.definitions.length > 0) {
             var listItems = this.state.definitions.map((col) =>
                 <tr>
-                    <td>{Common.getIconForDataikuItemType('definition', "16px")}
-                    </td>
                     <td className='definition-name' onClick={() => this.openDefinition(col.id)}>
+                        {Common.getIconForDataikuItemType('definition', "16px")}
                         <span>{col.name}</span>
                     </td>
                     <td>
