@@ -66,6 +66,16 @@ def scan_project():
 
     return json.dumps({"result": "scan complete"})
 
+@app.route('/recents', methods['GET'])
+def recents():
+    dss = dss_utils()
+    idx_ds = dss.get_index_ds()
+    df = idx_ds.get_dataframe()
+
+    df.nlargest(n=10, columns=['last_modified'])
+
+    return df.to_json(orient='records')
+
 @app.route('/scan', methods=['GET'])
 def scan():
     try:
@@ -426,9 +436,11 @@ class dss_utils:
             project_ct = len(ds.query('object_type=="project"'))
             def_ct = len(ds.query('object_type=="definition"'))
 
-            return { "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
+            recents = ds.nlargest(n=10, columns=['last_modified']).to_json(orient='records')
+
+            return { "recents": recents, "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
         except:
-            return { "column_ct": 0, "dataset_ct": 0, "project_ct": 0, "definition_ct": 0}
+            return { "recents": [], "column_ct": 0, "dataset_ct": 0, "project_ct": 0, "definition_ct": 0}
 
     def load_project(self, key):
         proj = self.client.get_project(key)
