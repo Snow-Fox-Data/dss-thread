@@ -2,6 +2,7 @@ from ctypes import util
 from dis import disassemble
 from http import client
 import json
+import gc
 
 # from tkinter import E
 import dataiku
@@ -871,6 +872,9 @@ class dss_utils:
         
         idx_ds = dataiku.Dataset(THREAD_INDEX_NAME)
         idx_ds.write_dataframe(df2, infer_schema=True, dropAndCreate=True)
+
+        del scan_obj
+        gc.collect()
 
         return True
     

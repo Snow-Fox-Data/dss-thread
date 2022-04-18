@@ -55,10 +55,10 @@ class Home extends Component {
                         window.addEventListener("hashchange", () => this.navDeepLink());
 
                         eventBus.on("datasetSelected", (ds) => {
-                            this.loadItem([{
-                                key: ds,
-                                object_type: 'dataset'
-                            }])
+                            // this.loadItem([{
+                            //     key: ds,
+                            //     object_type: 'dataset'
+                            // }])
 
                             // clear the search bar
                             // this.searchRef.clear()
