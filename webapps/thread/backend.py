@@ -87,7 +87,7 @@ def scan():
     # limit to folders
     folders = []
     if 'limit_to_folders' in proj_vars["standard"]:
-        folders = json.loads(proj_vars["standard"]['limit_to_folders'])
+        folders = proj_vars["standard"]['limit_to_folders']
 
     result = dss.scan_server(folders)
 
