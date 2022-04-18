@@ -687,7 +687,7 @@ class DataikuItem extends Component {
                     </p>
 
                 </Col>
-                <Col xs={1}>
+                <Col xs={2}>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
@@ -700,7 +700,7 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div></Col>
-                <Col xs={1}>
+                <Col xs={2}>
                     <div className="float-end">
                         <Card>
                             <Card.Header>
@@ -775,7 +775,16 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+
+                </Col>
+                <Col>
+                    <h1>{this.props.item.name}</h1>
+                    <p class="name">
+                        Definition
+                    </p>
+                </Col>
+                <Col xs={2}>
+                    <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="outline-secondary">
@@ -786,14 +795,7 @@ class DataikuItem extends Component {
                                 <Dropdown.Item onClick={() => this.deleteDef()}>Delete</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </div>
-                </Col>
-                <Col>
-                    <h1>{this.props.item.name}</h1>
-                    <p class="name">
-                        Definition
-                    </p>
-                </Col>
+                    </div></Col>
             </Row>
             <Row style={{ paddingTop: '15px' }}>
                 <Col>
@@ -882,7 +884,16 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, "80px")}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+
+                </Col>
+                <Col>
+                    <h1>{this.props.item.id}</h1>
+
+                    <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                    <div class="tags">{tags}</div>
+                </Col>
+                <Col xs={2}>
+                    <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="outline-secondary">
@@ -894,12 +905,6 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                </Col>
-                <Col>
-                    <h1>{this.props.item.id}</h1>
-
-                    <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
-                    <div class="tags">{tags}</div>
                 </Col>
                 <Col sm={2}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
@@ -961,7 +966,21 @@ class DataikuItem extends Component {
                     <div class="icon">
                         {Common.getIconForDataikuItemType(this.props.object_type, '80px')}
                     </div>
-                    <div style={{ paddingTop: '8px', textAlign: 'center' }}>
+
+                </Col>
+                <Col>
+                    <h1>{this.props.item.name} <span style={{ paddingLeft: "6px", paddingBottom: "2px" }}>
+
+                    </span>
+                    </h1>
+                    <h4>({this.props.item.projectKey})</h4>
+                    {/* <span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span> */}
+                    <p><span style={{ paddingLeft: '4px' }}>Project owned by <span style={{ fontWeight: "bold" }}>{this.props.item.ownerDisplayName}</span> in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
+                    <div class="tags">{tags}</div>
+
+                </Col>
+                <Col xs={2}>
+                    <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="outline-secondary">
@@ -974,17 +993,6 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                </Col>
-                <Col>
-                    <h1>{this.props.item.name} <span style={{ paddingLeft: "6px", paddingBottom: "2px" }}>
-
-                    </span>
-                    </h1>
-                    <h4>({this.props.item.projectKey})</h4>
-                    {/* <span><FaRedo onClick={() => this.scanProject()} style={{ width: '20px', height: '20px', cursor: 'pointer' }} /></span> */}
-                    <p><span style={{ paddingLeft: '4px' }}>Project owned by <span style={{ fontWeight: "bold" }}>{this.props.item.ownerDisplayName}</span> in <span style={{ fontWeight: "bold" }}>{this.props.item.folder}</span> folder</span></p>
-                    <div class="tags">{tags}</div>
-
                 </Col>
                 <Col sm={2}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
