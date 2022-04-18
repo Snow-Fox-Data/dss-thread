@@ -94,12 +94,17 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.props.item.definition = result.value;
-                    this.props.item.comment = result.value.description;
+                    if (result.success) {
+                        this.props.item.definition = result.value;
+                        this.props.item.comment = result.value.description;
 
-                    this.setState({
-                        newDefModal: false
-                    });
+                        this.setState({
+                            newDefModal: false
+                        });
+                    }
+                    else {
+                        alert(result.message);
+                    }
 
                     eventBus.dispatch("loading", false);
                 });
@@ -647,7 +652,7 @@ class DataikuItem extends Component {
                     </Col>
                     <Col ms-auto>
                         <Button variant="info" onClick={() => this.showLineageSelection()}>Select Applied Datasets &gt;</Button>
-                        
+
                     </Col>
                 </Modal.Footer>
             </Modal>
@@ -960,19 +965,21 @@ class DataikuItem extends Component {
 
                 </Col>
                 <Col>
-                    <div style={{ padding: '8px', textAlign: 'right' }}>
-                        <Dropdown>
-                            <Dropdown.Toggle size="sm"
-                                variant="outline-secondary">
-                                Options
-                            </Dropdown.Toggle>
+                    {this.props.user_security &&
+                        <div style={{ padding: '8px', textAlign: 'right' }}>
+                            <Dropdown>
+                                <Dropdown.Toggle size="sm"
+                                    variant="outline-secondary">
+                                    Options
+                                </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</Dropdown.Item>
-                                <Dropdown.Item onClick={() => this.scanProject()}>Rescan Project</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href={Common.createProjectLink(this.props.item.projectKey)} target="_blank">Open Project in new Tab</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => this.scanProject()}>Rescan Project</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                    }
                 </Col>
                 <Col sm={2}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}

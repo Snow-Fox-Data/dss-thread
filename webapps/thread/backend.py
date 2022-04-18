@@ -198,6 +198,7 @@ def load_item():
                 p['total_cols'] = col_ct
                 p['total_cols_def'] = col_def
                 p['success'] = True
+                p['user_security'] = can_user_access_project(key)
 
                 return json.dumps(p)
             else:
@@ -327,8 +328,13 @@ def update_desc():
     desc_ds.write_dataframe(df, infer_schema=True, dropAndCreate=True)
 
     if len(data['applied_to']) > 0:
-        client_as_user = get_user_client()
-        dss.update_column_description(data['applied_to'], data['description'], client_as_user)
+        try:
+            client_as_user = get_user_client()
+            dss.update_column_description(data['applied_to'], data['description'], client_as_user)
+        except:
+            return json.dumps({"success": False,
+              "message": "There was an issue updating the column description (do you have access?)"
+            })        
      
     return json.dumps({"success": True,
         "value": desc
