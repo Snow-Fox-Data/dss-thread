@@ -656,45 +656,43 @@ class dss_utils:
             # if not 'ADVANCEDDESIGNERVM' in p:
             #     continue
             
-            try:
-                for r in project['recipes']:
-                    settings = r.to_recipe().get_settings()
-                    if 'PrepareRecipe' in str(type(settings)):
-                        for step in settings.raw_steps:
-                            if 'type' in step and step['type'] == 'ColumnRenamer' and step['disabled'] == False:
-                                for renaming in step['params']['renamings']:
-                                    in_set = settings.get_recipe_inputs()['main']['items'][0]['ref']
-                                    out_set = settings.get_recipe_outputs()['main']['items'][0]['ref']
+            for r in project['recipes']:
 
-                                    remappings.append({'project': p, 'from': p + '|' + in_set + '|' + renaming['from'], 'to': p + '|' + out_set + '|' +renaming['to']})
-                                    # print(f'from: {renaming["from"]} to: {renaming["to"]}')
-                    
-                    ins = self.get_stream(r, 'inputs', p)            
-                    outs = self.get_stream(r, 'outputs', p)  
-                    
-                    r['ins'] = ins
-                    r['outs'] = outs
+                settings = r.to_recipe().get_settings()
+                if 'PrepareRecipe' in str(type(settings)):
+                    for step in settings.raw_steps:
+                        if 'type' in step and step['type'] == 'ColumnRenamer' and step['disabled'] == False:
+                            for renaming in step['params']['renamings']:
+                                in_set = settings.get_recipe_inputs()['main']['items'][0]['ref']
+                                out_set = settings.get_recipe_outputs()['main']['items'][0]['ref']
+
+                                remappings.append({'project': p, 'from': p + '|' + in_set + '|' + renaming['from'], 'to': p + '|' + out_set + '|' +renaming['to']})
+                                # print(f'from: {renaming["from"]} to: {renaming["to"]}')
                 
-                for d in project['datasets']:
-                    d['lineage_downstream'] = []
-                    d['lineage_upstream'] = []
-                    full_nm = self.get_full_dataset_name(d['name'], d['projectKey'])
+                ins = self.get_stream(r, 'inputs', p)            
+                outs = self.get_stream(r, 'outputs', p)  
+                
+                r['ins'] = ins
+                r['outs'] = outs
+            
+            for d in project['datasets']:
+                d['lineage_downstream'] = []
+                d['lineage_upstream'] = []
+                full_nm = self.get_full_dataset_name(d['name'], d['projectKey'])
 
-                    d['full_name'] = full_nm
-                    d['project'] = p
+                d['full_name'] = full_nm
+                d['project'] = p
 
-                    rec_name = full_nm 
-                    for r in project['recipes']:
-                        if rec_name in r['ins']:
-                            for o in r['outs']:
-                                if not o in d['lineage_downstream']:
-                                    d['lineage_downstream'].append(o)
-                        if rec_name in r['outs']:
-                            for i in r['ins']:
-                                if not i in d['lineage_upstream']:
-                                    d['lineage_upstream'].append(i)
-            except Exception as e:
-                logging.error(e)
+                rec_name = full_nm 
+                for r in project['recipes']:
+                    if rec_name in r['ins']:
+                        for o in r['outs']:
+                            if not o in d['lineage_downstream']:
+                                d['lineage_downstream'].append(o)
+                    if rec_name in r['outs']:
+                        for i in r['ins']:
+                            if not i in d['lineage_upstream']:
+                                d['lineage_upstream'].append(i)
 
         # write out the remappings...
         mapping_df = pd.DataFrame.from_dict(remappings)
@@ -834,7 +832,10 @@ class dss_utils:
                             "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
                             }) 
             except Exception as e:
-                logging.error(e)
+                if proj in scan_obj:
+                    del scan_obj[proj]
+                
+                logging.exception(e)
 
         # compute the dataset lineage
         self.get_ds_lineage(scan_obj)
