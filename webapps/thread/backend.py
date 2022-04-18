@@ -648,7 +648,7 @@ class dss_utils:
     def get_ds_lineage(self, all_projects):
 
         remapping_ds = dataiku.Dataset(THREAD_REMAPPING_NAME)
-        remappings = []
+        remappings = [{'project':'--', 'from':'--', 'to': '--'}]
 
         for p in all_projects:
             project = all_projects[p]
