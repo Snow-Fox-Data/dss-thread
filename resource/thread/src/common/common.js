@@ -13,6 +13,31 @@ function createDatasetLinkTag(proj, ds) {
     return '<a href="' + this.createDatasetLink(proj, ds) + '" target="_blank">' + proj + '.' + ds + '</a>';
 }
 
+function formatBasePath() {
+    console.log('formatBasePath() :: START :: ');
+
+    // let arrayUrlPath = App.CURRENT_URL.split('/');
+    let arrayUrlPath = window.location.pathname.split('/');
+    console.log('arrayUrlPath == ');
+    console.log(arrayUrlPath);
+
+    arrayUrlPath = arrayUrlPath.map((path, index) => {
+        // console.log('index == ' + index);
+        // console.log('path == ' + path);
+
+        return (path.length > 0) ? path : null;
+    }).filter((path) => path !== null);
+
+    // console.log('arrayUrlPath == ');
+    // console.log(arrayUrlPath);
+
+    let urlBuilder = '/' + arrayUrlPath[0] + '/' + arrayUrlPath[1] + '/' + arrayUrlPath[2];
+    console.log('urlBuilder == ' + urlBuilder);
+
+    console.log('buildBaseUrl() :: END :: ');
+    return urlBuilder;
+};
+
 function getIconForDataikuItemType(type, size = "11px") {
     switch (type) {
         case "project":
@@ -32,7 +57,8 @@ const Common = {
     createDatasetLink,
     createProjectLink,
     createDatasetLinkTag,
-    getIconForDataikuItemType
+    formatBasePath,
+    getIconForDataikuItemType,
 };
 
 export default Common;

@@ -35,31 +35,7 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 import Common from "./common/common";
 
-class App extends Component {
-    // static CURRENT_URL = () => {
-    //     console.log('buildBaseUrl() :: START :: ');
-
-    //     // let arrayUrlPath = App.CURRENT_URL.split('/');
-    //     let arrayUrlPath = window.location.pathname.split('/');
-    //     console.log('arrayUrlPath == ');
-    //     console.log(arrayUrlPath);
-
-    //     arrayUrlPath = arrayUrlPath.map((path, index) => {
-    //         // console.log('index == ' + index);
-    //         // console.log('path == ' + path);
-
-    //         return (path.length > 0) ? path : null;
-    //     }).filter((path) => path !== null);
-
-    //     // console.log('arrayUrlPath == ');
-    //     // console.log(arrayUrlPath);
-
-    //     let urlBuilder = '/' + arrayUrlPath[0] + '/' + arrayUrlPath[1] + '/' + arrayUrlPath[2];
-    //     console.log('urlBuilder == ' + urlBuilder);
-
-    //     console.log('buildBaseUrl() :: END :: ');
-    //     return urlBuilder;
-    // };
+class App extends Component {    
     static CURRENT_URL = window.location.pathname;
 
     static HOME = "HOME";
@@ -84,6 +60,8 @@ class App extends Component {
 
         this.buildBaseUrl();
         this.checkActiveTab();
+
+        console.log('Common.formatBasePath() :: ' + Common.formatBasePath());
     }
 
     buildBaseUrl() {
