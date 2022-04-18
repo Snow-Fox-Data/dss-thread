@@ -779,13 +779,13 @@ class dss_utils:
 
         dss_projects = self.client.list_project_keys()
         for proj in dss_projects:
-            scan_obj[proj] = {}
             project = self.client.get_project(proj)
 
             folder = project.get_project_folder().name
-            if len(limit_to_folders) == 0 or folder not in limit_to_folders:
+            if len(limit_to_folders) > 0 and folder not in limit_to_folders:
                 continue
 
+            scan_obj[proj] = {}
             proj_meta = project.get_metadata()
             
             datasets = project.list_datasets()
