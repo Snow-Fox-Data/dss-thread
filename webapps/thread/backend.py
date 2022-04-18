@@ -176,7 +176,6 @@ def load_item():
             logging.info(f'{key} not found')
 
         res = idx_df.iloc[0]
-        res['success'] = True
         if res['object_type'] == 'dataset':
             ds = dss.load_dataset(key, 'none')
             ds['object_type'] = 'dataset'
@@ -227,6 +226,7 @@ def load_item():
                     res['object_type'] = 'definition'
                     res['tag_list'] = dss.get_tag_list()
 
+        res['success'] = True
         response_json = json.dumps(res) 
         return response_json
 
