@@ -68,13 +68,12 @@ def scan_project():
 @app.route('/scan', methods=['GET'])
 def scan():
     p = dataiku.Project() # create a project handle
-    variables = p.get_variables() # retrieve your variables as a dictionary
-    proj_vars = variables["standard"]
-    if 'scanning' in proj_vars:
-        if proj_vars['scanning'] == 'True':
+    proj_vars = p.get_variables() # retrieve your variables as a dictionary
+    if 'scanning' in proj_vars["standard"]:
+        if proj_vars["standard"]['scanning'] == 'True':
             return json.dumps({"result": "already scanning"})
     
-    proj_vars['scanning'] = 'True'
+    proj_vars["standard"]['scanning'] = 'True'
     p.set_variables(proj_vars) # set the updated dictionary
     dss = dss_utils()
 
@@ -86,14 +85,13 @@ def scan():
 
     # limit to folders
     folders = []
-    if 'limit_to_folders' in proj_vars:
-        folders = json.loads(proj_vars['limit_to_folders'])
+    if 'limit_to_folders' in proj_vars["standard"]:
+        folders = json.loads(proj_vars["standard"]['limit_to_folders'])
 
     result = dss.scan_server(folders)
 
     # reset the project variables
-    proj_vars['scanning'] = 'False'
-    proj_vars["standard"] = proj_vars
+    proj_vars["standard"]['scanning'] = 'False'
     p.set_variables(proj_vars) 
 
     return json.dumps({"result": "scan complete"})
