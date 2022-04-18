@@ -196,7 +196,6 @@ class Catalog extends Component {
             var listItems = this.state.definitions.map((col) =>
                 <tr>
                     <td className='definition-name' onClick={() => this.openDefinition(col.id)}>
-                        {Common.getIconForDataikuItemType('definition', "16px")}
                         <span>{col.name}</span>
                     </td>
                     <td>
@@ -272,7 +271,7 @@ class Catalog extends Component {
             <Row>
                 <Col md={6}>
                     <div>
-                        <h2>Definitions</h2>
+                        <h2>{Common.getIconForDataikuItemType('definition', "24px")}<span style={{ paddingLeft: '5px' }}>Definitions</span></h2>
                     </div>
                 </Col>
                 <Col>
