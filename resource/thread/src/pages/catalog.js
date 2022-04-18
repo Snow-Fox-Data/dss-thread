@@ -271,7 +271,7 @@ class Catalog extends Component {
             <Row>
                 <Col md={6}>
                     <div>
-                        <h2>{Common.getIconForDataikuItemType('definition', "24px")}<span style={{ paddingLeft: '5px' }}>Definitions</span></h2>
+                        <h2>{Common.getIconForDataikuItemType('definition', "24px")}<span style={{ paddingLeft: '8px' }}>Definitions</span></h2>
                     </div>
                 </Col>
                 <Col>

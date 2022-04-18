@@ -813,6 +813,7 @@ class dss_utils:
                 datasets = project.list_datasets()
                 recipes = project.list_recipes()
                 folders = project.list_managed_folders()
+                summary = project.get_summary()
 
                 scan_obj[proj] = {}
                 scan_obj[proj]['datasets'] = datasets
@@ -823,6 +824,7 @@ class dss_utils:
                     "name": proj.replace('|', ' | '), 
                     "object_type": "project",
                     "key": proj,
+                    "last_modified": summary['creationTag']['lastModifiedOn'],
                     "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
                 })
 
@@ -830,6 +832,7 @@ class dss_utils:
                     index_list.append({
                         "name": dataset['name'],
                         "object_type": "dataset",
+                        "last_modified": dataset['creationTag']['lastModifiedOn'],
                         "key": self.get_full_dataset_name(dataset['name'], proj),
                         "description": dataset['name']
                     })
@@ -838,6 +841,7 @@ class dss_utils:
                         index_list.append({
                             "name": column['name'],
                             "description": column['name'],
+                            "last_modified": dataset['creationTag']['lastModifiedOn'],
                             "object_type": "column",
                             "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
                             }) 
