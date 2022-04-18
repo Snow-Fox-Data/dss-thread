@@ -4,6 +4,8 @@ from http import client
 import json
 import gc
 
+from matplotlib.font_manager import json_load
+
 # from tkinter import E
 import dataiku
 import pandas as pd
@@ -161,75 +163,78 @@ def load_item():
     
     # user = dataiku.api_client().get_user(auth_info["authIdentifier"])
     # client_as_user = user.get_client_as()
+    try:
+        args = request.args
+        key = args.get('key')
+        key = key.replace(' | ', '|')
 
-    args = request.args
-    key = args.get('key')
-    key = key.replace(' | ', '|')
+        dss = dss_utils()
 
-    dss = dss_utils()
+        idx_ds = dss.get_index_ds()
+        df = idx_ds.get_dataframe()
 
-    idx_ds = dss.get_index_ds()
-    df = idx_ds.get_dataframe()
+        idx_df = df.query(f'key=="{key}"')
+        if len(idx_df) == 0:
+            logging.info(f'{key} not found')
 
-    idx_df = df.query(f'key=="{key}"')
-    if len(idx_df) == 0:
-        logging.info(f'{key} not found')
+        res = idx_df.iloc[0]
+        res['success'] = True
+        if res['object_type'] == 'dataset':
+            ds = dss.load_dataset(key, 'none')
+            ds['object_type'] = 'dataset'
 
-    res = idx_df.iloc[0]
-    if res['object_type'] == 'dataset':
-        ds = dss.load_dataset(key, 'none')
-        ds['object_type'] = 'dataset'
+            col_ct, col_def = dss.calc_dataset_def_ct(key)
+            ds['total_cols'] = col_ct
+            ds['total_cols_def'] = col_def
 
-        col_ct, col_def = dss.calc_dataset_def_ct(key)
-        ds['total_cols'] = col_ct
-        ds['total_cols_def'] = col_def
-
-        return json.dumps(ds)
-    else:
-        if res['object_type'] == 'project':
-            p = dss.load_project(key)
-            p['object_type'] = 'project'
-            col_ct, col_def = dss.calc_project_def_ct(key)
-            p['total_cols'] = col_ct
-            p['total_cols_def'] = col_def
-
-            return json.dumps(p)
+            return json.dumps(ds)
         else:
-            if res['object_type'] == 'column':
-                try:
-                    df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-                    search_key = re.escape(key)
-                    def_df = df[df['applied_to'].str.contains(search_key, case=False, na=False)].fillna('')                    
-                except Exception as e:
-                    logging.info(e)
-                    def_df = ''
+            if res['object_type'] == 'project':
+                p = dss.load_project(key)
+                p['object_type'] = 'project'
+                col_ct, col_def = dss.calc_project_def_ct(key)
+                p['total_cols'] = col_ct
+                p['total_cols_def'] = col_def
 
-                p_name, d_name, c_name = dss.extract_name_project(key)
-                
-                p = dss.load_dataset(p_name + '|' + d_name, c_name)
-                col = next(item for item in p['schema'] if item["name"] == c_name)
-                col['project'] = p_name
-                col['dataset'] = d_name
-                col['definition'] = { "id": -1}
-                col['object_type'] = 'column'
-                col['tag_list'] = dss.get_tag_list()
-                col['user_security'] = can_user_access_project(p_name)
+                return json.dumps(p)
+            else:
+                if res['object_type'] == 'column':
+                    try:
+                        df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+                        search_key = re.escape(key)
+                        def_df = df[df['applied_to'].str.contains(search_key, case=False, na=False)].fillna('')                    
+                    except Exception as e:
+                        logging.info(e)
+                        def_df = ''
 
-                if len(def_df) > 0:
-                    col['definition'] = def_df.to_dict('records')[0]
+                    p_name, d_name, c_name = dss.extract_name_project(key)
                     
-                return col
-            if res['object_type'] == 'definition':
-                # logging.info(f'searching for definition key: {key}')
-                df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
-                res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
-                res['object_type'] = 'definition'
-                res['tag_list'] = dss.get_tag_list()
-               
-    response_json = json.dumps(res) 
-    # logging.info(response_json)
+                    p = dss.load_dataset(p_name + '|' + d_name, c_name)
+                    col = next(item for item in p['schema'] if item["name"] == c_name)
+                    col['project'] = p_name
+                    col['dataset'] = d_name
+                    col['definition'] = { "id": -1}
+                    col['object_type'] = 'column'
+                    col['tag_list'] = dss.get_tag_list()
+                    col['user_security'] = can_user_access_project(p_name)
 
-    return response_json
+                    if len(def_df) > 0:
+                        col['definition'] = def_df.to_dict('records')[0]
+                        
+                    return col
+                if res['object_type'] == 'definition':
+                    # logging.info(f'searching for definition key: {key}')
+                    df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+                    res = df.loc[df['id'] == int(key)].to_dict('records')[0]    
+                    res['object_type'] = 'definition'
+                    res['tag_list'] = dss.get_tag_list()
+
+        response_json = json.dumps(res) 
+        return response_json
+
+    except Exception as e:
+        capture_exception(e)
+        return json.dumps({'success': False})
 
 @app.route('/update-desc', methods=['POST'])
 def update_desc():
