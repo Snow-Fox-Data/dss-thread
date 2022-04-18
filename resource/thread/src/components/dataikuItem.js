@@ -687,7 +687,7 @@ class DataikuItem extends Component {
                     </p>
 
                 </Col>
-                <Col xs={2}>
+                <Col xs={1}>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
@@ -700,7 +700,7 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div></Col>
-                <Col xs={2}>
+                <Col xs={1}>
                     <div className="float-end">
                         <Card>
                             <Card.Header>
