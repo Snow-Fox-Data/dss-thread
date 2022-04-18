@@ -4,8 +4,6 @@ from http import client
 import json
 import gc
 
-from matplotlib.font_manager import json_load
-
 # from tkinter import E
 import dataiku
 import pandas as pd
