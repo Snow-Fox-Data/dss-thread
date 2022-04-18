@@ -44,7 +44,8 @@ html {
 
 .definition-name>span {
   color: #3399f3;
-  text-decoration: underline
+  text-decoration: underline;
+  padding-left: 5px;
 }
 
 .definition-tag {
