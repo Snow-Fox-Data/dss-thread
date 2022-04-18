@@ -501,8 +501,14 @@ class DataikuItem extends Component {
 
         const selectAll = (all) => {
             var checked = false;
-            if (all)
+            if (all) {
                 checked = true;
+
+                var allArr = applieds.concat(upstreams);
+                allArr = allArr.concat(downstreams);
+
+                this.state.applyToDataSets = allArr;
+            }
 
             for (const key in refs) {
                 refs[key].current.checked = checked;
