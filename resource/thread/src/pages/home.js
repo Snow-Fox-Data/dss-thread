@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Col, Row, Spinner, Card, Badge } from 'react-bootstrap';
+import { Col, Row, Spinner, Card, Badge, Table } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaFilter } from 'react-icons/fa';
 import Common from '../common/common';
@@ -306,6 +306,17 @@ class Home extends Component {
                     </Card>
                 </Col>
             </Row >
+            <Row>
+                <Col>
+                    <Table>
+                        {this.state.recents.map((col) =>
+                            <tr><td>{col.key}</td>
+                                <td>{col.object_type}</td>
+                            </tr>
+                        )}
+                    </Table>
+                </Col>
+            </Row>
         </div>
     }
 
