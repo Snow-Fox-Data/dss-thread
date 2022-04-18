@@ -644,7 +644,7 @@ class DataikuItem extends Component {
                         }
                     </Col>
                     <Col ms-auto>
-                        {this.state.tempSelDef.id != -1 &&
+                        {/* {this.state.tempSelDef.id != -1 &&
                             <div>
                                 {(upstreams.length > 0 || downstreams.length > 0) &&
                                     <Button variant="secondary" onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Button>
@@ -652,20 +652,20 @@ class DataikuItem extends Component {
                                 <Button onClick={() => this.saveCol()}>Save Definition</Button>
                             </div>
                         }
-                        {this.state.tempSelDef.id == -1 &&
-                            <Dropdown>
-                                <Dropdown.Toggle id="dropdown-basic">
-                                    Save and Apply
-                                </Dropdown.Toggle>
+                        {this.state.tempSelDef.id == -1 && */}
+                        <Dropdown>
+                            <Dropdown.Toggle id="dropdown-basic">
+                                Save and Apply
+                            </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
-                                    {(upstreams.length > 0 || downstreams.length > 0) &&
-                                        <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
-                                    }
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        }
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={() => this.saveCol()}>Save and Apply to column: {this.props.item.name}</Dropdown.Item>
+                                {(upstreams.length > 0 || downstreams.length > 0) &&
+                                    <Dropdown.Item onClick={() => this.showLineageSelection()}>Save and apply to Lineage</Dropdown.Item>
+                                }
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        {/* } */}
                     </Col>
                 </Modal.Footer>
             </Modal>
