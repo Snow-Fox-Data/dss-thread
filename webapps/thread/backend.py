@@ -419,6 +419,19 @@ class dss_utils:
 
     #     return exposed_ds
 
+    def check_new_projects(self):
+        dss_projects = self.client.list_project_keys()
+        df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe().query('object_type=="project"')
+
+        new_projects = []
+        for p in dss_projects:
+            if len(df.query(f'key=="{p}"')) == 0:
+                # new project
+                self.scan_project(p)
+                new_projects.append(p)
+
+        return new_projects
+            
     def get_collection_stats(self):
         try:
             ds = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
@@ -427,6 +440,7 @@ class dss_utils:
             project_ct = len(ds.query('object_type=="project"'))
             def_ct = len(ds.query('object_type=="definition"'))
 
+            self.check_new_projects()
             recents = ds.query('object_type=="project"').nlargest(n=10, columns=['last_modified']).to_json(orient='records')
 
             return { "recents": recents, "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
