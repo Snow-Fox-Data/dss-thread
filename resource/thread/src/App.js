@@ -113,6 +113,8 @@ class App extends Component {
                         loggedIn: true
                     });
 
+                    eventBus.dispatch('loggedIn', response)
+
                 }
                 else
                     this.setState({
@@ -224,7 +226,7 @@ class App extends Component {
                             <Routes>
                                 {/* STANDARD ROUTES */}
                                 <Route exact path="/" element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />                        
+                                <Route path="/catalog" element={<Catalog />} />
 
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}

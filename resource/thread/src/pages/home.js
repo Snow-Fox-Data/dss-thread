@@ -47,7 +47,6 @@ class Home extends Component {
         }
         );
 
-
         eventBus.on("projectSelected", (proj) => {
             this.navToObject(proj)
         }
@@ -70,24 +69,26 @@ class Home extends Component {
 
         //             if (response.status == 'ok') {
 
-        //                 this.setState({
-        //                     dataiku: window.dataiku,
-        //                     currentUser: response['you_are'],
-        //                     loading: false,
-        //                     loggedIn: true,
-        //                     collectionStats: response.stats,
-        //                     recents: eval(response.stats.recents)
-        //                 });
+        // this gets fired by app.js
+        eventBus.on('loggedIn', (response) => {
+            this.setState({
+                dataiku: window.dataiku,
+                currentUser: response['you_are'],
+                loading: false,
+                loggedIn: true,
+                collectionStats: response.stats,
+                recents: eval(response.stats.recents)
+            });
+        });
 
-        //                 // this.navDeepLink();
-        //             }
-        //             else
-        //                 this.setState({
-        //                     loading: false
-        //                 })
-        //         });
-
+        // this.navDeepLink();
+        //     }
+        //     else
+        //         this.setState({
+        //             loading: false
+        //         })
         // });
+
     }
 
     filterDataikuItems = (response) => {
