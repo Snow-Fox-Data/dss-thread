@@ -430,6 +430,8 @@ class dss_utils:
                 self.scan_project(p)
                 new_projects.append(p)
 
+                logging.info(f'new project: {p}')
+
         return new_projects
             
     def get_collection_stats(self):
