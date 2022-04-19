@@ -419,13 +419,12 @@ class dss_utils:
 
     #     return exposed_ds
 
-    def check_new_projects(self):
+    def check_new_projects(self, index_df):
         dss_projects = self.client.list_project_keys()
-        df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe().query('object_type=="project"')
 
         new_projects = []
         for p in dss_projects:
-            if len(df.query(f'key=="{p}"')) == 0:
+            if len(index_df.query(f'key=="{p}"')) == 0:
                 # new project
                 self.scan_project(p)
                 new_projects.append(p)
@@ -436,14 +435,14 @@ class dss_utils:
             
     def get_collection_stats(self):
         try:
-            ds = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
-            col_ct = len(ds.query('object_type=="column"'))
-            dataset_ct = len(ds.query('object_type=="dataset"'))
-            project_ct = len(ds.query('object_type=="project"'))
-            def_ct = len(ds.query('object_type=="definition"'))
+            index_df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
+            col_ct = len(index_df.query('object_type=="column"'))
+            dataset_ct = len(index_df.query('object_type=="dataset"'))
+            project_ct = len(index_df.query('object_type=="project"'))
+            def_ct = len(index_df.query('object_type=="definition"'))
 
-            self.check_new_projects()
-            recents = ds.query('object_type=="project"').nlargest(n=10, columns=['last_modified']).to_json(orient='records')
+            self.check_new_projects(index_df)
+            recents = index_df.query('object_type=="project"').nlargest(n=10, columns=['last_modified']).to_json(orient='records')
 
             return { "recents": recents, "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
         except:
