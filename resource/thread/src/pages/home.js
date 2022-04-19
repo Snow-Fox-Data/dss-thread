@@ -35,6 +35,8 @@ class Home extends Component {
 
     componentDidMount() {
 
+        this.navDeepLink();
+
         window.addEventListener("hashchange", () => this.navDeepLink());
 
         eventBus.on("datasetSelected", (ds) => {
@@ -185,7 +187,11 @@ class Home extends Component {
         if (parts.length > 1) {
             this.setState({ "loading": true });
             this.loadItemByKey(parts[1])
+
+            return true;
         }
+
+        return false;
     }
 
     navToObject(obj) {

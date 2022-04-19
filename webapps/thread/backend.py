@@ -853,19 +853,33 @@ class dss_utils:
                 scan_obj[proj]['recipes'] = recipes
                 scan_obj[proj]['folders'] = folders
 
+                last_mod = 0
+                if 'versionTag' in summary:
+                    last_mod = summary['versionTag']['lastModifiedOn']
+                else:
+                    if 'creationTag' in summary:
+                        last_mod = summary['creationTag']['lastModifiedOn']
+
                 index_list.append({
                     "name": proj.replace('|', ' | '), 
                     "object_type": "project",
                     "key": proj,
-                    "last_modified": summary['versionTag']['lastModifiedOn'],
+                    "last_modified": last_mod,
                     "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
                 })
 
                 for dataset in datasets:
+                    last_mod = 0
+                    if 'versionTag' in dataset:
+                        last_mod = dataset['versionTag']['lastModifiedOn']
+                    else:
+                        if 'creationTag' in summary:
+                            last_mod = dataset['creationTag']['lastModifiedOn']
+
                     index_list.append({
                         "name": dataset['name'],
                         "object_type": "dataset",
-                        "last_modified": dataset['versionTag']['lastModifiedOn'],
+                        "last_modified": last_mod,
                         "key": self.get_full_dataset_name(dataset['name'], proj),
                         "description": dataset['name']
                     })
