@@ -34,7 +34,7 @@ function formatBasePath() {
     let urlBuilder = '/' + arrayUrlPath[0] + '/' + arrayUrlPath[1] + '/' + arrayUrlPath[2];
     console.log('urlBuilder == ' + urlBuilder);
 
-    console.log('buildBaseUrl() :: END :: ');
+    console.log('formatBasePath() :: END :: ');
     return urlBuilder;
 };
 

@@ -104,16 +104,6 @@ class Catalog extends Component {
         } else {
             return <span>0</span>;
         }
-
-        // if(appliedTo != null && appliedTo.length > 0) {
-        //     let formattedAppliedTo = appliedTo.map((col) => {
-        //         return <span>{col}<br/></span>;
-        //     });
-
-        //     return formattedAppliedTo;
-        // } else {
-        //     return <span>{appliedTo}</span>;
-        // }
     }
 
     formatTags(tags) {
