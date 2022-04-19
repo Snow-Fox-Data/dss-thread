@@ -997,8 +997,10 @@ class dss_utils:
 
         # save datasets
         df = pd.DataFrame.from_dict(ds_list)
-        df = df.astype({"lineage_upstream": str})
-        df = df.astype({"lineage_downstream": str})
+        if len(ds_list) > 0:
+            df = df.astype({"lineage_upstream": str})
+            df = df.astype({"lineage_downstream": str})
+        
         proj_dataset = dataiku.Dataset(THREAD_DATASETS_NAME)
         exist = proj_dataset.get_dataframe()
 
