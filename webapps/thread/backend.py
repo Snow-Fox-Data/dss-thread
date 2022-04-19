@@ -427,7 +427,7 @@ class dss_utils:
             project_ct = len(ds.query('object_type=="project"'))
             def_ct = len(ds.query('object_type=="definition"'))
 
-            recents = ds.query('type=="project"').nlargest(n=10, columns=['last_modified']).to_json(orient='records')
+            recents = ds.query('object_type=="project"').nlargest(n=10, columns=['last_modified']).to_json(orient='records')
 
             return { "recents": recents, "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
         except:
