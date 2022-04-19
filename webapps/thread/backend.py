@@ -849,7 +849,7 @@ class dss_utils:
                     "name": proj.replace('|', ' | '), 
                     "object_type": "project",
                     "key": proj,
-                    "last_modified": summary['creationTag']['lastModifiedOn'],
+                    "last_modified": summary['versionTag']['lastModifiedOn'],
                     "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
                 })
 
@@ -857,7 +857,7 @@ class dss_utils:
                     index_list.append({
                         "name": dataset['name'],
                         "object_type": "dataset",
-                        "last_modified": dataset['creationTag']['lastModifiedOn'],
+                        "last_modified": dataset['versionTag']['lastModifiedOn'],
                         "key": self.get_full_dataset_name(dataset['name'], proj),
                         "description": dataset['name']
                     })
