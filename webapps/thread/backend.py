@@ -888,7 +888,7 @@ class dss_utils:
                         index_list.append({
                             "name": column['name'],
                             "description": column['name'],
-                            "last_modified": dataset['creationTag']['lastModifiedOn'],
+                            "last_modified": last_mod,
                             "object_type": "column",
                             "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
                             }) 
