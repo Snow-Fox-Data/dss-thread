@@ -62,32 +62,32 @@ class Home extends Component {
             this.setState({ "loading": isLoading })
         );
 
-        window.$(document).ready(() => {
+        // window.$(document).ready(() => {
 
-            fetch(window.getWebAppBackendUrl('get-user'))
-                .then(res => res.json())
-                .then((response) => {
+        //     fetch(window.getWebAppBackendUrl('get-user'))
+        //         .then(res => res.json())
+        //         .then((response) => {
 
-                    if (response.status == 'ok') {
+        //             if (response.status == 'ok') {
 
-                        this.setState({
-                            dataiku: window.dataiku,
-                            currentUser: response['you_are'],
-                            loading: false,
-                            loggedIn: true,
-                            collectionStats: response.stats,
-                            recents: eval(response.stats.recents)
-                        });
+        //                 this.setState({
+        //                     dataiku: window.dataiku,
+        //                     currentUser: response['you_are'],
+        //                     loading: false,
+        //                     loggedIn: true,
+        //                     collectionStats: response.stats,
+        //                     recents: eval(response.stats.recents)
+        //                 });
 
-                        // this.navDeepLink();
-                    }
-                    else
-                        this.setState({
-                            loading: false
-                        })
-                });
+        //                 // this.navDeepLink();
+        //             }
+        //             else
+        //                 this.setState({
+        //                     loading: false
+        //                 })
+        //         });
 
-        });
+        // });
     }
 
     filterDataikuItems = (response) => {
