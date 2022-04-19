@@ -74,17 +74,20 @@ class Home extends Component {
         });
 
         window.$(document).ready(() => {
-
-            fetch(window.getWebAppBackendUrl('dss-stats'))
-                .then(res => res.json())
-                .then((response) => {
-                    this.setState({
-                        collectionStats: response.stats,
-                        recents: eval(response.stats.recents),
-                        loading: false
-                    });
-                });
+            this.reloadDssStats();
         });
+    }
+
+    reloadDssStats = () => {
+        fetch(window.getWebAppBackendUrl('dss-stats'))
+            .then(res => res.json())
+            .then((response) => {
+                this.setState({
+                    collectionStats: response.stats,
+                    recents: eval(response.stats.recents),
+                    loading: false
+                });
+            });
     }
 
     filterDataikuItems = (response) => {
@@ -250,25 +253,28 @@ class Home extends Component {
         this.setState({ openFilter: !this.state.openFilter });
     }
 
-    collectionStats() {
-        const scanServer = () => {
-            const requestOptions = {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            };
+    scanNewProjects = () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
 
-            let url = window.getWebAppBackendUrl('scan-new');
-            this.setState({ loading: true });
-            fetch(url, requestOptions)
-                .then(res => res.json())
-                .then((response) => {
-                    // alert(response)
-                    this.setState({ loading: false });
-                });
-        }
+        let url = window.getWebAppBackendUrl('scan-new');
+        this.setState({ loading: true });
+        fetch(url, requestOptions)
+            .then(res => res.json())
+            .then((response) => {
+                // alert(response)
+                this.setState({ loading: false });
+                this.reloadDssStats();
+            });
+    }
+
+    collectionStats() {
+
 
         return <div style={{ padding: '20px' }}>
-            <h1>Dataiku Instance Stats</h1><span class="app-link" onClick={() => scanServer()}>Scan</span>
+            <h1>Dataiku Instance Stats</h1><span class="app-link" onClick={() => this.scanNewProjects()}>Scan</span>
             <Row style={{ paddingTop: '20px' }}>
                 <Col>
                     <Card style={{ width: '15rem' }} >
