@@ -26,8 +26,8 @@ class Catalog extends Component {
     }
 
     componentDidMount() {
-        // this.fetchDefinitions();
-        // this.fetchTags();
+        this.fetchDefinitions();
+        this.fetchTags();
     }
 
     displayTableHeaderCarets(columnHeader) {

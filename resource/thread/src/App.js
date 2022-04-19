@@ -36,8 +36,8 @@ import Catalog from "./pages/catalog";
 import Common from "./common/common";
 
 class App extends Component {
-    // static CURRENT_URL = window.location.pathname;
-    static CURRENT_URL = Common.formatBasePath();
+    static CURRENT_URL = window.location.pathname;
+    // static CURRENT_URL = Common.formatBasePath();
 
     static HOME = "HOME";
     static CATALOG = "CATALOG";
