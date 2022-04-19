@@ -26,9 +26,6 @@ class Catalog extends Component {
     }
 
     componentDidMount() {
-        console.log('window == ');
-        console.log(window);
-        
         this.fetchDefinitions();
         this.fetchTags();
     }
@@ -56,6 +53,9 @@ class Catalog extends Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
+
+        console.log('window == ');
+        console.log(window);
 
         let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
         fetch(url, requestOptions)
