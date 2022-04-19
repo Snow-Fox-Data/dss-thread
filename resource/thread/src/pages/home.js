@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Col, Row, Spinner, Card, Badge, Table } from 'react-bootstrap';
+import { Col, Row, Spinner, Card, Button, Table } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaFilter } from 'react-icons/fa';
 import Common from '../common/common';
@@ -266,15 +266,15 @@ class Home extends Component {
             .then((response) => {
                 // alert(response)
                 this.setState({ loading: false });
-                this.reloadDssStats();
+
+                if (response.length > 0)
+                    this.reloadDssStats();
             });
     }
 
     collectionStats() {
-
-
         return <div style={{ padding: '20px' }}>
-            <h1>Dataiku Instance Stats</h1><span class="app-link" onClick={() => this.scanNewProjects()}>Scan</span>
+            <h1>Dataiku Instance Stats</h1>
             <Row style={{ paddingTop: '20px' }}>
                 <Col>
                     <Card style={{ width: '15rem' }} >
@@ -332,12 +332,27 @@ class Home extends Component {
             {this.state.recents != null &&
                 <Row>
                     <Col>
-                        <Table>
-                            {this.state.recents.map((col) =>
-                                <tr><td>{col.key}</td>
-                                    <td>{col.object_type}</td>
+                        <h3>Recently Modified Projects</h3>
+                        <Button variant="link" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Last Modified
+                                    </th>
                                 </tr>
-                            )}
+                            </thead>
+                            <tbody>
+                                {this.state.recents.map((col) =>
+                                    <tr>
+                                        <td><span class="nav-item" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
+                                        <td>{new Date(col.last_modified).toDateString()}</td>
+                                    </tr>
+                                )}
+                            </tbody>
                         </Table>
                     </Col>
                 </Row>
