@@ -41,9 +41,9 @@ def get_user():
         
         if 'authIdentifier' in auth_info:
             dss = dss_utils()
-            res = dss.get_collection_stats()
+            # res = dss.get_collection_stats()
 
-            data = {"status": "ok", "you_are": auth_info["authIdentifier"], "stats": res}
+            data = {"status": "ok", "you_are": auth_info["authIdentifier"]}
         else:
             data = {"status": "denied", "you_are": 'not logged in'}
     except:
@@ -65,6 +65,12 @@ def scan_project():
     dss.scan_project(id)
 
     return json.dumps({"result": "scan complete"})
+
+@app.route('/dss-stats', methods=['GET'])
+def dss_stats():
+    dss = dss_utils()
+
+    return json.dumps({'stats', dss.get_collection_stats()})
 
 
 @app.route('/scan', methods=['GET'])

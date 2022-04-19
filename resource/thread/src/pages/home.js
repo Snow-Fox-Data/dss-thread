@@ -63,11 +63,14 @@ class Home extends Component {
 
         // window.$(document).ready(() => {
 
-        //     fetch(window.getWebAppBackendUrl('get-user'))
-        //         .then(res => res.json())
-        //         .then((response) => {
-
-        //             if (response.status == 'ok') {
+        fetch(window.getWebAppBackendUrl('dss-stats'))
+            .then(res => res.json())
+            .then((response) => {
+                this.setState({
+                    collectionStats: response.stats,
+                    recents: eval(response.stats.recents)
+                });
+            });
 
         // this gets fired by app.js
         eventBus.on('loggedIn', (response) => {
@@ -75,9 +78,7 @@ class Home extends Component {
                 dataiku: window.dataiku,
                 currentUser: response['you_are'],
                 loading: false,
-                loggedIn: true,
-                collectionStats: response.stats,
-                recents: eval(response.stats.recents)
+                loggedIn: true
             });
         });
 
