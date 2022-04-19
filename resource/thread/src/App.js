@@ -216,6 +216,17 @@ class App extends Component {
                                             to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
                                     </li> */}
                                     <li class="nav-item">
+                                        <Link className={activeTab == App.HOME ?  'active' : ''} 
+                                            onClick={() => this.setState({ activeTab: App.HOME })} 
+                                            to={Common.formatBasePath()}>Home</Link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} 
+                                            onClick={() => this.setState({ activeTab: App.CATALOG })} 
+                                            to={Common.formatBasePath() + "/catalog"}>Catalog</Link>
+                                    </li>
+                                    {/* STANDARD ROUTES */}
+                                    {/* <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
                                             onClick={() => this.setState({ activeTab: App.HOME })}
                                             to="/">Home</Link>
@@ -224,7 +235,7 @@ class App extends Component {
                                         <Link className={activeTab == App.CATALOG ? 'active' : ''}
                                             onClick={() => this.setState({ activeTab: App.CATALOG })}
                                             to="/catalog">Catalog</Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                             <ul class="navbar-nav" style={{ paddingRight: '15px' }}>
