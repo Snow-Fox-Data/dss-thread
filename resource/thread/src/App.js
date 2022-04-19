@@ -215,7 +215,7 @@ class App extends Component {
                                             onClick={() => this.setState({ activeTab: App.CATALOG })} 
                                             to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
                                     </li> */}
-                                    <li class="nav-item">
+                                    {/* <li class="nav-item">
                                         <Link className={activeTab == App.HOME ?  'active' : ''} 
                                             onClick={() => this.setState({ activeTab: App.HOME })} 
                                             to={Common.formatBasePath()}>Home</Link>
@@ -224,9 +224,9 @@ class App extends Component {
                                         <Link className={activeTab == App.CATALOG ?  'active' : ''} 
                                             onClick={() => this.setState({ activeTab: App.CATALOG })} 
                                             to={Common.formatBasePath() + "/catalog"}>Catalog</Link>
-                                    </li>
+                                    </li> */}
                                     {/* STANDARD ROUTES */}
-                                    {/* <li class="nav-item">
+                                    <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
                                             onClick={() => this.setState({ activeTab: App.HOME })}
                                             to="/">Home</Link>
@@ -235,7 +235,7 @@ class App extends Component {
                                         <Link className={activeTab == App.CATALOG ? 'active' : ''}
                                             onClick={() => this.setState({ activeTab: App.CATALOG })}
                                             to="/catalog">Catalog</Link>
-                                    </li> */}
+                                    </li>
                                 </ul>
                             </div>
                             <ul class="navbar-nav" style={{ paddingRight: '15px' }}>
@@ -258,11 +258,11 @@ class App extends Component {
                     {publicApp.length == 0 ?
                         <Row>
                             <Routes>
-                                {/* <Route exact path="/" element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} /> */}
+                                <Route exact path="/" element={<Home />} />
+                                <Route path="/catalog" element={<Catalog />} />
                                 
-                                <Route exact path={Common.formatBasePath()} element={<Home />} />
-                                <Route exact path={Common.formatBasePath() + "/catalog"} element={<Catalog />} />
+                                {/* <Route exact path={Common.formatBasePath()} element={<Home />} />
+                                <Route exact path={Common.formatBasePath() + "/catalog"} element={<Catalog />} /> */}
 
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}

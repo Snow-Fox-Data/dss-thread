@@ -8,12 +8,12 @@ import Common from './common/common';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    {/* <BrowserRouter basename={App.CURRENT_URL}>
+    {/* <BrowserRouter>
       <App />
     </BrowserRouter> */}
+    <BrowserRouter basename={App.CURRENT_URL}>
+      <App />
+    </BrowserRouter>
     {/* <BrowserRouter basename={Common.formatBasePath()}>
       <App />
     </BrowserRouter> */}
