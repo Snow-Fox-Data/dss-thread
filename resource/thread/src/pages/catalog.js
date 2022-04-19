@@ -57,6 +57,9 @@ class Catalog extends Component {
         console.log('window == ');
         console.log(window);
 
+        console.log("window.dataiku.getWebAppBackendUrl('def-search') == ");
+        console.log(window.dataiku.getWebAppBackendUrl('def-search'));
+
         let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
         fetch(url, requestOptions)
             .then(res => res.json())
