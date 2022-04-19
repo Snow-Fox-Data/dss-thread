@@ -250,8 +250,23 @@ class Home extends Component {
     }
 
     collectionStats() {
+        const scanServer = () => {
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            };
+
+            let url = window.getWebAppBackendUrl('scan-new');
+            this.setState({ loading: true });
+            fetch(url, requestOptions)
+                .then(res => res.json())
+                .then((response) => {
+                    alert(response)
+                });
+        }
+
         return <div style={{ padding: '20px' }}>
-            <h1>Dataiku Instance Stats</h1>
+            <h1>Dataiku Instance Stats</h1><span class="app-link" onClick={() => scanServer()}>Scan</span>
             <Row style={{ paddingTop: '20px' }}>
                 <Col>
                     <Card style={{ width: '15rem' }} >
@@ -306,18 +321,18 @@ class Home extends Component {
                     </Card>
                 </Col>
             </Row >
-            {this.state.recents!= null && 
-            <Row>
-                <Col>
-                    <Table>
-                        {this.state.recents.map((col) =>
-                            <tr><td>{col.key}</td>
-                                <td>{col.object_type}</td>
-                            </tr>
-                        )}
-                    </Table>
-                </Col>
-            </Row>
+            {this.state.recents != null &&
+                <Row>
+                    <Col>
+                        <Table>
+                            {this.state.recents.map((col) =>
+                                <tr><td>{col.key}</td>
+                                    <td>{col.object_type}</td>
+                                </tr>
+                            )}
+                        </Table>
+                    </Col>
+                </Row>
             }
         </div>
     }

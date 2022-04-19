@@ -134,6 +134,13 @@ def defintition_list():
     merged_df['search_def'] = merged_df['name'] + ' | ' + merged_df['description'] + ' | ' + merged_df['tags']
     return merged_df.to_json(orient='records')
 
+@app.route('/scan-new', methods=['GET'])
+def scan_new():
+    dss = dss_utils()
+    new_projects = dss.check_new_projects()
+
+    return json.dumps({'projects': new_projects})
+
 @app.route('/search', methods=['GET'])
 def search():
     args = request.args
@@ -419,17 +426,18 @@ class dss_utils:
 
     #     return exposed_ds
 
-    def check_new_projects(self, index_df):
+    def check_new_projects(self):
+        index_df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
         dss_projects = self.client.list_project_keys()
 
         new_projects = []
         for p in dss_projects:
             if len(index_df.query(f'key=="{p}"')) == 0:
+                logging.info(f'new project: {p}')
+
                 # new project
                 self.scan_project(p)
                 new_projects.append(p)
-
-                logging.info(f'new project: {p}')
 
         return new_projects
             
@@ -441,7 +449,6 @@ class dss_utils:
             project_ct = len(index_df.query('object_type=="project"'))
             def_ct = len(index_df.query('object_type=="definition"'))
 
-            # self.check_new_projects(index_df)
             recents = index_df.query('object_type=="project"').nlargest(n=10, columns=['last_modified']).to_json(orient='records')
 
             return { "recents": recents, "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
