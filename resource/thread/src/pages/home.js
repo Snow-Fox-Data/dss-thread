@@ -61,6 +61,16 @@ class Home extends Component {
             this.setState({ "loading": isLoading })
         );
 
+        // this gets fired by app.js
+        eventBus.on('loggedIn', (response) => {
+            this.setState({
+                dataiku: window.dataiku,
+                currentUser: response['you_are'],
+                loading: false,
+                loggedIn: true
+            });
+        });
+
         window.$(document).ready(() => {
 
             fetch(window.getWebAppBackendUrl('dss-stats'))
@@ -68,19 +78,10 @@ class Home extends Component {
                 .then((response) => {
                     this.setState({
                         collectionStats: response.stats,
-                        recents: eval(response.stats.recents)
+                        recents: eval(response.stats.recents),
+                        loading: false
                     });
                 });
-
-            // this gets fired by app.js
-            eventBus.on('loggedIn', (response) => {
-                this.setState({
-                    dataiku: window.dataiku,
-                    currentUser: response['you_are'],
-                    loading: false,
-                    loggedIn: true
-                });
-            });
         });
     }
 
