@@ -14,9 +14,6 @@ ReactDOM.render(
     <BrowserRouter basename={App.CURRENT_URL}>
       <App />
     </BrowserRouter>
-    {/* <BrowserRouter basename={Common.formatBasePath()}>
-      <App />
-    </BrowserRouter> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -36,7 +36,8 @@ import Catalog from "./pages/catalog";
 import Common from "./common/common";
 
 class App extends Component {
-    static CURRENT_URL = window.location.pathname;
+    // static CURRENT_URL = window.location.pathname;
+    static CURRENT_URL = Common.formatBasePath();
 
     static HOME = "HOME";
     static CATALOG = "CATALOG";
@@ -60,8 +61,6 @@ class App extends Component {
 
         this.buildBaseUrl();
         this.checkActiveTab();
-
-        console.log('Common.formatBasePath() :: ' + Common.formatBasePath());
     }
 
     buildBaseUrl() {
@@ -215,16 +214,7 @@ class App extends Component {
                                             onClick={() => this.setState({ activeTab: App.CATALOG })} 
                                             to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
                                     </li> */}
-                                    {/* <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.HOME })} 
-                                            to={Common.formatBasePath()}>Home</Link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.CATALOG })} 
-                                            to={Common.formatBasePath() + "/catalog"}>Catalog</Link>
-                                    </li> */}
+
                                     {/* STANDARD ROUTES */}
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
@@ -258,11 +248,9 @@ class App extends Component {
                     {publicApp.length == 0 ?
                         <Row>
                             <Routes>
+                                {/* STANDARD ROUTES */}
                                 <Route exact path="/" element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />
-                                
-                                {/* <Route exact path={Common.formatBasePath()} element={<Home />} />
-                                <Route exact path={Common.formatBasePath() + "/catalog"} element={<Catalog />} /> */}
+                                <Route path="/catalog" element={<Catalog />} />                        
 
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
