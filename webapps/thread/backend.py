@@ -941,6 +941,7 @@ class dss_utils:
         scan_obj[proj] = {}
         project = self.client.get_project(proj)
         proj_meta = project.get_metadata()
+        summary = project.get_summary()
         
         datasets = project.list_datasets()
         recipes = project.list_recipes()
@@ -953,6 +954,7 @@ class dss_utils:
         index_list.append({
             "name": proj.replace('|', ' | '), 
             "object_type": "project",
+            "last_modified": summary['versionTag']['lastModifiedOn'],
             "key": proj,
             "description": proj_meta['label'] + '(' + proj.replace('|', ' | ') + ')'
         })
@@ -962,7 +964,8 @@ class dss_utils:
                 "name": dataset['name'],
                 "object_type": "dataset",
                 "key": self.get_full_dataset_name(dataset['name'], proj),
-                "description": dataset['name']
+                "description": dataset['name'],
+                "last_modified": dataset['versionTag']['lastModifiedOn'],
             })
 
             for column in dataset['schema']['columns']:
@@ -970,7 +973,8 @@ class dss_utils:
                     "name": column['name'],
                     "description": column['name'],
                     "object_type": "column",
-                "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name']
+                "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name'],
+                "last_modified": dataset['versionTag']['lastModifiedOn'],
                     }) 
 
         # compute the dataset lineage
