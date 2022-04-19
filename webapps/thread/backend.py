@@ -441,7 +441,7 @@ class dss_utils:
             project_ct = len(index_df.query('object_type=="project"'))
             def_ct = len(index_df.query('object_type=="definition"'))
 
-            self.check_new_projects(index_df)
+            # self.check_new_projects(index_df)
             recents = index_df.query('object_type=="project"').nlargest(n=10, columns=['last_modified']).to_json(orient='records')
 
             return { "recents": recents, "column_ct": col_ct, "dataset_ct": dataset_ct, "project_ct": project_ct, "definition_ct": def_ct}
