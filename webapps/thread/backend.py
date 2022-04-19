@@ -70,8 +70,7 @@ def scan_project():
 def dss_stats():
     dss = dss_utils()
 
-    return json.dumps({'stats', dss.get_collection_stats()})
-
+    return json.dumps({"stats": dss.get_collection_stats()})
 
 @app.route('/scan', methods=['GET'])
 def scan():
