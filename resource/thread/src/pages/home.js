@@ -35,6 +35,33 @@ class Home extends Component {
 
     componentDidMount() {
 
+        window.addEventListener("hashchange", () => this.navDeepLink());
+
+        eventBus.on("datasetSelected", (ds) => {
+            this.navToObject(ds)
+        }
+        );
+
+        eventBus.on("definitionSelected", (ds) => {
+            this.navToObject(ds)
+        }
+        );
+
+
+        eventBus.on("projectSelected", (proj) => {
+            this.navToObject(proj)
+        }
+        );
+
+        eventBus.on("columnSelected", (col) => {
+            this.navToObject(col)
+        }
+        );
+
+        eventBus.on("loading", (isLoading) =>
+            this.setState({ "loading": isLoading })
+        );
+
         window.$(document).ready(() => {
 
             fetch(window.getWebAppBackendUrl('get-user'))
@@ -52,34 +79,7 @@ class Home extends Component {
                             recents: eval(response.stats.recents)
                         });
 
-                        this.navDeepLink();
-
-                        window.addEventListener("hashchange", () => this.navDeepLink());
-
-                        eventBus.on("datasetSelected", (ds) => {
-                            this.navToObject(ds)
-                        }
-                        );
-
-                        eventBus.on("definitionSelected", (ds) => {
-                            this.navToObject(ds)
-                        }
-                        );
-
-
-                        eventBus.on("projectSelected", (proj) => {
-                            this.navToObject(proj)
-                        }
-                        );
-
-                        eventBus.on("columnSelected", (col) => {
-                            this.navToObject(col)
-                        }
-                        );
-
-                        eventBus.on("loading", (isLoading) =>
-                            this.setState({ "loading": isLoading })
-                        );
+                        // this.navDeepLink();
                     }
                     else
                         this.setState({
