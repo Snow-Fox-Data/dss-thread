@@ -261,7 +261,8 @@ class Home extends Component {
             fetch(url, requestOptions)
                 .then(res => res.json())
                 .then((response) => {
-                    alert(response)
+                    // alert(response)
+                    this.setState({ loading: false });
                 });
         }
 
