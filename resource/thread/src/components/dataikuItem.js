@@ -484,17 +484,21 @@ class DataikuItem extends Component {
             }
         }
 
-        let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
-        down_flat.map((type) => {
-            if (!applieds.includes(type))
-                downstreams.push(type)
-        });
+        if (this.props.item.lineage_downstream != null) {
+            let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
+            down_flat.map((type) => {
+                if (!applieds.includes(type))
+                    downstreams.push(type)
+            });
+        }
 
-        let up_flat = this.flattenArray(this.props.item, 'lineage_upstream')
-        up_flat.map((type) => {
-            if (!applieds.includes(type))
-                upstreams.push(type)
-        });
+        if (this.props.item.lineage_upstream != null) {
+            let up_flat = this.flattenArray(this.props.item, 'lineage_upstream')
+            up_flat.map((type) => {
+                if (!applieds.includes(type))
+                    upstreams.push(type)
+            });
+        }
 
         applieds.map((type) => (
             refs['ap-' + type] = React.createRef()
