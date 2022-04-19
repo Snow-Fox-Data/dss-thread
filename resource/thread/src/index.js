@@ -4,18 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/home';
-import Catalog from './pages/catalog';
 import Common from './common/common';
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <BrowserRouter>
+      <App />
+    </BrowserRouter> */}
     <BrowserRouter basename={App.CURRENT_URL}>
       <App />
     </BrowserRouter>
-    {/* <BrowserRouter basename={Common.formatBasePath()}>
-      <App />
-    </BrowserRouter> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

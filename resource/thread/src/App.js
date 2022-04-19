@@ -37,6 +37,7 @@ import Common from "./common/common";
 
 class App extends Component {
     static CURRENT_URL = window.location.pathname;
+    // static CURRENT_URL = Common.formatBasePath();
 
     static HOME = "HOME";
     static CATALOG = "CATALOG";
@@ -58,35 +59,7 @@ class App extends Component {
         console.log("window.location == " + window.location);
         console.log("window.location.pathname == " + window.location.pathname);
 
-        this.buildBaseUrl();
         this.checkActiveTab();
-
-        console.log('Common.formatBasePath() :: ' + Common.formatBasePath());
-    }
-
-    buildBaseUrl() {
-        console.log('buildBaseUrl() :: START :: ');
-
-        // let arrayUrlPath = App.CURRENT_URL.split('/');
-        let arrayUrlPath = window.location.pathname.split('/');
-        console.log('arrayUrlPath == ');
-        console.log(arrayUrlPath);
-
-        arrayUrlPath = arrayUrlPath.map((path, index) => {
-            // console.log('index == ' + index);
-            // console.log('path == ' + path);
-
-            return (path.length > 0) ? path : null;
-        }).filter((path) => path !== null);
-
-        // console.log('arrayUrlPath == ');
-        // console.log(arrayUrlPath);
-
-        let urlBuilder = '/' + arrayUrlPath[0] + '/' + arrayUrlPath[1] + '/' + arrayUrlPath[2];
-        console.log('urlBuilder == ' + urlBuilder);
-
-        console.log('buildBaseUrl() :: END :: ');
-        return urlBuilder;
     }
 
     checkActiveTab() {
@@ -215,6 +188,8 @@ class App extends Component {
                                             onClick={() => this.setState({ activeTab: App.CATALOG })} 
                                             to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
                                     </li> */}
+
+                                    {/* STANDARD ROUTES */}
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
                                             onClick={() => this.setState({ activeTab: App.HOME })}
@@ -247,8 +222,9 @@ class App extends Component {
                     {publicApp.length == 0 ?
                         <Row>
                             <Routes>
+                                {/* STANDARD ROUTES */}
                                 <Route exact path="/" element={<Home />} />
-                                <Route path="/catalog" element={<Catalog />} />
+                                <Route path="/catalog" element={<Catalog />} />                        
 
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
