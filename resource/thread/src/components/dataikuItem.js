@@ -301,20 +301,22 @@ class DataikuItem extends Component {
     }
 
     defSearch = (term) => {
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        };
+        if (term.length > 1) {
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            };
 
-        let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
-        this.setState({ loading: true });
-        fetch(url, requestOptions)
-            .then(res => res.json())
-            .then((response) => {
-                this.setState({
-                    defSearchResults: response
+            let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
+            this.setState({ loading: true });
+            fetch(url, requestOptions)
+                .then(res => res.json())
+                .then((response) => {
+                    this.setState({
+                        defSearchResults: response
+                    });
                 });
-            });
+        }
     }
 
     renderDefSearchMenuItem(option, props) {
