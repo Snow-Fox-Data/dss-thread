@@ -696,7 +696,7 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div></Col>
-                <Col xs={2}>
+                <Col style={{width:'220px !important'}}>
                     <div className="float-end">
                         <Card>
                             <Card.Header>
@@ -888,7 +888,7 @@ class DataikuItem extends Component {
                     <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </Col>
-                <Col>
+                <Col style={{width:'100px !important'}}>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
@@ -902,7 +902,7 @@ class DataikuItem extends Component {
                         </Dropdown>
                     </div>
                 </Col>
-                <Col sm={2}>
+                <Col style={{width:'220px !important'}}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
@@ -975,7 +975,7 @@ class DataikuItem extends Component {
                     <div class="tags">{tags}</div>
 
                 </Col>
-                <Col>
+                <Col style={{width:'100px !important'}}>
                     {this.props.item.user_security &&
                         <div style={{ padding: '8px', textAlign: 'right' }}>
                             <Dropdown>
@@ -992,7 +992,7 @@ class DataikuItem extends Component {
                         </div>
                     }
                 </Col>
-                <Col sm={2}>
+                <Col style={{width:'220px !important'}}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
