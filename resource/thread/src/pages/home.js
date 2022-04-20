@@ -29,7 +29,8 @@ class Home extends Component {
             selectedItemType: null,
             searchResults: [],
             loggedIn: false,
-            collectionStats: {}
+            collectionStats: {},
+            compId: Math.random()
         }
     }
 
@@ -136,6 +137,7 @@ class Home extends Component {
     }
 
     loadItem = (item) => {
+        console.log('loading compId' + this.state.compId)
         this.setState({ loading: true });
         if (item.length > 0) {
             this.loadItemByKey(item[0].key)
@@ -470,7 +472,7 @@ class Home extends Component {
                     </Row>
                     : null}
 
-                {(selectedItem == null && this.state.errorMsg.length == 0 && this.state.collectionStats.project_ct>=0) &&
+                {(selectedItem == null && this.state.errorMsg.length == 0 && this.state.collectionStats.project_ct >= 0) &&
                     this.collectionStats()
                 }
                 <Row>

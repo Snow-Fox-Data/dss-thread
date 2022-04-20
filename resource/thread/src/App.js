@@ -83,14 +83,6 @@ class App extends Component {
         window.$(document).ready(() => {
             this.refreshUser();
 
-            // eventBus.on('catalog', () => {
-            //     let navigate = useNavigate();
-
-            //     navigate('/catalog', { replace: true })
-            //     this.setState({ activeTab: App.CATALOG })
-            // })
-
-
             eventBus.on("scanning", (isScanning) => {
                 if (isScanning)
                     this.setState({ "logo": loading_logo })
@@ -213,16 +205,6 @@ class App extends Component {
                             </ul>
                         </div>
                     </nav>
-                    {/* {scanning ?
-                        <Row>
-                            <div style={{ padding: '10px' }}>
-                                <Spinner animation="border" role="status">
-                                    <span className="visually-hidden">Loading...</span>
-                                </Spinner>
-                            </div>
-                        </Row>
-                        : null} */}
-
                     {publicApp.length == 0 ?
                         <Row>
                             <Routes>
