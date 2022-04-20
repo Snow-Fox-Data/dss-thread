@@ -196,7 +196,7 @@ class Home extends Component {
         }
         else {
             this.reloadDssStats(() =>
-                this.setState({ "selectedItem": null, "dataikuItem": null }));
+                this.setState({ "selectedItem": null, "dataikuItem": null, selectedItemType: null }));
         }
 
         return false;
