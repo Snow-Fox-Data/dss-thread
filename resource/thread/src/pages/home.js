@@ -195,7 +195,7 @@ class Home extends Component {
             if (parts[1] != this.state.navigatingTo) {
                 this.state.navigatingTo = parts[1];
 
-                console.log('navigating to: ' + parts[1])
+                console.log('navigating to: ' + this.state.navigatingTo + ' | ' + parts[1])
 
                 this.setState({ "loading": true });
                 this.loadItemByKey(parts[1])
