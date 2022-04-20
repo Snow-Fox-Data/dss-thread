@@ -192,7 +192,7 @@ class Home extends Component {
             return true;
         }
         else {
-            this.setState({ "dataikuItem": null });
+            this.setState({ "selectedItem": null });
         }
 
         return false;
