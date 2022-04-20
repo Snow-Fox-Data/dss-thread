@@ -21,8 +21,8 @@ html {
 }
 
 .options-button {
-  padding: '8px';
-  text-align: 'right';
+  padding: 4px 8px;
+  text-align: right;
   float: right;
 }
 
