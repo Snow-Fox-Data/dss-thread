@@ -34,9 +34,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-
-        this.navDeepLink();
-
         window.addEventListener("hashchange", () => this.navDeepLink());
 
         eventBus.on("datasetSelected", (ds) => {
@@ -74,7 +71,8 @@ class Home extends Component {
         });
 
         window.$(document).ready(() => {
-            this.reloadDssStats();
+            if (!this.navDeepLink())
+                this.reloadDssStats();
         });
     }
 
