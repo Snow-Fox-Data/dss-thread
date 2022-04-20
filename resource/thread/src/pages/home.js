@@ -137,7 +137,6 @@ class Home extends Component {
     }
 
     loadItem = (item) => {
-        console.log('loading compId' + this.state.compId)
         this.setState({ loading: true });
         if (item.length > 0) {
             this.loadItemByKey(item[0].key)
@@ -146,6 +145,7 @@ class Home extends Component {
     }
 
     loadItemByKey = (itemKey) => {
+        console.log('loading compId' + this.state.compId)
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
