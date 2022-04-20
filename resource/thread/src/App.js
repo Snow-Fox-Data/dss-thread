@@ -1,6 +1,5 @@
 import React from "react";
 import { Component } from 'react';
-import { useNavigate, Switch } from "react-router-dom";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,12 +13,6 @@ import {
     Row,
     Spinner,
 } from 'react-bootstrap';
-
-// import {
-//     Route,
-//     Routes,
-//     Link
-// } from "react-router-dom";
 
 import {
     BrowserRouter as Router,
@@ -209,10 +202,8 @@ class App extends Component {
                         <Row>
                             <Routes>
                                 {/* STANDARD ROUTES */}
-                                <Switch>
                                     <Route exact path="/" element={<Home />} />
                                     <Route exact path="/catalog" element={<Catalog />} />
-                                </Switch>
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
                             </Routes>
