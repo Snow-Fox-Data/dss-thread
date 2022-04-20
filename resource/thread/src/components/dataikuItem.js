@@ -127,7 +127,7 @@ class DataikuItem extends Component {
         }
     }
 
-    saveDef(fromModal = false) {
+    saveDef() {
         let applyTo = eval(this.props.item.applied_to);
 
         var tagList = [];
@@ -155,14 +155,7 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    if (fromModal)
-                        this.props.item.definition = result.value;
-                    else
-                        this.props.item = result.value;
-
-                    // this.setState({
-                    //     newDefModal: false
-                    // });
+                    this.props.item = result.value;
 
                     eventBus.dispatch("loading", false);
                 });
@@ -841,7 +834,7 @@ class DataikuItem extends Component {
                                             Will appear in the Dataiku Dataset's column description.
                                         </Form.Text>
                                     </Form.Group>
-                                    <Button variant="primary" onClick={() => this.saveDef(true)}>Save</Button>
+                                    <Button variant="primary" onClick={() => this.saveDef()}>Save</Button>
                                 </Form>
                             </div>
                         </Tab>
