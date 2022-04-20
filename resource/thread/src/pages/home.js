@@ -79,7 +79,7 @@ class Home extends Component {
             if (!this.navDeepLink())
                 this.reloadDssStats();
 
-            this.addHashListener();
+            // this.addHashListener();
         });
     }
 
