@@ -57,6 +57,11 @@ class Home extends Component {
         }
         );
 
+        eventBus.on("reloadItem", (item) => {
+            this.loadItemByKey(item)
+        }
+        );
+
         eventBus.on("loading", (isLoading) =>
             this.setState({ "loading": isLoading })
         );
@@ -469,7 +474,7 @@ class Home extends Component {
                     this.collectionStats()
                 }
                 <Row>
-                    {(!loading && selectedItem!=null) ? this.dataikuItem : null}
+                    {(!loading && selectedItem != null) ? this.dataikuItem : null}
                 </Row>
             </>
         );

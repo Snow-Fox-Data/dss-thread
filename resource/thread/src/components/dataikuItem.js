@@ -163,7 +163,7 @@ class DataikuItem extends Component {
                     // })
 
                     // eventBus.dispatch("loading", false);
-                    this.openDefinition(this.props.item.id);
+                    eventBus.dispatch("reloadItem", this.props.item.id);
                 });
     };
 
