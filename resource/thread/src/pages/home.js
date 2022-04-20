@@ -353,7 +353,7 @@ class Home extends Component {
                                 <h3>Recent Projects</h3>
                             </Col>
                             <Col xs={1}>
-                                <Button variant="secondary" size="sm" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
+                                <Button variant="outline-secondary" size="sm" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
                             </Col>
                         </Row>
                         <Row>

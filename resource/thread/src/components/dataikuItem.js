@@ -202,7 +202,7 @@ class DataikuItem extends Component {
     }
 
     tagListToObj(tagList) {
-        if (tagList == null || tagList.length > 0)
+        if (tagList == null || tagList.length == 0)
             return [];
 
         var tags = [];
