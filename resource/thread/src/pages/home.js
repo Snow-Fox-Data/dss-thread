@@ -184,22 +184,24 @@ class Home extends Component {
     }
 
     navDeepLink() {
-        let parts = window.top.location.href.split('#o=')
+        if (!this.state.loading) {
+            let parts = window.top.location.href.split('#o=')
 
-        if (parts.length > 1) {
-            this.setState({ "loading": true });
-            this.loadItemByKey(parts[1])
+            if (parts.length > 1) {
+                this.setState({ "loading": true });
+                this.loadItemByKey(parts[1])
 
-            return true;
-        }
-        else {
-            this.reloadDssStats(() =>
-                this.setState({
-                    "selectedItem": null,
-                    "dataikuItem": null,
-                    "selectedItemType": null,
-                    "errorMsg": ''
-                }));
+                return true;
+            }
+            else {
+                this.reloadDssStats(() =>
+                    this.setState({
+                        "selectedItem": null,
+                        "dataikuItem": null,
+                        "selectedItemType": null,
+                        "errorMsg": ''
+                    }));
+            }
         }
 
         return false;
