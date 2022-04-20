@@ -29,8 +29,7 @@ class Home extends Component {
             selectedItemType: null,
             searchResults: [],
             loggedIn: false,
-            collectionStats: {},
-            navigatingTo: ''
+            collectionStats: {}
         }
     }
 
@@ -191,13 +190,8 @@ class Home extends Component {
         let parts = window.top.location.href.split('#o=')
 
         if (parts.length > 1) {
-            // don't double-naviate due to event listeners
-            if (parts[1] != this.state.navigatingTo) {
-                console.log('navigating to: ' + this.state.navigatingTo + ' | ' + parts[1])
-
-                this.setState({ "loading": true, navigatingTo: parts[1] });
-                this.loadItemByKey(parts[1])
-            }
+            this.setState({ "loading": true });
+            this.loadItemByKey(parts[1])
 
             return true;
         }
