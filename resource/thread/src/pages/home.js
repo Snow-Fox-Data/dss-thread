@@ -300,7 +300,7 @@ class Home extends Component {
                         <Card.Body>
                             <Card.Title>
                                 <div style={{ fontSize: "50px", textAlign: "center" }}>
-                                    {this.state.collectionStats.project_ct}
+                                    {this.state.collectionStats.project_ct.toLocaleString("en-US")}
                                 </div>
                             </Card.Title>
                         </Card.Body>
@@ -312,7 +312,7 @@ class Home extends Component {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.dataset_ct}
+                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.dataset_ct.toLocaleString("en-US")}
                                 </div>
                             </Card.Title>
                         </Card.Body>
@@ -325,7 +325,7 @@ class Home extends Component {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.column_ct}
+                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.column_ct.toLocaleString("en-US")}
                                 </div>
                             </Card.Title>
                         </Card.Body>
@@ -338,7 +338,7 @@ class Home extends Component {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.definition_ct}
+                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.definition_ct.toLocaleString("en-US")}
                                 </div>
                             </Card.Title>
                         </Card.Body>
