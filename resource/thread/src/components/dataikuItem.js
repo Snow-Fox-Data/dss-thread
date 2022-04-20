@@ -266,12 +266,7 @@ class DataikuItem extends Component {
     }
 
     editDef() {
-
-        let tags = [];
-        let tag_def = eval(this.props.item.definition.tags);
-        for (var x = 0; x < tag_def.length; x++) {
-            tags.push({ id: x, name: tag_def[x] })
-        }
+        let tags = this.tagListToObj(eval(this.props.item.definition.tags));
         this.setState({
             tempSelDef: {
                 name: this.props.item.definition.name,
@@ -814,7 +809,6 @@ class DataikuItem extends Component {
                                                 suggestions={this.state.columnTagSuggestions}
                                                 onDelete={(i) => this.onDefTagDelete(i)}
                                                 onAddition={(tag) => this.onDefTagAddition(tag)} />
-
                                         </div>
 
                                         {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
