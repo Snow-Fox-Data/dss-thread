@@ -217,42 +217,25 @@ class DataikuItem extends Component {
         return tags
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.item != null && this.props.item != prevProps.item) {
-            switch (this.props.object_type) {
-                case 'column':
-                    var tags = this.tagListToObj(eval(this.props.item.tags));
-                    this.setState({
-                        columnTagSuggestions: tags
-                    })
-                    break;
-                case 'definition':
-                    var tagsArr = this.tagListToObj(eval(this.props.item.tags));
-                    var tagsListArr = this.tagListToObj(eval(this.props.item.tag_list));
+    componentDidMount() {
+        switch (this.props.object_type) {
+            case 'column':
+                var tags = this.tagListToObj(eval(this.props.item.tags));
+                this.setState({
+                    columnTagSuggestions: tags
+                })
+                break;
+            case 'definition':
+                var tagsArr = this.tagListToObj(eval(this.props.item.tags));
+                var tagsListArr = this.tagListToObj(eval(this.props.item.tag_list));
 
-                    this.setState({
-                        columnTags: tagsArr,
-                        columnTagSuggestions: tagsListArr
-                    })
-                    break;
-            }
+                this.setState({
+                    columnTags: tagsArr,
+                    columnTagSuggestions: tagsListArr
+                })
+                break;
         }
     }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log('component update!')
-    //     if (this.props.object_type == 'column') {
-    //         if (prevProps.item == null && this.props.item != null) {
-    //             this.props.item.applied_to = eval(this.props.item.applied_to);
-    //             this.resetSelectedDef();
-    //         } else {
-    //             if ((prevProps.item != null && this.props.item != null) && (prevProps.item.id != this.props.item.id)) {
-    //                 this.props.item.applied_to = eval(this.props.item.applied_to);
-    //                 this.resetSelectedDef();
-    //             }
-    //         }
-    //     }
-    // }
 
     newDef() {
         this.setState({
