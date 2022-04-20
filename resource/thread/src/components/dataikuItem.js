@@ -217,23 +217,25 @@ class DataikuItem extends Component {
         return tags
     }
 
-    componentWillMount() {
-        switch (this.props.object_type) {
-            case 'column':
-                var tags = this.tagListToObj(eval(this.props.item.tags));
-                this.setState({
-                    columnTagSuggestions: tags
-                })
-                break;
-            case 'definition':
-                var tagsArr = this.tagListToObj(eval(this.props.item.tags));
-                var tagsListArr = this.tagListToObj(eval(this.props.item.tag_list));
+    componentDidUpdate(prevProps) {
+        if (this.props.item != prevProps.item) {
+            switch (this.props.object_type) {
+                case 'column':
+                    var tags = this.tagListToObj(eval(this.props.item.tags));
+                    this.setState({
+                        columnTagSuggestions: tags
+                    })
+                    break;
+                case 'definition':
+                    var tagsArr = this.tagListToObj(eval(this.props.item.tags));
+                    var tagsListArr = this.tagListToObj(eval(this.props.item.tag_list));
 
-                this.setState({
-                    columnTags: tagsArr,
-                    columnTagSuggestions: tagsListArr
-                })
-                break;
+                    this.setState({
+                        columnTags: tagsArr,
+                        columnTagSuggestions: tagsListArr
+                    })
+                    break;
+            }
         }
     }
 
