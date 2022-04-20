@@ -469,7 +469,7 @@ class Home extends Component {
                     this.collectionStats()
                 }
                 <Row>
-                    {!loading ? this.dataikuItem : null}
+                    {(!loading && selectedItem!=null) ? this.dataikuItem : null}
                 </Row>
             </>
         );
