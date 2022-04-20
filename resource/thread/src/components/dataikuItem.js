@@ -683,7 +683,7 @@ class DataikuItem extends Component {
                     </p>
 
                 </Col>
-                <Col>
+                <Col style={{width:'100px !important'}}>
                     <div style={{ padding: '8px', textAlign: 'right' }}>
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
