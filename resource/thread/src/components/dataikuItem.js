@@ -650,14 +650,14 @@ class DataikuItem extends Component {
                     </div>
 
                 </Col>
-                <Col style={{wordBreak:'break-word'}}>
+                <div class="col" style={{wordBreak:'break-word'}}>
                     <h1>{this.props.item.name}</h1>
                     <p class="name">
                         <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
                         <span style={{ padding: "0px 3px" }}>|</span>
                         <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
                     </p>
-                </Col>
+                </div>
                 <Col sm={4}>
                     <div className="float-end">
                         <Card>
