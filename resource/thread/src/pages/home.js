@@ -369,7 +369,7 @@ class Home extends Component {
                                             {this.state.recents.map((col) =>
                                                 <tr>
                                                     <td><span class="app-link" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
-                                                    <td>{new Date(col.last_modified).toDateString()}</td>
+                                                    <td>{new Date(col.last_modified).toLocaleString()}</td>
                                                 </tr>
                                             )}
                                         </tbody>
