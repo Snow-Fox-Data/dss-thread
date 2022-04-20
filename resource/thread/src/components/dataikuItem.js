@@ -852,12 +852,12 @@ class DataikuItem extends Component {
                     </div>
 
                 </Col>
-                <Col>
+                <div class="col" style={{wordBreak:'break-word'}}>
                     <h1>{this.props.item.id}</h1>
 
                     <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
-                </Col>
+                </div>
                 <Col sm={4}>
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                     <div class="options-button">
