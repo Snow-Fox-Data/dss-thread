@@ -384,14 +384,19 @@ class DataikuItem extends Component {
     }
 
     createDocPctCard(total_cols, documented_cols) {
-        var pct = ((documented_cols / total_cols) * 100).toFixed(0);
-
+        var pct = 0;
         var bg = "secondary";
-        if (pct > 80)
-            bg = "success";
-        else {
-            if (pct < 40)
-                bg = "danger"
+
+        if (documented_cols > 0) {
+            pct = ((documented_cols / total_cols) * 100).toFixed(0);
+
+            bg = "secondary";
+            if (pct > 80)
+                bg = "success";
+            else {
+                if (pct < 40)
+                    bg = "danger"
+            }
         }
 
         return <Card style={{ width: '15rem' }} className="float-end">
