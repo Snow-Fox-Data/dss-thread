@@ -30,15 +30,12 @@ class Home extends Component {
             searchResults: [],
             loggedIn: false,
             collectionStats: {},
-            hashListenerAdded: false
+            navigatingTo: ''
         }
     }
 
     addHashListener() {
-        if (!this.state.hashListenerAdded) {
-            window.addEventListener("hashchange", () => this.navDeepLink());
-            this.state.hashListenerAdded = true;
-        }
+        window.addEventListener("hashchange", () => this.navDeepLink());
     }
 
     componentDidMount() {
@@ -196,10 +193,13 @@ class Home extends Component {
         let parts = window.top.location.href.split('#o=')
 
         if (parts.length > 1) {
-            this.setState({ "loading": true });
-            this.loadItemByKey(parts[1])
+            // don't double-naviate due to event listeners
+            if (parts[1] != this.state.navigatingTo) {
+                this.setState({ "loading": true });
+                this.loadItemByKey(parts[1])
 
-            console.log('nav deep link')
+                this.state.navigatingTo = parts[1]
+            }
 
             return true;
         }
