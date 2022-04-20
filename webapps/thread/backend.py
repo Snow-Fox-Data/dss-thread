@@ -868,6 +868,7 @@ class dss_utils:
                     # we don't want to index thread projects
                     if '--Thread-' in dataset['name']:
                         del scan_obj[proj]
+                        index_list.pop()
                         break
 
                     last_mod = 0
