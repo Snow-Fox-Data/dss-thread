@@ -155,14 +155,6 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    // var tags = this.tagListToObj(eval(result.value.tags));
-
-                    // this.props.item = result.value;
-                    // this.setState({
-                    //     columnTags: tags
-                    // })
-
-                    // eventBus.dispatch("loading", false);
                     eventBus.dispatch("reloadItem", this.props.item.id);
                 });
     };
@@ -210,6 +202,9 @@ class DataikuItem extends Component {
     }
 
     tagListToObj(tagList) {
+        if (tagList == null || tagList.length > 0)
+            return [];
+
         var tags = [];
         for (var x = 0; x < tagList.length; x++) {
             tags.push({ id: x, name: tagList[x] })
