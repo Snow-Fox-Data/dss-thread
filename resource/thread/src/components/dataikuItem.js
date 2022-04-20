@@ -218,7 +218,8 @@ class DataikuItem extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.item != null && this.props.item != prevProps.item) {
+        //&& this.props.item != prevProps.item
+        if (this.props.item != null ) { 
             switch (this.props.object_type) {
                 case 'column':
                     var tags = this.tagListToObj(eval(this.props.item.tags));
