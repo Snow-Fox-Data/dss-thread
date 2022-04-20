@@ -155,14 +155,15 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    var tags = this.tagListToObj(eval(result.value.tags));
+                    // var tags = this.tagListToObj(eval(result.value.tags));
 
-                    this.props.item = result.value;
-                    this.setState({
-                        columnTags: tags
-                    })
+                    // this.props.item = result.value;
+                    // this.setState({
+                    //     columnTags: tags
+                    // })
 
-                    eventBus.dispatch("loading", false);
+                    // eventBus.dispatch("loading", false);
+                    this.openDefinition(this.props.id);
                 });
     };
 
