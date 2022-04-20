@@ -182,7 +182,7 @@ class App extends Component {
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
                                             onClick={() => this.setState({ activeTab: App.HOME })}
-                                            to="/">Home</Link>
+                                            to="/home">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link className={activeTab == App.CATALOG ? 'active' : ''}
@@ -202,7 +202,7 @@ class App extends Component {
                         <Row>
                             <Routes>
                                 {/* STANDARD ROUTES */}
-                                    <Route exact path="/" element={<Home />} />
+                                    <Route exact path="/home" element={<Home />} />
                                     <Route exact path="/catalog" element={<Catalog />} />
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
