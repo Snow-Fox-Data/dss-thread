@@ -7,14 +7,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Common from './common/common';
 
 ReactDOM.render(
-  <React.StrictMode>
-    {/* <BrowserRouter>
+  // <React.StrictMode>
+    
+    (<BrowserRouter basename={App.CURRENT_URL}>
       <App />
-    </BrowserRouter> */}
-    <BrowserRouter basename={App.CURRENT_URL}>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>),
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 

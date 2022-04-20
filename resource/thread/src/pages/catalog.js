@@ -250,8 +250,8 @@ class Catalog extends Component {
     }
 
     render() {
-        console.log('render() :: STATE == ');
-        console.log(this.state);
+        // console.log('render() :: STATE == ');
+        // console.log(this.state);
         const { loading, searchBy } = this.state;
 
         return <Col>
