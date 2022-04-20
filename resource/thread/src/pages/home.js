@@ -353,26 +353,28 @@ class Home extends Component {
                         </Row>
                         <Row>
                             <Col>
-                                <Table striped bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Name
-                                            </th>
-                                            <th>
-                                                Last Modified
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.state.recents.map((col) =>
+                                <div class="dataiku-item">
+                                    <Table striped bordered hover>
+                                        <thead>
                                             <tr>
-                                                <td><span class="app-link" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
-                                                <td>{new Date(col.last_modified).toDateString()}</td>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Last Modified
+                                                </th>
                                             </tr>
-                                        )}
-                                    </tbody>
-                                </Table>
+                                        </thead>
+                                        <tbody>
+                                            {this.state.recents.map((col) =>
+                                                <tr>
+                                                    <td><span class="app-link" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
+                                                    <td>{new Date(col.last_modified).toDateString()}</td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </Table>
+                                </div>
                             </Col>
                         </Row>
                     </Col>

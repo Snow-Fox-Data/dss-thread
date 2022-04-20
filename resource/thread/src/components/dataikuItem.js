@@ -946,7 +946,7 @@ class DataikuItem extends Component {
                     {col.documented_columns} / {col.total_columns}
                     {(col.total_columns > 0) &&
                         <span>
-                            ({((col.documented_columns / col.total_columns) * 100).toFixed(0)}%)
+                            &nbsp;({((col.documented_columns / col.total_columns) * 100).toFixed(0)}%)
                         </span>
                     }
                 </td>
