@@ -684,19 +684,6 @@ class DataikuItem extends Component {
 
                 </Col>
                 <Col sm={4}>
-                    <div style={{ padding: '8px', textAlign: 'right' }}>
-                        <Dropdown>
-                            <Dropdown.Toggle size="sm"
-                                variant="outline-secondary">
-                                Options
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item href={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} target="_blank">Open Dataset in new Tab</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-
                     <div className="float-end">
                         <Card>
                             <Card.Header>
@@ -719,6 +706,19 @@ class DataikuItem extends Component {
                                 }
                             </Card.Body>
                         </Card>
+                    </div>
+
+                    <div class="options-button">
+                        <Dropdown>
+                            <Dropdown.Toggle size="sm"
+                                variant="outline-secondary">
+                                Options
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href={Common.createDatasetLink(this.props.item.project, this.props.item.dataset)} target="_blank">Open Dataset in new Tab</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
                 </Col>
             </Row>
@@ -780,7 +780,7 @@ class DataikuItem extends Component {
                     </p>
                 </Col>
                 <Col sm={4}>
-                    <div style={{ padding: '8px', textAlign: 'right' }}>
+                    <div class="options-button">
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="outline-secondary">
@@ -890,7 +890,8 @@ class DataikuItem extends Component {
                     <div class="tags">{tags}</div>
                 </Col>
                 <Col sm={4}>
-                    <div style={{ padding: '8px', textAlign: 'right' }}>
+                    {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
+                    <div class="options-button">
                         <Dropdown>
                             <Dropdown.Toggle size="sm"
                                 variant="outline-secondary">
@@ -902,8 +903,6 @@ class DataikuItem extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-
-                    {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
 
@@ -976,8 +975,9 @@ class DataikuItem extends Component {
 
                 </Col>
                 <Col sm={4}>
+                    {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                     {this.props.item.user_security &&
-                        <div style={{ padding: '8px', textAlign: 'right' }}>
+                        <div class='options-button'>
                             <Dropdown>
                                 <Dropdown.Toggle size="sm"
                                     variant="outline-secondary">
@@ -991,8 +991,6 @@ class DataikuItem extends Component {
                             </Dropdown>
                         </div>
                     }
-
-                    {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                 </Col>
             </Row>
             <Row>

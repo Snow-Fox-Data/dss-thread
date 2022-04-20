@@ -20,6 +20,12 @@ html {
   font-size: 1rem !important;
 }
 
+.options-button {
+  padding: '8px';
+  text-align: 'right';
+  float: right;
+}
+
 .dataiku-item .icon {
   max-width: 90px;
   max-height: 90px;
@@ -114,7 +120,7 @@ html {
 }
 
 .navbar .dropdown {
-  font-size:18px;
+  font-size: 18px;
 }
 
 ul.navbar-nav li.nav-item {
