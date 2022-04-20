@@ -204,13 +204,16 @@ class Home extends Component {
             return true;
         }
         else {
-            this.reloadDssStats(() =>
-                this.setState({
-                    "selectedItem": null,
-                    "dataikuItem": null,
-                    "selectedItemType": null,
-                    "errorMsg": ''
-                }));
+            if (this.state.navigatingTo != 'stats') {
+                this.reloadDssStats(() =>
+                    this.setState({
+                        "selectedItem": null,
+                        "dataikuItem": null,
+                        "selectedItemType": null,
+                        "errorMsg": ''
+                    }));
+                this.state.navigatingTo = 'stats';
+            }
         }
 
         return false;
