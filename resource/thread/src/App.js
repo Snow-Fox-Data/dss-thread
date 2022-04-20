@@ -125,18 +125,20 @@ class App extends Component {
 
     rescan() {
         if (!this.state.scanning) {
-            // this.setState({ "loading": isLoading });
-            this.setState({ "logo": loading_logo })
 
-            this.setState({ scanning: true });
-            fetch(window.getWebAppBackendUrl('scan'))
-                .then(res => res.json())
-                .then((response) => {
-                    if (response.result == 'error')
-                        alert(response.message)
-                    else
-                        window.location.reload();
-                });
+            if (window.confirm('A full rescan make take minutes to complete and may affect other Thread users. Would you like to proceed?')) {
+                this.setState({ "logo": loading_logo })
+
+                this.setState({ scanning: true });
+                fetch(window.getWebAppBackendUrl('scan'))
+                    .then(res => res.json())
+                    .then((response) => {
+                        if (response.result == 'error')
+                            alert(response.message)
+                        else
+                            window.location.reload();
+                    });
+            }
         }
     }
 

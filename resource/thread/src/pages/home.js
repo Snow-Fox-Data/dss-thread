@@ -38,13 +38,11 @@ class Home extends Component {
 
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
-        }
-        );
+        });
 
         eventBus.on("definitionSelected", (ds) => {
             this.navToObject(ds)
-        }
-        );
+        });
 
         eventBus.on("projectSelected", (proj) => {
             this.navToObject(proj)
@@ -199,8 +197,8 @@ class Home extends Component {
                 this.setState({
                     "selectedItem": null,
                     "dataikuItem": null,
-                    selectedItemType: null,
-                    errorMsg: ''
+                    "selectedItemType": null,
+                    "errorMsg": ''
                 }));
         }
 
