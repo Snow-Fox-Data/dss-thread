@@ -283,7 +283,7 @@ class Home extends Component {
                 // alert(response)
                 this.setState({ loading: false });
 
-                if (response.length > 0)
+                if (response.projects.length > 0)
                     this.reloadDssStats();
             });
     }
