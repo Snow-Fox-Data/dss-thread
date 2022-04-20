@@ -77,12 +77,7 @@ def scan():
     try:
         p = dataiku.Project() # create a project handle
         proj_vars = p.get_variables() # retrieve your variables as a dictionary
-        # if 'scanning' in proj_vars["standard"]:
-        #     if proj_vars["standard"]['scanning'] == 'True':
-        #         return json.dumps({"result": "already scanning"})
-        
-        # proj_vars["standard"]['scanning'] = 'True'
-        # p.set_variables(proj_vars) # set the updated dictionary
+
         dss = dss_utils()
 
         # initializing the datasets
@@ -869,6 +864,12 @@ class dss_utils:
                 })
 
                 for dataset in datasets:
+
+                    # we don't want to index thread projects
+                    if '--Thread-' in dataset['name']:
+                        del scan_obj[proj]
+                        break
+
                     last_mod = 0
                     if 'versionTag' in dataset:
                         last_mod = dataset['versionTag']['lastModifiedOn']
