@@ -156,6 +156,9 @@ class DataikuItem extends Component {
             .then(
                 (result) => {
                     this.props.item = result.value;
+                    this.setState({
+                        columnTags: eval(result.value.tags)
+                    })
 
                     eventBus.dispatch("loading", false);
                 });
