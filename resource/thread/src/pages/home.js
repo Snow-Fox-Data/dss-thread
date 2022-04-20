@@ -337,32 +337,38 @@ class Home extends Component {
             {this.state.recents != null &&
                 <Row>
                     <Col style={{ paddingTop: '20px' }}>
-                        <Col>
-                            <h3>Recent Projects</h3>
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Name
-                                        </th>
-                                        <th>
-                                            Last Modified
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.recents.map((col) =>
+                        <Row>
+                            <Col>
+                                <h3>Recent Projects</h3>
+                            </Col>
+                            <Col xs={1}>
+                                <Button variant="secondary" size="sm" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Table striped bordered hover>
+                                    <thead>
                                         <tr>
-                                            <td><span class="app-link" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
-                                            <td>{new Date(col.last_modified).toDateString()}</td>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>
+                                                Last Modified
+                                            </th>
                                         </tr>
-                                    )}
-                                </tbody>
-                            </Table>
-                        </Col>
-                        <Col xs={1}>
-                            <Button variant="secondary" size="sm" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
-                        </Col>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.recents.map((col) =>
+                                            <tr>
+                                                <td><span class="app-link" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
+                                                <td>{new Date(col.last_modified).toDateString()}</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </Table>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             }
