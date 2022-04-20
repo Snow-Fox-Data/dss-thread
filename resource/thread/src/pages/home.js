@@ -29,12 +29,19 @@ class Home extends Component {
             selectedItemType: null,
             searchResults: [],
             loggedIn: false,
-            collectionStats: {}
+            collectionStats: {},
+            hashListenerAdded: false
+        }
+    }
+
+    addHashListener() {
+        if (!this.state.hashListenerAdded) {
+            window.addEventListener("hashchange", () => this.navDeepLink());
+            this.state.hashListenerAdded = true;
         }
     }
 
     componentDidMount() {
-        window.addEventListener("hashchange", () => this.navDeepLink());
 
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
@@ -71,6 +78,8 @@ class Home extends Component {
         window.$(document).ready(() => {
             if (!this.navDeepLink())
                 this.reloadDssStats();
+
+            this.addHashListener();
         });
     }
 
@@ -184,24 +193,22 @@ class Home extends Component {
     }
 
     navDeepLink() {
-        if (!this.state.loading) {
-            let parts = window.top.location.href.split('#o=')
+        let parts = window.top.location.href.split('#o=')
 
-            if (parts.length > 1) {
-                this.setState({ "loading": true });
-                this.loadItemByKey(parts[1])
+        if (parts.length > 1) {
+            this.setState({ "loading": true });
+            this.loadItemByKey(parts[1])
 
-                return true;
-            }
-            else {
-                this.reloadDssStats(() =>
-                    this.setState({
-                        "selectedItem": null,
-                        "dataikuItem": null,
-                        "selectedItemType": null,
-                        "errorMsg": ''
-                    }));
-            }
+            return true;
+        }
+        else {
+            this.reloadDssStats(() =>
+                this.setState({
+                    "selectedItem": null,
+                    "dataikuItem": null,
+                    "selectedItemType": null,
+                    "errorMsg": ''
+                }));
         }
 
         return false;
