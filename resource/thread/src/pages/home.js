@@ -79,7 +79,7 @@ class Home extends Component {
             if (!this.navDeepLink())
                 this.reloadDssStats();
 
-            // this.addHashListener();
+            this.addHashListener();
         });
     }
 
@@ -198,6 +198,8 @@ class Home extends Component {
         if (parts.length > 1) {
             this.setState({ "loading": true });
             this.loadItemByKey(parts[1])
+
+            console.log('nav deep link')
 
             return true;
         }
