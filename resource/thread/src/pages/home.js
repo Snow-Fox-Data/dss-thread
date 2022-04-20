@@ -76,7 +76,7 @@ class Home extends Component {
         });
     }
 
-    reloadDssStats = () => {
+    reloadDssStats = (callback = null) => {
         fetch(window.getWebAppBackendUrl('dss-stats'))
             .then(res => res.json())
             .then((response) => {
@@ -85,6 +85,9 @@ class Home extends Component {
                     recents: eval(response.stats.recents),
                     loading: false
                 });
+
+                if (callback != null)
+                    callback()
             });
     }
 
@@ -192,7 +195,8 @@ class Home extends Component {
             return true;
         }
         else {
-            this.setState({ "selectedItem": null });
+            this.reloadDssStats(() =>
+                this.setState({ "selectedItem": null, "dataikuItem": null }));
         }
 
         return false;
