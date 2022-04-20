@@ -470,7 +470,7 @@ class Home extends Component {
                     </Row>
                     : null}
 
-                {(selectedItem == null && this.state.errorMsg.length == 0) &&
+                {(selectedItem == null && this.state.errorMsg.length == 0 && this.state.collectionStats.project_ct>=0) &&
                     this.collectionStats()
                 }
                 <Row>
