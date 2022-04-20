@@ -155,9 +155,11 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    var tags = this.tagListToObj(eval(result.value.tags));
+
                     this.props.item = result.value;
                     this.setState({
-                        columnTags: eval(result.value.tags)
+                        columnTags: tags
                     })
 
                     eventBus.dispatch("loading", false);
@@ -206,28 +208,27 @@ class DataikuItem extends Component {
         }
     }
 
+    tagListToObj(tagList) {
+        var tags = [];
+        for (var x = 0; x < tagList.length; x++) {
+            tags.push({ id: x, name: tagList[x] })
+        }
+
+        return tags
+    }
+
     componentDidMount() {
         switch (this.props.object_type) {
             case 'column':
-                var tags = [];
-                for (var x = 0; x < this.props.item.tag_list.length; x++) {
-                    tags.push({ id: x, name: this.props.item.tag_list[x] })
-                }
+                var tags = this.tagListToObj(eval(this.props.item.tags));
                 this.setState({
                     columnTagSuggestions: tags
                 })
                 break;
             case 'definition':
-                var tags = eval(this.props.item.tags);
-                var tagsArr = [];
-                for (var x = 0; x < tags.length; x++) {
-                    tagsArr.push({ id: x, name: tags[x] })
-                }
-                var tagList = eval(this.props.item.tag_list);
-                var tagsListArr = [];
-                for (var x = 0; x < tagList.length; x++) {
-                    tagsListArr.push({ id: x, name: tagList[x] })
-                }
+                var tagsArr = this.tagListToObj(eval(this.props.item.tags));
+                var tagsListArr = this.tagListToObj(eval(this.props.item.tag_list));
+
                 this.setState({
                     columnTags: tagsArr,
                     columnTagSuggestions: tagsListArr
@@ -813,12 +814,7 @@ class DataikuItem extends Component {
                                                 suggestions={this.state.columnTagSuggestions}
                                                 onDelete={(i) => this.onDefTagDelete(i)}
                                                 onAddition={(tag) => this.onDefTagAddition(tag)} />
-                                            {/* {eval(this.props.item.tags).length > 0 ?
-                                        <div style={{ paddingBottom: "10px" }}>
-                                            {this.buildTagsString(eval(this.props.item.tags), 'light', false)}
-                                        </div>
-                                        : <div>No tags</div>
-                                    } */}
+
                                         </div>
 
                                         {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
