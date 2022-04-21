@@ -198,7 +198,11 @@ class App extends Component {
                         </div>
                     </nav>
                     <Row>
-                        <Outlet />
+                        {publicApp.length == 0 ?
+                            <Outlet />
+                            :
+                            { publicApp }
+                        }
                     </Row>
                 </div >
             </Container >
