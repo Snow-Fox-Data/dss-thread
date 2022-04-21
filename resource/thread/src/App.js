@@ -18,6 +18,7 @@ import {
     Route,
     Link,
     Outlet,
+    NavLink,
     Routes
 } from "react-router-dom";
 
@@ -174,14 +175,14 @@ class App extends Component {
 
                                     {/* STANDARD ROUTES */}
                                     <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ? 'active' : ''}
+                                        <NavLink activeClassName='active'
                                             onClick={() => this.setState({ activeTab: App.HOME })}
-                                            to="/">Home</Link>
+                                            to="/">Home</NavLink>
                                     </li>
                                     <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ? 'active' : ''}
+                                        <NavLink activeClassName='active'
                                             onClick={() => this.setState({ activeTab: App.CATALOG })}
-                                            to="/catalog">Catalog</Link>
+                                            to="/catalog">Catalog</NavLink>
                                     </li>
                                 </ul>
                             </div>
