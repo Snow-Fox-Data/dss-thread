@@ -15,8 +15,6 @@ import {
 } from 'react-bootstrap';
 
 import {
-    BrowserRouter as Router,
-    Switch,
     Route,
     Link,
     Routes
@@ -182,7 +180,7 @@ class App extends Component {
                                     <li class="nav-item">
                                         <Link className={activeTab == App.HOME ? 'active' : ''}
                                             onClick={() => this.setState({ activeTab: App.HOME })}
-                                            to="/home">Home</Link>
+                                            to="/">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link className={activeTab == App.CATALOG ? 'active' : ''}
@@ -202,8 +200,8 @@ class App extends Component {
                         <Row>
                             <Routes>
                                 {/* STANDARD ROUTES */}
-                                    <Route exact path="/home" element={<Home />} />
-                                    <Route exact path="/catalog" element={<Catalog />} />
+                                    <Route path="/" caseSensitive={false}  element={<Home />} />
+                                    <Route path="/catalog" caseSensitive={false} element={<Catalog />} />
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
                             </Routes>
