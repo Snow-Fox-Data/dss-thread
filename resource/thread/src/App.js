@@ -17,6 +17,7 @@ import {
 import {
     Route,
     Link,
+    Outlet, 
     Routes
 } from "react-router-dom";
 
@@ -210,6 +211,7 @@ class App extends Component {
                             {publicApp}
                         </Row>
                     }
+                    <Outlet />
                 </div>
             </Container>
         );
