@@ -40,10 +40,18 @@ class Home extends Component {
 
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
+
+        // eventBus.remove('datasetSelected');
+        // eventBus.remove('definitionSelected');
+        // eventBus.remove('projectSelected');
+        // eventBus.remove('columnSelected');
+        // eventBus.remove('reloadItem');
+        // eventBus.remove('loading');
+        // eventBus.remove('loggedIn');
     }
 
     componentDidMount() {
-
+        console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
         });
