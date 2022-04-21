@@ -62,9 +62,9 @@ class App extends Component {
         }
 
         // console.log('checkActiveTab() :: END :: activeTab == ' + activeTab);
-        // this.setState({
-        //     activeTab: activeTab
-        // });
+        this.setState({
+            activeTab: activeTab
+        });
     }
 
     componentDidMount() {
