@@ -57,12 +57,8 @@ class App extends Component {
     checkActiveTab() {
         // console.log('checkActiveTab() :: START :: App.CURRENT_URL.indexOf(App.CATALOG) === ' + App.CURRENT_URL.indexOf(App.CATALOG));
         let activeTab = App.HOME;
-        if (App.CURRENT_URL.toUpperCase().indexOf(App.CATALOG) !== -1) {
-            // console.log('CHANGE TO CATALOG :: ');
+        if (App.CURRENT_URL.toUpperCase().indexOf(App.CATALOG) == -1) {
             activeTab = App.CATALOG;
-        } else {
-            // console.log('CHANGE TO HOME :: ');
-            activeTab = App.HOME;
         }
 
         // console.log('checkActiveTab() :: END :: activeTab == ' + activeTab);
@@ -146,7 +142,6 @@ class App extends Component {
     }
 
     render() {
-
         const { activeTab, loading, scanning } = this.state;
 
         var publicApp = this.checkPublic();
