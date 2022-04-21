@@ -145,7 +145,7 @@ class Home extends Component {
     }
 
     loadItemByKey = (itemKey) => {
-        console.log('loading compId' + this.state.compId)
+        console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
