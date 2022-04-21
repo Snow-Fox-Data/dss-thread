@@ -17,7 +17,6 @@ ReactDOM.render(
         <Route path="catalog" element={<Catalog />} />
       </Route>
     </Routes>
-    {/* <App /> */}
   </BrowserRouter>,
   // </React.StrictMode>,
   document.getElementById('root')

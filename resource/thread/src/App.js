@@ -6,8 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import eventBus from "./eventBus";
 import { Button, NavDropdown } from "react-bootstrap";
 
-import { FaRedo } from 'react-icons/fa';
-
 import {
     Container,
     Row,
@@ -24,22 +22,15 @@ import {
 
 import logo from "./assets/images/icon_thread.png";
 import loading_logo from "./assets/images/thread-spinner.gif";
-import Home from "./pages/home";
-import Catalog from "./pages/catalog";
 import Common from "./common/common";
 
 class App extends Component {
-    static CURRENT_URL = window.location.pathname;
     static BASE_PATH = Common.formatBasePath();
-
-    static HOME = "HOME";
-    static CATALOG = "CATALOG";
 
     constructor(props) {
         super(props)
 
         this.state = {
-            activeTab: 'HOME',
             dataiku: undefined,
             currentUser: '',
             loading: true,
@@ -47,25 +38,6 @@ class App extends Component {
             scanning: false,
             logo: logo
         }
-
-        console.log("window.location.href == " + window.location.href);
-        console.log("window.location == " + window.location);
-        console.log("window.location.pathname == " + window.location.pathname);
-
-        this.checkActiveTab();
-    }
-
-    checkActiveTab() {
-        // console.log('checkActiveTab() :: START :: App.CURRENT_URL.indexOf(App.CATALOG) === ' + App.CURRENT_URL.indexOf(App.CATALOG));
-        let activeTab = App.HOME;
-        if (App.CURRENT_URL.toUpperCase().indexOf(App.CATALOG) > -1) {
-            activeTab = App.CATALOG;
-        }
-
-        // console.log('checkActiveTab() :: END :: activeTab == ' + activeTab);
-        this.setState({
-            activeTab: activeTab
-        });
     }
 
     componentDidMount() {
@@ -162,26 +134,12 @@ class App extends Component {
                             </button>
                             <div class="collapse navbar-collapse" id="navbarContent">
                                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                    {/* <li class="nav-item">
-                                        <Link className={activeTab == App.HOME ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.HOME })} 
-                                            to={App.CURRENT_URL}>Home</Link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <Link className={activeTab == App.CATALOG ?  'active' : ''} 
-                                            onClick={() => this.setState({ activeTab: App.CATALOG })} 
-                                            to={App.CURRENT_URL + "/catalog"}>Catalog</Link>
-                                    </li> */}
-
-                                    {/* STANDARD ROUTES */}
                                     <li class="nav-item">
                                         <NavLink activeClassName='active'
-                                            onClick={() => this.setState({ activeTab: App.HOME })}
                                             to="/">Home</NavLink>
                                     </li>
                                     <li class="nav-item">
                                         <NavLink activeClassName='active'
-                                            onClick={() => this.setState({ activeTab: App.CATALOG })}
                                             to="/catalog">Catalog</NavLink>
                                     </li>
                                 </ul>
