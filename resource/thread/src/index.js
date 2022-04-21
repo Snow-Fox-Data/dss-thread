@@ -5,16 +5,21 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Common from './common/common';
+import Home from "./pages/home";
+import Catalog from "./pages/catalog";
 
 ReactDOM.render(
-  <React.StrictMode>
-    {/* <BrowserRouter>
-      <App />
-    </BrowserRouter> */}
+  // <React.StrictMode>
     <BrowserRouter basename={App.CURRENT_URL}>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+      <Routes>
+      <Route path="/" element={<App />}>
+        <Route path="home" element={<Home />} />
+        <Route path="catalog" element={<Catalog />} />
+      </Route>
+    </Routes>
+      {/* <App /> */}
+    </BrowserRouter>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
