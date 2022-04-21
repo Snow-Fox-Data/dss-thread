@@ -9,16 +9,16 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 ReactDOM.render(
-  // <React.StrictMode>
-    <BrowserRouter basename={App.CURRENT_URL}>
-      <Routes>
+  // <React.StrictMode>basename={App.CURRENT_URL}
+  <BrowserRouter>
+    <Routes>
       <Route path="/" element={<App />}>
-        <Route path="home" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="catalog" element={<Catalog />} />
       </Route>
     </Routes>
-      {/* <App /> */}
-    </BrowserRouter>,
+    {/* <App /> */}
+  </BrowserRouter>,
   // </React.StrictMode>,
   document.getElementById('root')
 );

@@ -200,7 +200,6 @@ class App extends Component {
                     <Row>
                         <Outlet />
                     </Row>
-                    
                 </div >
             </Container >
         );
