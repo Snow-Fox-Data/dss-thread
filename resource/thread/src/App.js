@@ -57,7 +57,7 @@ class App extends Component {
     checkActiveTab() {
         // console.log('checkActiveTab() :: START :: App.CURRENT_URL.indexOf(App.CATALOG) === ' + App.CURRENT_URL.indexOf(App.CATALOG));
         let activeTab = App.HOME;
-        if (App.CURRENT_URL.toUpperCase().indexOf(App.CATALOG) == -1) {
+        if (App.CURRENT_URL.toUpperCase().indexOf(App.CATALOG) > -1) {
             activeTab = App.CATALOG;
         }
 
