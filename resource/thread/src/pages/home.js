@@ -41,13 +41,13 @@ class Home extends Component {
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
 
-        eventBus.remove('datasetSelected');
-        eventBus.remove('definitionSelected');
-        eventBus.remove('projectSelected');
-        eventBus.remove('columnSelected');
-        eventBus.remove('reloadItem');
-        eventBus.remove('loading');
-        eventBus.remove('loggedIn');
+        eventBus.off('datasetSelected');
+        eventBus.off('definitionSelected');
+        eventBus.off('projectSelected');
+        eventBus.off('columnSelected');
+        eventBus.off('reloadItem');
+        eventBus.off('loading');
+        eventBus.off('loggedIn');
     }
 
     componentDidMount() {
