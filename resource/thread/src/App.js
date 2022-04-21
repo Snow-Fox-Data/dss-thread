@@ -55,17 +55,17 @@ class App extends Component {
     }
 
     checkActiveTab() {
-        console.log('checkActiveTab() :: START :: App.CURRENT_URL.indexOf(App.CATALOG) === ' + App.CURRENT_URL.indexOf(App.CATALOG));
+        // console.log('checkActiveTab() :: START :: App.CURRENT_URL.indexOf(App.CATALOG) === ' + App.CURRENT_URL.indexOf(App.CATALOG));
         let activeTab = App.HOME;
-        if (App.CURRENT_URL.indexOf(App.CATALOG) !== -1) {
-            console.log('CHANGE TO CATALOG :: ');
+        if (App.CURRENT_URL.toUpperCase().indexOf(App.CATALOG) !== -1) {
+            // console.log('CHANGE TO CATALOG :: ');
             activeTab = App.CATALOG;
         } else {
-            console.log('CHANGE TO HOME :: ');
+            // console.log('CHANGE TO HOME :: ');
             activeTab = App.HOME;
         }
 
-        console.log('checkActiveTab() :: END :: activeTab == ' + activeTab);
+        // console.log('checkActiveTab() :: END :: activeTab == ' + activeTab);
         // this.setState({
         //     activeTab: activeTab
         // });
