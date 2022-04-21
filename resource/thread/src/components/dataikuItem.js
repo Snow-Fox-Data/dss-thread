@@ -219,14 +219,6 @@ class DataikuItem extends Component {
         eventBus.remove("datasetSelected", this);
         eventBus.remove("definitionSelected", this);
         eventBus.remove("projectSelected", this);
-
-        // eventBus.off('datasetSelected');
-        // eventBus.off('definitionSelected');
-        // eventBus.off('projectSelected');
-        // eventBus.off('columnSelected');
-        // eventBus.off('reloadItem');
-        // eventBus.off('loading');
-        // eventBus.off('loggedIn');
     }
 
     componentDidMount() {
