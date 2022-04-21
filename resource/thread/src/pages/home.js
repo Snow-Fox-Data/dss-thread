@@ -41,43 +41,6 @@ class Home extends Component {
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
 
-        eventBus.off("datasetSelected", (ds) => {
-            this.navToObject(ds)
-        });
-
-        eventBus.off("definitionSelected", (ds) => {
-            this.navToObject(ds)
-        });
-
-        eventBus.off("projectSelected", (proj) => {
-            this.navToObject(proj)
-        }
-        );
-
-        eventBus.off("columnSelected", (col) => {
-            this.navToObject(col)
-        }
-        );
-
-        eventBus.off("reloadItem", (item) => {
-            this.loadItemByKey(item)
-        }
-        );
-
-        eventBus.off("loading", (isLoading) =>
-            this.setState({ "loading": isLoading })
-        );
-
-        // this gets fired by app.js
-        eventBus.off('loggedIn', (response) => {
-            this.setState({
-                dataiku: window.dataiku,
-                currentUser: response['you_are'],
-                loading: false,
-                loggedIn: true
-            });
-        });
-
         // eventBus.off('datasetSelected');
         // eventBus.off('definitionSelected');
         // eventBus.off('projectSelected');
