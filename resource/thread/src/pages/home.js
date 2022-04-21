@@ -38,6 +38,18 @@ class Home extends Component {
         window.addEventListener("hashchange", () => this.navDeepLink());
     }
 
+    componentWillUnmount() {
+        console.log('componentWillUnmount() :: ');
+
+        // eventBus.off('datasetSelected');
+        // eventBus.off('definitionSelected');
+        // eventBus.off('projectSelected');
+        // eventBus.off('columnSelected');
+        // eventBus.off('reloadItem');
+        // eventBus.off('loading');
+        // eventBus.off('loggedIn');
+    }
+
     componentDidMount() {
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
