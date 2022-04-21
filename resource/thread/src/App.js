@@ -201,7 +201,7 @@ class App extends Component {
                             <Routes>
                                 {/* STANDARD ROUTES */}
                                     <Route path="/" caseSensitive={false}  element={<Home />} />
-                                    <Route path="/catalog" caseSensitive={false} element={<Catalog />} />
+                                    <Route path="catalog" caseSensitive={false} element={<Catalog />} />
                                 {/* <Route exact path={App.CURRENT_URL} element={<Home />} />
                                 <Route exact path={App.CURRENT_URL + "/catalog"} element={<Catalog />} /> */}
                             </Routes>
