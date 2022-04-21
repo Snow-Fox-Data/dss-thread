@@ -26,8 +26,10 @@ class Catalog extends Component {
     }
 
     componentDidMount() {
-        this.fetchDefinitions();
-        this.fetchTags();
+        window.$(document).ready(() => {
+            this.fetchDefinitions();
+            this.fetchTags();
+        });
     }
 
     displayTableHeaderCarets(columnHeader) {
