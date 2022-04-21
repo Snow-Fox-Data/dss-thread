@@ -146,7 +146,7 @@ class Catalog extends Component {
         // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8/#o=83529576
         console.log("openDefinition(defKey) :: defKey == " + defKey);
         console.log("App.CURRENT_URL == " + App.CURRENT_URL);
-        let url = App.CURRENT_URL + "#o=" + defKey;
+        let url = App.BASE_PATH + "#o=" + defKey;
         window.location = url;
 
         // THIS CODE SHOULD NAVIGATE TO LINK

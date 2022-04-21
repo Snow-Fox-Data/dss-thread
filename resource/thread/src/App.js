@@ -26,7 +26,7 @@ import Common from "./common/common";
 
 class App extends Component {
     static BASE_PATH = Common.formatBasePath();
-
+    
     constructor(props) {
         super(props)
 
