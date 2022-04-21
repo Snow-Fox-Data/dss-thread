@@ -10,7 +10,7 @@ import Catalog from "./pages/catalog";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <BrowserRouter basename={App.CURRENT_URL}>
+  <BrowserRouter basename={App.BASE_PATH}>
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
