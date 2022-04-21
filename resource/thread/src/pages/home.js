@@ -41,21 +41,13 @@ class Home extends Component {
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
 
-        window.removeEventListener('datasetSelected');
-        window.removeEventListener('definitionSelected');
-        window.removeEventListener('projectSelected');
-        window.removeEventListener('columnSelected');
-        window.removeEventListener('reloadItem');
-        window.removeEventListener('loading');
-        window.removeEventListener('loggedIn');
-
-        // eventBus.remove('datasetSelected', this);
-        // eventBus.remove('definitionSelected', this);
-        // eventBus.remove('projectSelected', this);
-        // eventBus.remove('columnSelected', this);
-        // eventBus.remove('reloadItem', this);
-        // eventBus.remove('loading', this);
-        // eventBus.remove('loggedIn', this);
+        eventBus.remove('datasetSelected', this);
+        eventBus.remove('definitionSelected', this);
+        eventBus.remove('projectSelected', this);
+        eventBus.remove('columnSelected', this);
+        eventBus.remove('reloadItem', this);
+        eventBus.remove('loading', this);
+        eventBus.remove('loggedIn', this);
     }
 
     componentDidMount() {
