@@ -9,8 +9,8 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 ReactDOM.render(
-  // <React.StrictMode>basename={App.CURRENT_URL}
-  <BrowserRouter>
+  // <React.StrictMode>
+  <BrowserRouter basename={App.CURRENT_URL}>
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
