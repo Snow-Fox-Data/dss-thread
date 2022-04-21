@@ -38,6 +38,10 @@ class Home extends Component {
         window.addEventListener("hashchange", () => this.navDeepLink());
     }
 
+    componentWillUnmount() {
+        console.log('componentWillUnmount() :: ');
+    }
+
     componentDidMount() {
 
         eventBus.on("datasetSelected", (ds) => {
