@@ -215,10 +215,10 @@ class DataikuItem extends Component {
 
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
-        // eventBus.remove("columnSelected");
-        // eventBus.remove("datasetSelected");
-        // eventBus.remove("definitionSelected");
-        // eventBus.remove("projectSelected");
+        eventBus.remove("columnSelected", this);
+        eventBus.remove("datasetSelected", this);
+        eventBus.remove("definitionSelected", this);
+        eventBus.remove("projectSelected", this);
 
         // eventBus.off('datasetSelected');
         // eventBus.off('definitionSelected');
