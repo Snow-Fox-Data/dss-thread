@@ -241,7 +241,8 @@ class Home extends Component {
         let bp = Common.formatBasePath();
         // window.top.location.href = bp + "/dss/" + encodeURIComponent(obj);
 
-        this.props.navigate( "/dss/" + encodeURIComponent(obj))
+        this.props.navigate( "/dss/" + encodeURIComponent(obj));
+        this.loadItemByKey(obj);
         // let base_url = window.top.location.href.split('#')[0]
         // window.top.location.href = base_url + "/dss/" + encodeURIComponent(obj);
     }
