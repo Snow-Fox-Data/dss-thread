@@ -407,8 +407,8 @@ class Home extends Component {
     }
 
     render() {
-        if (this.props.id != null)
-            this.loadItemByKey(this.props.id)
+        if (this.props.params.id != null)
+            this.loadItemByKey(this.props.params.id)
 
         this.searchRef = React.createRef();
 
