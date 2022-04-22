@@ -5,7 +5,7 @@ import { FaFilter } from 'react-icons/fa';
 import Common from '../common/common';
 import DataikuItem from '../components/dataikuItem';
 import eventBus from '../eventBus';
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 class Home extends Component {
 
@@ -41,8 +41,6 @@ class Home extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("hashchange", this.navDeepLink)
-
         console.log('componentWillUnmount() :: ');
 
         eventBus.remove('datasetSelected', this);
@@ -55,11 +53,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-
-        let id = '';
-        if (this.props != null && this.props.match != null && this.props.match.params.id != null)
-            id = this.props.match.params.id;
-
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
@@ -414,6 +407,9 @@ class Home extends Component {
     }
 
     render() {
+        if (this.props.id != null)
+            this.loadItemByKey(this.props.id)
+
         this.searchRef = React.createRef();
 
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
