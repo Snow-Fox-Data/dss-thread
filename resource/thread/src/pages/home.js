@@ -63,10 +63,11 @@ class Home extends Component {
         eventBus.on('loggedIn', (response) => {
             this.setState({
                 currentUser: response['you_are'],
-                loading: false,
+                loading: true,
                 loggedIn: true
             });
             
+            // load the page after the user logs in
             if (this.props.params.id != null)
                 this.loadItemByKey(this.props.params.id)
             else
