@@ -11,8 +11,6 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        this.props.unmounted = false;
-
         this.state = {
             dataiku: undefined,
             dataikuItem: null,
@@ -38,11 +36,12 @@ class Home extends Component {
     }
 
     addHashListener() {
-        window.addEventListener("hashchange", () => this.navDeepLink());
+        window.addEventListener("hashchange", this.navDeepLink);
     }
 
     componentWillUnmount() {
-        this.props.unmounted = true;
+        window.removeEventListener("hashchange", this.navDeepLink)
+
         console.log('componentWillUnmount() :: ');
 
         eventBus.remove('datasetSelected', this);
@@ -161,9 +160,6 @@ class Home extends Component {
     }
 
     loadItemByKey = (itemKey) => {
-        if (this.props.unmounted)
-            return;
-
         console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
             method: 'GET',
@@ -213,9 +209,6 @@ class Home extends Component {
     }
 
     navDeepLink() {
-        if (!this.state.active)
-            return;
-
         let parts = window.top.location.href.split('#o=')
 
         if (parts.length > 1) {
