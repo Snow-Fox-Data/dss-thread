@@ -5,6 +5,7 @@ import { FaFilter } from 'react-icons/fa';
 import Common from '../common/common';
 import DataikuItem from '../components/dataikuItem';
 import eventBus from '../eventBus';
+import {useParams} from "react-router-dom"
 
 class Home extends Component {
 
@@ -505,4 +506,9 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default (props) => (
+    <Home
+        {...props}
+        params={useParams()}
+    />
+);
