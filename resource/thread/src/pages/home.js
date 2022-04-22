@@ -55,8 +55,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        let { id } = useParams();
-
+       
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
@@ -95,13 +94,13 @@ class Home extends Component {
             });
         });
 
-        window.$(document).ready(() => {
-            // if (!this.navDeepLink())
-                // this.reloadDssStats();
+        // window.$(document).ready(() => {
+        //     // if (!this.navDeepLink())
+        //         // this.reloadDssStats();
 
-            // this.addHashListener();
-            this.loadItemByKey(id);
-        });
+        //     // this.addHashListener();
+        //     this.loadItemByKey(id);
+        // });
     }
 
     reloadDssStats = (callback = null) => {
@@ -412,6 +411,8 @@ class Home extends Component {
 
     render() {
         this.searchRef = React.createRef();
+        let { id } = useParams();
+
 
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
         const filterBy = () => true;
