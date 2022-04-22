@@ -42,23 +42,19 @@ class Home extends Component {
         });
     }
 
-    componentWillUnmount() {
-        console.log('componentWillUnmount() :: ');
-
-        eventBus.remove('datasetSelected', this);
-        // eventBus.remove('definitionSelected', this);
-        // eventBus.remove('projectSelected', this);
-        // eventBus.remove('columnSelected', this);
-        eventBus.remove('reloadItem', this);
-        eventBus.remove('loading', this);
-        eventBus.remove('loggedIn', this);
-    }
+    // componentWillUnmount() {
+    //     console.log('componentWillUnmount() :: ');
+    // }
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
         eventBus.on("navToObject", (obj) => {
-            if (obj.id == this.state.compId)
-                this.navToObject(obj.obj)
+            if (obj == null)
+                this.reloadDssStats();
+            else {
+                if (obj.id == this.state.compId)
+                    this.navToObject(obj.obj)
+            }
         });
 
         eventBus.on("loading", (isLoading) =>

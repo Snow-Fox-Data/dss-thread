@@ -114,6 +114,10 @@ class App extends Component {
         return '';
     }
 
+    homeClick() {
+        eventBus.dispatch('navToObject', null)
+    }
+
     render() {
         const { activeTab, loading, scanning } = this.state;
 
@@ -136,6 +140,7 @@ class App extends Component {
                                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
                                         <NavLink activeClassName='active'
+                                        onClick={this.homeClick}
                                             to="/">Home</NavLink>
                                     </li>
                                     <li class="nav-item">
