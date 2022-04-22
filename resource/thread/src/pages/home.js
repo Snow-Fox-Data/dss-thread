@@ -157,14 +157,16 @@ class Home extends Component {
     }
 
     loadItem = (item) => {
-        this.setState({ loading: true });
-        if (item.length > 0) {
-            this.loadItemByKey(item[0].key)
-            this.navToObject(item[0].key)
-        }
+        this.navToObject(item[0].key);
+        // this.setState({ loading: true });
+        // if (item.length > 0) {
+        //     this.loadItemByKey(item[0].key)
+        //     this.navToObject(item[0].key)
+        // }
     }
 
     loadItemByKey = (itemKey) => {
+        this.props.navigate("/dss/" + encodeURIComponent(itemKey));
 
         console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
@@ -237,11 +239,10 @@ class Home extends Component {
     }
 
     navToObject(obj) {
-        eventBus.dispatch("loading", true);
-        let bp = Common.formatBasePath();
+        this.setState({ loading: true });
+        // let bp = Common.formatBasePath();
         // window.top.location.href = bp + "/dss/" + encodeURIComponent(obj);
 
-        this.props.navigate( "/dss/" + encodeURIComponent(obj));
         this.loadItemByKey(obj);
         // let base_url = window.top.location.href.split('#')[0]
         // window.top.location.href = base_url + "/dss/" + encodeURIComponent(obj);
