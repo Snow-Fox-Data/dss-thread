@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Col, Row, Spinner, Card, Button, Table } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaFilter } from 'react-icons/fa';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import Common from '../common/common';
 import DataikuItem from '../components/dataikuItem';
 import eventBus from '../eventBus';
@@ -55,7 +55,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-       
+        let { id } = useParams();
+
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
@@ -411,7 +412,6 @@ class Home extends Component {
 
     render() {
         this.searchRef = React.createRef();
-        // let { id } = useParams();
 
 
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
