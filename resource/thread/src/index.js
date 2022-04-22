@@ -9,17 +9,17 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <BrowserRouter basename={App.BASE_PATH}>
-    <Routes>
-      <Route path="/" element={<App />}>
-        {/* <Route index element={<Home />} /> */}
-        <Route path="home/:id" children={<Home />} />
-        <Route path="catalog" element={<Catalog />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <BrowserRouter basename={App.BASE_PATH}>
+      <Routes>
+        <Route path="/" element={<App />}>
+          {/* <Route index element={<Home />} /> */}
+          <Route path="home/:id" children={<Home />} />
+          <Route path="catalog" element={<Catalog />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
