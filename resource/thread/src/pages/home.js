@@ -411,7 +411,7 @@ class Home extends Component {
 
     render() {
         this.searchRef = React.createRef();
-        let { id } = useParams();
+        // let { id } = useParams();
 
 
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
