@@ -39,14 +39,11 @@ export default memo(({ data, isConnectable }) => {
 
   function openItem(e) {
     e.preventDefault();
+
     eventBus.dispatch("navToObject", {
       obj: data.project,
       id: this.props.parentid
     })
-    if (dataset != '')
-      eventBus.dispatch("datasetSelected", data.project);
-    else
-      eventBus.dispatch("project", data.project);
   }
 
   formatData(data);
