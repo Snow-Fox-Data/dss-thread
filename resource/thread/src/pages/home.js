@@ -33,9 +33,7 @@ class Home extends Component {
             compId: Math.random()
         }
 
-        // window.$(document).ready(() => {
-
-        // });
+        this.loadTheItem();
     }
 
     // componentWillUnmount() {
@@ -66,13 +64,17 @@ class Home extends Component {
                 loading: true,
                 loggedIn: true
             });
-            
-            // load the page after the user logs in
-            if (this.props.params.id != null)
-                this.loadItemByKey(this.props.params.id)
-            else
-                this.reloadDssStats();
+
+            this.loadTheItem();
         });
+    }
+
+    loadTheItem() {
+        // load the page after the user logs in
+        if (this.props.params.id != null)
+            this.loadItemByKey(this.props.params.id)
+        else
+            this.reloadDssStats();
     }
 
     reloadDssStats = (callback = null) => {
