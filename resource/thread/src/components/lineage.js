@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactFlow, { Controls, ReactFlowProvider, useZoomPanHelper } from 'react-flow-renderer';
-import dssFlowNode from './customFlowNode.js';
+import customFlowNode from './customFlowNode.js';
 import { createGraphLayout } from '../common/layout.js';
 import Common from '../common/common.js';
 
@@ -24,7 +24,7 @@ class Lineage extends Component {
         };
 
         this.nodeTypes = {
-            dssFlowNode: dssFlowNode,
+            customFlowNode: customFlowNode,
         };
     }
 
@@ -56,7 +56,7 @@ class Lineage extends Component {
         var baseNode = {
             id: baseElementId,
             className: 'thread-node-base',
-            type: 'dssFlowNode',
+            type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], parentid: this.props.parentid },
             position: { x: basePositionX, y: basePositionY },
             style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },

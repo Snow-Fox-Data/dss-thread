@@ -1,4 +1,4 @@
-import React, { dssFlowNode } from 'react';
+import React, { memo } from 'react';
 import eventBus from "../eventBus";
 
 import { Handle } from 'react-flow-renderer';
@@ -6,7 +6,7 @@ import Common from '../common/common';
 import { ArrowUpRightSquare, ThermometerSnow, ArrowRightSquare } from 'react-bootstrap-icons'
 import { FaColumns, FaDatabase, FaList, FaProjectDiagram, } from "react-icons/fa";
 
-export default dssFlowNode(({ data, isConnectable }) => {
+export default memo(({ data, isConnectable }) => {
   var project = "";
   var dataset = "";
   var column = "";
