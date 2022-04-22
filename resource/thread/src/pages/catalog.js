@@ -132,7 +132,7 @@ class Catalog extends Component {
 
     openDefinition(defKey) {
         // eventBus.dispatch('navToObject', { obj: defKey })
-        this.props.navigate('dss/' + defKey, { replace: true });
+        this.props.navigate('/dss/' + defKey, { replace: true });
     }
 
     sortDefinitions(sortBy) {
