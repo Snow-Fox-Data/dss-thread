@@ -40,7 +40,7 @@ class Home extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         // definition linked from catalog
-        if (prevProps != this.props)
+        if (prevProps.params.id != this.props.params.id)
             this.loadTheItem();
     }
 
