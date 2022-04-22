@@ -49,7 +49,7 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.key.split('.');
 
-        let basePositionX = 0;
+        let basePositionX = 0; 
         let basePositionY = 0;
 
         var baseElementId = 'base';
@@ -105,7 +105,7 @@ class Lineage extends Component {
                 id: elementId,
                 className: 'thread-node',
                 type: 'customFlowNode',
-                data: { project: project, dataset: dataset, column: col },
+                data: { project: project, dataset: dataset, column: col, parentid: this.props.parentid },
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
@@ -147,7 +147,7 @@ class Lineage extends Component {
                 id: elementId,
                 className: 'thread-node',
                 type: 'customFlowNode',
-                data: { project: project, dataset: dataset, column: col },
+                data: { project: project, dataset: dataset, column: col, parentid: this.props.parentid },
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
