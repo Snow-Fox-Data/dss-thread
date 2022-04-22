@@ -14,7 +14,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
-        <Route exact path="dss/:id" render={(props) => (
+        <Route path="dss/:id" render={(props) => (
           <Home id={props.match.params.id} />
         )} />
         <Route path="catalog" element={<Catalog />} />
