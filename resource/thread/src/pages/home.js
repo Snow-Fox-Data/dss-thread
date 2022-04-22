@@ -50,6 +50,10 @@ class Home extends Component {
     //     eventBus.remove('loggedIn');
     // }
 
+    componentWillUnmount() {
+        console.log('unmounting ' + this.state.compId)
+    }
+
     componentDidMount() {
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
