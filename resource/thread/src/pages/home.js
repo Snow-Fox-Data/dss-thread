@@ -41,9 +41,9 @@ class Home extends Component {
         });
     }
 
-    addHashListener() {
-        window.addEventListener("hashchange", () => { this.navDeepLink() });
-    }
+    // addHashListener() {
+    //     window.addEventListener("hashchange", () => { this.navDeepLink() });
+    // }
 
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
@@ -59,7 +59,7 @@ class Home extends Component {
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
-        eventBus.on("navToObject", this.navToObject);
+        eventBus.on("navToObject", this.navToObject.bind(this))
 
         // eventBus.on("definitionSelected", (ds) => {
         //     this.navToObject(ds)
