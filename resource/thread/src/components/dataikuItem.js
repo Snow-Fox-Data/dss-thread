@@ -412,10 +412,13 @@ class DataikuItem extends Component {
     }
 
     onDefTagAddition = (tag) => {
+        console.log('dataiku :: onDefTagAddition() :: tag' + tag);
         if (!this.state.columnTags.some(e => e.name === tag.name)) {
             const _columnTags = [].concat(this.state.columnTags, tag)
             this.setState({ columnTags: _columnTags })
         }
+        console.log('State == ');
+        console.log(this.state);
     }
 
     scanProject = () => {
