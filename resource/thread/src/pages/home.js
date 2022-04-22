@@ -157,7 +157,9 @@ class Home extends Component {
     }
 
     loadItem = (item) => {
-        this.navToObject(item[0].key);
+        if (item.length > 0) {
+            this.navToObject(item[0].key);
+        }
         // this.setState({ loading: true });
         // if (item.length > 0) {
         //     this.loadItemByKey(item[0].key)
