@@ -12,6 +12,7 @@ import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags, FaThumbsDown, FaThumbsUp, FaRedo } from "react-icons/fa";
 import Tag from "./tag"
+import { useParams, useNavigate } from "react-router-dom"
 
 const ReactTags = require('react-tag-autocomplete')
 
@@ -1024,4 +1025,9 @@ class DataikuItem extends Component {
     }
 }
 
-export default DataikuItem;
+export default (props) => (
+    <DataikuItem
+        {...props}
+        navigate={useNavigate()}
+    />
+);
