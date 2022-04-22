@@ -12,7 +12,7 @@ ReactDOM.render(
   // <React.StrictMode>
   <BrowserRouter basename={App.BASE_PATH}>
     <Routes>
-      <Route path="/" element={<App />}>
+      <Route path="/:id" element={<App />}>
         <Route index element={<Home />} />
         <Route path="catalog" element={<Catalog />} />
       </Route>

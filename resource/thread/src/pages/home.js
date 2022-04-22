@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Col, Row, Spinner, Card, Button, Table } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaFilter } from 'react-icons/fa';
+import { useParams } from 'react-router';
 import Common from '../common/common';
 import DataikuItem from '../components/dataikuItem';
 import eventBus from '../eventBus';
@@ -36,7 +37,7 @@ class Home extends Component {
     }
 
     addHashListener() {
-        window.addEventListener("hashchange", this.navDeepLink);
+        window.addEventListener("hashchange", () => { this.navDeepLink() });
     }
 
     componentWillUnmount() {
@@ -54,6 +55,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        let { id } = useParams();
+
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
@@ -93,10 +96,11 @@ class Home extends Component {
         });
 
         window.$(document).ready(() => {
-            if (!this.navDeepLink())
-                this.reloadDssStats();
+            // if (!this.navDeepLink())
+                // this.reloadDssStats();
 
-            this.addHashListener();
+            // this.addHashListener();
+            this.loadItemByKey(id);
         });
     }
 
@@ -160,6 +164,7 @@ class Home extends Component {
     }
 
     loadItemByKey = (itemKey) => {
+
         console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
             method: 'GET',
