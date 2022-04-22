@@ -13,9 +13,7 @@ ReactDOM.render(
   <BrowserRouter basename={App.BASE_PATH}>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="dss" index element={<Home />} >
-          <Route path=":id" element={<Home />} />
-        </Route>
+        <Route index element={<Home />} />
         <Route path="catalog" element={<Catalog />} />
       </Route>
     </Routes>
