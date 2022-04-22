@@ -182,7 +182,7 @@ class DataikuItem extends Component {
 
         arrayTags.forEach(element => {
             if (link) {
-                tags[tags.length] = <Button onClick={() => this.openDataset(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
+                tags[tags.length] = <Button onClick={() => this.openDssObject(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
                     {element}
                 </Button>
             }
@@ -277,22 +277,10 @@ class DataikuItem extends Component {
         })
     }
 
-    openColumn(col) {
-        eventBus.dispatch("columnSelected", col);
-    };
-
-    openDataset(ds) {
-        eventBus.dispatch("datasetSelected", ds);
-    }
-
-    openDefinition(definition) {
-        eventBus.dispatch("definitionSelected", definition);
-    }
-
-    openProject(proj) {
+    openDssObject(obj) {
         // eventBus.dispatch("projectSelected", proj);
         let bp = Common.formatBasePath();
-        window.top.location.href = bp + "/dss/" + encodeURIComponent(proj);
+        window.top.location.href = bp + "/dss/" + encodeURIComponent(obj);
     }
 
     defSearch = (term) => {
@@ -446,7 +434,8 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then((response) => {
                 eventBus.dispatch("scanning", false);
-                this.openProject(this.props.item.projectKey)
+                this.openDssObject(this.props.item.projectKey)
+                // this.openDssObject(this.props.item.projectKey)
             });
     }
 
@@ -675,9 +664,9 @@ class DataikuItem extends Component {
                 <div class="col" style={{ wordBreak: 'break-word' }}>
                     <h1>{this.props.item.name}</h1>
                     <p class="name">
-                        <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
+                        <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openDssObject(this.props.item.project)}>{this.props.item.project}</span>
                         <span style={{ padding: "0px 3px" }}>|</span>
-                        <span className='app-link' onClick={() => this.openDataset(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
+                        <span className='app-link' onClick={() => this.openDssObject(this.props.item.project + '|' + this.props.item.dataset)}>{this.props.item.dataset}</span>
                     </p>
                 </div>
                 <Col sm={4}>
@@ -844,11 +833,11 @@ class DataikuItem extends Component {
         let lineage = this.buildLineage();
 
         var listItems = this.props.item.schema.map((col) =>
-            //onClick={() => this.openColumn(col.key)}
+            //onClick={() => this.openDssObject(col.key)}
             <tr>
                 <td>
                     {Common.getIconForDataikuItemType('column', "16px")}
-                    <span className='app-link' style={{ marginLeft: '10px' }} onClick={() => this.openColumn(col.key)}>{col.name}</span>
+                    <span className='app-link' style={{ marginLeft: '10px' }} onClick={() => this.openDssObject(col.key)}>{col.name}</span>
                 </td>
                 <td>{col.type}</td>
                 <td>
@@ -877,7 +866,7 @@ class DataikuItem extends Component {
                 <div class="col" style={{ wordBreak: 'break-word' }}>
                     <h1>{this.props.item.id}</h1>
 
-                    <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
+                    <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openDssObject(this.props.item.project)}>{this.props.item.project}</span></p>
                     <div class="tags">{tags}</div>
                 </div>
                 <Col sm={4}>
@@ -932,7 +921,7 @@ class DataikuItem extends Component {
         let dataSetRows = this.props.item.datasets.map((col) =>
             <tr>
                 <td>{Common.getIconForDataikuItemType('dataset', "16px")}
-                    <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDataset(col.key)}>{col.key.split('|')[1]}</span></td>
+                    <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDssObject(col.key)}>{col.key.split('|')[1]}</span></td>
                 <td>
                     {col.documented_columns} / {col.total_columns}
                     {(col.total_columns > 0) &&
