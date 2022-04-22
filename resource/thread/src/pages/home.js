@@ -54,7 +54,11 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        
+
+        let id = '';
+        if (this.props != null && this.props.match != null && this.props.match.params.id != null)
+            id = this.props.match.params.id;
+
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
@@ -410,8 +414,6 @@ class Home extends Component {
 
     render() {
         this.searchRef = React.createRef();
-        
-        let id = this.props.match.params.id;
 
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
         const filterBy = () => true;
