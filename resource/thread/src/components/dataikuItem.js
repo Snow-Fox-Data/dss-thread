@@ -50,6 +50,8 @@ class DataikuItem extends Component {
     }
 
     saveCol() {
+        console.log('saveCol() :: ');
+
         let applyTo = this.state.applyToDataSets; // eval(this.state.tempSelDef.applied_to);
         applyTo.push(this.props.item.key);
 
@@ -71,6 +73,9 @@ class DataikuItem extends Component {
         for (var x = 0; x < this.state.columnTags.length; x++) {
             tagList.push(this.state.columnTags[x].name);
         }
+
+        console.log('tagList == ');
+        console.log(tagList);
 
         const requestOptions = {
             method: 'POST',
