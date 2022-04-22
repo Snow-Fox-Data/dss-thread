@@ -38,6 +38,12 @@ class Home extends Component {
     //     console.log('componentWillUnmount() :: ');
     // }
 
+    componentDidUpdate(prevProps, prevState) {
+        // definition linked from catalog
+        if (prevProps != this.props)
+            this.loadTheItem();
+    }
+
     componentDidMount() {
         console.log('componentDidMount() :: ');
         eventBus.on("navToObject", (obj) => {
