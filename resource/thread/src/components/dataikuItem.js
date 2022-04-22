@@ -142,7 +142,7 @@ class DataikuItem extends Component {
         }
 
         console.log('tagList == ');
-        console.log(tagList);        
+        console.log(tagList);
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -290,7 +290,9 @@ class DataikuItem extends Component {
     }
 
     openProject(proj) {
-        eventBus.dispatch("projectSelected", proj);
+        // eventBus.dispatch("projectSelected", proj);
+        let bp = Common.formatBasePath();
+        window.top.location.href = bp + "/dss/" + encodeURIComponent(proj);
     }
 
     defSearch = (term) => {
@@ -670,7 +672,7 @@ class DataikuItem extends Component {
                     </div>
 
                 </Col>
-                <div class="col" style={{wordBreak:'break-word'}}>
+                <div class="col" style={{ wordBreak: 'break-word' }}>
                     <h1>{this.props.item.name}</h1>
                     <p class="name">
                         <b>{this.props.item.type}</b> column in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span>
@@ -872,7 +874,7 @@ class DataikuItem extends Component {
                     </div>
 
                 </Col>
-                <div class="col" style={{wordBreak:'break-word'}}>
+                <div class="col" style={{ wordBreak: 'break-word' }}>
                     <h1>{this.props.item.id}</h1>
 
                     <p><span style={{ fontWeight: 'bold' }}>{this.props.item.ds_type}</span> Dataset in <span className='app-link' onClick={() => this.openProject(this.props.item.project)}>{this.props.item.project}</span></p>
