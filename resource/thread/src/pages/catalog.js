@@ -57,12 +57,6 @@ class Catalog extends Component {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        console.log('window == ');
-        console.log(window);
-
-        // console.log("window.dataiku.getWebAppBackendUrl('def-search') == ");
-        // console.log(window.dataiku.getWebAppBackendUrl('def-search'));
-
         let url = window.getWebAppBackendUrl('def-search') + '?term=' + term;
         fetch(url, requestOptions)
             .then(res => res.json())
@@ -137,7 +131,8 @@ class Catalog extends Component {
     }
 
     openDefinition(defKey) {
-        eventBus.dispatch('navToObject', { obj: defKey })
+        // eventBus.dispatch('navToObject', { obj: defKey })
+        this.props.navigate(defKey);
     }
 
     sortDefinitions(sortBy) {
@@ -310,4 +305,12 @@ class Catalog extends Component {
     }
 }
 
-export default Catalog;
+// export default Catalog;
+
+export default (props) => (
+    <Catalog
+        {...props}
+        params={useParams()}
+        navigate={useNavigate()}
+    />
+);
