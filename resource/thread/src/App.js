@@ -67,7 +67,6 @@ class App extends Component {
                     });
 
                     eventBus.dispatch('loggedIn', response)
-
                 }
                 else
                     this.setState({

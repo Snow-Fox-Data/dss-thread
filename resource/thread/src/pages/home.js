@@ -13,7 +13,6 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            dataiku: undefined,
             dataikuItem: null,
             dataikuItems: [],
             filters: {
@@ -34,12 +33,9 @@ class Home extends Component {
             compId: Math.random()
         }
 
-        window.$(document).ready(() => {
-            if (this.props.params.id != null)
-                this.loadItemByKey(this.props.params.id)
-            else
-                this.reloadDssStats();
-        });
+        // window.$(document).ready(() => {
+
+        // });
     }
 
     // componentWillUnmount() {
@@ -66,11 +62,15 @@ class Home extends Component {
         // this gets fired by app.js
         eventBus.on('loggedIn', (response) => {
             this.setState({
-                dataiku: window.dataiku,
                 currentUser: response['you_are'],
                 loading: false,
                 loggedIn: true
             });
+            
+            if (this.props.params.id != null)
+                this.loadItemByKey(this.props.params.id)
+            else
+                this.reloadDssStats();
         });
     }
 
