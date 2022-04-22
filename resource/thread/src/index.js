@@ -15,7 +15,7 @@ ReactDOM.render(
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="dss" element={<Home />} >
-          <Route path=":id" element={<Home />}></Route>
+          <Route path=":id" element={<Home />} />
         </Route>
         <Route path="catalog" element={<Catalog />} />
       </Route>
