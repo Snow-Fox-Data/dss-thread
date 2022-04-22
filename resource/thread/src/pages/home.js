@@ -59,9 +59,9 @@ class Home extends Component {
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
-        eventBus.on("navToObject", (ds, id) => {
-            if (id == this.state.compId)
-                this.navToObject(ds)
+        eventBus.on("navToObject", (obj) => {
+            if (obj.id == this.state.compId)
+                this.navToObject(obj.obj)
         });
 
         // eventBus.on("definitionSelected", (ds) => {
