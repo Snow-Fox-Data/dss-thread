@@ -38,12 +38,13 @@ export default memo(({ data, isConnectable }) => {
   }
 
   function openItem(e) {
-    e.preventDefault();
 
     eventBus.dispatch("navToObject", {
       obj: data.project,
-      id: this.props.parentid
+      id: data.parentid
     })
+
+    e.preventDefault();
   }
 
   formatData(data);
