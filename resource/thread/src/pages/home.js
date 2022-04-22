@@ -59,7 +59,7 @@ class Home extends Component {
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
-        eventBus.on("objectSelected", (ds) => {
+        eventBus.on("navToObject", (ds) => {
             this.navToObject(ds)
         });
 
