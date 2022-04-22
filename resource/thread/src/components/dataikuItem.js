@@ -719,7 +719,7 @@ class DataikuItem extends Component {
                                 <div>
                                     <Button variant="primary"
                                         onClick={() => this.newDef()}
-                                    >{(this.props.item.comment != null && this.props.item.comment > 0) ?
+                                    >{(this.props.item.comment != null && this.props.item.comment.length > 0) ?
                                         <span>Create Definition from Column Description</span>
                                         :
                                         <span>
