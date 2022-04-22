@@ -171,7 +171,7 @@ class DataikuItem extends Component {
 
     buildLineage() {
         return <Row>
-            <Lineage deets={this.props.item} full_ds_name={this.props.item.key} type={this.props.object_type}></Lineage>
+            <Lineage deets={this.props.item} parentid={this.props.parentid} full_ds_name={this.props.item.key} type={this.props.object_type}></Lineage>
         </Row>
     }
 

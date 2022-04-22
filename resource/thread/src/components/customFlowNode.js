@@ -1,12 +1,12 @@
-import React, { memo } from 'react';
+import React, { dssFlowNode } from 'react';
 import eventBus from "../eventBus";
 
 import { Handle } from 'react-flow-renderer';
 import Common from '../common/common';
 import { ArrowUpRightSquare, ThermometerSnow, ArrowRightSquare } from 'react-bootstrap-icons'
-import { FaColumns, FaDatabase, FaList, FaProjectDiagram,  } from "react-icons/fa";
+import { FaColumns, FaDatabase, FaList, FaProjectDiagram, } from "react-icons/fa";
 
-export default memo(({ data, isConnectable }) => {
+export default dssFlowNode(({ data, isConnectable }) => {
   var project = "";
   var dataset = "";
   var column = "";
@@ -39,15 +39,14 @@ export default memo(({ data, isConnectable }) => {
 
   function openItem(e) {
     e.preventDefault();
+    eventBus.dispatch("navToObject", {
+      obj: data.project,
+      id: this.props.parentid
+    })
     if (dataset != '')
       eventBus.dispatch("datasetSelected", data.project);
     else
       eventBus.dispatch("project", data.project);
-  }
-
-  function selectDataset(e) {
-    e.preventDefault();
-    eventBus.dispatch("datasetSelected", project + '|' + dataset);
   }
 
   formatData(data);
