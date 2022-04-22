@@ -133,12 +133,16 @@ class DataikuItem extends Component {
     }
 
     saveDef() {
+        console.log('saveDef() :: ');
         let applyTo = eval(this.props.item.applied_to);
 
         var tagList = [];
         for (var x = 0; x < this.state.columnTags.length; x++) {
             tagList.push(this.state.columnTags[x].name);
         }
+
+        console.log('tagList == ');
+        console.log(tagList);        
         const requestOptions = {
             method: 'POST',
             headers: {
