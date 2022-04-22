@@ -5,6 +5,7 @@ import { FaCaretDown, FaCaretUp, FaFilter, FaSearch } from 'react-icons/fa';
 import App from '../App';
 import { useNavigate } from 'react-router-dom';
 import Tag from "../components/tag"
+import eventBus from '../eventBus';
 
 class Catalog extends Component {
     // These values NEED to match data KEYS for sorting to work
@@ -135,23 +136,8 @@ class Catalog extends Component {
         this.setState({ tag: _tag });
     }
 
-    // import {browserHistory} from "react-router";
-
-    // functionName() {
-    // browserHistory.push("/path-to-link");
-    // }
-
     openDefinition(defKey) {
-        // TODO update this to use the navigation 
-        // https://dataiku.excelion.io/public-webapps/THREADDEMO/ROvQ0Y8/#o=83529576
-        console.log("openDefinition(defKey) :: defKey == " + defKey);
-        console.log("App.CURRENT_URL == " + App.CURRENT_URL);
-        let url = App.BASE_PATH + "#o=" + defKey;
-        window.location = url;
-
-        // THIS CODE SHOULD NAVIGATE TO LINK
-        //   let navigate = useNavigate();
-        //   navigate(url);
+        eventBus.dispatch('navToObject', { obj: defKey })
     }
 
     sortDefinitions(sortBy) {

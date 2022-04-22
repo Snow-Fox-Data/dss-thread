@@ -52,7 +52,7 @@ class Home extends Component {
             if (obj == null)
                 this.reloadDssStats();
             else {
-                if (obj.id == this.state.compId)
+                if (obj.id == this.state.compId || obj.id == null)
                     this.navToObject(obj.obj)
             }
         });
