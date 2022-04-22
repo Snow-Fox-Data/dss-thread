@@ -41,14 +41,14 @@ class Home extends Component {
         });
     }
 
-    // addHashListener() {
-    //     window.addEventListener("hashchange", () => { this.navDeepLink() });
-    // }
+    addHashListener() {
+        window.addEventListener("hashchange", () => { this.navDeepLink() });
+    }
 
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
 
-        eventBus.remove('navToObject', this.navToObject);
+        eventBus.remove('datasetSelected', this);
         // eventBus.remove('definitionSelected', this);
         // eventBus.remove('projectSelected', this);
         // eventBus.remove('columnSelected', this);
@@ -59,7 +59,10 @@ class Home extends Component {
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
-        eventBus.on("navToObject", this.navToObject.bind(this))
+        eventBus.on("navToObject", (ds, id) => {
+            if (id == this.state.compId)
+                this.navToObject(ds)
+        });
 
         // eventBus.on("definitionSelected", (ds) => {
         //     this.navToObject(ds)
