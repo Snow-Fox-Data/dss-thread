@@ -279,7 +279,8 @@ class DataikuItem extends Component {
     }
 
     openDssObject(obj) {
-        eventBus.dispatch('navToObject', {obj:obj, id: this.props.parentid})
+        // eventBus.dispatch('navToObject', {obj:obj, id: this.props.parentid})
+        this.props.navigate('/dss/' + obj, { replace: true });
     }
 
     defSearch = (term) => {
