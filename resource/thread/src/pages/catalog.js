@@ -310,7 +310,6 @@ class Catalog extends Component {
 export default (props) => (
     <Catalog
         {...props}
-        params={useParams()}
         navigate={useNavigate()}
     />
 );
