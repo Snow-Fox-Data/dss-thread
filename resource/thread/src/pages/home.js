@@ -34,6 +34,11 @@ class Home extends Component {
             compId: Math.random(),
             active: true
         }
+
+        window.$(document).ready(() => {
+            if (this.props.params.id != null)
+                this.loadItemByKey(this.props.params.id)
+        });
     }
 
     addHashListener() {
@@ -407,8 +412,6 @@ class Home extends Component {
     }
 
     render() {
-        if (this.props.params.id != null)
-            this.loadItemByKey(this.props.params.id)
 
         this.searchRef = React.createRef();
 
