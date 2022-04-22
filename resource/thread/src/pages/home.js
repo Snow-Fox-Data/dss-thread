@@ -11,6 +11,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
+        this.props.unmounted = false;
+
         this.state = {
             dataiku: undefined,
             dataikuItem: null,
@@ -30,7 +32,8 @@ class Home extends Component {
             searchResults: [],
             loggedIn: false,
             collectionStats: {},
-            compId: Math.random()
+            compId: Math.random(),
+            active: true
         }
     }
 
@@ -39,6 +42,7 @@ class Home extends Component {
     }
 
     componentWillUnmount() {
+        this.props.unmounted = true;
         console.log('componentWillUnmount() :: ');
 
         eventBus.remove('datasetSelected', this);
@@ -48,10 +52,6 @@ class Home extends Component {
         eventBus.remove('reloadItem', this);
         eventBus.remove('loading', this);
         eventBus.remove('loggedIn', this);
-    }
-
-    componentWillUnmount() {
-        console.log('unmounting ' + this.state.compId)
     }
 
     componentDidMount() {
@@ -161,6 +161,9 @@ class Home extends Component {
     }
 
     loadItemByKey = (itemKey) => {
+        if (this.props.unmounted)
+            return;
+
         console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
             method: 'GET',
@@ -210,6 +213,9 @@ class Home extends Component {
     }
 
     navDeepLink() {
+        if (!this.state.active)
+            return;
+
         let parts = window.top.location.href.split('#o=')
 
         if (parts.length > 1) {
