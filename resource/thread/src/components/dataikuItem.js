@@ -213,6 +213,14 @@ class DataikuItem extends Component {
         return tags
     }
 
+    // componentWillUnmount() {
+    //     console.log('componentWillUnmount() :: ');
+    //     eventBus.remove("columnSelected", this);
+    //     eventBus.remove("datasetSelected", this);
+    //     eventBus.remove("definitionSelected", this);
+    //     eventBus.remove("projectSelected", this);
+    // }
+
     componentDidMount() {
         switch (this.props.object_type) {
             case 'column':
