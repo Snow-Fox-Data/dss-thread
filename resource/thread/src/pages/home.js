@@ -55,8 +55,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        let [params] = useSearchParams();
-
+        
         console.log('componentDidMount() :: ');
         eventBus.on("datasetSelected", (ds) => {
             this.navToObject(ds)
@@ -412,7 +411,7 @@ class Home extends Component {
 
     render() {
         this.searchRef = React.createRef();
-
+        let [params] = useSearchParams();
 
         const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
         const filterBy = () => true;
