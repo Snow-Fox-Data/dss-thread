@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "../../resource/thread/build/static/css/main.b0890950.chunk.css",
-    "main.js": "../../resource/thread/build/static/js/main.6766446a.chunk.js",
-    "main.js.map": "../../resource/thread/build/static/js/main.6766446a.chunk.js.map",
+    "main.js": "../../resource/thread/build/static/js/main.f775aa2d.chunk.js",
+    "main.js.map": "../../resource/thread/build/static/js/main.f775aa2d.chunk.js.map",
     "runtime-main.js": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js",
     "runtime-main.js.map": "../../resource/thread/build/static/js/runtime-main.8e4d5060.js.map",
     "static/css/2.68a81a89.chunk.css": "../../resource/thread/build/static/css/2.68a81a89.chunk.css",
-    "static/js/2.875a3364.chunk.js": "../../resource/thread/build/static/js/2.875a3364.chunk.js",
-    "static/js/2.875a3364.chunk.js.map": "../../resource/thread/build/static/js/2.875a3364.chunk.js.map",
+    "static/js/2.1e60e9e6.chunk.js": "../../resource/thread/build/static/js/2.1e60e9e6.chunk.js",
+    "static/js/2.1e60e9e6.chunk.js.map": "../../resource/thread/build/static/js/2.1e60e9e6.chunk.js.map",
     "index.html": "../../resource/thread/build/index.html",
-    "precache-manifest.7491533816876bea1db4907f10f6e41f.js": "../../resource/thread/build/precache-manifest.7491533816876bea1db4907f10f6e41f.js",
+    "precache-manifest.4c44c9cffa0a1889d90c85814a3a507b.js": "../../resource/thread/build/precache-manifest.4c44c9cffa0a1889d90c85814a3a507b.js",
     "service-worker.js": "../../resource/thread/build/service-worker.js",
     "static/css/2.68a81a89.chunk.css.map": "../../resource/thread/build/static/css/2.68a81a89.chunk.css.map",
     "static/css/main.b0890950.chunk.css.map": "../../resource/thread/build/static/css/main.b0890950.chunk.css.map",
-    "static/js/2.875a3364.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.875a3364.chunk.js.LICENSE.txt",
+    "static/js/2.1e60e9e6.chunk.js.LICENSE.txt": "../../resource/thread/build/static/js/2.1e60e9e6.chunk.js.LICENSE.txt",
     "static/media/thread-spinner.gif": "../../resource/thread/build/static/media/thread-spinner.9fac5d7c.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.8e4d5060.js",
     "static/css/2.68a81a89.chunk.css",
-    "static/js/2.875a3364.chunk.js",
+    "static/js/2.1e60e9e6.chunk.js",
     "static/css/main.b0890950.chunk.css",
-    "static/js/main.6766446a.chunk.js"
+    "static/js/main.f775aa2d.chunk.js"
   ]
 }

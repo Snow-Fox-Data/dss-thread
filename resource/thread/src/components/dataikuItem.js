@@ -406,15 +406,15 @@ class DataikuItem extends Component {
     }
 
     onDefTagDelete = (i) => {
-        const columnTags = this.state.columnTags.slice(0)
-        columnTags.splice(i, 1)
-        this.setState({ columnTags })
+        const _columnTags = this.state.columnTags.slice(0)
+        _columnTags.splice(i, 1)
+        this.setState({ columnTags: _columnTags })
     }
 
     onDefTagAddition = (tag) => {
         if (!this.state.columnTags.some(e => e.name === tag.name)) {
-            const columnTags = [].concat(this.state.columnTags, tag)
-            this.setState({ columnTags })
+            const _columnTags = [].concat(this.state.columnTags, tag)
+            this.setState({ columnTags: _columnTags })
         }
     }
 
