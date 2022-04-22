@@ -32,8 +32,6 @@ class Home extends Component {
             collectionStats: {},
             compId: Math.random()
         }
-
-        this.loadTheItem();
     }
 
     // componentWillUnmount() {
