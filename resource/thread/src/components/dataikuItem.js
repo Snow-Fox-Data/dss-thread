@@ -279,7 +279,7 @@ class DataikuItem extends Component {
     }
 
     openDssObject(obj) {
-        eventBus.dispatch('navToObject', {obj:obj, id: this.props.parentid})
+        eventBus.dispatch('navToObject', { obj: obj, id: this.props.parentid })
     }
 
     defSearch = (term) => {
@@ -598,6 +598,9 @@ class DataikuItem extends Component {
                                                 <Form.Control type="text" defaultValue={this.state.tempSelDef.name}
                                                     onChange={e => this.state.tempSelDef.name = e.target.value}
                                                 />
+                                                <Form.Text className="text-muted">
+                                                    Changing this name does not change the dataset column name
+                                                </Form.Text>
                                                 {(this.state.tempSelDef.applied_to != null && this.state.tempSelDef.applied_to.length > 0) &&
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Applied To</Form.Label>
@@ -716,7 +719,14 @@ class DataikuItem extends Component {
                                 <div>
                                     <Button variant="primary"
                                         onClick={() => this.newDef()}
-                                    >Add Definition</Button>{' '}
+                                    >{(this.props.item.comment != null && this.props.item.comment > 0) ?
+                                        <span>Create Definition from Column Description</span>
+                                        :
+                                        <span>
+                                            Add Definition
+                                        </span>
+                                        }
+                                    </Button>{' '}
                                     <div style={{ padding: '10px' }}>
                                         {this.props.item.comment}
                                     </div>

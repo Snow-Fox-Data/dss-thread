@@ -49,8 +49,10 @@ class Home extends Component {
     componentDidMount() {
         console.log('componentDidMount() :: ');
         eventBus.on("navToObject", (obj) => {
-            if (obj == null)
+            if (obj == null) {
+                this.setState({ selectedItem: null })
                 this.reloadDssStats();
+            }
             else {
                 if (obj.id == this.state.compId || obj.id == null)
                     this.navToObject(obj.obj)
@@ -317,7 +319,7 @@ class Home extends Component {
                     <Col style={{ paddingTop: '20px' }}>
                         <Row>
                             <Col>
-                                <h3>Recent Projects</h3>
+                                <h3>Projects Recently Created in DSS</h3>
                             </Col>
                             <Col xs={1}>
                                 <Button variant="outline-secondary" size="sm" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
