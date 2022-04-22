@@ -5,7 +5,7 @@ import { FaFilter } from 'react-icons/fa';
 import Common from '../common/common';
 import DataikuItem from '../components/dataikuItem';
 import eventBus from '../eventBus';
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 class Home extends Component {
 
@@ -49,9 +49,9 @@ class Home extends Component {
         console.log('componentWillUnmount() :: ');
 
         eventBus.remove('datasetSelected', this);
-        eventBus.remove('definitionSelected', this);
-        eventBus.remove('projectSelected', this);
-        eventBus.remove('columnSelected', this);
+        // eventBus.remove('definitionSelected', this);
+        // eventBus.remove('projectSelected', this);
+        // eventBus.remove('columnSelected', this);
         eventBus.remove('reloadItem', this);
         eventBus.remove('loading', this);
         eventBus.remove('loggedIn', this);
@@ -59,23 +59,23 @@ class Home extends Component {
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
-        eventBus.on("datasetSelected", (ds) => {
+        eventBus.on("objectSelected", (ds) => {
             this.navToObject(ds)
         });
 
-        eventBus.on("definitionSelected", (ds) => {
-            this.navToObject(ds)
-        });
+        // eventBus.on("definitionSelected", (ds) => {
+        //     this.navToObject(ds)
+        // });
 
-        eventBus.on("projectSelected", (proj) => {
-            this.navToObject(proj)
-        }
-        );
+        // eventBus.on("projectSelected", (proj) => {
+        //     this.navToObject(proj)
+        // }
+        // );
 
-        eventBus.on("columnSelected", (col) => {
-            this.navToObject(col)
-        }
-        );
+        // eventBus.on("columnSelected", (col) => {
+        //     this.navToObject(col)
+        // }
+        // );
 
         eventBus.on("reloadItem", (item) => {
             this.loadItemByKey(item)
@@ -237,8 +237,13 @@ class Home extends Component {
     }
 
     navToObject(obj) {
-        let base_url = window.top.location.href.split('#')[0]
-        window.top.location.href = base_url + "/dss/" + encodeURIComponent(obj);
+        eventBus.dispatch("loading", true);
+        let bp = Common.formatBasePath();
+        // window.top.location.href = bp + "/dss/" + encodeURIComponent(obj);
+
+        this.props.navigate( "/dss/" + encodeURIComponent(obj))
+        // let base_url = window.top.location.href.split('#')[0]
+        // window.top.location.href = base_url + "/dss/" + encodeURIComponent(obj);
     }
 
     renderMenuItemChildren(option, props) {
@@ -509,5 +514,6 @@ export default (props) => (
     <Home
         {...props}
         params={useParams()}
+        navigate={useNavigate()}
     />
 );

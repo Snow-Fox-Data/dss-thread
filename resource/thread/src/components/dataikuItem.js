@@ -278,9 +278,7 @@ class DataikuItem extends Component {
     }
 
     openDssObject(obj) {
-        eventBus.dispatch("loading", true);
-        let bp = Common.formatBasePath();
-        window.top.location.href = bp + "/dss/" + encodeURIComponent(obj);
+        eventBus.dispatch('navToObject', obj)
     }
 
     defSearch = (term) => {
