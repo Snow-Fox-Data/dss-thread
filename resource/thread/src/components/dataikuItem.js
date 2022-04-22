@@ -164,7 +164,8 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    eventBus.dispatch("reloadItem", this.props.item.id);
+                    this.openDssObject(this.props.item.id)
+                    // eventBus.dispatch("reloadItem", this.props.item.id);
                 });
     };
 

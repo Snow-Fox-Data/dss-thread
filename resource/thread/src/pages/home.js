@@ -38,6 +38,8 @@ class Home extends Component {
         window.$(document).ready(() => {
             if (this.props.params.id != null)
                 this.loadItemByKey(this.props.params.id)
+            else
+                this.reloadDssStats();
         });
     }
 
@@ -64,24 +66,10 @@ class Home extends Component {
                 this.navToObject(obj.obj)
         });
 
-        // eventBus.on("definitionSelected", (ds) => {
-        //     this.navToObject(ds)
-        // });
-
-        // eventBus.on("projectSelected", (proj) => {
-        //     this.navToObject(proj)
+        // eventBus.on("reloadItem", (item) => {
+        //     this.loadItemByKey(item)
         // }
         // );
-
-        // eventBus.on("columnSelected", (col) => {
-        //     this.navToObject(col)
-        // }
-        // );
-
-        eventBus.on("reloadItem", (item) => {
-            this.loadItemByKey(item)
-        }
-        );
 
         eventBus.on("loading", (isLoading) =>
             this.setState({ "loading": isLoading })
@@ -96,14 +84,6 @@ class Home extends Component {
                 loggedIn: true
             });
         });
-
-        // window.$(document).ready(() => {
-        //     // if (!this.navDeepLink())
-        //         // this.reloadDssStats();
-
-        //     // this.addHashListener();
-        //     this.loadItemByKey(id);
-        // });
     }
 
     reloadDssStats = (callback = null) => {
