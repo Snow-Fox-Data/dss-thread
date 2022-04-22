@@ -31,8 +31,7 @@ class Home extends Component {
             searchResults: [],
             loggedIn: false,
             collectionStats: {},
-            compId: Math.random(),
-            active: true
+            compId: Math.random()
         }
 
         window.$(document).ready(() => {
@@ -41,10 +40,6 @@ class Home extends Component {
             else
                 this.reloadDssStats();
         });
-    }
-
-    addHashListener() {
-        window.addEventListener("hashchange", () => { this.navDeepLink() });
     }
 
     componentWillUnmount() {
@@ -65,11 +60,6 @@ class Home extends Component {
             if (obj.id == this.state.compId)
                 this.navToObject(obj.obj)
         });
-
-        // eventBus.on("reloadItem", (item) => {
-        //     this.loadItemByKey(item)
-        // }
-        // );
 
         eventBus.on("loading", (isLoading) =>
             this.setState({ "loading": isLoading })
@@ -141,11 +131,6 @@ class Home extends Component {
         if (item.length > 0) {
             this.navToObject(item[0].key);
         }
-        // this.setState({ loading: true });
-        // if (item.length > 0) {
-        //     this.loadItemByKey(item[0].key)
-        //     this.navToObject(item[0].key)
-        // }
     }
 
     loadItemByKey = (itemKey) => {
@@ -199,36 +184,9 @@ class Home extends Component {
             });
     }
 
-    navDeepLink() {
-        let parts = window.top.location.href.split('#o=')
-
-        if (parts.length > 1) {
-            this.setState({ "loading": true });
-            this.loadItemByKey(parts[1])
-
-            return true;
-        }
-        else {
-            this.reloadDssStats(() =>
-                this.setState({
-                    "selectedItem": null,
-                    "dataikuItem": null,
-                    "selectedItemType": null,
-                    "errorMsg": ''
-                }));
-        }
-
-        return false;
-    }
-
     navToObject(obj) {
         this.setState({ loading: true });
-        // let bp = Common.formatBasePath();
-        // window.top.location.href = bp + "/dss/" + encodeURIComponent(obj);
-
         this.loadItemByKey(obj);
-        // let base_url = window.top.location.href.split('#')[0]
-        // window.top.location.href = base_url + "/dss/" + encodeURIComponent(obj);
     }
 
     renderMenuItemChildren(option, props) {
