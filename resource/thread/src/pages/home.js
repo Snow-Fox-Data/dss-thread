@@ -48,7 +48,7 @@ class Home extends Component {
     componentWillUnmount() {
         console.log('componentWillUnmount() :: ');
 
-        eventBus.remove('datasetSelected', this);
+        eventBus.remove('navToObject', this.navToObject);
         // eventBus.remove('definitionSelected', this);
         // eventBus.remove('projectSelected', this);
         // eventBus.remove('columnSelected', this);
@@ -59,9 +59,7 @@ class Home extends Component {
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
-        eventBus.on("navToObject", (ds) => {
-            this.navToObject(ds)
-        });
+        eventBus.on("navToObject", this.navToObject);
 
         // eventBus.on("definitionSelected", (ds) => {
         //     this.navToObject(ds)
@@ -424,10 +422,10 @@ class Home extends Component {
 
         this.searchRef = React.createRef();
 
-        const { filters, loading, openFilter, searchResults, selectedItem, selectedItemType } = this.state;
+        const { filters, loading, openFilter, compId, searchResults, selectedItem, selectedItemType } = this.state;
         const filterBy = () => true;
 
-        this.dataikuItem = <DataikuItem item={selectedItem} object_type={selectedItemType} />;
+        this.dataikuItem = <DataikuItem parentid={compId} item={selectedItem} object_type={selectedItemType} />;
 
         return (
             <>
