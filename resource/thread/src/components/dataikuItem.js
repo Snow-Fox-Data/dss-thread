@@ -12,7 +12,6 @@ import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags, FaThumbsDown, FaThumbsUp, FaRedo } from "react-icons/fa";
 import Tag from "./tag"
-import { useParams, useNavigate } from "react-router-dom"
 
 const ReactTags = require('react-tag-autocomplete')
 
@@ -280,8 +279,7 @@ class DataikuItem extends Component {
     }
 
     openDssObject(obj) {
-        // eventBus.dispatch('navToObject', {obj:obj, id: this.props.parentid})
-        this.props.navigate('/dss/' + obj, { replace: true });
+        eventBus.dispatch('navToObject', {obj:obj, id: this.props.parentid})
     }
 
     defSearch = (term) => {
@@ -1013,7 +1011,7 @@ class DataikuItem extends Component {
             </Row>
         } else {
             item = <Row>
-                {/* <p>No Item to display...</p> */}
+                <p>No Item to display...</p>
             </Row>
         }
 
@@ -1028,6 +1026,5 @@ class DataikuItem extends Component {
 export default (props) => (
     <DataikuItem
         {...props}
-        navigate={useNavigate()}
     />
 );
