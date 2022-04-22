@@ -12,8 +12,9 @@ ReactDOM.render(
   // <React.StrictMode>
   <BrowserRouter basename={App.BASE_PATH}>
     <Routes>
-      <Route path="/:id" element={<App />}>
-        <Route index element={<Home />} />
+      <Route path="/" element={<App />}>
+        {/* <Route index element={<Home />} /> */}
+        <Route path="home/:id" children={<Home />} />
         <Route path="catalog" element={<Catalog />} />
       </Route>
     </Routes>
