@@ -143,6 +143,7 @@ class DataikuItem extends Component {
 
         console.log('tagList == ');
         console.log(tagList);
+        
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -809,7 +810,8 @@ class DataikuItem extends Component {
                                                 minQueryLength='1'
                                                 suggestions={this.state.columnTagSuggestions}
                                                 onDelete={(i) => this.onDefTagDelete(i)}
-                                                onAddition={(tag) => this.onDefTagAddition(tag)} />
+                                                // onAddition={(tag) => this.onDefTagAddition(tag)} 
+                                                onAddition={(tag) => this.onDefTagAddition.bind(this)} />
                                         </div>
 
                                         {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
