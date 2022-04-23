@@ -114,7 +114,7 @@ class App extends Component {
     }
 
     homeClick() {
-        window.location = window.location.origin + window.location.pathname;
+        window.location = Common.formatBasePath();
     }
 
     render() {
