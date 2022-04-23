@@ -131,7 +131,8 @@ class Catalog extends Component {
     }
 
     openDefinition(defKey) {
-        this.props.navigate('/dss/' + defKey, { replace: true });
+        // this.props.navigate('/dss/' + defKey, { replace: true });
+        window.location = window.location.origin + window.location.pathname + '/dss/' + defKey;
     }
 
     sortDefinitions(sortBy) {

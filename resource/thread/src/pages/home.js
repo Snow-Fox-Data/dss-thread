@@ -38,11 +38,11 @@ class Home extends Component {
     //     console.log('componentWillUnmount() :: ');
     // }
 
-    componentDidUpdate(prevProps, prevState) {
-        // definition linked from catalog
-        if (prevProps.params.id != this.props.params.id)
-            this.loadTheItem();
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     // definition linked from catalog
+    //     if (prevProps.params.id != this.props.params.id)
+    //         this.loadTheItem();
+    // }
 
     componentDidMount() {
         console.log('componentDidMount() :: ');
