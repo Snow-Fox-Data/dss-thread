@@ -26,7 +26,7 @@ import Common from "./common/common";
 
 class App extends Component {
     static BASE_PATH = Common.formatBasePath();
-    
+
     constructor(props) {
         super(props)
 
@@ -114,7 +114,7 @@ class App extends Component {
     }
 
     homeClick() {
-        eventBus.dispatch('navToObject', null)
+        window.location = window.location.origin + window.location.pathname;
     }
 
     render() {
@@ -139,7 +139,7 @@ class App extends Component {
                                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
                                         <NavLink activeClassName='active'
-                                        onClick={this.homeClick}
+                                            onClick={this.homeClick}
                                             to="/">Home</NavLink>
                                     </li>
                                     <li class="nav-item">
