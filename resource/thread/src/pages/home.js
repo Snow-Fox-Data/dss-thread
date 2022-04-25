@@ -330,7 +330,7 @@ class Home extends Component {
                             <Col>
                                 <h3>Projects Recently Created in DSS</h3>
                             </Col>
-                            <Col xs={1}>
+                            <Col xs={2}>
                                 <Button variant="outline-secondary" size="sm" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
                             </Col>
                         </Row>
