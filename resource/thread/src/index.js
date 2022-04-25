@@ -7,12 +7,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Common from './common/common';
 import Home from "./pages/home";
 import Catalog from "./pages/catalog";
+import NotFound from "./pages/notfound"
 
 ReactDOM.render(
   // <React.StrictMode>
   <BrowserRouter basename={App.BASE_PATH}>
     <Routes>
-      <Route path="*" element={<div>NO MATCH</div>} />
+      <Route path="*" element={<NotFound />} />
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="dss" element={<Home />} >

@@ -94,33 +94,12 @@ class App extends Component {
         }
     }
 
-    checkPublic() {
-        if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
-            const queryParams = new URLSearchParams(window.location.search)
-            // not accessing the public app
-            var proj = queryParams.get("projectKey");
-            var id = queryParams.get("webAppId");
-            var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
-
-            return <div>
-                <h4>Please access Thread through the <a target="_blank" href={url}>public web URL</a></h4>
-                <div style={{ paddingTop: '15px' }}>
-                    <span style={{ fontWeight: 'bold' }}>Public App Key:</span> {proj}.{id}
-                </div>
-            </div>
-        }
-
-        return '';
-    }
-
     homeClick() {
         window.location = Common.formatBasePath();
     }
 
     render() {
         const { activeTab, loading, scanning } = this.state;
-
-        var publicApp = this.checkPublic();
 
         return (
             <Container style={{ paddingTop: '10px' }}>
@@ -158,11 +137,7 @@ class App extends Component {
                         </div>
                     </nav>
                     <Row>
-                        {publicApp.length == 0 ?
-                            <Outlet />
-                            :
-                            { publicApp }
-                        }
+                        <Outlet />
                     </Row>
                 </div >
             </Container >
