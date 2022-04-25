@@ -252,12 +252,14 @@ class Home extends Component {
         };
 
         let url = window.getWebAppBackendUrl('scan-new');
-        this.setState({ loading: true });
+        // this.setState({ loading: true });
+        eventBus.dispatch('scanning', true);
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                // alert(response)
-                this.setState({ loading: false });
+                eventBus.dispatch('scanning', false);
+
+                // this.setState({ loading: false });
 
                 if (response.projects.length > 0)
                     this.reloadDssStats();

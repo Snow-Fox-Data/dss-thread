@@ -150,6 +150,8 @@ class App extends Component {
                             </div>
                             <ul class="navbar-nav" style={{ paddingRight: '15px' }}>
                                 <NavDropdown title={this.state.currentUser}>
+                                    <NavDropdown.Item href="https://github.com/Excelion-Partners/dss-thread/raw/main/Thread_Installation_Instructions.pdf">User Instructions</NavDropdown.Item>
+                                    <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={() => this.rescan()}>Full DSS Scan</NavDropdown.Item>
                                 </NavDropdown>
                             </ul>

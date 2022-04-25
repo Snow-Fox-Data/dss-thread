@@ -12,6 +12,7 @@ ReactDOM.render(
   // <React.StrictMode>
   <BrowserRouter basename={App.BASE_PATH}>
     <Routes>
+      <Route path="*" element={<div>NO MATCH</div>} />
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="dss" element={<Home />} >
