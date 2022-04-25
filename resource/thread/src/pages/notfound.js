@@ -6,8 +6,8 @@ class NotFound extends Component {
 
     constructor(props) {
         super(props);
-
     }
+
     checkPublic() {
         if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
             const queryParams = new URLSearchParams(window.location.search)
@@ -31,15 +31,17 @@ class NotFound extends Component {
         var publicApp = this.checkPublic();
 
         return (
-            <Container>
+            <>
                 <Row>
-                    {publicApp.length == 0 ?
-                        <h2>Resource not found</h2>
-                        :
-                        { publicApp }
-                    }
+                    <Col>
+                        {publicApp.length == 0 ?
+                            <h2>Resource not found</h2>
+                            :
+                            { publicApp }
+                        }
+                    </Col>
                 </Row>
-            </Container>
+            </>
         )
     }
 }
