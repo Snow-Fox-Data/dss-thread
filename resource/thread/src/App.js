@@ -36,7 +36,8 @@ class App extends Component {
             loading: true,
             loggedIn: null,
             scanning: false,
-            logo: logo
+            logo: logo,
+            fullRescan: false
         }
     }
 
@@ -82,6 +83,7 @@ class App extends Component {
                 this.setState({ "logo": loading_logo })
 
                 this.setState({ scanning: true });
+                this.setState({ fullRescan: true });
                 fetch(window.getWebAppBackendUrl('scan'))
                     .then(res => res.json())
                     .then((response) => {
@@ -106,40 +108,44 @@ class App extends Component {
                 {this.state.loggedIn != null && this.state.loggedIn === false &&
                     <div>Unauthorized</div>
                 }
-                <div hidden={!this.state.loggedIn}>
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <div class="container-fluid">
-                            <img src={this.state.logo} className="app-logo" alt="logo" />
-                            <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarContent">
-                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <NavLink activeClassName='active'
-                                            onClick={this.homeClick}
-                                            to="/">Home</NavLink>
-                                    </li>
-                                    <li class="nav-item">
-                                        <NavLink activeClassName='active'
-                                            to="/catalog">Catalog</NavLink>
-                                    </li>
+                {this.state.fullRescan ?
+                    <h2>Scanning in progress...</h2>
+                    :
+                    <div hidden={!this.state.loggedIn}>
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <div class="container-fluid">
+                                <img src={this.state.logo} className="app-logo" alt="logo" />
+                                <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarContent">
+                                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                        <li class="nav-item">
+                                            <NavLink activeClassName='active'
+                                                onClick={this.homeClick}
+                                                to="/">Home</NavLink>
+                                        </li>
+                                        <li class="nav-item">
+                                            <NavLink activeClassName='active'
+                                                to="/catalog">Catalog</NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="navbar-nav" style={{ paddingRight: '15px' }}>
+                                    <NavDropdown title={this.state.currentUser}>
+                                        <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/raw/main/Thread_User_Instructions.pdf">User Instructions</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item onClick={() => this.rescan()}>Full DSS Scan</NavDropdown.Item>
+                                    </NavDropdown>
                                 </ul>
                             </div>
-                            <ul class="navbar-nav" style={{ paddingRight: '15px' }}>
-                                <NavDropdown title={this.state.currentUser}>
-                                    <NavDropdown.Item href="https://github.com/Excelion-Partners/dss-thread/raw/main/Thread_User_Instructions.pdf">User Instructions</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={() => this.rescan()}>Full DSS Scan</NavDropdown.Item>
-                                </NavDropdown>
-                            </ul>
-                        </div>
-                    </nav>
-                    <Row>
-                        <Outlet />
-                    </Row>
-                </div >
+                        </nav>
+                        <Row>
+                            <Outlet />
+                        </Row>
+                    </div >
+                }
             </Container >
         );
     }
