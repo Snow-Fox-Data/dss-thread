@@ -109,7 +109,12 @@ class App extends Component {
                     <div>Unauthorized</div>
                 }
                 {this.state.fullRescan ?
-                    <h2>Scanning in progress...</h2>
+                    <div>
+                        <div style="float:left"><img src={this.state.logo} /></div>
+                        <div style="float:left">
+                            <h2>Scanning in progress...</h2>
+                        </div>
+                    </div>
                     :
                     <div hidden={!this.state.loggedIn}>
                         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
