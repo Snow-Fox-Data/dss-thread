@@ -37,7 +37,7 @@ class NotFound extends Component {
                         {publicApp.length == 0 ?
                             <h2>Resource not found</h2>
                             :
-                            <div>
+                            <div style={{padding:'20px'}}>
                                 {publicApp}
                             </div>
                         }
