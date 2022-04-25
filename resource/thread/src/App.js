@@ -110,9 +110,9 @@ class App extends Component {
                 }
                 {this.state.fullRescan ?
                     <div>
-                        <div style={{float:"left"}}><img src={this.state.logo} /></div>
-                        <div style={{float:"left"}}>
-                            <h2>Scanning in progress...</h2>
+                        <div style={{ float: "left" }}><img style={{ width: '100px' }} src={this.state.logo} /></div>
+                        <div style={{ float: "left", paddingTop: '25px', paddingLeft: '10px' }}>
+                            <h2>Full scan in progress...</h2>
                         </div>
                     </div>
                     :
