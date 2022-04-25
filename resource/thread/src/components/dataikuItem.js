@@ -727,10 +727,12 @@ class DataikuItem extends Component {
                                         </span>
                                         }
                                     </Button>{' '}
-                                    <div style={{ padding: '10px' }}>
-                                        <h5>Column Description</h5>
-                                        {this.props.item.comment}
-                                    </div>
+                                    {(this.props.item.definition.description != null && this.props.item.definition.description.length > 0) &&
+                                        <div style={{ padding: '10px' }}>
+                                            <h5>Column Description</h5>
+                                            {this.props.item.comment}
+                                        </div>
+                                    }
                                 </div>
                             }
                             {
