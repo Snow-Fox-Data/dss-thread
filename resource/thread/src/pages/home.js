@@ -73,6 +73,9 @@ class Home extends Component {
         });
 
         window.onpopstate = () => {
+            this.setState({
+                loading: true,
+            });
             this.loadTheItem();
         }
     }
