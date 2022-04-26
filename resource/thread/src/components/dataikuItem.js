@@ -560,7 +560,7 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="info" onClick={() => this.cancelLineageSave()}>&lt; Edit Definition</Button>
-                    <Button variant="primary" onClick={() => this.saveCol()}>Apply</Button>
+                    <Button variant="primary" style={{marginBottom:'5px'}} onClick={() => this.saveCol()}>Apply</Button>
                 </Modal.Footer>
             </Modal>
             <Modal size="xl" show={this.state.newDefModal} animation={false} onHide={handleClose}>
