@@ -61,7 +61,7 @@ export default memo(({ data, isConnectable }) => {
       <div>
         <div style={{ float: 'right' }}>
           <a onClick={(e) => openItem(e)} href='#'>
-            <ArrowRightSquare size={18} />
+            <ArrowUpRightSquare size={18} />
           </a>
         </div>
         <div style={{ float: 'left', width: '220px' }}>

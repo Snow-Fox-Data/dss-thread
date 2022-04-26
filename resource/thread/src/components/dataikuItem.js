@@ -128,7 +128,7 @@ class DataikuItem extends Component {
                 .then(
                     (result) => {
                         // go back to the home page
-                        window.location = window.location.origin + window.location.pathname;
+                        window.location = window.location.origin + window.location.pathname.substr(0, window.location.pathname.indexOf('dss'));
                     });
         }
     }
@@ -144,7 +144,7 @@ class DataikuItem extends Component {
 
         console.log('tagList == ');
         console.log(tagList);
-        
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -186,7 +186,7 @@ class DataikuItem extends Component {
         arrayTags.forEach(element => {
             if (link) {
                 tags[tags.length] = <Button onClick={() => this.openDssObject(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                    <span style={{paddingRight:'4px'}}>{element}</span><ArrowRightSquare />
+                    <span style={{ paddingRight: '4px' }}>{element}</span><ArrowUpRightSquare />
                 </Button>
             }
             else
@@ -561,7 +561,7 @@ class DataikuItem extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="info" onClick={() => this.cancelLineageSave()}>&lt; Edit Definition</Button>
-                    <Button variant="primary" style={{marginBottom:'5px'}} onClick={() => this.saveCol()}>Apply</Button>
+                    <Button variant="primary" style={{ marginBottom: '5px' }} onClick={() => this.saveCol()}>Apply</Button>
                 </Modal.Footer>
             </Modal>
             <Modal size="xl" show={this.state.newDefModal} animation={false} onHide={handleClose}>
@@ -813,9 +813,9 @@ class DataikuItem extends Component {
                                                 minQueryLength='1'
                                                 suggestions={this.state.columnTagSuggestions}
                                                 onDelete={(i) => this.onDefTagDelete(i)}
-                                                onAddition={(tag) => this.onDefTagAddition(tag)} 
-                                                // onAddition={(tag) => this.onDefTagAddition.bind(this)} 
-                                                />
+                                                onAddition={(tag) => this.onDefTagAddition(tag)}
+                                            // onAddition={(tag) => this.onDefTagAddition.bind(this)} 
+                                            />
                                         </div>
 
                                         {(this.props.item.applied_to != null && this.props.item.applied_to.length > 0) &&
