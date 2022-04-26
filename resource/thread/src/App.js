@@ -110,8 +110,10 @@ class App extends Component {
                 }
                 {this.state.fullRescan ?
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <div class="container-fluid">
+                        <div style={{ float: 'left', width: '75px' }}>
                             <img style={{ width: '75px' }} src={this.state.logo} className="app-logo" alt="logo" />
+                        </div>
+                        <div style={{ float: 'left' }}>
                             <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Full scan in progress...</a>
                         </div>
                     </nav>
