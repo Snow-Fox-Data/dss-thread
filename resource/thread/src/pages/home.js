@@ -73,7 +73,7 @@ class Home extends Component {
         });
 
         window.onpopstate = () => {
-            alert('back!')
+            this.loadTheItem();
         }
     }
 
