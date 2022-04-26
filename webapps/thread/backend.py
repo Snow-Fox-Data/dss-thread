@@ -439,8 +439,8 @@ class dss_utils:
                 logging.info(f'new project: {p}')
 
                 # new project
-                self.scan_project(p)
-                new_projects.append(p)
+                if self.scan_project(p):
+                    new_projects.append(p)
 
         return new_projects
             
@@ -990,7 +990,8 @@ class dss_utils:
             if '--Thread-' in dataset['name']:
                 del scan_obj[proj]
                 index_list.pop()
-                break
+
+                return False
 
             index_list.append({
                 "name": dataset['name'],
