@@ -985,6 +985,13 @@ class dss_utils:
         })
 
         for dataset in datasets:
+
+             # we don't want to index thread projects
+            if '--Thread-' in dataset['name']:
+                del scan_obj[proj]
+                index_list.pop()
+                break
+
             index_list.append({
                 "name": dataset['name'],
                 "object_type": "dataset",
