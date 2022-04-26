@@ -146,7 +146,7 @@ class Home extends Component {
     }
 
     loadItemByKey = (itemKey) => {
-        this.props.navigate("/dss/" + encodeURIComponent(itemKey));
+        this.props.navigate("/dss/" + encodeURIComponent(itemKey), {replace:false});
 
         console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
