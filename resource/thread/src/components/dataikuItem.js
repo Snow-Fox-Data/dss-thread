@@ -11,6 +11,7 @@ import Lineage from "./lineage";
 import Definition from "./definition"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FaTags, FaThumbsDown, FaThumbsUp, FaRedo } from "react-icons/fa";
+import { ArrowRightSquare } from 'react-bootstrap-icons'
 import Tag from "./tag"
 
 const ReactTags = require('react-tag-autocomplete')
@@ -185,7 +186,7 @@ class DataikuItem extends Component {
         arrayTags.forEach(element => {
             if (link) {
                 tags[tags.length] = <Button onClick={() => this.openDssObject(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
-                    {element}
+                    {element}{ }<ArrowRightSquare />
                 </Button>
             }
             else
