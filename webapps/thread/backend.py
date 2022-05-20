@@ -16,6 +16,7 @@ from sentry_sdk import capture_exception
 from sentry_sdk import capture_message
 import re
 import logging
+from datetime import datetime
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -152,6 +153,8 @@ def search():
     idx_ds = dss.get_index_ds()
     df = idx_ds.get_dataframe()
 
+    df = df.dropna(subset=['description'])
+
     result = df[df['description'].str.contains(args.get('term'), case=False)]
     
     return result.to_json(orient="records")
@@ -273,7 +276,7 @@ def update_desc():
     
     applied_to_json = json.dumps(data['applied_to'])
 
-    desc_txt = ''
+    desc_txt = '--'
     if 'description' in data and len(data['description']) > 0:
         desc_txt = data['description']
 
@@ -866,7 +869,7 @@ class dss_utils:
                 for dataset in datasets:
 
                     # we don't want to index thread projects
-                    if '--Thread-' in dataset['name']:
+                    if '--Thread' in dataset['name']:
                         del scan_obj[proj]
                         index_list.pop()
                         break
@@ -930,6 +933,7 @@ class dss_utils:
             df.fillna('', inplace=True)
             for idx, row in df.iterrows():
                 index_list.append({
+                    "last_modified": datetime.now(),
                         "name": row['name'],
                         "object_type": "definition",
                         "key": row['id'],
@@ -998,7 +1002,7 @@ class dss_utils:
                 "object_type": "dataset",
                 "key": self.get_full_dataset_name(dataset['name'], proj),
                 "description": dataset['name'],
-                "last_modified": dataset['versionTag']['lastModifiedOn'],
+                "last_modified": dataset['versionTag']['lastModifiedOn']
             })
 
             for column in dataset['schema']['columns']:
