@@ -17,6 +17,7 @@ from sentry_sdk import capture_message
 import re
 import logging
 from datetime import datetime
+import time
 
 sentry_sdk.init(
     "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
@@ -309,7 +310,8 @@ def update_desc():
                 "name": data['name'],
                 "description": data['name'] + ' | ' + desc_txt,
                 "object_type": "definition",
-                "key": new_id
+                "key": new_id,
+                "last_modified": int(time.time())
             }])
 
         # todo: really don't like reading this whole dataset
@@ -933,7 +935,7 @@ class dss_utils:
             df.fillna('', inplace=True)
             for idx, row in df.iterrows():
                 index_list.append({
-                    "last_modified": datetime.now(),
+                    "last_modified": int(time.time()),
                         "name": row['name'],
                         "object_type": "definition",
                         "key": row['id'],
