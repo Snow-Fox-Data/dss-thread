@@ -46,10 +46,10 @@ class App extends Component {
             this.refreshUser();
 
             eventBus.on("scanning", (isScanning) => {
-                // if (isScanning)
-                    // this.setState({ "logo": loading_logo })
-                // else
-                    // this.setState({ "logo": logo })
+                if (isScanning)
+                    this.setState({ "logo": loading_logo })
+                else
+                    this.setState({ "logo": logo })
             });
         });
     }
@@ -80,7 +80,7 @@ class App extends Component {
         if (!this.state.scanning) {
 
             if (window.confirm('A full rescan make take minutes to complete and may affect other Thread users. Would you like to proceed?')) {
-                this.setState({ "logo": loading_logo })
+                // this.setState({ "logo": loading_logo })
 
                 this.setState({ scanning: true });
                 this.setState({ fullRescan: true });
@@ -111,11 +111,11 @@ class App extends Component {
                 {this.state.fullRescan ?
                     <nav class="navbar navbar-expand-lg ">
                         {/* navbar-dark bg-dark */}
-                        <div style={{ float: 'left', width: '75px', marginLeft: '10px' }}>
-                            <img src={this.state.loading_logo} className="app-logo" alt="logo" />
-                        </div>
                         <div style={{ float: 'left', width: '300px', marginLeft: '10px' }}>
                             <img src={this.state.logo} className="app-logo" alt="logo" />
+                        </div>
+                        <div style={{ float: 'left', width: '75px', marginLeft: '10px' }}>
+                            <img src={this.state.loading_logo} className="app-logo" alt="logo" />
                         </div>
                         <div style={{ float: 'left' }}>
                             <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Full scan in progress...</a>
@@ -127,7 +127,7 @@ class App extends Component {
 
                             <div class="container-fluid">
                                 <img src={this.state.logo} className="app-logo" alt="logo" />
-                                
+
                                 <div class="collapse navbar-collapse" id="navbarContent">
                                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                         <li class="nav-item">
