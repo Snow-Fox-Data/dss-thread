@@ -3,7 +3,7 @@
 ## Installation Instructions
 [Guide](Thread_Installation_Instructions.pdf)
 
-## To build React application:
+## To build React application
 
 ```
 cd ./resource/thread/
