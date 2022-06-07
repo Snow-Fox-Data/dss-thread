@@ -20,7 +20,7 @@ import {
     Routes
 } from "react-router-dom";
 
-import logo from "./assets/images/icon_thread.png";
+import logo from "./assets/images/thread-logo.png";
 import loading_logo from "./assets/images/thread-spinner.gif";
 import Common from "./common/common";
 
@@ -122,10 +122,10 @@ class App extends Component {
                         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                             <div class="container-fluid">
                                 <img src={this.state.logo} className="app-logo" alt="logo" />
-                                <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
+                                {/* <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon"></span>
-                                </button>
+                                </button> */}
                                 <div class="collapse navbar-collapse" id="navbarContent">
                                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                         <li class="nav-item">
