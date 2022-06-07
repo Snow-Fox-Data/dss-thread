@@ -118,8 +118,8 @@ class App extends Component {
                         <div style={{ float: 'left', width: '300px', marginLeft: '10px' }}>
                             <img src={this.state.logo} className="app-logo" alt="logo" />
                         </div>
-                        <div style={{ float: 'left' }}>
-                            <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Full scan in progress...</a>
+                        <div style={{ float: 'left', paddingLeft:'10px' }}>
+                            <a class="navbar-brand" style={{ fontSize: "27px" }}>Full scan in progress...</a>
                         </div>
                     </nav>
                     :

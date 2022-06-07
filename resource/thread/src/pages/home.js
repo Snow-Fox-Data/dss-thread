@@ -6,6 +6,7 @@ import Common from '../common/common';
 import DataikuItem from '../components/dataikuItem';
 import eventBus from '../eventBus';
 import { useParams, useNavigate } from "react-router-dom"
+import loading_logo from "../assets/images/loader.gif";
 
 class Home extends Component {
 
@@ -30,7 +31,8 @@ class Home extends Component {
             searchResults: [],
             loggedIn: false,
             collectionStats: {},
-            compId: Math.random()
+            compId: Math.random(),
+            loading_logo:loading_logo
         }
     }
 
@@ -441,9 +443,7 @@ class Home extends Component {
                 {loading ?
                     <Row>
                         <div style={{ padding: '10px' }}>
-                            <Spinner animation="border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
+                            <img src={this.state.loading_logo}></img>
                         </div>
                     </Row>
                     : null}

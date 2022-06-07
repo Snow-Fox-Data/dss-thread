@@ -700,7 +700,7 @@ class DataikuItem extends Component {
 
                     <div class="options-button">
                         <Dropdown>
-                            <Dropdown.Toggle 
+                            <Dropdown.Toggle
                                 variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
