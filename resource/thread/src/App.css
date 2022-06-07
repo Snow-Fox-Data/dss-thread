@@ -133,7 +133,7 @@ ul.navbar-nav li.nav-item {
 }
 
 ul.navbar-nav li.nav-item a {
-  color: #FFF;
+  /* color: #FFF; */
   display: block;
   font-size: 1.15em;
   text-align: center;
@@ -144,7 +144,7 @@ ul.navbar-nav li.nav-item a {
 ul.navbar-nav li.nav-item a.active {
   /* border-bottom: solid 1px #FFF; */
   font-weight: bold;
-  background-color: #bbb;
+  /* background-color: #bbb; */
   color: #043C5B;
 }
 

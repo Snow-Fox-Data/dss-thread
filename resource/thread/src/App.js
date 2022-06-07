@@ -109,7 +109,7 @@ class App extends Component {
                     <div>Unauthorized</div>
                 }
                 {this.state.fullRescan ?
-                    <nav class="navbar navbar-expand-lg"> 
+                    <nav class="navbar navbar-expand-lg navbar-dark"> 
                     {/* navbar-dark bg-dark */}
                         <div style={{ float: 'left', width: '75px' }}>
                             <img style={{ width: '75px' }} src={this.state.logo} className="app-logo" alt="logo" />
@@ -120,7 +120,7 @@ class App extends Component {
                     </nav>
                     :
                     <div hidden={!this.state.loggedIn}>
-                        <nav class="navbar navbar-expand-lg">
+                        <nav class="navbar navbar-expand-lg navbar-dark">
                             
                             <div class="container-fluid">
                                 <img src={this.state.logo} className="app-logo" alt="logo" />
