@@ -21,7 +21,7 @@ import {
 } from "react-router-dom";
 
 import logo from "./assets/images/thread-logo-white.png";
-import loading_logo from "./assets/images/thread-spinner.gif";
+import loading_logo from "./assets/images/loader.gif";
 import Common from "./common/common";
 
 class App extends Component {
