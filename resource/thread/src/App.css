@@ -149,8 +149,11 @@ ul.navbar-nav li.nav-item a.active {
 }
 
 ul.navbar-nav li.nav-item a:hover {
-  border-bottom: solid 2px #DDD;
-  color: #DDD;
+  /* border-bottom: solid 2px #DDD;
+  color: #DDD; */
+  font-weight: bold;
+  background-color: #bbb;
+  color: #2CB37C;
 }
 
 .lineage-node-icon {
