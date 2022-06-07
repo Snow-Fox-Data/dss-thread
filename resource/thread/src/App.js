@@ -20,7 +20,7 @@ import {
     Routes
 } from "react-router-dom";
 
-import logo from "./assets/images/thread-logo.png";
+import logo from "./assets/images/thread-logo2.png";
 import loading_logo from "./assets/images/loader.gif";
 import Common from "./common/common";
 
