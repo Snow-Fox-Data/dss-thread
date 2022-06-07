@@ -37,7 +37,8 @@ class App extends Component {
             loggedIn: null,
             scanning: false,
             logo: logo,
-            fullRescan: false
+            fullRescan: false,
+            loading_logo:loading_logo
         }
     }
 
@@ -111,8 +112,8 @@ class App extends Component {
                 {this.state.fullRescan ?
                     <nav class="navbar navbar-expand-lg ">
                         {/* navbar-dark bg-dark */}
-                        <div style={{ float: 'left', width: '75px', marginLeft: '10px' }}>
-                            <img src={this.loading_logo} className="app-logo" alt="logo" />
+                        <div style={{ float: 'left', width: '48px', marginLeft: '10px' }}>
+                            <img src={this.state.loading_logo} className="app-logo" alt="logo" />
                         </div>
                         <div style={{ float: 'left', width: '300px', marginLeft: '10px' }}>
                             <img src={this.state.logo} className="app-logo" alt="logo" />
