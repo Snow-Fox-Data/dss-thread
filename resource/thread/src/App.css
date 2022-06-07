@@ -10,6 +10,7 @@ html {
 
 .app-logo {
   max-width: 300px;
+  margin: 5px;
 }
 
 .cellLink {
@@ -141,7 +142,8 @@ ul.navbar-nav li.nav-item a {
 }
 
 ul.navbar-nav li.nav-item a.active {
-  border-bottom: solid 2px #FFF;
+  border-bottom: solid 1px #FFF;
+  font-weight: bold;
 }
 
 ul.navbar-nav li.nav-item a:hover {
