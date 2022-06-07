@@ -3,8 +3,9 @@ html {
 }
 
 p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
-}
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important
+
+ }
 
 .app-link {
   text-decoration: underline;
@@ -37,7 +38,7 @@ p {
 }
 
 .dataiku-item p {
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   margin-bottom: .2em;
 }
 
@@ -121,10 +122,10 @@ p {
   left: 0px;
 }
 
-/* .navbar {
+.navbar {
   padding: 0;
-  background-color: rgba(0, 0, 0, .03);
-  border: 1px solid rgba(0, 0, 0, .125)
+  /* background-color: rgba(0, 0, 0, .03);
+  border: 1px solid rgba(0, 0, 0, .125) */
 }
 
 .navbar .container-fluid {
@@ -132,7 +133,7 @@ p {
 }
 
 .navbar .dropdown {
-  font-size: 18px;
+  /* font-size: 18px; */
 }
 
 ul.navbar-nav li.nav-item {
@@ -157,7 +158,7 @@ ul.navbar-nav li.nav-item a:hover {
   font-weight: bold;
   background-color: #bbb;
   color: #043C5B;
-} */
+}
 
 .lineage-node-icon {
   float: left;
