@@ -109,10 +109,12 @@ class App extends Component {
                     <div>Unauthorized</div>
                 }
                 {this.state.fullRescan ?
-                    <nav class="navbar navbar-expand-lg "> 
-                    {/* navbar-dark bg-dark */}
+                    <nav class="navbar navbar-expand-lg ">
+                        {/* navbar-dark bg-dark */}
                         <div style={{ float: 'left', width: '75px' }}>
-                            <img style={{ width: '75px' }} src={this.state.logo} className="app-logo" alt="logo" />
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
                         </div>
                         <div style={{ float: 'left' }}>
                             <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Full scan in progress...</a>
@@ -121,7 +123,7 @@ class App extends Component {
                     :
                     <div hidden={!this.state.loggedIn}>
                         <nav class="navbar navbar-expand-lg">
-                            
+
                             <div class="container-fluid">
                                 <img src={this.state.logo} className="app-logo" alt="logo" />
                                 {/* <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
