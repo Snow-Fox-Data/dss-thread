@@ -21,7 +21,7 @@ import {
 } from "react-router-dom";
 
 import logo from "./assets/images/thread-logo.png";
-import loading_logo from "./assets/images/loading.gif";
+// import loading_logo from "./assets/images/loading.gif";
 import Common from "./common/common";
 
 class App extends Component {
@@ -47,9 +47,9 @@ class App extends Component {
 
             eventBus.on("scanning", (isScanning) => {
                 if (isScanning)
-                    this.setState({ "logo": loading_logo })
+                    this.setState({ "fullRescan":true })
                 else
-                    this.setState({ "logo": logo })
+                    this.setState({ "fullRescan":false})
             });
         });
     }
@@ -80,7 +80,7 @@ class App extends Component {
         if (!this.state.scanning) {
 
             if (window.confirm('A full rescan make take minutes to complete and may affect other Thread users. Would you like to proceed?')) {
-                this.setState({ "logo": loading_logo })
+                // this.setState({ "logo": loading_logo })
 
                 this.setState({ scanning: true });
                 this.setState({ fullRescan: true });
