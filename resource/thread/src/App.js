@@ -46,10 +46,10 @@ class App extends Component {
             this.refreshUser();
 
             eventBus.on("scanning", (isScanning) => {
-                if (isScanning)
-                    this.setState({ "logo": loading_logo })
-                else
-                    this.setState({ "logo": logo })
+                // if (isScanning)
+                    // this.setState({ "logo": loading_logo })
+                // else
+                    // this.setState({ "logo": logo })
             });
         });
     }
@@ -111,7 +111,10 @@ class App extends Component {
                 {this.state.fullRescan ?
                     <nav class="navbar navbar-expand-lg ">
                         {/* navbar-dark bg-dark */}
-                        <div style={{ float: 'left', width: '75px' }}>
+                        <div style={{ float: 'left', width: '75px', marginLeft: '10px' }}>
+                            <img src={this.state.loading_logo} className="app-logo" alt="logo" />
+                        </div>
+                        <div style={{ float: 'left', width: '300px', marginLeft: '10px' }}>
                             <img src={this.state.logo} className="app-logo" alt="logo" />
                         </div>
                         <div style={{ float: 'left' }}>
@@ -124,10 +127,7 @@ class App extends Component {
 
                             <div class="container-fluid">
                                 <img src={this.state.logo} className="app-logo" alt="logo" />
-                                {/* <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Thread</a>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button> */}
+                                
                                 <div class="collapse navbar-collapse" id="navbarContent">
                                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                         <li class="nav-item">
