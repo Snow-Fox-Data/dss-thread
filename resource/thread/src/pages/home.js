@@ -338,7 +338,7 @@ class Home extends Component {
                                 <h3>Projects Recently Created in DSS</h3>
                             </Col>
                             <Col xs={2} style={{ textAlign: 'right' }}>
-                                <Button variant="outline-secondary" size="sm" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
+                                <Button variant="outline-secondary" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
                             </Col>
                         </Row>
                         <Row>

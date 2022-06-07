@@ -32,6 +32,10 @@ p {
   float: right;
 }
 
+.dataiku-item {
+  margin-top:10px;
+}
+
 .dataiku-item .icon {
   max-width: 90px;
   max-height: 90px;
