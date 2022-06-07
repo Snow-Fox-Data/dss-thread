@@ -782,7 +782,7 @@ class DataikuItem extends Component {
                 <Col sm={4}>
                     <div class="options-button">
                         <Dropdown>
-                            <Dropdown.Toggle size="sm"
+                            <Dropdown.Toggle 
                                 variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
@@ -889,7 +889,7 @@ class DataikuItem extends Component {
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                     <div class="options-button">
                         <Dropdown>
-                            <Dropdown.Toggle size="sm"
+                            <Dropdown.Toggle 
                                 variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
@@ -980,7 +980,7 @@ class DataikuItem extends Component {
                     {this.props.item.user_security &&
                         <div class='options-button'>
                             <Dropdown>
-                                <Dropdown.Toggle size="sm"
+                                <Dropdown.Toggle 
                                     variant="outline-secondary">
                                     Options
                                 </Dropdown.Toggle>
