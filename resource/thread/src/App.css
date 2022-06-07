@@ -124,8 +124,8 @@ p {
 
 .navbar {
   padding: 0;
-  /* background-color: rgba(0, 0, 0, .03);
-  border: 1px solid rgba(0, 0, 0, .125) */
+  background-color: rgba(0, 0, 0, .03);
+  border: 1px solid rgba(0, 0, 0, .125)
 }
 
 .navbar .container-fluid {
@@ -133,7 +133,7 @@ p {
 }
 
 .navbar .dropdown {
-  /* font-size: 18px; */
+  font-size: 18px;
 }
 
 ul.navbar-nav li.nav-item {
