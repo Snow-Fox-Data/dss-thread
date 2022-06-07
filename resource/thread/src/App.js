@@ -112,9 +112,7 @@ class App extends Component {
                     <nav class="navbar navbar-expand-lg ">
                         {/* navbar-dark bg-dark */}
                         <div style={{ float: 'left', width: '75px' }}>
-                            <Spinner animation="border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
+                            <img src={this.state.logo} className="app-logo" alt="logo" />
                         </div>
                         <div style={{ float: 'left' }}>
                             <a class="navbar-brand" style={{ fontWeight: "bold", fontSize: "27px" }}>Full scan in progress...</a>
