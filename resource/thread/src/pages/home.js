@@ -150,7 +150,7 @@ class Home extends Component {
     loadItemByKey = (itemKey) => {
         this.props.navigate("/dss/" + encodeURIComponent(itemKey), {replace:false});
 
-        console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
+        // console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -261,12 +261,12 @@ class Home extends Component {
         };
 
         let url = window.getWebAppBackendUrl('scan-new');
-        // this.setState({ loading: true });
-        eventBus.dispatch('scanning', true);
+        this.setState({ loading: true });
+        // eventBus.dispatch('scanning', true);
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                eventBus.dispatch('scanning', false);
+                // eventBus.dispatch('scanning', false);
                 this.setState({ loading: false });
 
                 if (response.projects.length > 0)
