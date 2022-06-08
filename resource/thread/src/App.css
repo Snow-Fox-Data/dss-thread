@@ -9,7 +9,8 @@ p {
 
 .app-link {
   text-decoration: underline;
-  color: #3399f3;
+  /* color: #3399f3; */
+  color: #7C9CB4;
   cursor: pointer;
 }
 
