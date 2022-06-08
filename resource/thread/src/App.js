@@ -38,7 +38,7 @@ class App extends Component {
             scanning: false,
             logo: logo,
             fullRescan: false,
-            loading_logo:loading_logo
+            loading_logo: loading_logo
         }
     }
 
@@ -47,10 +47,11 @@ class App extends Component {
             this.refreshUser();
 
             eventBus.on("scanning", (isScanning) => {
-                if (isScanning)
-                    this.setState({ "logo": loading_logo })
-                else
-                    this.setState({ "logo": logo })
+                // if (isScanning)
+                //     this.setState({ "logo": loading_logo })
+                // else
+                //     this.setState({ "logo": logo })
+                this.setState({ 'scanning': isScanning })
             });
         });
     }
@@ -109,16 +110,16 @@ class App extends Component {
                 {this.state.loggedIn != null && this.state.loggedIn === false &&
                     <div>Unauthorized</div>
                 }
-                {this.state.loading ?
+                {this.state.scanning ?
                     <nav class="navbar navbar-expand-lg ">
                         {/* navbar-dark bg-dark */}
                         <div style={{ float: 'left', width: '32px', marginLeft: '10px' }}>
-                            <img src={this.state.loading_logo} style={{width:'32px'}} className="app-logo" alt="logo" />
+                            <img src={this.state.loading_logo} style={{ width: '32px' }} className="app-logo" alt="logo" />
                         </div>
                         <div style={{ float: 'left', width: '300px', marginLeft: '10px' }}>
                             <img src={this.state.logo} className="app-logo" alt="logo" />
                         </div>
-                        
+
                         {/* <div style={{ float: 'left', paddingLeft:'10px' }}>
                             <a class="navbar-brand" style={{ fontSize: "27px" }}>Full scan in progress...</a>
                         </div> */}
