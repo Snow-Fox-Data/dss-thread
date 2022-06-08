@@ -109,7 +109,7 @@ class App extends Component {
                 {this.state.loggedIn != null && this.state.loggedIn === false &&
                     <div>Unauthorized</div>
                 }
-                {this.state.fullRescan ?
+                {this.state.loading ?
                     <nav class="navbar navbar-expand-lg ">
                         {/* navbar-dark bg-dark */}
                         <div style={{ float: 'left', width: '32px', marginLeft: '10px' }}>
@@ -118,9 +118,10 @@ class App extends Component {
                         <div style={{ float: 'left', width: '300px', marginLeft: '10px' }}>
                             <img src={this.state.logo} className="app-logo" alt="logo" />
                         </div>
-                        <div style={{ float: 'left', paddingLeft:'10px' }}>
+                        
+                        {/* <div style={{ float: 'left', paddingLeft:'10px' }}>
                             <a class="navbar-brand" style={{ fontSize: "27px" }}>Full scan in progress...</a>
-                        </div>
+                        </div> */}
                     </nav>
                     :
                     <div hidden={!this.state.loggedIn}>
