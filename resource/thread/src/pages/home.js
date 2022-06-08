@@ -267,8 +267,7 @@ class Home extends Component {
             .then(res => res.json())
             .then((response) => {
                 eventBus.dispatch('scanning', false);
-
-                // this.setState({ loading: false });
+                this.setState({ loading: false });
 
                 if (response.projects.length > 0)
                     this.reloadDssStats();

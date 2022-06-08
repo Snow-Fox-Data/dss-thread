@@ -113,7 +113,7 @@ class App extends Component {
                 {this.state.scanning ?
                     <nav class="navbar navbar-expand-lg ">
                         {/* navbar-dark bg-dark */}
-                        <div style={{ float: 'left', width: '32px', marginLeft: '10px' }}>
+                        <div style={{ float: 'left', width: '48px', marginLeft: '10px' }}>
                             <img src={this.state.loading_logo} style={{ width: '32px' }} className="app-logo" alt="logo" />
                         </div>
                         <div style={{ float: 'left', width: '300px', marginLeft: '10px' }}>
