@@ -436,6 +436,7 @@ class DataikuItem extends Component {
             .then(res => res.json())
             .then((response) => {
                 // eventBus.dispatch("scanning", false);
+                eventBus.dispatch("loading", false);
                 this.openDssObject(this.props.item.projectKey)
                 // this.openDssObject(this.props.item.projectKey)
             });
