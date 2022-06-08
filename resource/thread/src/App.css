@@ -9,8 +9,14 @@ p {
 .app-link {
   text-decoration: underline;
   /* color: #3399f3; */
-  color: #7C9CB4;
+  color: #043C5B;
   cursor: pointer;
+}
+
+.app-link:hover {
+  text-decoration: underline;
+  /* color: #3399f3; */
+  color: #2CB37C;
 }
 
 .app-logo {
