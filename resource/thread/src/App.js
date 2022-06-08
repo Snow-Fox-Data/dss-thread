@@ -33,7 +33,7 @@ class App extends Component {
         this.state = {
             dataiku: undefined,
             currentUser: '',
-            loading: true,
+            loading: false,
             loggedIn: null,
             scanning: false,
             logo: logo,
