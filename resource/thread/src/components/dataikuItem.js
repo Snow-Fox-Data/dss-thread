@@ -236,7 +236,7 @@ class DataikuItem extends Component {
     componentDidMount() {
         switch (this.props.object_type) {
             case 'column':
-                var tags = this.tagListToObj(eval(this.props.item.tags));
+                var tags = this.tagListToObj(eval(this.props.item.tag_list));
                 this.setState({
                     columnTagSuggestions: tags
                 })
