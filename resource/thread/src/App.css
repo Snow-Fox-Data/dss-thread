@@ -167,10 +167,9 @@ ul.navbar-nav li.nav-item a.active {
 }
 
 ul.navbar-nav li.nav-item a:hover {
-
-  font-weight: bold;
-  background-color: #bbb;
-  color: #043C5B;
+  /* font-weight: bold; */
+  color: #2CB37C;
+  background-color: #ccc;
 }
 
 .lineage-node-icon {
@@ -4616,7 +4615,7 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: .5rem 1rem;
-  color: #4582ec;
+  color: #7C9CB4;
   text-decoration: none;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out
 }
