@@ -6,7 +6,7 @@ import Common from '../common/common';
 import DataikuItem from '../components/dataikuItem';
 import eventBus from '../eventBus';
 import { useParams, useNavigate } from "react-router-dom"
-import loading_logo from "../assets/images/loader.gif";
+import loading_logo from "../assets/images/loading.gif";
 
 class Home extends Component {
 
