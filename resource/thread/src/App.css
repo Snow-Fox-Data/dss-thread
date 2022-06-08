@@ -23,6 +23,15 @@ p {
   cursor: pointer;
 }
 
+.bg-success {
+  background-color: #2CB37C;
+}
+
+.btn-primary {
+ background-color: #043C5B;
+ border-color: #043C5B;
+}
+
 .card-text {
   font-size: 1rem !important;
 }
@@ -609,12 +618,12 @@ sup {
 }
 
 a {
-  color: #4582ec;
+  color: #7C9CB4;
   text-decoration: underline
 }
 
 a:hover {
-  color: #3768bd
+  color: #043C5B;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
