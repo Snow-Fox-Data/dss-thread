@@ -61,7 +61,7 @@ class Catalog extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                this.setState({ definitions: response });
+                this.setState({ searchBy: term, definitions: response });
                 this.sortDefinitions(Catalog.NAME);
             });
     }
@@ -211,8 +211,8 @@ class Catalog extends Component {
                         <div style={{ display: "block" }}>
                             <FaFilter style={{
                                 color: "#000",
-                                height: '21px',
-                                width: '21px'
+                                height: '18px',
+                                width: '18px'
                             }} />
                         </div>
                     </span>
@@ -263,8 +263,8 @@ class Catalog extends Component {
                                 <div style={{ display: "block" }}>
                                     <FaSearch style={{
                                         color: "#000",
-                                        height: '21px',
-                                        width: '21px'
+                                        height: '18px',
+                                        width: '18px'
                                     }} />
                                 </div>
                             </span>

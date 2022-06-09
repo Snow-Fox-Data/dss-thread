@@ -185,7 +185,7 @@ class DataikuItem extends Component {
 
         arrayTags.forEach(element => {
             if (link) {
-                tags[tags.length] = <Button onClick={() => this.openDssObject(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} size="sm">
+                tags[tags.length] = <Button onClick={() => this.openDssObject(element)} style={{ marginRight: '6px', marginBottom: '5px' }} variant={variant} >
                     <span style={{ paddingRight: '4px' }}>{element}</span><ArrowUpRightSquare />
                 </Button>
             }
