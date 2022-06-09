@@ -61,7 +61,7 @@ class Catalog extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                this.setState({ searchBy: term, definitions: response });
+                this.setState({ searchBy: term, tag:'', definitions: response });
                 this.sortDefinitions(Catalog.NAME);
             });
     }
