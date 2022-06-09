@@ -74,9 +74,8 @@ p {
 }
 
 .definition-name>span {
-  color: #3399f3;
-  text-decoration: underline;
   padding-left: 5px;
+  font-size: 1em;
 }
 
 .definition-tag {

@@ -25,7 +25,7 @@ class Home extends Component {
             errorMsg: '',
             currentUser: '',
             loading: true,
-            openFilter: true,
+            openFilter: false,
             selectedItem: null,
             selectedItemType: null,
             searchResults: [],
@@ -385,7 +385,7 @@ class Home extends Component {
 
         return (
             <>
-                <Row>
+                <Row style={{paddingBottom:'12px', paddingLeft:'16px'}}>
                     <Col>
                         <div className="input-group" style={{ width: "100%" }}>
                             <AsyncTypeahead
@@ -417,7 +417,7 @@ class Home extends Component {
                 </Row>
 
                 {openFilter ?
-                    <Row className="filter" style={{ marginTop: "0.5em" }}>
+                    <Row className="filter" style={{ paddingBottom: "6px" }}>
                         {Object.entries(filters).map(([key, value]) => {
                             return (
                                 <Col xs={3} md={2} lg={1}>

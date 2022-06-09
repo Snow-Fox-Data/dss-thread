@@ -217,7 +217,7 @@ class Catalog extends Component {
                         </div>
                     </span>
 
-                    <select class="form-control" style={{padding:'0px'}} onChange={event => this.onChangeTag(event.target.value)} value={this.state.tag}>
+                    <select class="form-control" style={{padding:'0px 6px'}} onChange={event => this.onChangeTag(event.target.value)} value={this.state.tag}>
                         <option value={""}>Filter By Tag</option>
                         {tags}
                     </select>
