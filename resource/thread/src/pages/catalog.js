@@ -76,7 +76,7 @@ class Catalog extends Component {
         fetch(url, requestOptions)
             .then(res => res.json())
             .then((response) => {
-                this.setState({ definitions: response });
+                this.setState({ definitions: response, searchBy:'' });
                 this.sortDefinitions(Catalog.NAME);
             });
     }
@@ -175,7 +175,7 @@ class Catalog extends Component {
             var listItems = this.state.definitions.map((col) =>
                 <tr>
                     <td className='definition-name' onClick={() => this.openDefinition(col.id)}>
-                        <span>{col.name}</span>
+                        <span class="app-link">{col.name}</span>
                     </td>
                     <td>
                         {col.description}
@@ -217,7 +217,7 @@ class Catalog extends Component {
                         </div>
                     </span>
 
-                    <select class="form-control" onChange={event => this.onChangeTag(event.target.value)} value={this.state.tag}>
+                    <select class="form-control" style={{padding:'0px'}} onChange={event => this.onChangeTag(event.target.value)} value={this.state.tag}>
                         <option value={""}>Filter By Tag</option>
                         {tags}
                     </select>
