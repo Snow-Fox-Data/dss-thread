@@ -609,7 +609,7 @@ class DataikuItem extends Component {
                                                     <div style={{ padding: "10px 0px" }}>
                                                         <Form.Label>Applied To</Form.Label>
                                                         <div>
-                                                            {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'secondary')}
+                                                            {this.buildTagsString(eval(this.state.tempSelDef.applied_to), 'light')}
                                                         </div>
                                                     </div>
                                                 }
