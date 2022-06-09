@@ -47,6 +47,10 @@ p {
   float: right;
 }
 
+.btn-light {
+  border-color:#aaa !important;
+}
+
 .dataiku-item {
   margin-top: 10px;
 }
