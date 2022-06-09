@@ -719,9 +719,10 @@ class DataikuItem extends Component {
                     <Tabs defaultActiveKey="definition" className="mb-3" onSelect={tabClicked}>
                         <Tab eventKey="definition" title="Definition" def>
                             {
-                                (this.props.item.definition.id == -1 && this.props.item.user_security) &&
+                                (this.props.item.definition.id == -1) &&
                                 <div>
                                     <Button variant="primary"
+                                    disabled={!this.props.item.user_security}
                                         onClick={() => this.newDef()}
                                     >{(this.props.item.comment != null && this.props.item.comment.length > 0) ?
                                         <span>Create Definition from Column Description</span>
