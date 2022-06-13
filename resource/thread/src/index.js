@@ -8,17 +8,17 @@ import Common from './common/common';
 import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 import NotFound from "./pages/notfound"
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+// import * as Sentry from "@sentry/react";
+// import { BrowserTracing } from "@sentry/tracing";
 
-Sentry.init({
-  dsn: "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
-  integrations: [new BrowserTracing()],
+// Sentry.init({
+//   dsn: "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
+//   integrations: [new BrowserTracing()],
 
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
-  tracesSampleRate: 1.0,
-});
+//   // We recommend adjusting this value in production, or using tracesSampler
+//   // for finer control
+//   tracesSampleRate: 1.0,
+// });
 
 ReactDOM.render(
   // <React.StrictMode>

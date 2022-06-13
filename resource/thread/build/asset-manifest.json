@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Excelion-Partners/dss-thread/static/css/main.562671ab.chunk.css",
+    "main.js": "/Excelion-Partners/dss-thread/static/js/main.ce22b8ea.chunk.js",
+    "main.js.map": "/Excelion-Partners/dss-thread/static/js/main.ce22b8ea.chunk.js.map",
+    "runtime-main.js": "/Excelion-Partners/dss-thread/static/js/runtime-main.2a335f8f.js",
+    "runtime-main.js.map": "/Excelion-Partners/dss-thread/static/js/runtime-main.2a335f8f.js.map",
+    "static/css/2.68a81a89.chunk.css": "/Excelion-Partners/dss-thread/static/css/2.68a81a89.chunk.css",
+    "static/js/2.5dbcee94.chunk.js": "/Excelion-Partners/dss-thread/static/js/2.5dbcee94.chunk.js",
+    "static/js/2.5dbcee94.chunk.js.map": "/Excelion-Partners/dss-thread/static/js/2.5dbcee94.chunk.js.map",
+    "index.html": "/Excelion-Partners/dss-thread/index.html",
+    "precache-manifest.02a20391b4e9eb3db5d8ebc2ed904da9.js": "/Excelion-Partners/dss-thread/precache-manifest.02a20391b4e9eb3db5d8ebc2ed904da9.js",
+    "service-worker.js": "/Excelion-Partners/dss-thread/service-worker.js",
+    "static/css/2.68a81a89.chunk.css.map": "/Excelion-Partners/dss-thread/static/css/2.68a81a89.chunk.css.map",
+    "static/css/main.562671ab.chunk.css.map": "/Excelion-Partners/dss-thread/static/css/main.562671ab.chunk.css.map",
+    "static/js/2.5dbcee94.chunk.js.LICENSE.txt": "/Excelion-Partners/dss-thread/static/js/2.5dbcee94.chunk.js.LICENSE.txt",
+    "static/media/loading.gif": "/Excelion-Partners/dss-thread/static/media/loading.1a721458.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2a335f8f.js",
+    "static/css/2.68a81a89.chunk.css",
+    "static/js/2.5dbcee94.chunk.js",
+    "static/css/main.562671ab.chunk.css",
+    "static/js/main.ce22b8ea.chunk.js"
+  ]
+}
