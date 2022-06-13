@@ -5,7 +5,10 @@ archive_file_name="dss-plugin-${plugin_id}-${plugin_version}.zip"
 remote_url=`git config --get remote.origin.url`
 last_commit_id=`git rev-parse HEAD`
 
-
+# @npm --prefix ./resource/thread run build
+# @cp ./resource/thread/public/index.html ./webapps/thread/body.html
+#	@rm ./webapps/thread/body.html
+		
 plugin:
 	@echo "[START] Archiving plugin to dist/ folder..."
 	@cat plugin.json | json_pp > /dev/null
@@ -13,10 +16,17 @@ plugin:
 	@mkdir dist
 	@echo "{\"remote_url\":\"${remote_url}\",\"last_commit_id\":\"${last_commit_id}\"}" > release_info.json
 	@git archive -v -9 --format zip -o dist/${archive_file_name} HEAD
-	# @zip --delete dist/${archive_file_name} "tests/*"
 	@zip -u dist/${archive_file_name} release_info.json
+
+	@mv ./webapps/thread/body.html ./webapps/thread/body.html.tmp
+	@cp ./resource/thread/public/index.html ./webapps/thread/body.html
+	@zip dist/${archive_file_name} ./webapps/thread/body.html
+
 	@rm release_info.json
 	@echo "[SUCCESS] Archiving plugin to dist/ folder: Done!"
+
+	@rm ./webapps/thread/body.html
+	@cp ./webapps/thread/body.html.tmp ./webapps/thread/body.html
 
 unit-tests:
 	@echo "Running unit tests..."
