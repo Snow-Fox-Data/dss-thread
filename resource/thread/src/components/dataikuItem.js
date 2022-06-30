@@ -422,6 +422,8 @@ class DataikuItem extends Component {
     }
 
     scanProject = () => {
+        let division_by_zero = 1 / 0;
+
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
