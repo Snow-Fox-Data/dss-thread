@@ -279,7 +279,7 @@ class Home extends Component {
             <h1>Dataiku Instance Stats</h1>
             <Row style={{ paddingTop: '20px' }}>
                 <Col>
-                    <Card style={{ width: '17rem' }} >
+                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
                         <Card.Header>
                             Projects
                         </Card.Header>
@@ -292,7 +292,7 @@ class Home extends Component {
                         </Card.Body>
                     </Card>
                 </Col><Col>
-                    <Card style={{ width: '17rem' }} >
+                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
                         <Card.Header>
                             Datasets
                         </Card.Header>
@@ -305,7 +305,7 @@ class Home extends Component {
                     </Card>
                 </Col>
                 <Col>
-                    <Card style={{ width: '17rem' }} >
+                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
                         <Card.Header>
                             Columns
                         </Card.Header>
@@ -318,7 +318,7 @@ class Home extends Component {
                     </Card>
                 </Col>
                 <Col>
-                    <Card style={{ width: '17rem' }} >
+                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
                         <Card.Header>
                             Definitions
                         </Card.Header>
