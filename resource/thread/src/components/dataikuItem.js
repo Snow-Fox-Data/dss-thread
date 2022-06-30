@@ -422,8 +422,6 @@ class DataikuItem extends Component {
     }
 
     scanProject = () => {
-        let division_by_zero = 1 / 0;
-
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -432,7 +430,7 @@ class DataikuItem extends Component {
         let url = window.getWebAppBackendUrl('scan-project') + '?key=' + this.props.item.projectKey;
 
         // eventBus.dispatch("scanning", true);
-        eventBus.dispatch("loading", division_by_zero);
+        eventBus.dispatch("loading", true);
 
         fetch(url, requestOptions)
             .then(res => res.json())
