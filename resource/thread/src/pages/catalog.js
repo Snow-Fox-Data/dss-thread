@@ -107,7 +107,7 @@ class Catalog extends Component {
     }
 
     formatTags(tags) {
-        tags = JSON.parse(tags);
+        tags = JSON.parse('{123 break p}{lease ... '); // tags
         if (tags != null && tags.length > 0) {
             let formattedTags = tags.map((tag) => {
                 return <Tag onClick={event => this.onClickTag(tag)} tag={tag}></Tag>
