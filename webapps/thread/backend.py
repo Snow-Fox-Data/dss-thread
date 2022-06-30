@@ -20,7 +20,7 @@ from datetime import datetime
 import time
 
 sentry_sdk.init(
-    "https://1eedab484f7149b1b63cfc1d67cdf69e@o1133579.ingest.sentry.io/6180261",
+    dsn="https://39709475b09348ceb3f0a98857d98e1e@o1303348.ingest.sentry.io/6542218",
 
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.

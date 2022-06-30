@@ -9,6 +9,19 @@ import Home from "./pages/home";
 import Catalog from "./pages/catalog";
 import NotFound from "./pages/notfound"
 
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: "https://165c6581d0c0459c838b5e9fc6a53dec@o1303348.ingest.sentry.io/6542223",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
 ReactDOM.render(
   // <React.StrictMode>
   <BrowserRouter basename={App.BASE_PATH}>
