@@ -77,7 +77,9 @@ def dss_stats():
 @app.route('/scan', methods=['GET'])
 def scan():
     try:
-        p = dataiku.Project() # create a project handle
+        client = dataiku.api_client()
+
+        p = client.get_default_project() #dataiku.Project() # create a project handle
         proj_vars = p.get_variables() # retrieve your variables as a dictionary
 
         dss = dss_utils()
@@ -85,7 +87,7 @@ def scan():
         # initializing flow zones
         flow = p.get_flow()
         zone = flow.create_zone("Thread Internal Datasets")
-        
+
         # initializing the datasets
         ds1 = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
         ds2 = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
