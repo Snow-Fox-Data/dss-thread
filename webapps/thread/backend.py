@@ -111,9 +111,8 @@ def scan():
         result = dss.scan_server(tags)
 
         # reset the project variables
-        # proj_vars["standard"]['scanning'] = 'False'
-        # proj_vars["standard"]['limit_to_folders'] = folders
-        # p.set_variables(proj_vars) 
+        proj_vars["standard"]['limit_to_tags'] = tags
+        p.set_variables(proj_vars) 
 
         return json.dumps({"result": "scan complete"})
     except Exception as e:
