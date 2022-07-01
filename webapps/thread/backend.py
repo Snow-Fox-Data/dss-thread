@@ -92,7 +92,7 @@ def scan():
 
         # create the internal zone
         zone_name = "Thread Internal Datasets"
-        zone = init_thread_zone(zone_name)
+        zone = init_thread_zone(p, zone_name)
 
         # add the datasets to our default zone
         zone.add_item(ds1)
