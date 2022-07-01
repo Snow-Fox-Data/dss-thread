@@ -378,7 +378,7 @@ def init_thread_zone(project, zone_name):
             break
 
     if zone is None:
-        zone = flow.create_zone()
+        zone = flow.create_zone(zone_name)
 
     return zone
 
