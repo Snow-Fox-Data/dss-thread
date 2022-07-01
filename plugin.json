@@ -1,13 +1,13 @@
 {
     "id": "dss-thread",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "meta": {
         "label": "Thread",
         "description": "Data Catalog and Lineage Tool",
-        "author": "Excelion Partners",
+        "author": "Snowfox Data",
         "icon": "icon-book",
         "tags": [],
-        "url": "https://excelion.io",
+        "url": "https://snowfoxdata.com",
         "licenseInfo": "Commons Clause / GPL-3.0 License"
     }
 }
