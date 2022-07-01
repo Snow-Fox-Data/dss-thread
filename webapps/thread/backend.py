@@ -427,7 +427,7 @@ class dss_utils:
 
         ds2.write_dataframe(df) 
 
-        return ds2
+        return proj.get_dataset(name)
 
     # def dataset_project_shares(self, project_key):
     #     project = self.client.get_project(project_key)
