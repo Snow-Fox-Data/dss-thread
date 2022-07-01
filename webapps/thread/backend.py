@@ -84,15 +84,15 @@ def scan():
 
         dss = dss_utils()
 
-        # initializing flow zones
-        flow = p.get_flow()
-        zone = flow.create_zone("Thread Internal Datasets")
-
         # initializing the datasets
         ds1 = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
         ds2 = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
         ds3 = dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
         ds4 = dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
+
+        # create the internal zone
+        zone_name = "Thread Internal Datasets"
+        zone = init_thread_zone(zone_name)
 
         # add the datasets to our default zone
         zone.add_item(ds1)
@@ -368,6 +368,20 @@ def update_desc():
         "value": desc
     })
 
+def init_thread_zone(project, zone_name):
+     # initializing flow zones
+    flow = project.get_flow()
+    zone = None
+    for zn in flow.list_zones():
+        if zone.name == zone_name:
+            zone = zn
+            break
+
+    if zone is None:
+        zone = flow.create_zone()
+
+    return zone
+
 def get_user_client():
     headers = dict(request.headers)
     auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
@@ -405,7 +419,7 @@ class dss_utils:
         exists = ds.exists()
         if exists:
             if not overwrite:
-                return
+                return proj.get_dataset(name)
             
             ds.delete(drop_data=True)
             
