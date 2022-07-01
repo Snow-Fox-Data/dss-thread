@@ -101,16 +101,19 @@ def scan():
         zone.add_item(ds4)
 
         # limit to folders
-        folders = []
-        if 'limit_to_folders' in proj_vars["standard"]:
-            folders = proj_vars["standard"]['limit_to_folders']
+        # folders = []
+        # if 'limit_to_folders' in proj_vars["standard"]:
+        #     folders = proj_vars["standard"]['limit_to_folders']
+        tags = []
+        if 'limit_to_tags' in proj_vars["standard"]:
+            tags = proj_vars["standard"]['limit_to_tags']
 
-        result = dss.scan_server(folders)
+        result = dss.scan_server(tags)
 
         # reset the project variables
         # proj_vars["standard"]['scanning'] = 'False'
-        proj_vars["standard"]['limit_to_folders'] = folders
-        p.set_variables(proj_vars) 
+        # proj_vars["standard"]['limit_to_folders'] = folders
+        # p.set_variables(proj_vars) 
 
         return json.dumps({"result": "scan complete"})
     except Exception as e:
@@ -853,7 +856,7 @@ class dss_utils:
 
         ds.write_dataframe(df)
 
-    def scan_server(self, limit_to_folders = []):
+    def scan_server(self, limit_to_tags = []):
         project_list = []
         index_list = []
         scan_obj = {}
@@ -863,12 +866,25 @@ class dss_utils:
             try:
                 project = self.client.get_project(proj)
 
-                folder = project.get_project_folder().name
-                if len(limit_to_folders) > 0 and folder not in limit_to_folders:
-                    continue
+                # folder = project.get_project_folder().name
+                # if len(limit_to_folders) > 0 and folder not in limit_to_folders:
+                    # continue
 
                 proj_meta = project.get_metadata()
                 
+                # check to make sure this project has the tags we want to scan (or no tags specified)
+                ok_to_scan = False
+                if len(limit_to_tags) == 0:
+                    ok_to_scan = True
+                else:
+                    for limit in limit_to_tags:
+                        for tag in proj_meta['tags']:
+                            if limit.lower() == tag.lower():
+                                ok_to_scan = True
+                                break
+                if not ok_to_scan:
+                    continue
+
                 datasets = project.list_datasets()
                 recipes = project.list_recipes()
                 folders = project.list_managed_folders()
