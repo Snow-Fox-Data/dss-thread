@@ -373,7 +373,7 @@ def init_thread_zone(project, zone_name):
     flow = project.get_flow()
     zone = None
     for zn in flow.list_zones():
-        if zone.name == zone_name:
+        if zn.name == zone_name:
             zone = zn
             break
 
