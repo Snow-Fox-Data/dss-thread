@@ -82,11 +82,21 @@ def scan():
 
         dss = dss_utils()
 
+        # initializing flow zones
+        flow = p.get_flow()
+        zone = flow.create_zone("Thread Internal Datasets")
+        
         # initializing the datasets
-        dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
-        dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
-        dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
-        dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
+        ds1 = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
+        ds2 = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
+        ds3 = dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
+        ds4 = dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
+
+        # add the datasets to our default zone
+        zone.add_item(ds1)
+        zone.add_item(ds2)
+        zone.add_item(ds3)
+        zone.add_item(ds4)
 
         # limit to folders
         folders = []
