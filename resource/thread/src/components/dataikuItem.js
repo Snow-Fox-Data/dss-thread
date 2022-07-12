@@ -478,11 +478,12 @@ class DataikuItem extends Component {
         let applieds = [];
         let refs = {};
         if (this.state.tempSelDef.id > -1) {
+            applieds = eval(this.state.tempSelDef.applied_to); // applying an existing definition
+
+        } else {
             if (this.props.item.definition.id > -1) {
                 applieds = eval(this.props.item.definition.applied_to)
             }
-        } else {
-            applieds = eval(this.state.tempSelDef.applied_to); // applying an existing definition
         }
 
         if (this.props.item.lineage_downstream != null) {
