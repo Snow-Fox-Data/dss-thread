@@ -479,6 +479,8 @@ class DataikuItem extends Component {
             }
         }
 
+        this.setState({ applyToDataSets: applieds });
+
         if (this.props.item.lineage_downstream != null) {
             let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
             down_flat.map((type) => {
@@ -722,7 +724,7 @@ class DataikuItem extends Component {
                                 (this.props.item.definition.id == -1) &&
                                 <div>
                                     <Button variant="primary"
-                                    disabled={!this.props.item.user_security}
+                                        disabled={!this.props.item.user_security}
                                         onClick={() => this.newDef()}
                                     >{(this.props.item.comment != null && this.props.item.comment.length > 0) ?
                                         <span>Create Definition from Column Description</span>
@@ -785,7 +787,7 @@ class DataikuItem extends Component {
                 <Col sm={4}>
                     <div class="options-button">
                         <Dropdown>
-                            <Dropdown.Toggle 
+                            <Dropdown.Toggle
                                 variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
@@ -892,7 +894,7 @@ class DataikuItem extends Component {
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                     <div class="options-button">
                         <Dropdown>
-                            <Dropdown.Toggle 
+                            <Dropdown.Toggle
                                 variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
@@ -983,7 +985,7 @@ class DataikuItem extends Component {
                     {this.props.item.user_security &&
                         <div class='options-button'>
                             <Dropdown>
-                                <Dropdown.Toggle 
+                                <Dropdown.Toggle
                                     variant="outline-secondary">
                                     Options
                                 </Dropdown.Toggle>
