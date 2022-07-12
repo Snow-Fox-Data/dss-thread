@@ -464,7 +464,6 @@ class DataikuItem extends Component {
         };
         const handleLineageCheck = (e) => {
             var cb = e.target;
-            // var upstream = cb.id.indexOf('ul') > -1;
             if (cb.checked) {
                 this.state.applyToDataSets.push(cb.id.substr(3));
             }
