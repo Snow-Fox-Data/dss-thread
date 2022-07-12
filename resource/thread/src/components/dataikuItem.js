@@ -320,8 +320,14 @@ class DataikuItem extends Component {
     showLineageSelection() {
         let app_to = [];
         let tags = [];
-        if (this.props.item.definition.id > -1) {
-            app_to = eval(this.props.item.definition.applied_to);
+
+        if (this.state.tempSelDef.id > -1) {
+            app_to = eval(this.state.tempSelDef.applied_to);
+        }
+        else {
+            if (this.props.item.definition.id > -1) {
+                app_to = eval(this.props.item.definition.applied_to);
+            }
         }
 
         this.setState({
@@ -479,7 +485,8 @@ class DataikuItem extends Component {
             }
         }
 
-        this.state.applyToDataSets = applieds;
+
+        // this.state.applyToDataSets= applieds });
 
         if (this.props.item.lineage_downstream != null) {
             let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
