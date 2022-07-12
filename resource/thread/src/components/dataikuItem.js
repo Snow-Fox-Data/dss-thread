@@ -479,7 +479,7 @@ class DataikuItem extends Component {
             }
         }
 
-        this.setState({ applyToDataSets: applieds });
+        this.state.applyToDataSets = applieds;
 
         if (this.props.item.lineage_downstream != null) {
             let down_flat = this.flattenArray(this.props.item, 'lineage_downstream')
