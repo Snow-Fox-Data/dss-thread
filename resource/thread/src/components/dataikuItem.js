@@ -320,14 +320,8 @@ class DataikuItem extends Component {
     showLineageSelection() {
         let app_to = [];
         let tags = [];
-
-        if (this.state.tempSelDef.id > -1) {
-            app_to = eval(this.state.tempSelDef.applied_to);
-        }
-        else {
-            if (this.props.item.definition.id > -1) {
-                app_to = eval(this.props.item.definition.applied_to);
-            }
+        if (this.props.item.definition.id > -1) {
+            app_to = eval(this.props.item.definition.applied_to);
         }
 
         this.setState({
@@ -464,6 +458,7 @@ class DataikuItem extends Component {
         };
         const handleLineageCheck = (e) => {
             var cb = e.target;
+            // var upstream = cb.id.indexOf('ul') > -1;
             if (cb.checked) {
                 this.state.applyToDataSets.push(cb.id.substr(3));
             }
@@ -476,12 +471,11 @@ class DataikuItem extends Component {
         let upstreams = [];
         let applieds = [];
         let refs = {};
-        if (this.state.tempSelDef.id > -1) {
-            applieds = eval(this.state.tempSelDef.applied_to); // applying an existing definition
-
+        if (this.props.item.definition.id > -1) {
+            applieds = eval(this.props.item.definition.applied_to)
         } else {
-            if (this.props.item.definition.id > -1) {
-                applieds = eval(this.props.item.definition.applied_to)
+            if (this.state.tempSelDef.id > -1) {
+                applieds = eval(this.state.tempSelDef.applied_to); // applying an existing definition
             }
         }
 
@@ -728,7 +722,7 @@ class DataikuItem extends Component {
                                 (this.props.item.definition.id == -1) &&
                                 <div>
                                     <Button variant="primary"
-                                        disabled={!this.props.item.user_security}
+                                    disabled={!this.props.item.user_security}
                                         onClick={() => this.newDef()}
                                     >{(this.props.item.comment != null && this.props.item.comment.length > 0) ?
                                         <span>Create Definition from Column Description</span>
@@ -791,7 +785,7 @@ class DataikuItem extends Component {
                 <Col sm={4}>
                     <div class="options-button">
                         <Dropdown>
-                            <Dropdown.Toggle
+                            <Dropdown.Toggle 
                                 variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
@@ -898,7 +892,7 @@ class DataikuItem extends Component {
                     {this.createDocPctCard(this.props.item.total_cols, this.props.item.total_cols_def)}
                     <div class="options-button">
                         <Dropdown>
-                            <Dropdown.Toggle
+                            <Dropdown.Toggle 
                                 variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
@@ -989,7 +983,7 @@ class DataikuItem extends Component {
                     {this.props.item.user_security &&
                         <div class='options-button'>
                             <Dropdown>
-                                <Dropdown.Toggle
+                                <Dropdown.Toggle 
                                     variant="outline-secondary">
                                     Options
                                 </Dropdown.Toggle>
