@@ -696,6 +696,14 @@ class dss_utils:
         dss_users = self.client.list_users()
         for user in dss_users:
             if user['login'].lower() == user_name.lower():
+                # first check to see if user is an admin
+                grps = self.client.list_groups()
+                for user_grp in user['groups']:
+                    for dss_grp in grps:
+                        if user_grp.lower() == dss_grp.lower() and dss_grp['admin']:
+                            return True
+                
+                # if not, check if they have access to a group that has write access to the project
                 proj = self.client.get_project(proj_name)
                 perms = proj.get_permissions() 
                 for perm in perms['permissions']:
