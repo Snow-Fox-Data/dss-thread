@@ -4,8 +4,6 @@ from http import client
 import json
 import gc
 
-from matplotlib import use
-
 # from tkinter import E
 import dataiku
 import pandas as pd
