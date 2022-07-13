@@ -700,7 +700,7 @@ class dss_utils:
                 grps = self.client.list_groups()
                 for user_grp in user['groups']:
                     for dss_grp in grps:
-                        if user_grp.lower() == dss_grp.lower() and dss_grp['admin']:
+                        if user_grp.lower() == dss_grp['name'].lower() and dss_grp['admin']:
                             return True
                 
                 # if not, check if they have access to a group that has write access to the project
