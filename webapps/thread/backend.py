@@ -4,6 +4,8 @@ from http import client
 import json
 import gc
 
+from matplotlib import use
+
 # from tkinter import E
 import dataiku
 import pandas as pd
@@ -32,20 +34,10 @@ sentry_sdk.init(
 @app.route('/get-user')
 def get_user():
     try:
-        headers = dict(request.headers)
-        # Get the auth info of the user performing the request
-        auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
+        un = get_active_user_name()
         
-        # If the user's group is not TRUSTED_GROUP, raise an exception
-        # if TRUSTED_GROUP not in auth_info["groups"] :
-            # raise Exception("You do not belong here, go away")
-        # else:
-        
-        if 'authIdentifier' in auth_info:
-            dss = dss_utils()
-            # res = dss.get_collection_stats()
-
-            data = {"status": "ok", "you_are": auth_info["authIdentifier"]}
+        if len(un) > 0:
+            data = {"status": "ok", "you_are": un}
         else:
             data = {"status": "denied", "you_are": 'not logged in'}
     except:
@@ -200,6 +192,7 @@ def load_item():
         key = key.replace(' | ', '|')
 
         dss = dss_utils()
+        un = get_active_user_name()
 
         idx_ds = dss.get_index_ds()
         df = idx_ds.get_dataframe()
@@ -221,13 +214,14 @@ def load_item():
             return json.dumps(ds)
         else:
             if res['object_type'] == 'project':
+
                 p = dss.load_project(key)
                 p['object_type'] = 'project'
                 col_ct, col_def = dss.calc_project_def_ct(key)
                 p['total_cols'] = col_ct
                 p['total_cols_def'] = col_def
                 p['success'] = True
-                p['user_security'] = can_user_access_project(key)
+                p['user_security'] = dss.user_project_access(key, un)
 
                 return json.dumps(p)
             else:
@@ -249,7 +243,7 @@ def load_item():
                     col['definition'] = { "id": -1}
                     col['object_type'] = 'column'
                     col['tag_list'] = dss.get_tag_list()
-                    col['user_security'] = can_user_access_project(p_name)
+                    col['user_security'] = dss.user_project_access(p_name, un) # can_user_access_project(p_name)
                     col['success'] = True
 
                     if len(def_df) > 0:
@@ -390,15 +384,28 @@ def get_user_client():
     user = dataiku.api_client().get_user(auth_info['authIdentifier'])
     return user.get_client_as()
 
-def can_user_access_project(project_key):
-    client_as_user = get_user_client()
-
+def get_active_user_name():
     try:
-        proj = client_as_user.get_project(project_key)
-        proj.get_metadata()
-        return True
+        headers = dict(request.headers)
+        # Get the auth info of the user performing the request
+        auth_info = dataiku.api_client().get_auth_info_from_browser_headers(headers)
+        
+        if 'authIdentifier' in auth_info:
+           return auth_info["authIdentifier"]
     except:
-        return False
+        return ''
+
+# def can_user_access_project(project_key):
+#     client_as_user = get_user_client()
+
+#     try:
+#         proj = client_as_user.get_project(project_key)
+#         proj.get_metadata()
+#         return True
+#     except:
+#         return False
+
+
 
 
 THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
@@ -686,6 +693,25 @@ class dss_utils:
             logging.info('error loading definitions - tags')
 
         return tags
+
+    def user_project_access(self, proj_name, user_name):
+        dss_users = self.client.list_users()
+        for user in dss_users:
+            if user['login'].lower() == user_name.lower():
+                proj = self.client.get_project(proj_name)
+                perms = proj.get_permissions() 
+                for perm in perms['permissions']:
+                    if 'group' in perm:
+                        if perm['group'] in user['groups'] and perm['writeProjectContent']:
+                            print(f'{user_name} has access through {perm["group"]} group')
+                            return True
+                    else:
+                        if 'user' in perm:
+                            if perm['user'].lower() == user_name.lower() and perm['writeProjectContent']:
+                                print(f'{user_name} has direct access granted to project')
+                                return True
+                return False
+        return False
 
     def get_ds_by_name(self, name, all_projects, p_name=None):
         # logging.info(name)
