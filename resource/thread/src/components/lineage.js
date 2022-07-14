@@ -111,7 +111,7 @@ class Lineage extends Component {
                 sourcePosition: 'right',
                 position: {
                     x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 30),
-                    y: basePositionY + (0 - (down_res.length * (Lineage.DEFAULT_NODE_HEIGHT + 20) / 2) - 10) + (x * (Lineage.DEFAULT_NODE_HEIGHT + 20))
+                    y: basePositionY + (0 - (down_res.length * (Lineage.DEFAULT_NODE_HEIGHT + 20) / 2) + basePositionY) + (x * (Lineage.DEFAULT_NODE_HEIGHT + 20))
                 },
                 draggable: false
             };
@@ -154,7 +154,10 @@ class Lineage extends Component {
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 30), y: basePositionY + (0 - (down_res.length * (Lineage.DEFAULT_NODE_HEIGHT + 20) / 2) - 10) + (x * (Lineage.DEFAULT_NODE_HEIGHT + 20)) },
+                position: {
+                    x: basePositionX - (Lineage.DEFAULT_NODE_WIDTH + 30),
+                    y: basePositionY + (0 - (down_res.length * (Lineage.DEFAULT_NODE_HEIGHT + 20) / 2) + basePositionY) + (x * (Lineage.DEFAULT_NODE_HEIGHT + 20))
+                },
                 draggable: false
             };
 
