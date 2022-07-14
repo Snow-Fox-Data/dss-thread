@@ -198,8 +198,8 @@ class Lineage extends Component {
                     <ReactFlow 
                         onLoad={this.onLoad} 
                         // elements={this.state.elements}
-                        nodes={this.state._nodes}
-                        edges={this.state._edges}
+                        nodes={this.state.nodes}
+                        edges={this.state.edges}
                         nodeTypes={this.nodeTypes} 
                         style={{ height: "100%", width: "100%" }}
                     >
