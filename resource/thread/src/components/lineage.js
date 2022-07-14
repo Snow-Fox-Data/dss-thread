@@ -203,7 +203,6 @@ class Lineage extends Component {
                     <ReactFlowProvider>
                         <ReactFlow
                             onInit={this.onInit}
-                            // elements={this.state.elements}
                             nodes={this.state.nodes}
                             edges={this.state.edges}
                             nodeTypes={this.nodeTypes}
