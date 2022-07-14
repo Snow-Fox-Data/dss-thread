@@ -172,7 +172,7 @@ class Lineage extends Component {
 
         this.setState({
             edges: _edges,
-            elements: elements,
+            // elements: elements,
             nodes: _nodes
         });
 
@@ -197,7 +197,9 @@ class Lineage extends Component {
                 <ReactFlowProvider>
                     <ReactFlow 
                         onLoad={this.onLoad} 
-                        elements={this.state.elements}
+                        // elements={this.state.elements}
+                        nodes={this.state._nodes}
+                        edges={this.state._edges}
                         nodeTypes={this.nodeTypes} 
                         style={{ height: "100%", width: "100%" }}
                     >
