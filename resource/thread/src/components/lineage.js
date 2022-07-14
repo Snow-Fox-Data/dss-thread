@@ -172,7 +172,7 @@ class Lineage extends Component {
 
         this.setState({
             edges: _edges,
-            elements: elements,
+            // elements: elements,
             nodes: _nodes
         });
 
@@ -181,8 +181,8 @@ class Lineage extends Component {
             .catch((err) => console.error(err));
     }
 
-    onLoad(rv) {
-        setTimeout(() => rv.fitView(), 1000);
+    onInit(rv) {
+        setTimeout(() => rv.fitView(), 500);
     }
 
     render() {
@@ -193,10 +193,12 @@ class Lineage extends Component {
 
         return (            
             <div className='react-flow-container' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
-                {this.state.elements && 
+                {this.state.nodes && 
                 <ReactFlowProvider>
                     <ReactFlow 
                         onLoad={this.onLoad} 
+                        // elements={this.state.elements}
+                        nodes={this.state.nodes}
                         elements={this.state.elements}
                         nodeTypes={this.nodeTypes} 
                         style={{ height: "100%", width: "100%" }}
