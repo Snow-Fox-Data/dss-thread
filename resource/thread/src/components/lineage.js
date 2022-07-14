@@ -49,7 +49,7 @@ class Lineage extends Component {
     update = (st, base_elem) => {
         var base_splits = base_elem.key.split('.');
 
-        let basePositionX = 0; 
+        let basePositionX = 0;
         let basePositionY = 0;
 
         var baseElementId = 'base';
@@ -77,7 +77,7 @@ class Lineage extends Component {
             else
                 down_res = eval(base_elem['lineage_downstream']);
         }
-        
+
         var up_res = [];
         if (base_elem['lineage_upstream'] != null && base_elem['lineage_upstream'] != '') {
             if (base_elem['lineage_upstream'] != null)
@@ -109,7 +109,7 @@ class Lineage extends Component {
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                position: { x: basePositionX + ((x+1)*300), y: basePositionY },                     
+                position: { x: basePositionX + (300), y: basePositionY + (0 - (down_res.length * 60 / 2) + x * 60)},
                 draggable: false
             };
 
@@ -143,7 +143,7 @@ class Lineage extends Component {
                 col = splits[2];
 
             var elementId = 'up_' + x.toString();
-            var node ={
+            var node = {
                 id: elementId,
                 className: 'thread-node',
                 type: 'customFlowNode',
@@ -151,7 +151,7 @@ class Lineage extends Component {
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 sourcePosition: 'right',
                 targetPosition: 'left',
-                position: { x: basePositionX - ((x+1)*300), y: basePositionY },         
+                position: { x: basePositionX - (300), y: basePositionY + (0 - (up_res.length * 60 / 2) + x * 60) },
                 draggable: false
             };
 
@@ -168,7 +168,7 @@ class Lineage extends Component {
 
             elements[elements.length] = edge;
             _edges[_edges.length] = edge;
-        }        
+        }
 
         this.setState({
             edges: _edges,
@@ -177,7 +177,7 @@ class Lineage extends Component {
         });
 
         createGraphLayout(elements)
-            .then((els) => this.setState({elements: els}))
+            .then((els) => this.setState({ elements: els }))
             .catch((err) => console.error(err));
     }
 
@@ -191,23 +191,23 @@ class Lineage extends Component {
             this.update('elements', this.props.deets);
         }
 
-        return (            
+        return (
             <div className='react-flow-container' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
-                {this.state.nodes && 
-                <ReactFlowProvider>
-                    <ReactFlow 
-                        onInit={this.onInit} 
-                        // elements={this.state.elements}
-                        nodes={this.state.nodes}
-                        elements={this.state.elements}
-                        nodeTypes={this.nodeTypes} 
-                        style={{ height: "100%", width: "100%" }}
-                    >
-                        <Controls showInteractive="false" />
-                    </ReactFlow>
-                </ReactFlowProvider>}
+                {this.state.nodes &&
+                    <ReactFlowProvider>
+                        <ReactFlow
+                            onInit={this.onInit}
+                            // elements={this.state.elements}
+                            nodes={this.state.nodes}
+                            elements={this.state.elements}
+                            nodeTypes={this.nodeTypes}
+                            style={{ height: "100%", width: "100%" }}
+                        >
+                            <Controls showInteractive="false" />
+                        </ReactFlow>
+                    </ReactFlowProvider>}
             </div>
-        );        
+        );
     }
 }
 
