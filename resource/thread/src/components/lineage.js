@@ -193,7 +193,7 @@ class Lineage extends Component {
 
         return (            
             <div className='react-flow-container' style={{ backgroundColor: '#EEE', height: Lineage.DEFAULT_CONTAINER_HEIGHT, width: "100%" }}>
-                {this.state._nodes && 
+                {this.state.nodes && 
                 <ReactFlowProvider>
                     <ReactFlow 
                         onLoad={this.onLoad} 
