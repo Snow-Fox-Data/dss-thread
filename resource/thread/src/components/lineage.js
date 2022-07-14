@@ -196,7 +196,7 @@ class Lineage extends Component {
                 {this.state.nodes && 
                 <ReactFlowProvider>
                     <ReactFlow 
-                        onLoad={this.onLoad} 
+                        onInit={this.onInit} 
                         // elements={this.state.elements}
                         nodes={this.state.nodes}
                         elements={this.state.elements}
