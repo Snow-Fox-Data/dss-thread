@@ -109,7 +109,7 @@ class Lineage extends Component {
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                position: { x: basePositionX, y: basePositionY },                     
+                position: { x: basePositionX + (x*120), y: basePositionY },                     
                 draggable: false
             };
 
