@@ -50,7 +50,7 @@ class Lineage extends Component {
         var base_splits = base_elem.key.split('.');
 
         let basePositionX = 0;
-        let basePositionY = 0;
+        let basePositionY = 0 - (Lineage.DEFAULT_NODE_HEIGHT / 2);
 
         var baseElementId = 'base';
         var baseNode = {
@@ -58,7 +58,7 @@ class Lineage extends Component {
             className: 'thread-node-base',
             type: 'customFlowNode',
             data: { project: base_splits[0], dataset: base_splits[1], parentid: this.props.parentid },
-            position: { x: basePositionX, y: basePositionY - (Lineage.DEFAULT_NODE_HEIGHT / 2) },
+            position: { x: basePositionX, y: basePositionY },
             style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
             sourcePosition: 'right',
             targetPosition: 'left',
@@ -109,7 +109,10 @@ class Lineage extends Component {
                 style: { height: Lineage.DEFAULT_NODE_HEIGHT, width: Lineage.DEFAULT_NODE_WIDTH },
                 targetPosition: 'left',
                 sourcePosition: 'right',
-                position: { x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 30), y: basePositionY + (0 - (down_res.length * (Lineage.DEFAULT_NODE_HEIGHT + 20) / 2) - 10) + (x * (Lineage.DEFAULT_NODE_HEIGHT + 20)) },
+                position: {
+                    x: basePositionX + (Lineage.DEFAULT_NODE_WIDTH + 30),
+                    y: basePositionY + (0 - (down_res.length * (Lineage.DEFAULT_NODE_HEIGHT + 20) / 2) - 10) + (x * (Lineage.DEFAULT_NODE_HEIGHT + 20))
+                },
                 draggable: false
             };
 
