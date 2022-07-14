@@ -927,12 +927,12 @@ class DataikuItem extends Component {
                             </tbody>
                         </Table>
                     </Tab>
-                    {/* <Tab eventKey="lineage" title="Lineage">
+                    <Tab eventKey="lineage" title="Lineage">
                         {
                             this.state.isLineageVisible &&
                             <div class="lineage" id="lineage-container">{lineage}</div>
                         }
-                    </Tab> */}
+                    </Tab>
                     <Tab eventKey='flow' title="DSS" def>
                         <iframe style={{ width: '100%', height: '500px' }} src={this.state.dssSrc} ></iframe>
                     </Tab>
