@@ -6,6 +6,14 @@ class NotFound extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            rendered: false,
+        }
+
+        window.$(document).ready(() => {
+            this.setState({ rendered: true })
+        })
     }
 
     checkPublic() {
@@ -40,10 +48,11 @@ class NotFound extends Component {
             <>
                 <Row>
                     <Col>
-                        {publicApp.length == 0 ?
+                        {this.state.rendered &&
+                            publicApp.length == 0 ?
                             <h2>Resource not found</h2>
                             :
-                            <div style={{padding:'20px'}}>
+                            <div style={{ padding: '20px' }}>
                                 {publicApp}
                             </div>
                         }
