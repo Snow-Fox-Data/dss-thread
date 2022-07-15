@@ -16,7 +16,8 @@ class NotFound extends Component {
             var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
-            var backend_url = window.location.origin + '/web-apps-backends/' + proj + '/' + id + '/scan';
+            // var backend_url = window.location.origin + '/web-apps-backends/' + proj + '/' + id + '/scan';
+            var backend_url = window.getWebAppBackendUrl('scan');
 
             return (<div>
                 <h4>Please access Thread through the <a target="_blank" href={url}>public web URL</a></h4>
