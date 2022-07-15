@@ -16,10 +16,15 @@ class NotFound extends Component {
             var id = queryParams.get("webAppId");
             var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
+            var backend_url = window.location.origin + '/web-apps-backends/' + proj + '/' + id + '/scan';
+
             return (<div>
                 <h4>Please access Thread through the <a target="_blank" href={url}>public web URL</a></h4>
                 <div style={{ paddingTop: '15px' }}>
                     <span style={{ fontWeight: 'bold' }}>Public App Key:</span> {proj}.{id}
+                </div>
+                <div style={{ paddingTop: '15px' }}>
+                    <span style={{ fontWeight: 'bold' }}>Full Rescan URL:</span> {backend_url}
                 </div>
             </div>)
         }
