@@ -51,8 +51,6 @@ def init() :
         scheduler.add_job(func=scan, trigger="interval", minutes=rescan_min)
         scheduler.start()
 
-init()
-
 @app.route('/get-user')
 def get_user():
     try:
@@ -66,10 +64,6 @@ def get_user():
         data = {"status": "denied", "you_are": 'not logged in'}
 
     return json.dumps(data)
-
-@app.route('/init', methods=['GET'])
-def init():
-    return json.dumps({"result": "initialized"})
 
 @app.route('/scan-project', methods=['GET'])
 def scan_project():
@@ -425,18 +419,8 @@ def get_active_user_name():
     except:
         return ''
 
-# def can_user_access_project(project_key):
-#     client_as_user = get_user_client()
-
-#     try:
-#         proj = client_as_user.get_project(project_key)
-#         proj.get_metadata()
-#         return True
-#     except:
-#         return False
-
 class dss_utils:
-
+    
     def __init__(self):
         self.client = dataiku.api_client()
         # self.init_description_dataset()
@@ -1195,3 +1179,6 @@ class dss_utils:
         idx_ds.write_dataframe(df2, infer_schema=True, dropAndCreate=True)
 
         return True
+
+
+init()
