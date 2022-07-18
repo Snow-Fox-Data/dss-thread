@@ -52,6 +52,8 @@ def init() :
         scheduler.add_job(scan, CronTrigger.from_crontab(rescan_cron))
         scheduler.start()
 
+        print('scan will be firing on cron: ' + rescan_cron)
+
 @app.route('/get-user')
 def get_user():
     try:
