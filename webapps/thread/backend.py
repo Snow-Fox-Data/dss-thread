@@ -19,7 +19,8 @@ import re
 import logging
 from datetime import datetime
 import time
-import schedule
+
+from apscheduler.schedulers.background import BackgroundScheduler
 
 THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
 THREAD_DATASETS_NAME = '--Thread-Datasets--'
@@ -38,15 +39,19 @@ sentry_sdk.init(
     traces_sample_rate=1.0
 )
 
-from apscheduler.schedulers.background import BackgroundScheduler
+def init() :
+    client = dataiku.api_client()
 
-def print_date_time():
-    print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
+    p = client.get_default_project()
+    proj_vars = p.get_variables() 
+    if 'rescan_minutes' in proj_vars["standard"]:
+        rescan_min = proj_vars["standard"]['rescan_minutes']
+        
+        scheduler = BackgroundScheduler()
+        scheduler.add_job(func=scan, trigger="interval", minutes=rescan_min)
+        scheduler.start()
 
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=print_date_time, trigger="interval", seconds=60)
-scheduler.start()
+init()
 
 @app.route('/get-user')
 def get_user():
