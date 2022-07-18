@@ -18,7 +18,7 @@ class NotFound extends Component {
 
     checkPublic() {
         if (this.state.rendered) {
-            if (window.location.href.toLowerCase().indexOf('/autoscan')) {
+            if (window.location.href.toLowerCase().indexOf('/autoscan') > -1) {
                 var backend_url = window.location.origin + window.getWebAppBackendUrl('/scan');
                 const requestOptions = {
                     method: 'GET',
@@ -29,7 +29,7 @@ class NotFound extends Component {
                     .then((response) => {
 
                     });
-                    
+
                 return (
                     <div>
                         Complete</div>
@@ -43,7 +43,7 @@ class NotFound extends Component {
                     var id = queryParams.get("webAppId");
                     var url = window.location.origin + '/public-webapps/' + proj + '/' + id;
 
-                    var backend_url = window.location.origin + window.getWebAppBackendUrl('/scan');
+                    var backend_url = url + '/autoscan'
 
                     return (<div>
                         <h4>Please access Thread through the <a target="_blank" href={url}>public web URL</a></h4>
