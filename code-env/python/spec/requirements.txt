@@ -1,2 +1,2 @@
 flask
-sentry-sdk
+sentry-sdk[flask]

@@ -14,13 +14,17 @@ import sentry_sdk
 import random
 from sentry_sdk import capture_exception
 from sentry_sdk import capture_message
+from sentry_sdk.integrations.flask import FlaskIntegration
 import re
 import logging
 from datetime import datetime
 import time
 
 sentry_sdk.init(
-    dsn="https://39709475b09348ceb3f0a98857d98e1e@o1303348.ingest.sentry.io/6542218",
+   dsn="https://39709475b09348ceb3f0a98857d98e1e@o1303348.ingest.sentry.io/6542218",
+    integrations=[
+        FlaskIntegration(),
+    ],
 
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
