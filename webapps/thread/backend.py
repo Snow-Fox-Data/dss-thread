@@ -497,9 +497,9 @@ class dss_utils:
         applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)[1]
         tag_ds = self.init_thread_ds('tags', 'tags.csv', True)[1]
 
-        def_ds.write_with_schema(df[['id','name', 'description']], infer_schema=True, dropAndCreate=True)
-        applied_ds.write_dataframe(pd.DataFrame.from_dict(applied_set), infer_schema=True, dropAndCreate=True)
-        tag_ds.write_dataframe(pd.DataFrame.from_dict(tag_set), infer_schema=True, dropAndCreate=True)
+        def_ds.write_with_schema(df[['id','name', 'description']], dropAndCreate=True)
+        applied_ds.write_dataframe(pd.DataFrame.from_dict(applied_set),dropAndCreate=True)
+        tag_ds.write_dataframe(pd.DataFrame.from_dict(tag_set), dropAndCreate=True)
 
     def check_new_projects(self):
         index_df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
