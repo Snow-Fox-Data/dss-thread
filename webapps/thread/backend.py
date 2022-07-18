@@ -20,6 +20,11 @@ import logging
 from datetime import datetime
 import time
 
+THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
+THREAD_DATASETS_NAME = '--Thread-Datasets--'
+THREAD_INDEX_NAME = '--Thread-Index--'
+THREAD_REMAPPING_NAME = '--Thread-Column-Mapping--'
+
 sentry_sdk.init(
    dsn="https://39709475b09348ceb3f0a98857d98e1e@o1303348.ingest.sentry.io/6542218",
     integrations=[
@@ -175,6 +180,13 @@ def delete_definition():
 
     dss = dss_utils()
     dss.delete_definition(id)
+
+    return json.dumps({'success':True})
+
+@app.route('/export', methods=['GET'])
+def export():
+    dss = dss_utils()
+    dss.catalog_export()
 
     return json.dumps({'success':True})
 
@@ -366,6 +378,8 @@ def update_desc():
         "value": desc
     })
 
+
+
 def init_thread_zone(project, zone_name):
      # initializing flow zones
     flow = project.get_flow()
@@ -406,14 +420,6 @@ def get_active_user_name():
 #         return True
 #     except:
 #         return False
-
-
-
-
-THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
-THREAD_DATASETS_NAME = '--Thread-Datasets--'
-THREAD_INDEX_NAME = '--Thread-Index--'
-THREAD_REMAPPING_NAME = '--Thread-Column-Mapping--'
 
 class dss_utils:
 
@@ -470,6 +476,30 @@ class dss_utils:
     #             exposed_ds[name] = shares
 
     #     return exposed_ds
+
+    def catalog_export(self):
+        # dss = dss_utils()
+        df = dataiku.Dataset(THREAD_DEFINITIONS_NAME).get_dataframe()
+
+        applied_set = []
+        tag_set = []
+        for idx, row in df.iterrows():
+            applieds = json.loads(row['applied_to'])
+
+            for applied in applieds:
+                applied_set.append({'definition': row['id'], 'applied_to': applied})
+            
+            tags = json.loads(row['tags'])
+            for tag in tags:
+                tag_set.append({'tag': tag, 'definition': row['id']})
+                
+        def_ds = self.init_thread_ds('definitions', 'definitions.csv', True)
+        applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)
+        tag_ds = self.init_thread_ds('tags', 'tags.csv', True)
+
+        def_ds.write_dataframe(df[['id','name', 'description']], infer_schema=True, dropAndCreate=True)
+        applied_ds.write_dataframe(pd.DataFrame.from_dict(applied_set), infer_schema=True, dropAndCreate=True)
+        tag_ds.write_dataframe(pd.DataFrame.from_dict(tag_set), infer_schema=True, dropAndCreate=True)
 
     def check_new_projects(self):
         index_df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
