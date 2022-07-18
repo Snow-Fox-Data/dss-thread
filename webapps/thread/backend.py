@@ -84,10 +84,10 @@ def scan():
         dss = dss_utils()
 
         # initializing the datasets
-        ds1 = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
-        ds2 = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
-        ds3 = dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
-        ds4 = dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
+        ds1 = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')[0]
+        ds2 = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')[0]
+        ds3 = dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')[0]
+        ds4 = dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)[0]
 
         # create the internal zone
         zone_name = "Thread Internal Datasets"
@@ -458,7 +458,7 @@ class dss_utils:
 
         ds2.write_dataframe(df) 
 
-        return proj.get_dataset(name)
+        return proj.get_dataset(name), ds2
 
     # def dataset_project_shares(self, project_key):
     #     project = self.client.get_project(project_key)
@@ -493,11 +493,11 @@ class dss_utils:
             for tag in tags:
                 tag_set.append({'tag': tag, 'definition': row['id']})
                 
-        def_ds = self.init_thread_ds('definitions', 'definitions.csv', True)
-        applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)
-        tag_ds = self.init_thread_ds('tags', 'tags.csv', True)
+        def_ds = self.init_thread_ds('definitions', 'definitions.csv', True)[1]
+        applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)[1]
+        tag_ds = self.init_thread_ds('tags', 'tags.csv', True)[1]
 
-        def_ds.write_dataframe(df[['id','name', 'description']], infer_schema=True, dropAndCreate=True)
+        def_ds.write_with_schema(df[['id','name', 'description']], infer_schema=True, dropAndCreate=True)
         applied_ds.write_dataframe(pd.DataFrame.from_dict(applied_set), infer_schema=True, dropAndCreate=True)
         tag_ds.write_dataframe(pd.DataFrame.from_dict(tag_set), infer_schema=True, dropAndCreate=True)
 
