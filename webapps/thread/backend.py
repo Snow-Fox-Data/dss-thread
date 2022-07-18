@@ -496,7 +496,7 @@ class dss_utils:
         applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)
         tag_ds = self.init_thread_ds('tags', 'tags.csv', True)
 
-        dataiku.Dataset(def_ds.name).write_with_schema(df[['id','name', 'description']],  infer_schema=True, dropAndCreate=True)
+        dataiku.Dataset(def_ds.name).write_dataframe(df[['id','name', 'description']],  infer_schema=True, dropAndCreate=True)
         dataiku.Dataset(applied_ds.name).write_dataframe(pd.DataFrame.from_dict(applied_set),  infer_schema=True, dropAndCreate=True)
         dataiku.Dataset(tag_ds.name).write_dataframe(pd.DataFrame.from_dict(tag_set), infer_schema=True, dropAndCreate=True)
 
