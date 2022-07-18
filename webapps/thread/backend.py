@@ -19,6 +19,7 @@ import re
 import logging
 from datetime import datetime
 import time
+import schedule
 
 THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
 THREAD_DATASETS_NAME = '--Thread-Datasets--'
@@ -36,6 +37,11 @@ sentry_sdk.init(
     # We recommend adjusting this value in production.
     traces_sample_rate=1.0
 )
+
+def job():
+    print("I'm working...")
+
+schedule.every(1).minutes.do(job)
 
 
 @app.route('/get-user')
