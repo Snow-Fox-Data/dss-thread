@@ -84,10 +84,10 @@ def scan():
         dss = dss_utils()
 
         # initializing the datasets
-        ds1 = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')[0]
-        ds2 = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')[0]
-        ds3 = dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')[0]
-        ds4 = dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)[0]
+        ds1, ds1_ds = dss.init_thread_ds(THREAD_DATASETS_NAME, 'thread_datasets.csv')
+        ds2, ds2_ds = dss.init_thread_ds(THREAD_INDEX_NAME, 'thread_indexes.csv')
+        ds3, ds3_ds  = dss.init_thread_ds(THREAD_REMAPPING_NAME, 'thread_remapping.csv')
+        ds4, ds4_ds = dss.init_thread_ds(THREAD_DEFINITIONS_NAME, 'thread_definitions.csv', False)
 
         # create the internal zone
         zone_name = "Thread Internal Datasets"
@@ -493,9 +493,9 @@ class dss_utils:
             for tag in tags:
                 tag_set.append({'tag': tag, 'definition': row['id']})
                 
-        def_ds = self.init_thread_ds('definitions', 'definitions.csv', True)[1]
-        applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)[1]
-        tag_ds = self.init_thread_ds('tags', 'tags.csv', True)[1]
+        ds1, def_ds = self.init_thread_ds('definitions', 'definitions.csv', True)
+        ds2, applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)
+        ds3, tag_ds = self.init_thread_ds('tags', 'tags.csv', True)
 
         def_ds.write_with_schema(df[['id','name', 'description']], dropAndCreate=True)
         applied_ds.write_dataframe(pd.DataFrame.from_dict(applied_set),dropAndCreate=True)
