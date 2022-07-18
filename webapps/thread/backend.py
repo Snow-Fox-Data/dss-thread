@@ -21,6 +21,7 @@ from datetime import datetime
 import time
 
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 THREAD_DEFINITIONS_NAME = '--Thread-Definitions--'
 THREAD_DATASETS_NAME = '--Thread-Datasets--'
@@ -44,11 +45,11 @@ def init() :
 
     p = client.get_default_project()
     proj_vars = p.get_variables() 
-    if 'rescan_minutes' in proj_vars["standard"]:
-        rescan_min = proj_vars["standard"]['rescan_minutes']
+    if 'rescan_cron' in proj_vars["standard"]:
+        rescan_cron = proj_vars["standard"]['rescan_cron']
         
         scheduler = BackgroundScheduler()
-        scheduler.add_job(func=scan, trigger="interval", minutes=rescan_min)
+        scheduler.add_job(scan, CronTrigger.from_crontab(rescan_cron))
         scheduler.start()
 
 @app.route('/get-user')
