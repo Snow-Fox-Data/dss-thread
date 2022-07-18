@@ -486,15 +486,24 @@ class dss_utils:
             applieds = json.loads(row['applied_to'])
 
             for applied in applieds:
-                applied_set.append({'definition': row['id'], 'applied_to': applied})
+                applied_set.append({'definition_id': row['id'], 'applied_to': applied})
             
             tags = json.loads(row['tags'])
             for tag in tags:
-                tag_set.append({'tag': tag, 'definition': row['id']})
+                tag_set.append({'tag': tag, 'definition_id': row['id']})
                 
         def_ds = self.init_thread_ds('definitions', 'definitions.csv', True)
         applied_ds = self.init_thread_ds('applied_to', 'applied_to.csv', True)
         tag_ds = self.init_thread_ds('tags', 'tags.csv', True)
+
+        zone_name = "Thread Exports"
+        proj = self.client.get_default_project()
+        zone = init_thread_zone(proj, zone_name)
+
+        # add the datasets to our default zone
+        zone.add_item(def_ds)
+        zone.add_item(applied_ds)
+        zone.add_item(tag_ds)
 
         dataiku.Dataset(def_ds.name).write_dataframe(df[['id','name', 'description']],  infer_schema=True, dropAndCreate=True)
         dataiku.Dataset(applied_ds.name).write_dataframe(pd.DataFrame.from_dict(applied_set),  infer_schema=True, dropAndCreate=True)
