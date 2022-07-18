@@ -27,12 +27,13 @@ class NotFound extends Component {
                 fetch(backend_url, requestOptions)
                     .then(res => res.json())
                     .then((response) => {
-                        return (
-                            <div>
-                                Complete</div>
-                        )
-                    });
 
+                    });
+                    
+                return (
+                    <div>
+                        Complete</div>
+                )
             }
             else {
                 if (window.location.href.toLowerCase().indexOf('/webapps/view') > -1) {
