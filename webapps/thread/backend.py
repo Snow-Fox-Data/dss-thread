@@ -42,7 +42,7 @@ def job():
     print("I'm working...")
 
 schedule.every(1).minutes.do(job)
-
+schedule.run_pending()
 
 @app.route('/get-user')
 def get_user():
