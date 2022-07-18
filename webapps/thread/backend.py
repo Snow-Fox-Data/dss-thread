@@ -38,11 +38,15 @@ sentry_sdk.init(
     traces_sample_rate=1.0
 )
 
-def job():
-    print("I'm working...")
+from apscheduler.schedulers.background import BackgroundScheduler
 
-schedule.every(1).minutes.do(job)
-schedule.run_pending()
+def print_date_time():
+    print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
+
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=print_date_time, trigger="interval", seconds=60)
+scheduler.start()
 
 @app.route('/get-user')
 def get_user():
