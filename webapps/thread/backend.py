@@ -486,7 +486,9 @@ class dss_utils:
             applieds = json.loads(row['applied_to'])
 
             for applied in applieds:
-                applied_set.append({'definition_id': row['id'], 'applied_to': applied})
+                app_spl = applied.split('|')
+                applied_set.append({'definition_id': row['id'], 'applied_to': applied, 'project': app_spl[0],
+                'dataset': app_spl[1], 'column': app_spl[2]})
             
             tags = json.loads(row['tags'])
             for tag in tags:
