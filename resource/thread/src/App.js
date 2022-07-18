@@ -94,6 +94,25 @@ class App extends Component {
         }
     }
 
+
+    export() {
+        if (!this.state.scanning) {
+
+            if (window.confirm('This will export the configured definitons to datasets in your project\'s flow. Would you like to proceed?')) {
+                // this.setState({ "logo": loading_logo })
+
+                fetch(window.getWebAppBackendUrl('export'))
+                    .then(res => res.json())
+                    .then((response) => {
+                        if (response.result == 'error')
+                            alert(response.message)
+                        else
+                            alert('Export Complete!')
+                    });
+            }
+        }
+    }
+
     homeClick() {
         window.location = Common.formatBasePath();
     }
@@ -145,6 +164,7 @@ class App extends Component {
                                         <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/raw/main/Thread_User_Instructions.pdf">User Instructions</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={() => this.rescan()}>Full DSS Scan</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => this.export()}>Export Friendly Format</NavDropdown.Item>
                                     </NavDropdown>
                                 </ul>
                             </div>
