@@ -107,7 +107,7 @@ class App extends Component {
                         if (response.result == 'error')
                             alert(response.message)
                         else
-                            alert('Export Complete!')
+                            alert('Export Complete! Definitions, tags and applied datasets are now refreshed in the project flow.')
                     });
             }
         }

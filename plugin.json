@@ -1,13 +1,14 @@
 {
-    "id": "dss-thread",
+    "id": "thread",
     "version": "1.1.0",
     "meta": {
         "label": "Thread",
         "description": "Data Catalog and Lineage Tool",
         "author": "Snowfox Data",
         "icon": "icon-book",
-        "tags": [],
-        "url": "https://snowfoxdata.com",
-        "licenseInfo": "Commons Clause / GPL-3.0 License"
+        "tags": ["Governance", "Lineage", "Catalog"],
+        "url": "https://www.dataiku.com/product/plugins/thread",
+        "licenseInfo": "Commons Clause / GPL-3.0 License",
+        "supportLevel": "PARTNER_SUPPORTED"
     }
 }

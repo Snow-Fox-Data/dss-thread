@@ -1,71 +1,18 @@
-// This file is the descriptor for webapp 
 {
     "meta": {
-        // label: name of the webapp as displayed, should be short
         "label": "Thread",
-        // description: longer string to help end users understand what this webapp does
-        "description": "",
-        // icon: must be one of the FontAwesome 3.2.1 icons, complete list here at https://fontawesome.com/v3.2.1/icons/
-        // "icon": "icon-puzzle-piece"
-        "icon": "icon-sitemap"
-        
+        "description": "Data Catalog and Lineage Tool",
+        "icon": "icon-sitemap"        
     },
 
-    "baseType": "STANDARD", // WARNING: do not change
+    "baseType": "STANDARD", 
     "hasBackend": "true",
     "noJSSecurity": "false",
     "standardWebAppLibraries": ["jquery","bootstrap"],
-
-    /* The field "params" holds a list of all the params
-       for wich the user will be prompted for values in the Settings tab of the webapp.
-
-       The available parameter types include:
-       STRING, STRINGS, INT, DOUBLE, BOOLEAN, SELECT, MULTISELECT, MAP, TEXTAREA, PRESET, DATASET, DATASET_COLUMN, MANAGED_FOLDER
-
-       For the full list and for more details, see the documentation: https://doc.dataiku.com/dss/latest/plugins/reference/params.html
-    */
     "params": [
         
     ],
 
-    // {
-        //     "name": "input_dataset",
-        //     "type": "DATASET",
-        //     "label": "Dataset",
-        //     "description": "",
-        //     "mandatory": true
-        // },
-        // {
-        //     "name": "input_column",
-        //     "type": "DATASET_COLUMN",
-        //     "datasetParamName": "input_dataset",
-        //     "label": "Column",
-        //     "description": "",
-        //     "mandatory": true
-        // },
-        // {
-        //     "name": "input_int",
-        //     "type": "INT",
-        //     "label": "Int",
-        //     "description": "",
-        //     "mandatory": true
-        // },
-        // {
-        //     "name": "input_string",
-        //     "type": "STRING",
-        //     "label": "String",
-        //     "description": "",
-        //     "mandatory": false
-        // }
-
-    /* roles define where this webapp will appear in DSS GUI. They are used to pre-fill a macro parameter with context.
-
-       Each role consists of:
-        - type: where the macro will be shown
-            * DATASET, DATASETS, SAVED_MODEL, MANAGED_FOLDER, ANALYSIS (a button to create webapps will be shown in the corresponding "action" menu)
-        - targetParamsKey(s): name of the parameter(s) that will be filled with the selected object
-    */
     "roles": [
-        /* {"type": "DATASET", "targetParamsKey": "input_dataset"} */
     ]
 }
