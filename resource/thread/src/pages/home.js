@@ -32,7 +32,7 @@ class Home extends Component {
             loggedIn: false,
             collectionStats: {},
             compId: Math.random(),
-            loading_logo:loading_logo
+            loading_logo: loading_logo
         }
     }
 
@@ -148,7 +148,7 @@ class Home extends Component {
     }
 
     loadItemByKey = (itemKey) => {
-        this.props.navigate("/dss/" + encodeURIComponent(itemKey), {replace:false});
+        this.props.navigate("/dss/" + encodeURIComponent(itemKey), { replace: false });
 
         // console.log('loading ' + itemKey + ' from componentID: ' + this.state.compId)
         const requestOptions = {
@@ -275,101 +275,112 @@ class Home extends Component {
     }
 
     collectionStats() {
-        return <div style={{ padding: '20px' }}>
-            <h1>Dataiku Instance Stats</h1>
-            <Row style={{ paddingTop: '20px' }}>
-                <Col>
-                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
-                        <Card.Header>
-                            Projects
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Title>
-                                <div style={{ fontSize: "50px", textAlign: "center" }}>
-                                    {this.state.collectionStats.project_ct.toLocaleString("en-US")}
-                                </div>
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col><Col>
-                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
-                        <Card.Header>
-                            Datasets
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Title>
-                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.dataset_ct.toLocaleString("en-US")}
-                                </div>
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
-                        <Card.Header>
-                            Columns
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Title>
-                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.column_ct.toLocaleString("en-US")}
-                                </div>
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card style={{ width: '17rem', paddingBottom:'8px' }} >
-                        <Card.Header>
-                            Definitions
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Title>
-                                <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.definition_ct.toLocaleString("en-US")}
-                                </div>
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row >
-            {this.state.recents != null &&
-                <Row>
-                    <Col style={{ paddingTop: '20px' }}>
+        function rescan() {
+            eventBus.dispatch('rescan');
+        }
+
+        return <div>
+            {(this.state.collectionStats.project_ct == 0) &&
+                <a onClick={() => rescan() }>Scan your Dataiku Instance</a>
+            }
+            {(this.state.collectionStats.project_ct > 0) &&
+                <div style={{ padding: '20px' }}>
+                    <h1>Dataiku Instance Stats</h1>
+                    <Row style={{ paddingTop: '20px' }}>
+                        <Col>
+                            <Card style={{ width: '17rem', paddingBottom: '8px' }} >
+                                <Card.Header>
+                                    Projects
+                                </Card.Header>
+                                <Card.Body>
+                                    <Card.Title>
+                                        <div style={{ fontSize: "50px", textAlign: "center" }}>
+                                            {this.state.collectionStats.project_ct.toLocaleString("en-US")}
+                                        </div>
+                                    </Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </Col><Col>
+                            <Card style={{ width: '17rem', paddingBottom: '8px' }} >
+                                <Card.Header>
+                                    Datasets
+                                </Card.Header>
+                                <Card.Body>
+                                    <Card.Title>
+                                        <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.dataset_ct.toLocaleString("en-US")}
+                                        </div>
+                                    </Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card style={{ width: '17rem', paddingBottom: '8px' }} >
+                                <Card.Header>
+                                    Columns
+                                </Card.Header>
+                                <Card.Body>
+                                    <Card.Title>
+                                        <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.column_ct.toLocaleString("en-US")}
+                                        </div>
+                                    </Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card style={{ width: '17rem', paddingBottom: '8px' }} >
+                                <Card.Header>
+                                    Definitions
+                                </Card.Header>
+                                <Card.Body>
+                                    <Card.Title>
+                                        <div style={{ fontSize: "50px", textAlign: "center" }}>{this.state.collectionStats.definition_ct.toLocaleString("en-US")}
+                                        </div>
+                                    </Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row >
+                    {this.state.recents != null &&
                         <Row>
-                            <Col>
-                                <h3>Projects Recently Created in DSS</h3>
-                            </Col>
-                            <Col xs={2} style={{ textAlign: 'right' }}>
-                                <Button variant="outline-secondary" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
+                            <Col style={{ paddingTop: '20px' }}>
+                                <Row>
+                                    <Col>
+                                        <h3>Projects Recently Created in DSS</h3>
+                                    </Col>
+                                    <Col xs={2} style={{ textAlign: 'right' }}>
+                                        <Button variant="outline-secondary" onClick={() => this.scanNewProjects()}>Scan for new Projects</Button>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <div class="dataiku-item">
+                                            <Table striped bordered hover>
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Name
+                                                        </th>
+                                                        <th>
+                                                            Last Modified
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {this.state.recents.map((col) =>
+                                                        <tr>
+                                                            <td><span class="app-link" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
+                                                            <td>{new Date(col.last_modified).toLocaleString()}</td>
+                                                        </tr>
+                                                    )}
+                                                </tbody>
+                                            </Table>
+                                        </div>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col>
-                                <div class="dataiku-item">
-                                    <Table striped bordered hover>
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    Name
-                                                </th>
-                                                <th>
-                                                    Last Modified
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {this.state.recents.map((col) =>
-                                                <tr>
-                                                    <td><span class="app-link" onClick={() => this.navToObject(col.key)}>{col.key}</span></td>
-                                                    <td>{new Date(col.last_modified).toLocaleString()}</td>
-                                                </tr>
-                                            )}
-                                        </tbody>
-                                    </Table>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                    }
+                </div>
             }
         </div>
     }
@@ -385,7 +396,7 @@ class Home extends Component {
 
         return (
             <>
-                <Row style={{paddingBottom:'12px', paddingLeft:'16px'}}>
+                <Row style={{ paddingBottom: '12px', paddingLeft: '16px' }}>
                     <Col>
                         <div className="input-group" style={{ width: "100%" }}>
                             <AsyncTypeahead
