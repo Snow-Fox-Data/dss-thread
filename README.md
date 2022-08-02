@@ -1,11 +1,6 @@
 # Dataiku Thread Data Catalog
 
 ## Installation Instructions
-[Guide](Thread_Installation_Instructions.pdf)
+- [Admin Guide](Thread_Installation_Instructions.pdf)
+- [User Guide](Thread_User_Instructions.pdf)
 
-## To build React application
-
-```
-cd ./resource/thread/
-git pull & npm run-script build
-```

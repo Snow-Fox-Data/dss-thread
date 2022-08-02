@@ -165,12 +165,12 @@ class App extends Component {
                                 <ul class="navbar-nav" style={{ paddingRight: '15px' }}>
                                     <NavDropdown title={this.state.currentUser}>
                                         <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/raw/main/Thread_User_Instructions.pdf">User Instructions</NavDropdown.Item>
+                                        <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/raw/main/Thread_Installation_Instructions.pdf">Admin Instructions</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={() => this.rescan()}>Full DSS Scan</NavDropdown.Item>
                                         <NavDropdown.Item onClick={() => this.export()}>Export Definitions</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item target="_blank" href="https://excelion.io">Visit Excelion Partners</NavDropdown.Item>
-                                        
                                     </NavDropdown>
                                 </ul>
                             </div>
