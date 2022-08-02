@@ -107,10 +107,10 @@ class App extends Component {
                 fetch(window.getWebAppBackendUrl('export'))
                     .then(res => res.json())
                     .then((response) => {
-                        if (response.result == 'error')
-                            alert(response.message)
-                        else
+                        if (response.success == 'error')
                             alert('Export Complete! Definitions, tags and applied datasets are now refreshed in the project flow.')
+                        else
+                            alert('There was an error exporting the definitions.')
                     });
             }
         }
@@ -167,7 +167,10 @@ class App extends Component {
                                         <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/raw/main/Thread_User_Instructions.pdf">User Instructions</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={() => this.rescan()}>Full DSS Scan</NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => this.export()}>Export Friendly Format</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => this.export()}>Export Definitions</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item target="_blank" href="https://excelion.io">Visit Excelion Partners</NavDropdown.Item>
+                                        
                                     </NavDropdown>
                                 </ul>
                             </div>
