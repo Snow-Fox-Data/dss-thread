@@ -709,7 +709,8 @@ class DataikuItem extends Component {
                     <div class="options-button">
                         <Dropdown>
                             <Dropdown.Toggle
-                                variant="outline-secondary">
+                                variant="secondary">
+                                // variant="outline-secondary">
                                 Options
                             </Dropdown.Toggle>
 
@@ -792,7 +793,8 @@ class DataikuItem extends Component {
                     <div class="options-button">
                         <Dropdown>
                             <Dropdown.Toggle
-                                variant="outline-secondary">
+                                // variant="outline-secondary">
+                                variant="secondary">
                                 Options
                             </Dropdown.Toggle>
 
@@ -899,7 +901,8 @@ class DataikuItem extends Component {
                     <div class="options-button">
                         <Dropdown>
                             <Dropdown.Toggle
-                                variant="outline-secondary">
+                                variant="secondary">
+                                {/* variant="outline-secondary"> */}
                                 Options
                             </Dropdown.Toggle>
 
@@ -990,7 +993,8 @@ class DataikuItem extends Component {
                         <div class='options-button'>
                             <Dropdown>
                                 <Dropdown.Toggle
-                                    variant="outline-secondary">
+                                    variant="secondary">
+                                    // variant="outline-secondary">
                                     Options
                                 </Dropdown.Toggle>
 
