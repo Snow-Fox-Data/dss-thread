@@ -200,10 +200,13 @@ def delete_definition():
 
 @app.route('/export', methods=['GET'])
 def export():
-    dss = dss_utils()
-    dss.catalog_export()
+    try:
+        dss = dss_utils()
+        dss.catalog_export()
 
-    return json.dumps({'success':True})
+        return json.dumps({'success':True})
+    except:
+        return json.dumps({'success':False})
 
 @app.route('/load-item', methods=['GET'])
 def load_item():
