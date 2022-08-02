@@ -107,7 +107,7 @@ class App extends Component {
                 fetch(window.getWebAppBackendUrl('export'))
                     .then(res => res.json())
                     .then((response) => {
-                        if (response.success == 'error')
+                        if (response.success)
                             alert('Export Complete! Definitions, tags and applied datasets are now refreshed in the project flow.')
                         else
                             alert('There was an error exporting the definitions.')
