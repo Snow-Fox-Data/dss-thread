@@ -49,6 +49,9 @@ class App extends Component {
             eventBus.on("scanning", (isScanning) => {
                 this.setState({ 'scanning': isScanning })
             });
+            eventBus.on("rescan", () => {
+                this.rescan();
+            });
         });
     }
 

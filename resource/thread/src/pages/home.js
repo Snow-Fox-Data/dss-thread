@@ -281,7 +281,10 @@ class Home extends Component {
 
         return <div>
             {(this.state.collectionStats.project_ct == 0) &&
-                <Button variant="outline-secondary" onClick={() => rescan()}>Scan your Dataiku Instance</Button>
+                <div>
+                    <h2>Get started by clicking the button below</h2>
+                    <Button variant="primary" onClick={() => rescan()}>Scan your Dataiku Instance</Button>
+                </div>
             }
             {(this.state.collectionStats.project_ct > 0) &&
                 <div style={{ padding: '20px' }}>

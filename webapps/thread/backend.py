@@ -173,17 +173,20 @@ def scan_new():
 
 @app.route('/search', methods=['GET'])
 def search():
-    args = request.args
-    dss = dss_utils()
+    try:
+        args = request.args
+        dss = dss_utils()
 
-    idx_ds = dss.get_index_ds()
-    df = idx_ds.get_dataframe()
+        idx_ds = dss.get_index_ds()
+        df = idx_ds.get_dataframe()
 
-    df = df.dropna(subset=['description'])
+        df = df.dropna(subset=['description'])
 
-    result = df[df['description'].str.contains(args.get('term'), case=False)]
-    
-    return result.to_json(orient="records")
+        result = df[df['description'].str.contains(args.get('term'), case=False)]
+        
+        return result.to_json(orient="records")
+    except:
+        return json.dumps({'success': False})
 
 @app.route('/delete-definition', methods=['GET'])
 def delete_definition():
