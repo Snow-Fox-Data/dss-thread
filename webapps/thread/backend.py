@@ -1,6 +1,3 @@
-import sys
-sys.path.append('./python-lib')
-
 from ctypes import util
 from dis import disassemble
 from http import client
@@ -23,7 +20,7 @@ import logging
 from datetime import datetime
 import time
 
-from dss_utils import dss_utils
+from python_lib.dss_utils import dss_utils
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
