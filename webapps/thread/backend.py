@@ -172,6 +172,7 @@ def defintition_list():
 
 @app.route('/scan-new', methods=['GET'])
 def scan_new():
+    client = dataiku.api_client()
     p = client.get_default_project() #dataiku.Project() # create a project handle
     proj_vars = p.get_variables() # retrieve your variables as a dictionary
     
