@@ -900,7 +900,7 @@ class DataikuItem extends Component {
                         <Dropdown>
                             <Dropdown.Toggle
                                 variant="secondary">
-                                 Options
+                                Options
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
@@ -947,6 +947,9 @@ class DataikuItem extends Component {
             <tr>
                 <td>{Common.getIconForDataikuItemType('dataset', "16px")}
                     <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDssObject(col.key)}>{col.key.split('|')[1]}</span></td>
+                <td>
+                    <span>{ col.tags }</span>
+                </td>
                 <td>
                     {col.documented_columns} / {col.total_columns}
                     {(col.total_columns > 0) &&
@@ -1011,6 +1014,7 @@ class DataikuItem extends Component {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Tags</th>
                                         <th>Documentation Status</th>
                                     </tr>
                                 </thead>
