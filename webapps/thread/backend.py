@@ -117,17 +117,10 @@ def scan():
         #     folders = proj_vars["standard"]['limit_to_folders']
         limit_to_project_tags = []
         exclude_project_tags = []
-        # exclude_dataset_tags = []
-        # limit_to_dataset_tags = []
         if 'limit_to_project_tags' in proj_vars["standard"]:
             limit_to_project_tags = proj_vars["standard"]['limit_to_project_tags']
         if 'exclude_project_tags' in proj_vars["standard"]:
             exclude_project_tags = proj_vars["standard"]['exclude_project_tags']
-        # if 'limit_to_dataset_tags' in proj_vars["standard"]:
-        #     limit_to_dataset_tags = proj_vars["standard"]['limit_to_dataset_tags']
-        # if 'exclude_dataset_tags' in proj_vars["standard"]:
-        #     exclude_dataset_tags = proj_vars["standard"]['exclude_dataset_tags']
-
 
         result = dss.scan_server(limit_to_project_tags, exclude_project_tags)
 
@@ -179,8 +172,18 @@ def defintition_list():
 
 @app.route('/scan-new', methods=['GET'])
 def scan_new():
+    p = client.get_default_project() #dataiku.Project() # create a project handle
+    proj_vars = p.get_variables() # retrieve your variables as a dictionary
+    
+    limit_to_project_tags = []
+    exclude_project_tags = []
+    if 'limit_to_project_tags' in proj_vars["standard"]:
+        limit_to_project_tags = proj_vars["standard"]['limit_to_project_tags']
+    if 'exclude_project_tags' in proj_vars["standard"]:
+        exclude_project_tags = proj_vars["standard"]['exclude_project_tags']
+
     dss = dss_utils()
-    new_projects = dss.check_new_projects()
+    new_projects = dss.check_new_projects(limit_to_project_tags, exclude_project_tags)
 
     return json.dumps({'projects': new_projects})
 
@@ -532,7 +535,7 @@ class dss_utils:
         dataiku.Dataset(applied_ds.name).write_dataframe(pd.DataFrame.from_dict(applied_set),  infer_schema=True, dropAndCreate=True)
         dataiku.Dataset(tag_ds.name).write_dataframe(pd.DataFrame.from_dict(tag_set), infer_schema=True, dropAndCreate=True)
 
-    def check_new_projects(self):
+    def check_new_projects(self,limit_to_project_tags=[], exclude_project_tags=[]):
         index_df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
         dss_projects = self.client.list_project_keys()
 
@@ -542,7 +545,7 @@ class dss_utils:
                 logging.info(f'new project: {p}')
 
                 # new project
-                if self.scan_project(p):
+                if self.scan_project(p, limit_to_project_tags, exclude_project_tags):
                     new_projects.append(p)
 
         return new_projects
@@ -956,7 +959,7 @@ class dss_utils:
 
         ds.write_dataframe(df)
 
-    def scan_server(self, only_project_tags = [], exclude_project_tags=[], only_ds_tags=[], exclude_ds_tags=[]):
+    def scan_server(self, only_project_tags = [], exclude_project_tags=[]):
         project_list = []
         index_list = []
         scan_obj = {}
@@ -1018,26 +1021,6 @@ class dss_utils:
                 })
 
                 for dataset in datasets:
-
-                    ok_to_scan = False
-                    if len(only_ds_tags) == 0 and len(exclude_ds_tags) == 0:
-                        ok_to_scan = True
-                    else:
-                        if len(only_ds_tags) > 0:
-                            for limit in only_ds_tags:
-                                for tag in dataset['tags']:
-                                    if limit.lower() == tag.lower():
-                                        ok_to_scan = True
-                                        break
-                        if len(exclude_ds_tags) > 0:
-                            for limit in exclude_ds_tags:
-                                for tag in dataset['tags']:
-                                    if limit.lower() == tag.lower():
-                                        ok_to_scan = False
-                                        break
-                    if not ok_to_scan:
-                        continue
-
                     # we don't want to index thread projects
                     if '--Thread' in dataset['name']:
                         del scan_obj[proj]
@@ -1132,7 +1115,7 @@ class dss_utils:
 
         return True
     
-    def scan_project(self, proj):
+    def scan_project(self, proj, limit_to_project_tags=[], exclude_project_tags=[]):
 
         index_list = []
         scan_obj = {}
@@ -1141,6 +1124,26 @@ class dss_utils:
         project = self.client.get_project(proj)
         proj_meta = project.get_metadata()
         summary = project.get_summary()
+
+        ok_to_scan = False
+        if len(limit_to_project_tags) > 0 or  exclude_project_tags > 0:
+            if len(limit_to_project_tags) > 0:
+                for limit in limit_to_project_tags:
+                    for tag in proj_meta['tags']:
+                        if limit.lower() == tag.lower():
+                            ok_to_scan = True
+                            break
+                if len(exclude_project_tags) > 0:
+                    for limit in exclude_project_tags:
+                        for tag in proj_meta['tags']:
+                            if limit.lower() == tag.lower():
+                                ok_to_scan = False
+                                break
+        else:
+            ok_to_scan = True
+
+        if not ok_to_scan:
+            return False
         
         datasets = project.list_datasets()
         recipes = project.list_recipes()
