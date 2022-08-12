@@ -75,7 +75,14 @@ def scan_project():
     args = request.args
     id = args.get('key')
 
-    dss.scan_project(id)
+    exclude_dataset_tags = []
+    limit_to_dataset_tags = []
+    if 'limit_to_dataset_tags' in proj_vars["standard"]:
+        limit_to_dataset_tags = proj_vars["standard"]['limit_to_dataset_tags']
+    if 'exclude_dataset_tags' in proj_vars["standard"]:
+        exclude_dataset_tags = proj_vars["standard"]['exclude_dataset_tags']
+
+    dss.scan_project(id, limit_to_dataset_tags, exclude_dataset_tags)
 
     return json.dumps({"result": "scan complete"})
 
@@ -870,6 +877,7 @@ class dss_utils:
         mapping_df = pd.DataFrame.from_dict(remappings)
         if len(all_projects) == 1: # we're doing a single project scan
             try:
+                # this can error if there is only 1 project in the whole install
                 remap_df = remapping_ds.get_dataframe()
                 remap_df = remap_df[remap_df.project!=p]
                 mapping_df = mapping_df.append(remap_df, ignore_index=True)
@@ -1135,7 +1143,7 @@ class dss_utils:
 
         return True
     
-    def scan_project(self, proj):
+    def scan_project(self, proj, limit_to_dataset_tags, exclude_dataset_tags):
 
         index_list = []
         scan_obj = {}
@@ -1162,6 +1170,24 @@ class dss_utils:
         })
 
         for dataset in datasets:
+            ok_to_scan = False
+            if len(limit_to_dataset_tags) == 0 and len(exclude_dataset_tags) ==0:
+                ok_to_scan = True
+            else:
+                if len(limit_to_dataset_tags) > 0:
+                    for limit in limit_to_dataset_tags:
+                        for tag in dataset['tags']:
+                            if limit.lower() == tag.lower():
+                                ok_to_scan = True
+                                break
+                if len(exclude_dataset_tags) > 0:
+                    for limit in exclude_dataset_tags:
+                        for tag in dataset['tags']:
+                            if limit.lower() == tag.lower():
+                                ok_to_scan = False
+                                break
+            if not ok_to_scan:
+                continue
 
              # we don't want to index thread projects
             if '--Thread-' in dataset['name']:
