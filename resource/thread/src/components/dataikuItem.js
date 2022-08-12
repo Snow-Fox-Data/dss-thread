@@ -196,6 +196,19 @@ class DataikuItem extends Component {
         return tags;
     }
 
+    buildTagsList(arrayTags) {
+        if (arrayTags == null)
+            return;
+
+        let tags = [];
+
+        arrayTags.forEach(element => {
+            tags[tags.length] = <span style={{paddingRight:'5px'}}>{element}</span>
+        });
+
+        return tags;
+    }
+
     openExternalProject(key) {
         alert(key)
     }
@@ -948,7 +961,7 @@ class DataikuItem extends Component {
                 <td>{Common.getIconForDataikuItemType('dataset', "16px")}
                     <span class="app-link" style={{ marginLeft: '10px' }} onClick={() => this.openDssObject(col.key)}>{col.key.split('|')[1]}</span></td>
                 <td>
-                    <span>{ col.tags }</span>
+                    <span>{this.buildTagsList(col.tags)}</span>
                 </td>
                 <td>
                     {col.documented_columns} / {col.total_columns}
