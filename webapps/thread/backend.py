@@ -115,14 +115,31 @@ def scan():
         # folders = []
         # if 'limit_to_folders' in proj_vars["standard"]:
         #     folders = proj_vars["standard"]['limit_to_folders']
-        tags = []
-        if 'limit_to_tags' in proj_vars["standard"]:
-            tags = proj_vars["standard"]['limit_to_tags']
+        limit_to_project_tags = []
+        exclude_project_tags = []
+        exclude_dataset_tags = []
+        limit_to_dataset_tags = []
+        if 'limit_to_project_tags' in proj_vars["standard"]:
+            limit_to_project_tags = proj_vars["standard"]['limit_to_project_tags']
+        if 'exclude_project_tags' in proj_vars["standard"]:
+            exclude_project_tags = proj_vars["standard"]['exclude_project_tags']
+        if 'limit_to_dataset_tags' in proj_vars["standard"]:
+            limit_to_dataset_tags = proj_vars["standard"]['limit_to_dataset_tags']
+        if 'exclude_dataset_tags' in proj_vars["standard"]:
+            exclude_dataset_tags = proj_vars["standard"]['exclude_dataset_tags']
 
-        result = dss.scan_server(tags)
+        logging.info(f'limit_to_project_tags: {limit_to_project_tags}')
+        logging.info(f'exclude_project_tags: {exclude_project_tags}')
+        logging.info(f'limit_to_dataset_tags: {limit_to_dataset_tags}')
+        logging.info(f'exclude_dataset_tags: {exclude_dataset_tags}')
+
+        result = dss.scan_server(limit_to_project_tags, exclude_project_tags, limit_to_dataset_tags, exclude_dataset_tags)
 
         # reset the project variables
-        proj_vars["standard"]['limit_to_tags'] = tags
+        proj_vars["standard"]['limit_to_project_tags'] = limit_to_project_tags
+        proj_vars["standard"]['exclude_project_tags'] = exclude_project_tags
+        proj_vars["standard"]['limit_to_dataset_tags'] = limit_to_dataset_tags
+        proj_vars["standard"]['exclude_dataset_tags'] = exclude_dataset_tags
         p.set_variables(proj_vars) 
 
         return json.dumps({"result": "scan complete"})
@@ -939,7 +956,7 @@ class dss_utils:
 
         ds.write_dataframe(df)
 
-    def scan_server(self, limit_to_tags = []):
+    def scan_server(self, only_project_tags = [], exclude_project_tags=[], only_ds_tags=[], exclude_ds_tags=[]):
         project_list = []
         index_list = []
         scan_obj = {}
@@ -957,14 +974,21 @@ class dss_utils:
                 
                 # check to make sure this project has the tags we want to scan (or no tags specified)
                 ok_to_scan = False
-                if len(limit_to_tags) == 0:
+                if len(only_project_tags) == 0 and len(exclude_project_tags) == 0:
                     ok_to_scan = True
                 else:
-                    for limit in limit_to_tags:
-                        for tag in proj_meta['tags']:
-                            if limit.lower() == tag.lower():
-                                ok_to_scan = True
-                                break
+                    if len(only_project_tags) > 0:
+                        for limit in only_project_tags:
+                            for tag in proj_meta['tags']:
+                                if limit.lower() == tag.lower():
+                                    ok_to_scan = True
+                                    break
+                    if len(exclude_project_tags) > 0:
+                        for limit in exclude_project_tags:
+                            for tag in proj_meta['tags']:
+                                if limit.lower() == tag.lower():
+                                    ok_to_scan = False
+                                    break
                 if not ok_to_scan:
                     continue
 
@@ -994,6 +1018,25 @@ class dss_utils:
                 })
 
                 for dataset in datasets:
+
+                    ok_to_scan = False
+                    if len(only_ds_tags) == 0 and len(exclude_ds_tags) == 0:
+                        ok_to_scan = True
+                    else:
+                        if len(only_ds_tags) > 0:
+                            for limit in only_ds_tags:
+                                for tag in dataset['tags']:
+                                    if limit.lower() == tag.lower():
+                                        ok_to_scan = True
+                                        break
+                        if len(exclude_ds_tags) > 0:
+                            for limit in exclude_ds_tags:
+                                for tag in dataset['tags']:
+                                    if limit.lower() == tag.lower():
+                                        ok_to_scan = False
+                                        break
+                    if not ok_to_scan:
+                        continue
 
                     # we don't want to index thread projects
                     if '--Thread' in dataset['name']:

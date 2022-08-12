@@ -171,6 +171,7 @@ class App extends Component {
                                         <NavDropdown.Item onClick={() => this.export()}>Export Definitions</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item target="_blank" href="https://excelion.io">Visit Excelion Partners</NavDropdown.Item>
+                                        <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/issues">Open a Support Issue</NavDropdown.Item>
                                     </NavDropdown>
                                 </ul>
                             </div>

@@ -4,7 +4,7 @@
     "meta": {
         "label": "Thread",
         "description": "Data Catalog and Lineage Tool",
-        "author": "Excelion Partners",
+        "author": "Snowfox Data",
         "icon": "icon-book",
         "tags": ["Governance", "Lineage", "Catalog"],
         "url": "https://www.dataiku.com/product/plugins/thread",
