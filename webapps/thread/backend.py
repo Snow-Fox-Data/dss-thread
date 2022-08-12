@@ -75,17 +75,7 @@ def scan_project():
     args = request.args
     id = args.get('key')
 
-    p = client.get_default_project() #dataiku.Project() # create a project handle
-    proj_vars = p.get_variables() # retrieve your variables as a dictionary
-
-    exclude_dataset_tags = []
-    limit_to_dataset_tags = []
-    if 'limit_to_dataset_tags' in proj_vars["standard"]:
-        limit_to_dataset_tags = proj_vars["standard"]['limit_to_dataset_tags']
-    if 'exclude_dataset_tags' in proj_vars["standard"]:
-        exclude_dataset_tags = proj_vars["standard"]['exclude_dataset_tags']
-
-    dss.scan_project(id, limit_to_dataset_tags, exclude_dataset_tags)
+    dss.scan_project(id)
 
     return json.dumps({"result": "scan complete"})
 
@@ -127,29 +117,25 @@ def scan():
         #     folders = proj_vars["standard"]['limit_to_folders']
         limit_to_project_tags = []
         exclude_project_tags = []
-        exclude_dataset_tags = []
-        limit_to_dataset_tags = []
+        # exclude_dataset_tags = []
+        # limit_to_dataset_tags = []
         if 'limit_to_project_tags' in proj_vars["standard"]:
             limit_to_project_tags = proj_vars["standard"]['limit_to_project_tags']
         if 'exclude_project_tags' in proj_vars["standard"]:
             exclude_project_tags = proj_vars["standard"]['exclude_project_tags']
-        if 'limit_to_dataset_tags' in proj_vars["standard"]:
-            limit_to_dataset_tags = proj_vars["standard"]['limit_to_dataset_tags']
-        if 'exclude_dataset_tags' in proj_vars["standard"]:
-            exclude_dataset_tags = proj_vars["standard"]['exclude_dataset_tags']
+        # if 'limit_to_dataset_tags' in proj_vars["standard"]:
+        #     limit_to_dataset_tags = proj_vars["standard"]['limit_to_dataset_tags']
+        # if 'exclude_dataset_tags' in proj_vars["standard"]:
+        #     exclude_dataset_tags = proj_vars["standard"]['exclude_dataset_tags']
 
-        logging.info(f'limit_to_project_tags: {limit_to_project_tags}')
-        logging.info(f'exclude_project_tags: {exclude_project_tags}')
-        logging.info(f'limit_to_dataset_tags: {limit_to_dataset_tags}')
-        logging.info(f'exclude_dataset_tags: {exclude_dataset_tags}')
 
-        result = dss.scan_server(limit_to_project_tags, exclude_project_tags, limit_to_dataset_tags, exclude_dataset_tags)
+        result = dss.scan_server(limit_to_project_tags, exclude_project_tags)
 
         # reset the project variables
         proj_vars["standard"]['limit_to_project_tags'] = limit_to_project_tags
         proj_vars["standard"]['exclude_project_tags'] = exclude_project_tags
-        proj_vars["standard"]['limit_to_dataset_tags'] = limit_to_dataset_tags
-        proj_vars["standard"]['exclude_dataset_tags'] = exclude_dataset_tags
+        # proj_vars["standard"]['limit_to_dataset_tags'] = limit_to_dataset_tags
+        # proj_vars["standard"]['exclude_dataset_tags'] = exclude_dataset_tags
         p.set_variables(proj_vars) 
 
         return json.dumps({"result": "scan complete"})
@@ -193,18 +179,8 @@ def defintition_list():
 
 @app.route('/scan-new', methods=['GET'])
 def scan_new():
-    p = client.get_default_project() #dataiku.Project() # create a project handle
-    proj_vars = p.get_variables() # retrieve your variables as a dictionary
-
-    exclude_dataset_tags = []
-    limit_to_dataset_tags = []
-    if 'limit_to_dataset_tags' in proj_vars["standard"]:
-        limit_to_dataset_tags = proj_vars["standard"]['limit_to_dataset_tags']
-    if 'exclude_dataset_tags' in proj_vars["standard"]:
-        exclude_dataset_tags = proj_vars["standard"]['exclude_dataset_tags']
-
     dss = dss_utils()
-    new_projects = dss.check_new_projects(limit_to_dataset_tags, exclude_dataset_tags)
+    new_projects = dss.check_new_projects()
 
     return json.dumps({'projects': new_projects})
 
@@ -556,7 +532,7 @@ class dss_utils:
         dataiku.Dataset(applied_ds.name).write_dataframe(pd.DataFrame.from_dict(applied_set),  infer_schema=True, dropAndCreate=True)
         dataiku.Dataset(tag_ds.name).write_dataframe(pd.DataFrame.from_dict(tag_set), infer_schema=True, dropAndCreate=True)
 
-    def check_new_projects(self, limit_to_dataset_tags, exclude_dataset_tags):
+    def check_new_projects(self):
         index_df = dataiku.Dataset(THREAD_INDEX_NAME).get_dataframe()
         dss_projects = self.client.list_project_keys()
 
@@ -566,7 +542,7 @@ class dss_utils:
                 logging.info(f'new project: {p}')
 
                 # new project
-                if self.scan_project(p, limit_to_dataset_tags, exclude_dataset_tags):
+                if self.scan_project(p):
                     new_projects.append(p)
 
         return new_projects
@@ -1107,38 +1083,19 @@ class dss_utils:
         for p in scan_obj:
             datasets = scan_obj[p]['datasets']
             for ds in datasets:
-                ok_to_scan = False
-                if len(only_ds_tags) == 0 and len(exclude_ds_tags) == 0:
-                    ok_to_scan = True
-                else:
-                    if len(only_ds_tags) > 0:
-                        for limit in only_ds_tags:
-                            for tag in dataset['tags']:
-                                if limit.lower() == tag.lower():
-                                    ok_to_scan = True
-                                    break
-                    if len(exclude_ds_tags) > 0:
-                        for limit in exclude_ds_tags:
-                            for tag in dataset['tags']:
-                                if limit.lower() == tag.lower():
-                                    ok_to_scan = False
-                                    break
-                if not ok_to_scan:
-                    continue
-
-                obj = { "project": p, "name": ds.name, "key": self.get_full_dataset_name(ds.name, p)}
-                if 'lineage_downstream' in ds:
-                    obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full']) 
-                    obj['lineage_downstream_l1'] = json.dumps(ds['lineage_downstream']) 
-                else:
-                    obj['lineage_downstream'] = []
-                if 'lineage_upstream' in ds:
-                    obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
-                    obj['lineage_upstream_l1'] = json.dumps(ds['lineage_upstream'])
-                else:
-                    obj['lineage_upstream'] = []
-                    
-                ds_list.append(obj)
+                    obj = { "project": p, "name": ds.name, "key": self.get_full_dataset_name(ds.name, p)}
+                    if 'lineage_downstream' in ds:
+                        obj['lineage_downstream'] = json.dumps(ds['lineage_downstream_full']) 
+                        obj['lineage_downstream_l1'] = json.dumps(ds['lineage_downstream']) 
+                    else:
+                        obj['lineage_downstream'] = []
+                    if 'lineage_upstream' in ds:
+                        obj['lineage_upstream'] = json.dumps(ds['lineage_upstream_full'])
+                        obj['lineage_upstream_l1'] = json.dumps(ds['lineage_upstream'])
+                    else:
+                        obj['lineage_upstream'] = []
+                        
+                    ds_list.append(obj)
 
         # add definitions to index
         try:
@@ -1175,7 +1132,7 @@ class dss_utils:
 
         return True
     
-    def scan_project(self, proj, limit_to_dataset_tags=[], exclude_dataset_tags=[]):
+    def scan_project(self, proj):
 
         index_list = []
         scan_obj = {}
@@ -1202,24 +1159,6 @@ class dss_utils:
         })
 
         for dataset in datasets:
-            ok_to_scan = False
-            if len(limit_to_dataset_tags) == 0 and len(exclude_dataset_tags) ==0:
-                ok_to_scan = True
-            else:
-                if len(limit_to_dataset_tags) > 0:
-                    for limit in limit_to_dataset_tags:
-                        for tag in dataset['tags']:
-                            if limit.lower() == tag.lower():
-                                ok_to_scan = True
-                                break
-                if len(exclude_dataset_tags) > 0:
-                    for limit in exclude_dataset_tags:
-                        for tag in dataset['tags']:
-                            if limit.lower() == tag.lower():
-                                ok_to_scan = False
-                                break
-            if not ok_to_scan:
-                continue
 
              # we don't want to index thread projects
             if '--Thread-' in dataset['name']:
