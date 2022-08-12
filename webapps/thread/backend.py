@@ -869,9 +869,12 @@ class dss_utils:
         # write out the remappings...
         mapping_df = pd.DataFrame.from_dict(remappings)
         if len(all_projects) == 1: # we're doing a single project scan
-            remap_df = remapping_ds.get_dataframe()
-            remap_df = remap_df[remap_df.project!=p]
-            mapping_df = mapping_df.append(remap_df, ignore_index=True)
+            try:
+                remap_df = remapping_ds.get_dataframe()
+                remap_df = remap_df[remap_df.project!=p]
+                mapping_df = mapping_df.append(remap_df, ignore_index=True)
+            except Exception as e:
+                capture_exception(e)
 
         remapping_ds.write_dataframe(mapping_df, infer_schema=True, dropAndCreate=True)
 
