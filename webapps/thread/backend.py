@@ -701,9 +701,9 @@ class dss_utils:
         nxt = []
 
         print(f'getting column lineage: {recur_ct}')
-        if recur_ct < 5:
+        if recur_ct < 50:
             for obj in ds_lineage_obj:
-                ds = self.load_dataset(obj['name'], False)
+                ds = self.load_dataset(obj['name'], 'none')
                 for column in ds['schema']:
                     if not upstream:
                         to_col = obj['name'] + '|' + str(column['name'])
