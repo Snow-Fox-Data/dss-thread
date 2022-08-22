@@ -700,15 +700,15 @@ class dss_utils:
 
                 ds.set_schema(ds_schema)
 
-    def get_col_lineage(self, remapping_df, ds_name, col, ds_lineage_obj, upstream=False, orig_ds = None, recur_ct = 0):
+    def get_col_lineage(self, remapping_df, ds_name, col, ds_lineage_obj, upstream=False, recur_ct = 0):
         dir = 'lineage_downstream'
         if upstream:
             dir = 'lineage_upstream'
 
         nxt = []
 
-        print(f'getting column lineage: {recur_ct}')
-        if recur_ct < 50:
+        # print(f'getting column lineage: {recur_ct}')
+        if recur_ct < 20:
             for obj in ds_lineage_obj:
                 ds = self.load_dataset(obj['name'], 'none', False)
 
@@ -727,7 +727,7 @@ class dss_utils:
 
                     if column['name'].lower() == col.lower() or remap_found:
                         r = recur_ct + 1
-                        lin = self.get_col_lineage(remapping_df, obj['name'], column['name'], ds[dir], upstream, ds, r)
+                        lin = self.get_col_lineage(remapping_df, obj['name'], column['name'], ds[dir], upstream, r)
 
                         nxt.append({'name':obj['name'] + '|' + column['name'], dir:lin})#
         
