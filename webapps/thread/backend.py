@@ -598,6 +598,14 @@ class dss_utils:
 
         lin_up = []
         lin_down = []
+        schema = []
+
+        try:
+            schema = ds.read_schema()
+        except Exception as e:
+                # capture_exception(e)
+                logging.info(f'no schema for {key} {e}')
+
         if col_lineage != 'none':
             ds_ds = self.get_datasets_ds()
             rec = ds_ds.get_dataframe().query(f'key=="{key}"')
@@ -605,10 +613,8 @@ class dss_utils:
             lin_up = json.loads(rec.iloc[0]['lineage_upstream'])
             lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
-            schema = []
             remapping_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
             try:
-                schema = ds.read_schema()
                 for col in schema:
                     col['key'] = key + '|' + col['name']
                     if col_lineage == 'all' or col['name'] == col_lineage:
@@ -616,7 +622,7 @@ class dss_utils:
                         col['lineage_downstream'] = self.get_col_lineage(remapping_df, key, col['name'], lin_down, False)         
             except Exception as e:
                 # capture_exception(e)
-                logging.info(f'no schema for {key} {e}')
+                logging.info(f'lineage error for {key} {e}')
 
         # tags
         tags = []
