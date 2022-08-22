@@ -707,6 +707,9 @@ class dss_utils:
         if recur_ct < 50:
             for obj in ds_lineage_obj:
                 if orig_ds is None or orig_ds['key'] != obj['name']:
+                    if orig_ds is not None:
+                        print(orig_ds['key'], obj['name'])
+                        
                     ds = self.load_dataset(obj['name'], 'none', False)
                 else:
                     ds = orig_ds
