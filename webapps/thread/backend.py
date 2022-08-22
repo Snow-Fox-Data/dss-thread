@@ -451,6 +451,9 @@ class dss_utils:
         self.client = dataiku.api_client()
         # self.init_description_dataset()
 
+        ds_ds = self.get_datasets_ds()
+        self.dataset_df = ds_ds.get_dataframe()
+
     def init_thread_ds(self, name, location, overwrite=True):
         proj = self.client.get_default_project()
 
@@ -596,33 +599,24 @@ class dss_utils:
         p_name, d_name, c_name = self.extract_name_project(key)
         ds = dataiku.Dataset(d_name, p_name)
 
-        lin_up = []
-        lin_down = []
-        schema = []
+        rec = self.dataset_df.query(f'key=="{key}"')
 
+        lin_up = json.loads(rec.iloc[0]['lineage_upstream'])
+        lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
+
+        schema = []
+        remapping_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
         try:
             schema = ds.read_schema()
-        except Exception as e:
-                # capture_exception(e)
-                logging.info(f'no schema for {key} {e}')
-
-        if col_lineage != 'none':
-            ds_ds = self.get_datasets_ds()
-            rec = ds_ds.get_dataframe().query(f'key=="{key}"')
-
-            lin_up = json.loads(rec.iloc[0]['lineage_upstream'])
-            lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
-
-            remapping_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
-            try:
-                for col in schema:
-                    col['key'] = key + '|' + col['name']
+            for col in schema:
+                col['key'] = key + '|' + col['name']
+                if col_lineage != 'none':
                     if col_lineage == 'all' or col['name'] == col_lineage:
                         col['lineage_upstream'] = self.get_col_lineage(remapping_df, key, col['name'], lin_up, True)
                         col['lineage_downstream'] = self.get_col_lineage(remapping_df, key, col['name'], lin_down, False)         
-            except Exception as e:
-                # capture_exception(e)
-                logging.info(f'lineage error for {key} {e}')
+        except Exception as e:
+            # capture_exception(e)
+            logging.info(f'no schema for {key} {e}')
 
         # tags
         tags = []
@@ -704,7 +698,7 @@ class dss_utils:
 
                 ds.set_schema(ds_schema)
 
-    def get_col_lineage(self, remapping_df, ds_name, col, ds_lineage_obj, upstream=False, recur_ct = 0):
+    def get_col_lineage(self, remapping_df, ds_name, col, ds_lineage_obj, upstream=False, orig_ds = None, recur_ct = 0):
         dir = 'lineage_downstream'
         if upstream:
             dir = 'lineage_upstream'
@@ -715,7 +709,7 @@ class dss_utils:
         if recur_ct < 50:
             for obj in ds_lineage_obj:
                 ds = self.load_dataset(obj['name'], 'none', False)
-                
+
                 for column in ds['schema']:
                     if not upstream:
                         to_col = obj['name'] + '|' + str(column['name'])
@@ -731,7 +725,7 @@ class dss_utils:
 
                     if column['name'].lower() == col.lower() or remap_found:
                         r = recur_ct + 1
-                        lin = self.get_col_lineage(remapping_df, obj['name'], column['name'], ds[dir], upstream, r)
+                        lin = self.get_col_lineage(remapping_df, obj['name'], column['name'], ds[dir], upstream, ds, r)
 
                         nxt.append({'name':obj['name'] + '|' + column['name'], dir:lin})#
         
