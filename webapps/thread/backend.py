@@ -592,7 +592,7 @@ class dss_utils:
 
         return p
    
-    def load_dataset(self, key, col_lineage='none'):
+    def load_dataset(self, key, col_lineage='none', include_tags=True):
         p_name, d_name, c_name = self.extract_name_project(key)
         ds = dataiku.Dataset(d_name, p_name)
 
@@ -617,10 +617,13 @@ class dss_utils:
             logging.info(f'no schema for {key} {e}')
 
         # tags
-        p = self.client.get_project(p_name)
-        d = p.get_dataset(d_name)
-        tags = d.get_metadata()['tags']         
-        ds_type = d.get_settings().get_raw()['type']
+        tags = []
+        ds_type = ''
+        if include_tags:
+            p = self.client.get_project(p_name)
+            d = p.get_dataset(d_name)
+            tags = d.get_metadata()['tags']         
+            ds_type = d.get_settings().get_raw()['type']
 
         res = {
             "object_type": 'dataset',
@@ -703,7 +706,7 @@ class dss_utils:
         print(f'getting column lineage: {recur_ct}')
         if recur_ct < 50:
             for obj in ds_lineage_obj:
-                ds = self.load_dataset(obj['name'], 'none')
+                ds = self.load_dataset(obj['name'], 'none', False)
                 for column in ds['schema']:
                     if not upstream:
                         to_col = obj['name'] + '|' + str(column['name'])
