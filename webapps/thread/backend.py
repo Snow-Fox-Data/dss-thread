@@ -454,6 +454,8 @@ class dss_utils:
         ds_ds = self.get_datasets_ds()
         self.dataset_df = ds_ds.get_dataframe()
 
+        self.remap_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
+
     def init_thread_ds(self, name, location, overwrite=True):
         proj = self.client.get_default_project()
 
@@ -605,7 +607,7 @@ class dss_utils:
         lin_down = json.loads(rec.iloc[0]['lineage_downstream'])
 
         schema = []
-        remapping_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
+        remapping_df = self.remap_df
         try:
             schema = ds.read_schema()
             for col in schema:
