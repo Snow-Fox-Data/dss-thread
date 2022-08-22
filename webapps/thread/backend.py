@@ -693,32 +693,34 @@ class dss_utils:
 
                 ds.set_schema(ds_schema)
 
-    def get_col_lineage(self, remapping_df, ds_name, col, ds_lineage_obj, upstream=False):
+    def get_col_lineage(self, remapping_df, ds_name, col, ds_lineage_obj, upstream=False, recur_ct = 0):
         dir = 'lineage_downstream'
         if upstream:
             dir = 'lineage_upstream'
 
         nxt = []
 
-        for obj in ds_lineage_obj:
-            ds = self.load_dataset(obj['name'], False)
-            for column in ds['schema']:
-                if not upstream:
-                    to_col = obj['name'] + '|' + str(column['name'])
-                    from_col = ds_name + '|' + str(col)
-                else:
-                    from_col = obj['name'] + '|' + str(column['name'])
-                    to_col = ds_name + '|' + str(col)
+        if recur_ct < 10:
+            for obj in ds_lineage_obj:
+                ds = self.load_dataset(obj['name'], False)
+                for column in ds['schema']:
+                    if not upstream:
+                        to_col = obj['name'] + '|' + str(column['name'])
+                        from_col = ds_name + '|' + str(col)
+                    else:
+                        from_col = obj['name'] + '|' + str(column['name'])
+                        to_col = ds_name + '|' + str(col)
 
-                remap_found = len(remapping_df[(remapping_df['to'] == to_col)&(remapping_df['from'] == from_col)])>0
+                    remap_found = len(remapping_df[(remapping_df['to'] == to_col)&(remapping_df['from'] == from_col)])>0
 
-                if remap_found:
-                    logging.info(f'remap found! {from_col}, {to_col}')
+                    if remap_found:
+                        logging.info(f'remap found! {from_col}, {to_col}')
 
-                if column['name'].lower() == col.lower() or remap_found:
-                    lin = self.get_col_lineage(remapping_df, obj['name'], column['name'], ds[dir], upstream)
+                    if column['name'].lower() == col.lower() or remap_found:
+                        r = recur_ct + 1
+                        lin = self.get_col_lineage(remapping_df, obj['name'], column['name'], ds[dir], upstream, r)
 
-                    nxt.append({'name':obj['name'] + '|' + column['name'], dir:lin})#
+                        nxt.append({'name':obj['name'] + '|' + column['name'], dir:lin})#
         
         return nxt
                     
