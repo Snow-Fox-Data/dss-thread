@@ -574,8 +574,8 @@ class dss_utils:
         proj = self.client.get_project(key)
         p = proj.get_summary()
 
-        ds = dataiku.Dataset(THREAD_DATASETS_NAME)
-        datasets = ds.get_dataframe().query(f'project=="{key}"')
+        # ds = dataiku.Dataset(THREAD_DATASETS_NAME)
+        datasets = self.dataset_df.query(f'project=="{key}"')
 
         # get the project's folder
         folder = proj.get_project_folder().name
@@ -886,7 +886,7 @@ class dss_utils:
         if len(all_projects) == 1: # we're doing a single project scan
             try:
                 # this can error if there is only 1 project in the whole install
-                remap_df = remapping_ds.get_dataframe()
+                remap_df = self.remap_df #remapping_ds.get_dataframe()
                 remap_df = remap_df[remap_df.project!=p]
                 mapping_df = mapping_df.append(remap_df, ignore_index=True)
             except Exception as e:
