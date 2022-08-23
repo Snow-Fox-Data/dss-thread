@@ -1146,7 +1146,7 @@ class dss_utils:
         summary = project.get_summary()
 
         ok_to_scan = False
-        if len(limit_to_project_tags) > 0 or  exclude_project_tags > 0:
+        if len(limit_to_project_tags) > 0 or len(exclude_project_tags) > 0:
             if len(limit_to_project_tags) > 0:
                 for limit in limit_to_project_tags:
                     for tag in proj_meta['tags']:
