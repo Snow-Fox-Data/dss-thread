@@ -53,6 +53,10 @@ def init() :
         scheduler.start()
 
         print('scan will be firing on cron: ' + rescan_cron)
+    else:
+        proj_vars['standard']['rescan_cron'] = ''
+    
+    p.set_variables(proj_vars) 
 
 @app.route('/get-user')
 def get_user():
