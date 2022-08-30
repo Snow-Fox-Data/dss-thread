@@ -1,10 +1,10 @@
 {
     "id": "thread",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "meta": {
         "label": "Thread",
-        "description": "Data Catalog and Lineage Tool",
-        "author": "Snowfox Data",
+        "description": "THREAD™ together your Dataiku datasets and created definitions to formalize a catalog for improved understanding and governance. A free, lightweight cataloging tool, THREAD™ ties together your data lineage and provides a single location to document data connected to Dataiku. Create efficiency and maximize your data with THREAD™.",
+        "author": "Snow Fox Data",
         "icon": "icon-book",
         "tags": ["Governance", "Lineage", "Catalog"],
         "url": "https://www.dataiku.com/product/plugins/thread",
