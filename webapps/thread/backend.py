@@ -459,10 +459,13 @@ class dss_utils:
         self.client = dataiku.api_client()
         # self.init_description_dataset()
 
-        ds_ds = self.get_datasets_ds()
-        self.dataset_df = ds_ds.get_dataframe()
+        try:
+            ds_ds = self.get_datasets_ds()
+            self.dataset_df = ds_ds.get_dataframe()
 
-        self.remap_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
+            self.remap_df = dataiku.Dataset(THREAD_REMAPPING_NAME).get_dataframe()
+        except:
+            print('THREAD datasets do not exist yet')
 
     def init_thread_ds(self, name, location, overwrite=True):
         proj = self.client.get_default_project()
