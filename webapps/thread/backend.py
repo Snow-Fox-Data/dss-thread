@@ -48,11 +48,15 @@ def init() :
     if 'rescan_cron' in proj_vars["standard"]:
         rescan_cron = proj_vars["standard"]['rescan_cron']
         
-        scheduler = BackgroundScheduler()
-        scheduler.add_job(scan, CronTrigger.from_crontab(rescan_cron))
-        scheduler.start()
+        if len(rescan_cron) > 0:
+            try:
+                scheduler = BackgroundScheduler()
+                scheduler.add_job(scan, CronTrigger.from_crontab(rescan_cron))
+                scheduler.start()
+                print('scan will be firing on cron: ' + rescan_cron)
+            except:
+                print('error starting CRON job')
 
-        print('scan will be firing on cron: ' + rescan_cron)
     else:
         proj_vars['standard']['rescan_cron'] = ''
     
