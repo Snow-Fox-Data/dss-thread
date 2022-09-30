@@ -719,7 +719,7 @@ class dss_utils:
         nxt = []
 
         # print(f'getting column lineage: {recur_ct}')
-        if recur_ct < 20:
+        if recur_ct < 50:
             for obj in ds_lineage_obj:
                 ds = self.load_dataset(obj['name'], 'none', False)
 
@@ -949,7 +949,7 @@ class dss_utils:
                         lins = []
                         for node in ds[dir]:
                             recur_ct = recur_ct + 1
-                            if recur_ct > 200:
+                            if recur_ct > 20:
                                 logging.info(f'recursive error {dir} - {ds_name}, {ds[dir]}')
                                 return []
 
@@ -1197,12 +1197,19 @@ class dss_utils:
 
                 return False
 
+            last_mod = 0
+            if 'versionTag' in dataset:
+                last_mod = dataset['versionTag']['lastModifiedOn']
+            else:
+                if 'creationTag' in summary:
+                    last_mod = dataset['creationTag']['lastModifiedOn']
+
             index_list.append({
                 "name": dataset['name'],
                 "object_type": "dataset",
                 "key": self.get_full_dataset_name(dataset['name'], proj),
                 "description": dataset['name'],
-                "last_modified": dataset['versionTag']['lastModifiedOn']
+                "last_modified": last_mod
             })
 
             for column in dataset['schema']['columns']:
@@ -1211,7 +1218,7 @@ class dss_utils:
                     "description": column['name'],
                     "object_type": "column",
                 "key": self.get_full_dataset_name(dataset['name'], proj) + '|' + column['name'],
-                "last_modified": dataset['versionTag']['lastModifiedOn'],
+                "last_modified": last_mod,
                     }) 
 
         # compute the dataset lineage
