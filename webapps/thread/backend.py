@@ -40,6 +40,9 @@ sentry_sdk.init(
     traces_sample_rate=1.0
 )
 
+THREAD_CURRENT_VERSION = '1.1.3'
+sentry_sdk.set_tag("thread-version", THREAD_CURRENT_VERSION)
+
 def init() :
     client = dataiku.api_client()
 
@@ -68,7 +71,7 @@ def get_user():
         un = get_active_user_name()
         
         if len(un) > 0:
-            data = {"status": "ok", "you_are": un}
+            data = {"status": "ok", "you_are": un, 'version': THREAD_CURRENT_VERSION}
         else:
             data = {"status": "denied", "you_are": 'not logged in'}
     except:

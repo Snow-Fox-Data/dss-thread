@@ -33,6 +33,7 @@ class App extends Component {
         this.state = {
             dataiku: undefined,
             currentUser: '',
+            version: '',
             loading: false,
             loggedIn: null,
             scanning: false,
@@ -65,7 +66,8 @@ class App extends Component {
                     this.setState({
                         dataiku: window.dataiku,
                         currentUser: response['you_are'],
-                        loggedIn: true
+                        loggedIn: true,
+                        version: response['version']
                     });
 
                     eventBus.dispatch('loggedIn', response)
@@ -170,7 +172,8 @@ class App extends Component {
                                         <NavDropdown.Item onClick={() => this.rescan()}>Full DSS Scan</NavDropdown.Item>
                                         <NavDropdown.Item onClick={() => this.export()}>Export Definitions</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item target="_blank" href="https://excelion.io">Visit Excelion Partners</NavDropdown.Item>
+                                        <NavDropdown.Item target="_blank" href="https://snowfoxdata.com">Visit Snow Fox Data</NavDropdown.Item>
+                                        <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/issues">Open a Support Issue</NavDropdown.Item>
                                         <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/issues">Open a Support Issue</NavDropdown.Item>
                                     </NavDropdown>
                                 </ul>
@@ -180,6 +183,12 @@ class App extends Component {
                             <Outlet />
                         </Row>
                     </div >
+                }
+
+                {this.state.loggedIn != null && this.state.loggedIn === false &&
+                    <div style={{ paddingTop: '20px', textAlign: 'center', color: '#ccc' }}>
+                        version {this.state.version}
+                    </div>
                 }
             </Container >
         );

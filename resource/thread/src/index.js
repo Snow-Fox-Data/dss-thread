@@ -19,8 +19,10 @@ Sentry.init({
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
-  tracesSampleRate: 0.1,
+  tracesSampleRate: 1,
 });
+
+Sentry.setTag("thread-version", "1.1.3");
 
 ReactDOM.render(
   // <React.StrictMode>
