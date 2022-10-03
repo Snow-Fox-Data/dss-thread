@@ -174,7 +174,6 @@ class App extends Component {
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item target="_blank" href="https://snowfoxdata.com">Visit Snow Fox Data</NavDropdown.Item>
                                         <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/issues">Open a Support Issue</NavDropdown.Item>
-                                        <NavDropdown.Item target="_blank" href="https://github.com/Excelion-Partners/dss-thread/issues">Open a Support Issue</NavDropdown.Item>
                                     </NavDropdown>
                                 </ul>
                             </div>
@@ -185,9 +184,9 @@ class App extends Component {
                     </div >
                 }
 
-                {this.state.loggedIn != null && this.state.loggedIn === false &&
+                {this.state.loggedIn != null && this.state.loggedIn === true &&
                     <div style={{ paddingTop: '20px', textAlign: 'center', color: '#ccc' }}>
-                        version {this.state.version}
+                        Thread™ version {this.state.version} | <a href='https://snowfoxdata.com' target="_blank">Snow Fox Data</a>
                     </div>
                 }
             </Container >
