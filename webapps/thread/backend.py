@@ -801,6 +801,12 @@ class dss_utils:
                 # if not, check if they have access to a group that has write access to the project
                 proj = self.client.get_project(proj_name)
                 perms = proj.get_permissions() 
+
+                # check for owner
+                if perms['owner'].lower() == user_name.lower():
+                    return True
+
+                # iterate through the assigned groups
                 for perm in perms['permissions']:
                     if 'group' in perm:
                         if perm['group'] in user['groups'] and perm['writeProjectContent']:
