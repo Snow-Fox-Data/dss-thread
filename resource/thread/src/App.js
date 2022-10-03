@@ -186,7 +186,7 @@ class App extends Component {
 
                 {this.state.loggedIn != null && this.state.loggedIn === true &&
                     <div style={{ paddingTop: '20px', paddingBottom:'10px', textAlign: 'center', color: '#ccc' }}>
-                        Thread™ version {this.state.version} | <a href='https://snowfoxdata.com' target="_blank">Developed by Snow Fox Data</a>
+                        Thread™ version {this.state.version} | Developed by <a href='https://snowfoxdata.com' target="_blank">Snow Fox Data</a>
                     </div>
                 }
             </Container >
