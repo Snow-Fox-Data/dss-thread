@@ -870,10 +870,11 @@ class dss_utils:
                     for step in settings.raw_steps:
                         if 'type' in step and step['type'] == 'ColumnRenamer' and step['disabled'] == False:
                             for renaming in step['params']['renamings']:
-                                in_set = settings.get_recipe_inputs()['main']['items'][0]['ref']
-                                out_set = settings.get_recipe_outputs()['main']['items'][0]['ref']
+                                if 'to' in renaming:
+                                    in_set = settings.get_recipe_inputs()['main']['items'][0]['ref']
+                                    out_set = settings.get_recipe_outputs()['main']['items'][0]['ref']
 
-                                remappings.append({'project': p, 'from': p + '|' + in_set + '|' + renaming['from'], 'to': p + '|' + out_set + '|' +renaming['to']})
+                                    remappings.append({'project': p, 'from': p + '|' + in_set + '|' + renaming['from'], 'to': p + '|' + out_set + '|' + renaming['to']})
                                 # print(f'from: {renaming["from"]} to: {renaming["to"]}')
                 
                 ins = self.get_stream(r, 'inputs', p)            

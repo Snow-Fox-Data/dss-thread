@@ -111,8 +111,10 @@ class Home extends Component {
         var p_list = [];
         Object.keys(response).forEach(function (results) {
             var dataikuItem = response[results];
-            if (types.indexOf(dataikuItem.object_type.toString()) >= 0) {
-                p_list[p_list.length] = dataikuItem;
+            if ('object_type' in dataikuItem) {
+                if (types.indexOf(dataikuItem.object_type.toString()) >= 0) {
+                    p_list[p_list.length] = dataikuItem;
+                }
             }
         });
 
