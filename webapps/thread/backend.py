@@ -40,7 +40,7 @@ sentry_sdk.init(
     traces_sample_rate=1.0
 )
 
-THREAD_CURRENT_VERSION = '1.1.3'
+THREAD_CURRENT_VERSION = '1.1.4'
 sentry_sdk.set_tag("thread-version", THREAD_CURRENT_VERSION)
 
 def init() :

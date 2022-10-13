@@ -22,7 +22,7 @@ Sentry.init({
   tracesSampleRate: 1,
 });
 
-Sentry.setTag("thread-version", "1.1.3");
+Sentry.setTag("thread-version", "1.1.4");
 
 ReactDOM.render(
   // <React.StrictMode>
