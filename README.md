@@ -1,4 +1,4 @@
-# Dataiku Thread Data Catalog
+# Dataiku Thread™ Data Catalog
 
 ## Installation Instructions
 - [Admin Guide](Thread_Installation_Instructions.pdf)
